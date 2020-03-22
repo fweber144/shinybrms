@@ -2,14 +2,14 @@
 # Description
 
 This [R](https://www.r-project.org/) package **shinybrms** provides a
-graphical user interface (GUI) for the package
+graphical user interface (GUI) for the R package
 [**brms**](https://cran.r-project.org/web/packages/brms/index.html)
 which allows to fit Bayesian regression models using
 [Stan](https://mc-stan.org/) (more specifically, using its R interface,
-the package
+the R package
 [**rstan**](https://cran.r-project.org/web/packages/rstan/index.html)).
 The GUI is a [Shiny](https://shiny.rstudio.com/) app, i.e. created using
-the package
+the R package
 [**shiny**](https://cran.r-project.org/web/packages/shiny/index.html).
 
 # Installation

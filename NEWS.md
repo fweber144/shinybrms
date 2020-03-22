@@ -7,7 +7,7 @@
 
 ### Bug fixes
 
-  - UI: Added links to the example datasets on page “Links”.
+  - UI: Added links to the online example datasets on page “Links”.
 
 ## shinybrms 1.0.0 (only GitHub)
 

@@ -25,16 +25,16 @@ ui <- navbarPage(
         h4("Example dataset"),
         selectInput("ex_da_sel", "Choose example dataset",
                     choices = c("Choose ..." = "",
-                                "bodyfat (URL: see page \"About\")" = "bodyfat",
-                                "diabetes (URL: see page \"About\")" = "diabetes",
+                                "bodyfat (online resource; see page \"Links\")" = "bodyfat",
+                                "diabetes (online resource; see page \"Links\")" = "diabetes",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
-                                "mesquite (URL: see page \"About\")" = "mesquite",
+                                "mesquite (online resource; see page \"Links\")" = "mesquite",
                                 "mtcars" = "mtcars",
                                 "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
                                 "roaches (from package \"rstanarm\")" = "roaches",
                                 "ToothGrowth" = "ToothGrowth",
-                                "winequality-red (URL: see page \"About\")" = "winequality-red"),
+                                "winequality-red (online resource; see page \"Links\")" = "winequality-red"),
                     selectize = TRUE),
         # Horizontal line:
         hr(),
@@ -511,6 +511,25 @@ ui <- navbarPage(
             a("GitHub", href = "https://github.com/stan-dev/shinystan/", target = "_blank"), ", ",
             a("CRAN", href = "https://cran.r-project.org/web/packages/shinystan/index.html", target = "_blank")
           )))
+        )
+      ),
+      # # Horizontal line:
+      # hr(),
+      wellPanel(
+        h3("Example datasets (online resources)"),
+        tags$ul(
+          tags$li(a("bodyfat",
+                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/bodyfat.txt",
+                    target = "_blank")),
+          tags$li(a("diabetes",
+                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/diabetes.csv",
+                    target = "_blank")),
+          tags$li(a("mesquite",
+                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
+                    target = "_blank")),
+          tags$li(a("winequality-red",
+                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/winequality-red.csv",
+                    target = "_blank"))
         )
       )
     ),

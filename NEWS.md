@@ -7,7 +7,7 @@
 
 ### Bug fixes
 
-  - `README.md`: Added the requirement of package **devtools**.
+  - UI: Added links to the example datasets on page “Links”.
 
 ## shinybrms 1.0.0 (only GitHub)
 

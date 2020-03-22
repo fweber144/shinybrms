@@ -109,7 +109,7 @@ ui <- navbarPage(
           code("brms::brmsfamily()"),
           " from package ",
           a(HTML("<strong>brms</strong>"),
-            href = "https://cran.r-project.org/web/packages/brms/index.html",
+            href = "https://CRAN.R-project.org/package=brms",
             target = "_blank"),
           " and the ", strong("brms"), " vignette ",
           a("\"Parameterization of Response Distributions in brms\"",
@@ -203,7 +203,7 @@ ui <- navbarPage(
       code("brms::set_prior()"),
       " from package",
       a(HTML("<strong>brms</strong>"),
-        href = "https://cran.r-project.org/web/packages/brms/index.html",
+        href = "https://CRAN.R-project.org/package=brms",
         target = "_blank"),
       "."
     ))),
@@ -311,7 +311,7 @@ ui <- navbarPage(
         code("brms::brm()"),
         " from package ",
         a(HTML("<strong>brms</strong>"),
-          href = "https://cran.r-project.org/web/packages/brms/index.html",
+          href = "https://CRAN.R-project.org/package=brms",
           target = "_blank"),
         " and the help for ",
         code("rstan::sampling()"),
@@ -319,7 +319,7 @@ ui <- navbarPage(
         code("rstan::stan()"),
         " from package ",
         a(HTML("<strong>rstan</strong>"),
-          href = "https://cran.r-project.org/web/packages/rstan/index.html",
+          href = "https://CRAN.R-project.org/package=rstan",
           target = "_blank"),
         "."
       ))),
@@ -432,19 +432,19 @@ ui <- navbarPage(
             strong("Description: "),
             "The ", strong("shinybrms"), " app is a graphical user interface (GUI) for the R package ",
             a(HTML("<strong>brms</strong>"),
-              href = "https://cran.r-project.org/web/packages/brms/index.html",
+              href = "https://CRAN.R-project.org/package=brms",
               target = "_blank"),
             " which allows to fit Bayesian regression models using ",
             a("Stan", href = "https://mc-stan.org/", target = "_blank"),
             " (more specifically, using its R interface, the package ",
             a(HTML("<strong>rstan</strong>"),
-              href = "https://cran.r-project.org/web/packages/rstan/index.html",
+              href = "https://CRAN.R-project.org/package=rstan",
               target = "_blank"),
             "). The GUI is a ",
             a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
             " app, i.e. created using the R package ",
             a(HTML("<strong>shiny</strong>"),
-              href = "https://cran.r-project.org/web/packages/shiny/index.html",
+              href = "https://CRAN.R-project.org/package=shiny",
               target = "_blank"),
             "."
           ))),
@@ -499,17 +499,17 @@ ui <- navbarPage(
           tags$li(HTML(paste0(
             strong("brms"), ": ",
             a("GitHub", href = "https://github.com/paul-buerkner/brms", target = "_blank"), ", ",
-            a("CRAN", href = "https://cran.r-project.org/web/packages/brms/index.html", target = "_blank")
+            a("CRAN", href = "https://CRAN.R-project.org/package=brms", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("rstan"), ": ",
             a("GitHub", href = "https://github.com/stan-dev/rstan/", target = "_blank"), ", ",
-            a("CRAN", href = "https://cran.r-project.org/web/packages/rstan/index.html", target = "_blank")
+            a("CRAN", href = "https://CRAN.R-project.org/package=rstan", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("shinystan"), ": ",
             a("GitHub", href = "https://github.com/stan-dev/shinystan/", target = "_blank"), ", ",
-            a("CRAN", href = "https://cran.r-project.org/web/packages/shinystan/index.html", target = "_blank")
+            a("CRAN", href = "https://CRAN.R-project.org/package=shinystan", target = "_blank")
           )))
         )
       ),

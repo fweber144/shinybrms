@@ -22,10 +22,10 @@ Gaussian, Bernoulli, or negative binomial distribution for the
 population-level) effects are supported for the predictors. “Random”
 (a.k.a. varying or group-level) effects are not supported yet. Neither
 supported are most of
-[**brms**](https://cran.r-project.org/web/packages/brms/index.html)’s
-other features, like monotonic effects for ordinal predictors or
-non-linear effects. Interactions are supported, though. For the
-inspection of the output, only a short summary (from
-`brms::summary.brmsfit()`) and the possibility to launch
-[**shinystan**](https://cran.r-project.org/web/packages/shinystan/index.html)
-is offered.
+[**brms**](https://CRAN.R-project.org/package=brms)’s other features,
+like monotonic effects for ordinal predictors or non-linear effects.
+Interactions are supported, though. For the inspection of the output,
+only a short summary (from `brms::summary.brmsfit()`) and the
+possibility to launch
+[**shinystan**](https://CRAN.R-project.org/package=shinystan) is
+offered.

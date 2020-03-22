@@ -589,24 +589,51 @@ server <- function(input, output, session){
       return(read.csv("https://raw.githubusercontent.com/avehtari/modelselection/master/diabetes.csv",
                       header = TRUE, sep = ",", dec = ".")) # , quote = ""
     } else if(identical(input$ex_da_sel, "kidiq")){
-      tmp_env <- new.env()
-      data(kidiq, package = "rstanarm", envir = tmp_env)
-      return(get("kidiq", envir = tmp_env))
+      if(requireNamespace("rstanarm", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(kidiq, package = "rstanarm", envir = tmp_env)
+        return(get("kidiq", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"rstanarm\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
     } else if(identical(input$ex_da_sel, "mesquite")){
       return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
                         header = TRUE, sep = "", dec = ".")) # , quote = ""
     } else if(identical(input$ex_da_sel, "mtcars")){
       return(mtcars)
     } else if(identical(input$ex_da_sel, "Prostate")){
-      tmp_env <- new.env()
-      data(Prostate, package = "lasso2", envir = tmp_env)
-      return(get("Prostate", envir = tmp_env))
+      if(requireNamespace("lasso2", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(Prostate, package = "lasso2", envir = tmp_env)
+        return(get("Prostate", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"lasso2\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
     } else if(identical(input$ex_da_sel, "Puromycin")){
       return(Puromycin)
     } else if(identical(input$ex_da_sel, "roaches")){
-      tmp_env <- new.env()
-      data(roaches, package = "rstanarm", envir = tmp_env)
-      return(get("roaches", envir = tmp_env))
+      if(requireNamespace("rstanarm", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(roaches, package = "rstanarm", envir = tmp_env)
+        return(get("roaches", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"rstanarm\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
     } else if(identical(input$ex_da_sel, "ToothGrowth")){
       return(ToothGrowth)
     } else if(identical(input$ex_da_sel, "winequality-red")){

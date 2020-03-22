@@ -20,10 +20,13 @@ This [R](https://www.r-project.org/) package **shinybrms** provides a graphical 
 If not already done, you need to install R first (see the [R homepage](https://www.r-project.org/)). Then, in R, perform the following steps:
 
 1. Install the package [**rstan**](https://cran.r-project.org/web/packages/rstan/index.html) (see [this GitHub page](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started) for instructions).
-2. Install the package **shinybrms** with the following command:
-    ```{r, eval = FALSE}
-    devtools::install_github("fweber144/shinybrms")
-    ```
+2. Install the package **shinybrms** with the following commands:
+```{r, eval = FALSE}
+if(!requireNamespace("devtools", quietly = TRUE)){
+  install.packages("devtools")
+}
+devtools::install_github("fweber144/shinybrms")
+```
 
 # Usage
 

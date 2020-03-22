@@ -23,12 +23,16 @@ following steps:
     (see [this GitHub
     page](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
     for instructions).
+2.  Install the package **shinybrms** with the following commands:
 
-2.  Install the package **shinybrms** with the following command:
-    
-    ``` r
-    devtools::install_github("fweber144/shinybrms")
-    ```
+<!-- end list -->
+
+``` r
+if(!requireNamespace("devtools", quietly = TRUE)){
+  install.packages("devtools")
+}
+devtools::install_github("fweber144/shinybrms")
+```
 
 # Usage
 

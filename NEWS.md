@@ -5,6 +5,10 @@
 
 ## shinybrms 1.0.1
 
+### Bug fixes
+
+  - `README.md`: Added the requirement of package **devtools**.
+
 ## shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a

@@ -3,7 +3,9 @@
 
 # News for package “shinybrms”
 
-## shinybrms 1.0.0
+## shinybrms 1.0.1
+
+## shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a
 Gaussian, Bernoulli or negative binomial distribution for the

@@ -1,8 +1,8 @@
 Roxygen: list(markdown = TRUE)
 Package: shinybrms
 Title: Graphical User Interface (Shiny App) for Package "brms"
-Version: 1.0.0
-Date: 2020-03-20
+Version: 1.0.0.9000
+Date: 2020-03-22
 Authors@R: 
     person(given = "Frank",
            family = "Weber",

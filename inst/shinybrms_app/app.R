@@ -451,9 +451,9 @@ ui <- navbarPage(
           tags$li(strong("Author:"),
                   "Frank Weber"),
           tags$li(strong("Version:"),
-                  "1.0.0"),
+                  "1.0.0.9000"),
           tags$li(strong("Date (yyyy-mm-dd):"),
-                  "2020-03-20"),
+                  "2020-03-22"),
           tags$li(strong("License:"),
                   "GPL-3")
         )

@@ -2,7 +2,7 @@
 
 * R 3.6.3 on local Ubuntu 19.10 system (platform: x86_64-pc-linux-gnu (64-bit))
 * R 3.6.3 on local Windows 10 x64 (build 18363) system (platform: x86_64-w64-mingw32/x64 (64-bit))
-* Travis CI
+* R 3.6.2 on Travis CI with Ubuntu 16.04.6 LTS system (platform: x86_64-pc-linux-gnu (64-bit))
 * win-builder (R-devel and R-release)
 
 ## R CMD check results

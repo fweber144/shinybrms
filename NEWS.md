@@ -12,7 +12,7 @@
 ## shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a
-Gaussian, Bernoulli or negative binomial distribution for the
+Gaussian, Bernoulli, or negative binomial distribution for the
 (univariate) outcome. Currently, only “fixed” (a.k.a. non-varying or
 population-level) effects are supported for the predictors. “Random”
 (a.k.a. varying or group-level) effects are not supported yet. Neither

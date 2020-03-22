@@ -10,7 +10,10 @@ output: github_document
 
 ### Bug fixes
 
-* UI: Added links to the online example datasets on page "Links".
+* Example datasets:
+  + Added packages required for some example datasets to the "Suggests" list.
+  + Server: Check for availability of packages required for some example datasets.
+  + UI: Added links to the online example datasets on page "Links".
 
 ## shinybrms 1.0.0 (only GitHub)
 

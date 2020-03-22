@@ -1,4 +1,10 @@
 
+<!-- badges: start -->
+
+[![Travis build
+status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://travis-ci.org/fweber144/shinybrms)
+<!-- badges: end -->
+
 # Description
 
 This [R](https://www.r-project.org/) package **shinybrms** provides a

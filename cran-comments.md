@@ -1,3 +1,7 @@
+## Resubmission
+
+This is a resubmission. I have now single-quoted software names in the DESCRIPTION file ("Title" and "Description" fields).
+
 ## Test environments
 
 * R 3.6.3 on local Ubuntu 19.10 system (platform: x86_64-pc-linux-gnu (64-bit))

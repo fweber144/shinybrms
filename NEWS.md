@@ -1,7 +1,7 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# News for package “shinybrms”
+# News for ‘shinybrms’
 
 ## shinybrms 1.0.1
 

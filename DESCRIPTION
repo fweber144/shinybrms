@@ -9,10 +9,10 @@ Authors@R:
            role = c("aut", "cre"),
            email = "fweber144@protonmail.com")
 Description: A graphical user interface (GUI) for the 
-    package 'brms' which allows to fit Bayesian regression models using Stan 
+    package 'brms' which allows to fit Bayesian regression models using 'Stan' 
     (<https://mc-stan.org/>) (more specifically, using its R interface, the 
-    package 'rstan'). The GUI is a Shiny (<https://shiny.rstudio.com/>) app, 
-    i.e. created using the package 'shiny'.
+    package 'rstan'). The GUI is a 'Shiny' (<https://shiny.rstudio.com/>) app, 
+    i.e. it was created using the package 'shiny'.
 License: GPL-3
 URL: https://github.com/fweber144/shinybrms
 BugReports: https://github.com/fweber144/shinybrms/issues

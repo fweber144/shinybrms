@@ -1,6 +1,6 @@
 ## Resubmission
 
-This is a resubmission. I have now single-quoted software names in the DESCRIPTION file ("Title" and "Description" fields).
+This is a resubmission. I have now single-quoted the software names which were not quoted before.
 
 ## Test environments
 

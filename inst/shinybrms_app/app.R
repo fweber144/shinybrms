@@ -425,7 +425,8 @@ ui <- navbarPage(
           "the same name as an ",
           a("R", href = "https://www.r-project.org/", target = "_blank"),
           " package which is available on ",
-          a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), "."
+          a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), " and ",
+          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), "."
         ))),
         tags$ul(
           tags$li(HTML(paste0(
@@ -494,7 +495,8 @@ ui <- navbarPage(
         tags$ul(
           tags$li(HTML(paste0(
             strong("shinybrms"), ": ",
-            a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank")
+            a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), ", ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("brms"), ": ",

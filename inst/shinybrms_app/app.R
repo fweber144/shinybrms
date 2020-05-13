@@ -423,7 +423,7 @@ ui <- navbarPage(
         helpText(HTML(paste0(
           "Note: This is the ", strong("shinybrms"), " ", em("app"), ". It is distributed under ",
           "the same name as an ",
-          a("R", href = "https://www.r-project.org/", target = "_blank"),
+          a("R", href = "https://www.R-project.org/", target = "_blank"),
           " package which is available on ",
           a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), " and ",
           a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), "."
@@ -484,7 +484,7 @@ ui <- navbarPage(
       wellPanel(
         h3("Software (without R packages)"),
         tags$ul(
-          tags$li(a("R", href = "https://www.r-project.org/", target = "_blank")),
+          tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
           tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
         )
       ),

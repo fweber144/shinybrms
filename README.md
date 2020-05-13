@@ -7,7 +7,7 @@ status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://tr
 
 # Description
 
-This [R](https://www.r-project.org/) package
+This [R](https://www.R-project.org/) package
 [**shinybrms**](https://CRAN.R-project.org/package=shinybrms) provides a
 graphical user interface (GUI) for the R package
 [**brms**](https://CRAN.R-project.org/package=brms) which allows to fit
@@ -20,7 +20,7 @@ package [**shiny**](https://CRAN.R-project.org/package=shiny).
 # Installation
 
 If not already done, you need to install R first (see the [R
-homepage](https://www.r-project.org/)). Then, in R, perform the
+homepage](https://www.R-project.org/)). Then, in R, perform the
 following steps:
 
 1.  Install the package **rstan** (see [this GitHub

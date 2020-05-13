@@ -76,18 +76,19 @@ shiny::runGitHub("fweber144/shinybrms",
     **shinybrms** than installing from CRAN. The R code for these two
     options is as follows:
       - To install **shinybrms** from GitHub:
-    <!-- end list -->
-    ``` r
-    if(!requireNamespace("devtools", quietly = TRUE)){
-      install.packages("devtools")
-    }
-    devtools::install_github("fweber144/shinybrms")
-    ```
+        
+        ``` r
+        if(!requireNamespace("devtools", quietly = TRUE)){
+          install.packages("devtools")
+        }
+        devtools::install_github("fweber144/shinybrms")
+        ```
+    
       - To install **shinybrms** from CRAN:
-    <!-- end list -->
-    ``` r
-    install.packages("shinybrms")
-    ```
+        
+        ``` r
+        install.packages("shinybrms")
+        ```
 2.  Launch the **shinybrms** Shiny app by running the following R code:
 
 <!-- end list -->

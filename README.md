@@ -39,23 +39,23 @@ you need to perform the following steps first:
 
 ## Without installation of ‘shinybrms’
 
-1.  Install the R packages **brms** and **shiny**. You may use the
-    following R code for this:
+1.  Install the R package **brms**. You may use the following R code for
+    this:
 
 <!-- end list -->
 
 ``` r
-install.packages(c("brms", "shiny"))
+install.packages("brms")
 ```
 
 2.  For full functionality of **shinybrms** (if desired), install the R
-    packages **shinystan**, **callr**, **rstanarm**, and **lasso2**. You
-    may use the following R code for this:
+    packages **rstanarm** and **lasso2**. You may use the following R
+    code for this:
 
 <!-- end list -->
 
 ``` r
-install.packages(c("shinystan", "callr", "rstanarm", "lasso2"))
+install.packages(c("rstanarm", "lasso2"))
 ```
 
 3.  Launch the **shinybrms** Shiny app directly from GitHub by running

@@ -45,6 +45,7 @@ ui <- navbarPage(
                              "text/comma-separated-values",
                              "text/plain",
                              ".csv",
+                             ".txt",
                              ".dat")),
         strong("Header"),
         checkboxInput("header", "File has header", TRUE),

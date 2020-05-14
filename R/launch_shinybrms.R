@@ -36,8 +36,8 @@
 #' @export
 #'
 #' @examples
-#' \donttest{
-#' launch_shinybrms()
+#' if(interactive){
+#'   launch_shinybrms()
 #' }
 
 launch_shinybrms <- function(launch.browser = interactive(), ...){

@@ -45,7 +45,7 @@ impossible to launch the \pkg{shinystan} app if running on a non-Windows system 
 RStudio).
 }
 \examples{
-\donttest{
-launch_shinybrms()
+if(interactive){
+  launch_shinybrms()
 }
 }

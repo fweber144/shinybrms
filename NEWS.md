@@ -5,6 +5,10 @@
 
 ## shinybrms 1.0.1.9000
 
+### Minor changes
+
+  - Adopted to R 4.0.0.
+
 ## shinybrms 1.0.1
 
 ### Bug fixes

@@ -13,7 +13,7 @@ ui <- navbarPage(
     sidebarLayout(
       sidebarPanel(
         helpText("Either choose an example dataset or upload a file",
-                 "(e.g. \".csv\", \".txt\", \".dat\") containing your own dataset.",
+                 "(*.csv, *.txt, or *.dat) containing your own dataset.",
                  "In either case, a preview of the dataset will be shown in the main panel on the right.",
                  "If you want to upload a dataset after having chosen an example dataset, you have",
                  "to clear out the name of the example dataset from the field \"Choose example dataset\"."),

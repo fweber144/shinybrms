@@ -36,7 +36,7 @@
 #' @export
 #'
 #' @examples
-#' if(interactive){
+#' if(interactive()){
 #'   launch_shinybrms()
 #' }
 

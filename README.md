@@ -33,9 +33,12 @@ subsequent section “With installation of ‘shinybrms’”. In both cases,
 you need to perform the following steps first:
 
 1.  Install R (see the [R homepage](https://www.R-project.org/)).
-2.  Install the R package **rstan** (see [this GitHub
+2.  Install the R package **rstan** (see the [“RStan Getting Started”
+    GitHub
     page](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
-    for instructions).
+    for instructions; make sure to use `install.packages("rstan", [...],
+    dependencies = TRUE)` with `[...]` as advised on the “RStan Getting
+    Started” GitHub page).
 
 ## Without installation of ‘shinybrms’
 
@@ -48,9 +51,10 @@ you need to perform the following steps first:
 install.packages("brms")
 ```
 
-2.  For full functionality of **shinybrms** (if desired), install the R
-    packages **rstanarm** and **lasso2**. You may use the following R
-    code for this:
+2.  If you want to use the example datasets from the R packages
+    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) and
+    [**lasso2**](https://CRAN.R-project.org/package=lasso2), you need to
+    install these packages. You may use the following R code for this:
 
 <!-- end list -->
 
@@ -73,22 +77,45 @@ shiny::runGitHub("fweber144/shinybrms",
 
 1.  Install the R package **shinybrms** either from GitHub or from CRAN.
     Note that installing from GitHub might give a more recent version of
-    **shinybrms** than installing from CRAN. The R code for these two
-    options is as follows:
-      - To install **shinybrms** from GitHub:
+    **shinybrms** than installing from CRAN. You also need to decide
+    whether you want to use the example datasets from the R packages
+    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) and
+    [**lasso2**](https://CRAN.R-project.org/package=lasso2) or not.
+      - If you *don’t want* to use the example datasets from the R
+        packages **rstanarm** and **lasso2**, then the R code for
+        installing **shinybrms** from GitHub and CRAN (respectively) is
+        as follows:
+          - To install **shinybrms** from GitHub:
+            
+            ``` r
+            if(!requireNamespace("devtools", quietly = TRUE)){
+              install.packages("devtools")
+            }
+            devtools::install_github("fweber144/shinybrms")
+            ```
         
-        ``` r
-        if(!requireNamespace("devtools", quietly = TRUE)){
-          install.packages("devtools")
-        }
-        devtools::install_github("fweber144/shinybrms")
-        ```
-    
-      - To install **shinybrms** from CRAN:
+          - To install **shinybrms** from CRAN:
+            
+            ``` r
+            install.packages("shinybrms")
+            ```
+      - If you *want* to use the example datasets from the R packages
+        **rstanarm** and **lasso2**, then the R code for installing
+        **shinybrms** from GitHub and CRAN (respectively) is as follows:
+          - To install **shinybrms** from GitHub:
+            
+            ``` r
+            if(!requireNamespace("devtools", quietly = TRUE)){
+              install.packages("devtools")
+            }
+            devtools::install_github("fweber144/shinybrms", dependencies = TRUE)
+            ```
         
-        ``` r
-        install.packages("shinybrms")
-        ```
+          - To install **shinybrms** from CRAN:
+            
+            ``` r
+            install.packages("shinybrms", dependencies = TRUE)
+            ```
 2.  Launch the **shinybrms** Shiny app by running the following R code:
 
 <!-- end list -->

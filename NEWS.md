@@ -7,6 +7,7 @@
 
 ### Minor changes
 
+  - Minor improvements in the user interface (UI).
   - Adopted to R 4.0.0.
 
 ## shinybrms 1.0.1

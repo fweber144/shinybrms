@@ -1042,6 +1042,8 @@ server <- function(input, output, session){
   C_fit <- eventReactive(input$run_stan, {
     req(args_brm())
     args_brm_copy <- args_brm()
+
+    # Handle some peculiarities related to RStudio:
     RSTUDIO_orig <- Sys.getenv("RSTUDIO")
     if(identical(RSTUDIO_orig, "1")){
       browser_RS <- getOption("shinybrms.browser_RStudio", default = NULL)
@@ -1062,13 +1064,30 @@ server <- function(input, output, session){
       }
       Sys.setenv("RSTUDIO" = "")
     }
+
+    # Needed to avoid the use of parallel::mclapply() in RStan so that the progress file opens up:
+    if(identical(.Platform$OS.type, "unix") &&
+       interactive() &&
+       isatty(stdout()) &&
+       args_brm_copy$open_progress){
+      sink(tempfile(pattern = "dummy_stdout", fileext = ".txt"))
+      on.exit(sink())
+    }
+
+    # Get warnings directly when they occur:
     warn_orig <- options(warn = 1)
+
+    # Run Stan (more precisely: brms::brm()):
     warn_capt <- capture.output({
       C_fit_tmp <- do.call(brms::brm, args = args_brm_copy)
     }, type = "message")
+
+    # Reset all modified options and environment variables:
     options(warn = warn_orig$warn)
     if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     if(exists("browser_orig")) options(browser = browser_orig$browser)
+
+    # Throw warnings if existing:
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
       if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){

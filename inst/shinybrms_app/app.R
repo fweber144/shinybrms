@@ -152,12 +152,12 @@ ui <- navbarPage(
           h4("Non-varying main effects"),
           helpText("Start typing or click into the field below to choose variables for which a",
                    "non-varying main effect shall be added."),
-          varSelectInput("pred_main_sel", "Choose variables for non-varying main effects:",
+          varSelectInput("pred_NVmain_sel", "Choose variables for non-varying main effects:",
                          data = data.frame(),
                          multiple = TRUE,
                          selectize = TRUE),
           h4("Varying main effects"),
-          helpText("Not supported yet."),
+          helpText("Not supported yet.")
         ),
         # # Horizontal line:
         # hr(),
@@ -732,7 +732,7 @@ server <- function(input, output, session){
   # Main effects
 
   observe({
-    updateVarSelectInput(session, "pred_main_sel",
+    updateVarSelectInput(session, "pred_NVmain_sel",
                          data = da())
   })
 
@@ -768,7 +768,7 @@ server <- function(input, output, session){
     req(input$outc_sel)
     paste(input$outc_sel,
           "~",
-          paste(c("1", as.character(input$pred_main_sel), pred_int_rv$pred_int),
+          paste(c("1", as.character(input$pred_NVmain_sel), pred_int_rv$pred_int),
                 collapse = " + "))
   })
 

@@ -775,7 +775,7 @@ server <- function(input, output, session){
   # Formula construction
 
   pred_mainV <- reactive({
-    if(length(input$pred_mainV_sel) > 0){
+    if(length(input$pred_mainV_sel) > 0L){
       return(paste0("(1|", as.character(input$pred_mainV_sel), ")"))
     } else{
       return(character())

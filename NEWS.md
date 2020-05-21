@@ -5,6 +5,10 @@
 
 ## shinybrms 1.0.1.9000
 
+### Major changes
+
+  - Added the possibility to include varying intercepts.
+
 ### Minor changes
 
   - Minor improvements in the user interface (UI).

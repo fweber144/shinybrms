@@ -142,8 +142,13 @@ ui <- navbarPage(
         # hr(),
         wellPanel(
           h3("Main effects"),
-          helpText("Note: Non-varying effects are also known as population-level or \"fixed\" effects.",
-                   "Varying effects are also known as group-level or \"random\" effects."),
+          helpText("Note:",
+                   tags$ul(
+                     tags$li("Non-varying effects are also known as population-level or \"fixed\" effects."),
+                     tags$li("Varying effects are also known as group-level or \"random\" effects."),
+                   ),
+                   "The terms \"fixed\" and \"random\" effects are put in quotation marks as they",
+                   "are not really appropriate for a Bayesian regression model."),
           h4("Non-varying main effects"),
           helpText("Start typing or click into the field below to choose variables for which a",
                    "non-varying main effect shall be added."),

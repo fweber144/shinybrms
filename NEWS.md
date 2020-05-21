@@ -10,6 +10,11 @@
   - Minor improvements in the user interface (UI).
   - Adopted to R 4.0.0.
 
+### Bug fixes
+
+  - Fixed a bug preventing the progress file from opening up on Linux
+    (when started interactively from the terminal).
+
 ## shinybrms 1.0.1
 
 ### Bug fixes

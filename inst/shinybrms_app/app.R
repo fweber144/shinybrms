@@ -96,9 +96,9 @@ ui <- navbarPage(
         titlePanel("Outcome"),
         br(),
         helpText("Define the outcome (the dependent variable) and the distributional family for this outcome."),
-        varSelectizeInput("outc_sel", "Choose outcome:",
-                          data = data.frame(),
-                          selected = ""),
+        varSelectInput("outc_sel", "Choose outcome:",
+                       data = data.frame(),
+                       selected = ""),
         selectInput("dist_sel", "Choose distributional family for the outcome:",
                     choices = list("Choose ..." = c("Choose ..." = ""),
                                    "Continuous outcome:" = c("Gaussian (normal)" = "gaussian"),
@@ -684,9 +684,9 @@ server <- function(input, output, session){
   # Outcome
 
   observe({
-    updateVarSelectizeInput(session, "outc_sel",
-                            data = da(),
-                            selected = "") # , server = FALSE
+    updateVarSelectInput(session, "outc_sel",
+                         data = da(),
+                         selected = "") # , server = FALSE
   })
 
   #------------------------

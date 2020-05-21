@@ -374,9 +374,9 @@ ui <- navbarPage(
     wellPanel(
       h3("Run Stan"),
       helpText("Note: If the advanced option \"Open progress\" is selected (as per default),",
-               "users of the Firefox web browser may need to manually copy the link to the Stan",
-               "HTML progress file which is automatically opening up and paste this link into a",
-               "different web browser for viewing the progress file there."),
+               "users of the Firefox web browser on Windows may need to manually copy the link to",
+               "the Stan HTML progress file which is automatically opening up and paste this link",
+               "into a different web browser for viewing the progress file there."),
       actionButton("run_stan", "Run Stan")
     ),
     # # Horizontal line:

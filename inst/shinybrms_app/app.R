@@ -150,14 +150,19 @@ ui <- navbarPage(
                    "The terms \"fixed\" and \"random\" effects are put in quotation marks as they",
                    "are not really appropriate for a Bayesian regression model."),
           h4("Non-varying main effects"),
-          helpText("Start typing or click into the field below to choose variables for which a",
-                   "non-varying main effect shall be added."),
+          helpText("Start typing or click into the field below to choose variables for which",
+                   "non-varying main effects shall be added."),
           varSelectInput("pred_mainNV_sel", "Choose variables for non-varying main effects:",
                          data = data.frame(),
                          multiple = TRUE,
                          selectize = TRUE),
-          h4("Varying main effects"),
-          helpText("Not supported yet.")
+          h4("Varying intercepts"),
+          helpText("Start typing or click into the field below to choose variables for which",
+                   "varying intercepts shall be added."),
+          varSelectInput("pred_mainV_sel", "Choose variables for varying intercepts:",
+                         data = data.frame(),
+                         multiple = TRUE,
+                         selectize = TRUE)
         ),
         # # Horizontal line:
         # hr(),
@@ -736,6 +741,11 @@ server <- function(input, output, session){
                          data = da())
   })
 
+  observe({
+    updateVarSelectInput(session, "pred_mainV_sel",
+                         data = da())
+  })
+
   #------------------------
   # Interactions
 
@@ -764,11 +774,22 @@ server <- function(input, output, session){
   #------------------------
   # Formula construction
 
+  pred_mainV <- reactive({
+    if(length(input$pred_mainV_sel) > 0){
+      return(paste0("(1|", as.character(input$pred_mainV_sel), ")"))
+    } else{
+      return(character())
+    }
+  })
+
   C_formula_char <- reactive({
     req(input$outc_sel)
     paste(input$outc_sel,
           "~",
-          paste(c("1", as.character(input$pred_mainNV_sel), pred_int_rv$pred_int),
+          paste(c("1",
+                  as.character(input$pred_mainNV_sel),
+                  pred_mainV(),
+                  pred_int_rv$pred_int),
                 collapse = " + "))
   })
 

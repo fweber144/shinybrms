@@ -864,7 +864,7 @@ server <- function(input, output, session){
     req(C_prior_rv$prior_default_obj)
     prior_coef_choices_add <- unique(C_prior_rv$prior_default_obj$coef[
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel
-      ])
+    ])
     prior_coef_choices_add <- setNames(prior_coef_choices_add, prior_coef_choices_add)
     prior_coef_choices <- c("Choose or leave empty" = "",
                             prior_coef_choices_add)
@@ -1065,35 +1065,39 @@ server <- function(input, output, session){
     req(args_brm())
     args_brm_copy <- args_brm()
 
-    # Handle some peculiarities related to RStudio:
-    RSTUDIO_orig <- Sys.getenv("RSTUDIO")
-    if(identical(RSTUDIO_orig, "1")){
-      browser_RS <- getOption("shinybrms.browser_RStudio", default = NULL)
-      if(!identical(.Platform$OS.type, "windows") &&
-         is.null(browser_RS) &&
-         args_brm_copy$open_progress){
-        showNotification(
-          paste("If running on a non-Windows system in RStudio, you need to set the R option",
-                "\"shinybrms.browser_RStudio\" to a non-NULL value in order to automatically",
-                "open up the Stan progress file. Now deselecting the advanced option",
-                "\"Open progress\" internally."),
-          duration = NA,
-          type = "warning"
-        )
-        args_brm_copy$open_progress <- FALSE
-      } else{
-        browser_orig <- options(browser = browser_RS)
+    # Some modifications needed to show the progress (see the source code of
+    # rstan::sampling()):
+    if(args_brm_copy$open_progress){
+      # For RStudio:
+      RSTUDIO_orig <- Sys.getenv("RSTUDIO")
+      if(identical(RSTUDIO_orig, "1")){
+        Sys.setenv("RSTUDIO" = "")
       }
-      Sys.setenv("RSTUDIO" = "")
-    }
 
-    # Needed to avoid the use of parallel::mclapply() in RStan so that the progress file opens up:
-    if(identical(.Platform$OS.type, "unix") &&
-       interactive() &&
-       isatty(stdout()) &&
-       args_brm_copy$open_progress){
-      sink(tempfile(pattern = "dummy_stdout", fileext = ".txt"))
-      on.exit(sink())
+      # The progress browser:
+      prog_browser <- getOption("shinybrms.prog_browser",
+                                getOption("browser"))
+      browser_orig <- options(browser = prog_browser)
+
+      # Show the progress, even if parallel::mclapply() (with forking) is used:
+      if(identical(.Platform$OS.type, "unix")){
+        if(!interactive()){
+          tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
+          sink(tmp_stdout_txt)
+          sink_active <- TRUE
+          cat("Refresh this page to see the sampling progress.",
+              "Note that the C++ code needs to be compiled first and this may take",
+              "a while.\n")
+          tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
+          rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
+          browseURL(paste0("file://", tmp_stdout_html),
+                    browser = getOption("shinybrms.prog_browser",
+                                        getOption("browser")))
+        } else if(isatty(stdout())){
+          sink(tempfile(pattern = "shinybrms_dummy_stdout", fileext = ".txt"))
+          sink_active <- TRUE
+        }
+      }
     }
 
     # Get warnings directly when they occur:
@@ -1106,8 +1110,9 @@ server <- function(input, output, session){
 
     # Reset all modified options and environment variables:
     options(warn = warn_orig$warn)
-    if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
+    if(exists("sink_active")) sink()
     if(exists("browser_orig")) options(browser = browser_orig$browser)
+    if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
 
     # Throw warnings if existing:
     if(length(warn_capt) > 0L){
@@ -1164,29 +1169,17 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     if(requireNamespace("shinystan", quietly = TRUE)){
       if(requireNamespace("callr", quietly = TRUE)){
-        if(identical(Sys.getenv("RSTUDIO"), "1")){
-          browser_RS <- getOption("shinybrms.browser_RStudio", default = NULL)
-          if(!identical(.Platform$OS.type, "windows") &&
-             is.null(browser_RS)){
-            showNotification(
-              paste("If running on a non-Windows system in RStudio, you need to set the R option",
-                    "\"shinybrms.browser_RStudio\" to a non-NULL value in order to automatically",
-                    "open up the \"shinystan\" app."),
-              duration = NA,
-              type = "error"
-            )
-            return(invisible(FALSE))
-          } else{
-            browser_orig <- options(browser = browser_RS)
-          }
-        }
-        callr::r(function(brmsfit_obj, browser_callr){
-          browser_callr_orig <- options(browser = browser_callr)
-          shinystan::launch_shinystan(brmsfit_obj, rstudio = FALSE)
-          options(browser = browser_callr_orig$browser)
-          return(invisible(TRUE))
-        }, args = list(brmsfit_obj = C_fit(), browser_callr = getOption("browser")))
-        if(exists("browser_orig")) options(browser = browser_orig$browser)
+        callr::r(
+          function(brmsfit_obj, browser_callr){
+            browser_callr_orig <- options(browser = browser_callr)
+            shinystan::launch_shinystan(brmsfit_obj, rstudio = FALSE)
+            options(browser = browser_callr_orig$browser)
+            return(invisible(TRUE))
+          },
+          args = list(brmsfit_obj = C_fit(),
+                      browser_callr = getOption("shinybrms.shinystan_browser",
+                                                getOption("browser")))
+        )
       } else{
         showNotification(
           "Package \"callr\" needed. Please install it.",

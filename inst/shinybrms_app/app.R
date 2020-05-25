@@ -1079,7 +1079,8 @@ server <- function(input, output, session){
                                 getOption("browser"))
       browser_orig <- options(browser = prog_browser)
 
-      # Show the progress, even if parallel::mclapply() (with forking) is used:
+      # Even show the progress if parallel::mclapply() (with forking) is
+      # intended to be used:
       if(identical(.Platform$OS.type, "unix")){
         if(!interactive()){
           tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
@@ -1090,9 +1091,7 @@ server <- function(input, output, session){
               "a while.\n")
           tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
           rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
-          browseURL(paste0("file://", tmp_stdout_html),
-                    browser = getOption("shinybrms.prog_browser",
-                                        getOption("browser")))
+          browseURL(paste0("file://", tmp_stdout_html))
         } else if(isatty(stdout())){
           sink(tempfile(pattern = "shinybrms_dummy_stdout", fileext = ".txt"))
           sink_active <- TRUE

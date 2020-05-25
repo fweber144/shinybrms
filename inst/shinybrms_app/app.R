@@ -1077,6 +1077,14 @@ server <- function(input, output, session){
       # The progress browser:
       prog_browser <- getOption("shinybrms.prog_browser",
                                 getOption("browser"))
+      if(is.function(prog_browser) &&
+         any(grepl("rs_browseURL", as.character(body(prog_browser))))){
+        # In this case, "prog_browser" cannot be used (at least not without
+        # requiring the user to perform some major modifications to the
+        # initialization of the R session), so use the default browser stored
+        # in the environment variable "R_BROWSER":
+        prog_browser <- Sys.getenv("R_BROWSER")
+      }
       browser_orig <- options(browser = prog_browser)
 
       # Even show the progress if parallel::mclapply() (with forking) is
@@ -1168,6 +1176,20 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     if(requireNamespace("shinystan", quietly = TRUE)){
       if(requireNamespace("callr", quietly = TRUE)){
+        # The browser for "shinystan":
+        shinystan_browser <- getOption("shinybrms.shinystan_browser",
+                                       getOption("browser"))
+        if(is.function(shinystan_browser) &&
+           any(grepl("rs_browseURL", as.character(body(shinystan_browser))))){
+          # In this case, "shinystan_browser" cannot be used (at least not without
+          # requiring the user to perform some major modifications to the
+          # initialization of the R session), so use the default browser stored
+          # in the environment variable "R_BROWSER":
+          shinystan_browser <- Sys.getenv("R_BROWSER")
+        }
+
+        # Call "shinystan" from an external R process (needed to allow opening
+        # another Shiny app ("shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
           function(brmsfit_obj, browser_callr){
             browser_callr_orig <- options(browser = browser_callr)
@@ -1176,8 +1198,7 @@ server <- function(input, output, session){
             return(invisible(TRUE))
           },
           args = list(brmsfit_obj = C_fit(),
-                      browser_callr = getOption("shinybrms.shinystan_browser",
-                                                getOption("browser")))
+                      browser_callr = shinystan_browser)
         )
       } else{
         showNotification(

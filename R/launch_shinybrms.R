@@ -8,29 +8,28 @@
 #'
 #' @note The following global options are introduced by \pkg{shinybrms}:
 #'
-#'   * `shinybrms.prog_browser`: The value for the global option `browser` to be used for opening the
-#'   [Stan](https://mc-stan.org/) progress file (an HTML file). Defaults to option `browser` (see [base::options()]).
-#'   Note that RStudio's default for option `browser` cannot be used for the Stan progress file.
-#'   Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option `browser` to fix
-#'   this issue.
-#'   * `shinybrms.shinystan_browser`: The value for the global option `browser` to be used for opening the
-#'   \pkg{shinystan} app. Defaults to option `browser` (see [base::options()]).
-#'   Note that RStudio's default for option `browser` cannot be used for opening the \pkg{shinystan}
-#'   app from within \pkg{shinybrms}.
-#'   Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option `browser` to fix
-#'   this issue.
+#' * `shinybrms.prog_browser`: The value for the global option `browser` to be used for opening the
+#' [Stan](https://mc-stan.org/) progress file (an HTML file). Defaults to option `browser` (see
+#' [base::options()]). Note that RStudio's default for option `browser` cannot be used for the Stan
+#' progress file. Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option
+#' `browser` to fix this issue.
+#' * `shinybrms.shinystan_browser`: The value for the global option
+#' `browser` to be used for opening the \pkg{shinystan} app. Defaults to option `browser` (see
+#' [base::options()]). Note that RStudio's default for option `browser` cannot be used for opening
+#' the \pkg{shinystan} app from within \pkg{shinybrms}. Therefore, \pkg{shinybrms} automatically
+#' redefines RStudio's default for option `browser` to fix this issue.
 #'
-#'   Other global options used by \pkg{shinybrms}:
+#' Other global options used by \pkg{shinybrms}:
 #'
-#'   * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the advanced option
-#'   "Cores" (in the \pkg{shinybrms} app) defaults to the value of this option. If option `mc.cores`
-#'   is not set, then the advanced option "Cores" defaults to the value returned by
-#'   [parallel::detectCores()].
-#'   * `shinystan.rstudio` (see [shinystan::launch_shinystan()]): If set to `TRUE`, then use
-#'   RStudio's mechanism for opening the \pkg{shinystan} app (i.e. use
-#'   `getOption("shiny.launch.browser", interactive())` for argument `launch.browser` of
-#'   [shiny::runApp()]). Defaults to `FALSE` (i.e. use `TRUE` for argument `launch.browser` of
-#'   [shiny::runApp()]).
+#' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the advanced option
+#' "Cores" (in the \pkg{shinybrms} app) defaults to the value of this option. If option `mc.cores`
+#' is not set, then the advanced option "Cores" defaults to the value returned by
+#' [parallel::detectCores()].
+#' * `shinystan.rstudio` (see [shinystan::launch_shinystan()]): If set to
+#' `TRUE`, then use RStudio's mechanism for opening the \pkg{shinystan} app (i.e. use
+#' `getOption("shiny.launch.browser", interactive())` for argument `launch.browser` of
+#' [shiny::runApp()]). Defaults to `FALSE` (i.e. use `TRUE` for argument `launch.browser` of
+#' [shiny::runApp()]).
 #'
 #' @return `TRUE` (invisible).
 #'

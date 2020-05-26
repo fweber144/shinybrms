@@ -4,15 +4,12 @@
 \alias{launch_shinybrms}
 \title{Launch the \pkg{shinybrms} Shiny app}
 \usage{
-launch_shinybrms(launch.browser = interactive(), ...)
+launch_shinybrms(...)
 }
 \arguments{
-\item{launch.browser}{Argument \code{launch.browser} from \code{\link[shiny:runApp]{shiny::runApp()}}. Defaults here to
-\code{interactive()}.}
-
-\item{\dots}{Further arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to force
-launching the Shiny app in the system's default web browser, set argument \code{launch.browser} to
-\code{TRUE}.}
+\item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to force launching the
+Shiny app in the system's default web browser (even if using RStudio), set argument
+\code{launch.browser} to \code{TRUE}.}
 }
 \value{
 \code{TRUE} (invisible).
@@ -21,31 +18,36 @@ launching the Shiny app in the system's default web browser, set argument \code{
 This function launches the \pkg{shinybrms} Shiny app.
 }
 \note{
-If option \code{mc.cores} is set, then the advanced option "Cores" defaults to the value of this
-option. If option \code{mc.cores} is not set, then the advanced option "Cores" defaults to the value
-returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
+The following global options are introduced by \pkg{shinybrms}:
+\itemize{
+\item \code{shinybrms.prog_browser}: The value for the global option \code{browser} to be used for opening the
+\href{https://mc-stan.org/}{Stan} progress file (an HTML file). Defaults to option \code{browser} (see \code{\link[base:options]{base::options()}}).
+Note that RStudio's default for option \code{browser} cannot be used for the Stan progress file.
+Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option \code{browser} to fix
+this issue.
+\item \code{shinybrms.shinystan_browser}: The value for the global option \code{browser} to be used for opening the
+\pkg{shinystan} app. Defaults to option \code{browser} (see \code{\link[base:options]{base::options()}}).
+Note that RStudio's default for option \code{browser} cannot be used for opening the \pkg{shinystan}
+app from within \pkg{shinybrms}.
+Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option \code{browser} to fix
+this issue.
+}
 
-By default, the \href{https://mc-stan.org/}{Stan} progress automatically opens up as an HTML file.
-This behavior may be disabled in the "Advanced options" of the \pkg{shinybrms} Shiny app
-(option "Open progress"), but for the remainder of this paragraph, it is assumed that the
-automatic opening of the Stan progress file is desired. In RStudio, the default for option
-\code{browser} cannot be used for the Stan progress file. Therefore, \pkg{shinybrms} has an option
-\code{shinybrms.browser_RStudio} specifying the value for option \code{browser} to be used when running
-in RStudio. If not specified, option \code{shinybrms.browser_RStudio} defaults to \code{NULL}. On
-Windows, \code{NULL} means that the default browser (as determined by the file association
-mechanism) is used. On non-Windows systems, \code{NULL} has no meaning and automatically disables
-the advanced option "Open progress" from the \pkg{shinybrms} app internally (with a
-notification popping up) if not done by the user. On any system, option
-\code{shinybrms.browser_RStudio} may directly specify the HTML browser to use (see argument
-\code{browser} in \code{\link[utils:browseURL]{utils::browseURL()}} and option \code{browser} in \code{\link[base:options]{base::options()}} for details).
-
-The option \code{shinybrms.browser_RStudio} (see above) is also used when launching the
-\pkg{shinystan} Shiny app and running in RStudio. Here, the default (\code{NULL}) makes it
-impossible to launch the \pkg{shinystan} app if running on a non-Windows system (and in
-RStudio).
+Other global options used by \pkg{shinybrms}:
+\itemize{
+\item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the advanced option
+"Cores" (in the \pkg{shinybrms} app) defaults to the value of this option. If option \code{mc.cores}
+is not set, then the advanced option "Cores" defaults to the value returned by
+\code{\link[parallel:detectCores]{parallel::detectCores()}}.
+\item \code{shinystan.rstudio} (see \code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}): If set to \code{TRUE}, then use
+RStudio's mechanism for opening the \pkg{shinystan} app (i.e. use
+\code{getOption("shiny.launch.browser", interactive())} for argument \code{launch.browser} of
+\code{\link[shiny:runApp]{shiny::runApp()}}). Defaults to \code{FALSE} (i.e. use \code{TRUE} for argument \code{launch.browser} of
+\code{\link[shiny:runApp]{shiny::runApp()}}).
+}
 }
 \examples{
 if(interactive()){
-  launch_shinybrms()
+  launch_shinybrms(launch.browser = TRUE)
 }
 }

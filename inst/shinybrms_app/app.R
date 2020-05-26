@@ -168,7 +168,8 @@ ui <- navbarPage(
         # hr(),
         wellPanel(
           h3("Interaction effects"),
-          helpText("Start typing or click into the field below to choose variables for which an",
+          helpText("Currently, only interactions between predictor variables with non-varying main effects are supported.",
+                   "Start typing or click into the field below to choose variables for which an",
                    "interaction shall be added. Confirm this interaction by pressing the",
                    "\"Add interaction\" button. All interactions which have been added are",
                    "listed in the box below the \"Add interaction\" button. You may reset", em("all"),

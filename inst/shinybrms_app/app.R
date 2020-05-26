@@ -1201,7 +1201,7 @@ server <- function(input, output, session){
         callr::r(
           function(brmsfit_obj, browser_callr){
             browser_callr_orig <- options(browser = browser_callr)
-            shinystan::launch_shinystan(brmsfit_obj, rstudio = FALSE)
+            shinystan::launch_shinystan(brmsfit_obj)
             options(browser = browser_callr_orig$browser)
             return(invisible(TRUE))
           },

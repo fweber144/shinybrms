@@ -1084,6 +1084,10 @@ server <- function(input, output, session){
         # initialization of the R session), so use the default browser stored
         # in the environment variable "R_BROWSER":
         prog_browser <- Sys.getenv("R_BROWSER")
+        if(identical(.Platform$OS.type, "windows") &&
+           identical(prog_browser, "")){
+          prog_browser <- NULL
+        }
       }
       browser_orig <- options(browser = prog_browser)
 
@@ -1186,6 +1190,10 @@ server <- function(input, output, session){
           # initialization of the R session), so use the default browser stored
           # in the environment variable "R_BROWSER":
           shinystan_browser <- Sys.getenv("R_BROWSER")
+          if(identical(.Platform$OS.type, "windows") &&
+             identical(shinystan_browser, "")){
+            shinystan_browser <- NULL
+          }
         }
 
         # Call "shinystan" from an external R process (needed to allow opening

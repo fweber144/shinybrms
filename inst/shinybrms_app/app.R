@@ -382,7 +382,7 @@ ui <- navbarPage(
                "users of the Firefox web browser on Windows may need to manually copy the link to",
                "the Stan HTML progress file which is automatically opening up and paste this link",
                "into a different web browser for viewing the progress file there."),
-      actionButton("run_stan", "Run Stan")
+      actionButton("run_stan", "Run Stan (may take a while)")
     ),
     # # Horizontal line:
     # hr(),

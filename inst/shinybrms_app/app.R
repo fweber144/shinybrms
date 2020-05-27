@@ -416,8 +416,9 @@ ui <- navbarPage(
       verbatimTextOutput("smmry_view", placeholder = TRUE),
       selectInput("stanout_download_sel", "Choose output object to download:",
                   choices = c("\"brmsfit\" object" = "brmsfit_obj",
-                              "Posterior draws (matrix)" = "draws_mat",
-                              "Posterior draws (array)" = "draws_arr"),
+                              "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
+                              "Matrix of posterior draws (R object)" = "draws_mat_obj",
+                              "Array of posterior draws (R object)" = "draws_arr_obj"),
                   selectize = TRUE),
       helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
                            "is the output from ", code("brms::brm()"), ", the central function ",
@@ -1164,18 +1165,28 @@ server <- function(input, output, session){
 
   output$stanout_download <- downloadHandler(
     filename = function(){
-      paste0(switch(input$stanout_download_sel,
-                    "brmsfit_obj" = "shinybrms_brmsfit",
-                    "draws_mat" = "shinybrms_post_draws_mat",
-                    "draws_arr" = "shinybrms_post_draws_arr"),
-             ".rds")
+      if(identical(input$stanout_download_sel, "draws_mat_csv")){
+        return("shinybrms_post_draws_mat.csv")
+      } else{
+        return(paste0(switch(input$stanout_download_sel,
+                             "brmsfit_obj" = "shinybrms_brmsfit",
+                             "draws_mat_obj" = "shinybrms_post_draws_mat",
+                             "draws_arr_obj" = "shinybrms_post_draws_arr"),
+                      ".rds"))
+      }
     },
     content = function(file){
-      saveRDS(switch(input$stanout_download_sel,
-                     "brmsfit_obj" = C_fit(),
-                     "draws_mat" = as.matrix(C_fit()),
-                     "draws_arr" = as.array(C_fit())),
-              file = file)
+      if(identical(input$stanout_download_sel, "draws_mat_csv")){
+        write.csv(as.matrix(C_fit()),
+                  file = file,
+                  row.names = FALSE)
+      } else{
+        saveRDS(switch(input$stanout_download_sel,
+                       "brmsfit_obj" = C_fit(),
+                       "draws_mat_obj" = as.matrix(C_fit()),
+                       "draws_arr_obj" = as.array(C_fit())),
+                file = file)
+      }
     }
   )
 

@@ -426,8 +426,11 @@ ui <- navbarPage(
       downloadButton("stanout_download", "Download output object"),
       br(),
       br(),
-      strong("Interactive output inspection using package \"shinystan\":"),
-      br(),
+      h4("Interactive output inspection using package", strong("shinystan")),
+      numericInput("seed_PPD",
+                   paste("Seed for draws from posterior predictive distribution",
+                         "(leave empty to use a random seed):"),
+                   value = NULL, step = 1L),
       actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)"))),
       helpText(
         "Note: In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), "are used.",
@@ -1213,15 +1216,20 @@ server <- function(input, output, session){
         # Call "shinystan" from an external R process (needed to allow opening
         # another Shiny app ("shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
-          function(brmsfit_obj, browser_callr){
+          function(brmsfit_obj, browser_callr, seed_callr){
             browser_callr_orig <- options(browser = browser_callr)
+            assign("y", brms::get_y(brmsfit_obj), envir = .GlobalEnv)
+            if(!is.vector(y)) assign("y", as.vector(y), envir = .GlobalEnv)
+            set.seed(seed_callr)
+            assign("y_rep", brms::posterior_predict(brmsfit_obj), envir = .GlobalEnv)
             shinystan::launch_shinystan(brmsfit_obj,
                                         rstudio = FALSE)
             options(browser = browser_callr_orig$browser)
             return(invisible(TRUE))
           },
           args = list(brmsfit_obj = C_fit(),
-                      browser_callr = shinystan_browser)
+                      browser_callr = shinystan_browser,
+                      seed_callr = input$seed_PPD)
         )
       } else{
         showNotification(

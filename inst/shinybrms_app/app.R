@@ -336,45 +336,43 @@ ui <- navbarPage(
       checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
       conditionalPanel(
         condition = "input.show_advOpts",
-        helpText(HTML(paste0(
-          "Numeric options with an empty field are set to their default value (see the help for ",
-          code("brms::brm()"),
-          " from package ",
-          a(HTML("<strong>brms</strong>"),
-            href = "https://CRAN.R-project.org/package=brms",
-            target = "_blank"),
-          " and the help for ",
-          code("rstan::sampling()"),
-          " as well as for ",
-          code("rstan::stan()"),
-          " from package ",
-          a(HTML("<strong>rstan</strong>"),
-            href = "https://CRAN.R-project.org/package=rstan",
-            target = "_blank"),
-          "). ",
-          "Numeric options with a preset value may not be left empty."
-        ))),
-        helpText("Note that internally,",
-                 "the number of cores is set automatically to the minimum value of options",
-                 "\"Cores\" and \"Chains\"."),
+        helpText("Notes:",
+                 tags$ol(
+                   tags$li(paste("To obtain reproducible results, you need to specify a value for",
+                                 "option \"Seed\" and enter this value each time you want to",
+                                 "obtain the same results. Leave option \"Seed\" empty to use a",
+                                 "random seed (giving non-reproducible results).")),
+                   tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
+                           "a default value which depends on other options. Leave them empty to",
+                           "use this default value."),
+                   tags$li("Numeric options with a preset value may not be left empty."),
+                   tags$li(paste("Internally, the number of cores is set automatically to the",
+                                 "minimum value of options \"Cores\" and \"Chains\"."))
+                 )),
         fluidRow(
           column(5,
-                 numericInput("advOpts_seed", "Seed:", value = NA, step = 1L), # NOTE: setting "value = NULL" also results in an initial value of NA.
+                 numericInput("advOpts_seed", "Seed:",
+                              value = NA, step = 1L),
                  numericInput("advOpts_cores", "Cores:",
-                              value = getOption("mc.cores", parallel::detectCores()), step = 1L),
-                 numericInput("advOpts_chains", "Chains:", value = 4L, step = 1L),
-                 numericInput("advOpts_iter", "Total iterations per chain:", value = NA, step = 1L),
-                 numericInput("advOpts_warmup", "Warmup iterations per chain:", value = NA, step = 1L),
-                 numericInput("advOpts_thin", "Thinning rate:", value = NA, step = 1L)),
+                              value = getOption("mc.cores", parallel::detectCores()), step = 1L, min = 1L),
+                 numericInput("advOpts_chains", "Chains:",
+                              value = 4L, step = 1L, min = 1L),
+                 numericInput("advOpts_iter", "Total iterations per chain:",
+                              value = 2000L, step = 1L, min = 1L),
+                 numericInput("advOpts_warmup", "Warmup iterations per chain:",
+                              value = NA, step = 1L, min = 0L), # value = 1000L
+                 numericInput("advOpts_thin", "Thinning rate:",
+                              value = 1L, step = 1L, min = 1L)),
           column(5, offset = 1, # offset = 2,
                  radioButtons("advOpts_inits", "Initial values:",
                               choices = list("Random" = "random", "Zero" = "0"),
                               inline = TRUE),
                  numericInput("advOpts_init_r", "\"init_r\" (only relevant for random initial values):",
-                              value = NA, step = 0.1),
-                 numericInput("advOpts_adapt_delta", "\"adapt_delta\":", value = NA,
-                              min = 0, max = 1, step = 0.01),
-                 numericInput("advOpts_max_treedepth", "\"max_treedepth\":", value = NA, step = 1L),
+                              value = 2, step = 0.1, min = 0),
+                 numericInput("advOpts_adapt_delta", "\"adapt_delta\":",
+                              value = 0.95, step = 0.01, min = 0, max = 1),
+                 numericInput("advOpts_max_treedepth", "\"max_treedepth\":",
+                              value = 15L, step = 1L),
                  ### If "control" list shall be constructed more flexibly:
                  # selectInput("advOpts_control_name", "Name of \"control\" element:",
                  #             choices = c("Choose ..." = "",
@@ -386,10 +384,14 @@ ui <- navbarPage(
                  #           # width = "400px",
                  #           placeholder = "Enter value for the \"control\" element chosen above ..."),
                  ###
-                 checkboxInput("advOpts_open_progress", "Open progress", value = TRUE),
-                 numericInput("advOpts_refresh", "Progress-refreshing step size:", value = NA, step = 1L),
-                 checkboxInput("advOpts_save_all_pars", "\"save_all_pars\"", value = FALSE),
-                 checkboxInput("advOpts_save_warmup", "Save warmup", value = TRUE))
+                 checkboxInput("advOpts_open_progress", "Open progress",
+                               value = TRUE),
+                 numericInput("advOpts_refresh", "Progress-refreshing step size:",
+                              value = NA, step = 1L, min = 0L), # value = 200L
+                 checkboxInput("advOpts_save_all_pars", "\"save_all_pars\"",
+                               value = FALSE),
+                 checkboxInput("advOpts_save_warmup", "Save warmup",
+                               value = TRUE))
         )
       )
     ),
@@ -1031,52 +1033,27 @@ server <- function(input, output, session){
       silent = TRUE,
       verbose = FALSE,
       ##
-      ## Arguments which are preset by design of the UI (and which therefore can't be NA, so they
-      ## have to be added here regardless of their value):
+      ## Arguments which are preset by design of the UI:
+      seed = input$advOpts_seed,
+      iter = input$advOpts_iter,
+      thin = input$advOpts_thin,
       inits = input$advOpts_inits,
+      init_r = input$advOpts_init_r,
       open_progress = input$advOpts_open_progress,
       save_all_pars = input$advOpts_save_all_pars,
-      save_warmup = input$advOpts_save_warmup
+      save_warmup = input$advOpts_save_warmup,
+      control = list(adapt_delta = input$advOpts_adapt_delta,
+                     max_treedepth = input$advOpts_max_treedepth)
       ##
     )
-    if(!is.na(input$advOpts_seed)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(seed = input$advOpts_seed))
-    }
-    if(!is.na(input$advOpts_iter)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(iter = input$advOpts_iter))
-    }
     if(!is.na(input$advOpts_warmup)){
       args_brm_tmp <- c(args_brm_tmp,
                         list(warmup = input$advOpts_warmup))
-    }
-    if(!is.na(input$advOpts_thin)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(thin = input$advOpts_thin))
-    }
-    if(!is.na(input$advOpts_init_r)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(init_r = input$advOpts_init_r))
-    }
-    if(!is.na(input$advOpts_adapt_delta) || !is.na(input$advOpts_max_treedepth)){
-      control_brm <- NULL
-      if(!is.na(input$advOpts_adapt_delta)){
-        control_brm <- c(control_brm,
-                         list(adapt_delta = input$advOpts_adapt_delta))
-      }
-      if(!is.na(input$advOpts_max_treedepth)){
-        control_brm <- c(control_brm,
-                         list(max_treedepth = input$advOpts_max_treedepth))
-      }
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(control = control_brm))
     }
     if(!is.na(input$advOpts_refresh)){
       args_brm_tmp <- c(args_brm_tmp,
                         list(refresh = input$advOpts_refresh))
     }
-
     return(args_brm_tmp)
   })
 

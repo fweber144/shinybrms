@@ -372,7 +372,7 @@ ui <- navbarPage(
                  numericInput("advOpts_adapt_delta", "\"adapt_delta\":",
                               value = 0.95, step = 0.01, min = 0, max = 1),
                  numericInput("advOpts_max_treedepth", "\"max_treedepth\":",
-                              value = 15L, step = 1L),
+                              value = 15L, step = 1L, min = 1L),
                  ### If "control" list shall be constructed more flexibly:
                  # selectInput("advOpts_control_name", "Name of \"control\" element:",
                  #             choices = c("Choose ..." = "",

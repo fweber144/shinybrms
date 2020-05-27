@@ -336,7 +336,25 @@ ui <- navbarPage(
       checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
       conditionalPanel(
         condition = "input.show_advOpts",
-        helpText("Numeric options which have a default value are required. Note that internally,",
+        helpText(HTML(paste0(
+          "Numeric options with an empty field are set to their default value (see the help for ",
+          code("brms::brm()"),
+          " from package ",
+          a(HTML("<strong>brms</strong>"),
+            href = "https://CRAN.R-project.org/package=brms",
+            target = "_blank"),
+          " and the help for ",
+          code("rstan::sampling()"),
+          " as well as for ",
+          code("rstan::stan()"),
+          " from package ",
+          a(HTML("<strong>rstan</strong>"),
+            href = "https://CRAN.R-project.org/package=rstan",
+            target = "_blank"),
+          "). ",
+          "Numeric options with a preset value may not be left empty."
+        ))),
+        helpText("Note that internally,",
                  "the number of cores is set automatically to the minimum value of options",
                  "\"Cores\" and \"Chains\"."),
         fluidRow(

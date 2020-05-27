@@ -1066,6 +1066,13 @@ server <- function(input, output, session){
     req(args_brm())
     args_brm_copy <- args_brm()
 
+    showNotification(
+      paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",
+            "and this may take a while."),
+      duration = 60,
+      type = "message"
+    )
+
     # Some modifications needed to show the progress (see the source code of
     # rstan::sampling()):
     if(args_brm_copy$open_progress){

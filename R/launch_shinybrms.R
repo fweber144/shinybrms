@@ -19,17 +19,14 @@
 #' the \pkg{shinystan} app from within \pkg{shinybrms}. Therefore, \pkg{shinybrms} automatically
 #' redefines RStudio's default for option `browser` to fix this issue.
 #'
-#' Other global options used by \pkg{shinybrms}:
+#' The only other global option used by \pkg{shinybrms} is `mc.cores` (see [base::options()]): If
+#' option `mc.cores` is set, then the advanced option "Cores" (in the \pkg{shinybrms} app) defaults
+#' to the value of this option. If option `mc.cores` is not set, then the advanced option "Cores"
+#' defaults to the value returned by [parallel::detectCores()].
 #'
-#' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the advanced option
-#' "Cores" (in the \pkg{shinybrms} app) defaults to the value of this option. If option `mc.cores`
-#' is not set, then the advanced option "Cores" defaults to the value returned by
-#' [parallel::detectCores()].
-#' * `shinystan.rstudio` (see [shinystan::launch_shinystan()]): If set to
-#' `TRUE`, then use RStudio's mechanism for opening the \pkg{shinystan} app (i.e. use
-#' `getOption("shiny.launch.browser", interactive())` for argument `launch.browser` of
-#' [shiny::runApp()]). Defaults to `FALSE` (i.e. use `TRUE` for argument `launch.browser` of
-#' [shiny::runApp()]).
+#' Note that \pkg{shinystan}'s global option `shinystan.rstudio` (see
+#' [shinystan::launch_shinystan()]) may not be used here as \pkg{shinystan} is called from an
+#' external \R process where RStudio's browsers are not available.
 #'
 #' @return `TRUE` (invisible).
 #'

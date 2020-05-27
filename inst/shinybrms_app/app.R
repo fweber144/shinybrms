@@ -1202,16 +1202,15 @@ server <- function(input, output, session){
         # Call "shinystan" from an external R process (needed to allow opening
         # another Shiny app ("shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
-          function(brmsfit_obj, browser_callr, shinystan_rstudio_callr){
+          function(brmsfit_obj, browser_callr){
             browser_callr_orig <- options(browser = browser_callr)
             shinystan::launch_shinystan(brmsfit_obj,
-                                        rstudio = shinystan_rstudio_callr)
+                                        rstudio = FALSE)
             options(browser = browser_callr_orig$browser)
             return(invisible(TRUE))
           },
           args = list(brmsfit_obj = C_fit(),
-                      browser_callr = shinystan_browser,
-                      shinystan_rstudio_callr = getOption("shinystan.rstudio"))
+                      browser_callr = shinystan_browser)
         )
       } else{
         showNotification(

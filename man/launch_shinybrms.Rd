@@ -32,18 +32,14 @@ the \pkg{shinystan} app from within \pkg{shinybrms}. Therefore, \pkg{shinybrms} 
 redefines RStudio's default for option \code{browser} to fix this issue.
 }
 
-Other global options used by \pkg{shinybrms}:
-\itemize{
-\item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the advanced option
-"Cores" (in the \pkg{shinybrms} app) defaults to the value of this option. If option \code{mc.cores}
-is not set, then the advanced option "Cores" defaults to the value returned by
-\code{\link[parallel:detectCores]{parallel::detectCores()}}.
-\item \code{shinystan.rstudio} (see \code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}): If set to
-\code{TRUE}, then use RStudio's mechanism for opening the \pkg{shinystan} app (i.e. use
-\code{getOption("shiny.launch.browser", interactive())} for argument \code{launch.browser} of
-\code{\link[shiny:runApp]{shiny::runApp()}}). Defaults to \code{FALSE} (i.e. use \code{TRUE} for argument \code{launch.browser} of
-\code{\link[shiny:runApp]{shiny::runApp()}}).
-}
+The only other global option used by \pkg{shinybrms} is \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If
+option \code{mc.cores} is set, then the advanced option "Cores" (in the \pkg{shinybrms} app) defaults
+to the value of this option. If option \code{mc.cores} is not set, then the advanced option "Cores"
+defaults to the value returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
+
+Note that \pkg{shinystan}'s global option \code{shinystan.rstudio} (see
+\code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \pkg{shinystan} is called from an
+external \R process where RStudio's browsers are not available.
 }
 \examples{
 if(interactive()){

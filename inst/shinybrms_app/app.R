@@ -31,7 +31,6 @@ ui <- navbarPage(
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
                                 "mesquite (online resource; see page \"Links\")" = "mesquite",
-                                "mtcars" = "mtcars",
                                 "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
@@ -676,8 +675,6 @@ server <- function(input, output, session){
     } else if(identical(input$ex_da_sel, "mesquite")){
       return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
                         header = TRUE, sep = "", dec = ".")) # , quote = ""
-    } else if(identical(input$ex_da_sel, "mtcars")){
-      return(mtcars)
     } else if(identical(input$ex_da_sel, "Prostate")){
       if(requireNamespace("lasso2", quietly = TRUE)){
         tmp_env <- new.env()

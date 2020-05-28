@@ -798,6 +798,7 @@ server <- function(input, output, session){
   })
 
   dist_link_da <- reactive({
+    req(C_family())
     if(identical(input$dist_sel, "")){
       return(
         data.frame("parameter" = character(),
@@ -879,16 +880,23 @@ server <- function(input, output, session){
 
   C_formula_char <- reactive({
     req(input$outc_sel)
-    paste(input$outc_sel,
-          "~",
-          paste(c("1",
-                  as.character(input$pred_mainNV_sel),
-                  pred_mainV(),
-                  pred_int_rv$pred_int),
-                collapse = " + "))
+    if(all(c(input$outc_sel,
+             as.character(input$pred_mainNV_sel),
+             as.character(input$pred_mainV_sel)) %in% names(da()))){
+      return(paste(input$outc_sel,
+                   "~",
+                   paste(c("1",
+                           as.character(input$pred_mainNV_sel),
+                           pred_mainV(),
+                           pred_int_rv$pred_int),
+                         collapse = " + ")))
+    } else{
+      return(NULL)
+    }
   })
 
   C_formula <- reactive({
+    req(C_formula_char())
     as.formula(C_formula_char())
   })
 
@@ -909,7 +917,7 @@ server <- function(input, output, session){
                                prior_set_obj = brms::empty_prior())
 
   observe({
-    req(C_formula(), da(), C_family())
+    req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
@@ -938,8 +946,7 @@ server <- function(input, output, session){
   })
 
   observeEvent({
-    input$ex_da_sel
-    input$file_upload
+    da()
   }, {
     C_prior_rv$prior_default_obj <- brms::empty_prior()
   })
@@ -1007,7 +1014,7 @@ server <- function(input, output, session){
   # Stan code
 
   C_stancode <- reactive({
-    req(C_formula(), da(), C_family())
+    req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_stancode_tmp <- brms::make_stancode(formula = C_formula(),
@@ -1051,7 +1058,7 @@ server <- function(input, output, session){
   # Stan data
 
   C_standata <- reactive({
-    req(C_formula(), da(), C_family())
+    req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_standata_tmp <- brms::make_standata(formula = C_formula(),
@@ -1095,7 +1102,7 @@ server <- function(input, output, session){
   # Advanced options and run Stan
 
   args_brm <- reactive({
-    req(C_formula(), da(), C_family(), input$advOpts_cores, input$advOpts_chains)
+    req(C_formula(), C_family(), input$advOpts_cores, input$advOpts_chains)
     args_brm_tmp <- list(
       formula = C_formula(),
       data = da(),

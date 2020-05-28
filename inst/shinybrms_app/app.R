@@ -31,7 +31,6 @@ ui <- navbarPage(
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
                                 "mesquite (online resource; see page \"Links\")" = "mesquite",
-                                "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
                                 "Rabbit (from package \"MASS\")" = "Rabbit",
@@ -675,19 +674,6 @@ server <- function(input, output, session){
     } else if(identical(input$ex_da_sel, "mesquite")){
       return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
                         header = TRUE, sep = "", dec = ".")) # , quote = ""
-    } else if(identical(input$ex_da_sel, "Prostate")){
-      if(requireNamespace("lasso2", quietly = TRUE)){
-        tmp_env <- new.env()
-        data(Prostate, package = "lasso2", envir = tmp_env)
-        return(get("Prostate", envir = tmp_env))
-      } else{
-        showNotification(
-          "Package \"lasso2\" needed. Please install it.",
-          duration = NA,
-          type = "error"
-        )
-        return(NULL)
-      }
     } else if(identical(input$ex_da_sel, "Puromycin")){
       return(Puromycin)
     } else if(identical(input$ex_da_sel, "quine")){

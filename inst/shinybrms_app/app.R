@@ -26,18 +26,14 @@ ui <- navbarPage(
         selectInput("ex_da_sel", "Choose example dataset",
                     choices = c("Choose ..." = "",
                                 "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
-                                "bodyfat (online resource; see page \"Links\")" = "bodyfat",
-                                "diabetes (online resource; see page \"Links\")" = "diabetes",
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
-                                "mesquite (online resource; see page \"Links\")" = "mesquite",
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
                                 "Rabbit (from package \"MASS\")" = "Rabbit",
                                 "roaches (from package \"rstanarm\")" = "roaches",
                                 "sleepstudy (from package \"lme4\")" = "sleepstudy",
-                                "ToothGrowth" = "ToothGrowth",
-                                "winequality-red (online resource; see page \"Links\")" = "winequality-red"),
+                                "ToothGrowth" = "ToothGrowth"),
                     selectize = TRUE),
         # Horizontal line:
         hr(),
@@ -551,25 +547,6 @@ ui <- navbarPage(
             a("CRAN", href = "https://CRAN.R-project.org/package=shinystan", target = "_blank")
           )))
         )
-      ),
-      # # Horizontal line:
-      # hr(),
-      wellPanel(
-        h3("Example datasets (online resources)"),
-        tags$ul(
-          tags$li(a("bodyfat",
-                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/bodyfat.txt",
-                    target = "_blank")),
-          tags$li(a("diabetes",
-                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/diabetes.csv",
-                    target = "_blank")),
-          tags$li(a("mesquite",
-                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
-                    target = "_blank")),
-          tags$li(a("winequality-red",
-                    href = "https://raw.githubusercontent.com/avehtari/modelselection/master/winequality-red.csv",
-                    target = "_blank"))
-        )
       )
     ),
     tabPanel(
@@ -639,12 +616,6 @@ server <- function(input, output, session){
         )
         return(NULL)
       }
-    } else if(identical(input$ex_da_sel, "bodyfat")){
-      return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/bodyfat.txt",
-                        header = TRUE, sep = ";", dec = ".")) # , quote = ""
-    } else if(identical(input$ex_da_sel, "diabetes")){
-      return(read.csv("https://raw.githubusercontent.com/avehtari/modelselection/master/diabetes.csv",
-                      header = TRUE, sep = ",", dec = ".")) # , quote = ""
     } else if(identical(input$ex_da_sel, "grouseticks")){
       if(requireNamespace("lme4", quietly = TRUE)){
         tmp_env <- new.env()
@@ -671,9 +642,6 @@ server <- function(input, output, session){
         )
         return(NULL)
       }
-    } else if(identical(input$ex_da_sel, "mesquite")){
-      return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/mesquite.dat",
-                        header = TRUE, sep = "", dec = ".")) # , quote = ""
     } else if(identical(input$ex_da_sel, "Puromycin")){
       return(Puromycin)
     } else if(identical(input$ex_da_sel, "quine")){
@@ -730,9 +698,6 @@ server <- function(input, output, session){
       }
     } else if(identical(input$ex_da_sel, "ToothGrowth")){
       return(ToothGrowth)
-    } else if(identical(input$ex_da_sel, "winequality-red")){
-      return(read.csv("https://raw.githubusercontent.com/avehtari/modelselection/master/winequality-red.csv",
-                      header = TRUE, sep = ";", dec = ".")) # , quote = ""
     } else{
       # NOTE: input$file_upload will be NULL initially.
       req(input$file_upload)

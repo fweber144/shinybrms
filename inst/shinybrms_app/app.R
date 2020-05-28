@@ -1103,14 +1103,11 @@ server <- function(input, output, session){
 
   args_brm <- reactive({
     req(C_formula(), C_family(),
-        input$advOpts_cores, input$advOpts_chains,
+        input$advOpts_cores,
+        input$advOpts_chains,
         input$advOpts_iter,
         input$advOpts_thin,
-        input$advOpts_inits,
         input$advOpts_init_r,
-        input$advOpts_open_progress,
-        input$advOpts_save_all_pars,
-        input$advOpts_save_warmup,
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     args_brm_tmp <- list(
@@ -1118,13 +1115,9 @@ server <- function(input, output, session){
       data = da(),
       family = C_family(),
       prior = C_prior_rv$prior_set_obj,
+      ## Arguments which are preset by design of the UI:
       cores = min(input$advOpts_cores, input$advOpts_chains),
       chains = input$advOpts_chains,
-      ## Arguments which are fixed to a certain value:
-      silent = TRUE,
-      verbose = FALSE,
-      ##
-      ## Arguments which are preset by design of the UI:
       seed = input$advOpts_seed,
       iter = input$advOpts_iter,
       thin = input$advOpts_thin,
@@ -1134,7 +1127,11 @@ server <- function(input, output, session){
       save_all_pars = input$advOpts_save_all_pars,
       save_warmup = input$advOpts_save_warmup,
       control = list(adapt_delta = input$advOpts_adapt_delta,
-                     max_treedepth = input$advOpts_max_treedepth)
+                     max_treedepth = input$advOpts_max_treedepth),
+      ##
+      ## Arguments which are fixed to a certain value:
+      silent = TRUE,
+      verbose = FALSE
       ##
     )
     if(!is.na(input$advOpts_warmup)){

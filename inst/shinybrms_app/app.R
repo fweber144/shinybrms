@@ -25,6 +25,7 @@ ui <- navbarPage(
         h4("Example dataset"),
         selectInput("ex_da_sel", "Choose example dataset",
                     choices = c("Choose ..." = "",
+                                "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
                                 "bodyfat (online resource; see page \"Links\")" = "bodyfat",
                                 "diabetes (online resource; see page \"Links\")" = "diabetes",
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
@@ -620,7 +621,20 @@ server <- function(input, output, session){
   # Data
 
   da <- reactive({
-    if(identical(input$ex_da_sel, "bodyfat")){
+    if(identical(input$ex_da_sel, "Arabidopsis")){
+      if(requireNamespace("lme4", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(Arabidopsis, package = "lme4", envir = tmp_env)
+        return(get("Arabidopsis", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"lme4\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
+    } else if(identical(input$ex_da_sel, "bodyfat")){
       return(read.table("https://raw.githubusercontent.com/avehtari/modelselection/master/bodyfat.txt",
                         header = TRUE, sep = ";", dec = ".")) # , quote = ""
     } else if(identical(input$ex_da_sel, "diabetes")){

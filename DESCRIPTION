@@ -28,4 +28,5 @@ Suggests:
     callr (>= 3.4.0),
     rstanarm,
     lasso2,
-    MASS
+    MASS,
+    lme4

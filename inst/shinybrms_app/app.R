@@ -27,6 +27,7 @@ ui <- navbarPage(
                     choices = c("Choose ..." = "",
                                 "bodyfat (online resource; see page \"Links\")" = "bodyfat",
                                 "diabetes (online resource; see page \"Links\")" = "diabetes",
+                                "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
                                 "mesquite (online resource; see page \"Links\")" = "mesquite",
                                 "mtcars" = "mtcars",
@@ -625,6 +626,19 @@ server <- function(input, output, session){
     } else if(identical(input$ex_da_sel, "diabetes")){
       return(read.csv("https://raw.githubusercontent.com/avehtari/modelselection/master/diabetes.csv",
                       header = TRUE, sep = ",", dec = ".")) # , quote = ""
+    } else if(identical(input$ex_da_sel, "grouseticks")){
+      if(requireNamespace("lme4", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(grouseticks, package = "lme4", envir = tmp_env)
+        return(get("grouseticks", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"lme4\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
     } else if(identical(input$ex_da_sel, "kidiq")){
       if(requireNamespace("rstanarm", quietly = TRUE)){
         tmp_env <- new.env()

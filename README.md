@@ -46,12 +46,13 @@ you need to perform the following steps first:
     Note that installing from GitHub might give a more recent version of
     **shinybrms** than installing from CRAN. You also need to decide
     whether you want to use the example datasets from the R packages
-    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) and
-    [**lasso2**](https://CRAN.R-project.org/package=lasso2) or not.
+    [**lme4**](https://CRAN.R-project.org/package=lme4),
+    [**MASS**](https://CRAN.R-project.org/package=MASS), and
+    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) or not.
       - If you *don’t want* to use the example datasets from the R
-        packages **rstanarm** and **lasso2**, then the R code for
-        installing **shinybrms** from GitHub and CRAN (respectively) is
-        as follows:
+        packages **lme4**, **MASS**, and **rstanarm**, then the R code
+        for installing **shinybrms** from GitHub and CRAN (respectively)
+        is as follows:
           - To install **shinybrms** from GitHub:
             
             ``` r
@@ -67,8 +68,9 @@ you need to perform the following steps first:
             install.packages("shinybrms")
             ```
       - If you *want* to use the example datasets from the R packages
-        **rstanarm** and **lasso2**, then the R code for installing
-        **shinybrms** from GitHub and CRAN (respectively) is as follows:
+        **lme4**, **MASS**, and **rstanarm**, then the R code for
+        installing **shinybrms** from GitHub and CRAN (respectively) is
+        as follows:
           - To install **shinybrms** from GitHub:
             
             ``` r
@@ -112,14 +114,16 @@ install.packages("brms")
 ```
 
 2.  If you want to use the example datasets from the R packages
-    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) and
-    [**lasso2**](https://CRAN.R-project.org/package=lasso2), you need to
-    install these packages. You may use the following R code for this:
+    [**lme4**](https://CRAN.R-project.org/package=lme4),
+    [**MASS**](https://CRAN.R-project.org/package=MASS), and
+    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm), you
+    need to install these packages. You may use the following R code for
+    this:
 
 <!-- end list -->
 
 ``` r
-install.packages(c("rstanarm", "lasso2"))
+install.packages(c("lme4", "MASS", "rstanarm"))
 ```
 
 3.  Launch the **shinybrms** Shiny app directly from GitHub by running

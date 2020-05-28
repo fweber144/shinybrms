@@ -35,6 +35,7 @@ ui <- navbarPage(
                                 "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
+                                "Rabbit (from package \"MASS\")" = "Rabbit",
                                 "roaches (from package \"rstanarm\")" = "roaches",
                                 "sleepstudy (from package \"lme4\")" = "sleepstudy",
                                 "ToothGrowth" = "ToothGrowth",
@@ -692,6 +693,19 @@ server <- function(input, output, session){
         tmp_env <- new.env()
         data(quine, package = "MASS", envir = tmp_env)
         return(get("quine", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"MASS\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
+    } else if(identical(input$ex_da_sel, "Rabbit")){
+      if(requireNamespace("MASS", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(Rabbit, package = "MASS", envir = tmp_env)
+        return(get("Rabbit", envir = tmp_env))
       } else{
         showNotification(
           "Package \"MASS\" needed. Please install it.",

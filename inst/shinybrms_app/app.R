@@ -32,6 +32,7 @@ ui <- navbarPage(
                                 "mtcars" = "mtcars",
                                 "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
+                                "quine (from package \"MASS\")" = "quine",
                                 "roaches (from package \"rstanarm\")" = "roaches",
                                 "ToothGrowth" = "ToothGrowth",
                                 "winequality-red (online resource; see page \"Links\")" = "winequality-red"),
@@ -657,6 +658,19 @@ server <- function(input, output, session){
       }
     } else if(identical(input$ex_da_sel, "Puromycin")){
       return(Puromycin)
+    } else if(identical(input$ex_da_sel, "quine")){
+      if(requireNamespace("MASS", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(quine, package = "MASS", envir = tmp_env)
+        return(get("quine", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"MASS\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
     } else if(identical(input$ex_da_sel, "roaches")){
       if(requireNamespace("rstanarm", quietly = TRUE)){
         tmp_env <- new.env()

@@ -27,5 +27,4 @@ Suggests:
     shinystan (>= 2.4.0),
     callr (>= 3.4.0),
     rstanarm,
-    lasso2,
-    xtable
+    lasso2

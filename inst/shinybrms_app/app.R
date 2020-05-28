@@ -33,7 +33,6 @@ ui <- navbarPage(
                                 "Prostate (from package \"lasso2\")" = "Prostate",
                                 "Puromycin" = "Puromycin",
                                 "roaches (from package \"rstanarm\")" = "roaches",
-                                "tli (from package \"xtable\")" = "tli",
                                 "ToothGrowth" = "ToothGrowth",
                                 "winequality-red (online resource; see page \"Links\")" = "winequality-red"),
                     selectize = TRUE),
@@ -666,19 +665,6 @@ server <- function(input, output, session){
       } else{
         showNotification(
           "Package \"rstanarm\" needed. Please install it.",
-          duration = NA,
-          type = "error"
-        )
-        return(NULL)
-      }
-    } else if(identical(input$ex_da_sel, "tli")){
-      if(requireNamespace("xtable", quietly = TRUE)){
-        tmp_env <- new.env()
-        data(tli, package = "xtable", envir = tmp_env)
-        return(get("tli", envir = tmp_env))
-      } else{
-        showNotification(
-          "Package \"xtable\" needed. Please install it.",
           duration = NA,
           type = "error"
         )

@@ -627,6 +627,11 @@ server <- function(input, output, session){
       if(requireNamespace("lme4", quietly = TRUE)){
         tmp_env <- new.env()
         data(Arabidopsis, package = "lme4", envir = tmp_env)
+        assign("Arabidopsis", within(get("Arabidopsis", envir = tmp_env), {
+          gen <- as.factor(gen)
+          rack <- as.factor(rack)
+          nutrient <- as.factor(nutrient)
+        }), envir = tmp_env)
         return(get("Arabidopsis", envir = tmp_env))
       } else{
         showNotification(

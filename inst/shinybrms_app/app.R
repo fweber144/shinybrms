@@ -1102,7 +1102,17 @@ server <- function(input, output, session){
   # Advanced options and run Stan
 
   args_brm <- reactive({
-    req(C_formula(), C_family(), input$advOpts_cores, input$advOpts_chains)
+    req(C_formula(), C_family(),
+        input$advOpts_cores, input$advOpts_chains,
+        input$advOpts_iter,
+        input$advOpts_thin,
+        input$advOpts_inits,
+        input$advOpts_init_r,
+        input$advOpts_open_progress,
+        input$advOpts_save_all_pars,
+        input$advOpts_save_warmup,
+        input$advOpts_adapt_delta,
+        input$advOpts_max_treedepth)
     args_brm_tmp <- list(
       formula = C_formula(),
       data = da(),

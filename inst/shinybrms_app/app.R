@@ -36,6 +36,7 @@ ui <- navbarPage(
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
                                 "roaches (from package \"rstanarm\")" = "roaches",
+                                "sleepstudy (from package \"lme4\")" = "sleepstudy",
                                 "ToothGrowth" = "ToothGrowth",
                                 "winequality-red (online resource; see page \"Links\")" = "winequality-red"),
                     selectize = TRUE),
@@ -707,6 +708,19 @@ server <- function(input, output, session){
       } else{
         showNotification(
           "Package \"rstanarm\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
+    } else if(identical(input$ex_da_sel, "sleepstudy")){
+      if(requireNamespace("lme4", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(sleepstudy, package = "lme4", envir = tmp_env)
+        return(get("sleepstudy", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"lme4\" needed. Please install it.",
           duration = NA,
           type = "error"
         )

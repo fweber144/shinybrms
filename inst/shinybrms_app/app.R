@@ -16,15 +16,16 @@ ui <- navbarPage(
                  "(*.csv, *.txt, or *.dat) containing your own dataset.",
                  "In either case, a preview of the dataset will be shown in the main panel on the right.",
                  "If you want to upload a dataset after having chosen an example dataset, you have",
-                 "to clear out the name of the example dataset from the field \"Choose example dataset\"."),
+                 "to clear out the name of the example dataset from the input field",
+                 "\"Choose example dataset ...\"."),
         helpText(HTML(paste0("The following data entries are recognized as missing values: empty ",
                              "(i.e. nothing, not even a whitespace), whitespace, ", code("NA"),
                              ", ", code("."), " (dot)."))),
         # Horizontal line (first one, so set the global hr() style here):
         hr(tags$style(HTML("hr {border-top: 1px solid #b0b0b0;}"))),
         h4("Example dataset"),
-        selectInput("ex_da_sel", "Choose example dataset",
-                    choices = c("Choose ..." = "",
+        selectInput("ex_da_sel", NULL,
+                    choices = c("Choose example dataset ..." = "",
                                 "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
@@ -38,7 +39,7 @@ ui <- navbarPage(
         # Horizontal line:
         hr(),
         h4("Upload a dataset"),
-        fileInput("file_upload", "Choose file",
+        fileInput("file_upload", "Choose file:",
                   multiple = FALSE,
                   accept = c("text/csv",
                              "text/comma-separated-values",
@@ -94,15 +95,21 @@ ui <- navbarPage(
         "Outcome",
         titlePanel("Outcome"),
         br(),
-        helpText("Define the outcome (the dependent variable) and the distributional family for this outcome."),
-        selectInput("outc_sel", "Choose outcome:",
-                    choices = c("Choose ..." = ""),
+        helpText("Choose the outcome (the dependent variable) and the distributional family for this outcome."),
+        selectInput("outc_sel", "Outcome:",
+                    choices = c("Choose outcome ..." = ""),
                     selectize = TRUE),
-        selectInput("dist_sel", "Choose distributional family for the outcome:",
-                    choices = list("Choose ..." = c("Choose ..." = ""),
-                                   "Continuous outcome:" = c("Gaussian (normal)" = "gaussian"),
-                                   "Binary outcome:" = c("Bernoulli with logit link" = "bernoulli"),
-                                   "Count data outcome:" = c("Negative binomial" = "negbinomial")),
+        selectInput("dist_sel", "Distributional family for the outcome:",
+                    choices = list(
+                      "Choose distributional family for the outcome ..." =
+                        c("Choose distributional family for the outcome ..." = ""),
+                      "Continuous outcome:" =
+                        c("Gaussian (normal)" = "gaussian"),
+                      "Binary outcome:" =
+                        c("Bernoulli with logit link" = "bernoulli"),
+                      "Count data outcome:" =
+                        c("Negative binomial" = "negbinomial")
+                    ),
                     selectize = TRUE),
         strong("Parameters (with corresponding link functions) specific to this distributional family:"),
         tableOutput("dist_link"),
@@ -126,7 +133,7 @@ ui <- navbarPage(
         "Predictors",
         titlePanel("Predictors"),
         br(),
-        helpText("Define the predictors (the independent variables). More specifically, you may define",
+        helpText("Choose the predictors (the independent variables). More specifically, you may define",
                  "main effects of predictors and interactions between predictors.",
                  "An intercept (i.e. a constant) will always be included.",
                  "Numeric variables (with \"numeric\" including \"integer\") are treated as continuous",
@@ -151,15 +158,15 @@ ui <- navbarPage(
           h4("Non-varying main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "non-varying main effects shall be added."),
-          selectInput("pred_mainNV_sel", "Choose variables for non-varying main effects:",
-                      choices = c("Choose ..." = ""),
+          selectInput("pred_mainNV_sel", NULL,
+                      choices = c("Choose variables for non-varying main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           h4("Varying intercepts"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "varying intercepts shall be added."),
-          selectInput("pred_mainV_sel", "Choose variables for varying intercepts:",
-                      choices = c("Choose ..." = ""),
+          selectInput("pred_mainV_sel", NULL,
+                      choices = c("Choose variables for varying intercepts ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE)
         ),
@@ -173,8 +180,8 @@ ui <- navbarPage(
                    "\"Add interaction\" button. All interactions which have been added are",
                    "listed in the box below the \"Add interaction\" button. You may reset", em("all"),
                    "interactions by pressing the \"Reset all interactions\" button."),
-          selectInput("pred_int_sel", "Choose variables for an interaction:",
-                      choices = c("Choose ..." = ""),
+          selectInput("pred_int_sel", NULL,
+                      choices = c("Choose variables for an interaction ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           actionButton("pred_int_add", "Add interaction"),
@@ -227,22 +234,23 @@ ui <- navbarPage(
     # Horizontal line:
     hr(),
     h3("Custom priors"),
+    br(),
     sidebarLayout(
       sidebarPanel(
         h4("Specification of custom priors"),
         br(),
         selectInput("prior_class_sel", "Parameter class (may consist of a single parameter):",
-                    choices = c("Choose ..." = ""),
+                    choices = c("Choose parameter class ..." = ""),
                     selectize = TRUE),
-        selectInput("prior_coef_sel", "Coefficient (leave empty for using all coefficients belonging to the selected parameter class):",
-                    choices = c("Choose or leave empty" = ""),
+        selectInput("prior_coef_sel", "Coefficient (leave empty to use all coefficients belonging to the selected parameter class):",
+                    choices = c("Choose coefficient or leave empty" = ""),
                     selectize = TRUE),
         strong("Group:"),
         helpText("Varying effects are not supported yet."),
-        textInput("prior_text", "Prior distribution (in Stan language or leave empty for using a flat prior):",
+        textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",
                   value = "",
                   width = "400px",
-                  placeholder = "Enter prior distribution in Stan language or leave empty ..."),
+                  placeholder = "Enter prior distribution in Stan language or leave empty to use a flat prior ..."),
         actionButton("prior_add", "Add prior"),
         br(),
         br(),
@@ -374,7 +382,7 @@ ui <- navbarPage(
                               value = 15L, step = 1L, min = 1L),
                  ### If "control" list shall be constructed more flexibly:
                  # selectInput("advOpts_control_name", "Name of \"control\" element:",
-                 #             choices = c("Choose ..." = "",
+                 #             choices = c("Choose name of \"control\" element ..." = "",
                  #                         "\"adapt_delta\"" = "adapt_delta",
                  #                         "\"max_treedepth\"" = "max_treedepth"),
                  #             selectize = TRUE),
@@ -413,24 +421,19 @@ ui <- navbarPage(
       br(),
       strong("Summary:"),
       verbatimTextOutput("smmry_view", placeholder = TRUE),
-      selectInput("stanout_download_sel", "Choose output object to download:",
-                  choices = c("\"brmsfit\" object" = "brmsfit_obj",
+      selectInput("stanout_download_sel", "Choose output file to download:",
+                  choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
                               "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
-                              "Matrix of posterior draws (R object)" = "draws_mat_obj",
-                              "Array of posterior draws (R object)" = "draws_arr_obj"),
+                              "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
+                              "Array of posterior draws (RDS file)" = "draws_arr_obj"),
                   selectize = TRUE),
       helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
                            "is the output from ", code("brms::brm()"), ", the central function ",
                            "for inferring the posterior."))),
-      downloadButton("stanout_download", "Download output object"),
+      downloadButton("stanout_download", "Download output file"),
       br(),
       br(),
       h4("Interactive output inspection using package", strong("shinystan")),
-      numericInput("seed_PPD",
-                   paste("Seed for draws from posterior predictive distribution",
-                         "(leave empty to use a random seed):"),
-                   value = NULL, step = 1L),
-      actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)"))),
       helpText(
         "Note: In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), "are used.",
         "These are as follows:",
@@ -440,7 +443,12 @@ ui <- navbarPage(
           tags$li(HTML(paste("All other parameters are parameters specific to the chosen distributional family",
                              "for the outcome (see page \"Likelihood\" &rarr; \"Outcome\").")))
         )
-      )
+      ),
+      numericInput("seed_PPD",
+                   paste("Seed for draws from posterior predictive distribution",
+                         "(leave empty to use a random seed):"),
+                   value = NULL, step = 1L),
+      actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)")))
     )
   ),
   navbarMenu(
@@ -738,7 +746,7 @@ server <- function(input, output, session){
 
   observe({
     updateSelectInput(session, "outc_sel",
-                      choices = c("Choose ..." = "",
+                      choices = c("Choose outcome ..." = "",
                                   setdiff(names(da()),
                                           c(as.character(input$pred_mainNV_sel),
                                             as.character(input$pred_mainV_sel)))),
@@ -790,7 +798,7 @@ server <- function(input, output, session){
 
   observe({
     updateSelectInput(session, "pred_mainNV_sel",
-                      choices = c("Choose ..." = "",
+                      choices = c("Choose variables for non-varying main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
                                             as.character(input$pred_mainV_sel)))),
@@ -799,7 +807,7 @@ server <- function(input, output, session){
 
   observe({
     updateSelectInput(session, "pred_mainV_sel",
-                      choices = c("Choose ..." = "",
+                      choices = c("Choose variables for varying intercepts ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
                                             as.character(input$pred_mainNV_sel)))),
@@ -811,7 +819,7 @@ server <- function(input, output, session){
 
   observe({
     updateSelectInput(session, "pred_int_sel",
-                      choices = c("Choose ..." = "",
+                      choices = c("Choose variables for an interaction ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)),
                       selected = isolate(input$pred_int_sel))
@@ -825,7 +833,7 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
     updateSelectInput(session, "pred_int_sel",
-                      choices = c("Choose ..." = "",
+                      choices = c("Choose variables for an interaction ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)))
   })
@@ -926,7 +934,7 @@ server <- function(input, output, session){
     req(C_prior_rv$prior_default_obj)
     prior_class_choices_add <- unique(C_prior_rv$prior_default_obj$class)
     prior_class_choices_add <- setNames(prior_class_choices_add, prior_class_choices_add)
-    prior_class_choices <- c("Choose ..." = "",
+    prior_class_choices <- c("Choose parameter class ..." = "",
                              prior_class_choices_add)
 
     updateSelectInput(session, "prior_class_sel",
@@ -939,7 +947,7 @@ server <- function(input, output, session){
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel
     ])
     prior_coef_choices_add <- setNames(prior_coef_choices_add, prior_coef_choices_add)
-    prior_coef_choices <- c("Choose or leave empty" = "",
+    prior_coef_choices <- c("Choose coefficient or leave empty" = "",
                             prior_coef_choices_add)
 
     updateSelectInput(session, "prior_coef_sel",

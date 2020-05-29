@@ -180,7 +180,7 @@ ui <- navbarPage(
           actionButton("pred_int_add", "Add interaction"),
           br(),
           br(),
-          strong("Added interactions (\"NULL\" means that no interactions have been added yet):"),
+          strong("Added interactions:"),
           verbatimTextOutput("pred_int_out", placeholder = TRUE),
           actionButton("pred_int_reset", "Reset all interactions")
         ),
@@ -826,9 +826,9 @@ server <- function(input, output, session){
     }
   })
 
-  output$pred_int_out <- renderPrint({
+  output$pred_int_out <- renderText({
     pred_int_rv$pred_int
-  })
+  }, sep = ", ")
 
   observeEvent(input$pred_int_reset, {
     pred_int_rv$pred_int <- NULL

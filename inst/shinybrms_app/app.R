@@ -151,17 +151,17 @@ ui <- navbarPage(
           h4("Non-varying main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "non-varying main effects shall be added."),
-          varSelectInput("pred_mainNV_sel", "Choose variables for non-varying main effects:",
-                         data = data.frame(),
-                         multiple = TRUE,
-                         selectize = TRUE),
+          selectInput("pred_mainNV_sel", "Choose variables for non-varying main effects:",
+                      choices = c("Choose ..." = ""),
+                      multiple = TRUE,
+                      selectize = TRUE),
           h4("Varying intercepts"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "varying intercepts shall be added."),
-          varSelectInput("pred_mainV_sel", "Choose variables for varying intercepts:",
-                         data = data.frame(),
-                         multiple = TRUE,
-                         selectize = TRUE)
+          selectInput("pred_mainV_sel", "Choose variables for varying intercepts:",
+                      choices = c("Choose ..." = ""),
+                      multiple = TRUE,
+                      selectize = TRUE)
         ),
         # # Horizontal line:
         # hr(),
@@ -173,10 +173,10 @@ ui <- navbarPage(
                    "\"Add interaction\" button. All interactions which have been added are",
                    "listed in the box below the \"Add interaction\" button. You may reset", em("all"),
                    "interactions by pressing the \"Reset all interactions\" button."),
-          varSelectInput("pred_int_sel", "Choose variables for an interaction:",
-                         data = data.frame(),
-                         multiple = TRUE,
-                         selectize = TRUE),
+          selectInput("pred_int_sel", "Choose variables for an interaction:",
+                      choices = c("Choose ..." = ""),
+                      multiple = TRUE,
+                      selectize = TRUE),
           actionButton("pred_int_add", "Add interaction"),
           br(),
           br(),
@@ -739,7 +739,9 @@ server <- function(input, output, session){
   observe({
     updateSelectInput(session, "outc_sel",
                       choices = c("Choose ..." = "",
-                                  names(da())))
+                                  setdiff(names(da()),
+                                          c(as.character(input$pred_mainNV_sel),
+                                            as.character(input$pred_mainV_sel)))))
   })
 
   #------------------------
@@ -786,21 +788,29 @@ server <- function(input, output, session){
   # Main effects
 
   observe({
-    updateVarSelectInput(session, "pred_mainNV_sel",
-                         data = da())
+    updateSelectInput(session, "pred_mainNV_sel",
+                      choices = c("Choose ..." = "",
+                                  setdiff(names(da()),
+                                          c(input$outc_sel,
+                                            as.character(input$pred_mainV_sel)))))
   })
 
   observe({
-    updateVarSelectInput(session, "pred_mainV_sel",
-                         data = da())
+    updateSelectInput(session, "pred_mainV_sel",
+                      choices = c("Choose ..." = "",
+                                  setdiff(names(da()),
+                                          c(input$outc_sel,
+                                            as.character(input$pred_mainNV_sel)))))
   })
 
   #------------------------
   # Interactions
 
   observe({
-    updateVarSelectInput(session, "pred_int_sel",
-                         data = da())
+    updateSelectInput(session, "pred_int_sel",
+                      choices = c("Choose ..." = "",
+                                  as.character(input$pred_mainNV_sel),
+                                  as.character(input$pred_mainV_sel)))
   })
 
   pred_int_rv <- reactiveValues()

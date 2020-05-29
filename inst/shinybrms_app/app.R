@@ -741,7 +741,8 @@ server <- function(input, output, session){
                       choices = c("Choose ..." = "",
                                   setdiff(names(da()),
                                           c(as.character(input$pred_mainNV_sel),
-                                            as.character(input$pred_mainV_sel)))))
+                                            as.character(input$pred_mainV_sel)))),
+                      selected = input$outc_sel)
   })
 
   #------------------------
@@ -792,7 +793,8 @@ server <- function(input, output, session){
                       choices = c("Choose ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            as.character(input$pred_mainV_sel)))))
+                                            as.character(input$pred_mainV_sel)))),
+                      selected = input$pred_mainNV_sel)
   })
 
   observe({
@@ -800,7 +802,8 @@ server <- function(input, output, session){
                       choices = c("Choose ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            as.character(input$pred_mainNV_sel)))))
+                                            as.character(input$pred_mainNV_sel)))),
+                      selected = input$pred_mainV_sel)
   })
 
   #------------------------
@@ -810,7 +813,8 @@ server <- function(input, output, session){
     updateSelectInput(session, "pred_int_sel",
                       choices = c("Choose ..." = "",
                                   as.character(input$pred_mainNV_sel),
-                                  as.character(input$pred_mainV_sel)))
+                                  as.character(input$pred_mainV_sel)),
+                      selected = input$pred_int_sel)
   })
 
   pred_int_rv <- reactiveValues()

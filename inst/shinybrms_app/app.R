@@ -824,6 +824,10 @@ server <- function(input, output, session){
                                 paste(as.character(input$pred_int_sel), collapse = ":"))
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
+    updateSelectInput(session, "pred_int_sel",
+                      choices = c("Choose ..." = "",
+                                  as.character(input$pred_mainNV_sel),
+                                  as.character(input$pred_mainV_sel)))
   })
 
   output$pred_int_out <- renderText({

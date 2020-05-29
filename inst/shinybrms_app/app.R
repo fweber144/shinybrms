@@ -174,22 +174,32 @@ ui <- navbarPage(
         # hr(),
         wellPanel(
           h3("Interaction effects"),
-          helpText("Currently, only interactions between predictor variables with non-varying main effects are supported.",
+          helpText("Only variables already having a main effect may be included in an interaction",
+                   "term. In the rare case that you really need an interaction involving a variable",
+                   "without a main effect, you have to include this interaction manually as a",
+                   "variable in your dataset and add a main effect for this manually created",
+                   "interaction variable.",
+                   "Furthermore, only interactions between predictor variables with",
+                   em("non-varying"), "main effects are currently supported.",
                    "Start typing or click into the field below to choose variables for which an",
-                   "interaction shall be added. Confirm this interaction by pressing the",
-                   "\"Add interaction\" button. All interactions which have been added are",
-                   "listed in the box below the \"Add interaction\" button. You may reset", em("all"),
-                   "interactions by pressing the \"Reset all interactions\" button."),
+                   "interaction term shall be added. Confirm this interaction term by pressing the",
+                   "\"Add interaction term\" button. All interaction terms which have been added are",
+                   "listed in the box below the \"Add interaction term\" button. You may edit this list",
+                   "to remove individual interaction terms or to re-add interaction terms which you",
+                   "have previously removed. You may reset", em("all"), "added interaction terms",
+                   "by pressing the \"Reset all interaction terms\" button."),
           selectInput("pred_int_sel", NULL,
-                      choices = c("Choose variables for an interaction ..." = ""),
+                      choices = c("Choose variables for an interaction term ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
-          actionButton("pred_int_add", "Add interaction"),
+          actionButton("pred_int_add", "Add interaction term"),
           br(),
           br(),
-          strong("Added interactions:"),
-          verbatimTextOutput("pred_int_out", placeholder = TRUE),
-          actionButton("pred_int_reset", "Reset all interactions")
+          selectInput("pred_int_exist", "Added interaction terms (you may edit this list, see above):",
+                      choices = NULL,
+                      multiple = TRUE,
+                      selectize = TRUE),
+          actionButton("pred_int_reset", "Reset all interaction terms")
         ),
       ),
       tabPanel(
@@ -819,7 +829,7 @@ server <- function(input, output, session){
 
   observe({
     updateSelectInput(session, "pred_int_sel",
-                      choices = c("Choose variables for an interaction ..." = "",
+                      choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)),
                       selected = isolate(input$pred_int_sel))
@@ -833,14 +843,16 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
     updateSelectInput(session, "pred_int_sel",
-                      choices = c("Choose variables for an interaction ..." = "",
+                      choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)))
   })
 
-  output$pred_int_out <- renderText({
-    pred_int_rv$pred_int
-  }, sep = ", ")
+  observe({
+    updateSelectInput(session, "pred_int_exist",
+                      choices = as.list(pred_int_rv$pred_int),
+                      selected = as.list(pred_int_rv$pred_int))
+  })
 
   observeEvent(input$pred_int_reset, {
     pred_int_rv$pred_int <- NULL
@@ -867,7 +879,7 @@ server <- function(input, output, session){
                    paste(c("1",
                            as.character(input$pred_mainNV_sel),
                            pred_mainV(),
-                           pred_int_rv$pred_int),
+                           input$pred_int_exist),
                          collapse = " + ")))
     } else{
       return(NULL)

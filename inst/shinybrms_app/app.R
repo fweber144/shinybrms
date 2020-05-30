@@ -792,18 +792,18 @@ server <- function(input, output, session){
                       selected = isolate(input$pred_int_build))
   })
 
-  pred_int_build_rv <- reactiveValues()
+  pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
       pred_int_build_format <- paste(as.character(input$pred_int_build), collapse = ":")
-      pred_int_build_rv$pred_int <- c(pred_int_build_rv$pred_int,
-                                      pred_int_build_format)
-      pred_int_build_rv$pred_int <- unique(pred_int_build_rv$pred_int)
+      pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
+                                pred_int_build_format)
+      pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     } else{
       pred_int_build_format <- NULL
     }
     updateSelectInput(session, "pred_int_sel",
-                      choices = pred_int_build_rv$pred_int,
+                      choices = pred_int_rv$pred_int,
                       selected = c(isolate(input$pred_int_sel),
                                    pred_int_build_format))
     updateSelectInput(session, "pred_int_build",
@@ -813,7 +813,7 @@ server <- function(input, output, session){
   })
 
   observeEvent(input$pred_int_reset, {
-    pred_int_build_rv$pred_int <- NULL
+    pred_int_rv$pred_int <- NULL
     updateSelectInput(session, "pred_int_sel",
                       choices = character())
   })

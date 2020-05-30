@@ -715,8 +715,8 @@ server <- function(input, output, session){
     updateSelectInput(session, "outc_sel",
                       choices = c("Choose outcome ..." = "",
                                   setdiff(names(da()),
-                                          c(as.character(input$pred_mainNV_sel),
-                                            as.character(input$pred_mainV_sel)))),
+                                          c(input$pred_mainNV_sel,
+                                            input$pred_mainV_sel))),
                       selected = isolate(input$outc_sel))
   })
 
@@ -768,7 +768,7 @@ server <- function(input, output, session){
                       choices = c("Choose variables for non-varying main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            as.character(input$pred_mainV_sel)))),
+                                            input$pred_mainV_sel))),
                       selected = isolate(input$pred_mainNV_sel))
   })
 
@@ -777,7 +777,7 @@ server <- function(input, output, session){
                       choices = c("Choose variables for varying intercepts ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            as.character(input$pred_mainNV_sel)))),
+                                            input$pred_mainNV_sel))),
                       selected = isolate(input$pred_mainV_sel))
   })
 
@@ -787,15 +787,15 @@ server <- function(input, output, session){
   observe({
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
-                                  as.character(input$pred_mainNV_sel),
-                                  as.character(input$pred_mainV_sel)),
+                                  input$pred_mainNV_sel,
+                                  input$pred_mainV_sel),
                       selected = isolate(input$pred_int_build))
   })
 
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
-      pred_int_build_format <- paste(as.character(input$pred_int_build), collapse = ":")
+      pred_int_build_format <- paste(input$pred_int_build, collapse = ":")
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
                                 pred_int_build_format)
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
@@ -808,8 +808,8 @@ server <- function(input, output, session){
                                    pred_int_build_format))
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
-                                  as.character(input$pred_mainNV_sel),
-                                  as.character(input$pred_mainV_sel)))
+                                  input$pred_mainNV_sel,
+                                  input$pred_mainV_sel))
   })
 
   observeEvent(input$pred_int_reset, {
@@ -823,7 +823,7 @@ server <- function(input, output, session){
 
   pred_mainV <- reactive({
     if(length(input$pred_mainV_sel) > 0L){
-      return(paste0("(1|", as.character(input$pred_mainV_sel), ")"))
+      return(paste0("(1|", input$pred_mainV_sel, ")"))
     } else{
       return(character())
     }
@@ -832,12 +832,12 @@ server <- function(input, output, session){
   C_formula_char <- reactive({
     req(input$outc_sel)
     if(all(c(input$outc_sel,
-             as.character(input$pred_mainNV_sel),
-             as.character(input$pred_mainV_sel)) %in% names(da()))){
+             input$pred_mainNV_sel,
+             input$pred_mainV_sel) %in% names(da()))){
       return(paste(input$outc_sel,
                    "~",
                    paste(c("1",
-                           as.character(input$pred_mainNV_sel),
+                           input$pred_mainNV_sel,
                            pred_mainV(),
                            input$pred_int_sel),
                          collapse = " + ")))

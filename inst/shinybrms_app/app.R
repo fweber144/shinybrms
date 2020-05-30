@@ -188,7 +188,7 @@ ui <- navbarPage(
                    "to remove individual interaction terms or to re-add interaction terms which you",
                    "have previously removed. You may reset", em("all"), "added interaction terms",
                    "by pressing the \"Reset all interaction terms\" button."),
-          selectInput("pred_int_sel", NULL,
+          selectInput("pred_int_build", NULL,
                       choices = c("Choose variables for an interaction term ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
@@ -828,21 +828,21 @@ server <- function(input, output, session){
   # Interactions
 
   observe({
-    updateSelectInput(session, "pred_int_sel",
+    updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)),
-                      selected = isolate(input$pred_int_sel))
+                      selected = isolate(input$pred_int_build))
   })
 
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
-    if(length(input$pred_int_sel) > 1L){
+    if(length(input$pred_int_build) > 1L){
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
-                                paste(as.character(input$pred_int_sel), collapse = ":"))
+                                paste(as.character(input$pred_int_build), collapse = ":"))
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
-    updateSelectInput(session, "pred_int_sel",
+    updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)))

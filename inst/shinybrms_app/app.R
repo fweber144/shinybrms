@@ -816,7 +816,7 @@ server <- function(input, output, session){
     if(length(input$pred_int_build) > 1L){
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
                                 list(input$pred_int_build))
-      pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
+      pred_int_rv$pred_int <- pred_int_rv$pred_int[!duplicated(lapply(pred_int_rv$pred_int, sort))]
       pred_int_rv$pred_int_comma <- sapply(pred_int_rv$pred_int, function(x){
         paste(x, collapse = ", ")
       })

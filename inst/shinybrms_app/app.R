@@ -817,12 +817,13 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
                                 list(input$pred_int_build))
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
+      pred_int_rv$pred_int_comma <- sapply(pred_int_rv$pred_int, function(x){
+        paste(x, collapse = ", ")
+      })
       updateSelectInput(session, "pred_int_sel",
-                        choices = sapply(pred_int_rv$pred_int, function(x){
-                          paste(x, collapse = ", ")
-                        }),
+                        choices = pred_int_rv$pred_int_comma,
                         selected = c(input$pred_int_sel,
-                                     paste(input$pred_int_build, collapse = ", ")))
+                                     pred_int_rv$pred_int_comma[[length(pred_int_rv$pred_int_comma)]]))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNV_sel,
@@ -841,6 +842,11 @@ server <- function(input, output, session){
                    input$pred_mainV_sel))
     })
     pred_int_rv$pred_int <- pred_int_rv$pred_int[pred_int_keep]
+    pred_int_rv$pred_int_comma <- pred_int_rv$pred_int_comma[pred_int_keep]
+    updateSelectInput(session, "pred_int_sel",
+                      choices = pred_int_rv$pred_int_comma,
+                      selected = intersect(input$pred_int_sel,
+                                           pred_int_rv$pred_int_comma))
   })
 
   observeEvent(input$pred_int_reset, {

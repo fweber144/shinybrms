@@ -36,7 +36,6 @@ ui <- navbarPage(
                                 "sleepstudy (from package \"lme4\")" = "sleepstudy",
                                 "ToothGrowth" = "ToothGrowth"),
                     selectize = TRUE),
-        # Horizontal line:
         hr(),
         h4("Upload a dataset"),
         fileInput("file_upload", "Choose file:",
@@ -62,7 +61,6 @@ ui <- navbarPage(
         radioButtons("dec", "Decimal",
                      choices = c("Point" = ".",
                                  "Comma" = ",")),
-        # Horizontal line:
         hr(),
         h4("Preview"),
         radioButtons("preview_type_radio", "Type of preview",
@@ -90,7 +88,6 @@ ui <- navbarPage(
     titlePanel("Likelihood"),
     br(),
     navlistPanel(
-      # "Subsections",
       tabPanel(
         "Outcome",
         titlePanel("Outcome"),
@@ -144,8 +141,6 @@ ui <- navbarPage(
                  "changing the value \"1\" to \"level1\", the value \"2\" to \"level2\" and so on.",
                  "For nominal predictors, the first level (after sorting alphabetically) will be the",
                  "reference level."),
-        # # Horizontal line:
-        # hr(),
         wellPanel(
           h3("Main effects"),
           helpText("Note:",
@@ -170,8 +165,6 @@ ui <- navbarPage(
                       multiple = TRUE,
                       selectize = TRUE)
         ),
-        # # Horizontal line:
-        # hr(),
         wellPanel(
           h3("Interaction effects"),
           helpText("Only variables already having a main effect may be included in an interaction",
@@ -233,7 +226,6 @@ ui <- navbarPage(
         target = "_blank"),
       "."
     ))),
-    # Horizontal line:
     hr(),
     h3("Default priors"),
     br(),
@@ -241,7 +233,6 @@ ui <- navbarPage(
     tableOutput("prior_default_view"),
     helpText("An empty field in column \"prior\" denotes a flat prior over the domain of the",
              "corresponding parameter."),
-    # Horizontal line:
     hr(),
     h3("Custom priors"),
     br(),
@@ -285,8 +276,6 @@ ui <- navbarPage(
              a("Stan", href = "https://mc-stan.org/", target = "_blank"),
              "to infer the joint posterior distribution of all parameters in your model",
              "by sampling."),
-    # # Horizontal line:
-    # hr(),
     wellPanel(
       h3("Stan code"),
       helpText(
@@ -305,8 +294,6 @@ ui <- navbarPage(
       ),
       downloadButton("stancode_download", "Download Stan code")
     ),
-    # # Horizontal line:
-    # hr(),
     wellPanel(
       h3("Stan data"),
       helpText(
@@ -325,8 +312,6 @@ ui <- navbarPage(
       ),
       downloadButton("standata_download", "Download Stan data")
     ),
-    # # Horizontal line:
-    # hr(),
     wellPanel(
       h3("Advanced options"),
       helpText(HTML(paste0(
@@ -377,10 +362,10 @@ ui <- navbarPage(
                  numericInput("advOpts_iter", "Total iterations per chain:",
                               value = 2000L, step = 1L, min = 1L),
                  numericInput("advOpts_warmup", "Warmup iterations per chain:",
-                              value = NA, step = 1L, min = 0L), # value = 1000L
+                              value = NA, step = 1L, min = 0L),
                  numericInput("advOpts_thin", "Thinning rate:",
                               value = 1L, step = 1L, min = 1L)),
-          column(5, offset = 1, # offset = 2,
+          column(5, offset = 1,
                  radioButtons("advOpts_inits", "Initial values:",
                               choices = list("Random" = "random", "Zero" = "0"),
                               inline = TRUE),
@@ -390,21 +375,10 @@ ui <- navbarPage(
                               value = 0.95, step = 0.01, min = 0, max = 1),
                  numericInput("advOpts_max_treedepth", "\"max_treedepth\":",
                               value = 15L, step = 1L, min = 1L),
-                 ### If "control" list shall be constructed more flexibly:
-                 # selectInput("advOpts_control_name", "Name of \"control\" element:",
-                 #             choices = c("Choose name of \"control\" element ..." = "",
-                 #                         "\"adapt_delta\"" = "adapt_delta",
-                 #                         "\"max_treedepth\"" = "max_treedepth"),
-                 #             selectize = TRUE),
-                 # textInput("advOpts_control_text", "Value for \"control\" element:",
-                 #           value = "",
-                 #           # width = "400px",
-                 #           placeholder = "Enter value for the \"control\" element chosen above ..."),
-                 ###
                  checkboxInput("advOpts_open_progress", "Open progress",
                                value = TRUE),
                  numericInput("advOpts_refresh", "Progress-refreshing step size:",
-                              value = NA, step = 1L, min = 0L), # value = 200L
+                              value = NA, step = 1L, min = 0L),
                  checkboxInput("advOpts_save_all_pars", "\"save_all_pars\"",
                                value = FALSE),
                  checkboxInput("advOpts_save_warmup", "Save warmup",
@@ -412,8 +386,6 @@ ui <- navbarPage(
         )
       )
     ),
-    # # Horizontal line:
-    # hr(),
     wellPanel(
       h3("Run Stan"),
       helpText("Note: If the advanced option \"Open progress\" is selected (as per default),",
@@ -422,8 +394,6 @@ ui <- navbarPage(
                "paste this link into a different web browser for viewing the progress file there."),
       actionButton("run_stan", "Run Stan (may take a while)")
     ),
-    # # Horizontal line:
-    # hr(),
     wellPanel(
       h3("Output"),
       strong("Date and time when Stan run was finished:"),
@@ -467,8 +437,6 @@ ui <- navbarPage(
       "About",
       titlePanel("About \"shinybrms\""),
       br(),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("Basic information"),
         helpText(HTML(paste0(
@@ -510,8 +478,6 @@ ui <- navbarPage(
                   "GPL-3")
         )
       ),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("Trademarks"),
         tags$ul(
@@ -530,8 +496,6 @@ ui <- navbarPage(
       "Links",
       titlePanel("Links"),
       br(),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("Software (without R packages)"),
         tags$ul(
@@ -539,8 +503,6 @@ ui <- navbarPage(
           tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
         )
       ),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("R packages"),
         tags$ul(
@@ -571,16 +533,12 @@ ui <- navbarPage(
       "Help",
       titlePanel("Help"),
       br(),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("Software"),
         HTML(paste0("For help concerning the software used in the ", strong("shinybrms"), " app ",
                     "(including the R package ", strong("shinybrms"), "), see ",
                     "the \"More\" &rarr; \"Links\" page."))
       ),
-      # # Horizontal line:
-      # hr(),
       wellPanel(
         h3("Literature"),
         "These are helpful textbooks on Bayesian statistics:",
@@ -717,7 +675,6 @@ server <- function(input, output, session){
     } else if(identical(input$ex_da_sel, "ToothGrowth")){
       return(ToothGrowth)
     } else{
-      # NOTE: input$file_upload will be NULL initially.
       req(input$file_upload)
       tryCatch({
         return(read.csv(input$file_upload$datapath,
@@ -856,7 +813,7 @@ server <- function(input, output, session){
   observeEvent(input$pred_int_reset, {
     pred_int_rv$pred_int <- NULL
     updateSelectInput(session, "pred_int_sel",
-                      choices = character()) # Working values for "choices": character(), list(), "" (but not NULL)
+                      choices = character())
   })
 
   #------------------------
@@ -1148,8 +1105,7 @@ server <- function(input, output, session){
       type = "message"
     )
 
-    # Some modifications needed to show the progress (see the source code of
-    # rstan::sampling()):
+    # Some modifications needed to show the progress (see the source code of rstan::sampling()):
     if(args_brm_copy$open_progress){
       # For RStudio:
       RSTUDIO_orig <- Sys.getenv("RSTUDIO")
@@ -1162,10 +1118,9 @@ server <- function(input, output, session){
                                 getOption("browser"))
       if(is.function(prog_browser) &&
          any(grepl("rs_browseURL", as.character(body(prog_browser))))){
-        # In this case, "prog_browser" cannot be used (at least not without
-        # requiring the user to perform some major modifications to the
-        # initialization of the R session), so use the default browser stored
-        # in the environment variable "R_BROWSER":
+        # In this case, "prog_browser" cannot be used (at least not without requiring the user to
+        # perform some major modifications to the initialization of the R session), so use the
+        # default browser stored in the environment variable "R_BROWSER":
         prog_browser <- Sys.getenv("R_BROWSER")
         if(identical(.Platform$OS.type, "windows") &&
            identical(prog_browser, "")){
@@ -1174,8 +1129,7 @@ server <- function(input, output, session){
       }
       browser_orig <- options(browser = prog_browser)
 
-      # Even show the progress if parallel::mclapply() (with forking) is
-      # intended to be used:
+      # Even show the progress if parallel::mclapply() (with forking) is intended to be used:
       if(identical(.Platform$OS.type, "unix")){
         if(!interactive()){
           tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
@@ -1278,10 +1232,9 @@ server <- function(input, output, session){
                                        getOption("browser"))
         if(is.function(shinystan_browser) &&
            any(grepl("rs_browseURL", as.character(body(shinystan_browser))))){
-          # In this case, "shinystan_browser" cannot be used (at least not without
-          # requiring the user to perform some major modifications to the
-          # initialization of the R session), so use the default browser stored
-          # in the environment variable "R_BROWSER":
+          # In this case, "shinystan_browser" cannot be used (at least not without requiring the
+          # user to perform some major modifications to the initialization of the R session), so use
+          # the default browser stored in the environment variable "R_BROWSER":
           shinystan_browser <- Sys.getenv("R_BROWSER")
           if(identical(.Platform$OS.type, "windows") &&
              identical(shinystan_browser, "")){
@@ -1289,8 +1242,8 @@ server <- function(input, output, session){
           }
         }
 
-        # Call "shinystan" from an external R process (needed to allow opening
-        # another Shiny app ("shinystan") from within this Shiny app ("shinybrms")):
+        # Call "shinystan" from an external R process (needed to allow opening another Shiny app
+        # (here "shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
           function(brmsfit_obj, browser_callr, seed_callr){
             browser_callr_orig <- options(browser = browser_callr)

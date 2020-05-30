@@ -821,7 +821,7 @@ server <- function(input, output, session){
                         choices = sapply(pred_int_rv$pred_int, function(x){
                           paste(x, collapse = ", ")
                         }),
-                        selected = c(isolate(input$pred_int_sel),
+                        selected = c(input$pred_int_sel,
                                      paste(input$pred_int_build, collapse = ", ")))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",

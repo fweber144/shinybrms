@@ -799,6 +799,8 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
                                 pred_int_build_format)
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
+    } else{
+      pred_int_build_format <- NULL
     }
     updateSelectInput(session, "pred_int_sel",
                       choices = pred_int_rv$pred_int,

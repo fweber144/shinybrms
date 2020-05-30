@@ -838,24 +838,25 @@ server <- function(input, output, session){
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
+      pred_int_build_format <- paste(as.character(input$pred_int_build), collapse = ":")
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
-                                paste(as.character(input$pred_int_build), collapse = ":"))
+                                pred_int_build_format)
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
+    updateSelectInput(session, "pred_int_sel",
+                      choices = as.list(pred_int_rv$pred_int),
+                      selected = c(isolate(input$pred_int_sel),
+                                   as.list(pred_int_build_format)))
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),
                                   as.character(input$pred_mainV_sel)))
   })
 
-  observe({
-    updateSelectInput(session, "pred_int_sel",
-                      choices = as.list(pred_int_rv$pred_int),
-                      selected = as.list(pred_int_rv$pred_int))
-  })
-
   observeEvent(input$pred_int_reset, {
     pred_int_rv$pred_int <- NULL
+    updateSelectInput(session, "pred_int_sel",
+                      choices = "")
   })
 
   #------------------------

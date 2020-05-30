@@ -179,8 +179,7 @@ ui <- navbarPage(
                    "\"Add interaction term\" button. All interaction terms which have been added are",
                    "listed in the box below the \"Add interaction term\" button. You may edit this list",
                    "to remove individual interaction terms or to re-add interaction terms which you",
-                   "have previously removed. You may reset", em("all"), "added interaction terms",
-                   "by pressing the \"Reset all interaction terms\" button."),
+                   "have previously removed."),
 
           ### TEMPORARILY:
           verbatimTextOutput("TMP_out", placeholder = FALSE),
@@ -198,8 +197,7 @@ ui <- navbarPage(
           selectInput("pred_int_sel", "Added interaction terms (you may edit this list, see above):",
                       choices = NULL,
                       multiple = TRUE,
-                      selectize = TRUE),
-          actionButton("pred_int_reset", "Reset all interaction terms")
+                      selectize = TRUE)
         ),
       ),
       tabPanel(
@@ -847,12 +845,6 @@ server <- function(input, output, session){
                       choices = pred_int_rv$pred_int_comma,
                       selected = intersect(input$pred_int_sel,
                                            pred_int_rv$pred_int_comma))
-  })
-
-  observeEvent(input$pred_int_reset, {
-    pred_int_rv$pred_int <- NULL
-    updateSelectInput(session, "pred_int_sel",
-                      choices = character())
   })
 
   #------------------------

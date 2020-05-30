@@ -195,7 +195,7 @@ ui <- navbarPage(
           actionButton("pred_int_add", "Add interaction term"),
           br(),
           br(),
-          selectInput("pred_int_exist", "Added interaction terms (you may edit this list, see above):",
+          selectInput("pred_int_sel", "Added interaction terms (you may edit this list, see above):",
                       choices = NULL,
                       multiple = TRUE,
                       selectize = TRUE),
@@ -849,7 +849,7 @@ server <- function(input, output, session){
   })
 
   observe({
-    updateSelectInput(session, "pred_int_exist",
+    updateSelectInput(session, "pred_int_sel",
                       choices = as.list(pred_int_rv$pred_int),
                       selected = as.list(pred_int_rv$pred_int))
   })
@@ -879,7 +879,7 @@ server <- function(input, output, session){
                    paste(c("1",
                            as.character(input$pred_mainNV_sel),
                            pred_mainV(),
-                           input$pred_int_exist),
+                           input$pred_int_sel),
                          collapse = " + ")))
     } else{
       return(NULL)

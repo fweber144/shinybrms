@@ -863,16 +863,17 @@ server <- function(input, output, session){
     if(all(c(input$outc_sel,
              input$pred_mainNV_sel,
              input$pred_mainV_sel) %in% names(da()))){
+      pred_int_lst <- pred_int_rv$choices[pred_int_rv$choices_comma %in% input$pred_int_sel]
+      ### TEMPORARILY:
+      pred_int_lst <- sapply(pred_int_lst, paste, collapse = ":")
+      ###
       return(paste(input$outc_sel,
                    "~",
                    paste(c("1",
                            input$pred_mainNV_sel,
-                           pred_mainV()#,
-                           ### TEMPORARILY:
-                           # input$pred_int_sel
-                           ###
-                   ),
-                   collapse = " + ")))
+                           pred_mainV(),
+                           pred_int_lst),
+                         collapse = " + ")))
     } else{
       return(NULL)
     }

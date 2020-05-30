@@ -844,9 +844,9 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
     }
     updateSelectInput(session, "pred_int_sel",
-                      choices = as.list(pred_int_rv$pred_int),
+                      choices = pred_int_rv$pred_int,
                       selected = c(isolate(input$pred_int_sel),
-                                   as.list(pred_int_build_format)))
+                                   pred_int_build_format))
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   as.character(input$pred_mainNV_sel),

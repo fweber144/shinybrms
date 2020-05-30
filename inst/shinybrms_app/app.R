@@ -856,7 +856,7 @@ server <- function(input, output, session){
   observeEvent(input$pred_int_reset, {
     pred_int_rv$pred_int <- NULL
     updateSelectInput(session, "pred_int_sel",
-                      choices = "")
+                      choices = character()) # Working values for "choices": character(), list(), "" (but not NULL)
   })
 
   #------------------------

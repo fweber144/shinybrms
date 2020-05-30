@@ -817,20 +817,17 @@ server <- function(input, output, session){
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
                                 list(input$pred_int_build))
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
-      pred_int_build_format <- paste(input$pred_int_build, collapse = ", ")
-    } else{
-      pred_int_build_format <- NULL
+      updateSelectInput(session, "pred_int_sel",
+                        choices = sapply(pred_int_rv$pred_int, function(x){
+                          paste(x, collapse = ", ")
+                        }),
+                        selected = c(isolate(input$pred_int_sel),
+                                     paste(input$pred_int_build, collapse = ", ")))
+      updateSelectInput(session, "pred_int_build",
+                        choices = c("Choose variables for an interaction term ..." = "",
+                                    input$pred_mainNV_sel,
+                                    input$pred_mainV_sel))
     }
-    updateSelectInput(session, "pred_int_sel",
-                      choices = sapply(pred_int_rv$pred_int, function(x){
-                        paste(x, collapse = ", ")
-                      }),
-                      selected = c(isolate(input$pred_int_sel),
-                                   pred_int_build_format))
-    updateSelectInput(session, "pred_int_build",
-                      choices = c("Choose variables for an interaction term ..." = "",
-                                  input$pred_mainNV_sel,
-                                  input$pred_mainV_sel))
   })
 
   # Ensure that all variables involved in the interaction terms have a main

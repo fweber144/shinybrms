@@ -181,6 +181,13 @@ ui <- navbarPage(
                    "to remove individual interaction terms or to re-add interaction terms which you",
                    "have previously removed. You may reset", em("all"), "added interaction terms",
                    "by pressing the \"Reset all interaction terms\" button."),
+
+          ### TEMPORARILY:
+          verbatimTextOutput("TMP_out", placeholder = FALSE),
+          verbatimTextOutput("TMP_out2", placeholder = FALSE),
+          verbatimTextOutput("TMP_out3", placeholder = FALSE),
+          ###
+
           selectInput("pred_int_build", NULL,
                       choices = c("Choose variables for an interaction term ..." = ""),
                       multiple = TRUE,
@@ -792,24 +799,51 @@ server <- function(input, output, session){
                       selected = isolate(input$pred_int_build))
   })
 
+  ### TEMPORARILY:
+  output$TMP_out <- renderPrint({
+    str(input$pred_int_build)
+  })
+  output$TMP_out2 <- renderPrint({
+    str(pred_int_rv$pred_int)
+  })
+  output$TMP_out3 <- renderPrint({
+    str(input$pred_int_sel)
+  })
+  ###
+
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
-      pred_int_build_format <- paste(input$pred_int_build, collapse = ":")
       pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
-                                pred_int_build_format)
+                                list(input$pred_int_build))
       pred_int_rv$pred_int <- unique(pred_int_rv$pred_int)
+      pred_int_build_format <- paste(input$pred_int_build, collapse = ", ")
     } else{
       pred_int_build_format <- NULL
     }
     updateSelectInput(session, "pred_int_sel",
-                      choices = pred_int_rv$pred_int,
+                      choices = sapply(pred_int_rv$pred_int, function(x){
+                        paste(x, collapse = ", ")
+                      }),
                       selected = c(isolate(input$pred_int_sel),
                                    pred_int_build_format))
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   input$pred_mainNV_sel,
                                   input$pred_mainV_sel))
+  })
+
+  # Ensure that all variables involved in the interaction terms have a main
+  # effect (either nonvarying or varying):
+  observeEvent({
+    input$pred_mainNV_sel
+    input$pred_mainV_sel
+  }, {
+    pred_int_keep <- sapply(pred_int_rv$pred_int, function(x){
+      all(x %in% c(input$pred_mainNV_sel,
+                   input$pred_mainV_sel))
+    })
+    pred_int_rv$pred_int <- pred_int_rv$pred_int[pred_int_keep]
   })
 
   observeEvent(input$pred_int_reset, {
@@ -838,9 +872,12 @@ server <- function(input, output, session){
                    "~",
                    paste(c("1",
                            input$pred_mainNV_sel,
-                           pred_mainV(),
-                           input$pred_int_sel),
-                         collapse = " + ")))
+                           pred_mainV()#,
+                           ### TEMPORARILY:
+                           # input$pred_int_sel
+                           ###
+                   ),
+                   collapse = " + ")))
     } else{
       return(NULL)
     }

@@ -802,7 +802,7 @@ server <- function(input, output, session){
     str(input$pred_int_build)
   })
   output$TMP_out2 <- renderPrint({
-    str(pred_int_rv$pred_int)
+    str(pred_int_rv$choices)
   })
   output$TMP_out3 <- renderPrint({
     str(input$pred_int_sel)
@@ -812,16 +812,16 @@ server <- function(input, output, session){
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
-      pred_int_rv$pred_int <- c(pred_int_rv$pred_int,
-                                list(input$pred_int_build))
-      pred_int_rv$pred_int <- pred_int_rv$pred_int[!duplicated(lapply(pred_int_rv$pred_int, sort))]
-      pred_int_rv$pred_int_comma <- sapply(pred_int_rv$pred_int, function(x){
+      pred_int_rv$choices <- c(pred_int_rv$choices,
+                               list(input$pred_int_build))
+      pred_int_rv$choices <- pred_int_rv$choices[!duplicated(lapply(pred_int_rv$choices, sort))]
+      pred_int_rv$choices_comma <- sapply(pred_int_rv$choices, function(x){
         paste(x, collapse = ",")
       })
       updateSelectInput(session, "pred_int_sel",
-                        choices = pred_int_rv$pred_int_comma,
+                        choices = pred_int_rv$choices_comma,
                         selected = c(input$pred_int_sel,
-                                     pred_int_rv$pred_int_comma[[length(pred_int_rv$pred_int_comma)]]))
+                                     pred_int_rv$choices_comma[[length(pred_int_rv$choices_comma)]]))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNV_sel,
@@ -835,16 +835,16 @@ server <- function(input, output, session){
     input$pred_mainNV_sel
     input$pred_mainV_sel
   }, {
-    pred_int_keep <- sapply(pred_int_rv$pred_int, function(x){
+    pred_int_keep <- sapply(pred_int_rv$choices, function(x){
       all(x %in% c(input$pred_mainNV_sel,
                    input$pred_mainV_sel))
     })
-    pred_int_rv$pred_int <- pred_int_rv$pred_int[pred_int_keep]
-    pred_int_rv$pred_int_comma <- pred_int_rv$pred_int_comma[pred_int_keep]
+    pred_int_rv$choices <- pred_int_rv$choices[pred_int_keep]
+    pred_int_rv$choices_comma <- pred_int_rv$choices_comma[pred_int_keep]
     updateSelectInput(session, "pred_int_sel",
-                      choices = pred_int_rv$pred_int_comma,
+                      choices = pred_int_rv$choices_comma,
                       selected = intersect(input$pred_int_sel,
-                                           pred_int_rv$pred_int_comma))
+                                           pred_int_rv$choices_comma))
   })
 
   #------------------------

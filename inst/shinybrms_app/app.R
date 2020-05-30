@@ -815,9 +815,7 @@ server <- function(input, output, session){
       pred_int_rv$choices <- c(pred_int_rv$choices,
                                list(input$pred_int_build))
       pred_int_rv$choices <- pred_int_rv$choices[!duplicated(lapply(pred_int_rv$choices, sort))]
-      pred_int_rv$choices_comma <- sapply(pred_int_rv$choices, function(x){
-        paste(x, collapse = ",")
-      })
+      pred_int_rv$choices_comma <- sapply(pred_int_rv$choices, paste, collapse = ",")
       updateSelectInput(session, "pred_int_sel",
                         choices = pred_int_rv$choices_comma,
                         selected = c(input$pred_int_sel,

@@ -854,8 +854,8 @@ server <- function(input, output, session){
   #------------------------
   # Formula preview
 
-  output$formula_view <- renderPrint({
-    cat(C_formula_char())
+  output$formula_view <- renderText({
+    C_formula_char()
   })
 
   #-------------------------------------------------

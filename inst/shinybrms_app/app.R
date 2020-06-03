@@ -69,7 +69,7 @@ ui <- navbarPage(
         radioButtons("preview_rows_radio", "Rows to show (only for preview type \"Dataset\")",
                      choices = c("Head (only the first 6 rows)" = "head",
                                  "All rows" = "all"))
-
+        
       ),
       mainPanel(
         conditionalPanel(
@@ -291,10 +291,10 @@ ui <- navbarPage(
       h3("Stan code"),
       helpText(
         "Here, you can get a preview of the Stan code for your model and download it.",
-
+        
         "The data used in the", code("data {...}"), "program block of the Stan code is the Stan",
         "data. Thus, the Stan code goes together with the Stan data.",
-
+        
         "Apart from checking purposes,",
         "this is useful for example if you want to customize the model and then run Stan by yourself."
       ),
@@ -309,10 +309,10 @@ ui <- navbarPage(
       h3("Stan data"),
       helpText(
         "Here, you can get a preview of the structure of the Stan data for your model and download it.",
-
+        
         "The Stan data is the data used in the", code("data {...}"), "program block in the Stan",
         "code. Thus, the Stan data goes together with the Stan code.",
-
+        
         "Apart from checking purposes,",
         "this is useful for example if you want to customize the model and then run Stan by yourself."
       ),
@@ -580,10 +580,10 @@ ui <- navbarPage(
 ####################################################################################################
 
 server <- function(input, output, session){
-
+  
   #-------------------------------------------------
   # Data
-
+  
   da <- reactive({
     if(identical(input$ex_da_sel, "Arabidopsis")){
       if(requireNamespace("lme4", quietly = TRUE)){
@@ -700,10 +700,10 @@ server <- function(input, output, session){
       })
     }
   })
-
+  
   #-------------------------------------------------
   # Data preview
-
+  
   output$da_view <- renderTable({
     if(identical(input$preview_rows_radio, "head")){
       return(head(da()))
@@ -711,17 +711,17 @@ server <- function(input, output, session){
       return(da())
     }
   })
-
+  
   output$da_str <- renderPrint({
     str(da())
   })
-
+  
   #-------------------------------------------------
   # Outcome
-
+  
   #------------------------
   # Outcome
-
+  
   observe({
     updateSelectInput(session, "outc_sel",
                       choices = c("Choose outcome ..." = "",
@@ -730,15 +730,15 @@ server <- function(input, output, session){
                                             input$pred_mainV_sel))),
                       selected = isolate(input$outc_sel))
   })
-
+  
   #------------------------
   # Distributional family
-
+  
   C_family <- reactive({
     req(input$dist_sel)
     brms::brmsfamily(family = input$dist_sel)
   })
-
+  
   dist_link_da <- reactive({
     req(C_family())
     if(identical(input$dist_sel, "")){
@@ -763,17 +763,17 @@ server <- function(input, output, session){
       return(dist_link_tmp)
     }
   })
-
+  
   output$dist_link <- renderTable({
     dist_link_da()
   })
-
+  
   #-------------------------------------------------
   # Predictors
-
+  
   #------------------------
   # Main effects
-
+  
   observe({
     updateSelectInput(session, "pred_mainNV_sel",
                       choices = c("Choose variables for non-varying main effects ..." = "",
@@ -782,7 +782,7 @@ server <- function(input, output, session){
                                             input$pred_mainV_sel))),
                       selected = isolate(input$pred_mainNV_sel))
   })
-
+  
   observe({
     updateSelectInput(session, "pred_mainV_sel",
                       choices = c("Choose variables for varying intercepts ..." = "",
@@ -791,10 +791,10 @@ server <- function(input, output, session){
                                             input$pred_mainNV_sel))),
                       selected = isolate(input$pred_mainV_sel))
   })
-
+  
   #------------------------
   # Interactions
-
+  
   observe({
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
@@ -802,7 +802,7 @@ server <- function(input, output, session){
                                   input$pred_mainV_sel),
                       selected = isolate(input$pred_int_build))
   })
-
+  
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
@@ -820,7 +820,7 @@ server <- function(input, output, session){
                                     input$pred_mainV_sel))
     }
   })
-
+  
   # Ensure that all variables involved in the interaction terms have a main effect (either
   # nonvarying or varying):
   observeEvent({
@@ -845,7 +845,7 @@ server <- function(input, output, session){
                         choices = character())
     }
   }, ignoreNULL = FALSE)
-
+  
   C_pred <- reactive({
     if(all(c(input$pred_mainNV_sel,
              input$pred_mainV_sel) %in% names(da()))){
@@ -881,10 +881,10 @@ server <- function(input, output, session){
           pred_lst <- c(pred_lst[!pred_needsExpand],
                         pred_lst_expanded)
         }
-
+        
         # Remove duplicates:
         pred_lst <- pred_lst[!duplicated(lapply(pred_lst, sort))]
-
+        
         # By group-level term: Check each population-level term for being a "subterm" (lower-order
         # term) of a high-order term and if yes, remove it:
         pred_vec_comma <- sapply(pred_lst, function(x){
@@ -907,7 +907,7 @@ server <- function(input, output, session){
         }, simplify = FALSE)
         pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
       }
-
+      
       pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
         x_NV <- intersect(x, input$pred_mainNV_sel)
         if(length(x_NV) > 0L){
@@ -939,19 +939,19 @@ server <- function(input, output, session){
       return(NULL)
     }
   })
-
+  
   #------------------------
   # Predictor terms preview
-
+  
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x){
     sub("^from_mainV$", "group-level effects", sub("^from_mainNV$", "population-level effects", x))
   })
-
+  
   #------------------------
   # Formula construction
-
+  
   C_formula_char <- reactive({
     req(input$outc_sel)
     if(input$outc_sel %in% names(da())){
@@ -985,28 +985,28 @@ server <- function(input, output, session){
       return(NULL)
     }
   })
-
+  
   C_formula <- reactive({
     req(C_formula_char())
     as.formula(C_formula_char())
   })
-
+  
   #------------------------
   # Formula preview
-
+  
   output$formula_view <- renderText({
     C_formula_char()
   })
-
+  
   #-------------------------------------------------
   # Prior
-
+  
   #------------------------
   # Prior construction
-
+  
   C_prior_rv <- reactiveValues(prior_default_obj = brms::empty_prior(),
                                prior_set_obj = brms::empty_prior())
-
+  
   observe({
     req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
@@ -1035,24 +1035,24 @@ server <- function(input, output, session){
       }
     }
   })
-
+  
   observeEvent({
     da()
   }, {
     C_prior_rv$prior_default_obj <- brms::empty_prior()
   })
-
+  
   observe({
     req(C_prior_rv$prior_default_obj)
     prior_class_choices_add <- unique(C_prior_rv$prior_default_obj$class)
     prior_class_choices_add <- setNames(prior_class_choices_add, prior_class_choices_add)
     prior_class_choices <- c("Choose parameter class ..." = "",
                              prior_class_choices_add)
-
+    
     updateSelectInput(session, "prior_class_sel",
                       choices = prior_class_choices)
   })
-
+  
   observe({
     req(C_prior_rv$prior_default_obj)
     prior_coef_choices_add <- unique(C_prior_rv$prior_default_obj$coef[
@@ -1061,17 +1061,17 @@ server <- function(input, output, session){
     prior_coef_choices_add <- setNames(prior_coef_choices_add, prior_coef_choices_add)
     prior_coef_choices <- c("Choose coefficient or leave empty" = "",
                             prior_coef_choices_add)
-
+    
     updateSelectInput(session, "prior_coef_sel",
                       choices = prior_coef_choices)
   })
-
+  
   # Reset the user-specified priors if the default prior has changed (the default prior changes
   # when the dataset or the model formula changes (with "model formula" including the family)):
   observeEvent(C_prior_rv$prior_default_obj, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
-
+  
   observeEvent(input$prior_add, {
     if(input$prior_class_sel != ""){
       C_prior_rv$prior_set_obj <-
@@ -1082,28 +1082,28 @@ server <- function(input, output, session){
       C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
     }
   })
-
+  
   observeEvent(input$prior_reset, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
-
+  
   #------------------------
   # Prior preview
-
+  
   output$prior_default_view <- renderTable({
     C_prior_rv$prior_default_obj
   })
-
+  
   output$prior_set_view <- renderTable({
     C_prior_rv$prior_set_obj
   })
-
+  
   #-------------------------------------------------
   # Posterior
-
+  
   #------------------------
   # Stan code
-
+  
   C_stancode <- reactive({
     req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
@@ -1133,21 +1133,21 @@ server <- function(input, output, session){
     }
     return(C_stancode_tmp)
   })
-
+  
   output$stancode_view <- renderPrint({
     C_stancode()
   })
-
+  
   output$stancode_download <- downloadHandler(
     filename = "shinybrms_stancode.stan",
     content = function(file){
       cat(C_stancode(), file = file)
     }
   )
-
+  
   #------------------------
   # Stan data
-
+  
   C_standata <- reactive({
     req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
@@ -1177,21 +1177,21 @@ server <- function(input, output, session){
     }
     return(C_standata_tmp)
   })
-
+  
   output$standata_view <- renderPrint({
     str(C_standata())
   })
-
+  
   output$standata_download <- downloadHandler(
     filename = "shinybrms_standata.rds",
     content = function(file){
       saveRDS(C_standata(), file = file)
     }
   )
-
+  
   #------------------------
   # Advanced options and run Stan
-
+  
   args_brm <- reactive({
     req(C_formula(), C_family(),
         input$advOpts_cores,
@@ -1235,18 +1235,18 @@ server <- function(input, output, session){
     }
     return(args_brm_tmp)
   })
-
+  
   C_fit <- eventReactive(input$run_stan, {
     req(args_brm())
     args_brm_copy <- args_brm()
-
+    
     showNotification(
       paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",
             "and this may take a while."),
       duration = 60,
       type = "message"
     )
-
+    
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
     if(args_brm_copy$open_progress){
       # For RStudio:
@@ -1254,7 +1254,7 @@ server <- function(input, output, session){
       if(identical(RSTUDIO_orig, "1")){
         Sys.setenv("RSTUDIO" = "")
       }
-
+      
       # The progress browser:
       prog_browser <- getOption("shinybrms.prog_browser",
                                 getOption("browser"))
@@ -1270,7 +1270,7 @@ server <- function(input, output, session){
         }
       }
       browser_orig <- options(browser = prog_browser)
-
+      
       # Even show the progress if parallel::mclapply() (with forking) is intended to be used:
       if(identical(.Platform$OS.type, "unix")){
         if(!interactive()){
@@ -1289,21 +1289,21 @@ server <- function(input, output, session){
         }
       }
     }
-
+    
     # Get warnings directly when they occur:
     warn_orig <- options(warn = 1)
-
+    
     # Run Stan (more precisely: brms::brm()):
     warn_capt <- capture.output({
       C_fit_tmp <- do.call(brms::brm, args = args_brm_copy)
     }, type = "message")
-
+    
     # Reset all modified options and environment variables:
     options(warn = warn_orig$warn)
     if(exists("sink_active")) sink()
     if(exists("browser_orig")) options(browser = browser_orig$browser)
     if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
-
+    
     # Throw warnings if existing:
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
@@ -1324,20 +1324,20 @@ server <- function(input, output, session){
     }
     return(C_fit_tmp)
   })
-
+  
   #------------------------
   # Output
-
+  
   output$fit_date <- renderText({
     invisible(req(C_fit()))
     C_fit()$fit@date
   })
-
+  
   output$smmry_view <- renderPrint({
     invisible(req(C_fit()))
     print(C_fit(), digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
-
+  
   output$stanout_download <- downloadHandler(
     filename = function(){
       if(identical(input$stanout_download_sel, "draws_mat_csv")){
@@ -1364,7 +1364,7 @@ server <- function(input, output, session){
       }
     }
   )
-
+  
   observeEvent(input$act_launch_shinystan, {
     invisible(req(C_fit()))
     if(requireNamespace("shinystan", quietly = TRUE)){
@@ -1383,7 +1383,7 @@ server <- function(input, output, session){
             shinystan_browser <- NULL
           }
         }
-
+        
         # Call "shinystan" from an external R process (needed to allow opening another Shiny app
         # (here "shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
@@ -1417,22 +1417,22 @@ server <- function(input, output, session){
       )
     }
   })
-
+  
   #------------------------
   # Quit app
-
+  
   observe({
     if(identical(input$navbar_ID, "quit_app")){
       stopApp()
     }
   })
-
+  
   session$onSessionEnded(
     function(){
       stopApp()
     }
   )
-
+  
 }
 
 ####################################################################################################

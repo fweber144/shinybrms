@@ -27,6 +27,7 @@ ui <- navbarPage(
         selectInput("ex_da_sel", NULL,
                     choices = c("Choose example dataset ..." = "",
                                 "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
+                                "bacteria (from package \"MASS\")" = "bacteria",
                                 "epilepsy (from package \"brms\")" = "epilepsy",
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
@@ -602,6 +603,19 @@ server <- function(input, output, session){
       } else{
         showNotification(
           "Package \"lme4\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
+    } else if(identical(input$ex_da_sel, "bacteria")){
+      if(requireNamespace("MASS", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(bacteria, package = "MASS", envir = tmp_env)
+        return(get("bacteria", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"MASS\" needed. Please install it.",
           duration = NA,
           type = "error"
         )

@@ -258,7 +258,7 @@ ui <- navbarPage(
                     choices = c("Choose parameter class ..." = ""),
                     selectize = TRUE),
         selectInput("prior_coef_sel", "Coefficient (leave empty to use all coefficients belonging to the selected parameter class):",
-                    choices = character(),
+                    choices = c("Choose coefficient or leave empty" = ""),
                     selectize = TRUE),
         selectInput("prior_group_sel", "Group (for varying effects) (if no coefficient is selected: leave empty to use all groups belonging to the selected parameter class):",
                     choices = character(),
@@ -1056,10 +1056,10 @@ server <- function(input, output, session){
   # Update the choices for "parameter class" (if necessary):
   observe({
     req(C_prior_rv$prior_default_obj)
-    prior_class_choices_add <- unique(C_prior_rv$prior_default_obj$class)
-    prior_class_choices_add <- setNames(prior_class_choices_add, prior_class_choices_add)
+    prior_class_choices <- unique(C_prior_rv$prior_default_obj$class)
+    prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
     prior_class_choices <- c("Choose parameter class ..." = "",
-                             prior_class_choices_add)
+                             prior_class_choices)
     
     updateSelectInput(session, "prior_class_sel",
                       choices = prior_class_choices)
@@ -1068,12 +1068,11 @@ server <- function(input, output, session){
   # Update the choices for "coefficient" (if necessary):
   observe({
     req(C_prior_rv$prior_default_obj)
-    prior_coef_choices_add <- unique(C_prior_rv$prior_default_obj$coef[
+    prior_coef_choices <- unique(c("", C_prior_rv$prior_default_obj$coef[
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel
-    ])
-    prior_coef_choices_add <- setNames(prior_coef_choices_add, prior_coef_choices_add)
-    prior_coef_choices <- c("Choose coefficient or leave empty" = "",
-                            prior_coef_choices_add)
+    ]))
+    prior_coef_choices <- setNames(prior_coef_choices, prior_coef_choices)
+    names(prior_coef_choices)[prior_coef_choices == ""] <- "Choose coefficient or leave empty"
     
     updateSelectInput(session, "prior_coef_sel",
                       choices = prior_coef_choices)

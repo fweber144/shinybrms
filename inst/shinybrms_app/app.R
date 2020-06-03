@@ -28,6 +28,7 @@ ui <- navbarPage(
                     choices = c("Choose example dataset ..." = "",
                                 "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
                                 "bacteria (from package \"MASS\")" = "bacteria",
+                                "birthwt (from package \"MASS\")" = "birthwt",
                                 "epilepsy (from package \"brms\")" = "epilepsy",
                                 "grouseticks (from package \"lme4\")" = "grouseticks",
                                 "kidiq (from package \"rstanarm\")" = "kidiq",
@@ -613,6 +614,30 @@ server <- function(input, output, session){
         tmp_env <- new.env()
         data(bacteria, package = "MASS", envir = tmp_env)
         return(get("bacteria", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"MASS\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        return(NULL)
+      }
+    } else if(identical(input$ex_da_sel, "birthwt")){
+      if(requireNamespace("MASS", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(birthwt, package = "MASS", envir = tmp_env)
+        assign("birthwt", within(get("birthwt", envir = tmp_env), {
+          # Code from ?MASS::birthwt, but slightly modified:
+          low <- as.factor(low)
+          race <- factor(race, labels = c("white", "black", "other"))
+          smoke <- as.factor(smoke > 0)
+          ptl_2cat <- as.factor(ptl > 0)
+          ht <- as.factor(ht > 0)
+          ui <- as.factor(ui > 0)
+          ftv_3cat <- as.factor(ftv)
+          levels(ftv_3cat)[-(1:2)] <- "2+"
+        }), envir = tmp_env)
+        return(get("birthwt", envir = tmp_env))
       } else{
         showNotification(
           "Package \"MASS\" needed. Please install it.",

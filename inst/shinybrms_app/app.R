@@ -258,10 +258,10 @@ ui <- navbarPage(
                     choices = c("Choose parameter class ..." = ""),
                     selectize = TRUE),
         selectInput("prior_coef_sel", "Coefficient (leave empty to use all coefficients belonging to the selected parameter class):",
-                    choices = c("Choose coefficient or leave empty" = ""),
+                    choices = character(),
                     selectize = TRUE),
-        selectInput("prior_group_sel", "Group (for varying effects; leave empty to use all groups belonging to the selected parameter class and the selected coefficient(s)):",
-                    choices = c("Choose group or leave empty" = ""),
+        selectInput("prior_group_sel", "Group (for varying effects) (if no coefficient is selected: leave empty to use all groups belonging to the selected parameter class):",
+                    choices = character(),
                     selectize = TRUE),
         textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",
                   value = "",
@@ -1087,8 +1087,8 @@ server <- function(input, output, session){
         C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
     ])
     prior_group_choices_add <- setNames(prior_group_choices_add, prior_group_choices_add)
-    prior_group_choices <- c("Choose group or leave empty" = "",
-                             prior_group_choices_add)
+    names(prior_group_choices_add)[prior_group_choices_add == ""] <- "Choose group or leave empty"
+    prior_group_choices <- prior_group_choices_add
     
     updateSelectInput(session, "prior_group_sel",
                       choices = prior_group_choices)

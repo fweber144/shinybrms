@@ -851,6 +851,9 @@ server <- function(input, output, session){
     }
   }, ignoreNULL = FALSE)
   
+  #------------------------
+  # Combination of all predictor terms
+  
   C_pred <- reactive({
     if(all(c(input$pred_mainNV_sel,
              input$pred_mainV_sel) %in% names(da()))){

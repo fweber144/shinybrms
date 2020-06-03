@@ -242,11 +242,8 @@ ui <- navbarPage(
     br(),
     strong("Default priors for the parameters belonging to the current likelihood:"),
     tableOutput("prior_default_view"),
-    helpText(HTML(paste0(
-      "An empty field in column \"prior\" denotes a flat prior over the domain of the ",
-      "corresponding parameter. The column \"Response\" gives the outcome in the case of ",
-      "multiple outcomes, so does currently not apply to ", strong("shinybrms"), "."
-    ))),
+    helpText("An empty field in column \"Prior\" denotes a flat prior over the domain of the",
+             "corresponding parameter."),
     hr(),
     h3("Custom priors"),
     br(),
@@ -282,11 +279,8 @@ ui <- navbarPage(
         br(),
         strong("Custom priors currently set:"),
         tableOutput("prior_set_view"),
-        helpText(HTML(paste0(
-          "An empty field in column \"prior\" denotes a flat prior over the domain of the ",
-          "corresponding parameter. The column \"Response\" gives the outcome in the case of ",
-          "multiple outcomes, so does currently not apply to ", strong("shinybrms"), "."
-        )))
+        helpText("An empty field in column \"Prior\" denotes a flat prior over the domain of the",
+                 "corresponding parameter.")
       )
     )
   ),
@@ -1152,12 +1146,19 @@ server <- function(input, output, session){
     return(x)
   }
   
+  prior_colsToHide <- reactive({
+    sapply(C_prior_rv$prior_default_obj, function(x){
+      is.character(x) && all(x == "")
+    }) &
+      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_rv$prior_default_obj))
+  })
+  
   output$prior_default_view <- renderTable({
-    C_prior_rv$prior_default_obj
+    C_prior_rv$prior_default_obj[, !prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({
-    C_prior_rv$prior_set_obj
+    C_prior_rv$prior_set_obj[, !prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   #-------------------------------------------------

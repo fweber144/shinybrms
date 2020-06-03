@@ -1046,9 +1046,7 @@ server <- function(input, output, session){
     }
   })
   
-  observeEvent({
-    da()
-  }, {
+  observeEvent(da(), {
     C_prior_rv$prior_default_obj <- brms::empty_prior()
   })
   

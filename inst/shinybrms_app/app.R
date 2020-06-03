@@ -1085,6 +1085,9 @@ server <- function(input, output, session){
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel &
         C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
     ])
+    if(identical(length(prior_group_choices), 0L)){
+      prior_group_choices <- ""
+    }
     prior_group_choices <- setNames(prior_group_choices, prior_group_choices)
     names(prior_group_choices)[prior_group_choices == ""] <- "Choose group or leave empty"
     

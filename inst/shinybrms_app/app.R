@@ -185,6 +185,9 @@ ui <- navbarPage(
           verbatimTextOutput("TMP_out", placeholder = FALSE),
           verbatimTextOutput("TMP_out2", placeholder = FALSE),
           verbatimTextOutput("TMP_out3", placeholder = FALSE),
+          verbatimTextOutput("TMP_out4", placeholder = FALSE),
+          tableOutput("TMP_out5"),
+          verbatimTextOutput("TMP_out6", placeholder = FALSE),
           ###
 
           selectInput("pred_int_build", NULL,
@@ -807,6 +810,15 @@ server <- function(input, output, session){
   output$TMP_out3 <- renderPrint({
     str(input$pred_int_sel)
   })
+  output$TMP_out4 <- renderPrint({
+    str(C_formula_char())
+  })
+  output$TMP_out5 <- renderTable({
+    C_pred()
+  })
+  output$TMP_out6 <- renderPrint({
+    C_formula_char()
+  })
   ###
 
   pred_int_rv <- reactiveValues()
@@ -819,7 +831,7 @@ server <- function(input, output, session){
       updateSelectInput(session, "pred_int_sel",
                         choices = pred_int_rv$choices_comma,
                         selected = c(input$pred_int_sel,
-                                     pred_int_rv$choices_comma[[length(pred_int_rv$choices_comma)]]))
+                                     paste(input$pred_int_build, collapse = ",")))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNV_sel,
@@ -827,8 +839,8 @@ server <- function(input, output, session){
     }
   })
 
-  # Ensure that all variables involved in the interaction terms have a main
-  # effect (either nonvarying or varying):
+  # Ensure that all variables involved in the interaction terms have a main effect (either
+  # nonvarying or varying):
   observeEvent({
     input$pred_mainNV_sel
     input$pred_mainV_sel
@@ -837,41 +849,147 @@ server <- function(input, output, session){
       all(x %in% c(input$pred_mainNV_sel,
                    input$pred_mainV_sel))
     })
-    pred_int_rv$choices <- pred_int_rv$choices[pred_int_keep]
-    pred_int_rv$choices_comma <- pred_int_rv$choices_comma[pred_int_keep]
-    updateSelectInput(session, "pred_int_sel",
-                      choices = pred_int_rv$choices_comma,
-                      selected = intersect(input$pred_int_sel,
-                                           pred_int_rv$choices_comma))
-  })
+    if(any(pred_int_keep)){
+      pred_int_rv$choices <- pred_int_rv$choices[pred_int_keep]
+      pred_int_rv$choices_comma <- pred_int_rv$choices_comma[pred_int_keep]
+      updateSelectInput(session, "pred_int_sel",
+                        choices = pred_int_rv$choices_comma,
+                        selected = intersect(input$pred_int_sel,
+                                             pred_int_rv$choices_comma))
+    } else{
+      pred_int_rv$choices <- NULL
+      pred_int_rv$choices_comma <- NULL
+      updateSelectInput(session, "pred_int_sel",
+                        choices = character())
+    }
+  }, ignoreNULL = FALSE)
 
   #------------------------
   # Formula construction
 
-  pred_mainV <- reactive({
-    if(length(input$pred_mainV_sel) > 0L){
-      return(paste0("(1|", input$pred_mainV_sel, ")"))
+  C_pred <- reactive({
+    if(all(c(input$pred_mainNV_sel,
+             input$pred_mainV_sel) %in% names(da()))){
+      pred_lst <- c(
+        as.list(input$pred_mainNV_sel),
+        as.list(input$pred_mainV_sel),
+        pred_int_rv$choices[pred_int_rv$choices_comma %in% input$pred_int_sel]
+      )
+      if(length(input$pred_int_sel) > 0L){
+        # Perform the following tasks (at the same time):
+        #   - Expand interactions on the group-level side (in principle, this is not necessary as the
+        #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
+        #     including correlations between the varying effects of a specific group-level term, the
+        #     terms on the population-level side need to be grouped by the term on the group-level side)
+        #   - For varying effects, add the corresponding nonvarying effects since the varying effects
+        #     are assumed to have mean zero.
+        # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
+        # containing the group-level terms of a given element of "pred_lst".
+        # The second task is performed by additionally applying combn() to m = 0L when performing
+        # the first task.
+        pred_needsExpand <- sapply(pred_lst, function(x){
+          sum(x %in% input$pred_mainV_sel) > 0L
+        })
+        if(any(pred_needsExpand)){ # This if() condition is not necessary, but included for better readability.
+          pred_lst_toExpand <- pred_lst[pred_needsExpand]
+          pred_lst_expanded <- do.call("c", lapply(pred_lst_toExpand, function(x){
+            x_V <- intersect(x, input$pred_mainV_sel)
+            x_V_lst_expanded <- unlist(lapply(c(0L, seq_along(x_V)), combn, x = x_V, simplify = FALSE),
+                                       recursive = FALSE)
+            x_NV <- intersect(x, input$pred_mainNV_sel)
+            lapply(x_V_lst_expanded, "c", x_NV)
+          }))
+          pred_lst <- c(pred_lst[!pred_needsExpand],
+                        pred_lst_expanded)
+        }
+
+        # Remove duplicates:
+        pred_lst <- pred_lst[!duplicated(lapply(pred_lst, sort))]
+
+        # By group-level term: Check each population-level term for being a "subterm" (lower-order
+        # term) of a high-order term and if yes, remove it:
+        pred_vec_comma <- sapply(pred_lst, function(x){
+          x_V <- intersect(x, input$pred_mainV_sel)
+          if(length(x_V) > 0L){
+            return(paste(x_V, collapse = ","))
+          } else{
+            return(NA_character_)
+          }
+        })
+        pred_vec_comma <- factor(pred_vec_comma, levels = unique(pred_vec_comma), exclude = NULL)
+        pred_lst <- tapply(pred_lst, pred_vec_comma, function(x_lst){
+          x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNV_sel)
+          x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
+            any(sapply(x_NV_lst[-idx], function(x_NV){
+              all(x_NV_lst[[idx]] %in% x_NV)
+            }))
+          })
+          return(x_lst[!x_isSubNV])
+        }, simplify = FALSE)
+        pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
+      }
+
+      pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
+        x_NV <- intersect(x, input$pred_mainNV_sel)
+        if(length(x_NV) > 0L){
+          x_NV <- paste(x_NV, collapse = "*")
+        } else{
+          x_NV <- NA_character_
+        }
+        x_V <- intersect(x, input$pred_mainV_sel)
+        if(length(x_V) > 0L){
+          x_V <- paste(x_V, collapse = ":")
+        } else{
+          x_V <- NA_character_
+        }
+        data.frame("from_mainNV" = x_NV,
+                   "from_mainV" = x_V)
+      }))
+      if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
+        pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
+        pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
+          if(any(!is.na(x))){
+            return(paste(x[!is.na(x)], collapse = " + "))
+          } else{
+            return(NA_character_)
+          }
+        }, na.action = na.pass)
+      }
+      return(pred_DF)
     } else{
-      return(character())
+      return(NULL)
     }
   })
 
   C_formula_char <- reactive({
     req(input$outc_sel)
-    if(all(c(input$outc_sel,
-             input$pred_mainNV_sel,
-             input$pred_mainV_sel) %in% names(da()))){
-      pred_int_lst <- pred_int_rv$choices[pred_int_rv$choices_comma %in% input$pred_int_sel]
-      ### TEMPORARILY:
-      pred_int_lst <- sapply(pred_int_lst, paste, collapse = ":")
-      ###
-      return(paste(input$outc_sel,
-                   "~",
-                   paste(c("1",
-                           input$pred_mainNV_sel,
-                           pred_mainV(),
-                           pred_int_lst),
-                         collapse = " + ")))
+    if(input$outc_sel %in% names(da())){
+      pred_DF <- C_pred()
+      if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
+        stopifnot(all(sapply(pred_DF, function(x){
+          is.factor(x) || is.character(x)
+        }))) # Check this because apply() applied to a data.frame internally coerces to a matrix.
+        formula_splitted <- apply(pred_DF, 1, function(x){
+          isNA_NV <- is.na(x["from_mainNV"])
+          isNA_V <- is.na(x["from_mainV"])
+          if(!isNA_NV & !isNA_V){
+            paste0("(1 + ", x["from_mainNV"], " | ", x["from_mainV"], ")")
+          } else if(isNA_NV & !isNA_V){
+            paste0("(1 | ", x["from_mainV"], ")")
+          } else if(!isNA_NV & isNA_V){
+            paste0("1 + ", x["from_mainNV"])
+          } else{
+            stop("It seems like 'isNA_NV & isNA_V'. This case should not occur. Please report this.")
+          }
+        })
+      } else{
+        formula_splitted <- "1"
+      }
+      return(paste(
+        input$outc_sel,
+        "~",
+        paste(formula_splitted, collapse = " + ")
+      ))
     } else{
       return(NULL)
     }

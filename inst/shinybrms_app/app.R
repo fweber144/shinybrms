@@ -260,8 +260,9 @@ ui <- navbarPage(
         selectInput("prior_coef_sel", "Coefficient (leave empty to use all coefficients belonging to the selected parameter class):",
                     choices = c("Choose coefficient or leave empty" = ""),
                     selectize = TRUE),
-        strong("Group:"),
-        helpText("Varying effects are not supported yet."),
+        selectInput("prior_group_sel", "Group (for varying effects; leave empty to use all groups belonging to the selected parameter class and the selected coefficient(s)):",
+                    choices = c("Choose group or leave empty" = ""),
+                    selectize = TRUE),
         textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",
                   value = "",
                   placeholder = "Enter prior distribution in Stan language or leave empty to use a flat prior ..."),
@@ -1078,6 +1079,21 @@ server <- function(input, output, session){
                       choices = prior_coef_choices)
   })
   
+  # Update the choices for "group" (if necessary):
+  observe({
+    req(C_prior_rv$prior_default_obj)
+    prior_group_choices_add <- unique(C_prior_rv$prior_default_obj$group[
+      C_prior_rv$prior_default_obj$class %in% input$prior_class_sel &
+        C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
+    ])
+    prior_group_choices_add <- setNames(prior_group_choices_add, prior_group_choices_add)
+    prior_group_choices <- c("Choose group or leave empty" = "",
+                             prior_group_choices_add)
+    
+    updateSelectInput(session, "prior_group_sel",
+                      choices = prior_group_choices)
+  })
+  
   # Reset the user-specified priors if the default prior changes (the default prior changes
   # if the model formula changes (with the model formula also changing if the dataset changes) or 
   # if the distributional family for the outcome changes):
@@ -1091,7 +1107,8 @@ server <- function(input, output, session){
       C_prior_rv$prior_set_obj <-
         brms::set_prior(prior = input$prior_text,
                         class = input$prior_class_sel,
-                        coef = input$prior_coef_sel) +
+                        coef = input$prior_coef_sel,
+                        group = input$prior_group_sel) +
         C_prior_rv$prior_set_obj
       C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
     }

@@ -1089,7 +1089,9 @@ server <- function(input, output, session){
     names(prior_group_choices)[prior_group_choices == ""] <- "Choose group or leave empty"
     
     updateSelectInput(session, "prior_group_sel",
-                      choices = prior_group_choices)
+                      choices = prior_group_choices,
+                      selected = intersect(prior_group_choices,
+                                           isolate(input$prior_group_sel)))
   })
   
   # Reset the user-specified priors if the default prior changes (the default prior changes

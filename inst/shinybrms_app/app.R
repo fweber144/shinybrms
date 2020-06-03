@@ -180,16 +180,6 @@ ui <- navbarPage(
                    "listed in the box below the \"Add interaction term\" button. You may edit this list",
                    "to remove individual interaction terms or to re-add interaction terms which you",
                    "have previously removed."),
-
-          ### TEMPORARILY:
-          verbatimTextOutput("TMP_out", placeholder = FALSE),
-          verbatimTextOutput("TMP_out2", placeholder = FALSE),
-          verbatimTextOutput("TMP_out3", placeholder = FALSE),
-          verbatimTextOutput("TMP_out4", placeholder = FALSE),
-          tableOutput("TMP_out5"),
-          verbatimTextOutput("TMP_out6", placeholder = FALSE),
-          ###
-
           selectInput("pred_int_build", NULL,
                       choices = c("Choose variables for an interaction term ..." = ""),
                       multiple = TRUE,
@@ -202,6 +192,18 @@ ui <- navbarPage(
                       multiple = TRUE,
                       selectize = TRUE)
         ),
+        wellPanel(
+          h3("Preview of selected predictor terms"),
+          helpText(HTML(paste0(
+            "Here, you can get a preview of the currently selected predictor terms. ",
+            "This is mainly intended for those familiar with R's and ",
+            a(HTML("<strong>brms</strong>"),
+              href = "https://CRAN.R-project.org/package=brms",
+              target = "_blank"),
+            "'s formula syntax."
+          ))),
+          tableOutput("pred_view")
+        )
       ),
       tabPanel(
         "Formula preview",
@@ -800,27 +802,6 @@ server <- function(input, output, session){
                       selected = isolate(input$pred_int_build))
   })
 
-  ### TEMPORARILY:
-  output$TMP_out <- renderPrint({
-    str(input$pred_int_build)
-  })
-  output$TMP_out2 <- renderPrint({
-    str(pred_int_rv$choices)
-  })
-  output$TMP_out3 <- renderPrint({
-    str(input$pred_int_sel)
-  })
-  output$TMP_out4 <- renderPrint({
-    str(C_formula_char())
-  })
-  output$TMP_out5 <- renderTable({
-    C_pred()
-  })
-  output$TMP_out6 <- renderPrint({
-    C_formula_char()
-  })
-  ###
-
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
     if(length(input$pred_int_build) > 1L){
@@ -863,9 +844,6 @@ server <- function(input, output, session){
                         choices = character())
     }
   }, ignoreNULL = FALSE)
-
-  #------------------------
-  # Formula construction
 
   C_pred <- reactive({
     if(all(c(input$pred_mainNV_sel,
@@ -961,14 +939,21 @@ server <- function(input, output, session){
     }
   })
 
+  output$pred_view <- renderTable({
+    C_pred()
+  })
+
+  #------------------------
+  # Formula construction
+
   C_formula_char <- reactive({
     req(input$outc_sel)
     if(input$outc_sel %in% names(da())){
       pred_DF <- C_pred()
       if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
         stopifnot(all(sapply(pred_DF, function(x){
-          is.factor(x) || is.character(x)
-        }))) # Check this because apply() applied to a data.frame internally coerces to a matrix.
+          is.factor(x) || is.character(x) # Check this because apply() applied to a data.frame internally coerces to a matrix.
+        })))
         formula_splitted <- apply(pred_DF, 1, function(x){
           isNA_NV <- is.na(x["from_mainNV"])
           isNA_V <- is.na(x["from_mainV"])

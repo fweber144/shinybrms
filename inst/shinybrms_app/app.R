@@ -193,14 +193,15 @@ ui <- navbarPage(
                       selectize = TRUE)
         ),
         wellPanel(
-          h3("Preview of selected predictor terms"),
+          h3("Preview of chosen predictor terms"),
           helpText(HTML(paste0(
-            "Here, you can get a preview of the currently selected predictor terms. ",
-            "This is mainly intended for those familiar with R's and ",
+            "Here, you can get a preview of the currently chosen predictor terms. ",
+            "This is mainly intended as a check for those familiar with R's and ",
             a(HTML("<strong>brms</strong>"),
               href = "https://CRAN.R-project.org/package=brms",
               target = "_blank"),
-            "'s formula syntax."
+            "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
+            "preview\" which may be found in the panel on the left-hand side."
           ))),
           tableOutput("pred_view")
         )
@@ -939,8 +940,13 @@ server <- function(input, output, session){
     }
   })
 
+  #------------------------
+  # Predictor terms preview
+
   output$pred_view <- renderTable({
     C_pred()
+  }, sanitize.colnames.function = function(x){
+    sub("^from_mainV$", "group-level effects", sub("^from_mainNV$", "population-level effects", x))
   })
 
   #------------------------

@@ -963,7 +963,7 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
-    req(input$outc_sel)
+    req(da(), input$outc_sel)
     if(input$outc_sel %in% names(da())){
       pred_DF <- C_pred()
       if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){

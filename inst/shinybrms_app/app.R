@@ -231,7 +231,7 @@ ui <- navbarPage(
       code("brms::get_prior()"),
       " and ",
       code("brms::set_prior()"),
-      " from package",
+      " from package ",
       a(HTML("<strong>brms</strong>"),
         href = "https://CRAN.R-project.org/package=brms",
         target = "_blank"),
@@ -242,8 +242,11 @@ ui <- navbarPage(
     br(),
     strong("Default priors for the parameters belonging to the current likelihood:"),
     tableOutput("prior_default_view"),
-    helpText("An empty field in column \"prior\" denotes a flat prior over the domain of the",
-             "corresponding parameter."),
+    helpText(HTML(paste0(
+      "An empty field in column \"prior\" denotes a flat prior over the domain of the ",
+      "corresponding parameter. The column \"Response\" gives the outcome in the case of ",
+      "multiple outcomes, so does currently not apply to ", strong("shinybrms"), "."
+    ))),
     hr(),
     h3("Custom priors"),
     br(),
@@ -274,8 +277,11 @@ ui <- navbarPage(
         br(),
         strong("Custom priors currently set:"),
         tableOutput("prior_set_view"),
-        helpText("An empty field in column \"prior\" denotes a flat prior over the domain of the",
-                 "corresponding parameter.")
+        helpText(HTML(paste0(
+          "An empty field in column \"prior\" denotes a flat prior over the domain of the ",
+          "corresponding parameter. The column \"Response\" gives the outcome in the case of ",
+          "multiple outcomes, so does currently not apply to ", strong("shinybrms"), "."
+        )))
       )
     )
   ),
@@ -743,23 +749,23 @@ server <- function(input, output, session){
     req(C_family())
     if(identical(input$dist_sel, "")){
       return(
-        data.frame("parameter" = character(),
-                   "link function" = character(),
+        data.frame("Parameter" = character(),
+                   "Link function" = character(),
                    check.names = FALSE)
       )
     } else{
       C_family_list <- C_family()
-      dist_link_tmp <- data.frame("parameter" = C_family_list$dpars,
-                                  "link function" = NA,
+      dist_link_tmp <- data.frame("Parameter" = C_family_list$dpars,
+                                  "Link function" = NA,
                                   check.names = FALSE)
-      dist_link_tmp$"link function" <- sapply(dist_link_tmp$"parameter", function(par_i){
+      dist_link_tmp$"Link function" <- sapply(dist_link_tmp$"Parameter", function(par_i){
         if(paste0("link_", par_i) %in% names(C_family_list)){
           return(C_family_list[[paste0("link_", par_i)]])
         } else{
           return(NA)
         }
       })
-      dist_link_tmp$"link function"[dist_link_tmp$"parameter" %in% c("mu")] <- C_family_list$link
+      dist_link_tmp$"Link function"[dist_link_tmp$"Parameter" %in% c("mu")] <- C_family_list$link
       return(dist_link_tmp)
     }
   })
@@ -946,7 +952,9 @@ server <- function(input, output, session){
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x){
-    sub("^from_mainV$", "group-level effects", sub("^from_mainNV$", "population-level effects", x))
+    x <- sub("^from_mainNV$", "Population-level effects", x)
+    x <- sub("^from_mainV$", "Group-level effects", x)
+    return(x)
   })
   
   #------------------------
@@ -1090,13 +1098,25 @@ server <- function(input, output, session){
   #------------------------
   # Prior preview
   
+  san_prior_tab_nms <- function(x){
+    x <- sub("^prior$", "Prior", x)
+    x <- sub("^class$", "Class", x)
+    x <- sub("^coef$", "Coefficient", x)
+    x <- sub("^group$", "Group", x)
+    x <- sub("^resp$", "Response", x)
+    x <- sub("^dpar$", "Distributional parameter", x)
+    x <- sub("^nlpar$", "Non-linear parameter", x)
+    x <- sub("^bound$", "Bound", x)
+    return(x)
+  }
+  
   output$prior_default_view <- renderTable({
     C_prior_rv$prior_default_obj
-  })
+  }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({
     C_prior_rv$prior_set_obj
-  })
+  }, sanitize.colnames.function = san_prior_tab_nms)
   
   #-------------------------------------------------
   # Posterior

@@ -1017,6 +1017,7 @@ server <- function(input, output, session){
   C_prior_rv <- reactiveValues(prior_default_obj = brms::empty_prior(),
                                prior_set_obj = brms::empty_prior())
   
+  # Get default priors:
   observe({
     req(C_formula(), C_family())
     warn_orig <- options(warn = 1)
@@ -1046,10 +1047,12 @@ server <- function(input, output, session){
     }
   })
   
+  # Reset the default priors if the dataset changes:
   observeEvent(da(), {
     C_prior_rv$prior_default_obj <- brms::empty_prior()
   })
   
+  # Update the choices for "parameter class" (if necessary):
   observe({
     req(C_prior_rv$prior_default_obj)
     prior_class_choices_add <- unique(C_prior_rv$prior_default_obj$class)
@@ -1061,6 +1064,7 @@ server <- function(input, output, session){
                       choices = prior_class_choices)
   })
   
+  # Update the choices for "coefficient" (if necessary):
   observe({
     req(C_prior_rv$prior_default_obj)
     prior_coef_choices_add <- unique(C_prior_rv$prior_default_obj$coef[
@@ -1074,12 +1078,14 @@ server <- function(input, output, session){
                       choices = prior_coef_choices)
   })
   
-  # Reset the user-specified priors if the default prior has changed (the default prior changes
-  # when the dataset or the model formula changes (with "model formula" including the family)):
+  # Reset the user-specified priors if the default prior changes (the default prior changes
+  # if the model formula changes (with the model formula also changing if the dataset changes) or 
+  # if the distributional family for the outcome changes):
   observeEvent(C_prior_rv$prior_default_obj, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
   
+  # Add a user-specified prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
     if(input$prior_class_sel != ""){
       C_prior_rv$prior_set_obj <-
@@ -1091,6 +1097,7 @@ server <- function(input, output, session){
     }
   })
   
+  # Reset the user-specified priors if the user clicks the corresponding button:
   observeEvent(input$prior_reset, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })

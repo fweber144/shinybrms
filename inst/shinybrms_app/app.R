@@ -264,7 +264,6 @@ ui <- navbarPage(
         helpText("Varying effects are not supported yet."),
         textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",
                   value = "",
-                  width = "400px",
                   placeholder = "Enter prior distribution in Stan language or leave empty to use a flat prior ..."),
         actionButton("prior_add", "Add prior"),
         br(),

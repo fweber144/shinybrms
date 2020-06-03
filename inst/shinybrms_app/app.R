@@ -1082,13 +1082,12 @@ server <- function(input, output, session){
   # Update the choices for "group" (if necessary):
   observe({
     req(C_prior_rv$prior_default_obj)
-    prior_group_choices_add <- unique(C_prior_rv$prior_default_obj$group[
+    prior_group_choices <- unique(C_prior_rv$prior_default_obj$group[
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel &
         C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
     ])
-    prior_group_choices_add <- setNames(prior_group_choices_add, prior_group_choices_add)
-    names(prior_group_choices_add)[prior_group_choices_add == ""] <- "Choose group or leave empty"
-    prior_group_choices <- prior_group_choices_add
+    prior_group_choices <- setNames(prior_group_choices, prior_group_choices)
+    names(prior_group_choices)[prior_group_choices == ""] <- "Choose group or leave empty"
     
     updateSelectInput(session, "prior_group_sel",
                       choices = prior_group_choices)

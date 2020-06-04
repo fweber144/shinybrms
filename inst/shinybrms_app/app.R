@@ -852,7 +852,7 @@ server <- function(input, output, session){
     brms::brmsfamily(family = input$dist_sel)
   })
   
-  dist_link_da <- reactive({
+  output$dist_link <- renderTable({
     req(C_family())
     if(identical(input$dist_sel, "")){
       return(
@@ -875,10 +875,6 @@ server <- function(input, output, session){
       dist_link_tmp$"Link function"[dist_link_tmp$"Parameter" %in% c("mu")] <- C_family_list$link
       return(dist_link_tmp)
     }
-  })
-  
-  output$dist_link <- renderTable({
-    dist_link_da()
   })
   
   #-------------------------------------------------

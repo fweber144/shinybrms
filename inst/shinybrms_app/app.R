@@ -1,6 +1,22 @@
 library(shiny)
 
 ####################################################################################################
+# Global object definitions
+####################################################################################################
+
+san_prior_tab_nms <- function(x){
+  x <- sub("^prior$", "Prior", x)
+  x <- sub("^class$", "Class", x)
+  x <- sub("^coef$", "Coefficient", x)
+  x <- sub("^group$", "Group", x)
+  x <- sub("^resp$", "Response", x)
+  x <- sub("^dpar$", "Distributional parameter", x)
+  x <- sub("^nlpar$", "Non-linear parameter", x)
+  x <- sub("^bound$", "Bound", x)
+  return(x)
+}
+
+####################################################################################################
 # UI
 ####################################################################################################
 
@@ -1216,18 +1232,6 @@ server <- function(input, output, session){
   
   #------------------------
   # Prior preview
-  
-  san_prior_tab_nms <- function(x){
-    x <- sub("^prior$", "Prior", x)
-    x <- sub("^class$", "Class", x)
-    x <- sub("^coef$", "Coefficient", x)
-    x <- sub("^group$", "Group", x)
-    x <- sub("^resp$", "Response", x)
-    x <- sub("^dpar$", "Distributional parameter", x)
-    x <- sub("^nlpar$", "Non-linear parameter", x)
-    x <- sub("^bound$", "Bound", x)
-    return(x)
-  }
   
   prior_colsToHide <- reactive({
     sapply(C_prior_rv$prior_default_obj, function(x){

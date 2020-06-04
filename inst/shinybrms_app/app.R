@@ -155,9 +155,9 @@ ui <- navbarPage(
                    "are not really appropriate for a Bayesian regression model."),
           h4("Non-varying main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
-                   "non-varying main effects shall be added."),
+                   "nonvarying main effects shall be added."),
           selectInput("pred_mainNV_sel", NULL,
-                      choices = c("Choose variables for non-varying main effects ..." = ""),
+                      choices = c("Choose variables for nonvarying main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           h4("Varying intercepts"),
@@ -832,7 +832,7 @@ server <- function(input, output, session){
   
   observe({
     updateSelectInput(session, "pred_mainNV_sel",
-                      choices = c("Choose variables for non-varying main effects ..." = "",
+                      choices = c("Choose variables for nonvarying main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
                                             input$pred_mainV_sel))),

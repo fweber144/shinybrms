@@ -34,7 +34,7 @@
 
 First release. Offers support for Bayesian regression models with a
 Gaussian, Bernoulli, or negative binomial distribution for the
-(univariate) outcome. For the predictors, only non-varying (a.k.a.
+(univariate) outcome. For the predictors, only nonvarying (a.k.a.
 population-level or “fixed”) effects are supported. Varying (a.k.a.
 group-level or “random”) effects are not supported yet. Neither
 supported are most of

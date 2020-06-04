@@ -267,7 +267,7 @@ ui <- navbarPage(
                                              "selected: leave empty to use all groups belonging to",
                                              "the selected parameter class; if you are not able to",
                                              "clear the field while having no coefficient selected,",
-                                             "then first clear the \"Parameter class\" field.):"),
+                                             "then first clear the \"Parameter class\" field):"),
                     choices = character(),
                     selectize = TRUE),
         textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",

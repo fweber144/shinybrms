@@ -276,17 +276,35 @@ ui <- navbarPage(
         selectInput("prior_group_sel",
                     HTML(paste0(
                       "Group (for varying effects):",
-                      helpText("Note: If no coefficient is selected: Leave empty to use all groups",
-                               "belonging to the selected parameter class. If you are not able to",
-                               "clear the field while having no coefficient selected,",
-                               "then first clear the \"Parameter class\" field.",
+                      helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
+                               "use all groups belonging to the selected parameter class.",
+                               "Unfortunately, you are not able to clear this \"Group\" field",
+                               "while having an empty \"Coefficient\" field (and a nonempty",
+                               "\"Group\" field). In this case, a workaround is e.g. to first",
+                               "clear the \"Parameter class\" field.",
                                style = "font-weight:normal")
                     )),
                     choices = character(),
                     selectize = TRUE),
-        textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",
+        textInput("prior_text",
+                  HTML(paste0(
+                    "Prior distribution:",
+                    helpText(
+                      HTML(paste0(
+                        "Note: You may either specify a prior distribution using a Stan ",
+                        "function or leave this field empty to use a flat prior. If you ",
+                        "specify a prior distribution using a Stan function, you have to ",
+                        "choose the Stan function which would be used in a Stan sampling ",
+                        "statement, e.g. ", code("normal(0, 2.5)"), ". Furthermore, you need ",
+                        "to specify values for ", em("all"), " arguments of this Stan function. ",
+                        "Also note that ", strong("brms"), " introduces a few abbreviations for ",
+                        "some Stan functions (e.g. ", code("lkj"), ") which may also be used."
+                      )),
+                      style = "font-weight:normal"
+                    )
+                  )),
                   value = "",
-                  placeholder = "Enter prior distribution in Stan language or leave empty to use a flat prior"),
+                  placeholder = "Enter prior distribution using a Stan function or leave empty to use a flat prior"),
         actionButton("prior_add", "Add prior"),
         br(),
         br(),

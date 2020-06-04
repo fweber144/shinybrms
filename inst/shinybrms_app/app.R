@@ -198,9 +198,7 @@ ui <- navbarPage(
           helpText(HTML(paste0(
             "Here, you can get a preview of the currently chosen predictor terms. ",
             "This is mainly intended as a check for those familiar with R's and ",
-            a(HTML("<strong>brms</strong>"),
-              href = "https://CRAN.R-project.org/package=brms",
-              target = "_blank"),
+            strong("brms"),
             "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
             "preview\" which may be found in the panel on the left-hand side."
           ))),
@@ -291,14 +289,21 @@ ui <- navbarPage(
                     "Prior distribution:",
                     helpText(
                       HTML(paste0(
-                        "Note: You may either specify a prior distribution using a Stan ",
-                        "function or leave this field empty to use a flat prior. If you ",
-                        "specify a prior distribution using a Stan function, you have to ",
-                        "choose the Stan function which would be used in a Stan sampling ",
-                        "statement, e.g. ", code("normal(0, 2.5)"), ". Furthermore, you need ",
-                        "to specify values for ", em("all"), " arguments of this Stan function. ",
-                        "Also note that ", strong("brms"), " adds some own function definitions ",
-                        "(e.g. ", code("horseshoe"), " and ", code("lkj"), ") which may also be used."
+                        "Note: You may ", em("either"),
+                        tags$ul(
+                          tags$li(HTML(paste0("specify a prior distribution using a Stan function ", 
+                                              em("or")))),
+                          tags$li(HTML(paste0("specify a prior distribution using one of the ",
+                                              "special functions defined by ", strong("brms"), 
+                                              " for this purpose (e.g. ", 
+                                              code("horseshoe"), " and ", code("lkj"), 
+                                              ") ", em("or")))),
+                          tags$li("leave this field empty to use a flat prior.")
+                        ),
+                        "If you specify a prior distribution using a Stan function, you have to ",
+                        "use the Stan function which would be used in a Stan sampling statement ",
+                        "and specify values for all arguments of this Stan function (e.g. ", 
+                        code("normal(0, 2.5)"), "). "
                       )),
                       style = "font-weight:normal"
                     )

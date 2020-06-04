@@ -1067,15 +1067,11 @@ server <- function(input, output, session){
     if(input$outc_sel %in% names(da())){
       pred_DF <- C_pred()
       if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
-        stopifnot(all(sapply(pred_DF, function(x){
-          is.factor(x) || is.character(x) # Check this because apply() applied to a data.frame internally coerces to a matrix.
-        })))
         formula_splitted <- apply(pred_DF, 1, function(x){
-          isNA_V <- is.na(x["from_mainV"])
-          if(!isNA_V){
-            return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
-          } else{
+          if(is.na(x["from_mainV"])){
             return(x["from_mainNV"])
+          } else{
+            return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
           }
         })
       } else{

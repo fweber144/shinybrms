@@ -501,7 +501,7 @@ ui <- navbarPage(
       numericInput("seed_PPD",
                    paste("Seed for draws from posterior predictive distribution",
                          "(leave empty to use a random seed):"),
-                   value = NULL, step = 1L),
+                   value = NA, step = 1L),
       actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)")))
     )
   ),
@@ -1525,6 +1525,12 @@ server <- function(input, output, session){
           }
         }
         
+        # Get the seed for drawing from the posterior predictive distribution:
+        seed_PPD_tmp <- input$seed_PPD
+        if(is.na(seed_PPD_tmp)){
+          seed_PPD_tmp <- NULL
+        }
+        
         # Call "shinystan" from an external R process (needed to allow opening another Shiny app
         # (here "shinystan") from within this Shiny app ("shinybrms")):
         callr::r(
@@ -1541,7 +1547,7 @@ server <- function(input, output, session){
           },
           args = list(brmsfit_obj = C_fit(),
                       browser_callr = shinystan_browser,
-                      seed_callr = input$seed_PPD)
+                      seed_callr = seed_PPD_tmp)
         )
       } else{
         showNotification(

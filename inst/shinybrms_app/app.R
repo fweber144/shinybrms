@@ -986,11 +986,7 @@ server <- function(input, output, session){
       if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
         pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
         pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
-          if(any(!is.na(x))){
-            return(paste(x[!is.na(x)], collapse = " + "))
-          } else{
-            return(NA_character_)
-          }
+          paste(c("1", x[!is.na(x)]), collapse = " + ")
         }, na.action = na.pass)
       }
       return(pred_DF)
@@ -1022,16 +1018,11 @@ server <- function(input, output, session){
           is.factor(x) || is.character(x) # Check this because apply() applied to a data.frame internally coerces to a matrix.
         })))
         formula_splitted <- apply(pred_DF, 1, function(x){
-          isNA_NV <- is.na(x["from_mainNV"])
           isNA_V <- is.na(x["from_mainV"])
-          if(!isNA_NV & !isNA_V){
-            paste0("(1 + ", x["from_mainNV"], " | ", x["from_mainV"], ")")
-          } else if(isNA_NV & !isNA_V){
-            paste0("(1 | ", x["from_mainV"], ")")
-          } else if(!isNA_NV & isNA_V){
-            paste0("1 + ", x["from_mainNV"])
+          if(!isNA_V){
+            return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
           } else{
-            stop("It seems like 'isNA_NV & isNA_V'. This case should not occur. Please report this.")
+            return(x["from_mainNV"])
           }
         })
       } else{

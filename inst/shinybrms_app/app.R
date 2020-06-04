@@ -297,8 +297,8 @@ ui <- navbarPage(
                         "choose the Stan function which would be used in a Stan sampling ",
                         "statement, e.g. ", code("normal(0, 2.5)"), ". Furthermore, you need ",
                         "to specify values for ", em("all"), " arguments of this Stan function. ",
-                        "Also note that ", strong("brms"), " introduces a few abbreviations for ",
-                        "some Stan functions (e.g. ", code("lkj"), ") which may also be used."
+                        "Also note that ", strong("brms"), " adds some own function definitions ",
+                        "(e.g. ", code("horseshoe"), " and ", code("lkj"), ") which may also be used."
                       )),
                       style = "font-weight:normal"
                     )

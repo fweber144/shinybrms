@@ -186,7 +186,12 @@ ui <- navbarPage(
         ),
         wellPanel(
           h3("Interaction effects"),
-          helpText("Only variables already having a main effect may be included in an interaction",
+          helpText("Here, the term \"interaction\" not only includes interactions between",
+                   "population-level predictors, but also between population-level and group-level",
+                   "predictors (yielding varying slopes) as well as between group-level predictors",
+                   "(yielding a new group-level predictor with varying intercepts).",
+                   "This broad definition of \"interaction\" is indicated here by the symbol \"<-->\".",
+                   "Only variables already having a main effect may be included in an interaction",
                    "term. In the rare case that you really need an interaction involving a variable",
                    "without a main effect, you have to include this interaction manually as a",
                    "variable in your dataset and add a main effect for this manually created",

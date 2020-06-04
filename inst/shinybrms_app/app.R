@@ -66,7 +66,7 @@ ui <- navbarPage(
                              ".txt",
                              ".dat")),
         strong("Header"),
-        checkboxInput("header", "File has header", TRUE),
+        checkboxInput("header", "The file has a header containing the column names", TRUE),
         radioButtons("sep", "Separator",
                      choices = c("Comma" = ",",
                                  "Semicolon" = ";",

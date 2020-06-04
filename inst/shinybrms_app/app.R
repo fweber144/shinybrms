@@ -1338,7 +1338,7 @@ server <- function(input, output, session){
   #------------------------
   # Advanced options and run Stan
   
-  args_brm <- reactive({
+  C_fit <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,
         input$advOpts_chains,
@@ -1379,12 +1379,7 @@ server <- function(input, output, session){
       args_brm_tmp <- c(args_brm_tmp,
                         list(refresh = input$advOpts_refresh))
     }
-    return(args_brm_tmp)
-  })
-  
-  C_fit <- eventReactive(input$run_stan, {
-    req(args_brm())
-    args_brm_copy <- args_brm()
+    args_brm_copy <- args_brm_tmp
     
     showNotification(
       paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",

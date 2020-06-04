@@ -814,6 +814,16 @@ server <- function(input, output, session){
     }
   })
   
+  # Check for critical characters in the column names:
+  observe({
+    if(any(grepl("<-->", names(da())))){
+      safeError(paste(
+        "The character sequence \"<-->\" (without quotation marks) is not allowed in the",
+        "column names of the dataset. Please fix this and re-upload your fixed dataset."
+      ))
+    }
+  })
+  
   #-------------------------------------------------
   # Data preview
   

@@ -1347,7 +1347,7 @@ server <- function(input, output, session){
         input$advOpts_init_r,
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
-    args_brm_tmp <- list(
+    args_brm <- list(
       formula = C_formula(),
       data = da(),
       family = C_family(),
@@ -1372,14 +1372,14 @@ server <- function(input, output, session){
       ##
     )
     if(!is.na(input$advOpts_warmup)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(warmup = input$advOpts_warmup))
+      args_brm <- c(args_brm,
+                    list(warmup = input$advOpts_warmup))
     }
     if(!is.na(input$advOpts_refresh)){
-      args_brm_tmp <- c(args_brm_tmp,
-                        list(refresh = input$advOpts_refresh))
+      args_brm <- c(args_brm,
+                    list(refresh = input$advOpts_refresh))
     }
-    args_brm_copy <- args_brm_tmp
+    args_brm <- args_brm
     
     showNotification(
       paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",
@@ -1389,7 +1389,7 @@ server <- function(input, output, session){
     )
     
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
-    if(args_brm_copy$open_progress){
+    if(args_brm$open_progress){
       # For RStudio:
       RSTUDIO_orig <- Sys.getenv("RSTUDIO")
       if(identical(RSTUDIO_orig, "1")){
@@ -1436,7 +1436,7 @@ server <- function(input, output, session){
     
     # Run Stan (more precisely: brms::brm()):
     warn_capt <- capture.output({
-      C_fit_tmp <- do.call(brms::brm, args = args_brm_copy)
+      C_fit_tmp <- do.call(brms::brm, args = args_brm)
     }, type = "message")
     
     # Reset all modified options and environment variables:

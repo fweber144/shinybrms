@@ -918,11 +918,11 @@ server <- function(input, output, session){
       pred_int_rv$choices <- c(pred_int_rv$choices,
                                list(input$pred_int_build))
       pred_int_rv$choices <- pred_int_rv$choices[!duplicated(lapply(pred_int_rv$choices, sort))]
-      pred_int_rv$choices_comma <- sapply(pred_int_rv$choices, paste, collapse = ",")
+      pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
       updateSelectInput(session, "pred_int_sel",
-                        choices = pred_int_rv$choices_comma,
+                        choices = pred_int_rv$choices_chr,
                         selected = c(input$pred_int_sel,
-                                     paste(input$pred_int_build, collapse = ",")))
+                                     paste(input$pred_int_build, collapse = "<-->")))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNV_sel,
@@ -942,14 +942,14 @@ server <- function(input, output, session){
     })
     if(any(pred_int_keep)){
       pred_int_rv$choices <- pred_int_rv$choices[pred_int_keep]
-      pred_int_rv$choices_comma <- pred_int_rv$choices_comma[pred_int_keep]
+      pred_int_rv$choices_chr <- pred_int_rv$choices_chr[pred_int_keep]
       updateSelectInput(session, "pred_int_sel",
-                        choices = pred_int_rv$choices_comma,
+                        choices = pred_int_rv$choices_chr,
                         selected = intersect(input$pred_int_sel,
-                                             pred_int_rv$choices_comma))
+                                             pred_int_rv$choices_chr))
     } else{
       pred_int_rv$choices <- NULL
-      pred_int_rv$choices_comma <- NULL
+      pred_int_rv$choices_chr <- NULL
       updateSelectInput(session, "pred_int_sel",
                         choices = character())
     }
@@ -964,7 +964,7 @@ server <- function(input, output, session){
       pred_lst <- c(
         as.list(input$pred_mainNV_sel),
         as.list(input$pred_mainV_sel),
-        pred_int_rv$choices[pred_int_rv$choices_comma %in% input$pred_int_sel]
+        pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
       )
       if(length(input$pred_int_sel) > 0L){
         # Perform the following tasks (at the same time):
@@ -999,16 +999,16 @@ server <- function(input, output, session){
         
         # By group-level term: Check each population-level term for being a "subterm" (lower-order
         # term) of a high-order term and if yes, remove it:
-        pred_vec_comma <- sapply(pred_lst, function(x){
+        pred_vec_chr <- sapply(pred_lst, function(x){
           x_V <- intersect(x, input$pred_mainV_sel)
           if(length(x_V) > 0L){
-            return(paste(x_V, collapse = ","))
+            return(paste(x_V, collapse = "<-->"))
           } else{
             return(NA_character_)
           }
         })
-        pred_vec_comma <- factor(pred_vec_comma, levels = unique(pred_vec_comma), exclude = NULL)
-        pred_lst <- tapply(pred_lst, pred_vec_comma, function(x_lst){
+        pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
+        pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
           x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNV_sel)
           x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
             any(sapply(x_NV_lst[-idx], function(x_NV){

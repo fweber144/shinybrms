@@ -256,18 +256,32 @@ ui <- navbarPage(
       sidebarPanel(
         h4("Specification of custom priors"),
         br(),
-        selectInput("prior_class_sel", "Parameter class (may consist of a single parameter):",
+        selectInput("prior_class_sel",
+                    HTML(paste0(
+                      "Parameter class:",
+                      helpText("Note: The parameter class may consist of a single parameter.", 
+                               style = "font-weight:normal")
+                    )),
                     choices = c("Choose parameter class ..." = ""),
                     selectize = TRUE),
-        selectInput("prior_coef_sel", paste("Coefficient (leave empty to use all coefficients",
-                                            "belonging to the selected parameter class):"),
+        selectInput("prior_coef_sel",
+                    HTML(paste0(
+                      "Coefficient:",
+                      helpText("Note: Leave empty to use all coefficients belonging to the",
+                               "selected parameter class.", 
+                               style = "font-weight:normal")
+                    )),
                     choices = c("Choose coefficient or leave empty" = ""),
                     selectize = TRUE),
-        selectInput("prior_group_sel", paste("Group (for varying effects) (if no coefficient is",
-                                             "selected: leave empty to use all groups belonging to",
-                                             "the selected parameter class; if you are not able to",
-                                             "clear the field while having no coefficient selected,",
-                                             "then first clear the \"Parameter class\" field):"),
+        selectInput("prior_group_sel",
+                    HTML(paste0(
+                      "Group (for varying effects):",
+                      helpText("Note: If no coefficient is selected: Leave empty to use all groups",
+                               "belonging to the selected parameter class. If you are not able to",
+                               "clear the field while having no coefficient selected,",
+                               "then first clear the \"Parameter class\" field.",
+                               style = "font-weight:normal")
+                    )),
                     choices = character(),
                     selectize = TRUE),
         textInput("prior_text", "Prior distribution (in Stan language or leave empty to use a flat prior):",

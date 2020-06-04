@@ -236,7 +236,11 @@ ui <- navbarPage(
       a(HTML("<strong>brms</strong>"),
         href = "https://CRAN.R-project.org/package=brms",
         target = "_blank"),
-      "."
+      " as well as the ",
+      a(HTML("Stan documentation"),
+        href = "https://mc-stan.org/users/documentation/",
+        target = "_blank"),
+      " (in particular, the \"Stan Functions Reference\")."
     ))),
     hr(),
     h3("Default priors"),

@@ -1072,7 +1072,7 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
-    req(da(), input$outc_sel)
+    req(da())
     if(input$outc_sel %in% names(da())){
       pred_DF <- C_pred()
       if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
@@ -1097,8 +1097,11 @@ server <- function(input, output, session){
   })
   
   C_formula <- reactive({
-    req(C_formula_char())
-    as.formula(C_formula_char())
+    if(!is.null(C_formula_char())){
+      return(as.formula(C_formula_char()))
+    } else{
+      return(NULL)
+    }
   })
   
   #------------------------
@@ -1119,8 +1122,7 @@ server <- function(input, output, session){
   
   # Get default priors:
   observe({
-    req(C_formula())
-    if(!is.null(C_family())){
+    if(!is.null(C_formula()) && !is.null(C_family())){
       warn_orig <- options(warn = 1)
       warn_capt <- capture.output({
         C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),

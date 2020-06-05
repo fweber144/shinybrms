@@ -670,7 +670,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "bacteria")){
       if(requireNamespace("MASS", quietly = TRUE)){
@@ -683,7 +683,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "birthwt")){
       if(requireNamespace("MASS", quietly = TRUE)){
@@ -707,7 +707,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "epilepsy")){
       if(requireNamespace("brms", quietly = TRUE)){
@@ -720,7 +720,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "grouseticks")){
       if(requireNamespace("lme4", quietly = TRUE)){
@@ -733,7 +733,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "kidiq")){
       if(requireNamespace("rstanarm", quietly = TRUE)){
@@ -746,7 +746,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "Puromycin")){
       return(Puromycin)
@@ -761,7 +761,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "Rabbit")){
       if(requireNamespace("MASS", quietly = TRUE)){
@@ -774,7 +774,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "roaches")){
       if(requireNamespace("rstanarm", quietly = TRUE)){
@@ -787,7 +787,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "sleepstudy")){
       if(requireNamespace("lme4", quietly = TRUE)){
@@ -800,7 +800,7 @@ server <- function(input, output, session){
           duration = NA,
           type = "error"
         )
-        return(NULL)
+        req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "ToothGrowth")){
       return(ToothGrowth)

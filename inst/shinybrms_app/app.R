@@ -854,12 +854,18 @@ server <- function(input, output, session){
   # Distributional family
   
   C_family <- reactive({
-    if(identical(input$dist_sel, "")) return(NULL)
+    req(input$dist_sel)
     return(brms::brmsfamily(family = input$dist_sel))
   })
   
   output$dist_link <- renderTable({
-    if(!identical(input$dist_sel, "")){
+    if(identical(input$dist_sel, "")){
+      return(
+        data.frame("Parameter" = character(),
+                   "Link function" = character(),
+                   check.names = FALSE)
+      )
+    } else{
       C_family_list <- C_family()
       dist_link_tmp <- data.frame("Parameter" = C_family_list$dpars,
                                   "Link function" = NA,
@@ -873,12 +879,6 @@ server <- function(input, output, session){
       })
       dist_link_tmp$"Link function"[dist_link_tmp$"Parameter" %in% c("mu")] <- C_family_list$link
       return(dist_link_tmp)
-    } else{
-      return(
-        data.frame("Parameter" = character(),
-                   "Link function" = character(),
-                   check.names = FALSE)
-      )
     }
   })
   
@@ -1086,7 +1086,7 @@ server <- function(input, output, session){
   })
   
   C_formula <- reactive({
-    if(is.null(C_formula_char())) return(NULL)
+    req(C_formula_char())
     return(as.formula(C_formula_char()))
   })
   
@@ -1146,7 +1146,6 @@ server <- function(input, output, session){
   
   # Update the choices for "parameter class" (if necessary):
   observe({
-    req(C_prior_rv$prior_default_obj)
     prior_class_choices <- unique(C_prior_rv$prior_default_obj$class)
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
     prior_class_choices <- c("Choose parameter class ..." = "",
@@ -1158,7 +1157,6 @@ server <- function(input, output, session){
   
   # Update the choices for "coefficient" (if necessary):
   observe({
-    req(C_prior_rv$prior_default_obj)
     prior_coef_choices <- unique(c("", C_prior_rv$prior_default_obj$coef[
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel
     ]))
@@ -1171,7 +1169,6 @@ server <- function(input, output, session){
   
   # Update the choices for "group" (if necessary):
   observe({
-    req(C_prior_rv$prior_default_obj)
     prior_group_choices <- unique(C_prior_rv$prior_default_obj$group[
       C_prior_rv$prior_default_obj$class %in% input$prior_class_sel &
         C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
@@ -1207,15 +1204,14 @@ server <- function(input, output, session){
   
   # Add a user-specified prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
-    if(!identical(input$prior_class_sel, "")){
-      C_prior_rv$prior_set_obj <-
-        brms::set_prior(prior = input$prior_text,
-                        class = input$prior_class_sel,
-                        coef = input$prior_coef_sel,
-                        group = input$prior_group_sel) +
-        C_prior_rv$prior_set_obj
-      C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
-    }
+    req(input$prior_class_sel)
+    C_prior_rv$prior_set_obj <-
+      brms::set_prior(prior = input$prior_text,
+                      class = input$prior_class_sel,
+                      coef = input$prior_coef_sel,
+                      group = input$prior_group_sel) +
+      C_prior_rv$prior_set_obj
+    C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
   })
   
   # Reset the user-specified priors if the user clicks the corresponding button:
@@ -1227,10 +1223,10 @@ server <- function(input, output, session){
   # Prior preview
   
   prior_colsToHide <- reactive({
-    sapply(C_prior_rv$prior_default_obj, function(x){
+    return(sapply(C_prior_rv$prior_default_obj, function(x){
       is.character(x) && all(x == "")
     }) &
-      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_rv$prior_default_obj))
+      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_rv$prior_default_obj)))
   })
   
   output$prior_default_view <- renderTable({

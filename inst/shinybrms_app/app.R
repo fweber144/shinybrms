@@ -984,8 +984,8 @@ server <- function(input, output, session){
   # Combination of all predictor terms
   
   C_pred <- reactive({
-    if(!all(c(input$pred_mainNV_sel,
-              input$pred_mainV_sel) %in% names(da()))) return(NULL)
+    req(all(c(input$pred_mainNV_sel,
+              input$pred_mainV_sel) %in% names(da())))
     pred_lst <- c(
       as.list(input$pred_mainNV_sel),
       as.list(input$pred_mainV_sel),
@@ -1085,7 +1085,7 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
-    if(!input$outc_sel %in% names(da())) return(NULL)
+    req(input$outc_sel %in% names(da()))
     pred_DF <- C_pred()
     if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
       formula_splitted <- apply(pred_DF, 1, function(x){

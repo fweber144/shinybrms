@@ -117,8 +117,7 @@ ui <- navbarPage(
                     selectize = TRUE),
         selectInput("dist_sel", "Distributional family for the outcome:",
                     choices = list(
-                      "Choose distributional family for the outcome ..." =
-                        c("Choose distributional family for the outcome ..." = ""),
+                      "Choose distributional family ..." = "",
                       "Continuous outcome:" =
                         c("Gaussian (normal)" = "gaussian"),
                       "Binary outcome:" =
@@ -855,8 +854,11 @@ server <- function(input, output, session){
   # Distributional family
   
   C_family <- reactive({
-    req(input$dist_sel)
-    brms::brmsfamily(family = input$dist_sel)
+    if(!identical(input$dist_sel, "")){
+      return(brms::brmsfamily(family = input$dist_sel))
+    } else{
+      return(NULL)
+    }
   })
   
   output$dist_link <- renderTable({
@@ -1117,31 +1119,35 @@ server <- function(input, output, session){
   
   # Get default priors:
   observe({
-    req(C_formula(), C_family())
-    warn_orig <- options(warn = 1)
-    warn_capt <- capture.output({
-      C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
-                                                      data = da(),
-                                                      family = C_family())
-    }, type = "message")
-    options(warn = warn_orig$warn)
-    if(length(warn_capt) > 0L){
-      warn_capt <- unique(warn_capt)
-      if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
-        showNotification(
-          paste("Warning: There are missing values in the data. The corresponding rows have been",
-                "omitted in the construction of the default priors. They will also be omitted when",
-                "running Stan (and also in the Stan data)."),
-          duration = NA,
-          type = "warning"
-        )
-      } else{
-        showNotification(
-          paste(warn_capt, collapse = "|"),
-          duration = NA,
-          type = "warning"
-        )
+    req(C_formula())
+    if(!is.null(C_family())){
+      warn_orig <- options(warn = 1)
+      warn_capt <- capture.output({
+        C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
+                                                        data = da(),
+                                                        family = C_family())
+      }, type = "message")
+      options(warn = warn_orig$warn)
+      if(length(warn_capt) > 0L){
+        warn_capt <- unique(warn_capt)
+        if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
+          showNotification(
+            paste("Warning: There are missing values in the data. The corresponding rows have been",
+                  "omitted in the construction of the default priors. They will also be omitted when",
+                  "running Stan (and also in the Stan data)."),
+            duration = NA,
+            type = "warning"
+          )
+        } else{
+          showNotification(
+            paste(warn_capt, collapse = "|"),
+            duration = NA,
+            type = "warning"
+          )
+        }
       }
+    } else{
+      C_prior_rv$prior_default_obj <- brms::empty_prior()
     }
   })
   

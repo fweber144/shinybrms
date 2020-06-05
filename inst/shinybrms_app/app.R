@@ -894,6 +894,11 @@ server <- function(input, output, session){
   # Main effects
   
   observe({
+    if(inherits(try(da(), silent = TRUE), "try-error")){
+      updateSelectInput(session, "pred_mainNV_sel",
+                        choices = c("Choose variables for nonvarying main effects ..." = ""))
+      return()
+    }
     updateSelectInput(session, "pred_mainNV_sel",
                       choices = c("Choose variables for nonvarying main effects ..." = "",
                                   setdiff(names(da()),
@@ -903,6 +908,11 @@ server <- function(input, output, session){
   })
   
   observe({
+    if(inherits(try(da(), silent = TRUE), "try-error")){
+      updateSelectInput(session, "pred_mainV_sel",
+                        choices = c("Choose variables for varying intercepts ..." = ""))
+      return()
+    }
     updateSelectInput(session, "pred_mainV_sel",
                       choices = c("Choose variables for varying intercepts ..." = "",
                                   setdiff(names(da()),
@@ -915,6 +925,11 @@ server <- function(input, output, session){
   # Interactions
   
   observe({
+    if(inherits(try(da(), silent = TRUE), "try-error")){
+      updateSelectInput(session, "pred_int_build",
+                        choices = c("Choose variables for an interaction term ..." = ""))
+      return()
+    }
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
                                   input$pred_mainNV_sel,

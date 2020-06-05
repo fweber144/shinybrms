@@ -863,13 +863,7 @@ server <- function(input, output, session){
   
   output$dist_link <- renderTable({
     req(C_family())
-    if(identical(input$dist_sel, "")){
-      return(
-        data.frame("Parameter" = character(),
-                   "Link function" = character(),
-                   check.names = FALSE)
-      )
-    } else{
+    if(!identical(input$dist_sel, "")){
       C_family_list <- C_family()
       dist_link_tmp <- data.frame("Parameter" = C_family_list$dpars,
                                   "Link function" = NA,
@@ -883,6 +877,12 @@ server <- function(input, output, session){
       })
       dist_link_tmp$"Link function"[dist_link_tmp$"Parameter" %in% c("mu")] <- C_family_list$link
       return(dist_link_tmp)
+    } else{
+      return(
+        data.frame("Parameter" = character(),
+                   "Link function" = character(),
+                   check.names = FALSE)
+      )
     }
   })
   
@@ -1219,7 +1219,7 @@ server <- function(input, output, session){
   
   # Add a user-specified prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
-    if(input$prior_class_sel != ""){
+    if(!identical(input$prior_class_sel, "")){
       C_prior_rv$prior_set_obj <-
         brms::set_prior(prior = input$prior_text,
                         class = input$prior_class_sel,

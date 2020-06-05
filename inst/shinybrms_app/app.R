@@ -842,6 +842,12 @@ server <- function(input, output, session){
   # Outcome
   
   observe({
+    da_copy <- try(da(), silent = TRUE)
+    if(inherits(da_copy, "try-error")){
+      updateSelectInput(session, "outc_sel",
+                        choices = c("Choose outcome ..." = ""))
+      return()
+    }
     updateSelectInput(session, "outc_sel",
                       choices = c("Choose outcome ..." = "",
                                   setdiff(names(da()),

@@ -1108,7 +1108,7 @@ server <- function(input, output, session){
   
   # Get default priors:
   observe({
-    if(is.null(C_formula()) || is.null(C_family())){
+    if(identical(input$outc_sel, "") || identical(input$dist_sel, "")){
       C_prior_rv$prior_default_obj <- brms::empty_prior()
       return()
     }

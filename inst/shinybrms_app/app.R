@@ -854,11 +854,8 @@ server <- function(input, output, session){
   # Distributional family
   
   C_family <- reactive({
-    if(!identical(input$dist_sel, "")){
-      return(brms::brmsfamily(family = input$dist_sel))
-    } else{
-      return(NULL)
-    }
+    if(identical(input$dist_sel, "")) return(NULL)
+    return(brms::brmsfamily(family = input$dist_sel))
   })
   
   output$dist_link <- renderTable({
@@ -969,92 +966,89 @@ server <- function(input, output, session){
   
   C_pred <- reactive({
     if(all(c(input$pred_mainNV_sel,
-             input$pred_mainV_sel) %in% names(da()))){
-      pred_lst <- c(
-        as.list(input$pred_mainNV_sel),
-        as.list(input$pred_mainV_sel),
-        pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
-      )
-      if(length(input$pred_int_sel) > 0L){
-        # Perform the following tasks (at the same time):
-        #   - Expand interactions on the group-level side (in principle, this is not necessary as the
-        #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
-        #     including correlations between the varying effects of a specific group-level term, the
-        #     terms on the population-level side need to be grouped by the term on the group-level side)
-        #   - For varying effects, add the corresponding nonvarying effects since the varying effects
-        #     are assumed to have mean zero.
-        # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
-        # containing the group-level terms of a given element of "pred_lst".
-        # The second task is performed by additionally applying combn() to m = 0L when performing
-        # the first task.
-        pred_needsExpand <- sapply(pred_lst, function(x){
-          sum(x %in% input$pred_mainV_sel) > 0L
-        })
-        if(any(pred_needsExpand)){ # This if() condition is not necessary, but included for better readability.
-          pred_lst_toExpand <- pred_lst[pred_needsExpand]
-          pred_lst_expanded <- do.call("c", lapply(pred_lst_toExpand, function(x){
-            x_V <- intersect(x, input$pred_mainV_sel)
-            x_V_lst_expanded <- unlist(lapply(c(0L, seq_along(x_V)), combn, x = x_V, simplify = FALSE),
-                                       recursive = FALSE)
-            x_NV <- intersect(x, input$pred_mainNV_sel)
-            lapply(x_V_lst_expanded, "c", x_NV)
-          }))
-          pred_lst <- c(pred_lst[!pred_needsExpand],
-                        pred_lst_expanded)
-        }
-        
-        # Remove duplicates:
-        pred_lst <- pred_lst[!duplicated(lapply(pred_lst, sort))]
-        
-        # By group-level term: Check each population-level term for being a "subterm" (lower-order
-        # term) of a high-order term and if yes, remove it:
-        pred_vec_chr <- sapply(pred_lst, function(x){
+             input$pred_mainV_sel) %in% names(da()))) return(NULL)
+    pred_lst <- c(
+      as.list(input$pred_mainNV_sel),
+      as.list(input$pred_mainV_sel),
+      pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
+    )
+    if(length(input$pred_int_sel) > 0L){
+      # Perform the following tasks (at the same time):
+      #   - Expand interactions on the group-level side (in principle, this is not necessary as the
+      #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
+      #     including correlations between the varying effects of a specific group-level term, the
+      #     terms on the population-level side need to be grouped by the term on the group-level side)
+      #   - For varying effects, add the corresponding nonvarying effects since the varying effects
+      #     are assumed to have mean zero.
+      # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
+      # containing the group-level terms of a given element of "pred_lst".
+      # The second task is performed by additionally applying combn() to m = 0L when performing
+      # the first task.
+      pred_needsExpand <- sapply(pred_lst, function(x){
+        sum(x %in% input$pred_mainV_sel) > 0L
+      })
+      if(any(pred_needsExpand)){ # This if() condition is not necessary, but included for better readability.
+        pred_lst_toExpand <- pred_lst[pred_needsExpand]
+        pred_lst_expanded <- do.call("c", lapply(pred_lst_toExpand, function(x){
           x_V <- intersect(x, input$pred_mainV_sel)
-          if(length(x_V) > 0L){
-            return(paste(x_V, collapse = "<-->"))
-          } else{
-            return(NA_character_)
-          }
-        })
-        pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
-        pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
-          x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNV_sel)
-          x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
-            any(sapply(x_NV_lst[-idx], function(x_NV){
-              all(x_NV_lst[[idx]] %in% x_NV)
-            }))
-          })
-          return(x_lst[!x_isSubNV])
-        }, simplify = FALSE)
-        pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
+          x_V_lst_expanded <- unlist(lapply(c(0L, seq_along(x_V)), combn, x = x_V, simplify = FALSE),
+                                     recursive = FALSE)
+          x_NV <- intersect(x, input$pred_mainNV_sel)
+          lapply(x_V_lst_expanded, "c", x_NV)
+        }))
+        pred_lst <- c(pred_lst[!pred_needsExpand],
+                      pred_lst_expanded)
       }
       
-      pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
-        x_NV <- intersect(x, input$pred_mainNV_sel)
-        if(length(x_NV) > 0L){
-          x_NV <- paste(x_NV, collapse = "*")
-        } else{
-          x_NV <- NA_character_
-        }
+      # Remove duplicates:
+      pred_lst <- pred_lst[!duplicated(lapply(pred_lst, sort))]
+      
+      # By group-level term: Check each population-level term for being a "subterm" (lower-order
+      # term) of a high-order term and if yes, remove it:
+      pred_vec_chr <- sapply(pred_lst, function(x){
         x_V <- intersect(x, input$pred_mainV_sel)
         if(length(x_V) > 0L){
-          x_V <- paste(x_V, collapse = ":")
+          return(paste(x_V, collapse = "<-->"))
         } else{
-          x_V <- NA_character_
+          return(NA_character_)
         }
-        data.frame("from_mainNV" = x_NV,
-                   "from_mainV" = x_V)
-      }))
-      if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
-        pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
-        pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
-          paste(c("1", x[!is.na(x)]), collapse = " + ")
-        }, na.action = na.pass)
-      }
-      return(pred_DF)
-    } else{
-      return(NULL)
+      })
+      pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
+      pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
+        x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNV_sel)
+        x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
+          any(sapply(x_NV_lst[-idx], function(x_NV){
+            all(x_NV_lst[[idx]] %in% x_NV)
+          }))
+        })
+        return(x_lst[!x_isSubNV])
+      }, simplify = FALSE)
+      pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
     }
+    
+    pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
+      x_NV <- intersect(x, input$pred_mainNV_sel)
+      if(length(x_NV) > 0L){
+        x_NV <- paste(x_NV, collapse = "*")
+      } else{
+        x_NV <- NA_character_
+      }
+      x_V <- intersect(x, input$pred_mainV_sel)
+      if(length(x_V) > 0L){
+        x_V <- paste(x_V, collapse = ":")
+      } else{
+        x_V <- NA_character_
+      }
+      data.frame("from_mainNV" = x_NV,
+                 "from_mainV" = x_V)
+    }))
+    if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
+      pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
+      pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
+        paste(c("1", x[!is.na(x)]), collapse = " + ")
+      }, na.action = na.pass)
+    }
+    return(pred_DF)
   })
   
   #------------------------
@@ -1072,35 +1066,29 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
-    if(input$outc_sel %in% names(da())){
-      pred_DF <- C_pred()
-      if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
-        formula_splitted <- apply(pred_DF, 1, function(x){
-          if(is.na(x["from_mainV"])){
-            return(x["from_mainNV"])
-          } else{
-            return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
-          }
-        })
-      } else{
-        formula_splitted <- "1"
-      }
-      return(paste(
-        input$outc_sel,
-        "~",
-        paste(formula_splitted, collapse = " + ")
-      ))
+    if(!input$outc_sel %in% names(da())) return(NULL)
+    pred_DF <- C_pred()
+    if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
+      formula_splitted <- apply(pred_DF, 1, function(x){
+        if(is.na(x["from_mainV"])){
+          return(x["from_mainNV"])
+        } else{
+          return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
+        }
+      })
     } else{
-      return(NULL)
+      formula_splitted <- "1"
     }
+    return(paste(
+      input$outc_sel,
+      "~",
+      paste(formula_splitted, collapse = " + ")
+    ))
   })
   
   C_formula <- reactive({
-    if(!is.null(C_formula_char())){
-      return(as.formula(C_formula_char()))
-    } else{
-      return(NULL)
-    }
+    if(is.null(C_formula_char())) return(NULL)
+    return(as.formula(C_formula_char()))
   })
   
   #------------------------
@@ -1121,34 +1109,34 @@ server <- function(input, output, session){
   
   # Get default priors:
   observe({
-    if(!is.null(C_formula()) && !is.null(C_family())){
-      warn_orig <- options(warn = 1)
-      warn_capt <- capture.output({
-        C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
-                                                        data = da(),
-                                                        family = C_family())
-      }, type = "message")
-      options(warn = warn_orig$warn)
-      if(length(warn_capt) > 0L){
-        warn_capt <- unique(warn_capt)
-        if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
-          showNotification(
-            paste("Warning: There are missing values in the data. The corresponding rows have been",
-                  "omitted in the construction of the default priors. They will also be omitted when",
-                  "running Stan (and also in the Stan data)."),
-            duration = NA,
-            type = "warning"
-          )
-        } else{
-          showNotification(
-            paste(warn_capt, collapse = "|"),
-            duration = NA,
-            type = "warning"
-          )
-        }
-      }
-    } else{
+    if(is.null(C_formula()) || is.null(C_family())){
       C_prior_rv$prior_default_obj <- brms::empty_prior()
+      return()
+    }
+    warn_orig <- options(warn = 1)
+    warn_capt <- capture.output({
+      C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
+                                                      data = da(),
+                                                      family = C_family())
+    }, type = "message")
+    options(warn = warn_orig$warn)
+    if(length(warn_capt) > 0L){
+      warn_capt <- unique(warn_capt)
+      if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
+        showNotification(
+          paste("Warning: There are missing values in the data. The corresponding rows have been",
+                "omitted in the construction of the default priors. They will also be omitted when",
+                "running Stan (and also in the Stan data)."),
+          duration = NA,
+          type = "warning"
+        )
+      } else{
+        showNotification(
+          paste(warn_capt, collapse = "|"),
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
   })
   

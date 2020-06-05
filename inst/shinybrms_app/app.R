@@ -806,17 +806,19 @@ server <- function(input, output, session){
       return(ToothGrowth)
     } else{
       req(input$file_upload)
-      tryCatch({
-        return(read.csv(input$file_upload$datapath,
-                        header = input$header,
-                        sep = input$sep,
-                        quote = input$quote,
-                        dec = input$dec,
-                        na.strings = c("NA", ".")))
-      }, error = function(err){
-        # Return a safeError if a parsing error occurs:
-        stop(safeError(err))
-      })
+      try(return(read.csv(input$file_upload$datapath,
+                          header = input$header,
+                          sep = input$sep,
+                          quote = input$quote,
+                          dec = input$dec,
+                          na.strings = c("NA", "."))),
+          silent = TRUE)
+      showNotification(
+        "File upload was not successful.",
+        duration = NA,
+        type = "error"
+      )
+      req(FALSE)
     }
   })
   

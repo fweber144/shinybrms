@@ -859,7 +859,6 @@ server <- function(input, output, session){
   })
   
   output$dist_link <- renderTable({
-    req(C_family())
     if(!identical(input$dist_sel, "")){
       C_family_list <- C_family()
       dist_link_tmp <- data.frame("Parameter" = C_family_list$dpars,

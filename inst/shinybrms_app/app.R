@@ -986,8 +986,14 @@ server <- function(input, output, session){
   # Combination of all predictor terms
   
   C_pred <- reactive({
+    if(is.null(input$pred_mainNV_sel) && is.null(input$pred_mainV_sel)){
+      return(data.frame("from_mainV" = factor(NA_character_, levels = NA_character_, exclude = NULL),
+                        "from_mainNV" = "1"))
+    }
+    # The following check shouldn't be necessary, but is included to be on the safe side:
     req(all(c(input$pred_mainNV_sel,
               input$pred_mainV_sel) %in% names(da())))
+    
     pred_lst <- c(
       as.list(input$pred_mainNV_sel),
       as.list(input$pred_mainV_sel),
@@ -1063,12 +1069,10 @@ server <- function(input, output, session){
       data.frame("from_mainNV" = x_NV,
                  "from_mainV" = x_V)
     }))
-    if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
-      pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
-      pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
-        paste(c("1", x[!is.na(x)]), collapse = " + ")
-      }, na.action = na.pass)
-    }
+    pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
+    pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
+      paste(c("1", x[!is.na(x)]), collapse = " + ")
+    }, na.action = na.pass)
     return(pred_DF)
   })
   
@@ -1087,19 +1091,17 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
+    # The following check should be replaceable by "req(input$outc_sel)", but is formulated this way
+    # to be on the safe side:
     req(input$outc_sel %in% names(da()))
-    pred_DF <- C_pred()
-    if(length(pred_DF) > 0L && nrow(pred_DF) > 0L){
-      formula_splitted <- apply(pred_DF, 1, function(x){
-        if(is.na(x["from_mainV"])){
-          return(x["from_mainNV"])
-        } else{
-          return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
-        }
-      })
-    } else{
-      formula_splitted <- "1"
-    }
+    
+    formula_splitted <- apply(C_pred(), 1, function(x){
+      if(is.na(x["from_mainV"])){
+        return(x["from_mainNV"])
+      } else{
+        return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
+      }
+    })
     return(paste(
       input$outc_sel,
       "~",

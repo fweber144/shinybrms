@@ -3,7 +3,7 @@
 branches:
   except:
   - dev
-language: R
+language: r
 #r:
 ##  - oldrel
 #  - release

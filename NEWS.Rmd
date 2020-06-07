@@ -14,6 +14,7 @@ output: github_document
 
 ### Minor changes
 
+* All predictor terms (main effects as well as interactions) are now shown in a preview table.
 * It is now possible to remove interaction terms one by one.
 * Restricted the choices for the outcome and the predictor selections (e.g. remove the outcome from the list of possible predictor variables).
 * Removed some example datasets and added new ones.
@@ -27,12 +28,15 @@ output: github_document
 
 ### Bug fixes
 
+"Under the hood", there have been many changes which should make the **shinybrms** app more robust. In particular, the following bugs have been fixed:
+
+* Fixed a bug making it possible to keep the outcome and the predictor variables selected when clearing the selection of an example dataset.
+* Fixed a bug making it possible to clear the selection of an example dataset, the outcome, or the distributional family, but to keep showing the default priors and the custom priors for the former selection.
 * Fixed a bug making it possible to add an already existing interaction term with a different order of the involved predictor variables.
 * Fixed a bug making it possible to add an interaction term and then remove the main effect of an involved predictor variable while keeping the interaction term involving it.
 * Fixed a bug leading to the automatic removal of selected variables (outcome and predictors) under certain circumstances.
-* Fixed a bug making it impossible to select a new dataset after having selected the outcome and the distributional family for an older dataset.
+* Fixed a bug causing the app to crash when selecting a new dataset after having constructed the model formula and chosen the distributional family for an older dataset.
 * Fixed a bug preventing the progress file from opening up on Linux (when started interactively from the terminal).
-* Ensured that R CMD CHECK is passed on R 4.0.0.
 
 ## shinybrms 1.0.1
 

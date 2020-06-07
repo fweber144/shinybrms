@@ -57,8 +57,6 @@ been fixed:
   - Fixed a bug making it possible to add an interaction term and then
     remove the main effect of an involved predictor variable while
     keeping the interaction term involving it.
-  - Fixed a bug leading to the automatic removal of selected variables
-    (outcome and predictors) under certain circumstances.
   - Fixed a bug causing the app to crash when selecting a new dataset
     after having constructed the model formula and chosen the
     distributional family for an older dataset.

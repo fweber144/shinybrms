@@ -139,7 +139,7 @@ ui <- navbarPage(
             href = "https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html",
             target = "_blank"),
           ". Note that for each parameter, the link function only applies if this parameter is ",
-          "actually modeled by (non-constant) predictors. Currently, this is only supported ",
+          "actually modeled by (nonconstant) predictors. Currently, this is only supported ",
           "for the location parameter (e.g. ", code("mu"), " for a Gaussian distribution)."
         )))
       ),
@@ -246,7 +246,7 @@ ui <- navbarPage(
       "package ", strong("brms"), " will be used. ",
       "Note that the parameter \"Intercept\" is the intercept when centering the predictors ",
       "(this is only the internally used intercept; for the output, the intercept with ",
-      "respect to the non-centered predictors is given (named \"b_Intercept\")). ",
+      "respect to the noncentered predictors is given (named \"b_Intercept\")). ",
       "For details concerning the prior, see the help for functions ",
       code("brms::get_prior()"),
       " and ",
@@ -422,7 +422,7 @@ ui <- navbarPage(
                    tags$li(paste("To obtain reproducible results, you need to specify a value for",
                                  "option \"Seed\" and enter this value each time you want to",
                                  "obtain the same results. Leave option \"Seed\" empty to use a",
-                                 "random seed (giving non-reproducible results).")),
+                                 "random seed (giving nonreproducible results).")),
                    tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
                            "a default value which depends on other options. Leave them empty to",
                            "use this default value."),
@@ -500,7 +500,7 @@ ui <- navbarPage(
             "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), 
             "are used. These are as follows:",
             tags$ul(
-              tags$li("\"b_Intercept\" is the intercept (with respect to the non-centered predictors)."),
+              tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
               tags$li("The parameters starting with \"b_\" are the regression coefficients."),
               tags$li(HTML(paste("All other parameters are parameters specific to the chosen distributional family",
                                  "for the outcome (see page \"Likelihood\" &rarr; \"Outcome\").")))

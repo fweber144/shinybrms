@@ -1,7 +1,32 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-language: R
-cache: packages
 branches:
   except:
   - dev
+language: R
+#r:
+##  - oldrel
+#  - release
+##  - devel
+cache: packages
+#r_binary_packages:
+#  - rstan
+#r_packages:
+#  - httpuv
+#  - rstanarm
+os:
+  - linux
+  - osx
+#dist:
+#  - focal
+##  - bionic
+##  - xenial
+#sudo:
+#  - false
+##  - required
+osx_image: xcode10.1
+disable_homebrew: true
+#compiler:
+##  - gcc
+#  - clang
+#warnings_are_errors: false

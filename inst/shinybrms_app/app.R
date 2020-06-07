@@ -494,13 +494,28 @@ ui <- navbarPage(
       br(),
       h4("Interactive output inspection using package", strong("shinystan")),
       helpText(
-        "Note: In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), "are used.",
-        "These are as follows:",
+        "Notes:",
         tags$ul(
-          tags$li("\"b_Intercept\" is the intercept (with respect to the non-centered predictors)."),
-          tags$li("The parameters starting with \"b_\" are the regression coefficients."),
-          tags$li(HTML(paste("All other parameters are parameters specific to the chosen distributional family",
-                             "for the outcome (see page \"Likelihood\" &rarr; \"Outcome\").")))
+          tags$li(
+            "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), 
+            "are used. These are as follows:",
+            tags$ul(
+              tags$li("\"b_Intercept\" is the intercept (with respect to the non-centered predictors)."),
+              tags$li("The parameters starting with \"b_\" are the regression coefficients."),
+              tags$li(HTML(paste("All other parameters are parameters specific to the chosen distributional family",
+                                 "for the outcome (see page \"Likelihood\" &rarr; \"Outcome\").")))
+            )
+          ),
+          tags$li(
+            HTML(paste0(
+              "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
+              " are automatically created. These are the observations for the outcome (object ", 
+              code("y"), ") and the corresponding posterior predictive replications (object ", 
+              code("y_rep"), "). You can select them in the respective \"Object from global ",
+              "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
+              "\"Select data\" in the ", strong("shinystan"), " app."
+            ))
+          )
         )
       ),
       numericInput("seed_PPD",

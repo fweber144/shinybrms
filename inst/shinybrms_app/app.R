@@ -1349,9 +1349,8 @@ server <- function(input, output, session){
   )
   
   #------------------------
-  # Run Stan (including the retrieval of the advanced options)
+  # Run Stan
   
-  # Run Stan:
   C_fit <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,

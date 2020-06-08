@@ -1167,11 +1167,6 @@ server <- function(input, output, session){
     }
   })
   
-  # Reset the default priors if the dataset changes:
-  observeEvent(da(), {
-    C_prior_rv$prior_default_obj <- brms::empty_prior()
-  })
-  
   # Update the choices for "parameter class" (if necessary):
   observe({
     prior_class_choices <- unique(C_prior_rv$prior_default_obj$class)

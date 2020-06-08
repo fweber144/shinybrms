@@ -1362,8 +1362,18 @@ server <- function(input, output, session){
   )
   
   #------------------------
-  # Advanced options and run Stan
+  # Run Stan (including the retrieval of the advanced options)
   
+  # Reset "C_fit" if the model changes:
+  C_fit <- eventReactive({
+    C_formula()
+    C_family()
+    C_prior_rv$prior_set_obj
+  }, {
+    req(FALSE)
+  }, ignoreNULL = FALSE)
+  
+  # Run Stan:
   C_fit <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,

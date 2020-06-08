@@ -1218,9 +1218,7 @@ server <- function(input, output, session){
                       selected = prior_group_choices_sel)
   })
   
-  # Reset the user-specified priors if the default prior changes (the default prior changes
-  # if the model formula changes (with the model formula also changing if the dataset changes) or 
-  # if the distributional family for the outcome changes):
+  # Reset the user-specified priors if the default prior changes:
   observeEvent(C_prior_rv$prior_default_obj, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })

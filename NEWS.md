@@ -3,7 +3,7 @@
 
 # News for ‘shinybrms’
 
-## shinybrms 1.1.0
+## shinybrms 1.0.1.9000
 
 ### Major changes
 

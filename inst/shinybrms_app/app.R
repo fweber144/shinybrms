@@ -1130,21 +1130,19 @@ server <- function(input, output, session){
   #------------------------
   # Prior construction
   
-  C_prior_rv <- reactiveValues(prior_default_obj = brms::empty_prior(),
-                               prior_set_obj = brms::empty_prior())
+  C_prior_rv <- reactiveValues(prior_set_obj = brms::empty_prior())
   
   # Get default priors:
-  observe({
+  C_prior_default <- reactive({
     if(inherits(try(C_formula(), silent = TRUE), "try-error") ||
        inherits(try(C_family(), silent = TRUE), "try-error")){
-      C_prior_rv$prior_default_obj <- brms::empty_prior()
-      return()
+      return(brms::empty_prior())
     }
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
-      C_prior_rv$prior_default_obj <- brms::get_prior(formula = C_formula(),
-                                                      data = da(),
-                                                      family = C_family())
+      C_prior_default_tmp <- brms::get_prior(formula = C_formula(),
+                                             data = da(),
+                                             family = C_family())
     }, type = "message")
     options(warn = warn_orig$warn)
     if(length(warn_capt) > 0L){
@@ -1165,11 +1163,12 @@ server <- function(input, output, session){
         )
       }
     }
+    return(C_prior_default_tmp)
   })
   
   # Update the choices for "parameter class" (if necessary):
   observe({
-    prior_class_choices <- unique(C_prior_rv$prior_default_obj$class)
+    prior_class_choices <- unique(C_prior_default()$class)
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
     prior_class_choices <- c("Choose parameter class ..." = "",
                              prior_class_choices)
@@ -1180,8 +1179,8 @@ server <- function(input, output, session){
   
   # Update the choices for "coefficient" (if necessary):
   observe({
-    prior_coef_choices <- unique(c("", C_prior_rv$prior_default_obj$coef[
-      C_prior_rv$prior_default_obj$class %in% input$prior_class_sel
+    prior_coef_choices <- unique(c("", C_prior_default()$coef[
+      C_prior_default()$class %in% input$prior_class_sel
     ]))
     prior_coef_choices <- setNames(prior_coef_choices, prior_coef_choices)
     names(prior_coef_choices)[prior_coef_choices == ""] <- "Choose coefficient or leave empty"
@@ -1192,9 +1191,9 @@ server <- function(input, output, session){
   
   # Update the choices for "group" (if necessary):
   observe({
-    prior_group_choices <- unique(C_prior_rv$prior_default_obj$group[
-      C_prior_rv$prior_default_obj$class %in% input$prior_class_sel &
-        C_prior_rv$prior_default_obj$coef %in% input$prior_coef_sel
+    prior_group_choices <- unique(C_prior_default()$group[
+      C_prior_default()$class %in% input$prior_class_sel &
+        C_prior_default()$coef %in% input$prior_coef_sel
     ])
     if(identical(length(prior_group_choices), 0L)){
       prior_group_choices <- ""
@@ -1219,7 +1218,7 @@ server <- function(input, output, session){
   })
   
   # Reset the custom priors if the default prior changes:
-  observeEvent(C_prior_rv$prior_default_obj, {
+  observeEvent(C_prior_default(), {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
   
@@ -1244,14 +1243,14 @@ server <- function(input, output, session){
   # Prior preview
   
   prior_colsToHide <- reactive({
-    return(sapply(C_prior_rv$prior_default_obj, function(x){
+    return(sapply(C_prior_default(), function(x){
       is.character(x) && all(x == "")
     }) &
-      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_rv$prior_default_obj)))
+      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_default())))
   })
   
   output$prior_default_view <- renderTable({
-    C_prior_rv$prior_default_obj[, !prior_colsToHide()]
+    C_prior_default()[, !prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({
@@ -1354,7 +1353,7 @@ server <- function(input, output, session){
   
   # Reset "C_fit" if the default prior changes or if the custom prior changes:
   C_fit <- eventReactive({
-    C_prior_rv$prior_default_obj
+    C_prior_default()
     C_prior_rv$prior_set_obj
   }, {
     req(FALSE)

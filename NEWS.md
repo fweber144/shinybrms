@@ -44,10 +44,6 @@
 **shinybrms** app more robust. In particular, the following bugs have
 been fixed:
 
-  - Fixed the bug that the results from a previous Stan run were still
-    being used (e.g. in the output preview or in the **shinystan** app)
-    when the dataset or the model were changed, but the “Run Stan”
-    button had not been pressed yet.
   - Fixed a bug making it possible to keep the outcome and the predictor
     variables selected when clearing the selection of an example
     dataset.

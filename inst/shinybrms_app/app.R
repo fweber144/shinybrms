@@ -1138,6 +1138,9 @@ server <- function(input, output, session){
        inherits(try(C_family(), silent = TRUE), "try-error")){
       return(brms::empty_prior())
     }
+    req(all(c(input$pred_mainNV_sel,
+              input$pred_mainV_sel) %in% names(da())))
+    
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_prior_default_tmp <- brms::get_prior(formula = C_formula(),

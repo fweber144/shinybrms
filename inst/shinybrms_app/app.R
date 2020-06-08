@@ -1364,10 +1364,11 @@ server <- function(input, output, session){
   #------------------------
   # Run Stan (including the retrieval of the advanced options)
   
-  # Reset "C_fit" if the model changes:
+  # Reset "C_fit" if the default prior changes (the default prior changes
+  # if the model formula changes (with the model formula also changing if the dataset changes) or 
+  # if the distributional family for the outcome changes) or if the custom prior changes:
   C_fit <- eventReactive({
-    C_formula()
-    C_family()
+    C_prior_rv$prior_default_obj
     C_prior_rv$prior_set_obj
   }, {
     req(FALSE)

@@ -503,11 +503,14 @@ ui <- navbarPage(
               tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
               tags$li("The parameters starting with \"b_\" are the (nonvarying) regression coefficients."),
               tags$li("The parameters starting with \"r_\" are the varying effects."),
-              tags$li("The parameters starting with \"sd_\" are the standard deviations of varying effects."),
-              tags$li("The parameters starting with \"cor_\" are the correlations between varying effects (of the same group-level variable)."),
+              tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
+                      "varying effects."),
+              tags$li("The parameters starting with \"cor_\" are the correlations between the",
+                      "varying effects of the same group-level term."),
               tags$li("\"log-posterior\" is the (accumulated) log-posterior density (up to a constant)."),
-              tags$li(HTML(paste("All other parameters are parameters specific to the chosen distributional family",
-                                 "for the outcome (see page \"Likelihood\" &rarr; \"Outcome\").")))
+              tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
+                                 "distributional family for the outcome (see page \"Likelihood\"",
+                                 "&rarr; \"Outcome\").")))
             )
           ),
           tags$li(

@@ -1218,12 +1218,12 @@ server <- function(input, output, session){
                       selected = prior_group_choices_sel)
   })
   
-  # Reset the user-specified priors if the default prior changes:
+  # Reset the custom priors if the default prior changes:
   observeEvent(C_prior_rv$prior_default_obj, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
   
-  # Add a user-specified prior if the user clicks the corresponding button:
+  # Add a custom prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
     req(input$prior_class_sel)
     C_prior_rv$prior_set_obj <-
@@ -1235,7 +1235,7 @@ server <- function(input, output, session){
     C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
   })
   
-  # Reset the user-specified priors if the user clicks the corresponding button:
+  # Reset the custom priors if the user clicks the corresponding button:
   observeEvent(input$prior_reset, {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })

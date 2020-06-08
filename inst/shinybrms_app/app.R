@@ -998,9 +998,6 @@ server <- function(input, output, session){
       return(data.frame("from_mainV" = factor(NA_character_, levels = NA_character_, exclude = NULL),
                         "from_mainNV" = "1"))
     }
-    # The following check shouldn't be necessary, but is included to be on the safe side:
-    req(all(c(input$pred_mainNV_sel,
-              input$pred_mainV_sel) %in% names(da())))
     
     pred_lst <- c(
       as.list(input$pred_mainNV_sel),
@@ -1099,9 +1096,7 @@ server <- function(input, output, session){
   # Formula construction
   
   C_formula_char <- reactive({
-    # The following check should be replaceable by "req(input$outc_sel)", but is formulated this way
-    # to be on the safe side:
-    req(input$outc_sel %in% names(da()))
+    req(input$outc_sel)
     
     formula_splitted <- apply(C_pred(), 1, function(x){
       if(is.na(x["from_mainV"])){

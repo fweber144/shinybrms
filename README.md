@@ -46,6 +46,7 @@ you need to perform the following steps first:
     [**lme4**](https://CRAN.R-project.org/package=lme4),
     [**MASS**](https://CRAN.R-project.org/package=MASS), and
     [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) or not.
+    
       - If you *don’t want* to use the example datasets from the R
         packages **lme4**, **MASS**, and **rstanarm**, then the R code
         for installing **shinybrms** from GitHub and CRAN (respectively)
@@ -82,22 +83,22 @@ you need to perform the following steps first:
             ``` r
             install.packages("shinybrms", dependencies = TRUE)
             ```
-2.  Launch the **shinybrms** Shiny app by running the following R code:
 
-<!-- end list -->
-
-``` r
-library(shinybrms)
-launch_shinybrms()
-```
-
-If you are using RStudio and you don’t want to use RStudio’s mechanism
-for opening the **shinybrms** app, then run the following R code:
-
-``` r
-library(shinybrms)
-launch_shinybrms(launch.browser = TRUE)
-```
+2.  Launch the **shinybrms** Shiny app by either running the following R
+    code:
+    
+    ``` r
+    library(shinybrms)
+    launch_shinybrms()
+    ```
+    
+    or this R code which ensures that the app opens up in the default
+    web browser (helpful e.g. if you are using RStudio):
+    
+    ``` r
+    library(shinybrms)
+    launch_shinybrms(launch.browser = TRUE)
+    ```
 
 ## Without installation of ‘shinybrms’
 
@@ -123,21 +124,19 @@ install.packages("brms")
 install.packages(c("lme4", "MASS", "rstanarm"))
 ```
 
-3.  Launch the **shinybrms** Shiny app directly from GitHub by running
-    the following R code:
-
-<!-- end list -->
-
-``` r
-shiny::runGitHub("fweber144/shinybrms",
-                 subdir = "inst/shinybrms_app")
-```
-
-If you are using RStudio and you don’t want to use RStudio’s mechanism
-for opening the **shinybrms** app, then run the following R code:
-
-``` r
-shiny::runGitHub("fweber144/shinybrms",
-                 subdir = "inst/shinybrms_app",
-                 launch.browser = TRUE)
-```
+3.  Launch the **shinybrms** Shiny app directly from GitHub by either
+    running the following R code:
+    
+    ``` r
+    shiny::runGitHub("fweber144/shinybrms",
+                     subdir = "inst/shinybrms_app")
+    ```
+    
+    or this R code which ensures that the app opens up in the default
+    web browser (helpful e.g. if you are using RStudio):
+    
+    ``` r
+    shiny::runGitHub("fweber144/shinybrms",
+                     subdir = "inst/shinybrms_app",
+                     launch.browser = TRUE)
+    ```

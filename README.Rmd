@@ -58,16 +58,16 @@ The first option is described in the following section "With installation of 'sh
         ```{r, eval = FALSE}
         install.packages("shinybrms", dependencies = TRUE)
         ```
-2. Launch the **shinybrms** Shiny app by running the following R code:
-  ```{r, eval = FALSE}
-  library(shinybrms)
-  launch_shinybrms()
-  ```
-  If you are using RStudio and you don't want to use RStudio's mechanism for opening the **shinybrms** app, then run the following R code:
-  ```{r, eval = FALSE}
-  library(shinybrms)
-  launch_shinybrms(launch.browser = TRUE)
-  ```
+2. Launch the **shinybrms** Shiny app by either running the following R code:
+   ```{r, eval = FALSE}
+   library(shinybrms)
+   launch_shinybrms()
+   ```
+   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):
+   ```{r, eval = FALSE}
+   library(shinybrms)
+   launch_shinybrms(launch.browser = TRUE)
+   ```
 
 ## Without installation of 'shinybrms'
 
@@ -79,14 +79,14 @@ The first option is described in the following section "With installation of 'sh
   ```{r, eval = FALSE}
   install.packages(c("lme4", "MASS", "rstanarm"))
   ```
-3. Launch the **shinybrms** Shiny app directly from GitHub by running the following R code:
-  ```{r, eval = FALSE}
-  shiny::runGitHub("fweber144/shinybrms",
-                   subdir = "inst/shinybrms_app")
-  ```
-  If you are using RStudio and you don't want to use RStudio's mechanism for opening the **shinybrms** app, then run the following R code:
-  ```{r, eval = FALSE}
-  shiny::runGitHub("fweber144/shinybrms",
-                   subdir = "inst/shinybrms_app",
-                   launch.browser = TRUE)
-  ```
+3. Launch the **shinybrms** Shiny app directly from GitHub by either running the following R code:
+   ```{r, eval = FALSE}
+   shiny::runGitHub("fweber144/shinybrms",
+                    subdir = "inst/shinybrms_app")
+   ```
+   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):
+   ```{r, eval = FALSE}
+   shiny::runGitHub("fweber144/shinybrms",
+                    subdir = "inst/shinybrms_app",
+                    launch.browser = TRUE)
+   ```

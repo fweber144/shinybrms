@@ -9,7 +9,11 @@
 
 ### Minor changes
 
+  - Updated the “Description” field in the `DESCRIPTION` file.
+
 ### Bug fixes
+
+  - Try to fix a NOTE occurring in some CRAN checks.
 
 ## shinybrms 1.1.0
 

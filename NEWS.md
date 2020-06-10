@@ -9,6 +9,8 @@
 
 ### Minor changes
 
+  - Require R \>= 3.6.0.
+  - Updated the `README` file.
   - Updated the “Description” field in the `DESCRIPTION` file.
 
 ### Bug fixes

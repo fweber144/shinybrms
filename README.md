@@ -10,11 +10,8 @@ status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://tr
 This [R](https://www.R-project.org/) package **shinybrms** provides a
 graphical user interface (GUI) for the R package
 [**brms**](https://CRAN.R-project.org/package=brms) which allows to fit
-Bayesian regression models using [Stan](https://mc-stan.org/) (more
-specifically, using its R interface, the R package
-[**rstan**](https://CRAN.R-project.org/package=rstan)). The GUI is a
-[Shiny](https://shiny.rstudio.com/) app, i.e. it was created using the R
-package [**shiny**](https://CRAN.R-project.org/package=shiny).
+Bayesian regression models using [Stan](https://mc-stan.org/). The
+**shinybrms** GUI is a [Shiny](https://shiny.rstudio.com/) app.
 
 # Installation / Usage
 

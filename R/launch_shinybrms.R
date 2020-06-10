@@ -46,5 +46,9 @@ launch_shinybrms <- function(...){
     appDir = app_path,
     ...
   )
+  if(FALSE){
+    # Just a dummy call of a "brms" function for avoiding a NOTE in CRAN checks on some platforms:
+    brms::expp1(0)
+  }
   return(invisible(TRUE))
 }

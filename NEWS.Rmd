@@ -4,31 +4,29 @@ output: github_document
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# News for 'shinybrms'
+# shinybrms 1.1.0.9000
 
-## shinybrms 1.1.0.9000
-
-### Major changes
+## Major changes
 
 
 
-### Minor changes
+## Minor changes
 
 * Require R >= 3.6.0.
 * Updated the `README` file.
 * Updated the "Description" field in the `DESCRIPTION` file.
 
-### Bug fixes
+## Bug fixes
 
 * Try to fix a NOTE occurring in some CRAN checks.
 
-## shinybrms 1.1.0
+# shinybrms 1.1.0
 
-### Major changes
+## Major changes
 
 * Added the possibility to include varying effects.
 
-### Minor changes
+## Minor changes
 
 * All predictor terms (main effects as well as interactions) are now shown in a preview table.
 * It is now possible to remove interaction terms one by one.
@@ -42,7 +40,7 @@ output: github_document
 * Changed the way how RStudio's default setting for the global option `browser` is avoided. Most importantly, option `shinybrms.RStudio_browser` was removed and replaced by the two new options `shinybrms.prog_browser` and `shinybrms.shinystan_browser`.
 * Allowed *.dat files in the file upload.
 
-### Bug fixes
+## Bug fixes
 
 "Under the hood", there have been many changes which should make the **shinybrms** app more robust. In particular, the following bugs have been fixed:
 
@@ -54,15 +52,15 @@ output: github_document
 * Fixed a bug causing the app to crash when selecting a new dataset after having constructed the model formula and chosen the distributional family for an older dataset.
 * Fixed a bug preventing the progress file from opening up on Linux (when started interactively from the terminal).
 
-## shinybrms 1.0.1
+# shinybrms 1.0.1
 
-### Bug fixes
+## Bug fixes
 
 * Example datasets:
   + Added packages required for some example datasets to the "Suggests" list.
   + Check for availability of packages required for some example datasets.
   + Added links to the online example datasets on page "Links".
 
-## shinybrms 1.0.0 (only GitHub)
+# shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a Gaussian, Bernoulli, or negative binomial distribution for the (univariate) outcome. For the predictors, only nonvarying (a.k.a. population-level or "fixed") effects are supported. Varying (a.k.a. group-level or "random") effects are not supported yet. Neither supported are most of [**brms**](https://CRAN.R-project.org/package=brms)'s other features, like monotonic effects for ordinal predictors or non-linear effects. Interactions are supported, though. For the inspection of the output, only a short summary (from `brms::summary.brmsfit()`) and the possibility to launch [**shinystan**](https://CRAN.R-project.org/package=shinystan) is offered.

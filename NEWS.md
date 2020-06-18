@@ -1,29 +1,27 @@
 
 <!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
 
-# News for ‘shinybrms’
+# shinybrms 1.1.0.9000
 
-## shinybrms 1.1.0.9000
+## Major changes
 
-### Major changes
-
-### Minor changes
+## Minor changes
 
   - Require R \>= 3.6.0.
   - Updated the `README` file.
   - Updated the “Description” field in the `DESCRIPTION` file.
 
-### Bug fixes
+## Bug fixes
 
   - Try to fix a NOTE occurring in some CRAN checks.
 
-## shinybrms 1.1.0
+# shinybrms 1.1.0
 
-### Major changes
+## Major changes
 
   - Added the possibility to include varying effects.
 
-### Minor changes
+## Minor changes
 
   - All predictor terms (main effects as well as interactions) are now
     shown in a preview table.
@@ -52,7 +50,7 @@
     options `shinybrms.prog_browser` and `shinybrms.shinystan_browser`.
   - Allowed \*.dat files in the file upload.
 
-### Bug fixes
+## Bug fixes
 
 “Under the hood”, there have been many changes which should make the
 **shinybrms** app more robust. In particular, the following bugs have
@@ -79,9 +77,9 @@ been fixed:
   - Fixed a bug preventing the progress file from opening up on Linux
     (when started interactively from the terminal).
 
-## shinybrms 1.0.1
+# shinybrms 1.0.1
 
-### Bug fixes
+## Bug fixes
 
   - Example datasets:
       - Added packages required for some example datasets to the
@@ -90,7 +88,7 @@ been fixed:
         datasets.
       - Added links to the online example datasets on page “Links”.
 
-## shinybrms 1.0.0 (only GitHub)
+# shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a
 Gaussian, Bernoulli, or negative binomial distribution for the

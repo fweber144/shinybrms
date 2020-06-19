@@ -1408,7 +1408,6 @@ server <- function(input, output, session){
       args_brm <- c(args_brm,
                     list(refresh = input$advOpts_refresh))
     }
-    args_brm <- args_brm
     
     showNotification(
       paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",

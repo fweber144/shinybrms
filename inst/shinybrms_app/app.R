@@ -478,8 +478,21 @@ ui <- navbarPage(
       strong("Date and time when Stan run was finished:"),
       textOutput("fit_date"),
       br(),
-      strong("Summary:"),
+      # br(),
+      h4("Hamiltonian Monte Carlo (HMC) diagnostics"),
+      strong("Divergences:"),
+      verbatimTextOutput("diagn_div", placeholder = TRUE),
+      strong("Tree depth:"),
+      verbatimTextOutput("diagn_tree", placeholder = TRUE),
+      strong("Energy:"),
+      verbatimTextOutput("diagn_energy", placeholder = TRUE),
+      br(),
+      # br(),
+      h4("Summary"),
       verbatimTextOutput("smmry_view", placeholder = TRUE),
+      br(),
+      # br(),
+      h4("Download"),
       selectInput("stanout_download_sel", "Choose output file to download:",
                   choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
                               "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
@@ -1489,6 +1502,27 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     C_fit()$fit@date
   })
+  
+  output$diagn_div <- renderText({
+    invisible(req(C_fit()))
+    capture.output({
+      rstan::check_divergences(C_fit()$fit)
+    }, type = "message")
+  }, sep = "\n")
+  
+  output$diagn_tree <- renderText({
+    invisible(req(C_fit()))
+    capture.output({
+      rstan::check_treedepth(C_fit()$fit)
+    }, type = "message")
+  }, sep = "\n")
+  
+  output$diagn_energy <- renderText({
+    invisible(req(C_fit()))
+    capture.output({
+      rstan::check_energy(C_fit()$fit)
+    }, type = "message")
+  }, sep = "\n")
   
   output$smmry_view <- renderPrint({
     invisible(req(C_fit()))

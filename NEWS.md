@@ -5,6 +5,9 @@
 
 ## Major changes
 
+  - Show Hamiltonian Monte Carlo (HMC) diagnostics in the “Output” panel
+    on page “Posterior”.
+
 ## Minor changes
 
   - Require R \>= 3.6.0.

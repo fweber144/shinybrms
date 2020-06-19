@@ -21,7 +21,8 @@ RoxygenNote: 7.1.0
 Depends: R (>= 3.6.0)
 Imports: 
     shiny (>= 1.4.0),
-    brms (>= 2.12.0)
+    brms (>= 2.12.0),
+    rstan (>= 2.19.3)
 Suggests: 
     shinystan (>= 2.4.0),
     callr (>= 3.4.0),

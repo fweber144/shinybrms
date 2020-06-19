@@ -1173,7 +1173,7 @@ server <- function(input, output, session){
         )
       } else{
         showNotification(
-          paste(warn_capt, collapse = "|"),
+          paste(warn_capt, collapse = " | "),
           duration = NA,
           type = "warning"
         )
@@ -1300,7 +1300,7 @@ server <- function(input, output, session){
         )
       } else{
         showNotification(
-          paste(warn_capt, collapse = "|"),
+          paste(warn_capt, collapse = " | "),
           duration = NA,
           type = "warning"
         )
@@ -1344,7 +1344,7 @@ server <- function(input, output, session){
         )
       } else{
         showNotification(
-          paste(warn_capt, collapse = "|"),
+          paste(warn_capt, collapse = " | "),
           duration = NA,
           type = "warning"
         )
@@ -1485,7 +1485,7 @@ server <- function(input, output, session){
         )
       } else{
         showNotification(
-          paste(warn_capt, collapse = "|"),
+          paste(warn_capt, collapse = " | "),
           duration = NA,
           type = "warning"
         )

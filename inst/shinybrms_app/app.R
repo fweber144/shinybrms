@@ -478,12 +478,6 @@ ui <- navbarPage(
       strong("Date and time when Stan run was finished:"),
       textOutput("fit_date"),
       br(),
-      checkboxInput("show_stderr", "Show messages, warnings, and errors", value = FALSE),
-      conditionalPanel(
-        condition = "input.show_stderr",
-        verbatimTextOutput("stderr_view", placeholder = TRUE)
-      ),
-      br(),
       # br(),
       h4("Hamiltonian Monte Carlo (HMC) diagnostics"),
       strong("Divergences:"),
@@ -1459,7 +1453,7 @@ server <- function(input, output, session){
           rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
           browseURL(paste0("file://", tmp_stdout_html))
         } else if(isatty(stdout())){
-          sink(tempfile(pattern = "shinybrms_dummy_stdout_", fileext = ".txt"))
+          sink(tempfile(pattern = "shinybrms_dummy_stdout", fileext = ".txt"))
           sink_active <- TRUE
         }
       }
@@ -1468,43 +1462,34 @@ server <- function(input, output, session){
     # Get warnings directly when they occur:
     warn_orig <- options(warn = 1)
     
-    # Write all messages, warnings, and errors (i.e. the stderr() content) to an 
-    # external file (since capture.output({...}, type = "message") does not work):
-    stderr_con <- file(tempfile(pattern = "shinybrms_stderr_", fileext = ".txt"))
-    open(stderr_con, open = "w")
-    sink(stderr_con, type = "message")
-    
     # Run Stan (more precisely: brms::brm()):
-    C_fit_tmp <- do.call(brms::brm, args = args_brm)
+    warn_capt <- capture.output({
+      C_fit_tmp <- do.call(brms::brm, args = args_brm)
+    }, type = "message")
     
     # Reset all modified options and environment variables:
-    sink(type = "message")
-    close(stderr_con)
     options(warn = warn_orig$warn)
     if(exists("sink_active")) sink()
     if(exists("browser_orig")) options(browser = browser_orig$browser)
     if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     
-    # Throw a warning for NAs (if existing):
-    stderr_file <- list.files(tempdir(), pattern = "^shinybrms_stderr_.*\\.txt", full.names = TRUE)
-    if(length(stderr_file) > 1L){
-      stderr_file <- stderr_file[which.max(file.mtime(stderr_file))]
-      showNotification(
-        paste("Warning: Found more than one \"stderr\" file.",
-              "Using the most recent one."),
-        duration = NA,
-        type = "warning"
-      )
-    }
-    stderr_file <- normalizePath(stderr_file)
-    stderr_capt <- readLines(stderr_file)
-    if("Warning: Rows containing NAs were excluded from the model." %in% stderr_capt){
-      showNotification(
-        paste("Warning: There are missing values in the data. The corresponding rows have been",
-              "omitted in the Stan run."),
-        duration = NA,
-        type = "warning"
-      )
+    # Throw warnings if existing:
+    if(length(warn_capt) > 0L){
+      warn_capt <- unique(warn_capt)
+      if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
+        showNotification(
+          paste("Warning: There are missing values in the data. The corresponding rows have been",
+                "omitted in the Stan run."),
+          duration = NA,
+          type = "warning"
+        )
+      } else{
+        showNotification(
+          paste(warn_capt, collapse = " | "),
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
     return(C_fit_tmp)
   })
@@ -1516,22 +1501,6 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     C_fit()$fit@date
   })
-  
-  output$stderr_view <- renderText({
-    invisible(req(C_fit()))
-    stderr_file <- list.files(tempdir(), pattern = "^shinybrms_stderr_.*\\.txt", full.names = TRUE)
-    if(length(stderr_file) > 1L){
-      stderr_file <- stderr_file[which.max(file.mtime(stderr_file))]
-      showNotification(
-        paste("Warning: Found more than one \"stderr\" file.",
-              "Using the most recent one."),
-        duration = NA,
-        type = "warning"
-      )
-    }
-    stderr_file <- normalizePath(stderr_file)
-    readLines(stderr_file)
-  }, sep = "\n")
   
   output$diagn_div <- renderText({
     invisible(req(C_fit()))

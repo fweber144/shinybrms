@@ -1,6 +1,3 @@
-
-<!-- NEWS.md is generated from NEWS.Rmd. Please edit that file -->
-
 # shinybrms 1.1.0.9000
 
 ## Major changes
@@ -30,7 +27,7 @@
     shown in a preview table.
   - It is now possible to remove interaction terms one by one.
   - Restricted the choices for the outcome and the predictor selections
-    (e.g. remove the outcome from the list of possible predictor
+    (e.g. remove the outcome from the list of possible predictor
     variables).
   - Removed some example datasets and added new ones.
   - Automatically create the R objects needed for the posterior

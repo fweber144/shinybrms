@@ -1,11 +1,17 @@
 
+<br>
+
 <!-- badges: start -->
 
 [![Travis build
 status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://travis-ci.org/fweber144/shinybrms)
 <!-- badges: end -->
 
-# Description
+# shinybrms <img src='man/figures/logo.svg' align="right" height="139" />
+
+<br>
+
+## Description
 
 This [R](https://www.R-project.org/) package **shinybrms** provides a
 graphical user interface (GUI) for the R package
@@ -13,7 +19,7 @@ graphical user interface (GUI) for the R package
 Bayesian regression models using [Stan](https://mc-stan.org/). The
 **shinybrms** GUI is a [Shiny](https://shiny.rstudio.com/) app.
 
-# Installation / Usage
+## Installation / Usage
 
 There are two options for running the **shinybrms** Shiny app:
 
@@ -37,7 +43,7 @@ you need to perform the following steps first:
     dependencies = TRUE)` with `[...]` as advised on the “RStan Getting
     Started” GitHub page).
 
-## With installation of ‘shinybrms’
+### With installation of ‘shinybrms’
 
 1.  Install the R package **shinybrms** either from GitHub or from CRAN.
     Note that installing from GitHub might give a more recent version of
@@ -100,7 +106,7 @@ you need to perform the following steps first:
     launch_shinybrms(launch.browser = TRUE)
     ```
 
-## Without installation of ‘shinybrms’
+### Without installation of ‘shinybrms’
 
 1.  Install the R package **brms**. You may use the following R code for
     this:

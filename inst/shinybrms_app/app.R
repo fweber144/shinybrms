@@ -1453,7 +1453,7 @@ server <- function(input, output, session){
           rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
           browseURL(paste0("file://", tmp_stdout_html))
         } else if(isatty(stdout())){
-          sink(tempfile(pattern = "shinybrms_dummy_stdout", fileext = ".txt"))
+          sink(tempfile(pattern = "shinybrms_dummy_stdout_", fileext = ".txt"))
           sink_active <- TRUE
         }
       }

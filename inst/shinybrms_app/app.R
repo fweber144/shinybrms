@@ -471,7 +471,7 @@ ui <- navbarPage(
                "Windows users having Firefox set as their default web browser may need to manually",
                "copy the link to the Stan HTML progress file which is automatically opening up and",
                "paste this link into a different web browser for viewing the progress file there."),
-      actionButton("run_stan", "Run Stan (may take a while)")
+      actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary")
     ),
     wellPanel(
       h3("Output"),

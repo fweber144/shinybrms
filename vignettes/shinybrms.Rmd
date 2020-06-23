@@ -1,0 +1,21 @@
+---
+title: "shinybrms"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{shinybrms}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The recommended way for launching the **shinybrms** app is:
+```{r setup, eval = FALSE}
+library(shinybrms)
+launch_shinybrms(launch.browser = TRUE)
+```

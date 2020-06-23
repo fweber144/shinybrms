@@ -2,7 +2,6 @@
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
-^NEWS\.Rmd$
 ^cran-comments\.md$
 ^\.travis\.yml$
 ^CRAN-RELEASE$

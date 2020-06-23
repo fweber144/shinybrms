@@ -13,7 +13,7 @@ Description: A graphical user interface (GUI) for the package 'brms' which
     (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'Shiny' 
     (<https://shiny.rstudio.com/>) app.
 License: GPL-3
-URL: https://github.com/fweber144/shinybrms
+URL: https://fweber144.github.io/shinybrms/, https://github.com/fweber144/shinybrms
 BugReports: https://github.com/fweber144/shinybrms/issues
 Encoding: UTF-8
 LazyData: true

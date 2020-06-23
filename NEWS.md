@@ -7,6 +7,8 @@
 
 ## Minor changes
 
+  - Added a package website built with `pkgdown`.
+  - Added a package logo created with `hexSticker`.
   - Require R \>= 3.6.0.
   - Updated the `README` file.
   - Updated the “Description” field in the `DESCRIPTION` file.

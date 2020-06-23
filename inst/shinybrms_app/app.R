@@ -549,7 +549,7 @@ ui <- navbarPage(
     "More",
     tabPanel(
       "About",
-      titlePanel("About \"shinybrms\""),
+      titlePanel(HTML(paste("About", strong("shinybrms")))),
       br(),
       wellPanel(
         h3("Basic information"),
@@ -559,7 +559,10 @@ ui <- navbarPage(
           a("R", href = "https://www.R-project.org/", target = "_blank"),
           " package which is available on ",
           a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), " and ",
-          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), "."
+          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"),
+          " (see also the ",
+          a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
+          " for the ", strong("shinybrms"), " package)."
         ))),
         tags$ul(
           tags$li(HTML(paste0(
@@ -576,7 +579,7 @@ ui <- navbarPage(
               target = "_blank"),
             "). The GUI is a ",
             a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
-            " app, i.e. created using the R package ",
+            " app, i.e. it was created using the R package ",
             a(HTML("<strong>shiny</strong>"),
               href = "https://CRAN.R-project.org/package=shiny",
               target = "_blank"),
@@ -623,7 +626,8 @@ ui <- navbarPage(
           tags$li(HTML(paste0(
             strong("shinybrms"), ": ",
             a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), ", ",
-            a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank")
+            a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), ", ",
+            a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("brms"), ": ",

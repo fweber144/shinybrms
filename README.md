@@ -114,12 +114,10 @@ you need to perform the following steps first:
 
 1.  Install the R package **brms**. You may use the following R code for
     this:
-
-<!-- end list -->
-
-``` r
-install.packages("brms")
-```
+    
+    ``` r
+    install.packages("brms")
+    ```
 
 2.  If you want to use the example datasets from the R packages
     [**lme4**](https://CRAN.R-project.org/package=lme4),
@@ -127,12 +125,10 @@ install.packages("brms")
     [**rstanarm**](https://CRAN.R-project.org/package=rstanarm), you
     need to install these packages. You may use the following R code for
     this:
-
-<!-- end list -->
-
-``` r
-install.packages(c("lme4", "MASS", "rstanarm"))
-```
+    
+    ``` r
+    install.packages(c("lme4", "MASS", "rstanarm"))
+    ```
 
 3.  Launch the **shinybrms** Shiny app directly from GitHub by either
     running the following R code:

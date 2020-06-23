@@ -78,13 +78,13 @@ The first option is described in the following section "With installation of 'sh
 ### Without installation of 'shinybrms'
 
 1. Install the R package **brms**. You may use the following R code for this:
-  ```{r, eval = FALSE}
-  install.packages("brms")
-  ```
+   ```{r, eval = FALSE}
+   install.packages("brms")
+   ```
 2. If you want to use the example datasets from the R packages [**lme4**](https://CRAN.R-project.org/package=lme4), [**MASS**](https://CRAN.R-project.org/package=MASS), and [**rstanarm**](https://CRAN.R-project.org/package=rstanarm), you need to install these packages. You may use the following R code for this:
-  ```{r, eval = FALSE}
-  install.packages(c("lme4", "MASS", "rstanarm"))
-  ```
+   ```{r, eval = FALSE}
+   install.packages(c("lme4", "MASS", "rstanarm"))
+   ```
 3. Launch the **shinybrms** Shiny app directly from GitHub by either running the following R code:
    ```{r, eval = FALSE}
    shiny::runGitHub("fweber144/shinybrms",

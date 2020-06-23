@@ -1,5 +1,12 @@
 # shinybrms 1.2.0.9000
 
+## Minor changes
+
+  - Added the URL of the
+    [**shinybrms** website](https://fweber144.github.io/shinybrms/)
+    to the `DESCRIPTION` file as well as inside of the **shinybrms**
+    app.
+
 # shinybrms 1.2.0 (only GitHub)
 
 ## Major changes
@@ -12,8 +19,6 @@
   - Added a package website built with `pkgdown`.
   - Added a package logo created with `hexSticker`.
   - Require R \>= 3.6.0.
-  - Updated the `README` file.
-  - Updated the “Description” field in the `DESCRIPTION` file.
 
 ## Bug fixes
 

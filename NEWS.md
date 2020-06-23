@@ -1,4 +1,4 @@
-# shinybrms 1.1.0.9000
+# shinybrms 1.2.0
 
 ## Major changes
 

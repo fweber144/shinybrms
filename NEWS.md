@@ -2,9 +2,9 @@
 
 ## Minor changes
 
-  - Added the URL of the
-    [**shinybrms** website](https://fweber144.github.io/shinybrms/)
-    to the `DESCRIPTION` file as well as inside the **shinybrms** app.
+  - Updated information about the **shinybrms** package and app
+    (e.g. added the URL of the 
+    [**shinybrms** website](https://fweber144.github.io/shinybrms/)).
 
 # shinybrms 1.2.0 (only GitHub)
 

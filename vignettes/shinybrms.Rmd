@@ -1,8 +1,8 @@
 ---
-title: "Overview"
+title: "Example"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Overview}
+  %\VignetteIndexEntry{Example}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -14,4 +14,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-This overview is assuming that you have launched the **shinybrms** app. For instructions how to do so, see the [starting page](../index.html).
+The following screenshots show how to fit an example model in the **shinybrms** app. For instructions how to launch the **shinybrms** app, see the [starting page](../index.html).
+
+

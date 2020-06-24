@@ -278,7 +278,7 @@ ui <- navbarPage(
         selectInput("prior_class_sel",
                     HTML(paste0(
                       "Parameter class:",
-                      helpText("Note: The parameter class may consist of a single parameter.", 
+                      helpText("Note: The parameter class may consist of a single parameter.",
                                style = "font-weight:normal")
                     )),
                     choices = c("Choose parameter class ..." = ""),
@@ -287,7 +287,7 @@ ui <- navbarPage(
                     HTML(paste0(
                       "Coefficient:",
                       helpText("Note: Leave empty to use all coefficients belonging to the",
-                               "selected parameter class.", 
+                               "selected parameter class.",
                                style = "font-weight:normal")
                     )),
                     choices = c("Choose coefficient or leave empty" = ""),
@@ -312,18 +312,18 @@ ui <- navbarPage(
                       HTML(paste0(
                         "Note: You may ", em("either"),
                         tags$ul(
-                          tags$li(HTML(paste0("specify a prior distribution using a Stan function ", 
+                          tags$li(HTML(paste0("specify a prior distribution using a Stan function ",
                                               em("or")))),
                           tags$li(HTML(paste0("specify a prior distribution using one of the ",
-                                              "special functions defined by ", strong("brms"), 
-                                              " for this purpose (e.g. ", 
-                                              code("horseshoe"), " and ", code("lkj"), 
+                                              "special functions defined by ", strong("brms"),
+                                              " for this purpose (e.g. ",
+                                              code("horseshoe"), " and ", code("lkj"),
                                               ") ", em("or")))),
                           tags$li("leave this field empty to use a flat prior.")
                         ),
                         "If you specify a prior distribution using a Stan function, you have to ",
                         "use the Stan function which would be used in a Stan sampling statement ",
-                        "and specify values for all arguments of this Stan function (e.g. ", 
+                        "and specify values for all arguments of this Stan function (e.g. ",
                         code("normal(0, 2.5)"), "). "
                       )),
                       style = "font-weight:normal"
@@ -449,7 +449,7 @@ ui <- navbarPage(
                               choices = list("Random" = "random", "Zero" = "0"),
                               inline = TRUE),
                  numericInput("advOpts_init_r",
-                              HTML(paste0("Range of random initial values in the unconstrained parameter space (", 
+                              HTML(paste0("Range of random initial values in the unconstrained parameter space (",
                                           code("\"init_r\""),
                                           "; only relevant if random initial values are chosen):")),
                               value = 2, step = 0.1, min = 0),
@@ -517,7 +517,7 @@ ui <- navbarPage(
         "Notes:",
         tags$ul(
           tags$li(
-            "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"), 
+            "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
             "are used. These are as follows:",
             tags$ul(
               tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
@@ -536,8 +536,8 @@ ui <- navbarPage(
           tags$li(
             HTML(paste0(
               "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
-              " are automatically created. These are the observations for the outcome (object ", 
-              code("y"), ") and the corresponding posterior predictive replications (object ", 
+              " are automatically created. These are the observations for the outcome (object ",
+              code("y"), ") and the corresponding posterior predictive replications (object ",
               code("y_rep"), "). You can select them in the respective \"Object from global ",
               "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
               "\"Select data\" in the ", strong("shinystan"), " app."
@@ -594,8 +594,8 @@ ui <- navbarPage(
           ))),
           tags$li(strong("Author:"),
                   "Frank Weber (",
-                  a("ORCID iD: 0000-0002-4842-7922", 
-                    href = "https://orcid.org/0000-0002-4842-7922", 
+                  a("ORCID iD: 0000-0002-4842-7922",
+                    href = "https://orcid.org/0000-0002-4842-7922",
                     target = "_blank",
                     .noWS = "outside"),
                   ")"),

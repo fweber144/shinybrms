@@ -23,15 +23,20 @@ specifically, using its R interface, the R package
 was created using the R package
 [**shiny**](https://CRAN.R-project.org/package=shiny).
 
-## Installation / Usage
+To get an impression of the **shinybrms** app, have a look at the
+[**shinybrms**
+website](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
+The following text explains how to launch the **shinybrms** app.
 
-There are two options for running the **shinybrms** Shiny app:
+## Launching the **shinybrms** app
+
+There are two options for launching the **shinybrms** app:
 
   - Install the R package **shinybrms** (either [from
     GitHub](https://github.com/fweber144/shinybrms) or [from
-    CRAN](https://CRAN.R-project.org/package=shinybrms)) and then run
-    the **shinybrms** Shiny app from the installed package.
-  - Run the **shinybrms** Shiny app directly [from
+    CRAN](https://CRAN.R-project.org/package=shinybrms)) and then launch
+    the **shinybrms** app from the installed package.
+  - Launch the **shinybrms** app directly [from
     GitHub](https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app).
 
 The first option is described in the following section “With
@@ -94,8 +99,7 @@ you need to perform the following steps first:
             install.packages("shinybrms", dependencies = TRUE)
             ```
 
-2.  Launch the **shinybrms** Shiny app by either running the following R
-    code:
+2.  Launch the **shinybrms** app by either running the following R code:
     
     ``` r
     library(shinybrms)
@@ -130,8 +134,8 @@ you need to perform the following steps first:
     install.packages(c("lme4", "MASS", "rstanarm"))
     ```
 
-3.  Launch the **shinybrms** Shiny app directly from GitHub by either
-    running the following R code:
+3.  Launch the **shinybrms** app directly from GitHub by either running
+    the following R code:
     
     ``` r
     shiny::runGitHub("fweber144/shinybrms",

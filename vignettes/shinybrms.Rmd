@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following screenshots show how to fit an example model in the **shinybrms** app. For instructions how to launch the **shinybrms** app, see the [starting page](../index.html).
+The following screenshots show how to fit an example model in the **shinybrms** app. For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
 
 ## Data
 
@@ -84,13 +84,15 @@ knitr::include_graphics("screenshots/bacteria_7.png")
 [![](screenshots/small/bacteria_7.png)](screenshots/bacteria_7.png)
 *Fig. 7: Page "Prior" (top).*
 
-At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (class `b`):
+At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
 
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_8.png")
 ```
 [![](screenshots/small/bacteria_8.png)](screenshots/bacteria_8.png)
 *Fig. 8: Page "Prior" (bottom; setting up a custom prior).*
+
+After clicking on "Add prior", we see that our Student-$t$ prior was added to the preview table on the right:
 
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_9.png")
@@ -100,42 +102,74 @@ knitr::include_graphics("screenshots/bacteria_9.png")
 
 ## Posterior
 
-[![](screenshots/small/bacteria_10.png)](screenshots/bacteria_10.png)
+### Preparing the Stan run
+
+At the top of page "Posterior", we could get a preview of the Stan code and the Stan data (and download them):
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_10.png")
 ```
+[![](screenshots/small/bacteria_10.png)](screenshots/bacteria_10.png)
+*Fig. 10: Page "Posterior" (top).*
 
-[![](screenshots/small/bacteria_11.png)](screenshots/bacteria_11.png)
+Here, we will scroll down to focus on the panel "Advanced options":
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_11.png")
 ```
+[![](screenshots/small/bacteria_11.png)](screenshots/bacteria_11.png)
+*Fig. 11: Page "Posterior" (middle).*
 
-[![](screenshots/small/bacteria_12.png)](screenshots/bacteria_12.png)
+There, we may set a seed for reproducibility:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_12.png")
 ```
+[![](screenshots/small/bacteria_12.png)](screenshots/bacteria_12.png)
+*Fig. 12: Page "Posterior", panel "Advanced options".*
 
-[![](screenshots/small/bacteria_13.png)](screenshots/bacteria_13.png)
+### Running Stan
+
+Now, we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below the panel "Advanced options", we find the panel "Run Stan", where we simply click the button for running Stan:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_13.png")
 ```
+[![](screenshots/small/bacteria_13.png)](screenshots/bacteria_13.png)
+*Fig. 13: Page "Posterior", panel "Run Stan".*
 
-[![](screenshots/small/bacteria_14.png)](screenshots/bacteria_14.png)
+Now, Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) after compilation and show the sampling progress:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_14.png")
 ```
+[![](screenshots/small/bacteria_14.png)](screenshots/bacteria_14.png)
+*Fig. 14: Sampling progress (top).*
 
-[![](screenshots/small/bacteria_15.png)](screenshots/bacteria_15.png)
+Depending on your model and data, sampling might take a while. The progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_15.png")
 ```
+[![](screenshots/small/bacteria_15.png)](screenshots/bacteria_15.png)
+*Fig. 15: Sampling progress (bottom; after end of sampling).*
 
-[![](screenshots/small/bacteria_16.png)](screenshots/bacteria_16.png)
+### Inspecting the output
+
+We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output":
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_16.png")
 ```
+[![](screenshots/small/bacteria_16.png)](screenshots/bacteria_16.png)
+*Fig. 16: Page "Posterior", panel "Output" (top).*
 
-[![](screenshots/small/bacteria_17.png)](screenshots/bacteria_17.png)
+At the top of this panel "Output", we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK. Underneath the HMC diagnostics, we get a short summary of our posterior inference including some further Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Before using the posterior results for any downstream analyses or interpretations, these MCMC diagnostics should also be checked. Here, they are all OK **[EXPLAIN WHY!]**. Nevertheless, the output shown in the **shinybrms** app is only intended for quick inspection. A by far more comprehensive analysis of the output is possible using the [**shinystan**](https://CRAN.R-project.org/package=shinystan) package which provides a Shiny app for inspecting the output from Stan model fits (like ours). Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_17.png")
 ```
+[![](screenshots/small/bacteria_17.png)](screenshots/bacteria_17.png)
+*Fig. 17: Page "Posterior", panel "Output" (bottom).*
+
+Here, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can download multiple output objects (see Fig. 17) to analyze them outside of **shinybrms**.

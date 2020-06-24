@@ -7,7 +7,8 @@ Authors@R:
     person(given = "Frank",
            family = "Weber",
            role = c("aut", "cre"),
-           email = "fweber144@protonmail.com")
+           email = "fweber144@protonmail.com",
+           comment = c(ORCID = "0000-0002-4842-7922"))
 Description: A graphical user interface (GUI) for the package 'brms' which 
     allows to fit Bayesian regression models using 'Stan' 
     (<https://mc-stan.org/>) (more specifically, using its R interface, the 

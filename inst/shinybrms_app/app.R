@@ -593,13 +593,18 @@ ui <- navbarPage(
             "."
           ))),
           tags$li(strong("Author:"),
-                  "Frank Weber"),
+                  "Frank Weber (",
+                  a("ORCID iD: 0000-0002-4842-7922", 
+                    href = "https://orcid.org/0000-0002-4842-7922", 
+                    target = "_blank",
+                    .noWS = "outside"),
+                  ")"),
           tags$li(strong("Version:"),
                   "1.2.0.9000"),
           tags$li(strong("Date (yyyy-mm-dd):"),
                   "2020-06-23"),
           tags$li(strong("License:"),
-                  "GPL-3")
+                  a("GPL-3", href = "https://CRAN.R-project.org/web/licenses/GPL-3", target = "_blank"))
         )
       ),
       wellPanel(

@@ -16,35 +16,65 @@ knitr::opts_chunk$set(
 
 The following screenshots show how to fit an example model in the **shinybrms** app. For instructions how to launch the **shinybrms** app, see the [starting page](../index.html).
 
-[![](screenshots/small/bacteria_1.png)](screenshots/bacteria_1.png)
+## Data
+
+Usually, you will want to upload a custom dataset, but for the purpose of demonstration, we will choose the example dataset `MASS::bacteria` here:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_1.png")
 ```
+[![](screenshots/small/bacteria_1.png)](screenshots/bacteria_1.png)
+*Fig. 1: Page "Data" (top).*
 
-[![](screenshots/small/bacteria_2.png)](screenshots/bacteria_2.png)
+Here, we have chosen to show all rows of the dataset (option visible when scrolling down):
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_2.png")
 ```
+[![](screenshots/small/bacteria_2.png)](screenshots/bacteria_2.png)
+*Fig. 2: Page "Data" (bottom).*
 
-[![](screenshots/small/bacteria_3.png)](screenshots/bacteria_3.png)
+## Likelihood
+
+### Outcome
+
+On page "Likelihood", the first tab is "Outcome". Here, we define the variable `y` (from our dataset `MASS::bacteria`) to be the outcome and since this is a binary outcome, we choose the distributional family "Bernoulli with logit link":
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_3.png")
 ```
+[![](screenshots/small/bacteria_3.png)](screenshots/bacteria_3.png)
+*Fig. 3: Page "Likelihood", tab "Outcome".*
 
-[![](screenshots/small/bacteria_4.png)](screenshots/bacteria_4.png)
+### Predictors
+
+After selecting the tab "Predictors", we define `week` and `trt` to have nonvarying main effects and `ID` to have varying intercepts:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_4.png")
 ```
+[![](screenshots/small/bacteria_4.png)](screenshots/bacteria_4.png)
+*Fig. 4: Page "Likelihood", tab "Predictors" (top).*
 
-[![](screenshots/small/bacteria_5.png)](screenshots/bacteria_5.png)
+After scrolling down, we define `week` and `trt` to have a (nonvarying) interaction effect:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_5.png")
 ```
+[![](screenshots/small/bacteria_5.png)](screenshots/bacteria_5.png)
+*Fig. 5: Page "Likelihood", tab "Predictors" (bottom; setting up the interaction effect).*
 
-[![](screenshots/small/bacteria_6.png)](screenshots/bacteria_6.png)
+After clicking on "Add interaction term", the result is:
+
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_6.png")
 ```
+[![](screenshots/small/bacteria_6.png)](screenshots/bacteria_6.png)
+*Fig. 6: Page "Likelihood", tab "Predictors" (bottom; after adding the interaction effect).*
+
+## Prior
+
+### Default priors
 
 [![](screenshots/small/bacteria_7.png)](screenshots/bacteria_7.png)
 ```{r echo = FALSE, results = "hide"}

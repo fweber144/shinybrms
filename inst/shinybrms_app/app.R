@@ -491,7 +491,7 @@ ui <- navbarPage(
       verbatimTextOutput("diagn_div", placeholder = TRUE),
       strong("Tree depth:"),
       verbatimTextOutput("diagn_tree", placeholder = TRUE),
-      strong("Energy:"),
+      strong("Bayesian fraction of missing information for the energy transitions (E-BFMI):"),
       verbatimTextOutput("diagn_energy", placeholder = TRUE),
       br(),
       # br(),

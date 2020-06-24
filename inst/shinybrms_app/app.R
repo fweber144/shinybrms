@@ -604,7 +604,15 @@ ui <- navbarPage(
           tags$li(strong("Date (yyyy-mm-dd):"),
                   "2020-06-23"),
           tags$li(strong("License:"),
-                  a("GPL-3", href = "https://CRAN.R-project.org/web/licenses/GPL-3", target = "_blank"))
+                  a("GPL-3", href = "https://CRAN.R-project.org/web/licenses/GPL-3", target = "_blank")),
+          tags$li(strong("Citation:"),
+                  "Frank Weber (2020).",
+                  em("shinybrms: Graphical User Interface (Shiny App)",
+                     "for Package 'brms'."),
+                  "R package, version 1.2.0.9000. URL:",
+                  a("https://fweber144.github.io/shinybrms/",
+                    href = "https://fweber144.github.io/shinybrms/",
+                    target = "_blank"))
         )
       ),
       wellPanel(

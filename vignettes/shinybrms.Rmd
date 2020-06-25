@@ -187,7 +187,7 @@ knitr::include_graphics("screenshots/bacteria_15.png")
 ### Inspecting the output
 
 \
-We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output":
+We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output". At the top of this panel "Output", we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -197,14 +197,24 @@ knitr::include_graphics("screenshots/bacteria_16.png")
 *Fig. 16: Page "Posterior", panel "Output" (top).*
 
 \
-At the top of this panel "Output", we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK. Underneath the HMC diagnostics, we get a short summary of our posterior inference including some further Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Before using the posterior results for any downstream analyses or interpretations, these MCMC diagnostics should also be checked. Here, they are all OK **[EXPLAIN WHY!]**. Nevertheless, the output shown in the **shinybrms** app is only intended for quick inspection. A by far more comprehensive analysis of the output is possible using the [**shinystan**](https://CRAN.R-project.org/package=shinystan) package which provides a Shiny app for inspecting the output from Stan model fits (like ours). Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page:
+Underneath the HMC diagnostics, we get a short summary of our posterior inference including some further Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (see [here](https://arxiv.org/abs/1903.08008) why):
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_17.png")
 ```
 [![](screenshots/small/bacteria_17.png)](screenshots/bacteria_17.png)
-*Fig. 17: Page "Posterior", panel "Output" (bottom).*
+*Fig. 17: Page "Posterior", panel "Output" (middle).*
 
 \
-Here, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can download multiple output objects (see Fig. 17) to analyze them outside of **shinybrms**.
+For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5 \% and 97.5 \% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A by far more comprehensive analysis of the output (including the diagnostics and also posterior predictive checks) is possible using the [**shinystan**](https://CRAN.R-project.org/package=shinystan) package which provides a Shiny app for inspecting the output from Stan model fits (like ours). Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/bacteria_18.png")
+```
+[![](screenshots/small/bacteria_18.png)](screenshots/bacteria_18.png)
+*Fig. 18: Page "Posterior", panel "Output" (bottom).*
+
+\
+Here, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can download multiple output objects (see Fig. 18) to analyze them outside of **shinybrms**.

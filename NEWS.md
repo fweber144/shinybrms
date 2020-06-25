@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Minor improvements in the UI.
   - Updated information about the **shinybrms** package and app
     (e.g. added the URL of the 
     [**shinybrms** website](https://fweber144.github.io/shinybrms/)).

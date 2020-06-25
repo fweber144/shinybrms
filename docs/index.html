@@ -20,8 +20,10 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Graphical User Interface (Shiny App) for Package brms">
 <meta property="og:description" content="A graphical user interface (GUI) for the package brms which 
     allows to fit Bayesian regression models using Stan 
-    (&lt;https://mc-stan.org/&gt;). The shinybrms GUI is a Shiny 
-    (&lt;https://shiny.rstudio.com/&gt;) app.">
+    (&lt;https://mc-stan.org/&gt;) (more specifically, using its R interface, the 
+    package rstan). The shinybrms GUI is a Shiny 
+    (&lt;https://shiny.rstudio.com/&gt;) app, i.e. it was created using the package 
+    shiny.">
 <meta property="og:image" content="/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -41,7 +43,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
       </span>
     </div>
 
@@ -52,6 +54,9 @@
     <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
+</li>
+<li>
+  <a href="articles/shinybrms.html">Get started</a>
 </li>
 <li>
   <a href="reference/index.html">Reference</a>
@@ -91,24 +96,25 @@
 <div id="description" class="section level2">
 <h2 class="hasAnchor">
 <a href="#description" class="anchor"></a>Description</h2>
-<p>This <a href="https://www.R-project.org/">R</a> package <strong>shinybrms</strong> provides a graphical user interface (GUI) for the R package <a href="https://CRAN.R-project.org/package=brms"><strong>brms</strong></a> which allows to fit Bayesian regression models using <a href="https://mc-stan.org/">Stan</a>. The <strong>shinybrms</strong> GUI is a <a href="https://shiny.rstudio.com/">Shiny</a> app.</p>
+<p>This <a href="https://www.R-project.org/">R</a> package <strong>shinybrms</strong> provides a graphical user interface (GUI) for the R package <a href="https://CRAN.R-project.org/package=brms"><strong>brms</strong></a> which allows to fit Bayesian regression models using <a href="https://mc-stan.org/">Stan</a> (more specifically, using its R interface, the R package <a href="https://CRAN.R-project.org/package=rstan"><strong>rstan</strong></a>). The <strong>shinybrms</strong> GUI is a <a href="https://shiny.rstudio.com/">Shiny</a> app, i.e. it was created using the R package <a href="https://CRAN.R-project.org/package=shiny"><strong>shiny</strong></a>.</p>
+<p>To get an impression of the <strong>shinybrms</strong> app, have a look at the <a href="https://fweber144.github.io/shinybrms/articles/shinybrms.html"><strong>shinybrms</strong> website</a>. The following text explains how to launch the <strong>shinybrms</strong> app.</p>
 </div>
-<div id="installation--usage" class="section level2">
+<div id="launching-the-shinybrms-app" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation--usage" class="anchor"></a>Installation / Usage</h2>
-<p>There are two options for running the <strong>shinybrms</strong> Shiny app:</p>
+<a href="#launching-the-shinybrms-app" class="anchor"></a>Launching the shinybrms app</h2>
+<p>There are two options for launching the <strong>shinybrms</strong> app:</p>
 <ul>
-<li>Install the R package <strong>shinybrms</strong> (either <a href="https://github.com/fweber144/shinybrms">from GitHub</a> or <a href="https://CRAN.R-project.org/package=shinybrms">from CRAN</a>) and then run the <strong>shinybrms</strong> Shiny app from the installed package.</li>
-<li>Run the <strong>shinybrms</strong> Shiny app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a>.</li>
+<li>Install the R package <strong>shinybrms</strong> (either <a href="https://github.com/fweber144/shinybrms">from GitHub</a> or <a href="https://CRAN.R-project.org/package=shinybrms">from CRAN</a>) and then launch the <strong>shinybrms</strong> app from the installed package.</li>
+<li>Launch the <strong>shinybrms</strong> app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a>.</li>
 </ul>
-<p>The first option is described in the following section “With installation of ‘shinybrms’”. The second option is described in the subsequent section “Without installation of ‘shinybrms’”. In both cases, you need to perform the following steps first:</p>
+<p>The first option is described in the following section “<em>With</em> installation of shinybrms”. The second option is described in the subsequent section “<em>Without</em> installation of shinybrms”. In both cases, you need to perform the following steps first:</p>
 <ol>
 <li>Install R (see the <a href="https://www.R-project.org/">R homepage</a>).</li>
 <li>Install the R package <strong>rstan</strong> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
 </ol>
 <div id="with-installation-of-shinybrms" class="section level3">
 <h3 class="hasAnchor">
-<a href="#with-installation-of-shinybrms" class="anchor"></a>With installation of ‘shinybrms’</h3>
+<a href="#with-installation-of-shinybrms" class="anchor"></a><em>With</em> installation of shinybrms</h3>
 <ol>
 <li>
 <p>Install the R package <strong>shinybrms</strong> either from GitHub or from CRAN. Note that installing from GitHub might give a more recent version of <strong>shinybrms</strong> than installing from CRAN. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://CRAN.R-project.org/package=rstanarm"><strong>rstanarm</strong></a> or not.</p>
@@ -146,7 +152,7 @@
 </ul>
 </li>
 <li>
-<p>Launch the <strong>shinybrms</strong> Shiny app by either running the following R code:</p>
+<p>Launch the <strong>shinybrms</strong> app by either running the following R code:</p>
 <div class="sourceCode" id="cb5"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">shinybrms</span>)
 <span class="fu"><a href="https://rdrr.io/pkg/shinybrms/man/launch_shinybrms.html">launch_shinybrms</a></span>()</pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):</p>
@@ -157,18 +163,18 @@
 </div>
 <div id="without-installation-of-shinybrms" class="section level3">
 <h3 class="hasAnchor">
-<a href="#without-installation-of-shinybrms" class="anchor"></a>Without installation of ‘shinybrms’</h3>
-<ol>
-<li>Install the R package <strong>brms</strong>. You may use the following R code for this:</li>
-</ol>
-<!-- end list --><div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"brms"</span>)</pre></div>
-<ol>
-<li>If you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://CRAN.R-project.org/package=rstanarm"><strong>rstanarm</strong></a>, you need to install these packages. You may use the following R code for this:</li>
-</ol>
-<!-- end list --><div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span>))</pre></div>
+<a href="#without-installation-of-shinybrms" class="anchor"></a><em>Without</em> installation of shinybrms</h3>
 <ol>
 <li>
-<p>Launch the <strong>shinybrms</strong> Shiny app directly from GitHub by either running the following R code:</p>
+<p>Install the R package <strong>brms</strong>. You may use the following R code for this:</p>
+<div class="sourceCode" id="cb7"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"brms"</span>)</pre></div>
+</li>
+<li>
+<p>If you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://CRAN.R-project.org/package=rstanarm"><strong>rstanarm</strong></a>, you need to install these packages. You may use the following R code for this:</p>
+<div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span>))</pre></div>
+</li>
+<li>
+<p>Launch the <strong>shinybrms</strong> app directly from GitHub by either running the following R code:</p>
 <div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
                  <span class="kw">subdir</span> <span class="kw">=</span> <span class="st">"inst/shinybrms_app"</span>)</pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):</p>
@@ -205,7 +211,7 @@
 <div class="developers">
 <h2>Developers</h2>
 <ul class="list-unstyled">
-<li>Frank Weber <br><small class="roles"> Author, maintainer </small>  </li>
+<li>Frank Weber <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4842-7922" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 </ul>
 </div>
 

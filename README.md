@@ -28,7 +28,7 @@ To get an impression of the **shinybrms** app, have a look at the
 website](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
 The following text explains how to launch the **shinybrms** app.
 
-## Launching the **shinybrms** app
+## Launching the shinybrms app
 
 There are two options for launching the **shinybrms** app:
 
@@ -39,9 +39,9 @@ There are two options for launching the **shinybrms** app:
   - Launch the **shinybrms** app directly [from
     GitHub](https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app).
 
-The first option is described in the following section “With
-installation of ‘shinybrms’”. The second option is described in the
-subsequent section “Without installation of ‘shinybrms’”. In both cases,
+The first option is described in the following section “*With*
+installation of shinybrms”. The second option is described in the
+subsequent section “*Without* installation of shinybrms”. In both cases,
 you need to perform the following steps first:
 
 1.  Install R (see the [R homepage](https://www.R-project.org/)).
@@ -52,7 +52,7 @@ you need to perform the following steps first:
     dependencies = TRUE)` with `[...]` as advised on the “RStan Getting
     Started” GitHub page).
 
-### With installation of ‘shinybrms’
+### *With* installation of shinybrms
 
 1.  Install the R package **shinybrms** either from GitHub or from CRAN.
     Note that installing from GitHub might give a more recent version of
@@ -114,7 +114,7 @@ you need to perform the following steps first:
     launch_shinybrms(launch.browser = TRUE)
     ```
 
-### Without installation of ‘shinybrms’
+### *Without* installation of shinybrms
 
 1.  Install the R package **brms**. You may use the following R code for
     this:

@@ -1452,7 +1452,7 @@ server <- function(input, output, session){
       prog_browser <- getOption("shinybrms.prog_browser",
                                 getOption("browser"))
       if(is.function(prog_browser) &&
-         any(grepl("rs_browseURL", as.character(body(prog_browser))))){
+         any(grepl("rs_browseURL|rs_shinyviewer", as.character(body(prog_browser))))){
         # In this case, "prog_browser" cannot be used (at least not without requiring the user to
         # perform some major modifications to the initialization of the R session), so use the
         # default browser stored in the environment variable "R_BROWSER":
@@ -1587,7 +1587,7 @@ server <- function(input, output, session){
         shinystan_browser <- getOption("shinybrms.shinystan_browser",
                                        getOption("browser"))
         if(is.function(shinystan_browser) &&
-           any(grepl("rs_browseURL", as.character(body(shinystan_browser))))){
+           any(grepl("rs_browseURL|rs_shinyviewer", as.character(body(shinystan_browser))))){
           # In this case, "shinystan_browser" cannot be used (at least not without requiring the
           # user to perform some major modifications to the initialization of the R session), so use
           # the default browser stored in the environment variable "R_BROWSER":

@@ -6,6 +6,11 @@
     (e.g. added the URL of the 
     [**shinybrms** website](https://fweber144.github.io/shinybrms/)).
 
+## Bug fixes
+
+  - Fixed a bug causing the sampling progress file not to open up if
+    RStudio's internal `rs_shinyviewer` was used for option `"browser"`.
+
 # shinybrms 1.2.0 (only GitHub)
 
 ## Major changes

@@ -29,14 +29,14 @@ knitr::include_graphics("screenshots/bacteria_1.png")
 *Fig. 1: Page "Data" (top).*
 
 \
-Here, we have chosen to show all rows of the dataset (option visible when scrolling down):
+Further down the "Data" page, we may choose e.g. to show all rows of the dataset:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/bacteria_2.png")
 ```
 [![](screenshots/bacteria_2.png)](screenshots/bacteria_2.png)
-*Fig. 2: Page "Data" (bottom).*
+*Fig. 2: Page "Data" (further down).*
 
 ## Likelihood
 
@@ -55,7 +55,7 @@ knitr::include_graphics("screenshots/bacteria_3.png")
 ### Predictors
 
 \
-After selecting the tab "Predictors", we define `week` and `trt` to have nonvarying main effects and `ID` to have varying intercepts:
+After selecting the tab "Predictors", we define the variables `week` and `trt` to have nonvarying main effects and variable `ID` to have varying intercepts:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -65,7 +65,7 @@ knitr::include_graphics("screenshots/bacteria_4.png")
 *Fig. 4: Page "Likelihood", tab "Predictors" (top).*
 
 \
-After scrolling down, we define `week` and `trt` to have a (nonvarying) interaction effect:
+After scrolling down, we set up a (nonvarying) interaction term for `week` and `trt`:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -165,7 +165,7 @@ knitr::include_graphics("screenshots/bacteria_13.png")
 *Fig. 13: Page "Posterior", panel "Run Stan".*
 
 \
-Now, Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) after compilation and show the sampling progress:
+Now, Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) and show the sampling progress (after compilation has finished):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -175,7 +175,7 @@ knitr::include_graphics("screenshots/bacteria_14.png")
 *Fig. 14: Sampling progress (top).*
 
 \
-Depending on your model and data, sampling might take a while. The progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
+Depending on your model and data, the sampling might take a while. For the example here, the sampling is quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -187,7 +187,7 @@ knitr::include_graphics("screenshots/bacteria_15.png")
 ### Inspecting the output
 
 \
-We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output". At the top of this panel "Output", we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK:
+We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". At the top of this "Output" panel, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -197,7 +197,7 @@ knitr::include_graphics("screenshots/bacteria_16.png")
 *Fig. 16: Page "Posterior", panel "Output" (top).*
 
 \
-Underneath the HMC diagnostics, we get a short summary of our posterior inference including some further Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (see [here](https://arxiv.org/abs/1903.08008) why):
+Underneath the HMC diagnostics, we get a short summary of our posterior inference including some more general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (see [here](https://arxiv.org/abs/1903.08008) why):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -207,7 +207,7 @@ knitr::include_graphics("screenshots/bacteria_17.png")
 *Fig. 17: Page "Posterior", panel "Output" (middle).*
 
 \
-For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5 \% and 97.5 \% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the Shiny app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the more general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page:
+For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5 \% and 97.5 \% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the Shiny app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the more general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page (after having entered a seed for reproducibility of the posterior predictive checks):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -217,4 +217,4 @@ knitr::include_graphics("screenshots/bacteria_18.png")
 *Fig. 18: Page "Posterior", panel "Output" (bottom).*
 
 \
-At this point, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can download multiple output objects (see Fig. 18) to analyze them outside of **shinybrms**.
+At this point, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can also download different output objects (see Fig. 18) to analyze them outside of **shinybrms**.

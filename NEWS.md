@@ -1,5 +1,9 @@
 # shinybrms 1.2.1.9000
 
+## Bug fixes
+
+  - Fixed a NOTE occurring in some CRAN checks.
+
 # shinybrms 1.2.1
 
 ## Minor changes
@@ -29,7 +33,7 @@
 
 ## Bug fixes
 
-  - Try to fix a NOTE occurring in some CRAN checks.
+  - Fixed a NOTE occurring in some CRAN checks.
 
 # shinybrms 1.1.0
 

@@ -1405,7 +1405,6 @@ server <- function(input, output, session){
       data = da(),
       family = C_family(),
       prior = C_prior_rv$prior_set_obj,
-      ## Arguments which are preset by design of the UI:
       cores = min(input$advOpts_cores, input$advOpts_chains),
       chains = input$advOpts_chains,
       seed = input$advOpts_seed,
@@ -1418,11 +1417,6 @@ server <- function(input, output, session){
       save_warmup = input$advOpts_save_warmup,
       control = list(adapt_delta = input$advOpts_adapt_delta,
                      max_treedepth = input$advOpts_max_treedepth),
-      ##
-      ## Arguments which are fixed to a certain value:
-      silent = TRUE,
-      verbose = FALSE
-      ##
     )
     if(!is.na(input$advOpts_warmup)){
       args_brm <- c(args_brm,

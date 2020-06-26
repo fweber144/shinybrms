@@ -465,11 +465,8 @@ ui <- navbarPage(
                               HTML(paste0("Progress-refreshing step size (", code("\"refresh\""), "):")),
                               value = NA, step = 1L, min = 0L),
                  checkboxInput("advOpts_save_all_pars",
-                               strong("Save draws for", em("all"), "parameters, including internal ones (", code("\"save_all_pars\"", .noWS = "outside"), ")"),
+                               strong("Save draws from", em("all"), "parameters, including internal ones (", code("\"save_all_pars\"", .noWS = "outside"), ")"),
                                value = FALSE),
-                 checkboxInput("advOpts_save_ranef",
-                               strong("Save draws for varying effects (", code("\"save_ranef\"", .noWS = "outside"), ")"),
-                               value = TRUE),
                  checkboxInput("advOpts_save_warmup", strong("Save warmup"),
                                value = TRUE))
         )
@@ -1417,7 +1414,6 @@ server <- function(input, output, session){
       init_r = input$advOpts_init_r,
       open_progress = input$advOpts_open_progress,
       save_all_pars = input$advOpts_save_all_pars,
-      save_ranef = input$advOpts_save_ranef,
       save_warmup = input$advOpts_save_warmup,
       control = list(adapt_delta = input$advOpts_adapt_delta,
                      max_treedepth = input$advOpts_max_treedepth)

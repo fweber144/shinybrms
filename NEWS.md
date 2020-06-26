@@ -1,10 +1,5 @@
 # shinybrms 1.2.1.9000
 
-## Minor changes
-
-  - Added the "Advanced option" specifying if the draws for the varying
-    effects shall be saved or not.
-
 ## Bug fixes
 
   - Fixed a NOTE occurring in some CRAN checks.

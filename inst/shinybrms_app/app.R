@@ -486,6 +486,10 @@ ui <- navbarPage(
       textOutput("fit_date"),
       br(),
       # br(),
+      h4("Warnings"),
+      verbatimTextOutput("fit_warn", placeholder = TRUE),
+      br(),
+      # br(),
       h4("Hamiltonian Monte Carlo (HMC) diagnostics"),
       strong("Divergences:"),
       verbatimTextOutput("diagn_div", placeholder = TRUE),
@@ -1519,6 +1523,21 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     C_fit()$fit@date
   })
+  
+  output$fit_warn <- renderText({
+    invisible(req(C_fit()))
+    fit_warn_tmp <- capture.output({
+      rstan:::throw_sampler_warnings(C_fit()$fit)
+    }, type = "message")
+    n_chains_out <- C_fit()$fit@sim$chains
+    stopifnot(identical(n_chains_out,
+                        dim(as.array(C_fit()$fit))[2]))
+    if(n_chains_out < input$advOpts_chains){
+      fit_warn_tmp <- c(fit_warn_tmp,
+                        "Warning: At least one chain exited with an error. The results should not be used.")
+    }
+    return(fit_warn_tmp)
+  }, sep = "\n")
   
   output$diagn_div <- renderText({
     invisible(req(C_fit()))

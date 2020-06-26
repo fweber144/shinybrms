@@ -1420,7 +1420,7 @@ server <- function(input, output, session){
       save_ranef = input$advOpts_save_ranef,
       save_warmup = input$advOpts_save_warmup,
       control = list(adapt_delta = input$advOpts_adapt_delta,
-                     max_treedepth = input$advOpts_max_treedepth),
+                     max_treedepth = input$advOpts_max_treedepth)
     )
     if(!is.na(input$advOpts_warmup)){
       args_brm <- c(args_brm,

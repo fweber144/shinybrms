@@ -1395,6 +1395,10 @@ server <- function(input, output, session){
   #------------------------
   # Run Stan
   
+  # For storing the user-specified number of chains (will be updated when creating C_fit and will be
+  # used when printing the warnings):
+  n_chains_spec <- NULL
+  
   C_fit <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,
@@ -1404,6 +1408,9 @@ server <- function(input, output, session){
         input$advOpts_init_r,
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
+    
+    n_chains_spec <<- input$advOpts_chains
+    
     args_brm <- list(
       formula = C_formula(),
       data = da(),
@@ -1532,7 +1539,7 @@ server <- function(input, output, session){
     n_chains_out <- C_fit()$fit@sim$chains
     stopifnot(identical(n_chains_out,
                         dim(as.array(C_fit()$fit))[2]))
-    if(n_chains_out < input$advOpts_chains){
+    if(n_chains_out < n_chains_spec){
       fit_warn_tmp <- c(fit_warn_tmp,
                         "Warning: At least one chain exited with an error. The results should not be used.")
     }

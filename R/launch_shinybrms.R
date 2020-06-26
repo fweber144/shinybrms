@@ -49,6 +49,8 @@ launch_shinybrms <- function(...){
   if(FALSE){
     # Just a dummy call of a "brms" function for avoiding a NOTE in CRAN checks on some platforms:
     brms::expp1(0)
+    # Just a dummy call of an "rstan" function for avoiding a NOTE in CRAN checks on some platforms:
+    rstan::set_cppo()
   }
   return(invisible(TRUE))
 }

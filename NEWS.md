@@ -1,5 +1,12 @@
 # shinybrms 1.2.1.9000
 
+## Minor changes
+
+  - Show more warnings from the Stan run. Some of these additional 
+    warnings overlap with the HMC diagnostics added in v1.2.0, but
+    rather show too many warnings (even if they are partly duplicated)
+    than too few.
+
 ## Bug fixes
 
   - Fixed a NOTE occurring in some CRAN checks.

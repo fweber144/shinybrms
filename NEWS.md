@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Minor improvements in the UI.
   - Show more warnings from the Stan run. Some of these additional 
     warnings overlap with the HMC diagnostics added in v1.2.0, but
     rather show too many warnings (even if they are partly duplicated)

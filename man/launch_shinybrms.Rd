@@ -2,7 +2,7 @@
 % Please edit documentation in R/launch_shinybrms.R
 \name{launch_shinybrms}
 \alias{launch_shinybrms}
-\title{Launch the \pkg{shinybrms} Shiny app}
+\title{Launch the \bold{shinybrms} Shiny app}
 \usage{
 launch_shinybrms(...)
 }
@@ -15,30 +15,30 @@ Shiny app in the system's default web browser (even if using RStudio), set argum
 \code{TRUE} (invisible).
 }
 \description{
-This function launches the \pkg{shinybrms} Shiny app.
+This function launches the \bold{shinybrms} Shiny app.
 }
 \note{
-The following global options are introduced by \pkg{shinybrms}:
+The following global options are introduced by \bold{shinybrms}:
 \itemize{
 \item \code{shinybrms.prog_browser}: The value for the global option \code{browser} to be used for opening the
 \href{https://mc-stan.org/}{Stan} progress file (an HTML file). Defaults to option \code{browser} (see
 \code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser} cannot be used for the Stan
-progress file. Therefore, \pkg{shinybrms} automatically redefines RStudio's default for option
+progress file. Therefore, \bold{shinybrms} automatically redefines RStudio's default for option
 \code{browser} to fix this issue.
 \item \code{shinybrms.shinystan_browser}: The value for the global option
-\code{browser} to be used for opening the \pkg{shinystan} app. Defaults to option \code{browser} (see
+\code{browser} to be used for opening the \bold{shinystan} app. Defaults to option \code{browser} (see
 \code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser} cannot be used for opening
-the \pkg{shinystan} app from within \pkg{shinybrms}. Therefore, \pkg{shinybrms} automatically
+the \bold{shinystan} app from within \bold{shinybrms}. Therefore, \bold{shinybrms} automatically
 redefines RStudio's default for option \code{browser} to fix this issue.
 }
 
-The only other global option used by \pkg{shinybrms} is \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If
-option \code{mc.cores} is set, then the advanced option "Cores" (in the \pkg{shinybrms} app) defaults
+The only other global option used by \bold{shinybrms} is \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If
+option \code{mc.cores} is set, then the advanced option "Cores" (in the \bold{shinybrms} app) defaults
 to the value of this option. If option \code{mc.cores} is not set, then the advanced option "Cores"
 defaults to the value returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
 
-Note that \pkg{shinystan}'s global option \code{shinystan.rstudio} (see
-\code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \pkg{shinystan} is called from an
+Note that \bold{shinystan}'s global option \code{shinystan.rstudio} (see
+\code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \bold{shinystan} is called from an
 external \R process where RStudio's browsers are not available.
 }
 \examples{

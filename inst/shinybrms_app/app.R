@@ -244,7 +244,7 @@ ui <- navbarPage(
       "placing independent priors on all parameters separately. Notes:",
       tags$ul(
         tags$li("For parameters for which you do not specify a",
-                "custom prior, the default prior from the package", 
+                "custom prior, the default prior from the package",
                 strong("brms"), "will be used."),
         tags$li("The parameter named \"Intercept\" is the intercept when centering the predictors.",
                 "This is only the internally used intercept; for the output, the intercept with",

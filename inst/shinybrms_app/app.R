@@ -609,7 +609,7 @@ ui <- navbarPage(
                     .noWS = "outside"),
                   ")"),
           tags$li(strong("Version:"),
-                  "1.2.2"),
+                  "1.2.2.9000"),
           tags$li(strong("Date (yyyy-mm-dd):"),
                   "2020-07-01"),
           tags$li(strong("License:"),
@@ -618,7 +618,7 @@ ui <- navbarPage(
                   "Frank Weber (2020).",
                   em("shinybrms: Graphical User Interface (Shiny App)",
                      "for Package 'brms'."),
-                  "R package, version 1.2.2. URL:",
+                  "R package, version 1.2.2.9000. URL:",
                   a("https://fweber144.github.io/shinybrms/",
                     href = "https://fweber144.github.io/shinybrms/",
                     target = "_blank"))

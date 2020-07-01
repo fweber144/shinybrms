@@ -187,7 +187,7 @@ knitr::include_graphics("screenshots/bacteria_15.png")
 ### Inspecting the output
 
 \
-We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". At the top of this "Output" panel, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, these HMC-specific diagnostics are all OK:
+We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". If the Stan run produced warnings, they are shown at the top of this "Output" panel (below the date and the time when the Stan run was finished). Furthermore, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, no warnings have occurred and the HMC-specific diagnostics are all OK:
 
 \
 ```{r echo = FALSE, results = "hide"}

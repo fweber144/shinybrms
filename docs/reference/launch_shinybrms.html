@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Launch the <span class="pkg">shinybrms</span> Shiny app — launch_shinybrms • shinybrms</title>
+<title>Launch the <b>shinybrms</b> Shiny app — launch_shinybrms • shinybrms</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Launch the <span class="pkg">shinybrms</span> Shiny app — launch_shinybrms" />
+<meta property="og:title" content="Launch the <b>shinybrms</b> Shiny app — launch_shinybrms" />
 <meta property="og:description" content="This function launches the shinybrms Shiny app." />
 <meta property="og:image" content="/logo.svg" />
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
       </span>
     </div>
 
@@ -122,13 +122,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Launch the <span class="pkg">shinybrms</span> Shiny app</h1>
+    <h1>Launch the <b>shinybrms</b> Shiny app</h1>
     <small class="dont-index">Source: <a href='https://github.com/fweber144/shinybrms/blob/master/R/launch_shinybrms.R'><code>R/launch_shinybrms.R</code></a></small>
     <div class="hidden name"><code>launch_shinybrms.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This function launches the <span class="pkg">shinybrms</span> Shiny app.</p>
+    <p>This function launches the <b>shinybrms</b> Shiny app.</p>
     </div>
 
     <pre class="usage"><span class='fu'>launch_shinybrms</span>(<span class='no'>...</span>)</pre>
@@ -149,25 +149,25 @@ Shiny app in the system's default web browser (even if using RStudio), set argum
     <p><code>TRUE</code> (invisible).</p>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
-    <p>The following global options are introduced by <span class="pkg">shinybrms</span>:</p><ul>
+    <p>The following global options are introduced by <b>shinybrms</b>:</p><ul>
 <li><p><code>shinybrms.prog_browser</code>: The value for the global option <code>browser</code> to be used for opening the
 <a href='https://mc-stan.org/'>Stan</a> progress file (an HTML file). Defaults to option <code>browser</code> (see
 <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that RStudio's default for option <code>browser</code> cannot be used for the Stan
-progress file. Therefore, <span class="pkg">shinybrms</span> automatically redefines RStudio's default for option
+progress file. Therefore, <b>shinybrms</b> automatically redefines RStudio's default for option
 <code>browser</code> to fix this issue.</p></li>
 <li><p><code>shinybrms.shinystan_browser</code>: The value for the global option
-<code>browser</code> to be used for opening the <span class="pkg">shinystan</span> app. Defaults to option <code>browser</code> (see
+<code>browser</code> to be used for opening the <b>shinystan</b> app. Defaults to option <code>browser</code> (see
 <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that RStudio's default for option <code>browser</code> cannot be used for opening
-the <span class="pkg">shinystan</span> app from within <span class="pkg">shinybrms</span>. Therefore, <span class="pkg">shinybrms</span> automatically
+the <b>shinystan</b> app from within <b>shinybrms</b>. Therefore, <b>shinybrms</b> automatically
 redefines RStudio's default for option <code>browser</code> to fix this issue.</p></li>
 </ul>
 
-<p>The only other global option used by <span class="pkg">shinybrms</span> is <code>mc.cores</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): If
-option <code>mc.cores</code> is set, then the advanced option "Cores" (in the <span class="pkg">shinybrms</span> app) defaults
+<p>The only other global option used by <b>shinybrms</b> is <code>mc.cores</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): If
+option <code>mc.cores</code> is set, then the advanced option "Cores" (in the <b>shinybrms</b> app) defaults
 to the value of this option. If option <code>mc.cores</code> is not set, then the advanced option "Cores"
 defaults to the value returned by <code><a href='https://rdrr.io/r/parallel/detectCores.html'>parallel::detectCores()</a></code>.</p>
-<p>Note that <span class="pkg">shinystan</span>'s global option <code>shinystan.rstudio</code> (see
-<code><a href='https://rdrr.io/pkg/shinystan/man/launch_shinystan.html'>shinystan::launch_shinystan()</a></code>) may not be used here as <span class="pkg">shinystan</span> is called from an
+<p>Note that <b>shinystan</b>'s global option <code>shinystan.rstudio</code> (see
+<code><a href='https://rdrr.io/pkg/shinystan/man/launch_shinystan.html'>shinystan::launch_shinystan()</a></code>) may not be used here as <b>shinystan</b> is called from an
 external <span style="R">R</span> process where RStudio's browsers are not available.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>

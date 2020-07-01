@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2</span>
       </span>
     </div>
 
@@ -125,21 +125,41 @@
       <small>Source: <a href='https://github.com/fweber144/shinybrms/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="shinybrms-121" class="section level1">
-<h1 class="page-header" data-toc-text="1.2.1">
-<a href="#shinybrms-121" class="anchor"></a>shinybrms 1.2.1<small> Unreleased </small>
+    <div id="shinybrms-122" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.2">
+<a href="#shinybrms-122" class="anchor"></a>shinybrms 1.2.2<small> Unreleased </small>
 </h1>
 <div id="minor-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI.</li>
-<li>Updated information about the <strong>shinybrms</strong> package and app (e.g. added the URL of the <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong> website</a>).</li>
+<li>Show more warnings from the Stan run. Some of these additional warnings overlap with the HMC diagnostics added in v1.2.0, but rather show too many warnings (even if they are partly duplicated) than too few.</li>
 </ul>
 </div>
 <div id="bug-fixes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Fixed a NOTE occurring in some CRAN checks.</li>
+</ul>
+</div>
+</div>
+    <div id="shinybrms-121" class="section level1">
+<h1 class="page-header" data-toc-text="1.2.1">
+<a href="#shinybrms-121" class="anchor"></a>shinybrms 1.2.1<small> 2020-06-25 </small>
+</h1>
+<div id="minor-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
+<ul>
+<li>Minor improvements in the UI.</li>
+<li>Updated information about the <strong>shinybrms</strong> package and app (e.g. added the URL of the <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong> website</a>).</li>
+</ul>
+</div>
+<div id="bug-fixes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug causing the sampling progress file not to open up if RStudio’s internal <code>rs_shinyviewer</code> was used for option <code>"browser"</code>.</li>
 </ul>
@@ -156,20 +176,20 @@
 <li>Show Hamiltonian Monte Carlo (HMC) diagnostics in the “Output” panel on page “Posterior”.</li>
 </ul>
 </div>
-<div id="minor-changes-1" class="section level2">
+<div id="minor-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Added a package website built with <code>pkgdown</code>.</li>
 <li>Added a package logo created with <code>hexSticker</code>.</li>
 <li>Require R &gt;= 3.6.0.</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
-<li>Try to fix a NOTE occurring in some CRAN checks.</li>
+<li>Fixed a NOTE occurring in some CRAN checks.</li>
 </ul>
 </div>
 </div>
@@ -184,9 +204,9 @@
 <li>Added the possibility to include varying effects.</li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level2">
+<div id="minor-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>All predictor terms (main effects as well as interactions) are now shown in a preview table.</li>
 <li>It is now possible to remove interaction terms one by one.</li>
@@ -201,9 +221,9 @@
 <li>Allowed *.dat files in the file upload.</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <p>“Under the hood”, there have been many changes which should make the <strong>shinybrms</strong> app more robust. In particular, the following bugs have been fixed:</p>
 <ul>
 <li>Fixed a bug causing the app to crash if the dataset was changed under certain circumstances.</li>
@@ -220,9 +240,9 @@
 <h1 class="page-header" data-toc-text="1.0.1">
 <a href="#shinybrms-101" class="anchor"></a>shinybrms 1.0.1<small> 2020-03-26 </small>
 </h1>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Example datasets:
 <ul>

@@ -1,4 +1,4 @@
-# shinybrms 1.2.2
+# shinybrms 1.2.2 (only GitHub)
 
 ## Minor changes
 

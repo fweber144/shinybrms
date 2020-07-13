@@ -197,7 +197,7 @@ knitr::include_graphics("screenshots/bacteria_16.png")
 *Fig. 16: Page "Posterior", panel "Output" (top).*
 
 \
-Underneath the HMC diagnostics, we get a short summary of our posterior inference including some more general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (see [here](https://arxiv.org/abs/1903.08008) why):
+Underneath the HMC diagnostics, we get a short summary of our posterior inference including some more general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (cf. [Vehtari et al. (2020)](https://doi.org/10.1214/20-BA1221) to see why):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -218,3 +218,7 @@ knitr::include_graphics("screenshots/bacteria_18.png")
 
 \
 At this point, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can also download different output objects (see Fig. 18) to analyze them outside of **shinybrms**.
+
+# References
+
+Vehtari A, Gelman A, Simpson D, Carpenter B, and Bürkner P-C (2020). Rank-normalization, folding, and localization: An improved $\widehat{R}$ for assessing convergence of MCMC. *Bayesian Analysis*. DOI: [10.1214/20-BA1221](https://doi.org/10.1214/20-BA1221)

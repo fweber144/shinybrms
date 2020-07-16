@@ -55,7 +55,7 @@ knitr::include_graphics("screenshots/bacteria_3.png")
 ### Predictors
 
 \
-After selecting the tab "Predictors", we define the variables `week` and `trt` to have nonvarying main effects and variable `ID` to have varying intercepts:
+After selecting the tab "Predictors", we define the variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -65,7 +65,7 @@ knitr::include_graphics("screenshots/bacteria_4.png")
 *Fig. 4: Page "Likelihood", tab "Predictors" (top).*
 
 \
-After scrolling down, we set up a (nonvarying) interaction term for `week` and `trt`:
+After scrolling down, we set up a (nonpooled) interaction term for `week` and `trt`:
 
 \
 ```{r echo = FALSE, results = "hide"}

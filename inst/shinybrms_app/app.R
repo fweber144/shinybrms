@@ -678,12 +678,6 @@ ui <- navbarPage(
             a("website", href = "https://mc-stan.org/shinystan/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
-            strong("rstanarm"), ": ",
-            a("CRAN", href = "https://CRAN.R-project.org/package=rstanarm", target = "_blank"), ", ",
-            a("GitHub", href = "https://github.com/stan-dev/rstanarm/", target = "_blank"), ", ",
-            a("website", href = "https://mc-stan.org/rstanarm/", target = "_blank")
-          ))),
-          tags$li(HTML(paste0(
             strong("lme4"), ": ",
             a("CRAN", href = "https://CRAN.R-project.org/package=lme4", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/lme4/lme4/", target = "_blank")
@@ -691,6 +685,12 @@ ui <- navbarPage(
           tags$li(HTML(paste0(
             strong("MASS"), ": ",
             a("CRAN", href = "https://CRAN.R-project.org/package=MASS", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("rstanarm"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=rstanarm", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/stan-dev/rstanarm/", target = "_blank"), ", ",
+            a("website", href = "https://mc-stan.org/rstanarm/", target = "_blank")
           )))
         )
       )

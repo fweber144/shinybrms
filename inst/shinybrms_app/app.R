@@ -711,17 +711,15 @@ ui <- navbarPage(
         tags$ul(
           tags$li("Introductory:",
                   tags$ul(
-                    tags$li("McElreath, R. (2016).",
-                            em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan"),
-                            "(1st ed.",
-                            em("[Note that there is also a second edition available.]"),
-                            "). CRC Press.")
+                    tags$li("McElreath R (2016).",
+                            em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
+                            ". 1st ed. Boca Raton, FL: CRC Press.")
                   )),
           tags$li("Introductory to more advanced:",
                   tags$ul(
-                    tags$li("Gelman, A., Carlin, J. B., Stern, H. S., Dunson, D. B., Vehtari, A., & Rubin, D. B. (2014).",
-                            em("Bayesian Data Analysis"),
-                            "(3rd ed.). CRC Press.")
+                    tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
+                            em("Bayesian Data Analysis", .noWS = "after"),
+                            ". 3rd ed. Boca Raton, FL: CRC Press.")
                   ))
         )
       )

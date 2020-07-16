@@ -1,5 +1,10 @@
 # shinybrms 1.2.2.9000
 
+## Minor changes
+
+  - Use the term "nonpooled effects" instead of "nonvarying effects" and
+    the term "partially pooled effects" instead of "varying effects".
+
 # shinybrms 1.2.2 (only GitHub)
 
 ## Minor changes

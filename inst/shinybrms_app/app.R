@@ -162,33 +162,31 @@ ui <- navbarPage(
           h3("Main effects"),
           helpText("Note:",
                    tags$ul(
-                     tags$li("Nonvarying effects are also known as population-level or \"fixed\" effects."),
-                     tags$li("Varying effects are also known as group-level or \"random\" effects."),
-                   ),
-                   "The terms \"fixed\" and \"random\" effects are put in quotation marks as they",
-                   "are not really appropriate for a Bayesian regression model."),
-          h4("Nonvarying main effects"),
+                     tags$li("Nonpooled effects are also known as constant, population-level, or fixed effects."),
+                     tags$li("Partially pooled effects are also known as varying, group-level, or random effects."),
+                   )),
+          h4("Nonpooled main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
-                   "nonvarying main effects shall be added."),
+                   "nonpooled main effects shall be added."),
           selectInput("pred_mainNV_sel", NULL,
-                      choices = c("Choose variables for nonvarying main effects ..." = ""),
+                      choices = c("Choose variables for nonpooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
-          h4("Varying intercepts"),
+          h4("Partially pooled main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
-                   "varying intercepts shall be added."),
+                   "partially pooled main effects shall be added."),
           selectInput("pred_mainV_sel", NULL,
-                      choices = c("Choose variables for varying intercepts ..." = ""),
+                      choices = c("Choose variables for partially pooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE)
         ),
         wellPanel(
           h3("Interaction effects"),
           helpText(
-            p("Here, the term \"interaction\" not only includes interactions between",
-              "population-level predictors, but also between population-level and group-level",
-              "predictors (yielding varying slopes) as well as between group-level predictors",
-              "(yielding a new group-level predictor with varying intercepts).",
+            p("Here, the term \"interaction\" not only denotes interactions involving only",
+              "predictors with nonpooled effects (yielding an interaction with nonpooled effects),",
+              "but also interactions involving predictors with partially pooled effects (yielding",
+              "an interaction with partially pooled effects).",
               "This broad definition of \"interaction\" is indicated here by the symbol \"<-->\"."),
             p("Only variables already having a main effect may be included in an interaction",
               "term. In the rare case that you really need an interaction involving a variable",
@@ -299,7 +297,7 @@ ui <- navbarPage(
                     selectize = TRUE),
         selectInput("prior_group_sel",
                     HTML(paste0(
-                      "Group (for varying effects):",
+                      "Group (for partially pooled effects):",
                       helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
                                "use all groups belonging to the selected parameter class.",
                                "Unfortunately, you are not able to clear this \"Group\" field",
@@ -530,12 +528,12 @@ ui <- navbarPage(
             "are used. These are as follows:",
             tags$ul(
               tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
-              tags$li("The parameters starting with \"b_\" are the (nonvarying) regression coefficients."),
-              tags$li("The parameters starting with \"r_\" are the varying effects."),
+              tags$li("The parameters starting with \"b_\" are the (nonpooled) regression coefficients."),
+              tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
               tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
-                      "varying effects."),
+                      "partially pooled effects."),
               tags$li("The parameters starting with \"cor_\" are the correlations between the",
-                      "varying effects of the same group-level term."),
+                      "partially pooled effects of the same group."),
               tags$li("\"log-posterior\" is the (accumulated) log-posterior density (up to a constant)."),
               tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
                                  "distributional family for the outcome (see page \"Likelihood\"",
@@ -952,11 +950,11 @@ server <- function(input, output, session){
   observe({
     if(inherits(try(da(), silent = TRUE), "try-error")){
       updateSelectInput(session, "pred_mainNV_sel",
-                        choices = c("Choose variables for nonvarying main effects ..." = ""))
+                        choices = c("Choose variables for nonpooled main effects ..." = ""))
       return()
     }
     updateSelectInput(session, "pred_mainNV_sel",
-                      choices = c("Choose variables for nonvarying main effects ..." = "",
+                      choices = c("Choose variables for nonpooled main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
                                             input$pred_mainV_sel))),
@@ -966,11 +964,11 @@ server <- function(input, output, session){
   observe({
     if(inherits(try(da(), silent = TRUE), "try-error")){
       updateSelectInput(session, "pred_mainV_sel",
-                        choices = c("Choose variables for varying intercepts ..." = ""))
+                        choices = c("Choose variables for partially pooled main effects ..." = ""))
       return()
     }
     updateSelectInput(session, "pred_mainV_sel",
-                      choices = c("Choose variables for varying intercepts ..." = "",
+                      choices = c("Choose variables for partially pooled main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
                                             input$pred_mainNV_sel))),
@@ -1012,7 +1010,7 @@ server <- function(input, output, session){
   })
   
   # Ensure that all variables involved in the interaction terms have a main effect (either
-  # nonvarying or varying):
+  # nonpooled or partially pooled):
   observeEvent({
     input$pred_mainNV_sel
     input$pred_mainV_sel
@@ -1054,10 +1052,10 @@ server <- function(input, output, session){
       # Perform the following tasks (at the same time):
       #   - Expand interactions on the group-level side (in principle, this is not necessary as the
       #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
-      #     including correlations between the varying effects of a specific group-level term, the
-      #     terms on the population-level side need to be grouped by the term on the group-level side)
-      #   - For varying effects, add the corresponding nonvarying effects since the varying effects
-      #     are assumed to have mean zero.
+      #     including correlations between the partially pooled effects of a specific group-level term, the
+      #     terms on the population-level side need to be grouped by the term on the group-level side).
+      #   - For partially pooled slopes, add the corresponding nonpooled slopes since the partially pooled 
+      #     slopes are assumed to have mean zero.
       # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
       # containing the group-level terms of a given element of "pred_lst".
       # The second task is performed by additionally applying combn() to m = 0L when performing
@@ -1133,8 +1131,8 @@ server <- function(input, output, session){
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x){
-    x <- sub("^from_mainNV$", "Population-level effects", x)
-    x <- sub("^from_mainV$", "Group-level effects", x)
+    x <- sub("^from_mainNV$", "Coefficient", x)
+    x <- sub("^from_mainV$", "Group", x)
     return(x)
   })
   

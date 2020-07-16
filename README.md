@@ -23,9 +23,8 @@ specifically, using its R interface, the R package
 was created using the R package
 [**shiny**](https://CRAN.R-project.org/package=shiny).
 
-To get an impression of the **shinybrms** app, have a look at the
-[**shinybrms**
-website](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
+To get an impression of the **shinybrms** app, have a look at [this
+page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
 The following text explains how to launch the **shinybrms** app.
 
 ## Launching the shinybrms app

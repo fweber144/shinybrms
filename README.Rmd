@@ -25,7 +25,7 @@ knitr::opts_chunk$set(
 
 This [R](https://www.R-project.org/) package **shinybrms** provides a graphical user interface (GUI) for the R package [**brms**](https://CRAN.R-project.org/package=brms) which allows to fit Bayesian regression models using [Stan](https://mc-stan.org/) (more specifically, using its R interface, the R package [**rstan**](https://CRAN.R-project.org/package=rstan)). The **shinybrms** GUI is a [Shiny](https://shiny.rstudio.com/) app, i.e. it was created using the R package [**shiny**](https://CRAN.R-project.org/package=shiny).
 
-To get an impression of the **shinybrms** app, have a look at the [**shinybrms** website](https://fweber144.github.io/shinybrms/articles/shinybrms.html). The following text explains how to launch the **shinybrms** app.
+To get an impression of the **shinybrms** app, have a look at [this page](https://fweber144.github.io/shinybrms/articles/shinybrms.html). The following text explains how to launch the **shinybrms** app.
 
 ## Launching the shinybrms app
 

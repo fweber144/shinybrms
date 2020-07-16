@@ -32,9 +32,9 @@ The following text explains how to launch the **shinybrms** app.
 There are two options for launching the **shinybrms** app:
 
   - Install the R package **shinybrms** (either [from
-    GitHub](https://github.com/fweber144/shinybrms) or [from
-    CRAN](https://CRAN.R-project.org/package=shinybrms)) and then launch
-    the **shinybrms** app from the installed package.
+    CRAN](https://CRAN.R-project.org/package=shinybrms) or [from
+    GitHub](https://github.com/fweber144/shinybrms)) and then launch the
+    **shinybrms** app from the installed package.
   - Launch the **shinybrms** app directly [from
     GitHub](https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app).
 
@@ -53,18 +53,24 @@ you need to perform the following steps first:
 
 ### *With* installation of shinybrms
 
-1.  Install the R package **shinybrms** either from GitHub or from CRAN.
-    Note that installing from GitHub might give a more recent version of
-    **shinybrms** than installing from CRAN. You also need to decide
-    whether you want to use the example datasets from the R packages
+1.  Install the R package **shinybrms** either from CRAN or from GitHub.
+    The GitHub version might be more recent than the CRAN version. You
+    also need to decide whether you want to use the example datasets
+    from the R packages
     [**lme4**](https://CRAN.R-project.org/package=lme4),
     [**MASS**](https://CRAN.R-project.org/package=MASS), and
     [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) or not.
     
       - If you *don’t want* to use the example datasets from the R
         packages **lme4**, **MASS**, and **rstanarm**, then the R code
-        for installing **shinybrms** from GitHub and CRAN (respectively)
+        for installing **shinybrms** from CRAN and GitHub (respectively)
         is as follows:
+          - To install **shinybrms** from CRAN:
+            
+            ``` r
+            install.packages("shinybrms")
+            ```
+        
           - To install **shinybrms** from GitHub:
             
             ``` r
@@ -73,16 +79,16 @@ you need to perform the following steps first:
             }
             devtools::install_github("fweber144/shinybrms")
             ```
-        
+      - If you *want* to use the example datasets from the R packages
+        **lme4**, **MASS**, and **rstanarm**, then the R code for
+        installing **shinybrms** from CRAN and GitHub (respectively) is
+        as follows:
           - To install **shinybrms** from CRAN:
             
             ``` r
-            install.packages("shinybrms")
+            install.packages("shinybrms", dependencies = TRUE)
             ```
-      - If you *want* to use the example datasets from the R packages
-        **lme4**, **MASS**, and **rstanarm**, then the R code for
-        installing **shinybrms** from GitHub and CRAN (respectively) is
-        as follows:
+        
           - To install **shinybrms** from GitHub:
             
             ``` r
@@ -90,12 +96,6 @@ you need to perform the following steps first:
               install.packages("devtools")
             }
             devtools::install_github("fweber144/shinybrms", dependencies = TRUE)
-            ```
-        
-          - To install **shinybrms** from CRAN:
-            
-            ``` r
-            install.packages("shinybrms", dependencies = TRUE)
             ```
 
 2.  Launch the **shinybrms** app by either running the following R code:

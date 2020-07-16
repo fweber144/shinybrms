@@ -168,14 +168,14 @@ ui <- navbarPage(
           h4("Nonpooled main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "nonpooled main effects shall be added."),
-          selectInput("pred_mainNV_sel", NULL,
+          selectInput("pred_mainNP_sel", NULL,
                       choices = c("Choose variables for nonpooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           h4("Partially pooled main effects"),
           helpText("Start typing or click into the field below to choose variables for which",
                    "partially pooled main effects shall be added."),
-          selectInput("pred_mainV_sel", NULL,
+          selectInput("pred_mainPP_sel", NULL,
                       choices = c("Choose variables for partially pooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE)
@@ -904,8 +904,8 @@ server <- function(input, output, session){
     updateSelectInput(session, "outc_sel",
                       choices = c("Choose outcome ..." = "",
                                   setdiff(names(da()),
-                                          c(input$pred_mainNV_sel,
-                                            input$pred_mainV_sel))),
+                                          c(input$pred_mainNP_sel,
+                                            input$pred_mainPP_sel))),
                       selected = isolate(input$outc_sel))
   })
   
@@ -949,30 +949,30 @@ server <- function(input, output, session){
   
   observe({
     if(inherits(try(da(), silent = TRUE), "try-error")){
-      updateSelectInput(session, "pred_mainNV_sel",
+      updateSelectInput(session, "pred_mainNP_sel",
                         choices = c("Choose variables for nonpooled main effects ..." = ""))
       return()
     }
-    updateSelectInput(session, "pred_mainNV_sel",
+    updateSelectInput(session, "pred_mainNP_sel",
                       choices = c("Choose variables for nonpooled main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            input$pred_mainV_sel))),
-                      selected = isolate(input$pred_mainNV_sel))
+                                            input$pred_mainPP_sel))),
+                      selected = isolate(input$pred_mainNP_sel))
   })
   
   observe({
     if(inherits(try(da(), silent = TRUE), "try-error")){
-      updateSelectInput(session, "pred_mainV_sel",
+      updateSelectInput(session, "pred_mainPP_sel",
                         choices = c("Choose variables for partially pooled main effects ..." = ""))
       return()
     }
-    updateSelectInput(session, "pred_mainV_sel",
+    updateSelectInput(session, "pred_mainPP_sel",
                       choices = c("Choose variables for partially pooled main effects ..." = "",
                                   setdiff(names(da()),
                                           c(input$outc_sel,
-                                            input$pred_mainNV_sel))),
-                      selected = isolate(input$pred_mainV_sel))
+                                            input$pred_mainNP_sel))),
+                      selected = isolate(input$pred_mainPP_sel))
   })
   
   #------------------------
@@ -986,8 +986,8 @@ server <- function(input, output, session){
     }
     updateSelectInput(session, "pred_int_build",
                       choices = c("Choose variables for an interaction term ..." = "",
-                                  input$pred_mainNV_sel,
-                                  input$pred_mainV_sel),
+                                  input$pred_mainNP_sel,
+                                  input$pred_mainPP_sel),
                       selected = isolate(input$pred_int_build))
   })
   
@@ -1004,20 +1004,20 @@ server <- function(input, output, session){
                                      paste(input$pred_int_build, collapse = "<-->")))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
-                                    input$pred_mainNV_sel,
-                                    input$pred_mainV_sel))
+                                    input$pred_mainNP_sel,
+                                    input$pred_mainPP_sel))
     }
   })
   
   # Ensure that all variables involved in the interaction terms have a main effect (either
   # nonpooled or partially pooled):
   observeEvent({
-    input$pred_mainNV_sel
-    input$pred_mainV_sel
+    input$pred_mainNP_sel
+    input$pred_mainPP_sel
   }, {
     pred_int_keep <- sapply(pred_int_rv$choices, function(x){
-      all(x %in% c(input$pred_mainNV_sel,
-                   input$pred_mainV_sel))
+      all(x %in% c(input$pred_mainNP_sel,
+                   input$pred_mainPP_sel))
     })
     if(any(pred_int_keep)){
       pred_int_rv$choices <- pred_int_rv$choices[pred_int_keep]
@@ -1038,14 +1038,14 @@ server <- function(input, output, session){
   # Combination of all predictor terms
   
   C_pred <- reactive({
-    if(is.null(input$pred_mainNV_sel) && is.null(input$pred_mainV_sel)){
-      return(data.frame("from_mainV" = factor(NA_character_, levels = NA_character_, exclude = NULL),
-                        "from_mainNV" = "1"))
+    if(is.null(input$pred_mainNP_sel) && is.null(input$pred_mainPP_sel)){
+      return(data.frame("from_mainPP" = factor(NA_character_, levels = NA_character_, exclude = NULL),
+                        "from_mainNP" = "1"))
     }
     
     pred_lst <- c(
-      as.list(input$pred_mainNV_sel),
-      as.list(input$pred_mainV_sel),
+      as.list(input$pred_mainNP_sel),
+      as.list(input$pred_mainPP_sel),
       pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
     )
     if(length(input$pred_int_sel) > 0L){
@@ -1061,15 +1061,15 @@ server <- function(input, output, session){
       # The second task is performed by additionally applying combn() to m = 0L when performing
       # the first task.
       pred_needsExpand <- sapply(pred_lst, function(x){
-        sum(x %in% input$pred_mainV_sel) > 0L
+        sum(x %in% input$pred_mainPP_sel) > 0L
       })
       if(any(pred_needsExpand)){ # This if() condition is not necessary, but included for better readability.
         pred_lst_toExpand <- pred_lst[pred_needsExpand]
         pred_lst_expanded <- do.call("c", lapply(pred_lst_toExpand, function(x){
-          x_V <- intersect(x, input$pred_mainV_sel)
+          x_V <- intersect(x, input$pred_mainPP_sel)
           x_V_lst_expanded <- unlist(lapply(c(0L, seq_along(x_V)), combn, x = x_V, simplify = FALSE),
                                      recursive = FALSE)
-          x_NV <- intersect(x, input$pred_mainNV_sel)
+          x_NV <- intersect(x, input$pred_mainNP_sel)
           lapply(x_V_lst_expanded, "c", x_NV)
         }))
         pred_lst <- c(pred_lst[!pred_needsExpand],
@@ -1082,7 +1082,7 @@ server <- function(input, output, session){
       # By group-level term: Check each population-level term for being a "subterm" (lower-order
       # term) of a high-order term and if yes, remove it:
       pred_vec_chr <- sapply(pred_lst, function(x){
-        x_V <- intersect(x, input$pred_mainV_sel)
+        x_V <- intersect(x, input$pred_mainPP_sel)
         if(length(x_V) > 0L){
           return(paste(x_V, collapse = "<-->"))
         } else{
@@ -1091,7 +1091,7 @@ server <- function(input, output, session){
       })
       pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
       pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
-        x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNV_sel)
+        x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNP_sel)
         x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
           any(sapply(x_NV_lst[-idx], function(x_NV){
             all(x_NV_lst[[idx]] %in% x_NV)
@@ -1103,23 +1103,23 @@ server <- function(input, output, session){
     }
     
     pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
-      x_NV <- intersect(x, input$pred_mainNV_sel)
+      x_NV <- intersect(x, input$pred_mainNP_sel)
       if(length(x_NV) > 0L){
         x_NV <- paste(x_NV, collapse = "*")
       } else{
         x_NV <- NA_character_
       }
-      x_V <- intersect(x, input$pred_mainV_sel)
+      x_V <- intersect(x, input$pred_mainPP_sel)
       if(length(x_V) > 0L){
         x_V <- paste(x_V, collapse = ":")
       } else{
         x_V <- NA_character_
       }
-      data.frame("from_mainNV" = x_NV,
-                 "from_mainV" = x_V)
+      data.frame("from_mainNP" = x_NV,
+                 "from_mainPP" = x_V)
     }))
-    pred_DF$from_mainV <- factor(pred_DF$from_mainV, levels = unique(pred_DF$from_mainV), exclude = NULL)
-    pred_DF <- aggregate(from_mainNV ~ from_mainV, pred_DF, function(x){
+    pred_DF$from_mainPP <- factor(pred_DF$from_mainPP, levels = unique(pred_DF$from_mainPP), exclude = NULL)
+    pred_DF <- aggregate(from_mainNP ~ from_mainPP, pred_DF, function(x){
       paste(c("1", x[!is.na(x)]), collapse = " + ")
     }, na.action = na.pass)
     return(pred_DF)
@@ -1131,8 +1131,8 @@ server <- function(input, output, session){
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x){
-    x <- sub("^from_mainNV$", "Coefficient", x)
-    x <- sub("^from_mainV$", "Group", x)
+    x <- sub("^from_mainNP$", "Coefficient", x)
+    x <- sub("^from_mainPP$", "Group", x)
     return(x)
   })
   
@@ -1143,10 +1143,10 @@ server <- function(input, output, session){
     req(input$outc_sel)
     
     formula_splitted <- apply(C_pred(), 1, function(x){
-      if(is.na(x["from_mainV"])){
-        return(x["from_mainNV"])
+      if(is.na(x["from_mainPP"])){
+        return(x["from_mainNP"])
       } else{
-        return(paste0("(", x["from_mainNV"], " | ", x["from_mainV"], ")"))
+        return(paste0("(", x["from_mainNP"], " | ", x["from_mainPP"], ")"))
       }
     })
     return(paste(
@@ -1182,8 +1182,8 @@ server <- function(input, output, session){
        inherits(try(C_family(), silent = TRUE), "try-error")){
       return(brms::empty_prior())
     }
-    req(all(c(input$pred_mainNV_sel,
-              input$pred_mainV_sel) %in% names(da())))
+    req(all(c(input$pred_mainNP_sel,
+              input$pred_mainPP_sel) %in% names(da())))
     
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({

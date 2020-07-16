@@ -656,24 +656,41 @@ ui <- navbarPage(
         tags$ul(
           tags$li(HTML(paste0(
             strong("shinybrms"), ": ",
-            a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), ", ",
             a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), ", ",
             a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("brms"), ": ",
-            a("GitHub", href = "https://github.com/paul-buerkner/brms", target = "_blank"), ", ",
-            a("CRAN", href = "https://CRAN.R-project.org/package=brms", target = "_blank")
+            a("CRAN", href = "https://CRAN.R-project.org/package=brms", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/paul-buerkner/brms", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("rstan"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=rstan", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/stan-dev/rstan/", target = "_blank"), ", ",
-            a("CRAN", href = "https://CRAN.R-project.org/package=rstan", target = "_blank")
+            a("website", href = "https://mc-stan.org/rstan/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("shinystan"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=shinystan", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/stan-dev/shinystan/", target = "_blank"), ", ",
-            a("CRAN", href = "https://CRAN.R-project.org/package=shinystan", target = "_blank")
+            a("website", href = "https://mc-stan.org/shinystan/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("rstanarm"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=rstanarm", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/stan-dev/rstanarm/", target = "_blank"), ", ",
+            a("website", href = "https://mc-stan.org/rstanarm/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("lme4"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=lme4", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/lme4/lme4/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("MASS"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=MASS", target = "_blank")
           )))
         )
       )

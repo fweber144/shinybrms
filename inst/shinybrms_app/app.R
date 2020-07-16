@@ -424,19 +424,25 @@ ui <- navbarPage(
       checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
       conditionalPanel(
         condition = "input.show_advOpts",
-        helpText("Notes:",
-                 tags$ol(
-                   tags$li(paste("To obtain reproducible results, you need to specify a value for",
-                                 "option \"Seed\" and enter this value each time you want to",
-                                 "obtain the same results. Leave option \"Seed\" empty to use a",
-                                 "random seed (giving nonreproducible results).")),
-                   tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
-                           "a default value which depends on other options. Leave them empty to",
-                           "use this default value."),
-                   tags$li("Numeric options with a preset value may not be left empty."),
-                   tags$li(paste("Internally, the number of cores is set automatically to the",
-                                 "minimum value of options \"Cores\" and \"Chains\"."))
-                 )),
+        helpText(
+          "Notes:",
+          tags$ol(
+            tags$li(paste("To obtain reproducible results, you need to specify a value for",
+                          "option \"Seed\" and enter this value each time you want to",
+                          "obtain the same results. Leave option \"Seed\" empty to use a",
+                          "random seed (giving nonreproducible results).")),
+            tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
+                    "a default value which depends on other options. Leave them empty to",
+                    "use this default value. These defaults are:",
+                    tags$ul(
+                      tags$li("For option \"Warmup iterations per chain\": half of \"Total iterations per chain\" (rounded down if this fraction is not an integer)."),
+                      tags$li("For option \"Progress-refreshing step size\": tenth of \"Total iterations per chain\", but at least 1.")
+                    )),
+            tags$li("Numeric options with a preset value may not be left empty."),
+            tags$li(paste("Internally, the number of cores is set automatically to the",
+                          "minimum value of options \"Cores\" and \"Chains\"."))
+          )
+        ),
         fluidRow(
           column(5,
                  numericInput("advOpts_seed", "Seed:",

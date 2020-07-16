@@ -147,17 +147,18 @@ ui <- navbarPage(
         "Predictors",
         titlePanel("Predictors"),
         br(),
-        helpText("Choose the predictors (the independent variables). More specifically, you may define",
-                 "main effects of predictors and interactions between predictors.",
-                 "An intercept (i.e. a constant) will always be included.",
-                 "Numeric variables (with \"numeric\" including \"integer\") are treated as continuous",
-                 "predictors. Non-numeric variables are treated as nominal predictors. The type of",
-                 "a variable may be seen on the \"Data\" page when choosing the \"Structure\" preview",
-                 "type. If you want a numeric variable to be treated as a nominal predictor, you have",
-                 "to convert this variable in your dataset to a character variable, e.g. by",
-                 "changing the value \"1\" to \"level1\", the value \"2\" to \"level2\" and so on.",
-                 "For nominal predictors, the first level (after sorting alphabetically) will be the",
-                 "reference level."),
+        helpText(
+          p("Choose the predictors (the independent variables). More specifically, you may define",
+            "main effects of predictors and interactions between predictors.",
+            "An overall intercept will always be included."),
+          p("Numeric variables (with \"numeric\" including \"integer\") are treated as continuous",
+            "predictors. Non-numeric variables are treated as nominal predictors. The type of",
+            "a variable may be seen on the \"Data\" page when choosing the \"Structure\" preview",
+            "type. If you want a numeric variable to be treated as a nominal predictor, you have",
+            "to convert this variable in your dataset to a character variable, e.g. by",
+            "changing the value \"1\" to \"level1\", the value \"2\" to \"level2\" and so on.",
+            "For nominal predictors, the first level (after sorting alphabetically) will be the",
+            "reference level.")),
         wellPanel(
           h3("Main effects"),
           helpText("Note:",
@@ -214,13 +215,16 @@ ui <- navbarPage(
         ),
         wellPanel(
           h3("Preview of chosen predictor terms"),
-          helpText(HTML(paste0(
-            "Here, you can get a preview of the currently chosen predictor terms. ",
-            "This is mainly intended as a check for those familiar with R's and ",
-            strong("brms"),
-            "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
-            "preview\" which may be found in the panel on the left-hand side."
-          ))),
+          helpText(
+            p("Here, you can get a preview of the currently chosen predictor terms. ",
+              "This is mainly intended as a check for those familiar with R's and ",
+              strong("brms", .noWS = "outside"),
+              "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
+              "preview\" which may be found in the panel on the left-hand side."),
+            p("A missing value (", code(NA, .noWS = "outside"), ") in column \"Group\" stands",
+              "for the whole sample (i.e. no group). The value \"1\" in column \"Effect(s)\"",
+              "stands for the intercept (or intercepts, if \"Group\" exists).")
+          ),
           tableOutput("pred_view")
         )
       ),
@@ -528,7 +532,7 @@ ui <- navbarPage(
             "are used. These are as follows:",
             tags$ul(
               tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
-              tags$li("The parameters starting with \"b_\" are the (nonpooled) regression coefficients."),
+              tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
               tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
               tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
                       "partially pooled effects."),
@@ -1131,7 +1135,7 @@ server <- function(input, output, session){
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x){
-    x <- sub("^from_mainNP$", "Coefficient", x)
+    x <- sub("^from_mainNP$", "Effect(s)", x)
     x <- sub("^from_mainPP$", "Group", x)
     return(x)
   })

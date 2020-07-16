@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Minor improvements in the UI.
   - Use the term "nonpooled effects" instead of "nonvarying effects" and
     the term "partially pooled effects" instead of "varying effects".
 

@@ -273,7 +273,7 @@ ui <- navbarPage(
     br(),
     strong("Default priors for the parameters belonging to the current likelihood:"),
     tableOutput("prior_default_view"),
-    helpText("An empty field in column \"Prior\" denotes a flat prior over the domain of the",
+    helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
              "corresponding parameter."),
     hr(),
     h3("Custom priors"),
@@ -349,7 +349,7 @@ ui <- navbarPage(
         br(),
         strong("Custom priors currently set:"),
         tableOutput("prior_set_view"),
-        helpText("An empty field in column \"Prior\" denotes a flat prior over the domain of the",
+        helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
                  "corresponding parameter.")
       )
     )

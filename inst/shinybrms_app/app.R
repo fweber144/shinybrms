@@ -1467,8 +1467,7 @@ server <- function(input, output, session){
     }
     
     showNotification(
-      paste("Stan is about to start sampling. Note that the C++ code needs to be compiled first",
-            "and this may take a while."),
+      "Stan now compiles the C++ code (which may take a while) and then starts sampling.",
       duration = 60,
       type = "message"
     )
@@ -1504,7 +1503,7 @@ server <- function(input, output, session){
           sink(tmp_stdout_txt)
           sink_active <- TRUE
           cat("Refresh this page to see the sampling progress.",
-              "Note that the C++ code needs to be compiled first and this may take",
+              "Note that the C++ code needs to be compiled first, which may take",
               "a while.\n")
           tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
           rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)

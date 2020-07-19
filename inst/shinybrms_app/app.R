@@ -512,7 +512,7 @@ ui <- navbarPage(
       verbatimTextOutput("diagn_energy", placeholder = TRUE),
       br(),
       # br(),
-      h4("Summary"),
+      h4("Summary (including general MCMC diagnostics)"),
       verbatimTextOutput("smmry_view", placeholder = TRUE),
       br(),
       # br(),

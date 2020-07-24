@@ -1687,17 +1687,17 @@ server <- function(input, output, session){
     diagn_div <- capture.output({
       rstan::check_divergences(C_fit()$fit)
     }, type = "message")
-    diagn_div_OK <- grepl("^0 of", diagn_div)
+    diagn_div_OK <- grepl("^0 of", diagn_div) # diagn_div_OK <- identical(rstan::get_num_divergent(C_fit()$fit), 0L)
     
     diagn_tree <- capture.output({
       rstan::check_treedepth(C_fit()$fit)
     }, type = "message")
-    diagn_tree_OK <- grepl("^0 of", diagn_tree)
+    diagn_tree_OK <- grepl("^0 of", diagn_tree) # diagn_tree_OK <- identical(rstan::get_num_max_treedepth(C_fit()$fit), 0L)
     
     diagn_energy <- capture.output({
       rstan::check_energy(C_fit()$fit)
     }, type = "message")
-    diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.")
+    diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.") # diagn_energy_OK <- identical(length(rstan::get_low_bfmi_chains(C_fit()$fit)), 0L) # diagn_energy_OK <- all(rstan::get_bfmi(C_fit()$fit) >= 0.2)
     
     #------
     # General MCMC diagnostics

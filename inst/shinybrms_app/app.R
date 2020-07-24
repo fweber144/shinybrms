@@ -600,7 +600,6 @@ ui <- navbarPage(
       verbatimTextOutput("essBulk_out", placeholder = TRUE),
       strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
       verbatimTextOutput("essTail_out", placeholder = TRUE),
-      strong("Detailed table:"),
       checkboxInput("show_general_MCMC_tab",
                     "Show detailed table of the general MCMC diagnostics",
                     value = FALSE),

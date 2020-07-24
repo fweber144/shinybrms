@@ -1638,16 +1638,6 @@ server <- function(input, output, session){
         )
       }
     }
-    n_chains_out <- C_fit_tmp$fit@sim$chains
-    stopifnot(identical(n_chains_out,
-                        dim(as.array(C_fit_tmp$fit))[2]))
-    if(n_chains_out < n_chains_spec()){
-      showNotification(
-        "Warning: At least one chain exited with an error. The Stan results should not be used.",
-        duration = NA,
-        type = "warning"
-      )
-    }
     
     return(C_fit_tmp)
   })
@@ -1669,9 +1659,20 @@ server <- function(input, output, session){
   # Diagnostics
   
   diagn <- reactive({
-    invisible(req(C_fit()))
+    req(C_draws_arr())
     
-    n_chains_out <- dim(as.array(C_fit()$fit))[2]
+    n_chains_out <- dim(C_draws_arr())[2]
+    
+    #------
+    # Check for failed chains
+    
+    if(n_chains_out < n_chains_spec()){
+      showNotification(
+        "Warning: At least one chain exited with an error. The Stan results should not be used.",
+        duration = NA,
+        type = "warning"
+      )
+    }
     
     #------
     # HMC-specific diagnostics

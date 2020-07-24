@@ -575,7 +575,6 @@ ui <- navbarPage(
             tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
           ))
       )),
-      verbatimTextOutput("fit_warn", placeholder = TRUE),
       br(),
       # br(),
       h5("HMC-specific diagnostics", style = "font-size:110%"), # style = "font-weight:bold ; font-size:110%"
@@ -1502,10 +1501,6 @@ server <- function(input, output, session){
   #------------------------
   # Run Stan
   
-  # For storing the user-specified number of chains (will be updated when creating C_fit and will be
-  # used when printing the warnings):
-  n_chains_spec <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
-  
   C_fit <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,
@@ -1516,7 +1511,7 @@ server <- function(input, output, session){
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     
-    n_chains_spec(input$advOpts_chains)
+    n_chains_spec <- input$advOpts_chains
     
     args_brm <- list(
       formula = C_formula(),
@@ -1626,6 +1621,17 @@ server <- function(input, output, session){
         )
       }
     }
+    n_chains_out <- C_fit_tmp$fit@sim$chains
+    stopifnot(identical(n_chains_out,
+                        dim(as.array(C_fit_tmp$fit))[2]))
+    if(n_chains_out < n_chains_spec){
+      showNotification(
+        "Warning: At least one chain exited with an error. The results should not be used.",
+        duration = NA,
+        type = "warning"
+      )
+    }
+    
     return(C_fit_tmp)
   })
   
@@ -1636,21 +1642,6 @@ server <- function(input, output, session){
     invisible(req(C_fit()))
     C_fit()$fit@date
   })
-  
-  output$fit_warn <- renderText({
-    invisible(req(C_fit()))
-    fit_warn_tmp <- capture.output({
-      rstan:::throw_sampler_warnings(C_fit()$fit)
-    }, type = "message")
-    n_chains_out <- C_fit()$fit@sim$chains
-    stopifnot(identical(n_chains_out,
-                        dim(as.array(C_fit()$fit))[2]))
-    if(n_chains_out < n_chains_spec()){
-      fit_warn_tmp <- c(fit_warn_tmp,
-                        "Warning: At least one chain exited with an error. The results should not be used.")
-    }
-    return(fit_warn_tmp)
-  }, sep = "\n")
   
   output$diagn_div <- renderText({
     invisible(req(C_fit()))

@@ -579,11 +579,11 @@ ui <- navbarPage(
       # br(),
       h5("HMC-specific diagnostics", style = "font-size:110%"), # style = "font-weight:bold ; font-size:110%"
       strong("Divergences:"),
-      verbatimTextOutput("diagn_div", placeholder = TRUE),
+      verbatimTextOutput("diagn_div_out", placeholder = TRUE),
       strong("Hits of maximum tree depth:"),
-      verbatimTextOutput("diagn_tree", placeholder = TRUE),
+      verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
       strong("E-BFMI:"),
-      verbatimTextOutput("diagn_energy", placeholder = TRUE),
+      verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
       br(),
       # br(),
       h5("General MCMC diagnostics", style = "font-size:110%"),
@@ -1643,25 +1643,99 @@ server <- function(input, output, session){
     C_fit()$fit@date
   })
   
-  output$diagn_div <- renderText({
+  C_draws_arr <- reactive({
     invisible(req(C_fit()))
-    capture.output({
+    return(as.array(C_fit()$fit))
+  })
+  
+  diagn <- reactive({
+    invisible(req(C_fit()))
+    
+    n_chains_out <- dim(as.array(C_fit()$fit))[2]
+    
+    #------------
+    # HMC-specific diagnostics
+    
+    diagn_div <- capture.output({
       rstan::check_divergences(C_fit()$fit)
     }, type = "message")
-  }, sep = "\n")
-  
-  output$diagn_tree <- renderText({
-    invisible(req(C_fit()))
-    capture.output({
+    diagn_div_OK <- grepl("^0 of", diagn_div)
+    
+    diagn_tree <- capture.output({
       rstan::check_treedepth(C_fit()$fit)
     }, type = "message")
-  }, sep = "\n")
-  
-  output$diagn_energy <- renderText({
-    invisible(req(C_fit()))
-    capture.output({
+    diagn_tree_OK <- grepl("^0 of", diagn_tree)
+    
+    diagn_energy <- capture.output({
       rstan::check_energy(C_fit()$fit)
     }, type = "message")
+    diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.")
+    
+    #------------
+    # General MCMC diagnostics
+    
+    C_essBulk <- apply(C_draws_arr(), MARGIN = 3, FUN = ess_bulk)
+    if(any(is.na(C_essBulk))){
+      C_essBulk_OK <- FALSE
+    } else{
+      C_essBulk_OK <- all(C_essBulk > 100 * n_chains_out)
+    }
+    
+    C_rhat <- apply(C_draws_arr(), MARGIN = 3, FUN = Rhat)
+    if(any(is.na(C_rhat))){
+      C_rhat_OK <- FALSE
+    } else{
+      C_rhat_OK <- all(C_rhat < 1.01)
+    }
+    
+    C_essTail <- apply(C_draws_arr(), MARGIN = 3, FUN = ess_tail)
+    if(any(is.na(C_essTail))){
+      C_essTail_OK <- FALSE
+    } else{
+      C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
+    }
+    
+    #------------
+    # Report if all diagnostics are OK or not
+    
+    diagn_all_OK <- diagn_div_OK && diagn_tree_OK && diagn_energy_OK && 
+      C_essBulk_OK && C_rhat_OK && C_essTail_OK
+    if(diagn_all_OK){
+      showNotification(
+        "The Stan run was finished. All MCMC diagnostics are OK.",
+        duration = NA,
+        type = "message"
+      )
+    } else{
+      showNotification(
+        paste("Warning: The Stan run was finished, but least one MCMC diagnostic check failed. The",
+              "Stan results should not be used."),
+        duration = NA,
+        type = "warning"
+      )
+    }
+    
+    #------------
+    # Return
+    
+    return(list(div = diagn_div,
+                tree = diagn_tree,
+                energy = diagn_energy,
+                Rhat = C_rhat,
+                ESS_bulk = C_essBulk,
+                ESS_tail = C_essTail))
+  })
+  
+  output$diagn_div_out <- renderText({
+    diagn()$div
+  }, sep = "\n")
+  
+  output$diagn_tree_out <- renderText({
+    diagn()$tree
+  }, sep = "\n")
+  
+  output$diagn_energy_out <- renderText({
+    diagn()$energy
   }, sep = "\n")
   
   output$smmry_view <- renderPrint({

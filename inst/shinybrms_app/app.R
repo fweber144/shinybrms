@@ -369,7 +369,7 @@ ui <- navbarPage(
       #   target = "_blank"),
       "which is a special Hamiltonian Monte Carlo (HMC)",
       "sampler which in turn is a special Markov chain Monte Carlo (MCMC) sampler.",
-      "Details concerning Stan's sampling algorithm may be found in the", # "Corresponding literature may be found on the \"More\"", HTML("&rarr;"), "\"Help\" page."
+      "Details concerning Stan's sampling algorithm may be found in the",
       a("Stan documentation",
         href = "https://mc-stan.org/users/documentation/",
         target = "_blank",
@@ -531,23 +531,19 @@ ui <- navbarPage(
           "(the latter focussing on the general MCMC diagnostics).",
           "A list of all these MCMC diagnostics may be found below, together with some basic",
           "guidelines for their interpretation. These basic guidelines are also checked",
-          "automatically. Note that these are",
-          em("basic"), # em("general"), # em("rough"),
-          "guidelines", HTML("&ndash;"), "false positive and false negative alarms are possible and",
-          "in some situations, false alarms are more likely than in others."), # "For further links and literature concerning the MCMC diagnostics, see the \"More\"", HTML("&rarr;"), "\"Help\" page."
+          "automatically. Note that these are", em("basic"), "guidelines", HTML("&ndash;"), 
+          "false positive and false negative alarms are possible and",
+          "in some situations, false alarms are more likely than in others."),
         p("The HMC-specific diagnostics are:",
           tags$ul(
             tags$li("the number of iterations ending with a divergence,"),
             tags$li("the number of iterations hitting the maximum tree depth,"),
             tags$li("the Bayesian fraction of missing information for the energy transitions (E-BFMI).")
           ),
-          # "Here, the term \"iterations\" refers to the iterations of Stan's sampling algorithm.",
-          # "Ideally, the first two are zero (i.e. no such pathological iterations) and the third one (E-BFMI) as high as possible, but at least 0.2."
-          "In general, the first two of these diagnostics are", # "As a rough guideline, the first two diagnostics are",
-          "worrying", # "suspicious", # "considered to be pathological",
-          "if they are greater than zero (i.e. at least one iteration ending in a divergence or",
-          "at least one iteration hitting the maximum tree depth)",
-          "and the third diagnostic (E-BFMI) is worrying if it is smaller than 0.2 for at least one chain."),
+          "In general, the first two of these diagnostics are worrying if they are greater than",
+          "zero (i.e. at least one iteration ending in a divergence or at least one iteration",
+          "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
+          "smaller than 0.2 for at least one chain."),
         p("The general MCMC diagnostics (computed", em("for each parameter", .noWS = "after"), ") are:",
           tags$ul(
             tags$li("the modified",
@@ -569,8 +565,6 @@ ui <- navbarPage(
                       href = "https://doi.org/10.1214/20-BA1221",
                       target = "_blank"),
                     "(here simply called \"the\" \\(\\widehat{R}\\) instead of \"the modified\" \\(\\widehat{R}\\)),"),
-            # the \"new \\(\\widehat{R}\\)\" [(Vehtari et al., 2020)](https://doi.org/10.1214/20-BA1221) which is the maximum of rank-normalized split-\\(\\widehat{R}\\) and rank-normalized folded-split-\\(\\widehat{R}\\),
-            # , i.e. the maximum of rank-normalized split-\\(\\widehat{R}\\) and rank-normalized folded-split-\\(\\widehat{R}\\),
             tags$li("the effective sample size (ESS) in the bulk of the corresponding marginal posterior distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"),
             tags$li("the ESS in the tails of the corresponding marginal posterior distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)).")
           ),

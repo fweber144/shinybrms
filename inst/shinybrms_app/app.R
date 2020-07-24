@@ -620,6 +620,7 @@ ui <- navbarPage(
       h4("Download"),
       selectInput("stanout_download_sel", "Choose output file to download:",
                   choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
+                              "List of MCMC diagnostics (RDS file)" = "diagn_obj",
                               "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
                               "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
                               "Array of posterior draws (RDS file)" = "draws_arr_obj"),
@@ -1832,6 +1833,7 @@ server <- function(input, output, session){
       } else{
         return(paste0(switch(input$stanout_download_sel,
                              "brmsfit_obj" = "shinybrms_brmsfit",
+                             "diagn_obj" = "shinybrms_MCMC_diagnostics",
                              "draws_mat_obj" = "shinybrms_post_draws_mat",
                              "draws_arr_obj" = "shinybrms_post_draws_arr"),
                       ".rds"))
@@ -1845,6 +1847,7 @@ server <- function(input, output, session){
       } else{
         saveRDS(switch(input$stanout_download_sel,
                        "brmsfit_obj" = C_fit(),
+                       "diagn_obj" = diagn(),
                        "draws_mat_obj" = as.matrix(C_fit()),
                        "draws_arr_obj" = as.array(C_fit())),
                 file = file)

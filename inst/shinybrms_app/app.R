@@ -589,7 +589,7 @@ ui <- navbarPage(
       verbatimTextOutput("diagn_div_out", placeholder = TRUE),
       strong("Hits of maximum tree depth:"),
       verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
-      strong("E-BFMI:"),
+      strong("E-BFMI (value(s) only shown if worrying):"),
       verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
       br(),
       # br(),

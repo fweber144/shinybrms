@@ -587,7 +587,20 @@ ui <- navbarPage(
       br(),
       # br(),
       h5("General MCMC diagnostics", style = "font-size:110%"),
-      strong("UNDER CONSTRUCTION"),
+      strong(withMathJax("\\(\\widehat{R}\\):")),
+      verbatimTextOutput("rhat_out", placeholder = TRUE),
+      strong("Bulk-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{bulk}}\\):")),
+      verbatimTextOutput("essBulk_out", placeholder = TRUE),
+      strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
+      verbatimTextOutput("essTail_out", placeholder = TRUE),
+      strong("Detailed table:"),
+      checkboxInput("show_general_MCMC_tab",
+                    "Show detailed table of the general MCMC diagnostics",
+                    value = FALSE),
+      conditionalPanel(
+        condition = "input.show_general_MCMC_tab",
+        verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
+      ),
       br(),
       # br(),
       h4("Summary"),
@@ -1648,12 +1661,15 @@ server <- function(input, output, session){
     return(as.array(C_fit()$fit))
   })
   
+  #------------
+  # Diagnostics
+  
   diagn <- reactive({
     invisible(req(C_fit()))
     
     n_chains_out <- dim(as.array(C_fit()$fit))[2]
     
-    #------------
+    #------
     # HMC-specific diagnostics
     
     diagn_div <- capture.output({
@@ -1671,7 +1687,7 @@ server <- function(input, output, session){
     }, type = "message")
     diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.")
     
-    #------------
+    #------
     # General MCMC diagnostics
     
     C_essBulk <- apply(C_draws_arr(), MARGIN = 3, FUN = ess_bulk)
@@ -1695,36 +1711,47 @@ server <- function(input, output, session){
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
-    #------------
+    #------
     # Report if all diagnostics are OK or not
     
-    diagn_all_OK <- diagn_div_OK && diagn_tree_OK && diagn_energy_OK && 
-      C_essBulk_OK && C_rhat_OK && C_essTail_OK
+    diagn_all_OK <- all(c(diagn_div_OK, diagn_tree_OK, diagn_energy_OK, 
+                          C_essBulk_OK, C_rhat_OK, C_essTail_OK))
     if(diagn_all_OK){
       showNotification(
-        "The Stan run was finished. All MCMC diagnostics are OK.",
+        "The Stan run was finished. All MCMC diagnostics passed their checks.",
         duration = NA,
         type = "message"
       )
     } else{
       showNotification(
-        paste("Warning: The Stan run was finished, but least one MCMC diagnostic check failed. The",
+        paste("Warning: The Stan run was finished, but least one MCMC diagnostic",
+              "did not pass its check. In general, this indicates that the",
               "Stan results should not be used."),
         duration = NA,
         type = "warning"
       )
     }
     
-    #------------
+    #------
     # Return all diagnostics
     
-    return(list(divergences = diagn_div,
+    return(list(all_OK = diagn_all_OK,
+                divergences_OK = diagn_div_OK,
+                divergences = diagn_div,
+                hits_max_tree_depth_OK = diagn_tree_OK,
                 hits_max_tree_depth = diagn_tree,
+                EBFMI_OK = diagn_energy_OK,
                 EBFMI = diagn_energy,
+                Rhat_OK = C_rhat_OK,
                 Rhat = C_rhat,
+                ESS_bulk_OK = C_essBulk_OK,
                 ESS_bulk = C_essBulk,
+                ESS_tail_OK = C_essTail_OK,
                 ESS_tail = C_essTail))
   })
+  
+  #------
+  # HMC-specific diagnostics
   
   output$diagn_div_out <- renderText({
     diagn()$divergences
@@ -1738,10 +1765,50 @@ server <- function(input, output, session){
     diagn()$EBFMI
   }, sep = "\n")
   
+  #------
+  # General MCMC diagnostics
+  
+  output$rhat_out <- renderText({
+    if(diagn()$Rhat_OK){
+      return("All R-hat values are OK.")
+    } else{
+      return("At least one R-hat value is not OK.")
+    }
+  }, sep = "\n")
+  
+  output$essBulk_out <- renderText({
+    if(diagn()$ESS_bulk_OK){
+      return("All bulk-ESS values are OK.")
+    } else{
+      return("At least one bulk-ESS value is not OK.")
+    }
+  }, sep = "\n")
+  
+  output$essTail_out <- renderText({
+    if(diagn()$ESS_tail_OK){
+      return("All tail-ESS values are OK.")
+    } else{
+      return("At least one tail-ESS value is not OK.")
+    }
+  }, sep = "\n")
+  
+  output$general_MCMC_out <- renderPrint({
+    data.frame("R-hat" = diagn()$Rhat,
+               "ESS_bulk" = diagn()$ESS_bulk,
+               "ESS_tail" = diagn()$ESS_tail,
+               check.names = FALSE)
+  })
+  
+  #------------
+  # Summary
+  
   output$smmry_view <- renderPrint({
     invisible(req(C_fit()))
     print(C_fit(), digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
+  
+  #------------
+  # Download
   
   output$stanout_download <- downloadHandler(
     filename = function(){
@@ -1769,6 +1836,9 @@ server <- function(input, output, session){
       }
     }
   )
+  
+  #------------
+  # shinystan
   
   observeEvent(input$act_launch_shinystan, {
     invisible(req(C_fit()))

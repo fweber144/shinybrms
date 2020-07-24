@@ -2,7 +2,12 @@
 
 ## Minor changes
 
-  - Minor improvements in the UI.
+  - Up to now, some general MCMC diagnostics (R-hat, bulk-ESS, tail-ESS)
+    were only included implicitly as part of the warnings introduced in
+    version 1.2.2. Now, they were added explicitly and the warnings from
+    version 1.2.2 are now handled differently.
+  - Minor improvements in the UI (in particular, a help text concerning
+    the MCMC diagnostics was added).
   - Use the term "nonpooled effects" instead of "nonvarying effects" and
     the term "partially pooled effects" instead of "varying effects".
 

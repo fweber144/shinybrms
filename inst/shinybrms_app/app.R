@@ -1784,7 +1784,7 @@ server <- function(input, output, session){
     if(diagn()$Rhat_OK){
       return("All R-hat values are OK.")
     } else{
-      return("At least one R-hat value is not OK.")
+      return("At least one R-hat value is worrying.")
     }
   }, sep = "\n")
   
@@ -1792,7 +1792,7 @@ server <- function(input, output, session){
     if(diagn()$ESS_bulk_OK){
       return("All bulk-ESS values are OK.")
     } else{
-      return("At least one bulk-ESS value is not OK.")
+      return("At least one bulk-ESS value is worrying.")
     }
   }, sep = "\n")
   
@@ -1800,7 +1800,7 @@ server <- function(input, output, session){
     if(diagn()$ESS_tail_OK){
       return("All tail-ESS values are OK.")
     } else{
-      return("At least one tail-ESS value is not OK.")
+      return("At least one tail-ESS value is worrying.")
     }
   }, sep = "\n")
   

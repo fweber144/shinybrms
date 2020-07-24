@@ -1716,26 +1716,26 @@ server <- function(input, output, session){
     }
     
     #------------
-    # Return
+    # Return all diagnostics
     
-    return(list(div = diagn_div,
-                tree = diagn_tree,
-                energy = diagn_energy,
+    return(list(divergences = diagn_div,
+                hits_max_tree_depth = diagn_tree,
+                EBFMI = diagn_energy,
                 Rhat = C_rhat,
                 ESS_bulk = C_essBulk,
                 ESS_tail = C_essTail))
   })
   
   output$diagn_div_out <- renderText({
-    diagn()$div
+    diagn()$divergences
   }, sep = "\n")
   
   output$diagn_tree_out <- renderText({
-    diagn()$tree
+    diagn()$hits_max_tree_depth
   }, sep = "\n")
   
   output$diagn_energy_out <- renderText({
-    diagn()$energy
+    diagn()$EBFMI
   }, sep = "\n")
   
   output$smmry_view <- renderPrint({

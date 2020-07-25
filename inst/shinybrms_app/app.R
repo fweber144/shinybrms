@@ -519,7 +519,8 @@ ui <- navbarPage(
       ),
       tabPanel(
         "MCMC diagnostics",
-        h4("MCMC diagnostics"),
+        titlePanel("MCMC diagnostics"),
+        br(),
         withMathJax(helpText(
           p("Before using the Stan results for posterior inference, it is important to check the",
             "convergence and efficiency of the sampling algorithm for the given model and data by",
@@ -620,12 +621,14 @@ ui <- navbarPage(
       ),
       tabPanel(
         "Summary",
-        h4("Summary"),
+        titlePanel("Summary"),
+        br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
       tabPanel(
         "Download",
-        h4("Download"),
+        titlePanel("Download"),
+        br(),
         selectInput("stanout_download_sel", "Choose output file to download:",
                     choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
                                 "List of MCMC diagnostics (RDS file)" = "diagn_obj",
@@ -640,7 +643,8 @@ ui <- navbarPage(
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
-        h4("Interactive output inspection using package", strong("shinystan")),
+        titlePanel("Interactive output inspection using package", strong("shinystan")),
+        br(),
         helpText(
           "Notes:",
           tags$ul(

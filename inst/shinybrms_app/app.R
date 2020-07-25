@@ -643,7 +643,7 @@ ui <- navbarPage(
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
-        titlePanel("Interactive output inspection using package", strong("shinystan")),
+        titlePanel(HTML(paste("Interactive output inspection using package", strong("shinystan")))),
         br(),
         helpText(
           "Notes:",

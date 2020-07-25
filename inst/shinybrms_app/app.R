@@ -748,8 +748,8 @@ ui <- navbarPage(
           "the same name as an ",
           a("R", href = "https://www.R-project.org/", target = "_blank"),
           " package which is available on ",
-          a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"), " and ",
-          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"),
+          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), " and ",
+          a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"),
           " (see also the ",
           a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
           " for the ", strong("shinybrms"), " package)."
@@ -757,22 +757,14 @@ ui <- navbarPage(
         tags$ul(
           tags$li(HTML(paste0(
             strong("Description: "),
-            "The ", strong("shinybrms"), " app is a graphical user interface (GUI) for the R package ",
+            "The ", strong("shinybrms"), " ",
+            a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
+            " app is a graphical user interface (GUI) for the R package ",
             a(HTML(paste(strong("brms"))),
               href = "https://CRAN.R-project.org/package=brms",
               target = "_blank"),
             " which allows to fit Bayesian regression models using ",
             a("Stan", href = "https://mc-stan.org/", target = "_blank"),
-            " (more specifically, using its R interface, the package ",
-            a(HTML(paste(strong("rstan"))),
-              href = "https://CRAN.R-project.org/package=rstan",
-              target = "_blank"),
-            "). The GUI is a ",
-            a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
-            " app, i.e. it was created using the R package ",
-            a(HTML(paste(strong("shiny"))),
-              href = "https://CRAN.R-project.org/package=shiny",
-              target = "_blank"),
             "."
           ))),
           tags$li(strong("Author:"),
@@ -820,7 +812,8 @@ ui <- navbarPage(
         h3("Software (without R packages)"),
         tags$ul(
           tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
-          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
+          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
+          tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"))
         )
       ),
       wellPanel(
@@ -863,6 +856,12 @@ ui <- navbarPage(
             a("CRAN", href = "https://CRAN.R-project.org/package=rstanarm", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/stan-dev/rstanarm/", target = "_blank"), ", ",
             a("website", href = "https://mc-stan.org/rstanarm/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("shiny"), ": ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=shiny", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/rstudio/shiny", target = "_blank"), ", ",
+            a("website", href = "https://shiny.rstudio.com/", target = "_blank")
           )))
         )
       )

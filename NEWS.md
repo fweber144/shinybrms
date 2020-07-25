@@ -1,16 +1,23 @@
 # shinybrms 1.2.2.9000
 
-## Minor changes
+## Major changes
 
   - Use the term "nonpooled effects" instead of "nonvarying effects" and
     the term "partially pooled effects" instead of "varying effects".
-  - Minor improvements in the UI (in particular, a help text concerning
-    the MCMC diagnostics was added).
+  - Restructured page "Posterior".
   - Up to now, some general MCMC diagnostics (R-hat, bulk-ESS, tail-ESS)
-    were only included implicitly as part of the warnings introduced in
-    version 1.2.2. Now, they were added explicitly and the warnings from
-    version 1.2.2 are now handled differently.
-  - Added the possibility to download the MCMC diagnostics.
+    were only included implicitly (as part of the warnings introduced in
+    version 1.2.2), besides being accessible from within the
+    **shinystan** app. Now, these general MCMC diagnostics are
+    accessible from within the **shinybrms** app and the warnings from
+    version 1.2.2 are handled differently.
+
+## Minor changes
+
+  - Minor improvements in the UI (e.g. concerning help texts and
+    notifications).
+  - Added the possibility to download the MCMC diagnostics (including
+    the newly added general MCMC diagnostics).
 
 # shinybrms 1.2.2 (only GitHub)
 

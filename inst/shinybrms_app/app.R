@@ -743,36 +743,28 @@ ui <- navbarPage(
       br(),
       wellPanel(
         h3("Basic information"),
-        helpText(HTML(paste0(
-          "Note: This is the ", strong("shinybrms"), " ", em("app"), ". It is distributed under ",
-          "the same name as an ",
-          a("R", href = "https://www.R-project.org/", target = "_blank"),
-          " package which is available on ",
-          a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"), " and ",
-          a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"),
-          " (see also the ",
-          a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
-          " for the ", strong("shinybrms"), " package)."
-        ))),
+        helpText(
+          "Note: This is the", strong("shinybrms"), em("Shiny app", .noWS = "after"), ".",
+          "It is distributed under the same name as an",
+          em("R package"), "(see the \"More\"", HTML("&rarr;"), "\"Links\" page for software links)."
+        ),
         tags$ul(
-          tags$li(HTML(paste0(
-            strong("Description: "),
-            "The ", strong("shinybrms"), " ",
-            a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
-            " app is a graphical user interface (GUI) for the R package ",
-            a(HTML(paste(strong("brms"))),
-              href = "https://CRAN.R-project.org/package=brms",
-              target = "_blank"),
-            " which allows to fit Bayesian regression models using ",
-            a("Stan", href = "https://mc-stan.org/", target = "_blank"),
-            "."
-          ))),
+          tags$li(
+            strong("Description:"),
+            "The", strong("shinybrms"), "Shiny app is a graphical user interface (GUI) for the",
+            "R package", strong("brms"), "which allows to fit Bayesian regression models using",
+            "Stan (see the \"More\"", HTML("&rarr;"), "\"Links\" page for software links)."
+          ),
           tags$li(strong("Author:"),
-                  "Frank Weber (",
-                  a("ORCID iD: 0000-0002-4842-7922",
+                  "Frank Weber (ORCID iD:",
+                  a("0000-0002-4842-7922",
                     href = "https://orcid.org/0000-0002-4842-7922",
                     target = "_blank",
-                    .noWS = "outside"),
+                    .noWS = "after"),
+                  ", e-mail address:",
+                  a("fweber144@protonmail.com",
+                    href = "mailto:fweber144@protonmail.com",
+                    .noWS = "after"),
                   ")"),
           tags$li(strong("Version:"),
                   "1.2.2.9000"),
@@ -812,8 +804,8 @@ ui <- navbarPage(
         h3("Software (without R packages)"),
         tags$ul(
           tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
-          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
-          tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"))
+          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
+          # , tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"))
         )
       ),
       wellPanel(

@@ -376,299 +376,309 @@ ui <- navbarPage(
         .noWS = "after"),
       "."
     ),
-    wellPanel(
-      h3("Stan code"),
-      helpText(
-        "Here, you can get a preview of the Stan code for your model and download it.",
-        
-        "The data used in the", code("data {...}"), "program block of the Stan code is the Stan",
-        "data. Thus, the Stan code goes together with the Stan data.",
-        
-        "Apart from checking purposes,",
-        "this is useful for example if you want to customize the model and then run Stan by yourself."
-      ),
-      checkboxInput("show_stancode", "Show Stan code", value = FALSE),
-      conditionalPanel(
-        condition = "input.show_stancode",
-        verbatimTextOutput("stancode_view", placeholder = TRUE),
-      ),
-      downloadButton("stancode_download", "Download Stan code")
-    ),
-    wellPanel(
-      h3("Stan data"),
-      helpText(
-        "Here, you can get a preview of the structure of the Stan data for your model and download it.",
-        
-        "The Stan data is the data used in the", code("data {...}"), "program block in the Stan",
-        "code. Thus, the Stan data goes together with the Stan code.",
-        
-        "Apart from checking purposes,",
-        "this is useful for example if you want to customize the model and then run Stan by yourself."
-      ),
-      checkboxInput("show_standata", "Show structure of Stan data", value = FALSE),
-      conditionalPanel(
-        condition = "input.show_standata",
-        verbatimTextOutput("standata_view", placeholder = TRUE),
-      ),
-      downloadButton("standata_download", "Download Stan data")
-    ),
-    wellPanel(
-      h3("Advanced options"),
-      helpText(HTML(paste0(
-        "Here, you can set advanced options for the function ",
-        code("brms::brm()"),
-        "which is the central function for inferring the posterior. ",
-        "These advanced options have sensible defaults, but sometimes they need to be changed. ",
-        "For details on these advanced options, see the help for ",
-        code("brms::brm()"),
-        " from package ",
-        a(HTML("<strong>brms</strong>"),
-          href = "https://CRAN.R-project.org/package=brms",
-          target = "_blank"),
-        " and the help for ",
-        code("rstan::sampling()"),
-        " as well as for ",
-        code("rstan::stan()"),
-        " from package ",
-        a(HTML("<strong>rstan</strong>"),
-          href = "https://CRAN.R-project.org/package=rstan",
-          target = "_blank"),
-        "."
-      ))),
-      checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
-      conditionalPanel(
-        condition = "input.show_advOpts",
-        helpText(
-          "Notes:",
-          tags$ol(
-            tags$li(paste("To obtain reproducible results, you need to specify a value for",
-                          "option \"Seed\" and enter this value each time you want to",
-                          "obtain the same results. Leave option \"Seed\" empty to use a",
-                          "random seed (giving nonreproducible results).")),
-            tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
-                    "a default value which depends on other options. Leave them empty to",
-                    "use this default value. These defaults are:",
-                    tags$ul(
-                      tags$li("For option \"Warmup iterations per chain\": half of \"Total iterations per chain\" (rounded down if this fraction is not an integer)."),
-                      tags$li("For option \"Progress-refreshing step size\": tenth of \"Total iterations per chain\", but at least 1.")
-                    )),
-            tags$li("Numeric options with a preset value may not be left empty."),
-            tags$li(paste("Internally, the number of cores is set automatically to the",
-                          "minimum value of options \"Cores\" and \"Chains\"."))
+    navlistPanel(
+      tabPanel(
+        "Run Stan",
+        titlePanel("Run Stan"),
+        br(),
+        wellPanel(
+          h3("Stan code"),
+          helpText(
+            "Here, you can get a preview of the Stan code for your model and download it.",
+            
+            "The data used in the", code("data {...}"), "program block of the Stan code is the Stan",
+            "data. Thus, the Stan code goes together with the Stan data.",
+            
+            "Apart from checking purposes,",
+            "this is useful for example if you want to customize the model and then run Stan by yourself."
+          ),
+          checkboxInput("show_stancode", "Show Stan code", value = FALSE),
+          conditionalPanel(
+            condition = "input.show_stancode",
+            verbatimTextOutput("stancode_view", placeholder = TRUE),
+          ),
+          downloadButton("stancode_download", "Download Stan code")
+        ),
+        wellPanel(
+          h3("Stan data"),
+          helpText(
+            "Here, you can get a preview of the structure of the Stan data for your model and download it.",
+            
+            "The Stan data is the data used in the", code("data {...}"), "program block in the Stan",
+            "code. Thus, the Stan data goes together with the Stan code.",
+            
+            "Apart from checking purposes,",
+            "this is useful for example if you want to customize the model and then run Stan by yourself."
+          ),
+          checkboxInput("show_standata", "Show structure of Stan data", value = FALSE),
+          conditionalPanel(
+            condition = "input.show_standata",
+            verbatimTextOutput("standata_view", placeholder = TRUE),
+          ),
+          downloadButton("standata_download", "Download Stan data")
+        ),
+        wellPanel(
+          h3("Advanced options"),
+          helpText(HTML(paste0(
+            "Here, you can set advanced options for the function ",
+            code("brms::brm()"),
+            "which is the central function for inferring the posterior. ",
+            "These advanced options have sensible defaults, but sometimes they need to be changed. ",
+            "For details on these advanced options, see the help for ",
+            code("brms::brm()"),
+            " from package ",
+            a(HTML("<strong>brms</strong>"),
+              href = "https://CRAN.R-project.org/package=brms",
+              target = "_blank"),
+            " and the help for ",
+            code("rstan::sampling()"),
+            " as well as for ",
+            code("rstan::stan()"),
+            " from package ",
+            a(HTML("<strong>rstan</strong>"),
+              href = "https://CRAN.R-project.org/package=rstan",
+              target = "_blank"),
+            "."
+          ))),
+          checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
+          conditionalPanel(
+            condition = "input.show_advOpts",
+            helpText(
+              "Notes:",
+              tags$ol(
+                tags$li(paste("To obtain reproducible results, you need to specify a value for",
+                              "option \"Seed\" and enter this value each time you want to",
+                              "obtain the same results. Leave option \"Seed\" empty to use a",
+                              "random seed (giving nonreproducible results).")),
+                tags$li("Numeric options with an empty field (apart from option \"Seed\") have",
+                        "a default value which depends on other options. Leave them empty to",
+                        "use this default value. These defaults are:",
+                        tags$ul(
+                          tags$li("For option \"Warmup iterations per chain\": half of \"Total iterations per chain\" (rounded down if this fraction is not an integer)."),
+                          tags$li("For option \"Progress-refreshing step size\": tenth of \"Total iterations per chain\", but at least 1.")
+                        )),
+                tags$li("Numeric options with a preset value may not be left empty."),
+                tags$li(paste("Internally, the number of cores is set automatically to the",
+                              "minimum value of options \"Cores\" and \"Chains\"."))
+              )
+            ),
+            fluidRow(
+              column(5,
+                     numericInput("advOpts_seed", "Seed:",
+                                  value = NA, step = 1L),
+                     numericInput("advOpts_cores", "Cores:",
+                                  value = getOption("mc.cores", parallel::detectCores()), step = 1L, min = 1L),
+                     numericInput("advOpts_chains", "Chains:",
+                                  value = 4L, step = 1L, min = 1L),
+                     numericInput("advOpts_iter", "Total iterations per chain:",
+                                  value = 2000L, step = 1L, min = 1L),
+                     numericInput("advOpts_warmup", "Warmup iterations per chain:",
+                                  value = NA, step = 1L, min = 0L),
+                     numericInput("advOpts_thin", "Thinning rate:",
+                                  value = 1L, step = 1L, min = 1L)),
+              column(5, offset = 1,
+                     radioButtons("advOpts_inits", "Initial values:",
+                                  choices = list("Random" = "random", "Zero" = "0"),
+                                  inline = TRUE),
+                     numericInput("advOpts_init_r",
+                                  HTML(paste0("Range of random initial values in the unconstrained parameter space (",
+                                              code("\"init_r\""),
+                                              "; only relevant if random initial values are chosen):")),
+                                  value = 2, step = 0.1, min = 0),
+                     numericInput("advOpts_adapt_delta",
+                                  HTML(paste0("Target Metropolis acceptance rate (", code("\"adapt_delta\""), "):")),
+                                  value = 0.95, step = 0.01, min = 0, max = 1),
+                     numericInput("advOpts_max_treedepth",
+                                  HTML(paste0("Maximum tree depth (", code("\"max_treedepth\""), "):")),
+                                  value = 15L, step = 1L, min = 1L),
+                     checkboxInput("advOpts_open_progress", strong("Open progress"),
+                                   value = TRUE),
+                     numericInput("advOpts_refresh",
+                                  HTML(paste0("Progress-refreshing step size (", code("\"refresh\""), "):")),
+                                  value = NA, step = 1L, min = 0L),
+                     checkboxInput("advOpts_save_all_pars",
+                                   strong("Save draws for", em("all"), "parameters, including internal ones (", code("\"save_all_pars\"", .noWS = "outside"), ")"),
+                                   value = FALSE),
+                     checkboxInput("advOpts_save_warmup", strong("Save warmup"),
+                                   value = TRUE))
+            )
           )
         ),
-        fluidRow(
-          column(5,
-                 numericInput("advOpts_seed", "Seed:",
-                              value = NA, step = 1L),
-                 numericInput("advOpts_cores", "Cores:",
-                              value = getOption("mc.cores", parallel::detectCores()), step = 1L, min = 1L),
-                 numericInput("advOpts_chains", "Chains:",
-                              value = 4L, step = 1L, min = 1L),
-                 numericInput("advOpts_iter", "Total iterations per chain:",
-                              value = 2000L, step = 1L, min = 1L),
-                 numericInput("advOpts_warmup", "Warmup iterations per chain:",
-                              value = NA, step = 1L, min = 0L),
-                 numericInput("advOpts_thin", "Thinning rate:",
-                              value = 1L, step = 1L, min = 1L)),
-          column(5, offset = 1,
-                 radioButtons("advOpts_inits", "Initial values:",
-                              choices = list("Random" = "random", "Zero" = "0"),
-                              inline = TRUE),
-                 numericInput("advOpts_init_r",
-                              HTML(paste0("Range of random initial values in the unconstrained parameter space (",
-                                          code("\"init_r\""),
-                                          "; only relevant if random initial values are chosen):")),
-                              value = 2, step = 0.1, min = 0),
-                 numericInput("advOpts_adapt_delta",
-                              HTML(paste0("Target Metropolis acceptance rate (", code("\"adapt_delta\""), "):")),
-                              value = 0.95, step = 0.01, min = 0, max = 1),
-                 numericInput("advOpts_max_treedepth",
-                              HTML(paste0("Maximum tree depth (", code("\"max_treedepth\""), "):")),
-                              value = 15L, step = 1L, min = 1L),
-                 checkboxInput("advOpts_open_progress", strong("Open progress"),
-                               value = TRUE),
-                 numericInput("advOpts_refresh",
-                              HTML(paste0("Progress-refreshing step size (", code("\"refresh\""), "):")),
-                              value = NA, step = 1L, min = 0L),
-                 checkboxInput("advOpts_save_all_pars",
-                               strong("Save draws for", em("all"), "parameters, including internal ones (", code("\"save_all_pars\"", .noWS = "outside"), ")"),
-                               value = FALSE),
-                 checkboxInput("advOpts_save_warmup", strong("Save warmup"),
-                               value = TRUE))
+        wellPanel(
+          h3("Run Stan"),
+          helpText("Note: If the advanced option \"Open progress\" is selected (as per default),",
+                   "Windows users having Firefox set as their default web browser may need to manually",
+                   "copy the link to the Stan HTML progress file which is automatically opening up and",
+                   "paste this link into a different web browser for viewing the progress file there."),
+          actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary"),
+          br(),
+          br(),
+          strong("Date and time when Stan run was finished:"),
+          textOutput("fit_date")
         )
-      )
-    ),
-    wellPanel(
-      h3("Run Stan"),
-      helpText("Note: If the advanced option \"Open progress\" is selected (as per default),",
-               "Windows users having Firefox set as their default web browser may need to manually",
-               "copy the link to the Stan HTML progress file which is automatically opening up and",
-               "paste this link into a different web browser for viewing the progress file there."),
-      actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary")
-    ),
-    wellPanel(
-      h3("Output"),
-      strong("Date and time when Stan run was finished:"),
-      textOutput("fit_date"),
-      br(),
-      # br(),
-      h4("MCMC diagnostics"),
-      withMathJax(helpText(
-        p("Before using the Stan results for posterior inference, it is important to check the",
-          "convergence and efficiency of the sampling algorithm for the given model and data by",
-          "the help of", em("MCMC diagnostics", .noWS = "after"), ".",
-          "The MCMC diagnostics used here may be divided into",
-          em("HMC-specific diagnostics"), "and", em("general MCMC diagnostics", .noWS = "after"), ".",
-          "Lists of these two groups of MCMC diagnostics may be found below, together with some",
-          "basic guidelines for their interpretation. These basic guidelines are also checked",
-          "automatically. Note that these are", em("basic"), "guidelines", HTML("&ndash;"), 
-          "false positive and false negative alarms are possible and",
-          "in some situations, false alarms are more likely than in others.",
-          "For details concerning the MCMC diagnostics used here, see the",
-          a("\"Brief Guide to Stan’s Warnings\"",
-            href = "https://mc-stan.org/misc/warnings.html",
-            target = "_blank",
-            .noWS = "after"),
-          ",",
-          a("Betancourt (2017)",
-            href = "https://arxiv.org/abs/1701.02434",
-            target = "_blank",
-            .noWS = "after"),
-          ", and",
-          a("Vehtari et al. (2020)",
-            href = "https://doi.org/10.1214/20-BA1221",
-            target = "_blank",
-            .noWS = "after"),
-          ". The \"Brief Guide to Stan’s Warnings\" covers all MCMC diagnostics used here and",
-          "gives some advice on what to do when they indicate problems.",
-          "Betancourt (2017) focuses on the HMC-specific diagnostics",
-          "whereas Vehtari et al. (2020) focus on the general MCMC diagnostics."),
-        p("The HMC-specific diagnostics are:",
-          tags$ul(
-            tags$li("the number of iterations ending with a divergence,"),
-            tags$li("the number of iterations hitting the maximum tree depth,"),
-            tags$li("the Bayesian fraction of missing information for the energy transitions (E-BFMI) of each chain.")
-          ),
-          "In general, the first two of these diagnostics are worrying if they are greater than",
-          "zero (i.e. at least one iteration ending in a divergence or at least one iteration",
-          "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
-          "smaller than 0.2 for at least one chain."),
-        p("The general MCMC diagnostics (computed for each parameter",
-          "as well as for the accumulated log-posterior density) are:",
-          tags$ul(
-            tags$li("the modified",
-                    # "variant of the",
-                    "potential scale reduction factor \\(\\widehat{R}\\)",
-                    # "(",
-                    # a("Gelman and Rubin, 1992",
-                    #   href = "https://doi.org/10.1214/ss/1177011136",
-                    #   target = "_blank",
-                    #   .noWS = "outside"),
-                    # ";",
-                    # a("Brooks and Gelman, 1998",
-                    #   href = "https://doi.org/10.2307/1390675",
-                    #   target = "_blank",
-                    #   .noWS = "after"),
-                    # ")",
-                    "proposed by",
-                    a("Vehtari et al. (2020)",
-                      href = "https://doi.org/10.1214/20-BA1221",
-                      target = "_blank"),
-                    "(here simply called \"the\" \\(\\widehat{R}\\) instead of \"the modified\" \\(\\widehat{R}\\)),"),
-            tags$li("the effective sample size (ESS) in the bulk of the corresponding marginal posterior distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"),
-            tags$li("the ESS in the tails of the corresponding marginal posterior distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)).")
-          ),
-          "In general, the following values of the general MCMC diagnostics are worrying:",
-          tags$ul(
-            tags$li("\\(\\widehat{R} \\geq 1.01\\),"),
-            tags$li("\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\) with \\(n_{\\text{chains}}\\) denoting the number of chains,"),
-            tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
-          ))
-      )),
-      br(),
-      # br(),
-      h5("HMC-specific diagnostics", style = "font-size:110%"), # style = "font-weight:bold ; font-size:110%"
-      strong("Divergences:"),
-      verbatimTextOutput("diagn_div_out", placeholder = TRUE),
-      strong("Hits of maximum tree depth:"),
-      verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
-      strong("E-BFMI (value(s) only shown if worrying):"),
-      verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
-      br(),
-      # br(),
-      h5("General MCMC diagnostics", style = "font-size:110%"),
-      strong(withMathJax("\\(\\widehat{R}\\):")),
-      verbatimTextOutput("rhat_out", placeholder = TRUE),
-      strong("Bulk-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{bulk}}\\):")),
-      verbatimTextOutput("essBulk_out", placeholder = TRUE),
-      strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
-      verbatimTextOutput("essTail_out", placeholder = TRUE),
-      checkboxInput("show_general_MCMC_tab",
-                    "Show detailed table of the general MCMC diagnostics",
-                    value = FALSE),
-      conditionalPanel(
-        condition = "input.show_general_MCMC_tab",
-        verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
       ),
-      br(),
-      # br(),
-      h4("Summary"),
-      verbatimTextOutput("smmry_view", placeholder = TRUE),
-      br(),
-      # br(),
-      h4("Download"),
-      selectInput("stanout_download_sel", "Choose output file to download:",
-                  choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
-                              "List of MCMC diagnostics (RDS file)" = "diagn_obj",
-                              "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
-                              "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
-                              "Array of posterior draws (RDS file)" = "draws_arr_obj"),
-                  selectize = TRUE),
-      helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
-                           "is the output from ", code("brms::brm()"), ", the central function ",
-                           "for inferring the posterior."))),
-      downloadButton("stanout_download", "Download output file"),
-      br(),
-      br(),
-      h4("Interactive output inspection using package", strong("shinystan")),
-      helpText(
-        "Notes:",
-        tags$ul(
-          tags$li(
-            "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
-            "are used. These are as follows:",
+      tabPanel(
+        "MCMC diagnostics",
+        h4("MCMC diagnostics"),
+        withMathJax(helpText(
+          p("Before using the Stan results for posterior inference, it is important to check the",
+            "convergence and efficiency of the sampling algorithm for the given model and data by",
+            "the help of", em("MCMC diagnostics", .noWS = "after"), ".",
+            "The MCMC diagnostics used here may be divided into",
+            em("HMC-specific diagnostics"), "and", em("general MCMC diagnostics", .noWS = "after"), ".",
+            "Lists of these two groups of MCMC diagnostics may be found below, together with some",
+            "basic guidelines for their interpretation. These basic guidelines are also checked",
+            "automatically. Note that these are", em("basic"), "guidelines", HTML("&ndash;"), 
+            "false positive and false negative alarms are possible and",
+            "in some situations, false alarms are more likely than in others.",
+            "For details concerning the MCMC diagnostics used here, see the",
+            a("\"Brief Guide to Stan’s Warnings\"",
+              href = "https://mc-stan.org/misc/warnings.html",
+              target = "_blank",
+              .noWS = "after"),
+            ",",
+            a("Betancourt (2017)",
+              href = "https://arxiv.org/abs/1701.02434",
+              target = "_blank",
+              .noWS = "after"),
+            ", and",
+            a("Vehtari et al. (2020)",
+              href = "https://doi.org/10.1214/20-BA1221",
+              target = "_blank",
+              .noWS = "after"),
+            ". The \"Brief Guide to Stan’s Warnings\" covers all MCMC diagnostics used here and",
+            "gives some advice on what to do when they indicate problems.",
+            "Betancourt (2017) focuses on the HMC-specific diagnostics",
+            "whereas Vehtari et al. (2020) focus on the general MCMC diagnostics."),
+          p("The HMC-specific diagnostics are:",
             tags$ul(
-              tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
-              tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
-              tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
-              tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
-                      "partially pooled effects."),
-              tags$li("The parameters starting with \"cor_\" are the correlations between the",
-                      "partially pooled effects of the same group."),
-              tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
-              tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
-                                 "distributional family for the outcome (see page \"Likelihood\"",
-                                 "&rarr; \"Outcome\").")))
-            )
-          ),
-          tags$li(
-            HTML(paste0(
-              "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
-              " are automatically created. These are the observations for the outcome (object ",
-              code("y"), ") and the corresponding posterior predictive replications (object ",
-              code("y_rep"), "). You can select them in the respective \"Object from global ",
-              "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
-              "\"Select data\" in the ", strong("shinystan"), " app."
+              tags$li("the number of iterations ending with a divergence,"),
+              tags$li("the number of iterations hitting the maximum tree depth,"),
+              tags$li("the Bayesian fraction of missing information for the energy transitions (E-BFMI) of each chain.")
+            ),
+            "In general, the first two of these diagnostics are worrying if they are greater than",
+            "zero (i.e. at least one iteration ending in a divergence or at least one iteration",
+            "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
+            "smaller than 0.2 for at least one chain."),
+          p("The general MCMC diagnostics (computed for each parameter",
+            "as well as for the accumulated log-posterior density) are:",
+            tags$ul(
+              tags$li("the modified",
+                      # "variant of the",
+                      "potential scale reduction factor \\(\\widehat{R}\\)",
+                      # "(",
+                      # a("Gelman and Rubin, 1992",
+                      #   href = "https://doi.org/10.1214/ss/1177011136",
+                      #   target = "_blank",
+                      #   .noWS = "outside"),
+                      # ";",
+                      # a("Brooks and Gelman, 1998",
+                      #   href = "https://doi.org/10.2307/1390675",
+                      #   target = "_blank",
+                      #   .noWS = "after"),
+                      # ")",
+                      "proposed by",
+                      a("Vehtari et al. (2020)",
+                        href = "https://doi.org/10.1214/20-BA1221",
+                        target = "_blank"),
+                      "(here simply called \"the\" \\(\\widehat{R}\\) instead of \"the modified\" \\(\\widehat{R}\\)),"),
+              tags$li("the effective sample size (ESS) in the bulk of the corresponding marginal posterior distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"),
+              tags$li("the ESS in the tails of the corresponding marginal posterior distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)).")
+            ),
+            "In general, the following values of the general MCMC diagnostics are worrying:",
+            tags$ul(
+              tags$li("\\(\\widehat{R} \\geq 1.01\\),"),
+              tags$li("\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\) with \\(n_{\\text{chains}}\\) denoting the number of chains,"),
+              tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
             ))
-          )
+        )),
+        br(),
+        # br(),
+        h5("HMC-specific diagnostics", style = "font-size:110%"), # style = "font-weight:bold ; font-size:110%"
+        strong("Divergences:"),
+        verbatimTextOutput("diagn_div_out", placeholder = TRUE),
+        strong("Hits of maximum tree depth:"),
+        verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
+        strong("E-BFMI (value(s) only shown if worrying):"),
+        verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
+        br(),
+        # br(),
+        h5("General MCMC diagnostics", style = "font-size:110%"),
+        strong(withMathJax("\\(\\widehat{R}\\):")),
+        verbatimTextOutput("rhat_out", placeholder = TRUE),
+        strong("Bulk-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{bulk}}\\):")),
+        verbatimTextOutput("essBulk_out", placeholder = TRUE),
+        strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
+        verbatimTextOutput("essTail_out", placeholder = TRUE),
+        checkboxInput("show_general_MCMC_tab",
+                      "Show detailed table of the general MCMC diagnostics",
+                      value = FALSE),
+        conditionalPanel(
+          condition = "input.show_general_MCMC_tab",
+          verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
         )
       ),
-      numericInput("seed_PPD",
-                   paste("Seed for draws from posterior predictive distribution",
-                         "(leave empty to use a random seed):"),
-                   value = NA, step = 1L),
-      actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)")))
+      tabPanel(
+        "Summary",
+        h4("Summary"),
+        verbatimTextOutput("smmry_view", placeholder = TRUE)
+      ),
+      tabPanel(
+        "Download",
+        h4("Download"),
+        selectInput("stanout_download_sel", "Choose output file to download:",
+                    choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
+                                "List of MCMC diagnostics (RDS file)" = "diagn_obj",
+                                "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
+                                "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
+                                "Array of posterior draws (RDS file)" = "draws_arr_obj"),
+                    selectize = TRUE),
+        helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
+                             "is the output from ", code("brms::brm()"), ", the central function ",
+                             "for inferring the posterior."))),
+        downloadButton("stanout_download", "Download output file")
+      ),
+      tabPanel(
+        HTML(paste("Launch", strong("shinystan"))),
+        h4("Interactive output inspection using package", strong("shinystan")),
+        helpText(
+          "Notes:",
+          tags$ul(
+            tags$li(
+              "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
+              "are used. These are as follows:",
+              tags$ul(
+                tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
+                tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
+                tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
+                tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
+                        "partially pooled effects."),
+                tags$li("The parameters starting with \"cor_\" are the correlations between the",
+                        "partially pooled effects of the same group."),
+                tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
+                tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
+                                   "distributional family for the outcome (see page \"Likelihood\"",
+                                   "&rarr; \"Outcome\").")))
+              )
+            ),
+            tags$li(
+              HTML(paste0(
+                "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
+                " are automatically created. These are the observations for the outcome (object ",
+                code("y"), ") and the corresponding posterior predictive replications (object ",
+                code("y_rep"), "). You can select them in the respective \"Object from global ",
+                "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
+                "\"Select data\" in the ", strong("shinystan"), " app."
+              ))
+            )
+          )
+        ),
+        numericInput("seed_PPD",
+                     paste("Seed for draws from posterior predictive distribution",
+                           "(leave empty to use a random seed):"),
+                     value = NA, step = 1L),
+        actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)")))
+      )
     )
   ),
   navbarMenu(

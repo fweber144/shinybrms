@@ -11,6 +11,7 @@
     **shinystan** app. Now, these general MCMC diagnostics are
     accessible from within the **shinybrms** app and the warnings from
     version 1.2.2 are handled differently.
+  - Added a page "Home".
 
 ## Minor changes
 

@@ -643,37 +643,39 @@ ui <- navbarPage(
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
-        titlePanel(HTML(paste("Interactive output inspection using package", strong("shinystan")))),
+        titlePanel(HTML(paste("Launch", strong("shinystan")))),
         br(),
         helpText(
-          "Notes:",
-          tags$ul(
-            tags$li(
-              "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
-              "are used. These are as follows:",
-              tags$ul(
-                tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
-                tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
-                tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
-                tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
-                        "partially pooled effects."),
-                tags$li("The parameters starting with \"cor_\" are the correlations between the",
-                        "partially pooled effects of the same group."),
-                tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
-                tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
-                                   "distributional family for the outcome (see page \"Likelihood\"",
-                                   "&rarr; \"Outcome\").")))
+          p("The package", strong("shinystan"), "offers an interactive inspection of Stan's output."),
+          p("Notes:",
+            tags$ul(
+              tags$li(
+                "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
+                "are used. These are as follows:",
+                tags$ul(
+                  tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
+                  tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
+                  tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
+                  tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
+                          "partially pooled effects."),
+                  tags$li("The parameters starting with \"cor_\" are the correlations between the",
+                          "partially pooled effects of the same group."),
+                  tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
+                  tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
+                                     "distributional family for the outcome (see page \"Likelihood\"",
+                                     "&rarr; \"Outcome\").")))
+                )
+              ),
+              tags$li(
+                HTML(paste0(
+                  "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
+                  " are automatically created. These are the observations for the outcome (object ",
+                  code("y"), ") and the corresponding posterior predictive replications (object ",
+                  code("y_rep"), "). You can select them in the respective \"Object from global ",
+                  "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
+                  "\"Select data\" in the ", strong("shinystan"), " app."
+                ))
               )
-            ),
-            tags$li(
-              HTML(paste0(
-                "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
-                " are automatically created. These are the observations for the outcome (object ",
-                code("y"), ") and the corresponding posterior predictive replications (object ",
-                code("y_rep"), "). You can select them in the respective \"Object from global ",
-                "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
-                "\"Select data\" in the ", strong("shinystan"), " app."
-              ))
             )
           )
         ),

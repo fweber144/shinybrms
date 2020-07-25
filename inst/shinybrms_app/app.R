@@ -593,30 +593,30 @@ ui <- navbarPage(
               tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
             ))
         )),
-        br(),
-        # br(),
-        h5("HMC-specific diagnostics", style = "font-size:110%"), # style = "font-weight:bold ; font-size:110%"
-        strong("Divergences:"),
-        verbatimTextOutput("diagn_div_out", placeholder = TRUE),
-        strong("Hits of maximum tree depth:"),
-        verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
-        strong("E-BFMI (value(s) only shown if worrying):"),
-        verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
-        br(),
-        # br(),
-        h5("General MCMC diagnostics", style = "font-size:110%"),
-        strong(withMathJax("\\(\\widehat{R}\\):")),
-        verbatimTextOutput("rhat_out", placeholder = TRUE),
-        strong("Bulk-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{bulk}}\\):")),
-        verbatimTextOutput("essBulk_out", placeholder = TRUE),
-        strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
-        verbatimTextOutput("essTail_out", placeholder = TRUE),
-        checkboxInput("show_general_MCMC_tab",
-                      "Show detailed table of the general MCMC diagnostics",
-                      value = FALSE),
-        conditionalPanel(
-          condition = "input.show_general_MCMC_tab",
-          verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
+        wellPanel(
+          h3("HMC-specific diagnostics"),
+          strong("Divergences:"),
+          verbatimTextOutput("diagn_div_out", placeholder = TRUE),
+          strong("Hits of maximum tree depth:"),
+          verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
+          strong("E-BFMI (value(s) only shown if worrying):"),
+          verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
+        ),
+        wellPanel(
+          h3("General MCMC diagnostics"),
+          strong(withMathJax("\\(\\widehat{R}\\):")),
+          verbatimTextOutput("rhat_out", placeholder = TRUE),
+          strong("Bulk-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{bulk}}\\):")),
+          verbatimTextOutput("essBulk_out", placeholder = TRUE),
+          strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
+          verbatimTextOutput("essTail_out", placeholder = TRUE),
+          checkboxInput("show_general_MCMC_tab",
+                        "Show detailed table of the general MCMC diagnostics",
+                        value = FALSE),
+          conditionalPanel(
+            condition = "input.show_general_MCMC_tab",
+            verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
+          )
         )
       ),
       tabPanel(

@@ -1755,7 +1755,7 @@ server <- function(input, output, session){
                           C_essBulk_OK, C_rhat_OK, C_essTail_OK))
     if(diagn_all_OK){
       showNotification(
-        "The Stan run was finished. All MCMC diagnostics passed their checks.",
+        "The Stan run was finished. All MCMC diagnostics are OK.",
         duration = NA,
         type = "message"
       )
@@ -1809,7 +1809,7 @@ server <- function(input, output, session){
     if(diagn()$Rhat_OK){
       return("All R-hat values are OK.")
     } else{
-      return("At least one R-hat value is worrying.")
+      return("Warning: At least one R-hat value is worrying.")
     }
   }, sep = "\n")
   
@@ -1817,7 +1817,7 @@ server <- function(input, output, session){
     if(diagn()$ESS_bulk_OK){
       return("All bulk-ESS values are OK.")
     } else{
-      return("At least one bulk-ESS value is worrying.")
+      return("Warning: At least one bulk-ESS value is worrying.")
     }
   }, sep = "\n")
   
@@ -1825,7 +1825,7 @@ server <- function(input, output, session){
     if(diagn()$ESS_tail_OK){
       return("All tail-ESS values are OK.")
     } else{
-      return("At least one tail-ESS value is worrying.")
+      return("Warning: At least one tail-ESS value is worrying.")
     }
   }, sep = "\n")
   
@@ -1843,7 +1843,8 @@ server <- function(input, output, session){
     if(diagn()$all_OK){
       return("All MCMC diagnostics are OK.")
     } else{
-      return("Warning: At least one MCMC diagnostic did not pass its check.")
+      return(paste("Warning: At least one MCMC diagnostic did not pass its check. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   

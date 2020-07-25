@@ -1761,9 +1761,8 @@ server <- function(input, output, session){
       )
     } else{
       showNotification(
-        paste("Warning: The Stan run was finished, but least one MCMC diagnostic",
-              "did not pass its check. In general, this indicates that the",
-              "Stan results should not be used."),
+        paste("Warning: The Stan run was finished, but least one MCMC diagnostic is worrying.",
+              "In general, this indicates that the Stan results should not be used."),
         duration = NA,
         type = "warning"
       )
@@ -1843,7 +1842,7 @@ server <- function(input, output, session){
     if(diagn()$all_OK){
       return("All MCMC diagnostics are OK.")
     } else{
-      return(paste("Warning: At least one MCMC diagnostic did not pass its check. In general,",
+      return(paste("Warning: At least one MCMC diagnostic is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")

@@ -617,6 +617,11 @@ ui <- navbarPage(
             condition = "input.show_general_MCMC_tab",
             verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
           )
+        ),
+        wellPanel(
+          h3("Overall check"),
+          strong("Check if all MCMC diagnostics are OK:"),
+          verbatimTextOutput("diagn_all_out", placeholder = TRUE)
         )
       ),
       tabPanel(
@@ -1830,6 +1835,17 @@ server <- function(input, output, session){
                "ESS_tail" = diagn()$ESS_tail,
                check.names = FALSE)
   })
+  
+  #------
+  # Overall check (all MCMC diagnostics)
+  
+  output$diagn_all_out <- renderText({
+    if(diagn()$all_OK){
+      return("All MCMC diagnostics are OK.")
+    } else{
+      return("Warning: At least one MCMC diagnostic did not pass its check.")
+    }
+  }, sep = "\n")
   
   #------------
   # Summary

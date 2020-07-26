@@ -30,7 +30,8 @@ ui <- navbarPage(
     wellPanel(
       h3("Welcome to the", strong("shinybrms"), "app!",
          style = "text-align:center"),
-      br(),
+      # br(),
+      h4("Description"),
       p("With the",
         a(HTML(paste(strong("shinybrms"))), href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
         a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
@@ -45,6 +46,16 @@ ui <- navbarPage(
         strong("shinybrms"), "is the",
         a(HTML(paste(strong("rstan"))), href = "https://mc-stan.org/rstan/", target = "_blank"),
         "package."),
+      p("Note: The following conventions are used throughout this app:",
+        tags$ul(
+          tags$li("Names of R packages are written in bold (e.g.", strong("brms"), "but also",
+                  strong("shinybrms"), "since the", strong("shinybrms"), "app is distributed as an",
+                  "R package)."),
+          tags$li("Names of R functions are given according to the scheme",
+                  code("<package>::<function>()"), "with <package> denoting the R package which",
+                  "contains the <function>. Where possible, this scheme is hyperlinked.")
+        )),
+      h4("Bayesian regression models"),
       p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
         ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
         "that the joint posterior distribution of all parameters in the regression model is",
@@ -77,15 +88,6 @@ ui <- navbarPage(
           tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
                   em("Bayesian Data Analysis", .noWS = "after"),
                   ". 3rd ed. Boca Raton, FL: CRC Press.")
-        )),
-      p("Note: The following conventions are used throughout this app:",
-        tags$ul(
-          tags$li("Names of R packages are written in bold (e.g.", strong("brms"), "but also",
-                  strong("shinybrms"), "since the", strong("shinybrms"), "app is distributed as an",
-                  "R package)."),
-          tags$li("Names of R functions are given according to the scheme",
-                  code("<package>::<function>()"), "with <package> denoting the R package which",
-                  "contains the <function>. Where possible, this scheme is hyperlinked.")
         ))
     ),
     # hr(),

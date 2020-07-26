@@ -7,7 +7,7 @@
 status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://travis-ci.org/fweber144/shinybrms)
 <!-- badges: end -->
 
-# shinybrms <img src='man/figures/logo.svg' align="right" height="139" />
+# **shinybrms** <img src='man/figures/logo.svg' align="right" height="139" />
 
 <br>
 
@@ -27,7 +27,7 @@ To get an impression of the **shinybrms** app, have a look at [this
 page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
 The following text explains how to launch the **shinybrms** app.
 
-## Launching the shinybrms app
+## Launching the **shinybrms** app
 
 There are two options for launching the **shinybrms** app:
 
@@ -39,9 +39,9 @@ There are two options for launching the **shinybrms** app:
     GitHub](https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app).
 
 The first option is described in the following section “*With*
-installation of shinybrms”. The second option is described in the
-subsequent section “*Without* installation of shinybrms”. In both cases,
-you need to perform the following steps first:
+installation of **shinybrms**”. The second option is described in the
+subsequent section “*Without* installation of **shinybrms**”. In both
+cases, you need to perform the following steps first:
 
 1.  Install R (see the [R homepage](https://www.R-project.org/)).
 2.  Install the R package **rstan** (see the [“RStan Getting Started”
@@ -51,7 +51,7 @@ you need to perform the following steps first:
     dependencies = TRUE)` with `[...]` as advised on the “RStan Getting
     Started” GitHub page).
 
-### *With* installation of shinybrms
+### *With* installation of **shinybrms**
 
 1.  Install the R package **shinybrms** either from CRAN or from GitHub.
     The GitHub version might be more recent than the CRAN version. You
@@ -113,7 +113,7 @@ you need to perform the following steps first:
     launch_shinybrms(launch.browser = TRUE)
     ```
 
-### *Without* installation of shinybrms
+### *Without* installation of **shinybrms**
 
 1.  Install the R package **brms**. You may use the following R code for
     this:

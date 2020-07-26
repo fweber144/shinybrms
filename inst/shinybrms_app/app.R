@@ -806,7 +806,7 @@ ui <- navbarPage(
                   a("GPL-3", href = "https://CRAN.R-project.org/web/licenses/GPL-3", target = "_blank")),
           tags$li(strong("Citation:"),
                   "Frank Weber (2020).",
-                  em("shinybrms: Graphical User Interface (Shiny App)",
+                  em("shinybrms: Graphical User Interface ('Shiny' App)",
                      "for Package 'brms'."),
                   "R package, version 1.2.2.9000. URL:",
                   a("https://fweber144.github.io/shinybrms/",

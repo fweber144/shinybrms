@@ -830,6 +830,7 @@ ui <- navbarPage(
           ))),
           tags$li(HTML(paste0(
             strong("brms"), ": ",
+            a("website", href = "https://paul-buerkner.github.io/brms/", target = "_blank"), ", ",
             a("CRAN", href = "https://CRAN.R-project.org/package=brms", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/paul-buerkner/brms", target = "_blank")
           ))),

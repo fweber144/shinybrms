@@ -83,7 +83,10 @@ ui <- navbarPage(
         "these pages, the dataset has to be uploaded on page \"Data\" (even though for testing",
         "purposes, you may also choose an example dataset there). Every page should provide help texts",
         "where necessary. If you need more help, if you want to suggest improvements, or if you found",
-        "a bug, please follow the instructions given on page \"More\"", HTML("&rarr;"), "\"About\".",
+        "a bug, please open an issue on", # "a bug, please follow the instructions given on page \"More\"", HTML("&rarr;"), "\"About\".",
+        a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
+        ". Some basic information about this app as well as some legal information",
+        "may be found on page \"More\"", HTML("&rarr;"), "\"About\".",
         "Links to the software relevant for this app are given on",
         "page \"More\"", HTML("&rarr;"), "\"Links\".",
         "References for literature cited throughout the app may be found on",
@@ -855,7 +858,11 @@ ui <- navbarPage(
                   a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank", .noWS = "after"), ",",
                   a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank", .noWS = "after"), ",",
                   a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"))
-        )
+        ),
+        "If you need help, if you want to suggest improvements, or if you found",
+        "a bug, please open an issue on",
+        a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
+        "."
       ),
       wellPanel(
         h3("Trademarks"),

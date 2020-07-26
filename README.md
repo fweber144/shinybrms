@@ -107,7 +107,7 @@ cases, you need to perform the following steps first:
     
     or this R code which ensures that the app opens up in the default
     web browser (helpful e.g. if you are using
-    [RStudio](https://rstudio.com/products/rstudio/download/)):
+    [RStudio](https://rstudio.com/)):
     
     ``` r
     library(shinybrms)
@@ -143,7 +143,7 @@ cases, you need to perform the following steps first:
     
     or this R code which ensures that the app opens up in the default
     web browser (helpful e.g. if you are using
-    [RStudio](https://rstudio.com/products/rstudio/download/)):
+    [RStudio](https://rstudio.com/)):
     
     ``` r
     shiny::runGitHub("fweber144/shinybrms",

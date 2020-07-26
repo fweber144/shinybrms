@@ -15,8 +15,9 @@
 
 ## Minor changes
 
-  - Minor improvements in the UI (e.g. concerning help texts and
-    notifications).
+  - Minor improvements in the UI (e.g. improved help texts and
+    notifications, but also added hyperlinks to the documentation of R
+    functions).
   - Added the possibility to download the MCMC diagnostics (including
     the newly added general MCMC diagnostics).
 

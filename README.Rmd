@@ -71,7 +71,7 @@ The first option is described in the following section "*With* installation of *
    library(shinybrms)
    launch_shinybrms()
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):
+   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using [RStudio](https://rstudio.com/products/rstudio/download/)):
    ```{r, eval = FALSE}
    library(shinybrms)
    launch_shinybrms(launch.browser = TRUE)
@@ -92,7 +92,7 @@ The first option is described in the following section "*With* installation of *
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app")
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using RStudio):
+   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using [RStudio](https://rstudio.com/products/rstudio/download/)):
    ```{r, eval = FALSE}
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app",

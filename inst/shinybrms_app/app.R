@@ -1998,7 +1998,7 @@ server <- function(input, output, session){
                        "brmsfit_obj" = C_fit(),
                        "diagn_obj" = diagn(),
                        "draws_mat_obj" = as.matrix(C_fit()),
-                       "draws_arr_obj" = as.array(C_fit())),
+                       "draws_arr_obj" = C_draws_arr()),
                 file = file)
       }
     }

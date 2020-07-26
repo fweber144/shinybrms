@@ -13,15 +13,14 @@ status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://tr
 
 ## Description
 
-This [R](https://www.R-project.org/) package **shinybrms** provides a
+This [R](https://www.R-project.org/) package
+[**shinybrms**](https://fweber144.github.io/shinybrms/) solely consists
+of a [Shiny](https://shiny.rstudio.com/) app. This Shiny app is a
 graphical user interface (GUI) for the R package
-[**brms**](https://CRAN.R-project.org/package=brms) which allows to fit
-Bayesian regression models using [Stan](https://mc-stan.org/) (more
-specifically, using its R interface, the R package
-[**rstan**](https://CRAN.R-project.org/package=rstan)). The
-**shinybrms** GUI is a [Shiny](https://shiny.rstudio.com/) app, i.e. it
-was created using the R package
-[**shiny**](https://CRAN.R-project.org/package=shiny).
+[**brms**](https://paul-buerkner.github.io/brms/) which allows to fit
+Bayesian regression models using [Stan](https://mc-stan.org/). More
+specifically, the only **brms** backend currently supported by
+**shinybrms** is the R package [**rstan**](https://mc-stan.org/rstan/).
 
 To get an impression of the **shinybrms** app, have a look at [this
 page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
@@ -59,7 +58,7 @@ you need to perform the following steps first:
     from the R packages
     [**lme4**](https://CRAN.R-project.org/package=lme4),
     [**MASS**](https://CRAN.R-project.org/package=MASS), and
-    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm) or not.
+    [**rstanarm**](https://mc-stan.org/rstanarm/) or not.
     
       - If you *don’t want* to use the example datasets from the R
         packages **lme4**, **MASS**, and **rstanarm**, then the R code
@@ -125,9 +124,8 @@ you need to perform the following steps first:
 2.  If you want to use the example datasets from the R packages
     [**lme4**](https://CRAN.R-project.org/package=lme4),
     [**MASS**](https://CRAN.R-project.org/package=MASS), and
-    [**rstanarm**](https://CRAN.R-project.org/package=rstanarm), you
-    need to install these packages. You may use the following R code for
-    this:
+    [**rstanarm**](https://mc-stan.org/rstanarm/), you need to install
+    these packages. You may use the following R code for this:
     
     ``` r
     install.packages(c("lme4", "MASS", "rstanarm"))

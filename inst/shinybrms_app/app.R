@@ -36,8 +36,18 @@ ui <- navbarPage(
         a("R", href = "https://www.R-project.org/", target = "_blank"),
         "package", strong("brms"), "which in turn relies on",
         a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
-        ". (Note that links to the R packages are only given on",
-        "the \"More\"", HTML("&rarr;"), "\"Links\" page.)"),
+        "."),
+      p("The following conventions are used throughout this app:",
+        tags$ul(
+          tags$li("Names of R packages are written in bold (e.g.", strong("brms"), "but also",
+                  strong("shinybrms"), "since the", strong("shinybrms"), "app is distributed as an",
+                  "R package)."),
+          tags$li("Names of R functions are given according to the scheme",
+                  code("<package>::<function>()"), "with <package> denoting the R package which",
+                  "contains the <function>."),
+          tags$li("Links to the R packages named throughout the app are given on",
+                  "the \"More\"", HTML("&rarr;"), "\"Links\" page.")
+        )),
       p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
         ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
         "that the joint posterior distribution of all parameters in the regression model is",
@@ -169,21 +179,18 @@ ui <- navbarPage(
                     selectize = TRUE),
         strong("Parameters (with corresponding link functions) specific to this distributional family:"),
         tableOutput("dist_link"),
-        helpText(HTML(paste0(
-          "For details concerning the link functions, see the help for function ",
+        helpText(
+          "For details concerning the link functions, see the help for the function",
           code("brms::brmsfamily()"),
-          " from package ",
-          a(HTML(paste(strong("brms"))),
-            href = "https://CRAN.R-project.org/package=brms",
-            target = "_blank"),
-          " and the ", strong("brms"), " vignette ",
+          "and the", strong("brms"), "vignette",
           a("\"Parameterization of Response Distributions in brms\"",
             href = "https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html",
-            target = "_blank"),
-          ". Note that for each parameter, the link function only applies if this parameter is ",
-          "actually modeled by (nonconstant) predictors. Currently, this is only supported ",
-          "for the location parameter (e.g. ", code("mu"), " for a Gaussian distribution)."
-        )))
+            target = "_blank",
+            .noWS = "after"),
+          ". Note that for each parameter, the link function only applies if this parameter is",
+          "actually modeled by (nonconstant) predictors. Currently, this is only supported",
+          "for the location parameter (e.g.", code("mu"), "for a Gaussian distribution)."
+        )
       ),
       tabPanel(
         "Predictors",

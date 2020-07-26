@@ -736,7 +736,7 @@ ui <- navbarPage(
         helpText(
           p("The package",
             a(HTML(paste(strong("shinystan"))), href = "https://mc-stan.org/shinystan/", target = "_blank"),
-            "offers an interactive inspection of Stan's output."),
+            "provides a Shiny app offering an interactive inspection of Stan's output."),
           p("Notes:",
             tags$ul(
               tags$li(

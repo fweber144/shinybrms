@@ -67,7 +67,18 @@ ui <- navbarPage(
         "these pages, the dataset has to be uploaded on page \"Data\" (even though for testing",
         "purposes, you may also choose an example dataset there). Every page provides help texts",
         "where necessary. For more help, see the pages listed under \"More\"."),
-      p("The following conventions are used throughout this app:",
+      p("For a more thorough introduction to Bayesian statistics in general as well as",
+        "Bayesian regression models in particular, the following textbooks might",
+        "be helpful:",
+        tags$ul(
+          tags$li("McElreath R (2020).",
+                  em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
+                  ". 2nd ed. Boca Raton, FL: CRC Press."),
+          tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
+                  em("Bayesian Data Analysis", .noWS = "after"),
+                  ". 3rd ed. Boca Raton, FL: CRC Press.")
+        )),
+      p("Note: The following conventions are used throughout this app:",
         tags$ul(
           tags$li("Names of R packages are written in bold (e.g.", strong("brms"), "but also",
                   strong("shinybrms"), "since the", strong("shinybrms"), "app is distributed as an",
@@ -912,35 +923,6 @@ ui <- navbarPage(
             a("CRAN", href = "https://CRAN.R-project.org/package=shiny", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/rstudio/shiny", target = "_blank")
           )))
-        )
-      )
-    ),
-    tabPanel(
-      "Help",
-      titlePanel("Help"),
-      br(),
-      wellPanel(
-        h3("Software"),
-        HTML(paste0("For help concerning the software used in the ", strong("shinybrms"), " app ",
-                    "(including the R package ", strong("shinybrms"), "), see ",
-                    "the \"More\" &rarr; \"Links\" page."))
-      ),
-      wellPanel(
-        h3("Literature"),
-        "These are helpful textbooks on Bayesian statistics:",
-        tags$ul(
-          tags$li("Introductory:",
-                  tags$ul(
-                    tags$li("McElreath R (2016).",
-                            em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
-                            ". 1st ed. Boca Raton, FL: CRC Press.")
-                  )),
-          tags$li("Introductory to more advanced:",
-                  tags$ul(
-                    tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
-                            em("Bayesian Data Analysis", .noWS = "after"),
-                            ". 3rd ed. Boca Raton, FL: CRC Press.")
-                  ))
         )
       )
     )

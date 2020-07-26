@@ -277,7 +277,7 @@ ui <- navbarPage(
               strong("brms", .noWS = "outside"),
               "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
               "preview\" which may be found in the panel on the left-hand side."),
-            p("A missing value (", code(NA, .noWS = "outside"), ") in column \"Group\" stands",
+            p("A missing value (", code("NA", .noWS = "outside"), ") in column \"Group\" stands",
               "for the whole sample (i.e. no group). The value \"1\" in column \"Effect(s)\"",
               "stands for the intercept (or intercepts, if \"Group\" exists).")
           ),

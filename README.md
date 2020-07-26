@@ -14,13 +14,14 @@ status](https://travis-ci.org/fweber144/shinybrms.svg?branch=master)](https://tr
 ## Description
 
 This [R](https://www.R-project.org/) package
-[**shinybrms**](https://fweber144.github.io/shinybrms/) solely consists
-of a [Shiny](https://shiny.rstudio.com/) app. This Shiny app is a
-graphical user interface (GUI) for the R package
-[**brms**](https://paul-buerkner.github.io/brms/) which allows to fit
-Bayesian regression models using [Stan](https://mc-stan.org/). More
-specifically, the only **brms** backend currently supported by
-**shinybrms** is the R package [**rstan**](https://mc-stan.org/rstan/).
+[**shinybrms**](https://fweber144.github.io/shinybrms/) provides a
+[Shiny](https://shiny.rstudio.com/) app with the same name. This Shiny
+app is a graphical user interface (GUI) for fitting Bayesian regression
+models using the R package
+[**brms**](https://paul-buerkner.github.io/brms/) which in turn relies
+on [Stan](https://mc-stan.org/). More specifically, the only **brms**
+backend currently supported by **shinybrms** is the R package
+[**rstan**](https://mc-stan.org/rstan/).
 
 To get an impression of the **shinybrms** app, have a look at [this
 page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).

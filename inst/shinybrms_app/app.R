@@ -770,15 +770,13 @@ ui <- navbarPage(
         h3("Basic information"),
         helpText(
           "Note: This is the", strong("shinybrms"), em("Shiny app", .noWS = "after"), ".",
-          "It is distributed under the same name as an",
-          em("R package"), "(see the \"More\"", HTML("&rarr;"), "\"Links\" page for software links)."
+          "It is distributed under the same name as an", em("R package", .noWS = "after"), "."
         ),
         tags$ul(
           tags$li(
             strong("Description:"),
-            "The", strong("shinybrms"), "Shiny app is a graphical user interface (GUI) for the",
-            "R package", strong("brms"), "which allows to fit Bayesian regression models using",
-            "Stan (see the \"More\"", HTML("&rarr;"), "\"Links\" page for software links)."
+            "The", strong("shinybrms"), "Shiny app is a graphical user interface (GUI) for the R",
+            "package", strong("brms"), "which allows to fit Bayesian regression models using Stan."
           ),
           tags$li(strong("Author:"),
                   "Frank Weber (ORCID iD:",
@@ -793,8 +791,8 @@ ui <- navbarPage(
                   ")"),
           tags$li(strong("Version:"),
                   "1.2.2.9000"),
-          tags$li(strong("Date (yyyy-mm-dd):"),
-                  "2020-07-01"),
+          tags$li(strong("Date:"),
+                  "July 1, 2020"),
           tags$li(strong("License:"),
                   a("GPL-3", href = "https://CRAN.R-project.org/web/licenses/GPL-3", target = "_blank")),
           tags$li(strong("Citation:"),
@@ -804,7 +802,11 @@ ui <- navbarPage(
                   "R package, version 1.2.2.9000. URL:",
                   a("https://fweber144.github.io/shinybrms/",
                     href = "https://fweber144.github.io/shinybrms/",
-                    target = "_blank"))
+                    target = "_blank")),
+          tags$li(strong("Links (for the corresponding R package):"),
+                  a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank", .noWS = "after"), ",",
+                  a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank", .noWS = "after"), ",",
+                  a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"))
         )
       ),
       wellPanel(

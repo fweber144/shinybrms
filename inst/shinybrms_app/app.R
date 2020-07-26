@@ -84,6 +84,8 @@ ui <- navbarPage(
         "purposes, you may also choose an example dataset there). Every page should provide help texts",
         "where necessary. If you need more help, if you want to suggest improvements, or if you found",
         "a bug, please follow the instructions given on page \"More\"", HTML("&rarr;"), "\"About\".",
+        "Links to the software relevant for this app are given on",
+        "page \"More\"", HTML("&rarr;"), "\"Links\".",
         "References for literature cited throughout the app may be found on",
         "page \"More\"", HTML("&rarr;"), "\"References\"."),
       p("Furthermore, the following conventions are used throughout this app:",
@@ -872,13 +874,13 @@ ui <- navbarPage(
       titlePanel("Links"),
       br(),
       wellPanel(
-        h3("Software (without R packages)"),
+        h3("Programming languages and software environments"),
         tags$ul(
           tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
           tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
           tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
                   "(seen as an own",
-                  "software concept,", # "\"programming language\",",
+                  "software entity,", # "\"software environment\",", # "\"programming language\",", # "\"software concept\",", 
                   "even though it is actually implemented",
                   "in the R package", strong("shiny"), "(see below))")
         )
@@ -932,6 +934,15 @@ ui <- navbarPage(
             a("GitHub", href = "https://github.com/rstudio/shiny", target = "_blank")
           )))
         )
+      )
+    ),
+    tabPanel(
+      "References",
+      titlePanel("References"),
+      br(),
+      wellPanel(
+        # h3("References"),
+        "REFS HERE"
       )
     )
   ),

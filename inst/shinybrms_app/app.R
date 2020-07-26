@@ -942,7 +942,26 @@ ui <- navbarPage(
       br(),
       wellPanel(
         # h3("References"),
-        "REFS HERE"
+        p("Betancourt M (2017).",
+          "A conceptual introduction to Hamiltonian Monte Carlo.",
+          em("arXiv:170102434 [stat]", .noWS = "after"), ". URL:",
+          a("https://arxiv.org/abs/1701.02434",
+            href = "https://arxiv.org/abs/1701.02434",
+            target = "_blank"),
+          "(visited on July 26, 2020)."),
+        p("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
+          em("Bayesian Data Analysis", .noWS = "after"),
+          ". 3rd ed. Boca Raton, FL: CRC Press."),
+        p("McElreath R (2020).",
+          em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
+          ". 2nd ed. Boca Raton, FL: CRC Press."),
+        p(withMathJax(
+          "Vehtari A, Gelman A, Simpson D, Carpenter B, and Bürkner P-C (2020).",
+          "Rank-normalization, folding, and localization: An improved \\(\\widehat{R}\\) for",
+          "assessing convergence of MCMC.", em("Bayesian Analysis", .noWS = "after"), ". DOI:",
+          a("10.1214/20-BA1221", href = "https://doi.org/10.1214/20-BA1221", target = "_blank",
+            .noWS = "after"),
+          "."))
       )
     )
   ),

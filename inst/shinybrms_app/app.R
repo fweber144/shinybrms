@@ -815,8 +815,12 @@ ui <- navbarPage(
         h3("Software (without R packages)"),
         tags$ul(
           tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
-          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
-          # , tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"))
+          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
+          tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
+                  "(seen as an own",
+                  "software concept,", # "\"programming language\",",
+                  "even though it is actually implemented",
+                  "in the R package", strong("shiny"), "(see below))")
         )
       ),
       wellPanel(

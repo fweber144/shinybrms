@@ -33,7 +33,8 @@ ui <- navbarPage(
       br(),
       p("With the",
         a(HTML(paste(strong("shinybrms"))), href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
-        a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"), "app, you",
+        a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
+        "app, you",
         "can fit Bayesian regression models using the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
         "package",
@@ -775,8 +776,16 @@ ui <- navbarPage(
         tags$ul(
           tags$li(
             strong("Description:"),
-            "The", strong("shinybrms"), "Shiny app is a graphical user interface (GUI) for the R",
-            "package", strong("brms"), "which allows to fit Bayesian regression models using Stan."
+            "The",
+            a(HTML(paste(strong("shinybrms"))), href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
+            a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
+            "app is a graphical user interface (GUI) for the",
+            a("R", href = "https://www.R-project.org/", target = "_blank"),
+            "package",
+            a(HTML(paste(strong("brms"))), href = "https://paul-buerkner.github.io/brms/", target = "_blank"),
+            "which allows to fit Bayesian regression models using",
+            a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
+            "."
           ),
           tags$li(strong("Author:"),
                   "Frank Weber (ORCID iD:",

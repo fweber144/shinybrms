@@ -34,20 +34,11 @@ ui <- navbarPage(
       p("With this", a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"), "app, you",
         "can fit Bayesian regression models using the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
-        "package", strong("brms"), "which in turn relies on",
+        "package",
+        a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank"),
+        "which in turn relies on",
         a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
         "."),
-      p("The following conventions are used throughout this app:",
-        tags$ul(
-          tags$li("Names of R packages are written in bold (e.g.", strong("brms"), "but also",
-                  strong("shinybrms"), "since the", strong("shinybrms"), "app is distributed as an",
-                  "R package)."),
-          tags$li("Names of R functions are given according to the scheme",
-                  code("<package>::<function>()"), "with <package> denoting the R package which",
-                  "contains the <function>."),
-          tags$li("Links to the R packages named throughout the app are given on",
-                  "the \"More\"", HTML("&rarr;"), "\"Links\" page.")
-        )),
       p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
         ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
         "that the joint posterior distribution of all parameters in the regression model is",
@@ -65,7 +56,9 @@ ui <- navbarPage(
       p("Thus, after having specified the likelihood and the prior (distribution), the aim of a",
         "Bayesian data analysis is to infer the posterior (distribution) and then perform",
         "analyses based on the posterior.",
-        "The structure of the", strong("shinybrms"), "app follows this principle:",
+        "The structure of the",
+        a(HTML(paste(strong("shinybrms"))), href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank"),
+        "app follows this principle:",
         "The three main pages are \"Likelihood\", \"Prior\", and \"Posterior\". Before starting with",
         "these pages, the dataset has to be uploaded on page \"Data\" (even though for testing",
         "purposes, you may also choose an example dataset there). Every page provides help texts",
@@ -182,7 +175,9 @@ ui <- navbarPage(
         helpText(
           "For details concerning the link functions, see the help for the function",
           code("brms::brmsfamily()"),
-          "and the", strong("brms"), "vignette",
+          "and the",
+          a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank"),
+          "vignette",
           a("\"Parameterization of Response Distributions in brms\"",
             href = "https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html",
             target = "_blank",
@@ -267,7 +262,7 @@ ui <- navbarPage(
           helpText(
             p("Here, you can get a preview of the currently chosen predictor terms. ",
               "This is mainly intended as a check for those familiar with R's and ",
-              strong("brms", .noWS = "outside"),
+              a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank", .noWS = "outside"),
               "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
               "preview\" which may be found in the panel on the left-hand side."),
             p("A missing value (", code(NA, .noWS = "outside"), ") in column \"Group\" stands",
@@ -296,7 +291,8 @@ ui <- navbarPage(
       tags$ul(
         tags$li("For parameters for which you do not specify a",
                 "custom prior, the default prior from the package",
-                strong("brms"), "will be used."),
+                a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank"),
+                "will be used."),
         tags$li("The parameter named \"Intercept\" is the intercept when centering the predictors.",
                 "This is only the internally used intercept; for the output, the intercept with",
                 "respect to the noncentered predictors is given (named \"b_Intercept\")."),
@@ -306,9 +302,7 @@ ui <- navbarPage(
       "For details concerning the default priors, see the help for the function ",
       code("brms::set_prior()"),
       " from package ",
-      a(HTML(paste(strong("brms"))),
-        href = "https://CRAN.R-project.org/package=brms",
-        target = "_blank"),
+      a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank"),
       ". For details concerning the specification of custom priors, see the help for ",
       code("brms::set_prior()"),
       " as well as the ",
@@ -371,7 +365,10 @@ ui <- navbarPage(
                           tags$li(HTML(paste0("specify a prior distribution using a Stan function ",
                                               em("or")))),
                           tags$li(HTML(paste0("specify a prior distribution using one of the ",
-                                              "special functions defined by ", strong("brms"),
+                                              "special functions defined by ",
+                                              a(HTML(paste(strong("brms"))),
+                                                href = "https://CRAN.R-project.org/package=brms",
+                                                target = "_blank"),
                                               " for this purpose (e.g. ",
                                               code("horseshoe"), " and ", code("lkj"),
                                               ") ", em("or")))),
@@ -700,11 +697,16 @@ ui <- navbarPage(
         titlePanel(HTML(paste("Launch", strong("shinystan")))),
         br(),
         helpText(
-          p("The package", strong("shinystan"), "offers an interactive inspection of Stan's output."),
+          p("The package",
+            a(HTML(paste(strong("shinystan"))), href = "https://CRAN.R-project.org/package=shinystan", target = "_blank"),
+            "offers an interactive inspection of Stan's output."),
           p("Notes:",
             tags$ul(
               tags$li(
-                "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
+                "In the",
+                a(HTML(paste(strong("shinystan"))), href = "https://CRAN.R-project.org/package=shinystan", target = "_blank"),
+                "app, the parameter names given by",
+                a(HTML(paste(strong("brms"))), href = "https://CRAN.R-project.org/package=brms", target = "_blank"),
                 "are used. These are as follows:",
                 tags$ul(
                   tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
@@ -722,12 +724,15 @@ ui <- navbarPage(
               ),
               tags$li(
                 HTML(paste0(
-                  "The R objects needed for the posterior predictive checks in ", strong("shinystan"),
+                  "The R objects needed for the posterior predictive checks in ",
+                  a(HTML(paste(strong("shinystan"))), href = "https://CRAN.R-project.org/package=shinystan", target = "_blank"),
                   " are automatically created. These are the observations for the outcome (object ",
                   code("y"), ") and the corresponding posterior predictive replications (object ",
                   code("y_rep"), "). You can select them in the respective \"Object from global ",
                   "environment\" input selector under \"DIAGNOSE\" &rarr; \"PPcheck\" &rarr; ",
-                  "\"Select data\" in the ", strong("shinystan"), " app."
+                  "\"Select data\" in the ",
+                  a(HTML(paste(strong("shinystan"))), href = "https://CRAN.R-project.org/package=shinystan", target = "_blank"),
+                  " app."
                 ))
               )
             )

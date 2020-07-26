@@ -1113,7 +1113,7 @@ server <- function(input, output, session){
     }
   })
   
-  #-------------------------------------------------
+  #------------------------
   # Data preview
   
   output$da_view <- renderTable({
@@ -1129,7 +1129,7 @@ server <- function(input, output, session){
   })
   
   #-------------------------------------------------
-  # Outcome
+  # Likelihood
   
   #------------------------
   # Outcome
@@ -1148,7 +1148,7 @@ server <- function(input, output, session){
                       selected = isolate(input$outc_sel))
   })
   
-  #------------------------
+  #------------
   # Distributional family
   
   C_family <- reactive({
@@ -1180,10 +1180,10 @@ server <- function(input, output, session){
     }
   })
   
-  #-------------------------------------------------
+  #------------------------
   # Predictors
   
-  #------------------------
+  #------------
   # Main effects
   
   observe({
@@ -1214,7 +1214,7 @@ server <- function(input, output, session){
                       selected = isolate(input$pred_mainPP_sel))
   })
   
-  #------------------------
+  #------------
   # Interactions
   
   observe({
@@ -1273,7 +1273,7 @@ server <- function(input, output, session){
     }
   }, ignoreNULL = FALSE)
   
-  #------------------------
+  #------------
   # Combination of all predictor terms
   
   C_pred <- reactive({
@@ -1364,7 +1364,7 @@ server <- function(input, output, session){
     return(pred_DF)
   })
   
-  #------------------------
+  #------------
   # Predictor terms preview
   
   output$pred_view <- renderTable({
@@ -1376,7 +1376,7 @@ server <- function(input, output, session){
   })
   
   #------------------------
-  # Formula construction
+  # Formula
   
   C_formula_char <- reactive({
     req(input$outc_sel)
@@ -1399,9 +1399,6 @@ server <- function(input, output, session){
     req(C_formula_char())
     return(as.formula(C_formula_char()))
   })
-  
-  #------------------------
-  # Formula preview
   
   output$formula_view <- renderText({
     C_formula_char()
@@ -1547,6 +1544,9 @@ server <- function(input, output, session){
   # Posterior
   
   #------------------------
+  # Run Stan
+  
+  #------------
   # Stan code
   
   C_stancode <- reactive({
@@ -1590,7 +1590,7 @@ server <- function(input, output, session){
     }
   )
   
-  #------------------------
+  #------------
   # Stan data
   
   C_standata <- reactive({
@@ -1634,7 +1634,7 @@ server <- function(input, output, session){
     }
   )
   
-  #------------------------
+  #------------
   # Run Stan
   
   # For storing the user-specified number of chains (will be updated when creating C_fit and will be
@@ -1765,9 +1765,6 @@ server <- function(input, output, session){
     return(C_fit_tmp)
   })
   
-  #------------------------
-  # Output
-  
   output$fit_date <- renderText({
     invisible(req(C_fit()))
     C_fit()$fit@date
@@ -1778,15 +1775,15 @@ server <- function(input, output, session){
     return(as.array(C_fit()$fit))
   })
   
-  #------------
-  # Diagnostics
+  #------------------------
+  # MCMC diagnostics
   
   diagn <- reactive({
     req(C_draws_arr())
     
     n_chains_out <- dim(C_draws_arr())[2]
     
-    #------
+    #------------
     # Check for failed chains
     
     if(n_chains_out < n_chains_spec()){
@@ -1797,7 +1794,7 @@ server <- function(input, output, session){
       )
     }
     
-    #------
+    #------------
     # HMC-specific diagnostics
     
     diagn_div <- capture.output({
@@ -1815,7 +1812,7 @@ server <- function(input, output, session){
     }, type = "message")
     diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.") # diagn_energy_OK <- identical(length(rstan::get_low_bfmi_chains(C_fit()$fit)), 0L) # diagn_energy_OK <- all(rstan::get_bfmi(C_fit()$fit) >= 0.2)
     
-    #------
+    #------------
     # General MCMC diagnostics
     
     C_essBulk <- apply(C_draws_arr(), MARGIN = 3, FUN = ess_bulk)
@@ -1839,7 +1836,7 @@ server <- function(input, output, session){
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
-    #------
+    #------------
     # Report if all diagnostics are OK or not
     
     diagn_all_OK <- all(c(diagn_div_OK, diagn_tree_OK, diagn_energy_OK, 
@@ -1859,7 +1856,7 @@ server <- function(input, output, session){
       )
     }
     
-    #------
+    #------------
     # Return all diagnostics
     
     return(list(all_OK = diagn_all_OK,
@@ -1877,7 +1874,7 @@ server <- function(input, output, session){
                 ESS_tail = C_essTail))
   })
   
-  #------
+  #------------
   # HMC-specific diagnostics
   
   output$diagn_div_out <- renderText({
@@ -1892,7 +1889,7 @@ server <- function(input, output, session){
     diagn()$EBFMI
   }, sep = "\n")
   
-  #------
+  #------------
   # General MCMC diagnostics
   
   output$rhat_out <- renderText({
@@ -1926,7 +1923,7 @@ server <- function(input, output, session){
                check.names = FALSE)
   })
   
-  #------
+  #------------
   # Overall check (all MCMC diagnostics)
   
   output$diagn_all_out <- renderText({
@@ -1938,7 +1935,7 @@ server <- function(input, output, session){
     }
   }, sep = "\n")
   
-  #------------
+  #------------------------
   # Summary
   
   output$smmry_view <- renderPrint({
@@ -1946,7 +1943,7 @@ server <- function(input, output, session){
     print(C_fit(), digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
   
-  #------------
+  #------------------------
   # Download
   
   output$stanout_download <- downloadHandler(
@@ -1978,7 +1975,7 @@ server <- function(input, output, session){
     }
   )
   
-  #------------
+  #------------------------
   # shinystan
   
   observeEvent(input$act_launch_shinystan, {
@@ -2040,7 +2037,7 @@ server <- function(input, output, session){
     }
   })
   
-  #------------------------
+  #-------------------------------------------------
   # Quit app
   
   observe({

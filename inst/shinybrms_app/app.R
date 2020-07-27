@@ -1779,6 +1779,7 @@ server <- function(input, output, session){
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- 
         paste("Warning: There are missing values in the data. The corresponding rows have been",
               "omitted in the Stan run.")
+      warn_capt <- setdiff(warn_capt, "Compiling Stan program...")
       showNotification(
         paste(warn_capt, collapse = " | "),
         duration = NA,

@@ -349,7 +349,8 @@ ui <- navbarPage(
                 "This is only the internally used intercept; for the output, the intercept with",
                 "respect to the noncentered predictors is given (named \"b_Intercept\")."),
         tags$li("As soon as you choose a new dataset on page \"Data\" (even if you upload",
-                "the same dataset again), the custom priors are automatically reset.")
+                "the same dataset again), the custom priors are automatically reset."),
+        tags$li("As soon as you change the likelihood, the custom priors are automatically reset.")
       ),
       "For details concerning the default priors, see the help for the R function ",
       a(HTML(paste(code("brms::set_prior()"))),

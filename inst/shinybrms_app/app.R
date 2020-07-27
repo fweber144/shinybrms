@@ -1793,7 +1793,7 @@ server <- function(input, output, session){
   })
   
   C_draws_arr <- reactive({
-    return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit)) # return(brms:::as.array.brmsfit(C_fit()))
+    return(brms:::as.array.brmsfit(C_fit())) # return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit))
   })
   
   # Computation of MCMC diagnostics:

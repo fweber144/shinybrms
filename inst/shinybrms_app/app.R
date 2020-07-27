@@ -1767,7 +1767,7 @@ server <- function(input, output, session){
     if(exists("browser_orig")) options(browser = browser_orig$browser)
     if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     
-    # Throw warnings thrown by the call to brms::brm():
+    # Notifications for the warnings thrown by the call to brms::brm():
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- 

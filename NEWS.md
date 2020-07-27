@@ -12,14 +12,19 @@
     accessible from within the **shinybrms** app and the warnings from
     version 1.2.2 are handled differently.
   - Added a page "Home".
+  - Added a page "References" (listed under "More").
+  - Removed page "Help" (which was listed under "More").
 
 ## Minor changes
 
-  - Minor improvements in the UI (e.g. improved help texts and
-    notifications, but also added hyperlinks to the documentation of R
-    functions).
+  - Minor improvements in the UI (e.g. improved and added help texts and
+    notifications, but also added hyperlinks to the online documentation
+    of R functions).
   - Added the possibility to download the MCMC diagnostics (including
     the newly added general MCMC diagnostics).
+  - Minor improvements in the README file.
+  - Minor improvements on pages "About" and "Links" (both listed under
+    "More").
 
 # shinybrms 1.2.2 (only GitHub)
 

@@ -706,7 +706,7 @@ ui <- navbarPage(
           strong("Hits of maximum tree depth:"),
           verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
           strong("E-BFMI (value(s) only shown if worrying):"),
-          verbatimTextOutput("diagn_energy_out", placeholder = TRUE),
+          verbatimTextOutput("diagn_EBFMI_out", placeholder = TRUE),
         ),
         wellPanel(
           h3("General MCMC diagnostics"),
@@ -1803,10 +1803,10 @@ server <- function(input, output, session){
     }, type = "message")
     C_tree_OK <- grepl("^0 of", C_tree) # C_tree_OK <- identical(rstan::get_num_max_treedepth(C_bfit$fit), 0L)
     
-    C_energy <- capture.output({
+    C_EBFMI <- capture.output({
       rstan::check_energy(C_bfit$fit)
     }, type = "message")
-    C_energy_OK <- identical(C_energy, "E-BFMI indicated no pathological behavior.") # C_energy_OK <- identical(length(rstan::get_low_bfmi_chains(C_bfit$fit)), 0L) # C_energy_OK <- all(rstan::get_bfmi(C_bfit$fit) >= 0.2)
+    C_EBFMI_OK <- identical(C_EBFMI, "E-BFMI indicated no pathological behavior.") # C_EBFMI_OK <- identical(length(rstan::get_low_bfmi_chains(C_bfit$fit)), 0L) # C_EBFMI_OK <- all(rstan::get_bfmi(C_bfit$fit) >= 0.2)
     
     #---
     # General MCMC diagnostics
@@ -1835,7 +1835,7 @@ server <- function(input, output, session){
     #---
     # Overall check for all MCMC diagnostics
     
-    C_all_OK <- all(c(C_div_OK, C_tree_OK, C_energy_OK, 
+    C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK, 
                       C_essBulk_OK, C_rhat_OK, C_essTail_OK))
     
     #---
@@ -1875,8 +1875,8 @@ server <- function(input, output, session){
                              divergences = C_div,
                              hits_max_tree_depth_OK = C_tree_OK,
                              hits_max_tree_depth = C_tree,
-                             EBFMI_OK = C_energy_OK,
-                             EBFMI = C_energy,
+                             EBFMI_OK = C_EBFMI_OK,
+                             EBFMI = C_EBFMI,
                              Rhat_OK = C_rhat_OK,
                              Rhat = C_rhat,
                              ESS_bulk_OK = C_essBulk_OK,
@@ -1921,7 +1921,7 @@ server <- function(input, output, session){
     C_stanres()$diagn$hits_max_tree_depth
   }, sep = "\n")
   
-  output$diagn_energy_out <- renderText({
+  output$diagn_EBFMI_out <- renderText({
     C_stanres()$diagn$EBFMI
   }, sep = "\n")
   

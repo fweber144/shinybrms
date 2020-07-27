@@ -1776,20 +1776,14 @@ server <- function(input, output, session){
     # Throw warnings if existing:
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
-      if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){
-        showNotification(
-          paste("Warning: There are missing values in the data. The corresponding rows have been",
-                "omitted in the Stan run."),
-          duration = NA,
-          type = "warning"
-        )
-      } else{
-        showNotification(
-          paste(warn_capt, collapse = " | "),
-          duration = NA,
-          type = "warning"
-        )
-      }
+      warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- 
+        paste("Warning: There are missing values in the data. The corresponding rows have been",
+              "omitted in the Stan run.")
+      showNotification(
+        paste(warn_capt, collapse = " | "),
+        duration = NA,
+        type = "warning"
+      )
     }
     
     return(C_fit_tmp)

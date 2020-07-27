@@ -1797,7 +1797,7 @@ server <- function(input, output, session){
   
   C_draws_arr <- reactive({
     invisible(req(C_fit()))
-    return(as.array(C_fit()$fit))
+    return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit))
   })
   
   #------------------------

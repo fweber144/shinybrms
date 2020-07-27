@@ -617,7 +617,7 @@ ui <- navbarPage(
           br(),
           br(),
           strong("Date and time when Stan run was finished:"),
-          textOutput("fit_date"),
+          verbatimTextOutput("fit_date", placeholder = TRUE),
           br(),
           strong("Check if all MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details):"),
           verbatimTextOutput("diagn_all_out", placeholder = TRUE)

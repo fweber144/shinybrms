@@ -1796,9 +1796,7 @@ server <- function(input, output, session){
     return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit)) # return(brms:::as.array.brmsfit(C_fit()))
   })
   
-  #------------------------
-  # MCMC diagnostics
-  
+  # Computation of MCMC diagnostics:
   diagn <- reactive({
     n_chains_out <- dim(C_draws_arr())[2]
     
@@ -1896,6 +1894,21 @@ server <- function(input, output, session){
                 ESS_tail = C_essTail))
   })
   
+  # Overall check for all MCMC diagnostics:
+  output$diagn_all_out <- renderText({
+    if(diagn()$all_OK){
+      return(paste("All MCMC diagnostics are OK (see",
+                   "the tab \"MCMC diagnostics\" for details)."))
+    } else{
+      return(paste("Warning: At least one MCMC diagnostic is worrying (see",
+                   "the tab \"MCMC diagnostics\" for details). In general,",
+                   "this indicates that the Stan results should not be used."))
+    }
+  }, sep = "\n")
+  
+  #------------------------
+  # MCMC diagnostics (output)
+  
   #------------
   # HMC-specific diagnostics
   
@@ -1944,20 +1957,6 @@ server <- function(input, output, session){
                "ESS_tail" = diagn()$ESS_tail,
                check.names = FALSE)
   })
-  
-  #------------
-  # Overall check (all MCMC diagnostics)
-  
-  output$diagn_all_out <- renderText({
-    if(diagn()$all_OK){
-      return(paste("All MCMC diagnostics are OK (see",
-                   "the tab \"MCMC diagnostics\" for details)."))
-    } else{
-      return(paste("Warning: At least one MCMC diagnostic is worrying (see",
-                   "the tab \"MCMC diagnostics\" for details). In general,",
-                   "this indicates that the Stan results should not be used."))
-    }
-  }, sep = "\n")
   
   #------------------------
   # Summary

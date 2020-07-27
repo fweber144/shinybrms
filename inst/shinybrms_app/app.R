@@ -1809,17 +1809,6 @@ server <- function(input, output, session){
     n_chains_out <- dim(C_draws_arr())[2]
     
     #------------
-    # Check for failed chains
-    
-    if(n_chains_out < n_chains_spec()){
-      showNotification(
-        "Warning: At least one chain exited with an error. The Stan results should not be used.",
-        duration = NA,
-        type = "warning"
-      )
-    }
-    
-    #------------
     # HMC-specific diagnostics
     
     diagn_div <- capture.output({
@@ -1866,19 +1855,30 @@ server <- function(input, output, session){
     
     diagn_all_OK <- all(c(diagn_div_OK, diagn_tree_OK, diagn_energy_OK, 
                           C_essBulk_OK, C_rhat_OK, C_essTail_OK))
-    if(diagn_all_OK){
+    
+    # First: Check for failed chains:
+    if(n_chains_out < n_chains_spec()){
       showNotification(
-        "The Stan run was finished. All MCMC diagnostics are OK.",
-        duration = NA,
-        type = "message"
-      )
-    } else{
-      showNotification(
-        paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying.",
-              "In general, this indicates that the Stan results should not be used."),
+        paste("Warning: The Stan run was finished, but at least one chain exited with an error.",
+              "The Stan results should not be used."),
         duration = NA,
         type = "warning"
       )
+    } else{
+      if(diagn_all_OK){
+        showNotification(
+          "The Stan run was finished. All MCMC diagnostics are OK.",
+          duration = NA,
+          type = "message"
+        )
+      } else{
+        showNotification(
+          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying.",
+                "In general, this indicates that the Stan results should not be used."),
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
     
     #------------

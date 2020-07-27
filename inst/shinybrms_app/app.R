@@ -1664,11 +1664,7 @@ server <- function(input, output, session){
   #------------
   # Run Stan
   
-  # For storing the user-specified number of chains (will be updated when creating C_fit and will be
-  # used when checking for problems in the Stan run):
-  n_chains_spec <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
-  
-  C_fit <- eventReactive(input$run_stan, {
+  C_stanres <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,
         input$advOpts_chains,
@@ -1678,7 +1674,7 @@ server <- function(input, output, session){
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     
-    n_chains_spec(input$advOpts_chains)
+    n_chains_spec <- input$advOpts_chains
     
     args_brm <- list(
       formula = C_formula(),
@@ -1762,7 +1758,7 @@ server <- function(input, output, session){
     
     # Run Stan (more precisely: brms::brm()):
     warn_capt <- capture.output({
-      C_fit_tmp <- do.call(brms::brm, args = args_brm)
+      C_bfit <- do.call(brms::brm, args = args_brm)
     }, type = "message")
     
     # Reset all modified options and environment variables:
@@ -1771,7 +1767,7 @@ server <- function(input, output, session){
     if(exists("browser_orig")) options(browser = browser_orig$browser)
     if(!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     
-    # Throw warnings if existing:
+    # Throw warnings thrown by the call to brms::brm():
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- 
@@ -1787,71 +1783,66 @@ server <- function(input, output, session){
       }
     }
     
-    return(C_fit_tmp)
-  })
-  
-  output$fit_date <- renderText({
-    C_fit()$fit@date
-  })
-  
-  C_draws_arr <- reactive({
-    return(brms:::as.array.brmsfit(C_fit())) # return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit))
-  })
-  
-  # Computation of MCMC diagnostics:
-  diagn <- reactive({
-    n_chains_out <- dim(C_draws_arr())[2]
+    C_draws_arr <- brms:::as.array.brmsfit(C_bfit) # as.array(C_bfit$fit) # rstan:::as.array.stanfit(C_bfit$fit)
     
-    #------------
+    #------
+    # Computation of MCMC diagnostics
+    
+    n_chains_out <- dim(C_draws_arr)[2]
+    
+    #---
     # HMC-specific diagnostics
     
-    diagn_div <- capture.output({
-      rstan::check_divergences(C_fit()$fit)
+    C_div <- capture.output({
+      rstan::check_divergences(C_bfit$fit)
     }, type = "message")
-    diagn_div_OK <- grepl("^0 of", diagn_div) # diagn_div_OK <- identical(rstan::get_num_divergent(C_fit()$fit), 0L)
+    C_div_OK <- grepl("^0 of", C_div) # C_div_OK <- identical(rstan::get_num_divergent(C_bfit$fit), 0L)
     
-    diagn_tree <- capture.output({
-      rstan::check_treedepth(C_fit()$fit)
+    C_tree <- capture.output({
+      rstan::check_treedepth(C_bfit$fit)
     }, type = "message")
-    diagn_tree_OK <- grepl("^0 of", diagn_tree) # diagn_tree_OK <- identical(rstan::get_num_max_treedepth(C_fit()$fit), 0L)
+    C_tree_OK <- grepl("^0 of", C_tree) # C_tree_OK <- identical(rstan::get_num_max_treedepth(C_bfit$fit), 0L)
     
-    diagn_energy <- capture.output({
-      rstan::check_energy(C_fit()$fit)
+    C_energy <- capture.output({
+      rstan::check_energy(C_bfit$fit)
     }, type = "message")
-    diagn_energy_OK <- identical(diagn_energy, "E-BFMI indicated no pathological behavior.") # diagn_energy_OK <- identical(length(rstan::get_low_bfmi_chains(C_fit()$fit)), 0L) # diagn_energy_OK <- all(rstan::get_bfmi(C_fit()$fit) >= 0.2)
+    C_energy_OK <- identical(C_energy, "E-BFMI indicated no pathological behavior.") # C_energy_OK <- identical(length(rstan::get_low_bfmi_chains(C_bfit$fit)), 0L) # C_energy_OK <- all(rstan::get_bfmi(C_bfit$fit) >= 0.2)
     
-    #------------
+    #---
     # General MCMC diagnostics
     
-    C_essBulk <- apply(C_draws_arr(), MARGIN = 3, FUN = rstan::ess_bulk)
+    C_essBulk <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_bulk)
     if(any(is.na(C_essBulk))){
       C_essBulk_OK <- FALSE
     } else{
       C_essBulk_OK <- all(C_essBulk > 100 * n_chains_out)
     }
     
-    C_rhat <- apply(C_draws_arr(), MARGIN = 3, FUN = rstan::Rhat)
+    C_rhat <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::Rhat)
     if(any(is.na(C_rhat))){
       C_rhat_OK <- FALSE
     } else{
       C_rhat_OK <- all(C_rhat < 1.01)
     }
     
-    C_essTail <- apply(C_draws_arr(), MARGIN = 3, FUN = rstan::ess_tail)
+    C_essTail <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_tail)
     if(any(is.na(C_essTail))){
       C_essTail_OK <- FALSE
     } else{
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
-    #------------
-    # Report if all diagnostics are OK or not
+    #---
+    # Overall check for all MCMC diagnostics
     
-    diagn_all_OK <- all(c(diagn_div_OK, diagn_tree_OK, diagn_energy_OK, 
-                          C_essBulk_OK, C_rhat_OK, C_essTail_OK))
+    C_all_OK <- all(c(C_div_OK, C_tree_OK, C_energy_OK, 
+                      C_essBulk_OK, C_rhat_OK, C_essTail_OK))
+    
+    #---
+    # Notifications for the MCMC diagnostics
     
     # First: Check for failed chains:
-    if(n_chains_out < n_chains_spec()){
+    if(n_chains_out < n_chains_spec){
       showNotification(
         paste("Warning: The Stan run was finished, but at least one chain exited with an error.",
               "The Stan results should not be used."),
@@ -1859,8 +1850,8 @@ server <- function(input, output, session){
         type = "warning"
       )
     } else{
-      # Secondly: Check all MCMC diagnostics:
-      if(diagn_all_OK){
+      # Secondly: Overall check for all MCMC diagnostics:
+      if(C_all_OK){
         showNotification(
           paste("The Stan run was finished. All MCMC diagnostics are OK (see",
                 "the tab \"MCMC diagnostics\" for details)."),
@@ -1878,27 +1869,35 @@ server <- function(input, output, session){
       }
     }
     
-    #------------
-    # Return all diagnostics
-    
-    return(list(all_OK = diagn_all_OK,
-                divergences_OK = diagn_div_OK,
-                divergences = diagn_div,
-                hits_max_tree_depth_OK = diagn_tree_OK,
-                hits_max_tree_depth = diagn_tree,
-                EBFMI_OK = diagn_energy_OK,
-                EBFMI = diagn_energy,
-                Rhat_OK = C_rhat_OK,
-                Rhat = C_rhat,
-                ESS_bulk_OK = C_essBulk_OK,
-                ESS_bulk = C_essBulk,
-                ESS_tail_OK = C_essTail_OK,
-                ESS_tail = C_essTail))
+    return(list(bfit = C_bfit,
+                diagn = list(all_OK = C_all_OK,
+                             divergences_OK = C_div_OK,
+                             divergences = C_div,
+                             hits_max_tree_depth_OK = C_tree_OK,
+                             hits_max_tree_depth = C_tree,
+                             EBFMI_OK = C_energy_OK,
+                             EBFMI = C_energy,
+                             Rhat_OK = C_rhat_OK,
+                             Rhat = C_rhat,
+                             ESS_bulk_OK = C_essBulk_OK,
+                             ESS_bulk = C_essBulk,
+                             ESS_tail_OK = C_essTail_OK,
+                             ESS_tail = C_essTail),
+                draws_arr = C_draws_arr))
   })
   
-  # Overall check for all MCMC diagnostics:
+  #------
+  # Date and time when Stan run was finished
+  
+  output$fit_date <- renderText({
+    C_stanres()$bfit$fit@date
+  })
+  
+  #------
+  # Overall check for all MCMC diagnostics
+  
   output$diagn_all_out <- renderText({
-    if(diagn()$all_OK){
+    if(C_stanres()$diagn$all_OK){
       return(paste("All MCMC diagnostics are OK (see",
                    "the tab \"MCMC diagnostics\" for details)."))
     } else{
@@ -1909,28 +1908,28 @@ server <- function(input, output, session){
   }, sep = "\n")
   
   #------------------------
-  # MCMC diagnostics (output)
+  # MCMC diagnostics
   
   #------------
   # HMC-specific diagnostics
   
   output$diagn_div_out <- renderText({
-    diagn()$divergences
+    C_stanres()$diagn$divergences
   }, sep = "\n")
   
   output$diagn_tree_out <- renderText({
-    diagn()$hits_max_tree_depth
+    C_stanres()$diagn$hits_max_tree_depth
   }, sep = "\n")
   
   output$diagn_energy_out <- renderText({
-    diagn()$EBFMI
+    C_stanres()$diagn$EBFMI
   }, sep = "\n")
   
   #------------
   # General MCMC diagnostics
   
   output$rhat_out <- renderText({
-    if(diagn()$Rhat_OK){
+    if(C_stanres()$diagn$Rhat_OK){
       return("All R-hat values are OK.")
     } else{
       return("Warning: At least one R-hat value is worrying.")
@@ -1938,7 +1937,7 @@ server <- function(input, output, session){
   }, sep = "\n")
   
   output$essBulk_out <- renderText({
-    if(diagn()$ESS_bulk_OK){
+    if(C_stanres()$diagn$ESS_bulk_OK){
       return("All bulk-ESS values are OK.")
     } else{
       return("Warning: At least one bulk-ESS value is worrying.")
@@ -1946,7 +1945,7 @@ server <- function(input, output, session){
   }, sep = "\n")
   
   output$essTail_out <- renderText({
-    if(diagn()$ESS_tail_OK){
+    if(C_stanres()$diagn$ESS_tail_OK){
       return("All tail-ESS values are OK.")
     } else{
       return("Warning: At least one tail-ESS value is worrying.")
@@ -1954,9 +1953,9 @@ server <- function(input, output, session){
   }, sep = "\n")
   
   output$general_MCMC_out <- renderPrint({
-    data.frame("R-hat" = diagn()$Rhat,
-               "ESS_bulk" = diagn()$ESS_bulk,
-               "ESS_tail" = diagn()$ESS_tail,
+    data.frame("R-hat" = C_stanres()$diagn$Rhat,
+               "ESS_bulk" = C_stanres()$diagn$ESS_bulk,
+               "ESS_tail" = C_stanres()$diagn$ESS_tail,
                check.names = FALSE)
   })
   
@@ -1964,7 +1963,7 @@ server <- function(input, output, session){
   # Summary
   
   output$smmry_view <- renderPrint({
-    print(C_fit(), digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
+    print(C_stanres()$bfit, digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
   
   #------------------------
@@ -1985,15 +1984,15 @@ server <- function(input, output, session){
     },
     content = function(file){
       if(identical(input$stanout_download_sel, "draws_mat_csv")){
-        write.csv(as.matrix(C_fit()),
+        write.csv(as.matrix(C_stanres()$bfit),
                   file = file,
                   row.names = FALSE)
       } else{
         saveRDS(switch(input$stanout_download_sel,
-                       "brmsfit_obj" = C_fit(),
-                       "diagn_obj" = diagn(),
-                       "draws_mat_obj" = as.matrix(C_fit()),
-                       "draws_arr_obj" = C_draws_arr()),
+                       "brmsfit_obj" = C_stanres()$bfit,
+                       "diagn_obj" = C_stanres()$diagn,
+                       "draws_mat_obj" = as.matrix(C_stanres()$bfit),
+                       "draws_arr_obj" = C_stanres()$draws_arr),
                 file = file)
       }
     }
@@ -2003,7 +2002,7 @@ server <- function(input, output, session){
   # shinystan
   
   observeEvent(input$act_launch_shinystan, {
-    invisible(req(C_fit()))
+    invisible(req(C_stanres()))
     if(requireNamespace("shinystan", quietly = TRUE)){
       if(requireNamespace("callr", quietly = TRUE)){
         # The browser for "shinystan":
@@ -2041,7 +2040,7 @@ server <- function(input, output, session){
             options(browser = browser_callr_orig$browser)
             return(invisible(TRUE))
           },
-          args = list(brmsfit_obj = C_fit(),
+          args = list(brmsfit_obj = C_stanres()$bfit,
                       browser_callr = shinystan_browser,
                       seed_callr = seed_PPD_tmp)
         )

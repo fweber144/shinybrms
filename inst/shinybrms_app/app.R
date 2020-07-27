@@ -1874,7 +1874,7 @@ server <- function(input, output, session){
       )
     } else{
       showNotification(
-        paste("Warning: The Stan run was finished, but least one MCMC diagnostic is worrying.",
+        paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying.",
               "In general, this indicates that the Stan results should not be used."),
         duration = NA,
         type = "warning"

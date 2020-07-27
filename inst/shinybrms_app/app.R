@@ -617,7 +617,10 @@ ui <- navbarPage(
           br(),
           br(),
           strong("Date and time when Stan run was finished:"),
-          textOutput("fit_date")
+          textOutput("fit_date"),
+          br(),
+          strong("Check if all MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details):"),
+          verbatimTextOutput("diagn_all_out", placeholder = TRUE)
         )
       ),
       tabPanel(
@@ -720,11 +723,6 @@ ui <- navbarPage(
             condition = "input.show_general_MCMC_tab",
             verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
           )
-        ),
-        wellPanel(
-          h3("Overall check"),
-          strong("Check if all MCMC diagnostics are OK:"),
-          verbatimTextOutput("diagn_all_out", placeholder = TRUE)
         )
       ),
       tabPanel(
@@ -1952,9 +1950,11 @@ server <- function(input, output, session){
   
   output$diagn_all_out <- renderText({
     if(diagn()$all_OK){
-      return("All MCMC diagnostics are OK.")
+      return(paste("All MCMC diagnostics are OK (see",
+                   "the tab \"MCMC diagnostics\" for details)."))
     } else{
-      return(paste("Warning: At least one MCMC diagnostic is worrying. In general,",
+      return(paste("Warning: At least one MCMC diagnostic is worrying (see",
+                   "the tab \"MCMC diagnostics\" for details). In general,",
                    "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")

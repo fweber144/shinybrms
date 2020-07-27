@@ -618,7 +618,6 @@ ui <- navbarPage(
           br(),
           strong("Date and time when Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
-          br(),
           strong("Check if all MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details):"),
           verbatimTextOutput("diagn_all_out", placeholder = TRUE)
         )
@@ -699,6 +698,7 @@ ui <- navbarPage(
               tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
             ))
         )),
+        br(),
         wellPanel(
           h3("HMC-specific diagnostics"),
           strong("Divergences:"),

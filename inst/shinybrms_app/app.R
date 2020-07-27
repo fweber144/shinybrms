@@ -1783,7 +1783,7 @@ server <- function(input, output, session){
       }
     }
     
-    C_draws_arr <- brms:::as.array.brmsfit(C_bfit) # as.array(C_bfit$fit) # rstan:::as.array.stanfit(C_bfit$fit)
+    C_draws_arr <- as.array(C_bfit)
     
     #------
     # Computation of MCMC diagnostics

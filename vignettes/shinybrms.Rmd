@@ -187,7 +187,7 @@ knitr::include_graphics("screenshots/bacteria_15.png")
 ### Inspecting the output
 
 \
-We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". If the Stan run produced warnings, they are shown at the top of this "Output" panel (below the date and the time when the Stan run was finished). Furthermore, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, no warnings have occurred and the HMC-specific diagnostics are all OK:
+We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". First, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, no warnings have occurred and the HMC-specific diagnostics are all OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -197,7 +197,7 @@ knitr::include_graphics("screenshots/bacteria_16.png")
 *Fig. 16: Page "Posterior", panel "Output" (top).*
 
 \
-Underneath the HMC diagnostics, we get a short summary of our posterior inference including some more general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these MCMC diagnostics are all OK (cf. [Vehtari et al. (2020)](https://doi.org/10.1214/20-BA1221) to see why):
+Underneath the HMC diagnostics, we get a short summary of our posterior inference including some general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these general MCMC diagnostics are all OK (cf. [Vehtari et al. (2020)](https://doi.org/10.1214/20-BA1221) to see why):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -207,7 +207,7 @@ knitr::include_graphics("screenshots/bacteria_17.png")
 *Fig. 17: Page "Posterior", panel "Output" (middle).*
 
 \
-For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5% and 97.5% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the Shiny app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the more general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page (after having entered a seed for reproducibility of the posterior predictive checks):
+For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5% and 97.5% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the Shiny app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page (after having entered a seed for reproducibility of the posterior predictive checks):
 
 \
 ```{r echo = FALSE, results = "hide"}

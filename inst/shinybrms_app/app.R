@@ -1710,7 +1710,8 @@ server <- function(input, output, session){
     }
     
     showNotification(
-      "Stan now compiles the C++ code (which may take a while) and then starts sampling.",
+      paste("Stan will now compile the C++ code for your model (which may take a while) and",
+            "will then start sampling."),
       duration = 60,
       type = "message"
     )

@@ -1791,12 +1791,10 @@ server <- function(input, output, session){
   })
   
   output$fit_date <- renderText({
-    invisible(req(C_fit()))
     C_fit()$fit@date
   })
   
   C_draws_arr <- reactive({
-    invisible(req(C_fit()))
     return(as.array(C_fit()$fit)) # return(rstan:::as.array.stanfit(C_fit()$fit)) # return(brms:::as.array.brmsfit(C_fit()))
   })
   
@@ -1804,8 +1802,6 @@ server <- function(input, output, session){
   # MCMC diagnostics
   
   diagn <- reactive({
-    req(C_draws_arr())
-    
     n_chains_out <- dim(C_draws_arr())[2]
     
     #------------
@@ -1964,7 +1960,6 @@ server <- function(input, output, session){
   # Summary
   
   output$smmry_view <- renderPrint({
-    invisible(req(C_fit()))
     print(C_fit(), digits = 2, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
   

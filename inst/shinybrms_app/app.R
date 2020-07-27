@@ -1861,16 +1861,19 @@ server <- function(input, output, session){
         type = "warning"
       )
     } else{
+      # Secondly: Check all MCMC diagnostics:
       if(diagn_all_OK){
         showNotification(
-          "The Stan run was finished. All MCMC diagnostics are OK.",
+          paste("The Stan run was finished. All MCMC diagnostics are OK (see",
+                "the tab \"MCMC diagnostics\" for details)."),
           duration = NA,
           type = "message"
         )
       } else{
         showNotification(
-          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying.",
-                "In general, this indicates that the Stan results should not be used."),
+          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying (see",
+                "the tab \"MCMC diagnostics\" for details). In general,",
+                "this indicates that the Stan results should not be used."),
           duration = NA,
           type = "warning"
         )

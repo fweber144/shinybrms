@@ -135,7 +135,7 @@ knitr::include_graphics("screenshots/bacteria_9.png")
 ### Preparing the Stan run
 
 \
-At the top of page "Posterior", we could get a preview of the Stan code and the Stan data (and download them):
+On page "Posterior", the first tab is "Run Stan". At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):
 
 \
 ```{r echo = FALSE, results = "hide"}

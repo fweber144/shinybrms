@@ -311,6 +311,43 @@ ui <- navbarPage(
                       selectize = TRUE)
         ),
         wellPanel(
+          h3("Offset"),
+          helpText(withMathJax(
+            p("An offset is a predictor with a coefficient fixed to 1.",
+              "In most regression analyses, an offset is not needed.",
+              "In the context of this app, the typical use case would be a count data outcome",
+              "where the observation time differs from individual to individual (see the",
+              strong("rstanarm"), "vignette",
+              a("\"Estimating Generalized Linear Models for Count Data with rstanarm\"",
+                href = "https://mc-stan.org/rstanarm/articles/count.html",
+                target = "_blank"),
+              "for an example)."),
+            p("If you want to specify an offset, please follow these steps which ensure that",
+              "the default prior for the intercept (at centered predictors) is adopted accordingly:",
+              tags$ol(
+                tags$li("Add the offset variable in the \"Nonpooled main effects\" input field",
+                        "in the tab \"Predictors\"."),
+                tags$li("In the \"Specification of custom priors\" on page \"Prior\":",
+                        tags$ol(
+                          tags$li("Choose parameter class \"b\"."),
+                          tags$li("Choose the coefficient of the offset variable."),
+                          tags$li("Type", code("constant(1)"), "in the input field for the prior distribution."),
+                          tags$li("Click on \"Add prior\".")
+                        ))
+              )),
+            p(strong("Important:"),
+              "If you followed these steps, then after the Stan run, you will be warned that",
+              "at least one MCMC diagnostic is worrying. The problem is that the steps above",
+              "create a constant parameter with a missing value (", code("NA", .noWS = "outside"),
+              ") for the corresponding \\(\\widehat{R}\\), bulk-ESS, and tail-ESS. Thus,",
+              "for the \\(\\widehat{R}\\), bulk-ESS, and tail-ESS",
+              em("of this constant parameter", .noWS = "after"), ", you may ignore the warning.",
+              "However, the MCMC diagnostics might be worrying for other reasons as well. Thus, you",
+              "need to check the MCMC diagnostics very carefully. In particular, you need to check",
+              "the HMC-specific diagnostics as well as the detailed table of the general MCMC diagnostics.")
+          ))
+        ),
+        wellPanel(
           h3("Preview of chosen predictor terms"),
           helpText(
             p("Here, you can get a preview of the currently chosen predictor terms. ",

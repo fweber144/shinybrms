@@ -1977,7 +1977,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$divergences_OK){
       return(paste(div_text, "is OK."))
     } else{
-      return(paste("Warning:", div_text, "is worrying."))
+      return(paste("Warning:", div_text, "is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   
@@ -1988,7 +1989,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$hits_max_tree_depth_OK){
       return(paste(tree_text, "is OK."))
     } else{
-      return(paste("Warning:", tree_text, "is worrying."))
+      return(paste("Warning:", tree_text, "is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   
@@ -2002,7 +2004,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$EBFMI_OK){
       return(paste(EBFMI_text, "is OK."))
     } else{
-      return(paste("Warning:", EBFMI_text, "is worrying."))
+      return(paste("Warning:", EBFMI_text, "is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   
@@ -2013,7 +2016,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$Rhat_OK){
       return("All R-hat values are OK.")
     } else{
-      return("Warning: At least one R-hat value is worrying.")
+      return(paste("Warning: At least one R-hat value is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   
@@ -2021,7 +2025,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$ESS_bulk_OK){
       return("All bulk-ESS values are OK.")
     } else{
-      return("Warning: At least one bulk-ESS value is worrying.")
+      return(paste("Warning: At least one bulk-ESS value is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   
@@ -2029,7 +2034,8 @@ server <- function(input, output, session){
     if(C_stanres()$diagn$ESS_tail_OK){
       return("All tail-ESS values are OK.")
     } else{
-      return("Warning: At least one tail-ESS value is worrying.")
+      return(paste("Warning: At least one tail-ESS value is worrying. In general,",
+                   "this indicates that the Stan results should not be used."))
     }
   }, sep = "\n")
   

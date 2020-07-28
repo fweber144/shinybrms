@@ -627,7 +627,7 @@ ui <- navbarPage(
         "MCMC diagnostics",
         titlePanel("MCMC diagnostics"),
         br(),
-        withMathJax(helpText(
+        helpText(withMathJax(
           p("Before using the Stan results for posterior inference, it is important to check the",
             "convergence and efficiency of the sampling algorithm for the given model and data by",
             "the help of", em("MCMC diagnostics", .noWS = "after"), ".",

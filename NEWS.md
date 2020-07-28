@@ -14,6 +14,8 @@
   - Added a page "Home".
   - Added a page "References" (listed under "More").
   - Removed page "Help" (which was listed under "More").
+  - Added a description how to include an offset. For this, the required
+    version of **brms** had to be increased to 2.13.3.
 
 ## Minor changes
 
@@ -25,6 +27,7 @@
   - Minor improvements in the README file.
   - Minor improvements on pages "About" and "Links" (both listed under
     "More").
+  - Added example dataset `roaches` from package **rstanarm**.
 
 # shinybrms 1.2.2 (only GitHub)
 

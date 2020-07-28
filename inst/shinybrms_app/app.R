@@ -702,7 +702,7 @@ ui <- navbarPage(
               tags$li("the Bayesian fraction of missing information for the energy transitions (E-BFMI) of each chain.")
             ),
             "In general, the first two of these diagnostics are worrying if they are greater than",
-            "zero (i.e. at least one iteration ending in a divergence or at least one iteration",
+            "zero (i.e. at least one iteration ending with a divergence or at least one iteration",
             "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
             "smaller than 0.2 for at least one chain."),
           p("The general MCMC diagnostics (computed for each parameter",
@@ -1855,20 +1855,15 @@ server <- function(input, output, session){
     #---
     # HMC-specific diagnostics
     
-    C_div <- capture.output({
-      rstan::check_divergences(C_bfit$fit)
-    }, type = "message")
-    C_div_OK <- grepl("^0 of", C_div) # C_div_OK <- identical(rstan::get_num_divergent(C_bfit$fit), 0L)
+    C_div <- rstan::get_num_divergent(C_bfit$fit)
+    C_div_OK <- identical(C_div, 0L)
     
-    C_tree <- capture.output({
-      rstan::check_treedepth(C_bfit$fit)
-    }, type = "message")
-    C_tree_OK <- grepl("^0 of", C_tree) # C_tree_OK <- identical(rstan::get_num_max_treedepth(C_bfit$fit), 0L)
+    C_tree <- rstan::get_num_max_treedepth(C_bfit$fit)
+    C_tree_OK <- identical(C_tree, 0L)
     
-    C_EBFMI <- capture.output({
-      rstan::check_energy(C_bfit$fit)
-    }, type = "message")
-    C_EBFMI_OK <- identical(C_EBFMI, "E-BFMI indicated no pathological behavior.") # C_EBFMI_OK <- identical(length(rstan::get_low_bfmi_chains(C_bfit$fit)), 0L) # C_EBFMI_OK <- all(rstan::get_bfmi(C_bfit$fit) >= 0.2)
+    C_EBFMI <- setNames(rstan::get_bfmi(C_bfit$fit),
+                        paste0("chain_", sapply(C_bfit$fit@stan_args, "[[", "chain_id")))
+    C_EBFMI_OK <- all(C_EBFMI >= 0.2)
     
     #---
     # General MCMC diagnostics
@@ -1976,15 +1971,39 @@ server <- function(input, output, session){
   # HMC-specific diagnostics
   
   output$diagn_div_out <- renderText({
-    C_stanres()$diagn$divergences
+    div_text <- paste0("The number of iterations ending with a divergence (",
+                       C_stanres()$diagn$divergences,
+                       ")")
+    if(C_stanres()$diagn$divergences_OK){
+      return(paste(div_text, "is OK."))
+    } else{
+      return(paste("Warning:", div_text, "is worrying."))
+    }
   }, sep = "\n")
   
   output$diagn_tree_out <- renderText({
-    C_stanres()$diagn$hits_max_tree_depth
+    tree_text <- paste0("The number of iterations hitting the maximum tree depth (",
+                        C_stanres()$diagn$hits_max_tree_depth,
+                        ")")
+    if(C_stanres()$diagn$hits_max_tree_depth_OK){
+      return(paste(tree_text, "is OK."))
+    } else{
+      return(paste("Warning:", tree_text, "is worrying."))
+    }
   }, sep = "\n")
   
   output$diagn_EBFMI_out <- renderText({
-    C_stanres()$diagn$EBFMI
+    EBFMI_text <- paste0("The E-BFMI (",
+                         paste(paste0(names(C_stanres()$diagn$EBFMI),
+                                      ": ",
+                                      round(C_stanres()$diagn$EBFMI, 4)),
+                               collapse = ", "),
+                         ")")
+    if(C_stanres()$diagn$EBFMI_OK){
+      return(paste(EBFMI_text, "is OK."))
+    } else{
+      return(paste("Warning:", EBFMI_text, "is worrying."))
+    }
   }, sep = "\n")
   
   #------------

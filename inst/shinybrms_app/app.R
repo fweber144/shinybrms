@@ -1147,9 +1147,9 @@ server <- function(input, output, session){
         req(FALSE)
       }
     } else if(identical(input$ex_da_sel, "roaches")){
-      if(requireNamespace("rstanarm", quietly = TRUE)){
-        tmp_env <- new.env()
-        data(roaches, package = "rstanarm", envir = tmp_env)
+      tmp_env <- new.env()
+      if(!inherits(try(data(roaches, package = "rstanarm", envir = tmp_env),
+                       silent = TRUE), "try-error")){
         assign("roaches", within(get("roaches", envir = tmp_env), {
           # Code from
           # https://avehtari.github.io/modelselection/roaches.html
@@ -1163,7 +1163,9 @@ server <- function(input, output, session){
         return(get("roaches", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"rstanarm\" needed. Please install it.",
+          HTML(paste0("Failed to load dataset ", code("roaches"), " (from package ",
+                      strong("rstanarm", .noWS = "after"), "). Please install ",
+                      strong("rstanarm"), " or (if already done) try re-installing it.")),
           duration = NA,
           type = "error"
         )

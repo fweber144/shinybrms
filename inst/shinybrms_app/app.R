@@ -149,6 +149,7 @@ ui <- navbarPage(
                                 "Puromycin" = "Puromycin",
                                 "quine (from package \"MASS\")" = "quine",
                                 "Rabbit (from package \"MASS\")" = "Rabbit",
+                                "roaches (from package \"rstanarm\")" = "roaches",
                                 "sleepstudy (from package \"lme4\")" = "sleepstudy",
                                 "ToothGrowth" = "ToothGrowth"),
                     selectize = TRUE),
@@ -1140,6 +1141,29 @@ server <- function(input, output, session){
       } else{
         showNotification(
           "Package \"MASS\" needed. Please install it.",
+          duration = NA,
+          type = "error"
+        )
+        req(FALSE)
+      }
+    } else if(identical(input$ex_da_sel, "roaches")){
+      if(requireNamespace("rstanarm", quietly = TRUE)){
+        tmp_env <- new.env()
+        data(roaches, package = "rstanarm", envir = tmp_env)
+        assign("roaches", within(get("roaches", envir = tmp_env), {
+          # Code from
+          # https://avehtari.github.io/modelselection/roaches.html
+          # and
+          # https://mc-stan.org/rstanarm/articles/count.html
+          # but slightly modified:
+          exposure2_log <- log(exposure2)
+          roach1_scaledBy0.01 <- 0.01 * roach1
+          roach1_sqrt <- sqrt(roach1)
+        }), envir = tmp_env)
+        return(get("roaches", envir = tmp_env))
+      } else{
+        showNotification(
+          "Package \"rstanarm\" needed. Please install it.",
           duration = NA,
           type = "error"
         )

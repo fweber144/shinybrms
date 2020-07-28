@@ -744,7 +744,7 @@ ui <- navbarPage(
           verbatimTextOutput("diagn_div_out", placeholder = TRUE),
           strong("Hits of maximum tree depth:"),
           verbatimTextOutput("diagn_tree_out", placeholder = TRUE),
-          strong("E-BFMI (value(s) only shown if worrying):"),
+          strong("E-BFMI:"),
           verbatimTextOutput("diagn_EBFMI_out", placeholder = TRUE),
         ),
         wellPanel(

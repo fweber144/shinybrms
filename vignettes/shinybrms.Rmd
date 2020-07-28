@@ -16,6 +16,18 @@ knitr::opts_chunk$set(
 
 The following screenshots show how to fit an example model in the **shinybrms** app. For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
 
+## Home
+
+\
+After launching the **shinybrms** app, the following page is shown:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Home.png")
+```
+[![](screenshots/Home.png)](screenshots/Home.png)
+*Fig. 1: Page "Home".*
+
 ## Data
 
 \

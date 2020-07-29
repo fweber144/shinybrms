@@ -29,6 +29,10 @@
     "More").
   - Added example dataset `roaches` from package **rstanarm**.
 
+## Bug fixes
+
+  - Fixed a bug when switching the dataset.
+
 # shinybrms 1.2.2 (only GitHub)
 
 ## Minor changes

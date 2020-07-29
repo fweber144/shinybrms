@@ -1846,11 +1846,13 @@ server <- function(input, output, session){
     }
     
     C_draws_arr <- as.array(C_bfit)
+    n_chains_out <- dim(C_draws_arr)[2]
+    # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither
+    # test gradient mode (1L) nor error mode (2L):
+    stopifnot(identical(C_bfit$fit@mode, 0L))
     
     #------
     # Computation of MCMC diagnostics
-    
-    n_chains_out <- dim(C_draws_arr)[2]
     
     #---
     # HMC-specific diagnostics

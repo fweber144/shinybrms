@@ -303,7 +303,7 @@ ui <- navbarPage(
                       choices = c("Choose variables for an interaction term ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
-          actionButton("pred_int_add", "Add interaction term"),
+          actionButton("pred_int_add", "Add interaction term", class = "btn-primary"),
           br(),
           br(),
           selectInput("pred_int_sel", "Added interaction terms (you may edit this list, see above):",
@@ -480,7 +480,7 @@ ui <- navbarPage(
                   )),
                   value = "",
                   placeholder = "Enter prior distribution using a Stan function or leave empty to use a flat prior"),
-        actionButton("prior_add", "Add prior"),
+        actionButton("prior_add", "Add prior", class = "btn-primary"),
         br(),
         br(),
         br(),
@@ -834,7 +834,9 @@ ui <- navbarPage(
                      paste("Seed for draws from posterior predictive distribution",
                            "(leave empty to use a random seed):"),
                      value = NA, step = 1L),
-        actionButton("act_launch_shinystan", HTML(paste("Launch", strong("shinystan"), "(may take a while)")))
+        actionButton("act_launch_shinystan",
+                     HTML(paste("Launch", strong("shinystan"), "(may take a while)")),
+                     class = "btn-primary")
       )
     )
   ),

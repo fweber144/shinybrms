@@ -1507,7 +1507,8 @@ server <- function(input, output, session){
        inherits(try(C_family(), silent = TRUE), "try-error")){
       return(brms::empty_prior())
     }
-    req(all(c(input$pred_mainNP_sel,
+    req(all(c(ifelse(identical(input$outc_sel, ""), NULL, input$outc_sel),
+              input$pred_mainNP_sel,
               input$pred_mainPP_sel) %in% names(da())))
     
     warn_orig <- options(warn = 1)

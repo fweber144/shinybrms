@@ -139,30 +139,20 @@ On page "Posterior", the first tab is "Run Stan". At the top of this tab, we cou
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_10.png")
+knitr::include_graphics("screenshots/bacteria_post.png")
 ```
-[![](screenshots/bacteria_10.png)](screenshots/bacteria_10.png)
-*Fig. 10: Page "Posterior" (top).*
+[![](screenshots/bacteria_post.png)](screenshots/bacteria_post.png)
+*Fig. 10: Page "Posterior", tab "Run Stan" (top).*
 
 \
-Here, we will scroll down to focus on the panel "Advanced options":
+Here, we focus on the panel "Advanced options" where we may set a seed for reproducibility:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_11.png")
+knitr::include_graphics("screenshots/bacteria_advOpts.png")
 ```
-[![](screenshots/bacteria_11.png)](screenshots/bacteria_11.png)
-*Fig. 11: Page "Posterior" (middle).*
-
-\
-There, we may set a seed for reproducibility:
-
-\
-```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_12.png")
-```
-[![](screenshots/bacteria_12.png)](screenshots/bacteria_12.png)
-*Fig. 12: Page "Posterior", panel "Advanced options".*
+[![](screenshots/bacteria_advOpts.png)](screenshots/bacteria_advOpts.png)
+*Fig. 11: Page "Posterior", tab "Run Stan", panel "Advanced options".*
 
 ### Running Stan
 

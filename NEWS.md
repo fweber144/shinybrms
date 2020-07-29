@@ -65,8 +65,8 @@
 
 ## Major changes
 
-  - Show Hamiltonian Monte Carlo (HMC) diagnostics in the “Output” panel
-    on page “Posterior”.
+  - Show Hamiltonian Monte Carlo (HMC) diagnostics in the "Output" panel
+    on page "Posterior".
 
 ## Minor changes
 
@@ -97,7 +97,7 @@
     predictive checks in **shinystan**.
   - Added the possibility to download the matrix of posterior draws as a
     CSV file.
-  - For the “Advanced options” (for **brms** and Stan): Use explicit
+  - For the "Advanced options" (for **brms** and Stan): Use explicit
     default values and show them to the user. Set `adapt_delta` per
     default to 0.95 as done in package **rstanarm**. Set `max_treedepth`
     per default to 15 as done for most models in **rstanarm**.
@@ -115,7 +115,7 @@
 
 ## Bug fixes
 
-“Under the hood”, there have been many changes which should make the
+"Under the hood", there have been many changes which should make the
 **shinybrms** app more robust. In particular, the following bugs have
 been fixed:
 
@@ -146,18 +146,18 @@ been fixed:
 
   - Example datasets:
       - Added packages required for some example datasets to the
-        “Suggests” list.
+        "Suggests" list.
       - Check for availability of packages required for some example
         datasets.
-      - Added links to the online example datasets on page “Links”.
+      - Added links to the online example datasets on page "Links".
 
 # shinybrms 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a
 Gaussian, Bernoulli, or negative binomial distribution for the
 (univariate) outcome. For the predictors, only nonvarying (a.k.a.
-population-level or “fixed”) effects are supported. Varying (a.k.a.
-group-level or “random”) effects are not supported yet. Neither
+population-level or "fixed") effects are supported. Varying (a.k.a.
+group-level or "random") effects are not supported yet. Neither
 supported are most of
 [**brms**](https://CRAN.R-project.org/package=brms)’s other features,
 like monotonic effects for ordinal predictors or non-linear effects.

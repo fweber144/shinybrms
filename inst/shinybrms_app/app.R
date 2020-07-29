@@ -1011,8 +1011,7 @@ ui <- navbarPage(
       )
     )
   ),
-  tabPanel(title = "Quit", value = "quit_app", icon = icon("power-off")),
-  theme = shinythemes::shinytheme("united")
+  tabPanel(title = "Quit", value = "quit_app", icon = icon("power-off"))
 )
 
 ####################################################################################################

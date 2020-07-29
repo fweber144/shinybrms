@@ -1503,21 +1503,17 @@ server <- function(input, output, session){
   
   # Get default priors:
   C_prior_default <- reactive({
-    if(inherits(try(C_formula(), silent = TRUE), "try-error") ||
-       inherits(try(C_family(), silent = TRUE), "try-error")){
-      return(brms::empty_prior())
-    }
-    req(all(c(ifelse(identical(input$outc_sel, ""), NULL, input$outc_sel),
-              input$pred_mainNP_sel,
-              input$pred_mainPP_sel) %in% names(da())))
-    
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
-      C_prior_default_tmp <- brms::get_prior(formula = C_formula(),
-                                             data = da(),
-                                             family = C_family())
+      C_prior_default_tmp <- try(brms::get_prior(formula = C_formula(),
+                                                 data = da(),
+                                                 family = C_family()),
+                                 silent = TRUE)
     }, type = "message")
     options(warn = warn_orig$warn)
+    if(inherits(C_prior_default_tmp, "try-error")){
+      return(brms::empty_prior())
+    }
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
       if(identical(warn_capt, "Warning: Rows containing NAs were excluded from the model.")){

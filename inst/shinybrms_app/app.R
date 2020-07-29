@@ -25,9 +25,6 @@ ui <- navbarPage(
   tabPanel(
     "Home",
     titlePanel("Home"),
-    ### TEMPORARILY:
-    shinythemes::themeSelector(),
-    ###
     br(),
     # hr(),
     wellPanel(

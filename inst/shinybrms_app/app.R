@@ -404,101 +404,95 @@ ui <- navbarPage(
         target = "_blank"),
       " (in particular, the \"Stan Functions Reference\")."
     ))),
-    navlistPanel(
-      tabPanel(
-        "Default priors",
-        titlePanel("Default priors"),
+    hr(),
+    h3("Default priors"),
+    br(),
+    strong("Default priors for the parameters belonging to the current likelihood:"),
+    tableOutput("prior_default_view"),
+    helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
+             "corresponding parameter."),
+    hr(),
+    h3("Custom priors"),
+    br(),
+    sidebarLayout(
+      sidebarPanel(
+        h4("Specification of custom priors"),
         br(),
-        strong("Default priors for the parameters belonging to the current likelihood:"),
-        tableOutput("prior_default_view"),
+        selectInput("prior_class_sel",
+                    HTML(paste0(
+                      "Parameter class:",
+                      helpText("Note: The parameter class may consist of a single parameter.",
+                               style = "font-weight:normal")
+                    )),
+                    choices = c("Choose parameter class ..." = ""),
+                    selectize = TRUE),
+        selectInput("prior_coef_sel",
+                    HTML(paste0(
+                      "Coefficient:",
+                      helpText("Note: Leave empty to use all coefficients belonging to the",
+                               "selected parameter class.",
+                               style = "font-weight:normal")
+                    )),
+                    choices = c("Choose coefficient or leave empty" = ""),
+                    selectize = TRUE),
+        selectInput("prior_group_sel",
+                    HTML(paste0(
+                      "Group (for partially pooled effects):",
+                      helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
+                               "use all groups belonging to the selected parameter class.",
+                               "Unfortunately, you are not able to clear this \"Group\" field",
+                               "while having an empty \"Coefficient\" field (and a nonempty",
+                               "\"Group\" field). In this case, a workaround is e.g. to first",
+                               "clear the \"Parameter class\" field.",
+                               style = "font-weight:normal")
+                    )),
+                    choices = character(),
+                    selectize = TRUE),
+        textInput("prior_text",
+                  HTML(paste0(
+                    "Prior distribution:",
+                    helpText(
+                      HTML(paste0(
+                        "Note: You may ", em("either"),
+                        tags$ul(
+                          tags$li(HTML(paste0("specify a prior distribution using a Stan function ",
+                                              em("or")))),
+                          tags$li(HTML(paste0("specify a prior distribution using one of the ",
+                                              "special (pseudo-)functions defined by ", strong("brms"),
+                                              " for this purpose (e.g. ",
+                                              a(HTML(paste(code("brms::horseshoe()"))),
+                                                href = "https://paul-buerkner.github.io/brms/reference/horseshoe.html",
+                                                target = "_blank"),
+                                              " and ",
+                                              a(HTML(paste(code("lkj"))),
+                                                href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
+                                                target = "_blank"),
+                                              ") ", em("or")))),
+                          tags$li("leave this field empty to use a flat prior.")
+                        ),
+                        "If you specify a prior distribution using a Stan function, you have to ",
+                        "use the Stan function which would be used in a Stan sampling statement ",
+                        "and specify values for all arguments of this Stan function (e.g. ",
+                        code("normal(0, 2.5)"), "). "
+                      )),
+                      style = "font-weight:normal"
+                    )
+                  )),
+                  value = "",
+                  placeholder = "Enter prior distribution using a Stan function or leave empty to use a flat prior"),
+        actionButton("prior_add", "Add prior", class = "btn-primary"),
+        br(),
+        br(),
+        br(),
+        actionButton("prior_reset", "Reset all custom priors")
+      ),
+      mainPanel(
+        h4("Preview of custom priors"),
+        br(),
+        strong("Custom priors currently set:"),
+        tableOutput("prior_set_view"),
         helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
                  "corresponding parameter.")
-      ),
-      tabPanel(
-        "Custom priors",
-        titlePanel("Custom priors"),
-        br(),
-        sidebarLayout(
-          sidebarPanel(
-            h4("Specification of custom priors"),
-            br(),
-            selectInput("prior_class_sel",
-                        HTML(paste0(
-                          "Parameter class:",
-                          helpText("Note: The parameter class may consist of a single parameter.",
-                                   style = "font-weight:normal")
-                        )),
-                        choices = c("Choose parameter class ..." = ""),
-                        selectize = TRUE),
-            selectInput("prior_coef_sel",
-                        HTML(paste0(
-                          "Coefficient:",
-                          helpText("Note: Leave empty to use all coefficients belonging to the",
-                                   "selected parameter class.",
-                                   style = "font-weight:normal")
-                        )),
-                        choices = c("Choose coefficient or leave empty" = ""),
-                        selectize = TRUE),
-            selectInput("prior_group_sel",
-                        HTML(paste0(
-                          "Group (for partially pooled effects):",
-                          helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
-                                   "use all groups belonging to the selected parameter class.",
-                                   "Unfortunately, you are not able to clear this \"Group\" field",
-                                   "while having an empty \"Coefficient\" field (and a nonempty",
-                                   "\"Group\" field). In this case, a workaround is e.g. to first",
-                                   "clear the \"Parameter class\" field.",
-                                   style = "font-weight:normal")
-                        )),
-                        choices = character(),
-                        selectize = TRUE),
-            textInput("prior_text",
-                      HTML(paste0(
-                        "Prior distribution:",
-                        helpText(
-                          HTML(paste0(
-                            "Note: You may ", em("either"),
-                            tags$ul(
-                              tags$li(HTML(paste0("specify a prior distribution using a Stan function ",
-                                                  em("or")))),
-                              tags$li(HTML(paste0("specify a prior distribution using one of the ",
-                                                  "special (pseudo-)functions defined by ", strong("brms"),
-                                                  " for this purpose (e.g. ",
-                                                  a(HTML(paste(code("brms::horseshoe()"))),
-                                                    href = "https://paul-buerkner.github.io/brms/reference/horseshoe.html",
-                                                    target = "_blank"),
-                                                  " and ",
-                                                  a(HTML(paste(code("lkj"))),
-                                                    href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
-                                                    target = "_blank"),
-                                                  ") ", em("or")))),
-                              tags$li("leave this field empty to use a flat prior.")
-                            ),
-                            "If you specify a prior distribution using a Stan function, you have to ",
-                            "use the Stan function which would be used in a Stan sampling statement ",
-                            "and specify values for all arguments of this Stan function (e.g. ",
-                            code("normal(0, 2.5)"), "). "
-                          )),
-                          style = "font-weight:normal"
-                        )
-                      )),
-                      value = "",
-                      placeholder = "Enter prior distribution using a Stan function or leave empty to use a flat prior"),
-            actionButton("prior_add", "Add prior", class = "btn-primary"),
-            br(),
-            br(),
-            br(),
-            actionButton("prior_reset", "Reset all custom priors")
-          ),
-          mainPanel(
-            h4("Preview of custom priors"),
-            br(),
-            strong("Custom priors currently set:"),
-            tableOutput("prior_set_view"),
-            helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
-                     "corresponding parameter.")
-          )
-        )
       )
     )
   ),

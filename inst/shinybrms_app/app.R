@@ -988,7 +988,6 @@ ui <- navbarPage(
       "References",
       titlePanel("References"),
       br(),
-      # h3("References"),
       p("Betancourt M (2017).",
         "A conceptual introduction to Hamiltonian Monte Carlo.",
         em("arXiv:170102434 [stat]", .noWS = "after"), ". URL:",

@@ -17,10 +17,8 @@ The [R](https://www.R-project.org/) package
 [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a
 graphical user interface (GUI) for fitting Bayesian regression models
 using the R package [**brms**](https://paul-buerkner.github.io/brms/)
-which in turn relies on [Stan](https://mc-stan.org/). More specifically,
-the only **brms** backend currently supported by **shinybrms** is the R
-package [**rstan**](https://mc-stan.org/rstan/). The **shinybrms** GUI
-is a [Shiny](https://shiny.rstudio.com/) app.
+which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms**
+GUI is a [Shiny](https://shiny.rstudio.com/) app.
 
 To get an impression of the **shinybrms** app, have a look at [this
 page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).
@@ -43,8 +41,8 @@ subsequent section “*Without* installation of **shinybrms**”. In both
 cases, you need to perform the following steps first:
 
 1.  Install R (see the [R homepage](https://www.R-project.org/)).
-2.  Install the R package **rstan** (see the [“RStan Getting Started”
-    GitHub
+2.  Install the R package [**rstan**](https://mc-stan.org/rstan/) (see
+    the [“RStan Getting Started” GitHub
     page](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started)
     for instructions; make sure to use `install.packages("rstan", [...],
     dependencies = TRUE)` with `[...]` as advised on the “RStan Getting

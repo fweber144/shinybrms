@@ -11,7 +11,7 @@ Authors@R:
            comment = c(ORCID = "0000-0002-4842-7922"))
 Description: A graphical user interface (GUI) for fitting Bayesian
     regression models using the package 'brms' which in turn relies on
-    'Stan' (<https://mc-stan.org/>). The GUI is a 'Shiny' 
+    'Stan' (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'Shiny' 
     (<https://shiny.rstudio.com/>) app.
 License: GPL-3
 URL: https://fweber144.github.io/shinybrms/,

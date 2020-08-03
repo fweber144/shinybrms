@@ -931,6 +931,17 @@ ui <- navbarPage(
           ))),
           tags$li("Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries.")
         )
+      ),
+      wellPanel(
+        h3("Further legal information"),
+        "shinybrms  Copyright (C) 2020  Frank Weber",
+        br(),
+        "This program comes with ABSOLUTELY NO WARRANTY; for details see the license linked under",
+        "\"Basic information\" above.",
+        br(),
+        "This is free software, and you are welcome to redistribute it",
+        "under certain conditions; see the license linked under",
+        "\"Basic information\" above for details."
       )
     ),
     tabPanel(

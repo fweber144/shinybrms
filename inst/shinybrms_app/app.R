@@ -831,7 +831,7 @@ ui <- navbarPage(
           )
         ),
         numericInput("seed_PPD",
-                     paste("Seed for draws from posterior predictive distribution",
+                     paste("Seed for draws from the posterior predictive distribution",
                            "(leave empty to use a random seed):"),
                      value = NA, step = 1L),
         actionButton("act_launch_shinystan",

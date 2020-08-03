@@ -101,7 +101,7 @@ ui <- navbarPage(
         "help texts where necessary. If you need more help, if you want to suggest improvements, or if you",
         "found a bug, please open an issue on", # "a bug, please follow the instructions given on page \"More\"", HTML("&rarr;"), "\"About\".",
         a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
-        ". Some basic information about this app as well as some legal information",
+        ". Some basic information about", strong("shinybrms"), "as well as some legal information",
         "may be found on page \"More\"", HTML("&rarr;"), "\"About\".",
         "Links to the software relevant for this app are given on",
         "page \"More\"", HTML("&rarr;"), "\"Links\".",
@@ -863,20 +863,6 @@ ui <- navbarPage(
       wellPanel(
         h3("Basic information"),
         tags$ul(
-          tags$li(
-            strong("Description:"),
-            "This",
-            a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
-            "app is part of the",
-            a("R", href = "https://www.R-project.org/", target = "_blank"),
-            "package",
-            a(HTML(paste(strong("shinybrms"))), href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
-            "and allows to fit Bayesian regression models using the R package",
-            a(HTML(paste(strong("brms"))), href = "https://paul-buerkner.github.io/brms/", target = "_blank"),
-            "which in turn relies on",
-            a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
-            "."
-          ),
           tags$li(strong("Author:"),
                   "Frank Weber (ORCID iD:",
                   a("0000-0002-4842-7922",

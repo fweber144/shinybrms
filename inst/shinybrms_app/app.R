@@ -815,6 +815,9 @@ ui <- navbarPage(
                 tags$ul(
                   tags$li("\"b_Intercept\" is the intercept (with respect to the noncentered predictors)."),
                   tags$li("The parameters starting with \"b_\" are the nonpooled effects."),
+                  tags$li("If you used the", code("constant(1)"), "approach for including an offset, then",
+                          "the parameters starting with \"par_b_\" are internal parameters which you don't",
+                          "need to take into account."),
                   tags$li("The parameters starting with \"r_\" are the partially pooled effects."),
                   tags$li("The parameters starting with \"sd_\" are the standard deviations of the",
                           "partially pooled effects."),

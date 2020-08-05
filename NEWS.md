@@ -13,7 +13,9 @@
     version 1.2.2 are handled differently.
   - Added a page "Home".
   - Added a page "References" (listed under "More").
-  - Removed page "Help" (which was listed under "More").
+  - Removed page "Help" (which was listed under "More"). Its content is
+    now located at other (more appropriate) places in the **shinybrms**
+    app.
   - Added a description how to include an offset. For this, the required
     version of **brms** had to be increased to 2.13.3.
 

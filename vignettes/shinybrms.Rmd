@@ -175,7 +175,7 @@ knitr::include_graphics("screenshots/Posterior_Sampling_1.png")
 *Fig. 14: Sampling progress (top).*
 
 \
-Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
+Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks something like this:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -185,8 +185,7 @@ knitr::include_graphics("screenshots/Posterior_Sampling_2.png")
 *Fig. 15: Sampling progress (bottom; after completion of sampling).*
 
 \
-We can now switch back to the browser tab where **shinybrms** is running. In the panel "Run Stan", we now see the date and time when the Stan run was completed.
-Furthermore, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which will be given in detail in the tab "MCMC diagnostics". The result of this overall check is shown in a box underneath the date and time box as well as in the pop-up notification telling us that the Stan run was completed. Here, all MCMC diagnostics are OK:
+We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail in the tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -239,25 +238,17 @@ knitr::include_graphics("screenshots/Posterior_Summary.png")
 [![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)
 *Fig. 20: Page "Posterior", tab "Summary".*
 
-\
-The tab "Download" offers the possibility to download different output objects which may be analyzed outside of **shinybrms**:
+### Launch **shinystan**
 
 \
-```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/Posterior_Download.png")
-```
-[![](screenshots/Posterior_Download.png)](screenshots/Posterior_Download.png)
-*Fig. 21: Page "Posterior", tab "Download".*
-
-\
-Note that the output shown in tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [Shiny](https://shiny.rstudio.com/) app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button in the tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+Note that the output shown in tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [Shiny](https://shiny.rstudio.com/) app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button in the tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_shinystan.png")
 ```
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)
-*Fig. 22: Page "Posterior", tab "Launch **shinystan**".*
+*Fig. 21: Page "Posterior", tab "Launch **shinystan**".*
 
 \
 At this point, the **shinybrms** workflow ends and passes over to **shinystan**.

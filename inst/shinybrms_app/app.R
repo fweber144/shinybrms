@@ -910,6 +910,7 @@ ui <- navbarPage(
               target = "_blank"),
             "."
           ))),
+          tags$li("Windows is a registered trademark of Microsoft Corporation in the United States and other countries."),
           tags$li("Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries.")
         )
       ),

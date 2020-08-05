@@ -224,7 +224,7 @@ For the general MCMC diagnostics (which are computed for each parameter as well 
 knitr::include_graphics("screenshots/Posterior_Diagnostics_General_Detailed.png")
 ```
 [![](screenshots/Posterior_Diagnostics_General_Detailed.png)](screenshots/Posterior_Diagnostics_General_Detailed.png)
-*Fig. 19: Page "Posterior", tab "MCMC diagnostics", detailed table of the general MCMC diagnostics.*
+*Fig. 19: Page "Posterior", tab "MCMC diagnostics", top of the detailed table of the general MCMC diagnostics.*
 
 ### Summary
 

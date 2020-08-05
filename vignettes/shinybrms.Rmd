@@ -35,20 +35,20 @@ Usually, you will want to upload a custom dataset, but for the purpose of demons
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_1.png")
+knitr::include_graphics("screenshots/Data.png")
 ```
-[![](screenshots/bacteria_1.png)](screenshots/bacteria_1.png)
-*Fig. 1: Page "Data" (top).*
+[![](screenshots/Data.png)](screenshots/Data.png)
+*Fig. 2: Page "Data" (top).*
 
 \
 Further down the "Data" page, we may choose e.g. to show all rows of the dataset:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_2.png")
+knitr::include_graphics("screenshots/Data_AllRows.png")
 ```
-[![](screenshots/bacteria_2.png)](screenshots/bacteria_2.png)
-*Fig. 2: Page "Data" (further down).*
+[![](screenshots/Data_AllRows.png)](screenshots/Data_AllRows.png)
+*Fig. 3: Page "Data" (further down when showing all rows of the dataset).*
 
 ## Likelihood
 
@@ -59,10 +59,10 @@ On page "Likelihood", the first tab is "Outcome". Here, we define the variable `
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_3.png")
+knitr::include_graphics("screenshots/Likelihood_Outcome.png")
 ```
-[![](screenshots/bacteria_3.png)](screenshots/bacteria_3.png)
-*Fig. 3: Page "Likelihood", tab "Outcome".*
+[![](screenshots/Likelihood_Outcome.png)](screenshots/Likelihood_Outcome.png)
+*Fig. 4: Page "Likelihood", tab "Outcome".*
 
 ### Predictors
 
@@ -71,30 +71,30 @@ After selecting the tab "Predictors", we define the variables `week` and `trt` t
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_4.png")
+knitr::include_graphics("screenshots/Likelihood_Predictors.png")
 ```
-[![](screenshots/bacteria_4.png)](screenshots/bacteria_4.png)
-*Fig. 4: Page "Likelihood", tab "Predictors" (top).*
+[![](screenshots/Likelihood_Predictors.png)](screenshots/Likelihood_Predictors.png)
+*Fig. 5: Page "Likelihood", tab "Predictors" (top).*
 
 \
 After scrolling down, we set up a (nonpooled) interaction term for `week` and `trt`:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_5.png")
+knitr::include_graphics("screenshots/Likelihood_Predictors_Int.png")
 ```
-[![](screenshots/bacteria_5.png)](screenshots/bacteria_5.png)
-*Fig. 5: Page "Likelihood", tab "Predictors" (bottom; setting up the interaction effect).*
+[![](screenshots/Likelihood_Predictors_Int.png)](screenshots/Likelihood_Predictors_Int.png)
+*Fig. 6: Page "Likelihood", tab "Predictors" (bottom; setting up the interaction effect).*
 
 \
 After clicking on "Add interaction term", we get:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_6.png")
+knitr::include_graphics("screenshots/Likelihood_Predictors_done.png")
 ```
-[![](screenshots/bacteria_6.png)](screenshots/bacteria_6.png)
-*Fig. 6: Page "Likelihood", tab "Predictors" (bottom; after adding the interaction effect).*
+[![](screenshots/Likelihood_Predictors_done.png)](screenshots/Likelihood_Predictors_done.png)
+*Fig. 7: Page "Likelihood", tab "Predictors" (bottom; after adding the interaction effect).*
 
 ## Prior
 
@@ -105,122 +105,159 @@ At the top of page "Prior", we get a table with the default priors for the model
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_7.png")
+knitr::include_graphics("screenshots/Prior_Default.png")
 ```
-[![](screenshots/bacteria_7.png)](screenshots/bacteria_7.png)
-*Fig. 7: Page "Prior" (top).*
+[![](screenshots/Prior_Default.png)](screenshots/Prior_Default.png)
+*Fig. 8: Page "Prior" (top).*
 
 \
 At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_8.png")
+knitr::include_graphics("screenshots/Prior_Custom.png")
 ```
-[![](screenshots/bacteria_8.png)](screenshots/bacteria_8.png)
-*Fig. 8: Page "Prior" (bottom; setting up a custom prior).*
+[![](screenshots/Prior_Custom.png)](screenshots/Prior_Custom.png)
+*Fig. 9: Page "Prior" (bottom; setting up a custom prior).*
 
 \
 After clicking on "Add prior", we see that our Student-$t$ prior was added to the preview table on the right:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_9.png")
+knitr::include_graphics("screenshots/Prior_Custom_done.png")
 ```
-[![](screenshots/bacteria_9.png)](screenshots/bacteria_9.png)
-*Fig. 9: Page "Prior" (bottom; after adding a custom prior).*
+[![](screenshots/Prior_Custom_done.png)](screenshots/Prior_Custom_done.png)
+*Fig. 10: Page "Prior" (bottom; after adding a custom prior).*
 
 ## Posterior
 
-### Preparing the Stan run
+### Run Stan
 
 \
 On page "Posterior", the first tab is "Run Stan". At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_post.png")
+knitr::include_graphics("screenshots/Posterior_Run.png")
 ```
-[![](screenshots/bacteria_post.png)](screenshots/bacteria_post.png)
-*Fig. 10: Page "Posterior", tab "Run Stan" (top).*
+[![](screenshots/Posterior_Run.png)](screenshots/Posterior_Run.png)
+*Fig. 11: Page "Posterior", tab "Run Stan" (top).*
 
 \
 Here, we focus on the panel "Advanced options" where we may set a seed for reproducibility:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_advOpts.png")
+knitr::include_graphics("screenshots/Posterior_Run_AdvOpts.png")
 ```
-[![](screenshots/bacteria_advOpts.png)](screenshots/bacteria_advOpts.png)
-*Fig. 11: Page "Posterior", tab "Run Stan", panel "Advanced options".*
-
-### Running Stan
+[![](screenshots/Posterior_Run_AdvOpts.png)](screenshots/Posterior_Run_AdvOpts.png)
+*Fig. 12: Page "Posterior", tab "Run Stan", panel "Advanced options".*
 
 \
-Now, we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below the panel "Advanced options", we find the panel "Run Stan", where we simply click the button for running Stan:
+Now we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below the panel "Advanced options", we find the panel "Run Stan" where we simply click the button for running Stan:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_13.png")
+knitr::include_graphics("screenshots/Posterior_Run_Run.png")
 ```
-[![](screenshots/bacteria_13.png)](screenshots/bacteria_13.png)
-*Fig. 13: Page "Posterior", panel "Run Stan".*
+[![](screenshots/Posterior_Run_Run.png)](screenshots/Posterior_Run_Run.png)
+*Fig. 13: Page "Posterior", tab "Run Stan", panel "Run Stan".*
 
 \
-Now, Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) and show the sampling progress (after compilation has finished):
+Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_14.png")
+knitr::include_graphics("screenshots/Posterior_Sampling_1.png")
 ```
-[![](screenshots/bacteria_14.png)](screenshots/bacteria_14.png)
+[![](screenshots/Posterior_Sampling_1.png)](screenshots/Posterior_Sampling_1.png)
 *Fig. 14: Sampling progress (top).*
 
 \
-Depending on your model and data, the sampling might take a while. For the example here, the sampling is quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
+Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks like this:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_15.png")
+knitr::include_graphics("screenshots/Posterior_Sampling_2.png")
 ```
-[![](screenshots/bacteria_15.png)](screenshots/bacteria_15.png)
-*Fig. 15: Sampling progress (bottom; after end of sampling).*
-
-### Inspecting the output
+[![](screenshots/Posterior_Sampling_2.png)](screenshots/Posterior_Sampling_2.png)
+*Fig. 15: Sampling progress (bottom; after completion of sampling).*
 
 \
-We can now switch back to the browser tab where **shinybrms** is running and inspect the final panel "Output" on page "Posterior". First, we can check some diagnostics specific to Hamiltonian Monte Carlo (HMC): the number of iterations ending with a divergence, the number of iterations hitting the maximum tree depth, and the Bayesian fraction of missing information for the energy transitions (E-BFMI). Here, no warnings have occurred and the HMC-specific diagnostics are all OK:
+We can now switch back to the browser tab where **shinybrms** is running. In the panel "Run Stan", we now see the date and time when the Stan run was completed.
+Furthermore, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which will be given in detail in the tab "MCMC diagnostics". The result of this overall check is shown in a box underneath the date and time box as well as in the pop-up notification telling us that the Stan run was completed. Here, all MCMC diagnostics are OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_16.png")
+knitr::include_graphics("screenshots/Posterior_Run_Run_done.png")
 ```
-[![](screenshots/bacteria_16.png)](screenshots/bacteria_16.png)
-*Fig. 16: Page "Posterior", panel "Output" (top).*
+[![](screenshots/Posterior_Run_Run_done.png)](screenshots/Posterior_Run_Run_done.png)
+*Fig. 16: Page "Posterior", tab "Run Stan", panel "Run Stan" (after completion of the Stan run).*
+
+### MCMC diagnostics (details)
 
 \
-Underneath the HMC diagnostics, we get a short summary of our posterior inference including some general Markov chain Monte Carlo (MCMC) diagnostics (`Rhat`, `Bulk_ESS`, `Tail_ESS`). Here, these general MCMC diagnostics are all OK (cf. [Vehtari et al. (2020)](https://doi.org/10.1214/20-BA1221) to see why):
+The tab "MCMC diagnostics" first shows a description which MCMC diagnostics are checked here:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_17.png")
+knitr::include_graphics("screenshots/Posterior_Diagnostics.png")
 ```
-[![](screenshots/bacteria_17.png)](screenshots/bacteria_17.png)
-*Fig. 17: Page "Posterior", panel "Output" (middle).*
+[![](screenshots/Posterior_Diagnostics.png)](screenshots/Posterior_Diagnostics.png)
+*Fig. 17: Page "Posterior", tab "MCMC diagnostics" (top).*
 
 \
-For those who would now want to start interpreting the posterior results given under "Summary" (e.g. the posterior median and the posterior 2.5% and 97.5% quantiles), it should be noted that the output shown under "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the Shiny app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button at the bottom of the page (after having entered a seed for reproducibility of the posterior predictive checks):
+Underneath this description, the diagnostic results for the given Stan run are shown; first the diagnostics specific to Hamiltonian Monte Carlo (HMC) and then the general MCMC diagnostics:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/bacteria_18.png")
+knitr::include_graphics("screenshots/Posterior_Diagnostics_General.png")
 ```
-[![](screenshots/bacteria_18.png)](screenshots/bacteria_18.png)
-*Fig. 18: Page "Posterior", panel "Output" (bottom).*
+[![](screenshots/Posterior_Diagnostics_General.png)](screenshots/Posterior_Diagnostics_General.png)
+*Fig. 18: Page "Posterior", tab "MCMC diagnostics" (bottom).*
 
 \
-At this point, the **shinybrms** workflow ends and passes over to the **shinystan** workflow. Note that within the **shinybrms** app, you can also download different output objects (see Fig. 18) to analyze them outside of **shinybrms**.
+For the general MCMC diagnostics (which are computed for each parameter as well as for the accumulated log-posterior density), it is also possible to show a detailed table:
 
-# References
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_Diagnostics_General_Detailed.png")
+```
+[![](screenshots/Posterior_Diagnostics_General_Detailed.png)](screenshots/Posterior_Diagnostics_General_Detailed.png)
+*Fig. 19: Page "Posterior", tab "MCMC diagnostics", detailed table of the general MCMC diagnostics.*
 
-Vehtari A, Gelman A, Simpson D, Carpenter B, and Bürkner P-C (2020). Rank-normalization, folding, and localization: An improved $\widehat{R}$ for assessing convergence of MCMC. *Bayesian Analysis*. DOI: [10.1214/20-BA1221](https://doi.org/10.1214/20-BA1221)
+### Summary
+
+\
+Since all MCMC diagnostics look good, we may start interpreting the posterior. In the tab "Summary", we get a short summary of our Stan run, including the mean (column `Estimate`), the standard deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_Summary.png")
+```
+[![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)
+*Fig. 20: Page "Posterior", tab "Summary".*
+
+\
+The tab "Download" offers the possibility to download different output objects which may be analyzed outside of **shinybrms**:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_Download.png")
+```
+[![](screenshots/Posterior_Download.png)](screenshots/Posterior_Download.png)
+*Fig. 21: Page "Posterior", tab "Download".*
+
+\
+Note that the output shown in tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [Shiny](https://shiny.rstudio.com/) app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the HMC-specific and the general MCMC diagnostics. Here, we launch the **shinystan** app by clicking the corresponding button in the tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_shinystan.png")
+```
+[![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)
+*Fig. 22: Page "Posterior", tab "Launch **shinystan**".*
+
+\
+At this point, the **shinybrms** workflow ends and passes over to **shinystan**.

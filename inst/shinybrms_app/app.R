@@ -672,7 +672,22 @@ ui <- navbarPage(
           strong("Date and time when Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
           strong("Check if all MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details):"),
-          verbatimTextOutput("diagn_all_out", placeholder = TRUE)
+          verbatimTextOutput("diagn_all_out", placeholder = TRUE),
+          selectInput("stanout_download_sel", "Choose output file to download (optional, but recommended):",
+                      choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
+                                  "List of MCMC diagnostics (RDS file)" = "diagn_obj",
+                                  "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
+                                  "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
+                                  "Array of posterior draws (RDS file)" = "draws_arr_obj"),
+                      selectize = TRUE),
+          helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
+                               "is the output from the R function ",
+                               a(HTML(paste(code("brms::brm()"))),
+                                 href = "https://paul-buerkner.github.io/brms/reference/brm.html",
+                                 target = "_blank"),
+                               ", the central function ",
+                               "for inferring the posterior."))),
+          downloadButton("stanout_download", "Download output file")
         )
       ),
       tabPanel(
@@ -783,26 +798,6 @@ ui <- navbarPage(
         titlePanel("Summary"),
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
-      ),
-      tabPanel(
-        "Download",
-        titlePanel("Download"),
-        br(),
-        selectInput("stanout_download_sel", "Choose output file to download:",
-                    choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
-                                "List of MCMC diagnostics (RDS file)" = "diagn_obj",
-                                "Matrix of posterior draws (CSV file)" = "draws_mat_csv",
-                                "Matrix of posterior draws (RDS file)" = "draws_mat_obj",
-                                "Array of posterior draws (RDS file)" = "draws_arr_obj"),
-                    selectize = TRUE),
-        helpText(HTML(paste0("The most comprehensive output object is the \"brmsfit\" object which ",
-                             "is the output from the R function ",
-                             a(HTML(paste(code("brms::brm()"))),
-                               href = "https://paul-buerkner.github.io/brms/reference/brm.html",
-                               target = "_blank"),
-                             ", the central function ",
-                             "for inferring the posterior."))),
-        downloadButton("stanout_download", "Download output file")
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),

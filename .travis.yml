@@ -15,8 +15,8 @@ cache: packages
 #  - httpuv
 #  - rstanarm
 os:
-  - linux
   - osx
+#  - linux
 #dist:
 #  - focal
 ##  - bionic

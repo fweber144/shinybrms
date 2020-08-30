@@ -30,4 +30,5 @@ Suggests:
     callr (>= 3.4.0),
     rstanarm,
     MASS,
-    lme4
+    lme4,
+    testthat

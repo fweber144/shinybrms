@@ -31,4 +31,5 @@ Suggests:
     rstanarm,
     MASS,
     lme4,
-    testthat
+    testthat,
+    shinytest

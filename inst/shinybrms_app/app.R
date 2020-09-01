@@ -14,11 +14,15 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+####################################################################################################
+# Preparations and global definitions
+####################################################################################################
+
 library(shiny)
 
-####################################################################################################
-# Global object definitions
-####################################################################################################
+Sys.setlocale("LC_COLLATE", "C")
+# # Sys.setlocale("LC_CTYPE", "C")
+# Sys.setlocale("LC_ALL", "C") # Could be used to replace setting "LC_COLLATE" and "LC_CTYPE" (and other localization environment variables).
 
 san_prior_tab_nms <- function(x){
   x <- sub("^prior$", "Prior", x)

@@ -1538,6 +1538,17 @@ server <- function(input, output, session){
         )
       }
     }
+    C_prior_default_sort <- C_prior_default_tmp[order(C_prior_default_tmp$resp,
+                                                      C_prior_default_tmp$dpar,
+                                                      C_prior_default_tmp$nlpar,
+                                                      C_prior_default_tmp$class,
+                                                      C_prior_default_tmp$group,
+                                                      C_prior_default_tmp$coef), , drop = FALSE]
+    if(!identical(C_prior_default_tmp, C_prior_default_sort)){
+      # Order the same way as done in brms:::.get_prior():
+      message("Re-ordering the table of the default priors.")
+      C_prior_default_tmp <- C_prior_default_sort
+    }
     return(C_prior_default_tmp)
   })
   

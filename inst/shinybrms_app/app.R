@@ -21,8 +21,6 @@
 library(shiny)
 
 Sys.setlocale("LC_COLLATE", "C")
-# # Sys.setlocale("LC_CTYPE", "C")
-# Sys.setlocale("LC_ALL", "C") # Could be used to replace setting "LC_COLLATE" and "LC_CTYPE" (and other localization environment variables).
 
 san_prior_tab_nms <- function(x){
   x <- sub("^prior$", "Prior", x)

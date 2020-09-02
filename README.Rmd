@@ -94,7 +94,7 @@ The following two sections describe two options for launching the **shinybrms** 
                     launch.browser = TRUE)
    ```
 
-## Issues
+## Known issues
 
 If you are using RStudio and the **shinybrms** app crashes RStudio when starting the Stan run, then run the following R code before launching the **shinybrms** app:
 ```{r, eval = FALSE}

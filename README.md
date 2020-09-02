@@ -143,7 +143,7 @@ you need to perform the following steps first:
                      launch.browser = TRUE)
     ```
 
-## Issues
+## Known issues
 
 If you are using RStudio and the **shinybrms** app crashes RStudio when
 starting the Stan run, then run the following R code before launching

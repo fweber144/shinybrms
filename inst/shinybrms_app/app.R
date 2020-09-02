@@ -20,8 +20,10 @@
 
 library(shiny)
 
-lc_collate_orig <- Sys.getlocale("LC_COLLATE")
-Sys.setlocale("LC_COLLATE", "C")
+if(isTRUE(getOption("shiny.testmode"))){
+  lc_collate_orig <- Sys.getlocale("LC_COLLATE")
+  Sys.setlocale("LC_COLLATE", "C")
+}
 
 san_prior_tab_nms <- function(x){
   x <- sub("^prior$", "Prior", x)
@@ -2160,12 +2162,14 @@ server <- function(input, output, session){
   
   observe({
     if(identical(input$navbar_ID, "quit_app")){
-      if(identical(length(lc_collate_orig), 1L) && 
-         is.character(lc_collate_orig) && 
-         is.vector(lc_collate_orig)){
-        Sys.setlocale("LC_COLLATE", lc_collate_orig)
-      } else{
-        Sys.setlocale("LC_COLLATE", "")
+      if(exists("lc_collate_orig")){
+        if(identical(length(lc_collate_orig), 1L) && 
+           is.character(lc_collate_orig) && 
+           is.vector(lc_collate_orig)){
+          Sys.setlocale("LC_COLLATE", lc_collate_orig)
+        } else{
+          Sys.setlocale("LC_COLLATE", "")
+        }
       }
       stopApp()
     }
@@ -2173,12 +2177,14 @@ server <- function(input, output, session){
   
   session$onSessionEnded(
     function(){
-      if(identical(length(lc_collate_orig), 1L) && 
-         is.character(lc_collate_orig) && 
-         is.vector(lc_collate_orig)){
-        Sys.setlocale("LC_COLLATE", lc_collate_orig)
-      } else{
-        Sys.setlocale("LC_COLLATE", "")
+      if(exists("lc_collate_orig")){
+        if(identical(length(lc_collate_orig), 1L) && 
+           is.character(lc_collate_orig) && 
+           is.vector(lc_collate_orig)){
+          Sys.setlocale("LC_COLLATE", lc_collate_orig)
+        } else{
+          Sys.setlocale("LC_COLLATE", "")
+        }
       }
       stopApp()
     }

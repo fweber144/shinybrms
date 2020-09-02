@@ -20,6 +20,7 @@
 
 library(shiny)
 
+# If in test mode, turn off locale-specific sorting:
 if(isTRUE(getOption("shiny.testmode"))){
   lc_collate_orig <- Sys.getlocale("LC_COLLATE")
   Sys.setlocale("LC_COLLATE", "C")

@@ -1,4 +1,5 @@
 library(shinytest)
+shinytest::installDependencies()
 
 test_that("Preparation of the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette", {
   skip_on_cran()

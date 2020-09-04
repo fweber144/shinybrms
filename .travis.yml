@@ -15,8 +15,8 @@ cache: packages
 #  - httpuv
 #  - rstanarm
 os:
+  - linux
   - osx
-#  - linux
 #dist:
 #  - focal
 ##  - bionic
@@ -24,6 +24,10 @@ os:
 #sudo:
 #  - false
 ##  - required
+addons:
+  apt:
+    packages:
+      - libv8-dev
 osx_image: xcode10.1
 disable_homebrew: true
 #compiler:

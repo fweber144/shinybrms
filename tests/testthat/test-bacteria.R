@@ -1,6 +1,6 @@
 library(shinytest)
 
-test_that("the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette is prepared as expected", {
+test_that("Preparation of the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette", {
   skip_on_cran()
   skip_if_not_installed("MASS")
   

@@ -378,10 +378,10 @@ ui <- navbarPage(
         wellPanel(
           h3("Preview of chosen predictor terms"),
           helpText(
-            p("Here, you can get a preview of the currently chosen predictor terms. ",
-              "This is mainly intended as a check for those familiar with R's and ",
-              strong("brms", .noWS = "outside"),
-              "'s formula syntax. A preview of the full formula is given in the tab \"Formula ",
+            p("Here, you can get a preview of the currently chosen predictor terms.",
+              "This is mainly intended as a check for those familiar with R's and",
+              strong("brms", .noWS = "after"),
+              "'s formula syntax. A preview of the full formula is given in the tab \"Formula",
               "preview\" which may be found in the panel on the left-hand side."),
             p("A missing value (", code("NA", .noWS = "outside"), ") in column \"Group\" stands",
               "for the whole sample (i.e. no group). The value \"1\" in column \"Effect(s)\"",

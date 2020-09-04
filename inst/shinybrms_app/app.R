@@ -2000,17 +2000,17 @@ server <- function(input, output, session){
       # Secondly: Overall check for all MCMC diagnostics:
       if(C_all_OK){
         showNotification(
-          HTML(paste("The Stan run was finished. All MCMC diagnostics are OK (see",
-                     "the tab", actionLink("mcmc_link2", "MCMC diagnostics", style = "color:black"),
-                     "for details).")),
+          "The Stan run was finished. All MCMC diagnostics are OK, see the following tab for details:",
+          action = actionLink("mcmc_link2", "MCMC diagnostics", style = "color:black"),
           duration = NA,
           type = "message"
         )
       } else{
         showNotification(
-          HTML(paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying (see",
-                     "the tab", actionLink("mcmc_link3", "MCMC diagnostics", style = "color:black"),
-                     "for details). In general, this indicates that the Stan results should not be used.")),
+          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying.",
+                "In general, this indicates that the Stan results should not be used.",
+                "See the following tab for details:"),
+          action = actionLink("mcmc_link3", "MCMC diagnostics", style = "color:black"),
           duration = NA,
           type = "warning"
         )

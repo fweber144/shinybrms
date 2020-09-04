@@ -16,7 +16,7 @@ app$setInputs(navbar_ID = "Prior",
               prior_text = "student_t(3, 0, 10)",
               prior_add = "click")
 app$setInputs(navbar_ID = "Posterior",
-              show_advOpts = TRUE)
-app$setInputs(advOpts_seed = 6789,
+              show_advOpts = TRUE,
+              advOpts_seed = 6789,
               advOpts_cores = 4)
 app$snapshot()

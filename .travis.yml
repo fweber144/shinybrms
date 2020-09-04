@@ -1,8 +1,8 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
-# branches:
-#   except:
-#   - dev
+branches:
+  except:
+  - dev
 language: r
 #r:
 ##  - oldrel

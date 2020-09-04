@@ -3,10 +3,10 @@ app$snapshotInit("bacteria-prep", screenshot = FALSE)
 
 app$setInputs(navbar_ID = "Data",
               ex_da_sel = "bacteria")
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(outc_sel = "y",
-              dist_sel = "bernoulli",
-              likelihood_navlist_ID = "Predictors",
+app$setInputs(navbar_ID = "Likelihood",
+              outc_sel = "y",
+              dist_sel = "bernoulli")
+app$setInputs(likelihood_navlist_ID = "Predictors",
               pred_mainNP_sel = c("week", "trt"),
               pred_mainPP_sel = "ID")
 app$setInputs(pred_int_build = c("week", "trt"),

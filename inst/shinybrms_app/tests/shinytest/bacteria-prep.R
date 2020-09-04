@@ -8,7 +8,6 @@ app$setInputs(navbar_ID = "Likelihood",
               dist_sel = "bernoulli")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot(items = list(output = c("formula_view")))
-app$setInputs(likelihood_navlist_ID = "Outcome")
 app$setInputs(likelihood_navlist_ID = "Predictors",
               pred_mainNP_sel = c("week", "trt"),
               pred_mainPP_sel = "ID")

@@ -101,18 +101,24 @@ ui <- navbarPage(
       h4("Notes"),
       p("The structure of the", strong("shinybrms"), "app follows the principle described in the previous",
         "section \"Bayesian regression models\":",
-        "The three main pages in the navigation bar above are \"Likelihood\", \"Prior\", and \"Posterior\".",
-        "Before starting with these pages, the dataset has to be uploaded on page \"Data\" (even though",
+        "The three main pages in the navigation bar above are",
+        HTML(paste(actionLink("likelihood_link1", "Likelihood")), .noWS = "after"), ",",
+        HTML(paste(actionLink("prior_link1", "Prior")), .noWS = "after"), ", and",
+        HTML(paste(actionLink("posterior_link1", "Posterior")), .noWS = "after"), ".",
+        "Before starting with these pages, the dataset has to be uploaded on page",
+        actionLink("data_link1", "Data"),
+        "(even though",
         "for testing purposes, you may also choose an example dataset there). Every page should provide",
         "help texts where necessary. If you need more help, if you want to suggest improvements, or if you",
-        "found a bug, please open an issue on", # "a bug, please follow the instructions given on page \"More\"", HTML("&rarr;"), "\"About\".",
+        "found a bug, please open an issue on",
         a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
         ". Some basic information about", strong("shinybrms"), "as well as some legal information",
-        "may be found on page \"More\"", HTML("&rarr;"), "\"About\".",
-        "Links to the software relevant for this app are given on",
-        "page \"More\"", HTML("&rarr;"), "\"Links\".",
-        "References for literature cited throughout the app may be found on",
-        "page \"More\"", HTML("&rarr;"), "\"References\"."),
+        "may be found on page",
+        HTML(paste(actionLink("about_link1", "About")), .noWS = "after"), ".",
+        "Links to the software relevant for this app are given on page",
+        HTML(paste(actionLink("links_link1", "Links")), .noWS = "after"), ".",
+        "References for literature cited throughout the app may be found on page",
+        HTML(paste(actionLink("references_link1", "References")), .noWS = "after"), "."),
       p("Furthermore, the following conventions are used throughout this app:",
         tags$ul(
           tags$li("Names of R packages are written in bold (e.g.", strong("brms", .noWS = "after"), ")."),
@@ -271,7 +277,7 @@ ui <- navbarPage(
             "An overall intercept will always be included."),
           p("Numeric variables (with \"numeric\" including \"integer\") are treated as continuous",
             "predictors. Non-numeric variables are treated as nominal predictors. The type of",
-            "a variable may be seen on the \"Data\" page when choosing the \"Structure\" preview",
+            "a variable may be seen on page", actionLink("data_link2", "Data"), "when choosing the \"Structure\" preview",
             "type. If you want a numeric variable to be treated as a nominal predictor, you have",
             "to convert this variable in your dataset to a character variable, e.g. by",
             "changing the value \"1\" to \"level1\", the value \"2\" to \"level2\" and so on.",
@@ -348,7 +354,8 @@ ui <- navbarPage(
               tags$ol(
                 tags$li("Add the offset variable in the \"Nonpooled main effects\" input field",
                         "in the tab \"Predictors\"."),
-                tags$li("In the \"Specification of custom priors\" on page \"Prior\":",
+                tags$li("In the \"Specification of custom priors\" on page",
+                        HTML(paste(actionLink("prior_link2", "Prior")), .noWS = "after"), ":",
                         tags$ol(
                           tags$li("Choose parameter class \"b\"."),
                           tags$li("Choose the coefficient of the offset variable."),
@@ -389,7 +396,8 @@ ui <- navbarPage(
         br(),
         strong("Current formula:"),
         verbatimTextOutput("formula_view", placeholder = TRUE)
-      )
+      ),
+      id = "likelihood_navlist_ID"
     )
   ),
   tabPanel(
@@ -406,7 +414,7 @@ ui <- navbarPage(
         tags$li("The parameter named \"Intercept\" is the intercept when centering the predictors.",
                 "This is only the internally used intercept; for the output, the intercept with",
                 "respect to the noncentered predictors is given (named \"b_Intercept\")."),
-        tags$li("As soon as you choose a new dataset on page \"Data\" (even if you upload",
+        tags$li("As soon as you choose a new dataset on page", actionLink("data_link3", "Data"), "(even if you upload",
                 "the same dataset again), the custom priors are automatically reset."),
         tags$li("As soon as you change the likelihood, the custom priors are automatically reset.")
       ),
@@ -830,9 +838,10 @@ ui <- navbarPage(
                   tags$li("The parameters starting with \"cor_\" are the correlations between the",
                           "partially pooled effects of the same group."),
                   tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
-                  tags$li(HTML(paste("All other parameters are parameters specific to the chosen",
-                                     "distributional family for the outcome (see page \"Likelihood\"",
-                                     "&rarr; \"Outcome\").")))
+                  tags$li("All other parameters are parameters specific to the chosen",
+                                     "distributional family for the outcome (see page",
+                          HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
+                          ").")
                 )
               ),
               tags$li(
@@ -855,7 +864,8 @@ ui <- navbarPage(
         actionButton("act_launch_shinystan",
                      HTML(paste("Launch", strong("shinystan"), "(may take a while)")),
                      class = "btn-primary")
-      )
+      ),
+      id = "posterior_navlist_ID"
     )
   ),
   navbarMenu(
@@ -1031,6 +1041,54 @@ ui <- navbarPage(
 ####################################################################################################
 
 server <- function(input, output, session){
+  
+  #-------------------------------------------------
+  # Links
+  
+  observeEvent(input$data_link1, {
+    updateNavbarPage(session, "navbar_ID", "Data")
+  })
+  
+  observeEvent(input$data_link2, {
+    updateNavbarPage(session, "navbar_ID", "Data")
+  })
+  
+  observeEvent(input$data_link3, {
+    updateNavbarPage(session, "navbar_ID", "Data")
+  })
+  
+  observeEvent(input$likelihood_link1, {
+    updateNavbarPage(session, "navbar_ID", "Likelihood")
+  })
+  
+  observeEvent(input$prior_link1, {
+    updateNavbarPage(session, "navbar_ID", "Prior")
+  })
+  
+  observeEvent(input$prior_link2, {
+    updateNavbarPage(session, "navbar_ID", "Prior")
+  })
+  
+  observeEvent(input$posterior_link1, {
+    updateNavbarPage(session, "navbar_ID", "Posterior")
+  })
+  
+  observeEvent(input$outcome_link1, {
+    updateNavbarPage(session, "navbar_ID", "Likelihood")
+    updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
+  })
+  
+  observeEvent(input$about_link1, {
+    updateNavbarPage(session, "navbar_ID", "About")
+  })
+  
+  observeEvent(input$links_link1, {
+    updateNavbarPage(session, "navbar_ID", "Links")
+  })
+  
+  observeEvent(input$references_link1, {
+    updateNavbarPage(session, "navbar_ID", "References")
+  })
   
   #-------------------------------------------------
   # Data

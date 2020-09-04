@@ -1,4 +1,4 @@
-app <- ShinyDriver$new("../")
+app <- ShinyDriver$new("../../")
 app$snapshotInit("bacteria-prep", screenshot = FALSE)
 
 app$setInputs(navbar_ID = "Data")

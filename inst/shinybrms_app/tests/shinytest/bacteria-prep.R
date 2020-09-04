@@ -1,8 +1,8 @@
 app <- ShinyDriver$new("../../")
 app$snapshotInit("bacteria-prep", screenshot = FALSE)
 
-app$setInputs(navbar_ID = "Data")
-app$setInputs(ex_da_sel = "bacteria")
+app$setInputs(navbar_ID = "Data",
+              ex_da_sel = "bacteria")
 app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(outc_sel = "y",
               dist_sel = "bernoulli",
@@ -11,12 +11,12 @@ app$setInputs(outc_sel = "y",
               pred_mainPP_sel = "ID")
 app$setInputs(pred_int_build = c("week", "trt"),
               pred_int_add = "click")
-app$setInputs(navbar_ID = "Prior")
-app$setInputs(prior_class_sel = "b",
+app$setInputs(navbar_ID = "Prior",
+              prior_class_sel = "b",
               prior_text = "student_t(3, 0, 10)",
               prior_add = "click")
-app$setInputs(navbar_ID = "Posterior")
-app$setInputs(show_advOpts = TRUE)
+app$setInputs(navbar_ID = "Posterior",
+              show_advOpts = TRUE)
 app$setInputs(advOpts_seed = 6789,
               advOpts_cores = 4)
 app$snapshot()

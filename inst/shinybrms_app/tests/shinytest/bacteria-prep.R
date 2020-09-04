@@ -7,7 +7,7 @@ app$setInputs(navbar_ID = "Likelihood",
               outc_sel = "y",
               dist_sel = "bernoulli")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$snapshot(items = list(output = c("formula_view")))
+app$snapshot(items = list(export = c("C_formula_char_export"))) # For snapshotting all exported values: export = TRUE
 app$setInputs(likelihood_navlist_ID = "Predictors",
               pred_mainNP_sel = c("week", "trt"),
               pred_mainPP_sel = "ID")

@@ -1571,6 +1571,10 @@ server <- function(input, output, session){
     ))
   })
   
+  if(isTRUE(getOption("shiny.testmode"))){
+    shinytest::exportTestValues(C_formula_char_export = C_formula_char()) # , [further objects to be exported may be added here]
+  }
+  
   C_formula <- reactive({
     req(C_formula_char())
     return(as.formula(C_formula_char()))

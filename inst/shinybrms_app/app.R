@@ -840,7 +840,7 @@ ui <- navbarPage(
                           "partially pooled effects of the same group."),
                   tags$li("\"log-posterior\" is the accumulated log-posterior density (up to an additive constant)."),
                   tags$li("All other parameters are parameters specific to the chosen",
-                                     "distributional family for the outcome (see page",
+                          "distributional family for the outcome (see page",
                           HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
                           ").")
                 )

@@ -1,9 +1,5 @@
 # shinybrms 1.3.0.9000
 
-## Major changes
-
-  - Added unit tests using packages **shinytest** and **testthat**.
-
 # shinybrms 1.3.0
 
 ## Major changes

@@ -1061,6 +1061,11 @@ server <- function(input, output, session){
     updateNavbarPage(session, "navbar_ID", "Likelihood")
   })
   
+  observeEvent(input$outcome_link1, {
+    updateNavbarPage(session, "navbar_ID", "Likelihood")
+    updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
+  })
+  
   observeEvent(input$prior_link1, {
     updateNavbarPage(session, "navbar_ID", "Prior")
   })
@@ -1071,11 +1076,6 @@ server <- function(input, output, session){
   
   observeEvent(input$posterior_link1, {
     updateNavbarPage(session, "navbar_ID", "Posterior")
-  })
-  
-  observeEvent(input$outcome_link1, {
-    updateNavbarPage(session, "navbar_ID", "Likelihood")
-    updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
   })
   
   observeEvent(input$about_link1, {

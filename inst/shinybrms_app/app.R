@@ -352,8 +352,7 @@ ui <- navbarPage(
             p("If you want to specify an offset, please follow these steps which ensure that",
               "the default prior for the intercept (at centered predictors) is adopted accordingly:",
               tags$ol(
-                tags$li("Add the offset variable in the \"Nonpooled main effects\" input field",
-                        "in the tab \"Predictors\"."),
+                tags$li("Add the offset variable in the input field of section \"Nonpooled main effects\" above."),
                 tags$li("In the \"Specification of custom priors\" on page",
                         HTML(paste(actionLink("prior_link2", "Prior")), .noWS = "after"), ":",
                         tags$ol(
@@ -381,8 +380,8 @@ ui <- navbarPage(
             p("Here, you can get a preview of the currently chosen predictor terms.",
               "This is mainly intended as a check for those familiar with R's and",
               strong("brms", .noWS = "after"),
-              "'s formula syntax. A preview of the full formula is given in the tab \"Formula",
-              "preview\" which may be found in the panel on the left-hand side."),
+              "'s formula syntax. A preview of the full formula is given in the tab",
+              HTML(paste(actionLink("formula_link1", "Formula preview")), .noWS = "after"), "."),
             p("A missing value (", code("NA", .noWS = "outside"), ") in column \"Group\" stands",
               "for the whole sample (i.e. no group). The value \"1\" in column \"Effect(s)\"",
               "stands for the intercept (or intercepts, if \"Group\" exists).")
@@ -685,7 +684,9 @@ ui <- navbarPage(
           br(),
           strong("Date and time when Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
-          strong("Check if all MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details):"),
+          strong("Check if all MCMC diagnostics are OK (see the tab",
+                 actionLink("mcmc_link1", "MCMC diagnostics"),
+                 "for details):"),
           verbatimTextOutput("diagn_all_out", placeholder = TRUE),
           selectInput("stanout_download_sel", "Choose output file to download (optional, but recommended):",
                       choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
@@ -1066,6 +1067,11 @@ server <- function(input, output, session){
     updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
   })
   
+  observeEvent(input$formula_link1, {
+    updateNavbarPage(session, "navbar_ID", "Likelihood")
+    updateNavlistPanel(session, "likelihood_navlist_ID", "Formula preview")
+  })
+  
   observeEvent(input$prior_link1, {
     updateNavbarPage(session, "navbar_ID", "Prior")
   })
@@ -1076,6 +1082,11 @@ server <- function(input, output, session){
   
   observeEvent(input$posterior_link1, {
     updateNavbarPage(session, "navbar_ID", "Posterior")
+  })
+  
+  observeEvent(input$mcmc_link1, {
+    updateNavbarPage(session, "navbar_ID", "Posterior")
+    updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
   })
   
   observeEvent(input$about_link1, {

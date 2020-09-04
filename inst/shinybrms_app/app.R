@@ -1046,17 +1046,13 @@ server <- function(input, output, session){
   #-------------------------------------------------
   # Links
   
-  observeEvent(input$data_link1, {
+  observeEvent({
+    input$data_link1
+    input$data_link2
+    input$data_link3
+  }, {
     updateNavbarPage(session, "navbar_ID", "Data")
-  })
-  
-  observeEvent(input$data_link2, {
-    updateNavbarPage(session, "navbar_ID", "Data")
-  })
-  
-  observeEvent(input$data_link3, {
-    updateNavbarPage(session, "navbar_ID", "Data")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$likelihood_link1, {
     updateNavbarPage(session, "navbar_ID", "Likelihood")
@@ -1072,13 +1068,12 @@ server <- function(input, output, session){
     updateNavlistPanel(session, "likelihood_navlist_ID", "Formula preview")
   })
   
-  observeEvent(input$prior_link1, {
+  observeEvent({
+    input$prior_link1
+    input$prior_link2
+  }, {
     updateNavbarPage(session, "navbar_ID", "Prior")
-  })
-  
-  observeEvent(input$prior_link2, {
-    updateNavbarPage(session, "navbar_ID", "Prior")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$posterior_link1, {
     updateNavbarPage(session, "navbar_ID", "Posterior")

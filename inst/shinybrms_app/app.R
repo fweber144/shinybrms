@@ -1079,20 +1079,17 @@ server <- function(input, output, session){
     updateNavbarPage(session, "navbar_ID", "Posterior")
   })
   
-  observeEvent(input$mcmc_link1, {
+  observeEvent({
+    input$mcmc_link1
+    input$mcmc_link2
+    input$mcmc_link3
+  }, {
+    req(input$mcmc_link1 != 0 ||
+          input$mcmc_link2 != 0 ||
+          input$mcmc_link3 != 0)
     updateNavbarPage(session, "navbar_ID", "Posterior")
     updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
-  })
-  
-  observeEvent(input$mcmc_link2, {
-    updateNavbarPage(session, "navbar_ID", "Posterior")
-    updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
-  })
-  
-  observeEvent(input$mcmc_link3, {
-    updateNavbarPage(session, "navbar_ID", "Posterior")
-    updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$about_link1, {
     updateNavbarPage(session, "navbar_ID", "About")

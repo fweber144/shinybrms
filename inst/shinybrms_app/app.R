@@ -20,6 +20,10 @@
 
 library(shiny)
 
+# Needed to prevent occasional RStudio crashes when starting the Stan run with
+# "rstan" version >= 2.21.1:
+rstan::rstan_options("javascript" = FALSE)
+
 # If in test mode, turn off locale-specific sorting:
 if(isTRUE(getOption("shiny.testmode"))){
   lc_collate_orig <- Sys.getlocale("LC_COLLATE")

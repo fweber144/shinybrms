@@ -1,5 +1,10 @@
 # shinybrms 1.3.0.9000
 
+## Minor changes
+
+  - Automatically run `rstan::rstan_options("javascript" = FALSE)` at the startup of the **shinybrms** app to prevent occasional RStudio crashes when starting the Stan run.
+  - UI: Added internal links.
+
 # shinybrms 1.3.0
 
 ## Major changes

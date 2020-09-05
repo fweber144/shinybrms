@@ -142,13 +142,3 @@ you need to perform the following steps first:
                      subdir = "inst/shinybrms_app",
                      launch.browser = TRUE)
     ```
-
-## Known issues
-
-If you are using RStudio and the **shinybrms** app crashes RStudio when
-starting the Stan run, then run the following R code before launching
-the **shinybrms** app:
-
-``` r
-rstan::rstan_options("javascript" = FALSE)
-```

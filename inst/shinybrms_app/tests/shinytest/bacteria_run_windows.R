@@ -27,7 +27,6 @@ app$setInputs(navbar_ID = "Posterior",
               advOpts_cores = 4)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$setInputs(mcmc_link2 = "click")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))

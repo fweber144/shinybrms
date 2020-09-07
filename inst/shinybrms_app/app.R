@@ -1086,17 +1086,10 @@ server <- function(input, output, session){
     updateNavbarPage(session, "navbar_ID", "Posterior")
   })
   
-  observeEvent({
-    input$mcmc_link1
-    input$mcmc_link2
-    input$mcmc_link3
-  }, {
-    req(input$mcmc_link1 != 0 ||
-          input$mcmc_link2 != 0 ||
-          input$mcmc_link3 != 0)
+  observeEvent(input$mcmc_link1, {
     updateNavbarPage(session, "navbar_ID", "Posterior")
     updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
-  }, ignoreNULL = FALSE, ignoreInit = TRUE)
+  })
   
   observeEvent(input$about_link1, {
     updateNavbarPage(session, "navbar_ID", "About")
@@ -1999,17 +1992,16 @@ server <- function(input, output, session){
       # Secondly: Overall check for all MCMC diagnostics:
       if(C_all_OK){
         showNotification(
-          HTML(paste("The Stan run was finished. All MCMC diagnostics are OK (see",
-                     "the tab", actionLink("mcmc_link2", "MCMC diagnostics", style = "color:black"),
-                     "for details).")),
+          paste("The Stan run was finished. All MCMC diagnostics are OK (see",
+                "the tab \"MCMC diagnostics\" for details)."),
           duration = NA,
           type = "message"
         )
       } else{
         showNotification(
-          HTML(paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying (see",
-                     "the tab", actionLink("mcmc_link3", "MCMC diagnostics", style = "color:black"),
-                     "for details). In general, this indicates that the Stan results should not be used.")),
+          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying (see",
+                "the tab \"MCMC diagnostics\" for details). In general,",
+                "this indicates that the Stan results should not be used."),
           duration = NA,
           type = "warning"
         )

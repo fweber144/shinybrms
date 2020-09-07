@@ -1,4 +1,4 @@
-# shinybrms 1.3.0.9000
+# **shinybrms** 1.3.0.9000
 
 ## Minor changes
 
@@ -6,7 +6,7 @@
   - On Windows: Automatically run `rstan::rstan_options("javascript" = FALSE)` at the startup of the **shinybrms** app to prevent occasional RStudio crashes when starting the Stan run.
   - UI: Added internal links.
 
-# shinybrms 1.3.0
+# **shinybrms** 1.3.0
 
 ## Major changes
 
@@ -43,7 +43,7 @@
 
   - Fixed a bug when switching the dataset.
 
-# shinybrms 1.2.2 (only GitHub)
+# **shinybrms** 1.2.2 (only GitHub)
 
 ## Minor changes
 
@@ -57,7 +57,7 @@
 
   - Fixed a NOTE occurring in some CRAN checks.
 
-# shinybrms 1.2.1
+# **shinybrms** 1.2.1
 
 ## Minor changes
 
@@ -71,7 +71,7 @@
   - Fixed a bug causing the sampling progress file not to open up if
     RStudio's internal `rs_shinyviewer` was used for option `"browser"`.
 
-# shinybrms 1.2.0 (only GitHub)
+# **shinybrms** 1.2.0 (only GitHub)
 
 ## Major changes
 
@@ -88,7 +88,7 @@
 
   - Fixed a NOTE occurring in some CRAN checks.
 
-# shinybrms 1.1.0
+# **shinybrms** 1.1.0
 
 ## Major changes
 
@@ -150,7 +150,7 @@ been fixed:
   - Fixed a bug preventing the progress file from opening up on Linux
     (when started interactively from the terminal).
 
-# shinybrms 1.0.1
+# **shinybrms** 1.0.1
 
 ## Bug fixes
 
@@ -161,7 +161,7 @@ been fixed:
         datasets.
       - Added links to the online example datasets on page "Links".
 
-# shinybrms 1.0.0 (only GitHub)
+# **shinybrms** 1.0.0 (only GitHub)
 
 First release. Offers support for Bayesian regression models with a
 Gaussian, Bernoulli, or negative binomial distribution for the

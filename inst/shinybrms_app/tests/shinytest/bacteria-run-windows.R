@@ -1,40 +1,36 @@
 app <- ShinyDriver$new("../../")
 app$snapshotInit("bacteria-run-windows", screenshot = FALSE)
 
-app$setInputs(navbar_ID = "Data")
-app$setInputs(ex_da_sel = "bacteria")
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(outc_sel = "y")
-app$setInputs(dist_sel = "bernoulli")
-app$setInputs(likelihood_navlist_ID = "Predictors")
+app$setInputs(navbar_ID = "Data",
+              ex_da_sel = "bacteria")
+app$setInputs(navbar_ID = "Likelihood",
+              outc_sel = "y",
+              dist_sel = "bernoulli")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$setInputs(likelihood_navlist_ID = "Predictors")
-app$setInputs(pred_mainNP_sel = "week")
-app$setInputs(pred_mainNP_sel = c("week", "trt"))
-app$setInputs(pred_mainPP_sel = "ID")
+app$setInputs(likelihood_navlist_ID = "Predictors",
+              pred_mainNP_sel = c("week", "trt"),
+              pred_mainPP_sel = "ID")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$setInputs(likelihood_navlist_ID = "Predictors")
-app$setInputs(pred_int_build = "week")
-app$setInputs(pred_int_build = c("week", "trt"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(likelihood_navlist_ID = "Predictors",
+              pred_int_build = c("week", "trt"),
+              pred_int_add = "click")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$setInputs(navbar_ID = "Prior")
-app$setInputs(prior_class_sel = "b")
-app$setInputs(prior_text = "student_t")
-app$setInputs(prior_text = "student_t(3, 0, 10)")
-app$setInputs(prior_add = "click")
-app$setInputs(navbar_ID = "Posterior")
-app$setInputs(show_advOpts = TRUE)
-app$setInputs(advOpts_seed = 6789)
-app$setInputs(advOpts_cores = 4)
+app$setInputs(navbar_ID = "Prior",
+              prior_class_sel = "b",
+              prior_text = "student_t(3, 0, 10)",
+              prior_add = "click")
+app$setInputs(navbar_ID = "Posterior",
+              show_advOpts = TRUE,
+              advOpts_seed = 6789,
+              advOpts_cores = 4)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
 app$setInputs(mcmc_link2 = "click")
 app$snapshot()
 app$setInputs(stanout_download_sel = "draws_mat_csv")
 app$snapshotDownload("stanout_download")
-app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
-app$setInputs(show_general_MCMC_tab = TRUE)
+app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
+              show_general_MCMC_tab = TRUE)
 app$snapshot()
 app$setInputs(posterior_navlist_ID = "Summary")
 app$snapshot()

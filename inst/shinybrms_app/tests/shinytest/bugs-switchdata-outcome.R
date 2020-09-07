@@ -1,5 +1,5 @@
 app <- ShinyDriver$new("../../")
-app$snapshotInit("bugs-switchdata-outcome")
+app$snapshotInit("bugs-switchdata-outcome", screenshot = FALSE)
 
 app$setInputs(navbar_ID = "Data")
 app$setInputs(ex_da_sel = "Arabidopsis")

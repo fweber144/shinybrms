@@ -2038,6 +2038,7 @@ server <- function(input, output, session){
   
   output$fit_date <- renderText({
     if(isTRUE(getOption("shiny.testmode"))){
+      req(C_stanres())
       return(paste("The Stan run was finished. However, since \"shinybrms\" runs in",
                    "test mode, the date and time when it was finished are not shown here."))
     } else{

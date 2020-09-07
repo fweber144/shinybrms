@@ -66,7 +66,7 @@
   },
   "output": {
     "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> y <\/th> <th style='text-align: left;'> ap <\/th> <th style='text-align: left;'> hilo <\/th> <th style='text-align: right;'> week <\/th> <th style='text-align: left;'> ID <\/th> <th style='text-align: left;'> trt <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   4 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">  11 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n   <\/tbody> <\/table>",
-    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.7114, chain_2: 0.5972, chain_3: 0.696, chain_4: 0.649) is OK.",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.7114, chain_2: 0.5972, chain_3: 0.6784, chain_4: 0.649) is OK.",
     "diagn_all_out": "All MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details).",
     "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
     "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",

@@ -1,0 +1,12 @@
+app <- ShinyDriver$new("../../")
+app$snapshotInit("bugs-switchdata-outcome")
+
+app$setInputs(navbar_ID = "Data")
+app$setInputs(ex_da_sel = "Arabidopsis")
+app$setInputs(navbar_ID = "Likelihood")
+app$setInputs(outc_sel = "total.fruits")
+app$setInputs(dist_sel = "negbinomial")
+app$setInputs(navbar_ID = "Data")
+app$snapshot()
+app$setInputs(ex_da_sel = "bacteria")
+app$snapshot()

@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - UI: Minor improvements.
   - On Windows: Automatically run `rstan::rstan_options("javascript" = FALSE)` at the startup of the **shinybrms** app to prevent occasional RStudio crashes when starting the Stan run.
   - UI: Added internal links.
 

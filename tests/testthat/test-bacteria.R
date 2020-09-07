@@ -6,7 +6,7 @@ test_that("Preparation of the Stan run for the \"bacteria\" example from the \"s
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "bacteria-prep.R", compareImages = FALSE))
+  expect_pass(testApp(app_path, testnames = "bacteria_prep.R", compareImages = FALSE))
 })
 
 test_that("Results of the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette on Linux", {
@@ -18,7 +18,7 @@ test_that("Results of the Stan run for the \"bacteria\" example from the \"shiny
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "bacteria-run-linux.R", compareImages = FALSE))
+  expect_pass(testApp(app_path, testnames = "bacteria_run_linux.R", compareImages = FALSE))
 })
 
 test_that("Results of the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette on Windows", {
@@ -30,5 +30,5 @@ test_that("Results of the Stan run for the \"bacteria\" example from the \"shiny
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "bacteria-run-windows.R", compareImages = FALSE))
+  expect_pass(testApp(app_path, testnames = "bacteria_run_windows.R", compareImages = FALSE))
 })

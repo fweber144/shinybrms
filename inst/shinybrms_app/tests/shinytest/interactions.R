@@ -45,7 +45,7 @@ app$setInputs(pred_mainNP_sel = c("rack", "nutrient", "amd", "status", "reg"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_mainNP_sel = c("rack", "nutrient", "amd", "status"))###
+# A test for adding a variable at a specific position (here, "reg" at the beginning):
 app$setInputs(pred_mainNP_sel = c("reg", "rack", "nutrient", "amd", "status"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")

@@ -3,11 +3,11 @@ app$snapshotInit("bugs_switchData_pred", screenshot = FALSE)
 
 app$setInputs(navbar_ID = "Data")
 app$uploadFile(file_upload = "data_bugs_switchData_pred.csv")
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(outc_sel = "column1")
-app$setInputs(dist_sel = "bernoulli")
-app$setInputs(likelihood_navlist_ID = "Predictors")
-app$setInputs(pred_mainNP_sel = "column2")
+app$setInputs(navbar_ID = "Likelihood",
+              outc_sel = "column1",
+              dist_sel = "bernoulli")
+app$setInputs(likelihood_navlist_ID = "Predictors",
+              pred_mainNP_sel = "column2")
 app$setInputs(navbar_ID = "Data")
 app$snapshot()
 app$uploadFile(file_upload = "data_bugs_switchData_pred_mod.csv")

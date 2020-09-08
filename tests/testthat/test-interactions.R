@@ -1,6 +1,6 @@
 library(shinytest)
 
-test_that("Specification of interaction terms.", {
+test_that("Specification of interaction terms", {
   skip_on_cran()
   skip_if_not_installed("lme4")
   

@@ -50,3 +50,10 @@ app$setInputs(pred_mainNP_sel = c("reg", "rack", "nutrient", "amd", "status"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")
 app$snapshot()
+# A test for removing an interaction term:
+app$setInputs(pred_int_sel = c("popu<-->gen", "rack<-->popu<-->gen", "status<-->popu", "reg<-->nutrient"))
+app$snapshot()
+# A test for the bug fixed in commit 695e50dde2e31202034c1b17c103d19aecd43b72:
+app$setInputs(pred_int_build = c("nutrient", "amd"),
+              pred_int_add = "click")
+app$snapshot()

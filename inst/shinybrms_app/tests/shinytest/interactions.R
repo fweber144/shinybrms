@@ -15,27 +15,27 @@ app$setInputs(pred_mainNP_sel = c("reg", "rack", "nutrient", "amd", "status"),
 app$snapshot()
 app$setInputs(pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("reg", "nutrient"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("reg", "nutrient"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("nutrient", "reg"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("nutrient", "reg"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("reg", "nutrient", "popu"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("reg", "nutrient", "popu"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("reg", "nutrient", "amd"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("reg", "nutrient", "amd"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("popu", "gen"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("popu", "gen"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("rack", "amd", "popu", "gen"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("rack", "amd", "popu", "gen"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("rack", "popu", "gen"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("rack", "popu", "gen"),
+              pred_int_add = "click")
 app$snapshot()
-app$setInputs(pred_int_build = c("status", "popu"))
-app$setInputs(pred_int_add = "click")
+app$setInputs(pred_int_build = c("status", "popu"),
+              pred_int_add = "click")
 app$snapshot()

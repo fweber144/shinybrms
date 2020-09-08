@@ -35,6 +35,15 @@ test_that("clearing the outcome resets the priors.", {
   expect_pass(testApp(app_path, testnames = "clearOutcome.R", compareImages = FALSE))
 })
 
+test_that("clearing the distributional family resets the priors.", {
+  skip_on_cran()
+  skip_if_not_installed("MASS")
+  
+  shinytest::installDependencies()
+  app_path <- system.file("shinybrms_app", package = "shinybrms")
+  expect_pass(testApp(app_path, testnames = "clearFamily.R", compareImages = FALSE))
+})
+
 test_that("clearing the example dataset resets the priors, the selected outcome, and the selected predictors.", {
   skip_on_cran()
   skip_if_not_installed("MASS")

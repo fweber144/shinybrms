@@ -135,9 +135,8 @@ been fixed:
     variables selected when clearing the selection of an example
     dataset.
   - Fixed a bug making it possible to clear the selection of an example
-    dataset, the outcome, or the distributional family, but to keep
-    showing the default priors and the custom priors for the former
-    selection.
+    dataset or the outcome, but to keep showing the default priors and
+    the custom priors for the former selection.
   - Fixed a bug making it possible to add an already existing
     interaction term with a different order of the involved predictor
     variables.

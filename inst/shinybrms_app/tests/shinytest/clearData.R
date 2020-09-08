@@ -1,28 +1,25 @@
 app <- ShinyDriver$new("../../")
 app$snapshotInit("clearData", screenshot = FALSE)
 
-app$setInputs(navbar_ID = "Data")
-app$setInputs(ex_da_sel = "bacteria")
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(outc_sel = "y")
-app$setInputs(dist_sel = "bernoulli")
-app$setInputs(likelihood_navlist_ID = "Predictors")
-app$setInputs(pred_mainNP_sel = "week")
-app$setInputs(pred_mainNP_sel = c("week", "trt"))
-app$setInputs(pred_mainPP_sel = "ID")
-app$setInputs(pred_int_build = "week")
-app$setInputs(pred_int_build = c("week", "trt"))
-app$setInputs(pred_int_add = "click")
-app$setInputs(navbar_ID = "Prior")
-app$setInputs(prior_class_sel = "b")
-app$setInputs(prior_text = "student_t")
-app$setInputs(prior_text = "student_t(3, 0, 10)")
-app$setInputs(prior_add = "click")
+app$setInputs(navbar_ID = "Data",
+              ex_da_sel = "bacteria")
+app$setInputs(navbar_ID = "Likelihood",
+              outc_sel = "y",
+              dist_sel = "bernoulli")
+app$setInputs(likelihood_navlist_ID = "Predictors",
+              pred_mainNP_sel = c("week", "trt"),
+              pred_mainPP_sel = "ID")
+app$setInputs(pred_int_build = c("week", "trt"),
+              pred_int_add = "click")
+app$setInputs(navbar_ID = "Prior",
+              prior_class_sel = "b",
+              prior_text = "student_t(3, 0, 10)",
+              prior_add = "click")
 app$snapshot()
 # A test for the bugs fixed by commits 32e2ca0b56124ee84ea56bcd21425e22425ad37c and
 # 01e0e1a9140c5d393b0e7117b2cb866660eba0a4:
-app$setInputs(navbar_ID = "Data")
-app$setInputs(ex_da_sel = "")
+app$setInputs(navbar_ID = "Data",
+              ex_da_sel = "")
 app$setInputs(navbar_ID = "Prior")
 app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(likelihood_navlist_ID = "Outcome")

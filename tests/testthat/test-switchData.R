@@ -10,7 +10,7 @@ test_that(
     
     shinytest::installDependencies()
     app_path <- system.file("shinybrms_app", package = "shinybrms")
-    expect_pass(testApp(app_path, testnames = "bugs_switchData_outcome.R", compareImages = FALSE))
+    expect_pass(testApp(app_path, testnames = "switchData_outcome.R", compareImages = FALSE))
   }
 )
 
@@ -24,6 +24,6 @@ test_that(
     
     shinytest::installDependencies()
     app_path <- system.file("shinybrms_app", package = "shinybrms")
-    expect_pass(testApp(app_path, testnames = "bugs_switchData_pred.R", compareImages = FALSE))
+    expect_pass(testApp(app_path, testnames = "switchData_pred.R", compareImages = FALSE))
   }
 )

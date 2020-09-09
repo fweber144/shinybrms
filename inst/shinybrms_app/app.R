@@ -414,11 +414,13 @@ ui <- navbarPage(
       "Build the joint prior distribution of all parameters in your model by ",
       "placing independent priors on all parameters separately. Notes:",
       tags$ul(
-        tags$li("For parameters for which you do not specify a",
-                "custom prior, the default prior from the package",
-                strong("brms"), "will be used."),
+        tags$li("The default priors are taken from package", strong("brms", .noWS = "after"), "."),
+        tags$li("For parameters for which you do not specify a custom prior, the default prior will be used."),
+        tags$li("When specifying a custom prior, you may only choose a combination of",
+                "\"Class\", \"Coefficient\", and \"Group\" which is also present in the",
+                "table of the default priors."),
         tags$li("The parameter named \"Intercept\" is the intercept when centering the predictors.",
-                "This is only the internally used intercept; for the output, the intercept with",
+                "This is only the internally used intercept; in the output, the intercept with",
                 "respect to the noncentered predictors is given (named \"b_Intercept\")."),
         tags$li("As soon as you choose a new dataset on page", actionLink("data_link3", "Data"), "(even if you upload",
                 "the same dataset again), the custom priors are automatically reset."),
@@ -450,12 +452,12 @@ ui <- navbarPage(
     br(),
     sidebarLayout(
       sidebarPanel(
-        h4("Specification of custom priors"),
+        h4("Specification of a custom prior"),
         br(),
         selectInput("prior_class_sel",
                     HTML(paste0(
-                      "Parameter class:",
-                      helpText("Note: The parameter class may consist of a single parameter.",
+                      "Class:",
+                      helpText("Note: This is the parameter class. It may consist of a single parameter.",
                                style = "font-weight:normal")
                     )),
                     choices = c("Choose parameter class ..." = ""),
@@ -1680,8 +1682,9 @@ server <- function(input, output, session){
     if(!identical(prior_set_obj_add_ch,
                   prior_set_obj_add[, names(prior_set_obj_add) != "prior"])){
       showNotification(
-        paste("Your custom prior has not been added since the combination of \"class\", \"coef\", and \"group\" you",
-              "have currently selected is not contained in the table of the default priors."),
+        paste("Your custom prior has not been added since the combination of",
+              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected is",
+              "not contained in the table of the default priors."),
         duration = NA,
         type = "error"
       )

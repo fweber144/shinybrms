@@ -15,5 +15,6 @@ app$setInputs(navbar_ID = "Prior",
               prior_class_sel = "sd")
 app$setInputs(prior_group_sel = "ID")
 app$snapshot()
+# A test for the bug fixed by commit e484a6fdff61fa9eb60ae67a9b0a8bdcc932502c:
 app$setInputs(prior_class_sel = "cor")
 app$snapshot()

@@ -9,9 +9,15 @@ app$setInputs(navbar_ID = "Likelihood",
 app$setInputs(likelihood_navlist_ID = "Predictors",
               pred_mainNP_sel = "column2")
 app$setInputs(navbar_ID = "Data")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))
 # A test for the bug fixed by commit 490a653dce15fd7351586097b6724e9aa6d71f4b:
 app$uploadFile(file_upload = "switchData_pred-data_mod.csv")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))
 app$setInputs(navbar_ID = "Likelihood")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))

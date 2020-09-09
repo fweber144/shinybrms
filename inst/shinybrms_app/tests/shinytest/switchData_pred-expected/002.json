@@ -22,20 +22,6 @@
     "dec": ".",
     "dist_sel": "bernoulli",
     "ex_da_sel": "",
-    "file_upload": {
-      "name": [
-        "switchData_pred-data_mod.csv"
-      ],
-      "size": [
-        63
-      ],
-      "type": [
-        "text/csv"
-      ],
-      "datapath": [
-        "0.csv"
-      ]
-    },
     "formula_link1": 0,
     "header": true,
     "likelihood_link1": 0,

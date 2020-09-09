@@ -33,7 +33,6 @@ app$snapshot()
 app$setInputs(prior_reset = "click")
 app$snapshot()
 # A test for the bug fixed by commit 5fd4cf8dae2fe6399c2fe4d1a57c8632cc7db5ff:
-app$setInputs(prior_class_sel = "sd")
 app$setInputs(prior_coef_sel = "Intercept")
 app$setInputs(prior_group_sel = "")
 app$setInputs(prior_text = "student_t(3, 0, 6)",

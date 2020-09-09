@@ -47,7 +47,7 @@
     "prior_add": 1,
     "prior_class_sel": "sd",
     "prior_coef_sel": "",
-    "prior_group_sel": "ID",
+    "prior_group_sel": "",
     "prior_link1": 0,
     "prior_link2": 0,
     "prior_reset": 0,

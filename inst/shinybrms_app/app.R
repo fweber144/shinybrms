@@ -474,13 +474,9 @@ ui <- navbarPage(
                       "Group (for partially pooled effects):",
                       helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
                                "use all groups belonging to the selected parameter class.",
-                               "Unfortunately, you are not able to clear this \"Group\" field",
-                               "while having an empty \"Coefficient\" field (and a nonempty",
-                               "\"Group\" field). In this case, a workaround is e.g. to first",
-                               "clear the \"Parameter class\" field.",
                                style = "font-weight:normal")
                     )),
-                    choices = character(),
+                    choices = c("Choose group or leave empty" = ""),
                     selectize = TRUE),
         textInput("prior_text",
                   HTML(paste0(
@@ -1664,6 +1660,16 @@ server <- function(input, output, session){
                       choices = prior_group_choices,
                       selected = prior_group_choices_sel)
   })
+  
+  ### HERE:
+  # observe({
+  #   if(input$prior_coef_sel == "" & input$prior_group_sel != ""){
+  #     updateSelectInput(session, "prior_group_sel",
+  #                       # choices = prior_group_choices, ### HERE!
+  #                       selected = NULL)
+  #   }
+  # })
+  ###
   
   # Reset the custom priors if the default prior changes:
   observeEvent(C_prior_default(), {

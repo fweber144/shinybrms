@@ -1,5 +1,5 @@
 app <- ShinyDriver$new("../../")
-app$snapshotInit("priors_switchClass", screenshot = FALSE)
+app$snapshotInit("priors_switchClass")
 
 app$setInputs(navbar_ID = "Data",
               ex_da_sel = "bacteria")

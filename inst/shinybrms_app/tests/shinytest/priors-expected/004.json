@@ -44,14 +44,14 @@
     "pred_mainPP_sel": "ID",
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",
-    "prior_add": 1,
+    "prior_add": 2,
     "prior_class_sel": "sd",
     "prior_coef_sel": "",
     "prior_group_sel": "ID",
     "prior_link1": 0,
     "prior_link2": 0,
     "prior_reset": 0,
-    "prior_text": "student_t(3, 0, 3)",
+    "prior_text": "student_t(3, 0, 4)",
     "quote": "\"",
     "references_link1": 0,
     "run_stan": 0,
@@ -68,7 +68,7 @@
     "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + week*trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrug <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrugP <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week:trtdrug <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week:trtdrugP <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <\/tr>\n   <\/tbody> <\/table>",
-    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 3) <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <\/tr>\n   <\/tbody> <\/table>"
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 4) <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 3) <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <\/tr>\n   <\/tbody> <\/table>"
   },
   "export": {
 

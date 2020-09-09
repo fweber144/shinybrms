@@ -14,11 +14,11 @@ app$setInputs(prior_coef_sel = "Intercept")
 app$setInputs(prior_text = "normal(0, 2.5)",
               prior_add = "click")
 app$snapshot()
-app$setInputs(prior_coef_sel = "",
-              prior_text = "normal(0, 3)",
+app$setInputs(prior_coef_sel = "")
+app$setInputs(prior_text = "normal(0, 3)",
               prior_add = "click")
 app$snapshot()
-app$setInputs(prior_class_sel = "Intercept",
-              prior_text = "normal(0, 4)",
+app$setInputs(prior_class_sel = "Intercept")
+app$setInputs(prior_text = "normal(0, 4)",
               prior_add = "click")
 app$snapshot()

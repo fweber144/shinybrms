@@ -1653,15 +1653,11 @@ server <- function(input, output, session){
     prior_group_choices <- setNames(prior_group_choices, prior_group_choices)
     names(prior_group_choices)[prior_group_choices == ""] <- "Choose group or leave empty"
     
-    if("" %in% prior_group_choices){
-      prior_group_choices_sel <- prior_group_choices[prior_group_choices == ""]
-    } else{
-      prior_group_choices_sel <- intersect(prior_group_choices,
-                                           isolate(input$prior_group_sel))
-      prior_group_choices_sel <- setNames(prior_group_choices_sel, prior_group_choices_sel)
-      if(identical(length(prior_group_choices_sel), 0L)){
-        prior_group_choices_sel <- NULL
-      }
+    prior_group_choices_sel <- intersect(prior_group_choices,
+                                         isolate(input$prior_group_sel))
+    prior_group_choices_sel <- setNames(prior_group_choices_sel, prior_group_choices_sel)
+    if(identical(length(prior_group_choices_sel), 0L)){
+      prior_group_choices_sel <- NULL
     }
     
     updateSelectInput(session, "prior_group_sel",

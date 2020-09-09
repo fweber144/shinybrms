@@ -1661,16 +1661,6 @@ server <- function(input, output, session){
                       selected = prior_group_choices_sel)
   })
   
-  ### HERE:
-  # observe({
-  #   if(input$prior_coef_sel == "" & input$prior_group_sel != ""){
-  #     updateSelectInput(session, "prior_group_sel",
-  #                       # choices = prior_group_choices, ### HERE!
-  #                       selected = NULL)
-  #   }
-  # })
-  ###
-  
   # Reset the custom priors if the default prior changes:
   observeEvent(C_prior_default(), {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
@@ -1679,12 +1669,25 @@ server <- function(input, output, session){
   # Add a custom prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
     req(input$prior_class_sel)
-    C_prior_rv$prior_set_obj <-
-      brms::set_prior(prior = input$prior_text,
-                      class = input$prior_class_sel,
-                      coef = input$prior_coef_sel,
-                      group = input$prior_group_sel) +
-      C_prior_rv$prior_set_obj
+    prior_set_obj_add <- brms::set_prior(prior = input$prior_text,
+                                         class = input$prior_class_sel,
+                                         coef = input$prior_coef_sel,
+                                         group = input$prior_group_sel)
+    prior_set_obj_add_ch <- merge(prior_set_obj_add[, names(prior_set_obj_add) != "prior"],
+                                  C_prior_default()[, names(C_prior_default()) != "prior"],
+                                  sort = FALSE)
+    class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
+    if(!identical(prior_set_obj_add_ch,
+                  prior_set_obj_add[, names(prior_set_obj_add) != "prior"])){
+      showNotification(
+        paste("Your custom prior has not been added since the combination of \"class\", \"coef\", and \"group\" you",
+              "have currently selected is not contained in the table of the default priors."),
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
+    C_prior_rv$prior_set_obj <- prior_set_obj_add + C_prior_rv$prior_set_obj
     C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
   })
   

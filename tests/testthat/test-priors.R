@@ -17,3 +17,12 @@ test_that("the group for the prior is not automatically set to be empty when not
   app_path <- system.file("shinybrms_app", package = "shinybrms")
   expect_pass(testApp(app_path, testnames = "priors_autoSetEmpty.R", compareImages = FALSE))
 })
+
+test_that("if necessary, the group for the prior is automatically reset when switching the class for the prior.", {
+  skip_on_cran()
+  skip_if_not_installed("MASS")
+  
+  shinytest::installDependencies()
+  app_path <- system.file("shinybrms_app", package = "shinybrms")
+  expect_pass(testApp(app_path, testnames = "priors_switchClass.R", compareImages = FALSE))
+})

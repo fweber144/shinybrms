@@ -1622,8 +1622,17 @@ server <- function(input, output, session){
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
     names(prior_class_choices)[prior_class_choices == ""] <- "Choose class ..."
     
+    prior_class_choices_sel <- intersect(prior_class_choices,
+                                         isolate(input$prior_class_sel))
+    prior_class_choices_sel <- setNames(prior_class_choices_sel, prior_class_choices_sel)
+    names(prior_class_choices_sel)[prior_class_choices_sel == ""] <- "Choose class ..."
+    if(identical(length(prior_class_choices_sel), 0L)){
+      prior_class_choices_sel <- NULL
+    }
+    
     updateSelectInput(session, "prior_class_sel",
-                      choices = prior_class_choices)
+                      choices = prior_class_choices,
+                      selected = prior_class_choices_sel)
   })
   
   # Update the choices for "coefficient" (if necessary):
@@ -1637,8 +1646,17 @@ server <- function(input, output, session){
     prior_coef_choices <- setNames(prior_coef_choices, prior_coef_choices)
     names(prior_coef_choices)[prior_coef_choices == ""] <- "Choose coefficient or leave empty"
     
+    prior_coef_choices_sel <- intersect(prior_coef_choices,
+                                        isolate(input$prior_coef_sel))
+    prior_coef_choices_sel <- setNames(prior_coef_choices_sel, prior_coef_choices_sel)
+    names(prior_coef_choices_sel)[prior_coef_choices_sel == ""] <- "Choose coefficient or leave empty"
+    if(identical(length(prior_coef_choices_sel), 0L)){
+      prior_coef_choices_sel <- NULL
+    }
+    
     updateSelectInput(session, "prior_coef_sel",
-                      choices = prior_coef_choices)
+                      choices = prior_coef_choices,
+                      selected = prior_coef_choices_sel)
   })
   
   # Update the choices for "group" (if necessary):

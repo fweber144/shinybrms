@@ -1618,10 +1618,9 @@ server <- function(input, output, session){
   
   # Update the choices for "parameter class" (if necessary):
   observe({
-    prior_class_choices <- unique(C_prior_default()$class)
+    prior_class_choices <- unique(c("", C_prior_default()$class))
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
-    prior_class_choices <- c("Choose parameter class ..." = "",
-                             prior_class_choices)
+    names(prior_class_choices)[prior_class_choices == ""] <- "Choose parameter class ..."
     
     updateSelectInput(session, "prior_class_sel",
                       choices = prior_class_choices)

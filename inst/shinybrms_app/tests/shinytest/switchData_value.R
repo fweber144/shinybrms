@@ -3,15 +3,15 @@ app$snapshotInit("switchData_value", screenshot = FALSE)
 
 app$setInputs(navbar_ID = "Data")
 app$uploadFile(file_upload = "switchData-data.csv")
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(outc_sel = "y")
-app$setInputs(dist_sel = "bernoulli")
-app$setInputs(likelihood_navlist_ID = "Predictors")
-app$setInputs(pred_mainNP_sel = "x1")
-app$setInputs(navbar_ID = "Prior")
-app$setInputs(prior_class_sel = "b")
-app$setInputs(prior_text = "normal(0, 2.5)")
-app$setInputs(prior_add = "click")
+app$setInputs(navbar_ID = "Likelihood",
+              outc_sel = "y",
+              dist_sel = "bernoulli")
+app$setInputs(likelihood_navlist_ID = "Predictors",
+              pred_mainNP_sel = "x1")
+app$setInputs(navbar_ID = "Prior",
+              prior_class_sel = "b")
+app$setInputs(prior_text = "normal(0, 2.5)",
+              prior_add = "click")
 app$snapshot()
 app$setInputs(navbar_ID = "Data")
 app$uploadFile(file_upload = "switchData_value-data.csv")

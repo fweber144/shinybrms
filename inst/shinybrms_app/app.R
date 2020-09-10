@@ -363,7 +363,7 @@ ui <- navbarPage(
                 tags$li("In the \"Specification of custom priors\" on page",
                         HTML(paste(actionLink("prior_link2", "Prior")), .noWS = "after"), ":",
                         tags$ol(
-                          tags$li("Choose parameter class \"b\"."),
+                          tags$li("Choose class \"b\"."),
                           tags$li("Choose the coefficient of the offset variable."),
                           tags$li("Type", code("constant(1)"), "in the input field for the prior distribution."),
                           tags$li("Click on \"Add prior\".")
@@ -460,13 +460,13 @@ ui <- navbarPage(
                       helpText("Note: This is the parameter class. It may consist of a single parameter.",
                                style = "font-weight:normal")
                     )),
-                    choices = c("Choose parameter class ..." = ""),
+                    choices = c("Choose class ..." = ""),
                     selectize = TRUE),
         selectInput("prior_coef_sel",
                     HTML(paste0(
                       "Coefficient:",
                       helpText("Note: Leave empty to use all coefficients belonging to the",
-                               "selected parameter class.",
+                               "selected class.",
                                style = "font-weight:normal")
                     )),
                     choices = c("Choose coefficient or leave empty" = ""),
@@ -475,7 +475,7 @@ ui <- navbarPage(
                     HTML(paste0(
                       "Group (for partially pooled effects):",
                       helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
-                               "use all groups belonging to the selected parameter class.",
+                               "use all groups belonging to the selected class.",
                                style = "font-weight:normal")
                     )),
                     choices = c("Choose group or leave empty" = ""),
@@ -1616,11 +1616,11 @@ server <- function(input, output, session){
     return(C_prior_default_tmp)
   })
   
-  # Update the choices for "parameter class" (if necessary):
+  # Update the choices for "class" (if necessary):
   observe({
     prior_class_choices <- unique(c("", C_prior_default()$class))
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
-    names(prior_class_choices)[prior_class_choices == ""] <- "Choose parameter class ..."
+    names(prior_class_choices)[prior_class_choices == ""] <- "Choose class ..."
     
     updateSelectInput(session, "prior_class_sel",
                       choices = prior_class_choices)

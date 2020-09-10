@@ -25,6 +25,7 @@ app$setInputs(prior_coef_sel = "")
 app$setInputs(prior_text = "student_t(3, 0, 4)",
               prior_add = "click")
 app$snapshot()
+# The following two lines effectively set app$setInputs(prior_group_sel = ""):
 app$setInputs(prior_class_sel = "")
 app$setInputs(prior_class_sel = "sd")
 app$setInputs(prior_text = "student_t(3, 0, 5)",

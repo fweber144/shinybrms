@@ -82,7 +82,8 @@ app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot()
 # A test for adding a variable at a specific position (here, "reg" at the beginning):
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainNP_sel = c("reg", "rack", "nutrient", "amd", "status"))
+              pred_mainNP_sel = c("rack", "nutrient", "amd", "status"))
+app$setInputs(pred_mainNP_sel = c("reg", "rack", "nutrient", "amd", "status"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")
 app$setInputs(likelihood_navlist_ID = "Formula preview")

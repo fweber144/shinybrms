@@ -14,9 +14,7 @@ app$setInputs(prior_text = "normal(0, 2.5)")
 app$setInputs(prior_add = "click")
 app$snapshot()
 app$setInputs(navbar_ID = "Data")
-### Not contained in the test script from the original recording, so might have to be added manually:
-# app$uploadFile(file_upload = "switchData-data.csv")
-### 
+app$uploadFile(file_upload = "switchData-data.csv")
 app$snapshot()
 app$setInputs(navbar_ID = "Prior")
 app$snapshot()

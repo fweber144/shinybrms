@@ -55,7 +55,7 @@
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",
     "prior_add": 1,
-    "prior_class_sel": "b",
+    "prior_class_sel": "",
     "prior_coef_sel": "",
     "prior_group_sel": "",
     "prior_link1": 0,
@@ -78,7 +78,7 @@
     "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + x1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> x1 <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
-    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> normal(0, 2.5) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>"
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <\/tbody> <\/table>"
   },
   "export": {
 

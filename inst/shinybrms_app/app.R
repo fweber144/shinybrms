@@ -1654,6 +1654,7 @@ server <- function(input, output, session){
     prior_group_choices_sel <- intersect(prior_group_choices,
                                          isolate(input$prior_group_sel))
     prior_group_choices_sel <- setNames(prior_group_choices_sel, prior_group_choices_sel)
+    names(prior_group_choices_sel)[prior_group_choices_sel == ""] <- "Choose group or leave empty"
     if(identical(length(prior_group_choices_sel), 0L)){
       prior_group_choices_sel <- NULL
     }

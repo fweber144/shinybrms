@@ -31,7 +31,6 @@ app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))
 app$setInputs(stanout_download_sel = "draws_mat_csv")
-app$snapshotDownload("stanout_download")
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$snapshot(items = list(input = TRUE,

@@ -24,7 +24,7 @@ app$setInputs(navbar_ID = "Prior",
 app$setInputs(navbar_ID = "Posterior",
               show_advOpts = TRUE,
               advOpts_seed = 6789,
-              advOpts_cores = 4)
+              advOpts_cores = 2)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
 app$snapshot(items = list(input = TRUE,

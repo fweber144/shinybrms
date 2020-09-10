@@ -30,7 +30,6 @@ app$setInputs(run_stan = "click", timeout_ = 1800000)
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))
-app$setInputs(stanout_download_sel = "draws_mat_csv")
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$snapshot(items = list(input = TRUE,

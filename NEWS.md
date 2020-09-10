@@ -2,12 +2,28 @@
 
 ## Minor changes
 
-  - UI: Minor improvements.
-  - On Windows: Automatically run
+  - When specifying a custom prior and switching the "Class" or
+    "Coefficient", the input field "Group" is only cleared
+    (automatically) if necessary. Before, it was cleared at every change
+    of "Class" or "Coefficient" (provided that the clearing was allowed,
+    meaning that such a combination was present in the table of the
+    default priors).
+  - UI: Minor improvements (e.g. improved button labels and help texts).
+  - On Windows with **rstan** version \>= 2.21.1: Automatically run
     `rstan::rstan_options("javascript" = FALSE)` at the launch of the
     **shinybrms** app to prevent occasional RStudio crashes when
     starting the Stan run.
   - UI: Added internal links.
+
+## Bug fixes
+
+  - Fixed the bug that when setting the input field "Group" (of a custom
+    prior) to a nonempty value and later switching back to an empty
+    value, the "Group" was empty in the UI, but internally, the former
+    value was kept. This bug was solved by initializing the input field
+    "Group" *with* a choose prompt (which made it necessary to catch
+    impossible combinations of "Class", "Coefficient", and "Group"
+    with a user notification).
 
 # **shinybrms** 1.3.0
 

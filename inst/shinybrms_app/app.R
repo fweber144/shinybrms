@@ -1629,9 +1629,12 @@ server <- function(input, output, session){
   
   # Update the choices for "coefficient" (if necessary):
   observe({
-    prior_coef_choices <- unique(c("", C_prior_default()$coef[
+    prior_coef_choices <- unique(C_prior_default()$coef[
       C_prior_default()$class %in% input$prior_class_sel
-    ]))
+    ])
+    if(identical(length(prior_coef_choices), 0L)){
+      prior_coef_choices <- ""
+    }
     prior_coef_choices <- setNames(prior_coef_choices, prior_coef_choices)
     names(prior_coef_choices)[prior_coef_choices == ""] <- "Choose coefficient or leave empty"
     

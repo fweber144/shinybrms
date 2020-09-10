@@ -12,12 +12,20 @@ app$setInputs(navbar_ID = "Prior",
               prior_class_sel = "b")
 app$setInputs(prior_text = "normal(0, 2.5)",
               prior_add = "click")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))
 app$setInputs(navbar_ID = "Data")
 app$uploadFile(file_upload = "switchData-data.csv")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))
 app$setInputs(navbar_ID = "Prior")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))
 app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(likelihood_navlist_ID = "Outcome")
-app$snapshot()
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "file_upload"),
+                          output = TRUE,
+                          export = TRUE))

@@ -26,6 +26,14 @@ test_that(
   }
 )
 
+test_that("uploading another dataset (here: the same dataset again) resets the custom priors.", {
+  skip_on_cran()
+  
+  shinytest::installDependencies()
+  app_path <- system.file("shinybrms_app", package = "shinybrms")
+  expect_pass(testApp(app_path, testnames = "switchData_same.R", compareImages = FALSE))
+})
+
 test_that("clearing the outcome resets the priors.", {
   skip_on_cran()
   skip_if_not_installed("MASS")

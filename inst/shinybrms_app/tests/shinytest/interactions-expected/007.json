@@ -26,7 +26,7 @@
     "formula_link1": 0,
     "header": true,
     "likelihood_link1": 0,
-    "likelihood_navlist_ID": "Predictors",
+    "likelihood_navlist_ID": "Formula preview",
     "links_link1": 0,
     "mcmc_link1": 0,
     "navbar_ID": "Likelihood",
@@ -75,6 +75,7 @@
   "output": {
     "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> reg <\/th> <th style='text-align: left;'> popu <\/th> <th style='text-align: left;'> gen <\/th> <th style='text-align: left;'> rack <\/th> <th style='text-align: left;'> nutrient <\/th> <th style='text-align: left;'> amd <\/th> <th style='text-align: left;'> status <\/th> <th style='text-align: right;'> total.fruits <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Transplant <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 1 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Petri.Plate <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 1 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Normal <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Normal <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 8 <\/td> <td> clipped <\/td> <td> Transplant <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> unclipped <\/td> <td> Petri.Plate <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> log <\/td> <\/tr>\n  <tr> <td> shape <\/td> <td> log <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "formula_view": "total.fruits ~ 1 + rack + amd + status + reg*nutrient + (1 + reg*nutrient | popu) + (1 | gen)",
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + rack + amd + status + reg*nutrient <\/td> <\/tr>\n  <tr> <td> popu <\/td> <td> 1 + reg*nutrient <\/td> <\/tr>\n  <tr> <td> gen <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>"
   },
   "export": {

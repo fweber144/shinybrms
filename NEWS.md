@@ -2,6 +2,11 @@
 
 ## Minor changes
 
+  - When deselecting a variable from the list for the nonpooled main
+    effects or deselecting a variable from the list for the partially
+    pooled main effects, reduce the interactions involving this variable
+    to the corresponding lower-order interactions (instead of simply
+    removing them).
   - When specifying a custom prior and switching the "Class" or
     "Coefficient", the input field "Group" is only cleared
     (automatically) if necessary. Before, it was cleared at every change

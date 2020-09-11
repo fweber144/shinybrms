@@ -4,20 +4,20 @@
 
   - When deselecting a variable from the list for the nonpooled main
     effects or deselecting a variable from the list for the partially
-    pooled main effects, reduce the interactions involving this variable
-    to the corresponding lower-order interactions (instead of simply
-    removing them).
-  - When specifying a custom prior and switching the "Class" or
-    "Coefficient", the input field "Group" is only cleared
+    pooled main effects, the interactions involving this variable are
+    now reduced to the corresponding lower-order interactions (instead
+    of being simply removed).
+  - When specifying a custom prior and switching the class or the
+    coefficient, the input field for the group is now only cleared
     (automatically) if necessary. Before, it was cleared at every change
-    of "Class" or "Coefficient" (provided that the clearing was allowed,
+    of class or coefficient (provided that the clearing was allowed,
     meaning that such a combination was present in the table of the
     default priors).
   - UI: Minor improvements (e.g. improved button labels and help texts).
   - On Windows with **rstan** version \>= 2.21.1: Automatically run
     `rstan::rstan_options("javascript" = FALSE)` at the launch of the
-    **shinybrms** app to prevent occasional RStudio crashes when
-    starting the Stan run.
+    **shinybrms** app to prevent occasional crashes of the R session
+    when starting the Stan run.
   - UI: Added internal links.
 
 ## Bug fixes

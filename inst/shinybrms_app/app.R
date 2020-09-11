@@ -722,7 +722,7 @@ ui <- navbarPage(
             em("HMC-specific diagnostics"), "and", em("general MCMC diagnostics", .noWS = "after"), ".",
             "Lists of these two groups of MCMC diagnostics may be found below, together with some",
             "basic guidelines for their interpretation. These basic guidelines are also checked",
-            "automatically. Note that these are", em("basic"), "guidelines", HTML("&ndash;"), 
+            "automatically. Note that these are", em("basic"), "guidelines", HTML("&ndash;"),
             "false positive and false negative alarms are possible and",
             "in some situations, false alarms are more likely than in others.",
             "For details concerning the MCMC diagnostics used here, see the",
@@ -957,7 +957,7 @@ ui <- navbarPage(
           tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
           tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
                   "(seen as an own",
-                  "software entity,", # "\"software environment\",", # "\"programming language\",", # "\"software concept\",", 
+                  "software entity,", # "\"software environment\",", # "\"programming language\",", # "\"software concept\",",
                   "even though it is actually implemented",
                   "in the R package", strong("shiny"), "(see below))")
         )
@@ -1463,7 +1463,7 @@ server <- function(input, output, session){
       #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
       #     including correlations between the partially pooled effects of a specific group-level term, the
       #     terms on the population-level side need to be grouped by the term on the group-level side).
-      #   - For partially pooled slopes, add the corresponding nonpooled slopes since the partially pooled 
+      #   - For partially pooled slopes, add the corresponding nonpooled slopes since the partially pooled
       #     slopes are assumed to have mean zero.
       # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
       # containing the group-level terms of a given element of "pred_lst".
@@ -1941,7 +1941,7 @@ server <- function(input, output, session){
     # Notifications for the warnings thrown by the call to brms::brm():
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
-      warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- 
+      warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <-
         paste("Warning: There are missing values in the data which was used for the model.",
               "The corresponding rows have been omitted in the Stan run.")
       warn_capt <- setdiff(warn_capt, "Compiling Stan program...")
@@ -2003,7 +2003,7 @@ server <- function(input, output, session){
     #---
     # Overall check for all MCMC diagnostics
     
-    C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK, 
+    C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK,
                       C_essBulk_OK, C_rhat_OK, C_essTail_OK))
     
     #---
@@ -2264,8 +2264,8 @@ server <- function(input, output, session){
   observe({
     if(identical(input$navbar_ID, "quit_app")){
       if(exists("lc_collate_orig")){
-        if(identical(length(lc_collate_orig), 1L) && 
-           is.character(lc_collate_orig) && 
+        if(identical(length(lc_collate_orig), 1L) &&
+           is.character(lc_collate_orig) &&
            is.vector(lc_collate_orig)){
           Sys.setlocale("LC_COLLATE", lc_collate_orig)
         } else{
@@ -2279,8 +2279,8 @@ server <- function(input, output, session){
   session$onSessionEnded(
     function(){
       if(exists("lc_collate_orig")){
-        if(identical(length(lc_collate_orig), 1L) && 
-           is.character(lc_collate_orig) && 
+        if(identical(length(lc_collate_orig), 1L) &&
+           is.character(lc_collate_orig) &&
            is.vector(lc_collate_orig)){
           Sys.setlocale("LC_COLLATE", lc_collate_orig)
         } else{

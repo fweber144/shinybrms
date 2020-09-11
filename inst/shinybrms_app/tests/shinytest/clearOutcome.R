@@ -1,6 +1,8 @@
 app <- ShinyDriver$new("../../")
 app$snapshotInit("clearOutcome", screenshot = FALSE)
 
+app$setInputs(advOpts_cores = 4)
+
 app$setInputs(navbar_ID = "Data",
               ex_da_sel = "bacteria")
 app$setInputs(navbar_ID = "Likelihood",

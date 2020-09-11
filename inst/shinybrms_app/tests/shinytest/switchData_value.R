@@ -1,6 +1,8 @@
 app <- ShinyDriver$new("../../")
 app$snapshotInit("switchData_value", screenshot = FALSE)
 
+app$setInputs(advOpts_cores = 4)
+
 app$setInputs(navbar_ID = "Data")
 app$uploadFile(file_upload = "switchData-data.csv")
 app$setInputs(navbar_ID = "Likelihood",

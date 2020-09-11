@@ -7,6 +7,9 @@
     pooled main effects, the interactions involving this variable are
     now reduced to the corresponding lower-order interactions (instead
     of being simply removed).
+  - When updating the selections for the class or the coefficient of
+    a custom prior, the former value is now selected if it exists
+    among the new choices.
   - When specifying a custom prior and switching the class or the
     coefficient, the input field for the group is now only cleared
     (automatically) if necessary. Before, it was cleared at every change

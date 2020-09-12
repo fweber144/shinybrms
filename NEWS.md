@@ -1,5 +1,15 @@
 # **shinybrms** 1.3.0.9000
 
+## Major changes
+
+  - A new theme is used for the **shinybrms** app. This theme is
+    basically the "United" theme from
+    [Bootswatch](https://github.com/thomaspark/bootswatch) v3.3.7 with
+    just a few minor modifications. For the font, the "Open Sans" font
+    from [Google Fonts](https://fonts.google.com/) is used. See the new
+    file "LICENSE" for details concerning the licenses of these new
+    components.
+
 ## Minor changes
 
   - When deselecting a variable from the list for the nonpooled main

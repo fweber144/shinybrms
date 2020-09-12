@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -100,12 +100,7 @@
 <div id="launching-the-shinybrms-app" class="section level2">
 <h2 class="hasAnchor">
 <a href="#launching-the-shinybrms-app" class="anchor"></a>Launching the <strong>shinybrms</strong> app</h2>
-<p>There are two options for launching the <strong>shinybrms</strong> app:</p>
-<ul>
-<li>Install the R package <strong>shinybrms</strong> (either <a href="https://CRAN.R-project.org/package=shinybrms">from CRAN</a> or <a href="https://github.com/fweber144/shinybrms">from GitHub</a>) and then launch the <strong>shinybrms</strong> app from the installed package.</li>
-<li>Launch the <strong>shinybrms</strong> app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a>.</li>
-</ul>
-<p>The first option is described in the following section “<em>With</em> installation of <strong>shinybrms</strong>”. The second option is described in the subsequent section “<em>Without</em> installation of <strong>shinybrms</strong>”. In both cases, you need to perform the following steps first:</p>
+<p>The following two sections describe two options for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The first option is recommended as it offers all advantages that R packages have (e.g. offline usage). For both options, you need to perform the following steps first:</p>
 <ol>
 <li>Install R (see the <a href="https://www.R-project.org/">R homepage</a>).</li>
 <li>Install the R package <a href="https://mc-stan.org/rstan/"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
@@ -116,35 +111,35 @@
 </h3>
 <ol>
 <li>
-<p>Install the R package <strong>shinybrms</strong> either from CRAN or from GitHub. The GitHub version might be more recent than the CRAN version. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/"><strong>rstanarm</strong></a> or not.</p>
+<p>In this first step, you will install the R package <strong>shinybrms</strong> either <a href="https://CRAN.R-project.org/package=shinybrms">from CRAN</a> or <a href="https://github.com/fweber144/shinybrms">from GitHub</a>. The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/"><strong>rstanarm</strong></a> or not.</p>
 <ul>
-<li>If you <em>don’t want</em> to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
+<li>If you want to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
 <ul>
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 </li>
 <li>
 <p>To install <strong>shinybrms</strong> from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)){
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 }
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>)</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 </li>
 </ul>
 </li>
-<li>If you <em>want</em> to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
+<li>If you <em>don’t</em> want to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
 <ul>
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>)</pre></div>
 </li>
 <li>
 <p>To install <strong>shinybrms</strong> from GitHub:</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="kw">if</span>(!<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)){
   <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
 }
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>, <span class="kw">dependencies</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>)</pre></div>
 </li>
 </ul>
 </li>
@@ -174,11 +169,11 @@
 <div class="sourceCode" id="cb8"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span>))</pre></div>
 </li>
 <li>
-<p>Launch the <strong>shinybrms</strong> app directly from GitHub by either running the following R code:</p>
-<div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
+<p>Launch the <strong>shinybrms</strong> app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a> by either running the following R code:</p>
+<div class="sourceCode" id="cb9"><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
                  <span class="kw">subdir</span> <span class="kw">=</span> <span class="st">"inst/shinybrms_app"</span>)</pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
-<div class="sourceCode" id="cb10"><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
+<div class="sourceCode" id="cb10"><pre class="r"><span class="kw pkg">shiny</span><span class="kw ns">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
                  <span class="kw">subdir</span> <span class="kw">=</span> <span class="st">"inst/shinybrms_app"</span>,
                  <span class="kw">launch.browser</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 </li>
@@ -205,7 +200,7 @@
 <h2>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a></small></li>
+<li><small><a href="https://www.r-project.org/Licenses/GPL-3">GPL-3</a> | file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

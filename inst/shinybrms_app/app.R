@@ -951,17 +951,6 @@ ui <- navbarPage(
           target = "_blank",
           .noWS = "after"),
         "."
-      ),
-      wellPanel(
-        h3("Further legal information"),
-        "shinybrms  Copyright (C) 2020  Frank Weber",
-        br(),
-        "This program comes with ABSOLUTELY NO WARRANTY; for details see the section",
-        "\"License information\" above.",
-        br(),
-        "This is free software, and you are welcome to redistribute it",
-        "under certain conditions; see the section",
-        "\"License information\" above for details."
       )
     ),
     tabPanel(

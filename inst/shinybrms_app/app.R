@@ -266,7 +266,7 @@ ui <- navbarPage(
             target = "_blank"),
           "and the", strong("brms"), "vignette",
           a("\"Parameterization of Response Distributions in brms\"",
-            href = "https://cran.r-project.org/web/packages/brms/vignettes/brms_families.html",
+            href = "https://CRAN.R-project.org/web/packages/brms/vignettes/brms_families.html",
             target = "_blank",
             .noWS = "after"),
           ". Note that for each parameter, the link function only applies if this parameter is",

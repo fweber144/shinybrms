@@ -919,20 +919,6 @@ ui <- navbarPage(
         "."
       ),
       wellPanel(
-        h3("Trademarks"),
-        tags$ul(
-          tags$li(HTML(paste0(
-            "The Stan name is a registered trademark of ",
-            a("NumFOCUS under the direction of the Stan Leadership Body",
-              href = "https://mc-stan.org/about/numfocus/index.html",
-              target = "_blank"),
-            "."
-          ))),
-          tags$li("Windows is a registered trademark of Microsoft Corporation in the United States and other countries."),
-          tags$li("Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries.")
-        )
-      ),
-      wellPanel(
         h3("License information"),
         "The", strong("shinybrms"), "package as a whole is distributed under the",
         a("GPL-3",
@@ -951,6 +937,20 @@ ui <- navbarPage(
           target = "_blank",
           .noWS = "after"),
         "."
+      ),
+      wellPanel(
+        h3("Trademarks"),
+        tags$ul(
+          tags$li(HTML(paste0(
+            "The Stan name is a registered trademark of ",
+            a("NumFOCUS under the direction of the Stan Leadership Body",
+              href = "https://mc-stan.org/about/numfocus/index.html",
+              target = "_blank"),
+            "."
+          ))),
+          tags$li("Windows is a registered trademark of Microsoft Corporation in the United States and other countries."),
+          tags$li("Firefox is a trademark of the Mozilla Foundation in the U.S. and other countries.")
+        )
       )
     ),
     tabPanel(

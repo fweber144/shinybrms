@@ -1424,6 +1424,12 @@ server <- function(input, output, session){
     input$pred_mainNP_sel
     input$pred_mainPP_sel
   }, {
+    pred_int_sel_before <- pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
+    pred_int_sel_before <- lapply(pred_int_sel_before, function(x){
+      intersect(x, c(input$pred_mainNP_sel,
+                     input$pred_mainPP_sel))
+    })
+    pred_int_sel_before <- pred_int_sel_before[sapply(pred_int_sel_before, length) > 1L]
     pred_int_rv$choices <- lapply(pred_int_rv$choices, function(x){
       intersect(x, c(input$pred_mainNP_sel,
                      input$pred_mainPP_sel))
@@ -1433,7 +1439,7 @@ server <- function(input, output, session){
       pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
       updateSelectInput(session, "pred_int_sel",
                         choices = pred_int_rv$choices_chr,
-                        selected = intersect(input$pred_int_sel,
+                        selected = intersect(pred_int_sel_before,
                                              pred_int_rv$choices_chr))
     } else{
       pred_int_rv$choices <- NULL

@@ -912,7 +912,10 @@ ui <- navbarPage(
                   a("website", href = "https://fweber144.github.io/shinybrms/", target = "_blank", .noWS = "after"), ",",
                   a("CRAN", href = "https://CRAN.R-project.org/package=shinybrms", target = "_blank", .noWS = "after"), ",",
                   a("GitHub", href = "https://github.com/fweber144/shinybrms", target = "_blank"))
-        ),
+        )
+      ),
+      wellPanel(
+        h3("Issues"),
         "If you need help, if you want to suggest improvements, or if you found",
         "a bug, please open an issue on",
         a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),

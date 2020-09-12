@@ -1,7 +1,7 @@
 ## Test environments
 
 * Local:
-  - R 4.0.2 on Ubuntu 20.04 LTS system (platform: x86_64-pc-linux-gnu (64-bit))
+  - R 4.0.2 on Ubuntu 20.04.1 LTS system (platform: x86_64-pc-linux-gnu (64-bit))
   - R 4.0.2 on Windows 10 x64 (build 19041) system (platform: x86_64-w64-mingw32/x64 (64-bit))
 * Travis CI:
   - R 4.0.2 on Ubuntu 16.04.6 LTS system (platform: x86_64-pc-linux-gnu (64-bit))

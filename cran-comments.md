@@ -13,7 +13,14 @@
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs or NOTEs.
+There were no ERRORs or WARNINGs.
+
+There was 1 NOTE for both local systems and both Travis CI systems:
+
+* checking for future file timestamps ... NOTE
+  unable to verify current time
+
+This NOTE seems to be related to the external resource at <http://worldclockapi.com/> currently not being available.
 
 ## Downstream dependencies
 

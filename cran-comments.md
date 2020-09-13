@@ -20,7 +20,7 @@ There was 1 NOTE for both local systems and both Travis CI systems:
 * checking for future file timestamps ... NOTE
   unable to verify current time
 
-This NOTE seems to be related to the external resource at <http://worldclockapi.com/> currently not being available.
+This NOTE seems to be related to the external resource at <http://worldclockapi.com/> currently not being available. On the local systems, I could get rid of this NOTE by setting the environment variable "_R_CHECK_SYSTEM_CLOCK_" to "false". On the remote systems (Travis CI), I did not try this approach (since I don't consider the NOTE as being harmful anyway).
 
 ## Downstream dependencies
 

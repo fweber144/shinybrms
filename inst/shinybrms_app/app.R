@@ -1041,7 +1041,7 @@ ui <- navbarPage(
         em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
         ". 2nd ed. Boca Raton, FL: CRC Press."),
       p(withMathJax(
-        "Vehtari A, Gelman A, Simpson D, Carpenter B, and Bürkner P-C (2020).",
+        "Vehtari A, Gelman A, Simpson D, Carpenter B, and B", HTML("&uuml;", .noWS = "outside"), "rkner P-C (2020).",
         "Rank-normalization, folding, and localization: An improved \\(\\widehat{R}\\) for",
         "assessing convergence of MCMC.", em("Bayesian Analysis", .noWS = "after"), ". DOI:",
         a("10.1214/20-BA1221", href = "https://doi.org/10.1214/20-BA1221", target = "_blank",

@@ -25,3 +25,12 @@ This NOTE seems to be related to the external resource at <http://worldclockapi.
 ## Downstream dependencies
 
 There are currently no downstream dependencies for this package.
+
+## Other comments
+
+According to CRAN's policies, "Any change to a package's license must be
+highlighted when an update is submitted [...]". The previous version of
+**shinybrms** (1.4.0) *did* imply a change of license (not of
+**shinybrms** itself, but version 1.4.0 introduced external components
+and the licenses for these external components were added). I am sorry
+that I forgot to mention this in the CRAN comments for version 1.4.0.

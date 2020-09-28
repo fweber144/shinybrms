@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -125,6 +125,17 @@
       <small>Source: <a href='https://github.com/fweber144/shinybrms/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="shinybrms-141" class="section level1">
+<h1 class="page-header" data-toc-text="1.4.1">
+<a href="#shinybrms-141" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.4.1</h1>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>Corrected a mistake in the DESCRIPTION file: The contributors and copyright holders for external components have to be listed among the authors.</li>
+</ul>
+</div>
+</div>
     <div id="shinybrms-140" class="section level1">
 <h1 class="page-header" data-toc-text="1.4.0">
 <a href="#shinybrms-140" class="anchor"></a><small> 2020-09-13 </small><strong>shinybrms</strong> 1.4.0</h1>
@@ -147,9 +158,9 @@
 <li>UI: Added internal links.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed the bug that when setting the input field “Group” (of a custom prior) to a nonempty value and later switching back to an empty value, the “Group” was empty in the UI, but internally, the former value was kept. This bug was solved by initializing the input field “Group” <em>with</em> a choose prompt (which made it necessary to catch impossible combinations of “Class”, “Coefficient”, and “Group” with a user notification).</li>
 </ul>
@@ -182,9 +193,9 @@
 <li>Added example dataset <code>roaches</code> from package <strong>rstanarm</strong>.</li>
 </ul>
 </div>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug when switching the dataset.</li>
 </ul>
@@ -201,9 +212,9 @@
 <li>Show more warnings from the Stan run. Some of these additional warnings overlap with the HMC diagnostics added in v1.2.0, but rather show too many warnings (even if they are partly duplicated) than too few.</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a NOTE occurring in some CRAN checks.</li>
 </ul>
@@ -220,9 +231,9 @@
 <li>Updated information about the <strong>shinybrms</strong> package and app (e.g. added the URL of the <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong> website</a>).</li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug causing the sampling progress file not to open up if RStudio’s internal <code>rs_shinyviewer</code> was used for option <code>"browser"</code>.</li>
 </ul>
@@ -247,9 +258,9 @@
 <li>Require R &gt;= 3.6.0.</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a NOTE occurring in some CRAN checks.</li>
 </ul>
@@ -282,9 +293,9 @@
 <li>Allowed *.dat files in the file upload.</li>
 </ul>
 </div>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <p>“Under the hood”, there have been many changes which should make the <strong>shinybrms</strong> app more robust. In particular, the following bugs have been fixed:</p>
 <ul>
 <li>Fixed a bug causing the app to crash if the dataset was changed under certain circumstances.</li>
@@ -300,9 +311,9 @@
     <div id="shinybrms-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">
 <a href="#shinybrms-101" class="anchor"></a><small> 2020-03-26 </small><strong>shinybrms</strong> 1.0.1</h1>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Example datasets:
 <ul>

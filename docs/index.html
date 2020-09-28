@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -118,17 +118,15 @@
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>, dependencies = <span class="fl">TRUE</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinybrms"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </li>
 <li>
 <p>To install <strong>shinybrms</strong> from GitHub:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">if</span>(<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, quietly = <span class="fl">TRUE</span>)){
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-}
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>, dependencies = <span class="fl">TRUE</span>)
-</pre></div>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </li>
 </ul>
 </li>
@@ -137,17 +135,15 @@
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"shinybrms"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"shinybrms"</span><span class="op">)</span></pre></div>
 </li>
 <li>
 <p>To install <strong>shinybrms</strong> from GitHub:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co">if</span>(<span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"devtools"</span>, quietly = <span class="fl">TRUE</span>)){
-  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"devtools"</span>)
-}
-<span class="kw">devtools</span>::<span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"fweber144/shinybrms"</span>)
-</pre></div>
+<span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span><span class="op">(</span><span class="st">"devtools"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span><span class="op">{</span>
+  <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"devtools"</span><span class="op">)</span>
+<span class="op">}</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span><span class="op">)</span></pre></div>
 </li>
 </ul>
 </li>
@@ -156,14 +152,12 @@
 <li>
 <p>Launch the <strong>shinybrms</strong> app by either running the following R code:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://fweber144.github.io/shinybrms">shinybrms</a></span>)
-<span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span>()
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span><span class="op">)</span></pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://fweber144.github.io/shinybrms">shinybrms</a></span>)
-<span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span>(launch.browser = <span class="fl">TRUE</span>)
-</pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span>
+<span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span>launch.browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </li>
 </ol>
 </div>
@@ -175,27 +169,23 @@
 <li>
 <p>Install the R package <strong>brms</strong>. You may use the following R code for this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"brms"</span>)
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span></pre></div>
 </li>
 <li>
 <p>If you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/"><strong>rstanarm</strong></a>, you need to install these packages. You may use the following R code for this:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span>))
-</pre></div>
+<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span><span class="op">)</span><span class="op">)</span></pre></div>
 </li>
 <li>
 <p>Launch the <strong>shinybrms</strong> app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a> by either running the following R code:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit">
-<span class="kw">shiny</span>::<span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
-                 subdir = <span class="st">"inst/shinybrms_app"</span>)
-</pre></div>
+<span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
+                 subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span><span class="op">)</span></pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
 <div class="sourceCode" id="cb10"><pre class="downlit">
-<span class="kw">shiny</span>::<span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span>(<span class="st">"fweber144/shinybrms"</span>,
-                 subdir = <span class="st">"inst/shinybrms_app"</span>,
-                 launch.browser = <span class="fl">TRUE</span>)
-</pre></div>
+<span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
+                 subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span>,
+                 launch.browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
 </li>
 </ol>
 </div>
@@ -227,6 +217,7 @@
 <h2>Developers</h2>
 <ul class="list-unstyled">
 <li>Frank Weber <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4842-7922" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">All authors...</a></li>
 </ul>
 </div>
 

@@ -4,11 +4,21 @@ Title: Graphical User Interface ('Shiny' App) for Package 'brms'
 Version: 1.4.0.9000
 Date: 2020-09-16
 Authors@R: 
-    person(given = "Frank",
-           family = "Weber",
-           role = c("aut", "cre"),
-           email = "fweber144@protonmail.com",
-           comment = c(ORCID = "0000-0002-4842-7922"))
+    c(person(given = "Frank",
+         family = "Weber",
+         role = c("aut", "cre"),
+         email = "fweber144@protonmail.com",
+         comment = c(ORCID = "0000-0002-4842-7922")),
+      person(given = "Thomas",
+             family = "Park",
+             role = c("ctb", "cph"),
+             comment = "'Bootswatch' theme \"United\""),
+      person(family = "Twitter, Inc.",
+             role = c("ctb", "cph"),
+             comment = "'Bootstrap' (basis for the 'Bootswatch' theme \"United\")"),
+      person(family = "Google, LLC",
+             role = c("ctb", "cph"),
+             comment = "\"Open Sans\" font"))
 Description: A graphical user interface (GUI) for fitting Bayesian
     regression models using the package 'brms' which in turn relies on
     'Stan' (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'Shiny' 

@@ -1,5 +1,11 @@
 # **shinybrms** 1.4.0.9000
 
+## Bug fixes
+
+  - Corrected a mistake in the DESCRIPTION file: The contributors and
+    copyright holders for external components have to be listed among
+    the authors.
+
 # **shinybrms** 1.4.0
 
 ## Major changes

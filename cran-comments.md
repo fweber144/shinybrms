@@ -7,7 +7,7 @@
   - R 4.0.2 on Ubuntu 16.04.6 LTS system (platform: x86_64-pc-linux-gnu (64-bit))
   - R 4.0.2 on macOS High Sierra 10.13.6 system (platform: x86_64-apple-darwin17.0 (64-bit))
 * win-builder:
-  - R-devel (2020-09-09 r79174)
+  - R-devel (2020-09-25 r79262)
   - R-release (R 4.0.2)
   - R-oldrelease (R 3.6.3)
 * R-hub:

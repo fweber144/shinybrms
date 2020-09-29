@@ -19,12 +19,12 @@
 
 There were no ERRORs or WARNINGs.
 
-There was 1 NOTE for both local systems, both Travis CI systems, and the first two R-hub systems:
+There was 1 NOTE for both local systems, both Travis CI systems, and the second R-hub system:
 
 * checking for future file timestamps ... NOTE
   unable to verify current time
 
-This NOTE seems to be related to the external resource at <http://worldclockapi.com/> currently not being available. On the local systems, I could get rid of this NOTE by setting the environment variable `_R_CHECK_SYSTEM_CLOCK_` to "false". On the remote systems where this NOTE occurred (both Travis CI systems and the first two R-hub systems), I did not try this approach (since I don't consider the NOTE as being harmful anyway).
+This NOTE seems to be related to the external resource at <http://worldclockapi.com/> currently not being available. On the local systems, I could get rid of this NOTE by setting the environment variable `_R_CHECK_SYSTEM_CLOCK_` to "false". On the remote systems where this NOTE occurred (both Travis CI systems and the second R-hub system), I did not try this approach (since I don't consider the NOTE as being harmful anyway).
 
 ## Downstream dependencies
 

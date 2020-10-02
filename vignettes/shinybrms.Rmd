@@ -241,7 +241,7 @@ knitr::include_graphics("screenshots/Posterior_Summary.png")
 ### Launch **shinystan**
 
 \
-Note that the output shown in tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [Shiny](https://shiny.rstudio.com/) app from [**shinystan**](https://CRAN.R-project.org/package=shinystan) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button in the tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+Note that the output shown in tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [Shiny](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button in the tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 ```{r echo = FALSE, results = "hide"}

@@ -1,10 +1,10 @@
-#' @title Launch the \bold{shinybrms} Shiny app
+#' @title Launch the \bold{shinybrms} app
 #'
-#' @description This function launches the \bold{shinybrms} Shiny app.
+#' @description This function launches the \bold{shinybrms} app.
 #'
-#' @param \dots Arguments passed to [shiny::runApp()]. For example, in order to force launching the
-#'   Shiny app in the system's default web browser (even if using RStudio), set argument
-#'   `launch.browser` to `TRUE`.
+#' @param \dots Arguments passed to [shiny::runApp()]. For example, in order to force the
+#'   \bold{shinybrms} app to launch in the system's default web browser (even if using RStudio),
+#'   set argument `launch.browser` to `TRUE`.
 #'
 #' @note The following global options are introduced by \bold{shinybrms}:
 #'

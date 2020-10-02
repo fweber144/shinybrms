@@ -2,20 +2,20 @@
 % Please edit documentation in R/launch_shinybrms.R
 \name{launch_shinybrms}
 \alias{launch_shinybrms}
-\title{Launch the \bold{shinybrms} Shiny app}
+\title{Launch the \bold{shinybrms} app}
 \usage{
 launch_shinybrms(...)
 }
 \arguments{
-\item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to force launching the
-Shiny app in the system's default web browser (even if using RStudio), set argument
-\code{launch.browser} to \code{TRUE}.}
+\item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to force the
+\bold{shinybrms} app to launch in the system's default web browser (even if using RStudio),
+set argument \code{launch.browser} to \code{TRUE}.}
 }
 \value{
 \code{TRUE} (invisible).
 }
 \description{
-This function launches the \bold{shinybrms} Shiny app.
+This function launches the \bold{shinybrms} app.
 }
 \note{
 The following global options are introduced by \bold{shinybrms}:

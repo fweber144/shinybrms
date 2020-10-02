@@ -1,5 +1,10 @@
 # **shinybrms** 1.4.1.9000
 
+## Minor changes
+
+  - Added CITATION file.
+  - Minor improvements in the documentation for `launch_shinybrms()`.
+
 # **shinybrms** 1.4.1
 
 ## Bug fixes

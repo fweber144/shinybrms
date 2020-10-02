@@ -1,7 +1,6 @@
-citHeader("To cite package 'shinybrms' in publications, use:")
-
-citEntry(
-  entry = "Manual",
+bibentry(
+  bibtype = "Manual",
+  header = "To cite package 'shinybrms' in publications, use:",
   title = "{shinybrms}: Graphical User Interface ('{Shiny}' App) for Package '{brms}'",
   author = "Frank Weber",
   year = "2020",

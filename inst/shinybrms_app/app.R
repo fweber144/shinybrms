@@ -1,4 +1,4 @@
-# shinybrms: Graphical User Interface ('shiny' App) for 'brms'
+# shinybrms: Graphical User Interface ('Shiny' App) for Package 'brms'
 # Copyright (C) 2020  Frank Weber
 #   
 # This program is free software: you can redistribute it and/or modify
@@ -61,7 +61,7 @@ ui <- navbarPage(
       # br(),
       h4("Description"),
       p("This",
-        a(strong("shiny"), href = "https://shiny.rstudio.com/", target = "_blank"),
+        a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
         "app is part of the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
         "package",
@@ -826,7 +826,7 @@ ui <- navbarPage(
         helpText(
           p("The package",
             a(HTML(paste(strong("shinystan"))), href = "https://mc-stan.org/shinystan/", target = "_blank"),
-            "provides a", strong("shiny"), "app offering an interactive inspection of Stan's output."),
+            "provides a Shiny app offering an interactive inspection of Stan's output."),
           p("Notes:",
             tags$ul(
               tags$li(
@@ -900,8 +900,8 @@ ui <- navbarPage(
                   "September 29, 2020"),
           tags$li(strong("Citation:"),
                   "Frank Weber (2020).",
-                  em("shinybrms: Graphical User Interface ('shiny' App)",
-                     "for 'brms'."),
+                  em("shinybrms: Graphical User Interface ('Shiny' App)",
+                     "for Package 'brms'."),
                   "R package, version 1.4.1.9000. URL:",
                   a("https://fweber144.github.io/shinybrms/",
                     href = "https://fweber144.github.io/shinybrms/",
@@ -964,7 +964,12 @@ ui <- navbarPage(
         h3("Programming languages and software environments"),
         tags$ul(
           tags$li(a("R", href = "https://www.R-project.org/", target = "_blank")),
-          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank"))
+          tags$li(a("Stan", href = "https://mc-stan.org/", target = "_blank")),
+          tags$li(a("Shiny", href = "https://shiny.rstudio.com/", target = "_blank"),
+                  "(seen as an own",
+                  "software entity,", # "\"software environment\",", # "\"programming language\",", # "\"software concept\",",
+                  "even though it is actually implemented",
+                  "in the R package", strong("shiny"), "(see below))")
         )
       ),
       wellPanel(
@@ -2240,8 +2245,8 @@ server <- function(input, output, session){
           seed_PPD_tmp <- NULL
         }
         
-        # Call "shinystan" from an external R process (needed to allow opening another "shiny" app
-        # (here "shinystan") from within the current "shiny" app (here "shinybrms")):
+        # Call "shinystan" from an external R process (needed to allow opening another Shiny app
+        # (here "shinystan") from within the current Shiny app (here "shinybrms")):
         callr::r(
           function(brmsfit_obj, browser_callr, seed_callr){
             browser_callr_orig <- options(browser = browser_callr)

@@ -18,7 +18,7 @@ The [R](https://www.R-project.org/) package
 graphical user interface (GUI) for fitting Bayesian regression models
 using the R package [**brms**](https://paul-buerkner.github.io/brms/)
 which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms**
-GUI is a [Shiny](https://shiny.rstudio.com/) app.
+GUI is a [**shiny**](https://shiny.rstudio.com/) app.
 
 To get an impression of the **shinybrms** app, have a look at [this
 page](https://fweber144.github.io/shinybrms/articles/shinybrms.html).

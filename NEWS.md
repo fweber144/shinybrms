@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Adopted to **brms** v2.14.0.
   - Changed package description.
   - Added CITATION file.
   - Minor improvements in the documentation for `launch_shinybrms()`.

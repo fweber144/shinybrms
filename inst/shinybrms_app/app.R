@@ -41,6 +41,7 @@ san_prior_tab_nms <- function(x){
   x <- sub("^dpar$", "Distributional parameter", x)
   x <- sub("^nlpar$", "Non-linear parameter", x)
   x <- sub("^bound$", "Bound", x)
+  x <- sub("^source$", "Source", x)
   return(x)
 }
 
@@ -1712,12 +1713,12 @@ server <- function(input, output, session){
                                          class = input$prior_class_sel,
                                          coef = input$prior_coef_sel,
                                          group = input$prior_group_sel)
-    prior_set_obj_add_ch <- merge(prior_set_obj_add[, names(prior_set_obj_add) != "prior"],
-                                  C_prior_default()[, names(C_prior_default()) != "prior"],
+    prior_set_obj_add_ch <- merge(prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "source")],
+                                  C_prior_default()[, !names(C_prior_default()) %in% c("prior", "source")],
                                   sort = FALSE)
     class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
     if(!identical(prior_set_obj_add_ch,
-                  prior_set_obj_add[, names(prior_set_obj_add) != "prior"])){
+                  prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "source")])){
       showNotification(
         paste("Your custom prior has not been added since the combination of",
               "\"Class\", \"Coefficient\", and \"Group\" you have currently selected is",
@@ -1740,10 +1741,13 @@ server <- function(input, output, session){
   # Prior preview
   
   prior_colsToHide <- reactive({
-    return(sapply(C_prior_default(), function(x){
-      is.character(x) && all(x == "")
-    }) &
-      !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_default())))
+    return(
+      names(C_prior_default()) == "source" |
+        (sapply(C_prior_default(), function(x){
+          is.character(x) && all(x == "")
+        }) &
+          !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_default())))
+    )
   })
   
   output$prior_default_view <- renderTable({

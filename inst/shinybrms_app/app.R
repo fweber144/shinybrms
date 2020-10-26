@@ -827,6 +827,20 @@ ui <- navbarPage(
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
+      # tabPanel(
+      #   "Custom analyses",
+      #   titlePanel("Custom analyses"),
+      #   br(),
+      #   helpText("Construct a custom mathematical expression and calculate posterior summary statistics",
+      #            "for it. The drop-down list below may be used for inserting parameter names."),
+      #   br(),
+      #   textInput("cust_text", "Custom mathematical expression:",
+      #             placeholder = "Enter expression ..."),
+      #   selectInput("par_sel", "Parameter name:",
+      #               choices = c("Choose parameter name ..." = ""),
+      #               selectize = TRUE),
+      #   tableOutput("cust_view")
+      # ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
         titlePanel(HTML(paste("Launch", strong("shinystan")))),
@@ -2192,6 +2206,22 @@ server <- function(input, output, session){
   output$smmry_view <- renderPrint({
     print(C_stanres()$bfit, digits = 2, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
+  
+  # #------------------------
+  # # Custom analyses
+  # 
+  # C_cust <- eventReactive(cust_add, {
+  #   # req(input$cust_text)
+  #   C_draws_mat <- as.matrix(C_stanres()$bfit)
+  #   C_draws_DF <- as.data.frame(C_draws_mat)
+  #   return(within(C_draws_DF, {
+  #     ### TODO
+  #   }))
+  # })
+  # 
+  # output$cust_view <- renderTable({
+  #   C_cust()
+  # })
   
   #------------------------
   # Download

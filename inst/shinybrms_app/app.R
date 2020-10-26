@@ -818,6 +818,13 @@ ui <- navbarPage(
         "Summary",
         titlePanel("Summary"),
         br(),
+        helpText("Notes:",
+                 tags$ul(
+                   tags$li("Column \"Estimate\" gives the posterior median."),
+                   tags$li("Column \"Est.Error\" gives the posterior median absolute deviation."),
+                   tags$li("Column \"l-95% CI\" gives the lower boundary of the 95% central posterior interval."),
+                   tags$li("Column \"u-95% CI\" gives the upper boundary of the 95% central posterior interval.")
+                 )),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
       tabPanel(

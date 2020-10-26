@@ -825,6 +825,7 @@ ui <- navbarPage(
                    tags$li("Column \"l-95% CI\" gives the lower boundary of the 95% central posterior interval."),
                    tags$li("Column \"u-95% CI\" gives the upper boundary of the 95% central posterior interval.")
                  )),
+        br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
       tabPanel(

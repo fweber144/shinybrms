@@ -511,7 +511,6 @@ ui <- navbarPage(
                       style = "font-weight:normal"
                     )
                   )),
-                  value = "",
                   placeholder = "Enter prior distribution using a Stan function or leave empty to use a flat prior"),
         actionButton("prior_add", "Add prior", class = "btn-primary"),
         br(),

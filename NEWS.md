@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Changed package description.
   - Added CITATION file.
   - Minor improvements in the documentation for `launch_shinybrms()`.
 

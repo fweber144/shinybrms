@@ -1,6 +1,6 @@
 Roxygen: list(markdown = TRUE)
 Package: shinybrms
-Title: Graphical User Interface ('Shiny' App) for Package 'brms'
+Title: Graphical User Interface ('shiny' App) for 'brms'
 Version: 1.4.1.9000
 Date: 2020-09-29
 Authors@R: 
@@ -21,8 +21,8 @@ Authors@R:
              comment = "\"Open Sans\" font"))
 Description: A graphical user interface (GUI) for fitting Bayesian
     regression models using the package 'brms' which in turn relies on
-    'Stan' (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'Shiny' 
-    (<https://shiny.rstudio.com/>) app.
+    'Stan' (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'shiny'
+    app.
 License: GPL-3 | file LICENSE
 URL: https://fweber144.github.io/shinybrms/,
     https://github.com/fweber144/shinybrms

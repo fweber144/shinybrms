@@ -1962,7 +1962,7 @@ server <- function(input, output, session){
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <-
-        paste("Warning: There are missing values in the data which was used for the model.",
+        paste("Warning: There were missing values in the dataset which was used for the model.",
               "The corresponding rows have been omitted in the Stan run.")
       warn_capt <- setdiff(warn_capt, c("Compiling Stan program...", "Start sampling"))
       for(warn_capt_i in warn_capt){

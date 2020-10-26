@@ -672,7 +672,7 @@ ui <- navbarPage(
                                   HTML(paste0("Progress-refreshing step size (", code("\"refresh\""), "):")),
                                   value = NA, step = 1L, min = 0L),
                      checkboxInput("advOpts_save_all_pars",
-                                   strong("Save draws for", em("all"), "parameters, including internal ones."),
+                                   strong("Save draws for", em("all"), "parameters, including internal ones"),
                                    value = FALSE),
                      checkboxInput("advOpts_save_warmup", strong("Save warmup"),
                                    value = TRUE))

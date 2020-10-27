@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Minor cosmetic improvement in the CSS theme.
   - Adopted to **brms** v2.14.0.
   - Changed package description.
   - Added CITATION file.

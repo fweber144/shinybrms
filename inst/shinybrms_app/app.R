@@ -828,8 +828,8 @@ ui <- navbarPage(
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
       # tabPanel(
-      #   "Custom analyses",
-      #   titlePanel("Custom analyses"),
+      #   "Custom summary",
+      #   titlePanel("Custom summary"),
       #   br(),
       #   helpText("Construct a custom mathematical expression and calculate posterior summary statistics",
       #            "for it. The drop-down list below may be used for inserting parameter names."),
@@ -2208,7 +2208,7 @@ server <- function(input, output, session){
   })
   
   # #------------------------
-  # # Custom analyses
+  # # Custom summary
   # 
   # C_cust <- eventReactive(cust_add, {
   #   # req(input$cust_text)

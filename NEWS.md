@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Fixed a possible security issue for the text input field "Prior distribution".
   - Adopted to **brms** v2.14.0.
   - Changed package description.
   - Added CITATION file.

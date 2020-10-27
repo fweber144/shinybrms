@@ -45,6 +45,57 @@ san_prior_tab_nms <- function(x){
   return(x)
 }
 
+# Stan function names which may be used for specifying a prior distribution:
+prior_stan_fun <- c(
+  "normal",
+  "std_normal",
+  "exp_mod_normal",
+  "skew_normal",
+  "student_t",
+  "cauchy",
+  "double_exponential",
+  "logistic",
+  "gumbel",
+  ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
+  "lognormal",
+  "chi_square",
+  "inv_chi_square",
+  "scaled_inv_chi_square",
+  "exponential",
+  "gamma",
+  "inv_gamma",
+  "weibull",
+  "frechet",
+  "rayleigh",
+  "wiener",
+  "pareto",
+  "pareto_type_2",
+  ### 
+  ### Requiring a lower bound and an upper bound (which is checked by brms:::check_prior_content()):
+  "beta",
+  "beta_proportion",
+  "von_mises",
+  "uniform"
+  ### 
+)
+
+# brms function names which may be used for specifying a prior distribution:
+prior_brms_fun <- c(
+  "horseshoe",
+  "lasso",
+  "constant",
+  ### Requiring a simplex constraint:
+  "dirichlet",
+  ### 
+  ### Requiring a Cholesky-factor-of-correlation-matrix constraint:
+  "lkj", # Internally replaced by "lkj_corr_cholesky".
+  "lkj_corr_cholesky",
+  ### 
+  ### Requiring a correlation-matrix constraint:
+  "lkj_corr" # Internally replaced by "lkj_corr_cholesky".
+  ### 
+)
+
 ####################################################################################################
 # UI
 ####################################################################################################
@@ -439,7 +490,13 @@ ui <- navbarPage(
       a(HTML("Stan documentation"),
         href = "https://mc-stan.org/users/documentation/",
         target = "_blank"),
-      " (in particular, the \"Stan Functions Reference\")."
+      " (in particular, the ",
+      a("\"Stan Functions Reference\"",
+        href = "https://mc-stan.org/docs/2_21/functions-reference/index.html",
+        target = "_blank"),
+      ", here for Stan version 2.21.0 since this is the Stan version used by the most recent version of ",
+      strong("rstan"),
+      ")."
     ))),
     hr(),
     h3("Default priors"),
@@ -488,8 +545,14 @@ ui <- navbarPage(
                       HTML(paste0(
                         "Note: You may ", em("either"),
                         tags$ul(
-                          tags$li(HTML(paste0("specify a prior distribution using a Stan function ",
-                                              em("or")))),
+                          tags$li(HTML(paste(
+                            "specify a prior distribution using a Stan function (see the",
+                            a("\"Stan Functions Reference\"",
+                              href = "https://mc-stan.org/docs/2_21/functions-reference/index.html",
+                              target = "_blank"),
+                            "for details)",
+                            em("or")
+                          ))),
                           tags$li(HTML(paste0("specify a prior distribution using one of the ",
                                               "special (pseudo-)functions defined by ", strong("brms"),
                                               " for this purpose (e.g. ",
@@ -1730,6 +1793,44 @@ server <- function(input, output, session){
   # Add a custom prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
     req(input$prior_class_sel)
+    prior_text_valid <- identical(input$prior_text, "") ||
+      any(sapply(prior_stan_fun, function(prior_stan_fun_i){
+        grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
+      })) ||
+      grepl(paste0("^horseshoe\\((",
+                   "(",
+                   "(df[[:blank:]]*=[[:blank:]]*)|",
+                   "(scale_global[[:blank:]]*=[[:blank:]]*)|",
+                   "(df_global[[:blank:]]*=[[:blank:]]*)|",
+                   "(scale_slab[[:blank:]]*=[[:blank:]]*)|",
+                   "(df_slab[[:blank:]]*=[[:blank:]]*)|",
+                   "(par_ratio[[:blank:]]*=[[:blank:]]*)|",
+                   "(autoscale[[:blank:]]*=[[:blank:]]*)|",
+                   "",
+                   ")",
+                   "([[:digit:][:blank:].,]*|NULL|TRUE|FALSE)",
+                   ")*\\)$"), input$prior_text) ||
+      grepl(paste0("^lasso\\((",
+                   "(",
+                   "(df[[:blank:]]*=[[:blank:]]*)|",
+                   "(scale[[:blank:]]*=[[:blank:]]*)|",
+                   "",
+                   ")",
+                   "[[:digit:][:blank:].,]*",
+                   ")*\\)$"), input$prior_text) ||
+      grepl(paste0("^dirichlet\\([[:digit:][:blank:].,:c()]*\\)$"), input$prior_text) ||
+      any(sapply(setdiff(prior_brms_fun, c("horseshoe", "lasso", "dirichlet")), function(prior_brms_fun_i){
+        grepl(paste0("^", prior_brms_fun_i, "\\([[:digit:][:blank:].]*\\)$"), input$prior_text)
+      }))
+    if(!prior_text_valid){
+      showNotification(
+        paste("Your custom prior has not been added since your text in the \"Prior distribution\"",
+              "input field could not be recognized."),
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
     prior_set_obj_add <- brms::set_prior(prior = input$prior_text,
                                          class = input$prior_class_sel,
                                          coef = input$prior_coef_sel,

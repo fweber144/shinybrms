@@ -96,6 +96,13 @@ prior_brms_fun <- c(
   ### 
 )
 
+# Allowed symbols for "Custom summary":
+cust_allow <- c("(", ")", getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) == 1L])
+cust_allow_grp <- c("pmax", "pmin",
+                    getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) > 1L],
+                    getGroupMembers("Math"),
+                    getGroupMembers("Compare"))
+
 ####################################################################################################
 # UI
 ####################################################################################################
@@ -882,28 +889,49 @@ ui <- navbarPage(
         br(),
         helpText("Notes:",
                  tags$ul(
-                   tags$li("Column \"Estimate\" gives the posterior median."),
-                   tags$li("Column \"Est.Error\" gives the posterior median absolute deviation."),
-                   tags$li("Column \"l-95% CI\" gives the lower boundary of the 95% central posterior interval."),
-                   tags$li("Column \"u-95% CI\" gives the upper boundary of the 95% central posterior interval.")
+                   tags$li("Column \"Estimate\" contains the posterior median."),
+                   tags$li("Column \"Est.Error\" contains the posterior median absolute deviation."),
+                   tags$li("Column \"l-95% CI\" contains the lower boundary of the 95% central posterior interval."),
+                   tags$li("Column \"u-95% CI\" contains the upper boundary of the 95% central posterior interval.")
                  )),
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
-      # tabPanel(
-      #   "Custom summary",
-      #   titlePanel("Custom summary"),
-      #   br(),
-      #   helpText("Construct a custom mathematical expression and calculate posterior summary statistics",
-      #            "for it. The drop-down list below may be used for inserting parameter names."),
-      #   br(),
-      #   textInput("cust_text", "Custom mathematical expression:",
-      #             placeholder = "Enter expression ..."),
-      #   selectInput("par_sel", "Parameter name:",
-      #               choices = c("Choose parameter name ..." = ""),
-      #               selectize = TRUE),
-      #   tableOutput("cust_view")
-      # ),
+      tabPanel(
+        "Custom summary",
+        titlePanel("Custom summary"),
+        br(),
+        helpText(p("Here, you may calculate posterior summary quantities for a custom mathematical",
+                   "expression involving at least one parameter.",
+                   "Parameter names need to be enclosed in backticks (", code("`", .noWS = "outside"), ").",
+                   "The drop-down list below may be used for inserting parameter names (directly with",
+                   "enclosing backticks) into the custom mathematical expression."),
+                 p("Examples for such a custom mathematical expression would be:",
+                   code("`b_age` + `b_age:genderM`"),
+                   "or",
+                   code("`b_age` > 0.2", .noWS = "after"),
+                   ". For the latter example, the posterior mean gives the posterior probability for",
+                   code("`b_age` > 0.2", .noWS = "after"),
+                   ".")),
+        br(),
+        textInput("cust_text", "Custom mathematical expression involving at least one parameter:",
+                  placeholder = "Enter expression ...",
+                  width = "100%"),
+        selectInput("par_sel", "Parameter name to insert:",
+                    choices = c("Choose parameter name ..." = ""),
+                    selectize = TRUE),
+        actionButton("par_add", "Insert parameter name"),
+        br(),
+        br(),
+        actionButton("cust_act", "Calculate posterior summary quantities", class = "btn-primary"),
+        br(),
+        br(),
+        strong("Posterior summary quantities:"),
+        tableOutput("cust_view"),
+        helpText("Note: All columns contain", em("posterior"), "summary quantities.",
+                 "In particular, the columns starting with \"Q\" contain the corresponding",
+                 "posterior percentiles and column \"MAD\" contains the posterior median absolute deviation.")
+      ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
         titlePanel(HTML(paste("Launch", strong("shinystan")))),
@@ -2199,6 +2227,13 @@ server <- function(input, output, session){
   })
   
   #------
+  # Matrix of posterior draws (for later usage and only run if needed)
+  
+  C_draws_mat <- reactive({
+    as.matrix(C_stanres()$bfit)
+  })
+  
+  #------
   # Date and time when Stan run was finished
   
   output$fit_date <- renderText({
@@ -2308,21 +2343,84 @@ server <- function(input, output, session){
     print(C_stanres()$bfit, digits = 2, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
   
-  # #------------------------
-  # # Custom summary
-  # 
-  # C_cust <- eventReactive(cust_add, {
-  #   # req(input$cust_text)
-  #   C_draws_mat <- as.matrix(C_stanres()$bfit)
-  #   C_draws_DF <- as.data.frame(C_draws_mat)
-  #   return(within(C_draws_DF, {
-  #     ### TODO
-  #   }))
-  # })
-  # 
-  # output$cust_view <- renderTable({
-  #   C_cust()
-  # })
+  #------------------------
+  # Custom summary
+  
+  C_pars <- reactive({
+    brms::parnames(C_stanres()$bfit)
+  })
+  
+  observe({
+    updateSelectInput(session, "par_sel",
+                      choices = c("Choose parameter name ..." = "",
+                                  C_pars()))
+  })
+  
+  observeEvent(input$par_add, {
+    req(input$par_sel)
+    updateTextInput(session, "cust_text",
+                    value = paste0(input$cust_text, "`", input$par_sel, "`"))
+  })
+  
+  C_cust <- eventReactive(input$cust_act, {
+    # Check that there is at least one parameter name in 'input$cust_text':
+    req(grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text))
+    # Check for forbidden code:
+    cust_text_valid <- grepl(
+      paste0(
+        "^(",
+        paste(c(paste0("[",
+                       paste(c("[:digit:][:blank:]",
+                               sub("*", "\\*", cust_allow, fixed = TRUE)), # NOTEs: Character "-" doesn't need to be escaped here (probably because it's not surrounded by letters or digits). Character "^" doesn't need to be escaped here because it's not at the beginning of the character class.
+                             collapse = ""),
+                       "]"),
+                cust_allow_grp), # paste0("(", cust_allow_grp, ")")
+              collapse = "|"),
+        ")*$"
+      ),
+      gsub(paste(paste0("`", C_pars(), "`"), collapse = "|"), "", input$cust_text)
+    )
+    if(!cust_text_valid){
+      showNotification(
+        "Your custom summary has not been calculated since your custom expression was invalid.",
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
+    return(with(as.data.frame(C_draws_mat()), {
+      cust_res <- eval(parse(text = input$cust_text))
+      cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
+      names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
+      names(cust_q)[names(cust_q) == "Q50"] <- "median"
+      cust_smmry <- as.data.frame(t(cust_q))
+      cust_smmry <- cbind(cust_smmry, data.frame(
+        "MAD" = mad(cust_res),
+        "mean" = mean(cust_res),
+        "SD" = sd(cust_res)
+      ))
+      return(cust_smmry)
+    }))
+  })
+  
+  output$cust_view <- renderTable({
+    if(inherits(try(C_cust(), silent = TRUE), "try-error")){
+      cust_res <- 0
+      cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
+      names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
+      names(cust_q)[names(cust_q) == "Q50"] <- "median"
+      cust_smmry <- as.data.frame(t(cust_q))
+      cust_smmry <- cbind(cust_smmry, data.frame(
+        "MAD" = mad(cust_res),
+        "mean" = mean(cust_res),
+        "SD" = sd(cust_res)
+      ))
+      cust_smmry <- cust_smmry[-seq_len(nrow(cust_smmry)), ]
+      return(cust_smmry)
+    } else{
+      C_cust()
+    }
+  })
   
   #------------------------
   # Download
@@ -2342,14 +2440,14 @@ server <- function(input, output, session){
     },
     content = function(file){
       if(identical(input$stanout_download_sel, "draws_mat_csv")){
-        write.csv(as.matrix(C_stanres()$bfit),
+        write.csv(C_draws_mat(),
                   file = file,
                   row.names = FALSE)
       } else{
         saveRDS(switch(input$stanout_download_sel,
                        "brmsfit_obj" = C_stanres()$bfit,
                        "diagn_obj" = C_stanres()$diagn,
-                       "draws_mat_obj" = as.matrix(C_stanres()$bfit),
+                       "draws_mat_obj" = C_draws_mat(),
                        "draws_arr_obj" = C_stanres()$draws_arr),
                 file = file)
       }

@@ -1,5 +1,10 @@
 # **shinybrms** 1.4.1.9000
 
+## Major changes
+
+  - Added the possibility to perform custom posterior summary analyses, e.g. for a transformation of
+    parameters or for a sum of parameters.
+
 ## Minor changes
 
   - Minor cosmetic improvement in the CSS theme.

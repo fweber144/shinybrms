@@ -97,17 +97,17 @@ prior_brms_fun <- c(
 )
 
 # Allowed symbols for "Custom summary":
-cust_allow_all <- c(".", "(", ")", "!", "pmax", "pmin",
+cust_allow_all <- c(as.character(0:9), " ", ".", "(", ")", "!", "pmax", "pmin",
                     getGroupMembers("Arith"),
                     getGroupMembers("Compare"),
                     getGroupMembers("Logic"),
                     getGroupMembers("Math"))
-cust_allow_cc <- cust_allow_all[nchar(cust_allow_all) == 1L]
-cust_allow_grp <- setdiff(cust_allow_all, cust_allow_cc)
-# Escape special characters (NOTE: "-" mustn't be escaped here (probably because it's not surrounded
-# by letters or digits)):
-cust_allow_cc <- sub("*", "\\*", cust_allow_cc, fixed = TRUE)
-cust_allow_cc <- sub("^", "\\^", cust_allow_cc, fixed = TRUE) # NOTE: In fact, "^" doesn't need to be escaped here because it's not at the beginning of the character class. To be on the safe side, it is escaped here anyway.
+# Escape special characters:
+cust_allow_spec <- c(".", "|", "(", ")", "^", "*", "+") # , "\\", "[", "{", "$", "?"
+cust_allow_grp <- cust_allow_all
+for(char_i in cust_allow_spec){
+  cust_allow_grp <- sub(char_i, paste0("\\", char_i), cust_allow_grp, fixed = TRUE)
+}
 
 # Empty "Custom summary" table:
 cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),
@@ -2403,16 +2403,7 @@ server <- function(input, output, session){
     }
     # Check for forbidden code:
     cust_text_valid <- grepl(
-      paste0(
-        "^(",
-        paste(c(paste0("[",
-                       paste(c("[:digit:][:blank:]", cust_allow_cc),
-                             collapse = ""),
-                       "]"),
-                cust_allow_grp),
-              collapse = "|"),
-        ")*$"
-      ),
+      paste0("^(", paste(cust_allow_grp, collapse = "|"), ")*$"),
       gsub(paste(paste0("`", C_pars(), "`"), collapse = "|"), "", input$cust_text)
     )
     if(!cust_text_valid){

@@ -2406,8 +2406,7 @@ server <- function(input, output, session){
       paste0(
         "^(",
         paste(c(paste0("[",
-                       paste(c("[:digit:][:blank:]",
-                               cust_allow),
+                       paste(c("[:digit:][:blank:]", cust_allow),
                              collapse = ""),
                        "]"),
                 cust_allow_grp),

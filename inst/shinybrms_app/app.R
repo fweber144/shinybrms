@@ -2374,7 +2374,16 @@ server <- function(input, output, session){
                     value = paste0(input$cust_text, "`", input$par_sel, "`"))
   })
   
-  C_cust <- eventReactive(input$cust_act, {
+  C_cust <- reactiveVal(cust_smmry_empty)
+  
+  # Reset C_cust() when C_stanres() has changed (and also reset input$cust_text):
+  observeEvent(C_stanres(), {
+    C_cust(cust_smmry_empty)
+    updateTextInput(session, "cust_text",
+                    value = "")
+  })
+  
+  observeEvent(input$cust_act, {
     # Check that there is at least one parameter name in 'input$cust_text':
     if(!grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text)){
       showNotification(
@@ -2383,7 +2392,8 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      return(cust_smmry_empty)
+      C_cust(cust_smmry_empty)
+      return()
     }
     # Check for forbidden code:
     cust_text_valid <- grepl(
@@ -2406,7 +2416,8 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      return(cust_smmry_empty)
+      C_cust(cust_smmry_empty)
+      return()
     }
     # Check that "C_pars()" contains the correct parameter names:
     if(!identical(C_pars(), colnames(C_draws_mat()))){
@@ -2415,9 +2426,10 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      return(cust_smmry_empty)
+      C_cust(cust_smmry_empty)
+      return()
     }
-    return(with(as.data.frame(C_draws_mat()), {
+    C_cust(with(as.data.frame(C_draws_mat()), {
       cust_res <- eval(parse(text = input$cust_text))
       cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
       names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
@@ -2433,7 +2445,7 @@ server <- function(input, output, session){
   })
   
   output$cust_view <- renderTable({
-    if(inherits(try(C_cust(), silent = TRUE), "try-error")){
+    if(inherits(try(C_stanres(), silent = TRUE), "try-error")){
       return(cust_smmry_empty)
     } else{
       return(C_cust())

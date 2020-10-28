@@ -2351,6 +2351,11 @@ server <- function(input, output, session){
   })
   
   observe({
+    if(inherits(try(C_pars(), silent = TRUE), "try-error")){
+      updateSelectInput(session, "par_sel",
+                        choices = c("Choose parameter name ..." = ""))
+      return()
+    }
     updateSelectInput(session, "par_sel",
                       choices = c("Choose parameter name ..." = "",
                                   C_pars()))

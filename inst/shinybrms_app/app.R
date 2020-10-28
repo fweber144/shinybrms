@@ -97,12 +97,13 @@ prior_brms_fun <- c(
 )
 
 # Allowed symbols for "Custom summary":
-cust_allow <- c("(", ")", "!", getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) == 1L])
-cust_allow_grp <- c("pmax", "pmin",
-                    getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) > 1L],
-                    getGroupMembers("Math"),
+cust_allow_all <- c("(", ")", "!", "pmax", "pmin",
+                    getGroupMembers("Arith"),
                     getGroupMembers("Compare"),
-                    getGroupMembers("Logic"))
+                    getGroupMembers("Logic"),
+                    getGroupMembers("Math"))
+cust_allow <- cust_allow_all[nchar(cust_allow_all) == 1L]
+cust_allow_grp <- setdiff(cust_allow_all, cust_allow)
 
 # Empty "Custom summary" table:
 cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),

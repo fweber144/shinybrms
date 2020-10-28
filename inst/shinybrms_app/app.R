@@ -2432,7 +2432,6 @@ server <- function(input, output, session){
       cust_smmry <- cust_smmry[-seq_len(nrow(cust_smmry)), ]
       return(cust_smmry)
     } else{
-      req(C_stanres())
       C_cust()
     }
   })

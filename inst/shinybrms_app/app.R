@@ -2377,7 +2377,7 @@ server <- function(input, output, session){
   C_cust <- reactiveVal(cust_smmry_empty)
   
   # Reset C_cust() when C_stanres() has changed (and also reset input$cust_text):
-  observeEvent(C_stanres(), {
+  observeEvent(!inherits(try(C_stanres(), silent = TRUE), "try-error"), {
     C_cust(cust_smmry_empty)
     updateTextInput(session, "cust_text",
                     value = "")

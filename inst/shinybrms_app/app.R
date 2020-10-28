@@ -102,12 +102,12 @@ cust_allow_all <- c(".", "(", ")", "!", "pmax", "pmin",
                     getGroupMembers("Compare"),
                     getGroupMembers("Logic"),
                     getGroupMembers("Math"))
-cust_allow <- cust_allow_all[nchar(cust_allow_all) == 1L]
-cust_allow_grp <- setdiff(cust_allow_all, cust_allow)
+cust_allow_cc <- cust_allow_all[nchar(cust_allow_all) == 1L]
+cust_allow_grp <- setdiff(cust_allow_all, cust_allow_cc)
 # Escape special characters (NOTE: "-" mustn't be escaped here (probably because it's not surrounded
 # by letters or digits)):
-cust_allow <- sub("*", "\\*", cust_allow, fixed = TRUE)
-cust_allow <- sub("^", "\\^", cust_allow, fixed = TRUE) # NOTE: In fact, "^" doesn't need to be escaped here because it's not at the beginning of the character class. To be on the safe side, it is escaped here anyway.
+cust_allow_cc <- sub("*", "\\*", cust_allow_cc, fixed = TRUE)
+cust_allow_cc <- sub("^", "\\^", cust_allow_cc, fixed = TRUE) # NOTE: In fact, "^" doesn't need to be escaped here because it's not at the beginning of the character class. To be on the safe side, it is escaped here anyway.
 
 # Empty "Custom summary" table:
 cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),
@@ -2406,7 +2406,7 @@ server <- function(input, output, session){
       paste0(
         "^(",
         paste(c(paste0("[",
-                       paste(c("[:digit:][:blank:]", cust_allow),
+                       paste(c("[:digit:][:blank:]", cust_allow_cc),
                              collapse = ""),
                        "]"),
                 cust_allow_grp),

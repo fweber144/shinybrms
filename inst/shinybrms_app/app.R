@@ -2374,7 +2374,7 @@ server <- function(input, output, session){
                                sub("*", "\\*", cust_allow, fixed = TRUE)), # NOTEs: Character "-" doesn't need to be escaped here (probably because it's not surrounded by letters or digits). Character "^" doesn't need to be escaped here because it's not at the beginning of the character class.
                              collapse = ""),
                        "]"),
-                cust_allow_grp), # paste0("(", cust_allow_grp, ")")
+                cust_allow_grp),
               collapse = "|"),
         ")*$"
       ),

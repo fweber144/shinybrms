@@ -2015,6 +2015,11 @@ server <- function(input, output, session){
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     
+    # Reset input$par_sel (necessary here since otherwise, input$par_sel keeps the old choices while
+    # Stan is running):
+    updateSelectInput(session, "par_sel",
+                      choices = c("Choose parameter name ..." = ""))
+    
     n_chains_spec <- input$advOpts_chains
     
     args_brm <- list(

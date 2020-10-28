@@ -101,7 +101,8 @@ cust_allow <- c("(", ")", getGroupMembers("Arith")[nchar(getGroupMembers("Arith"
 cust_allow_grp <- c("pmax", "pmin",
                     getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) > 1L],
                     getGroupMembers("Math"),
-                    getGroupMembers("Compare"))
+                    getGroupMembers("Compare"),
+                    getGroupMembers("Logic"))
 
 # Empty "Custom summary" table:
 cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),

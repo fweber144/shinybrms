@@ -2388,6 +2388,15 @@ server <- function(input, output, session){
       )
       return()
     }
+    # Check that "C_pars()" contains the correct parameter names:
+    if(!identical(C_pars(), colnames(C_draws_mat()))){
+      showNotification(
+        "Unexpected parameter names. Please report this.",
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
     return(with(as.data.frame(C_draws_mat()), {
       cust_res <- eval(parse(text = input$cust_text))
       cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))

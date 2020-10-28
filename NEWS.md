@@ -7,6 +7,7 @@
 
 ## Minor changes
 
+  - UI: Minor improvements (e.g. in label and notification texts).
   - Minor cosmetic improvement in the CSS theme.
   - Adopted to **brms** v2.14.0.
   - Changed package description.

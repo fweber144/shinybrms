@@ -2376,7 +2376,15 @@ server <- function(input, output, session){
   
   C_cust <- eventReactive(input$cust_act, {
     # Check that there is at least one parameter name in 'input$cust_text':
-    req(grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text))
+    if(!grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text)){
+      showNotification(
+        paste("Your custom summary has not been calculated since your custom expression did not contain",
+              "at least one parameter."),
+        duration = NA,
+        type = "error"
+      )
+      return(cust_smmry_empty)
+    }
     # Check for forbidden code:
     cust_text_valid <- grepl(
       paste0(

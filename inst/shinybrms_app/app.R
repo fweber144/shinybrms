@@ -97,7 +97,7 @@ prior_brms_fun <- c(
 )
 
 # Allowed symbols for "Custom summary":
-cust_allow <- c("(", ")", getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) == 1L])
+cust_allow <- c("(", ")", "!", getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) == 1L])
 cust_allow_grp <- c("pmax", "pmin",
                     getGroupMembers("Arith")[nchar(getGroupMembers("Arith")) > 1L],
                     getGroupMembers("Math"),

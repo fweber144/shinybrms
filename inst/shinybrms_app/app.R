@@ -103,6 +103,13 @@ cust_allow_grp <- c("pmax", "pmin",
                     getGroupMembers("Math"),
                     getGroupMembers("Compare"))
 
+# Empty "Custom summary" table:
+cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),
+                             sub("^Q50$",
+                                 "median",
+                                 c(paste0("Q", sub("\\.0$", "", 100 * c(0.025, 0.25, 0.5, 0.75, 0.975))),
+                                   "MAD", "mean", "SD")))
+
 ####################################################################################################
 # UI
 ####################################################################################################
@@ -2419,20 +2426,9 @@ server <- function(input, output, session){
   
   output$cust_view <- renderTable({
     if(inherits(try(C_cust(), silent = TRUE), "try-error")){
-      cust_res <- 0
-      cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
-      names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
-      names(cust_q)[names(cust_q) == "Q50"] <- "median"
-      cust_smmry <- as.data.frame(t(cust_q))
-      cust_smmry <- cbind(cust_smmry, data.frame(
-        "MAD" = mad(cust_res),
-        "mean" = mean(cust_res),
-        "SD" = sd(cust_res)
-      ))
-      cust_smmry <- cust_smmry[-seq_len(nrow(cust_smmry)), ]
-      return(cust_smmry)
+      return(cust_smmry_empty)
     } else{
-      C_cust()
+      return(C_cust())
     }
   })
   

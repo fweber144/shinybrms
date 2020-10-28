@@ -2435,7 +2435,15 @@ server <- function(input, output, session){
       return()
     }
     C_cust(with(as.data.frame(C_draws_mat()), {
-      cust_res <- eval(parse(text = input$cust_text))
+      cust_res <- try(eval(parse(text = input$cust_text)), silent = TRUE)
+      if(inherits(cust_res, "try-error")){
+        showNotification(
+          "The evaluation of your custom expression failed.",
+          duration = NA,
+          type = "error"
+        )
+        return(cust_smmry_empty)
+      }
       cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
       names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
       names(cust_q)[names(cust_q) == "Q50"] <- "median"

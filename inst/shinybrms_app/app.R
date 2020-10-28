@@ -916,6 +916,8 @@ ui <- navbarPage(
         br(),
         helpText(p("Here, you may calculate posterior summary quantities for a custom mathematical",
                    "(or logical) expression involving at least one parameter.",
+                   "Click", HTML(paste(actionLink("cust_allow_link", "here"))),
+                   "for a list of characters and character groups which are allowed in the custom expression.",
                    "Parameter names need to be enclosed in backticks (", code("`", .noWS = "outside"), ").",
                    "The drop-down list below may be used for inserting parameter names (directly with",
                    "enclosing backticks) into the custom expression."),
@@ -1231,6 +1233,18 @@ server <- function(input, output, session){
   
   observeEvent(input$references_link1, {
     updateNavbarPage(session, "navbar_ID", "References")
+  })
+  
+  observeEvent(input$cust_allow_link, {
+    showModal(modalDialog(
+      paste("These are the characters and character groups which are allowed in the custom expression on",
+            "tab \"Custom summary\":",
+            paste(cust_allow_all, collapse = ", ")),
+      title = "Allowed characters and character groups",
+      footer = modalButton("Close"),
+      # size = "m",
+      easyClose = TRUE
+    ))
   })
   
   #-------------------------------------------------

@@ -2398,7 +2398,7 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      return()
+      return(cust_smmry_empty)
     }
     # Check that "C_pars()" contains the correct parameter names:
     if(!identical(C_pars(), colnames(C_draws_mat()))){
@@ -2407,7 +2407,7 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      return()
+      return(cust_smmry_empty)
     }
     return(with(as.data.frame(C_draws_mat()), {
       cust_res <- eval(parse(text = input$cust_text))

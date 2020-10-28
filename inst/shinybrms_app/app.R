@@ -757,7 +757,7 @@ ui <- navbarPage(
           actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary"),
           br(),
           br(),
-          strong("Date and time when Stan run was finished:"),
+          strong("Date and time when the Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
           strong("Check if all MCMC diagnostics are OK (see the tab",
                  actionLink("mcmc_link1", "MCMC diagnostics"),
@@ -2184,7 +2184,7 @@ server <- function(input, output, session){
     # First: Check for failed chains:
     if(n_chains_out < n_chains_spec){
       showNotification(
-        paste("Warning: The Stan run was finished, but at least one chain exited with an error.",
+        paste("Warning: Finished running Stan, but at least one chain exited with an error.",
               "The Stan results should not be used."),
         duration = NA,
         type = "warning"
@@ -2193,14 +2193,14 @@ server <- function(input, output, session){
       # Secondly: Overall check for all MCMC diagnostics:
       if(C_all_OK){
         showNotification(
-          paste("The Stan run was finished. All MCMC diagnostics are OK (see",
+          paste("Finished running Stan. All MCMC diagnostics are OK (see",
                 "the tab \"MCMC diagnostics\" for details)."),
           duration = NA,
           type = "message"
         )
       } else{
         showNotification(
-          paste("Warning: The Stan run was finished, but at least one MCMC diagnostic is worrying (see",
+          paste("Warning: Finished running Stan, but at least one MCMC diagnostic is worrying (see",
                 "the tab \"MCMC diagnostics\" for details). In general,",
                 "this indicates that the Stan results should not be used."),
           duration = NA,
@@ -2234,7 +2234,7 @@ server <- function(input, output, session){
   })
   
   #------
-  # Date and time when Stan run was finished
+  # Date and time when the Stan run was finished
   
   output$fit_date <- renderText({
     C_stanres()$bfit$fit@date

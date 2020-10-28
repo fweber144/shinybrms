@@ -1241,7 +1241,12 @@ server <- function(input, output, session){
         "These are the characters and character groups which are allowed in the custom expression on",
         "tab \"Custom summary\":",
         tags$ul(
-          lapply(cust_allow_all, function(char_i) tags$li(code(char_i)))
+          lapply(cust_allow_all, function(char_i){
+            if(identical(char_i, " ")){
+              return(tags$li(code(char_i), "(blank space)"))
+            }
+            return(tags$li(code(char_i)))
+          })
         )
       )),
       title = "Allowed characters and character groups",

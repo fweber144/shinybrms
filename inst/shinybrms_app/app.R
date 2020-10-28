@@ -1237,9 +1237,13 @@ server <- function(input, output, session){
   
   observeEvent(input$cust_allow_link, {
     showModal(modalDialog(
-      paste("These are the characters and character groups which are allowed in the custom expression on",
-            "tab \"Custom summary\":",
-            paste(cust_allow_all, collapse = ", ")),
+      HTML(paste(
+        "These are the characters and character groups which are allowed in the custom expression on",
+        "tab \"Custom summary\":",
+        tags$ul(
+          lapply(cust_allow_all, function(char_i) tags$li(code(char_i)))
+        )
+      )),
       title = "Allowed characters and character groups",
       footer = modalButton("Close"),
       # size = "m",

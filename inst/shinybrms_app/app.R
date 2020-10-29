@@ -1239,85 +1239,6 @@ server <- function(input, output, session){
     updateNavbarPage(session, "navbar_ID", "References")
   })
   
-  observeEvent(input$cust_allow_link, {
-    showModal(modalDialog(
-      HTML(paste(
-        "These are the characters and character groups which are allowed in the custom expression on",
-        "tab \"Custom summary\":",
-        tags$ul(
-          lapply(cust_allow_all, function(char_i){
-            if(identical(char_i, " ")){
-              return(tags$li(HTML(paste(code(char_i), "&nbsp;(blank space)"))))
-            }
-            return(tags$li(code(char_i)))
-          })
-        )
-      )),
-      title = "Allowed characters and character groups",
-      footer = modalButton("Close"),
-      # size = "m",
-      easyClose = TRUE
-    ))
-  })
-  
-  observeEvent(input$cust_help_link, {
-    showModal(modalDialog(
-      HTML(paste(
-        "Help pages for R functions which may be used in the custom expression:",
-        tags$ul(
-          tags$li(a("\"Arithmetic Operators\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html",
-                    target = "_blank")),
-          tags$li(a("\"Relational Operators\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html",
-                    target = "_blank")),
-          tags$li(a("\"Logical Operators\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html",
-                    target = "_blank")),
-          tags$li(a("\"Miscellaneous Mathematical Functions\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html",
-                    target = "_blank"),
-                  "(", code("abs()", .noWS = "before"), "and", code("sqrt()", .noWS = "after"), ")"),
-          tags$li(a("\"Sign Function\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/sign.html",
-                    target = "_blank")),
-          tags$li(a("\"Rounding of Numbers\"",
-                    href = "https://stat.ethz.ch/R-manual/R-patched/library/base/html/Round.html",
-                    target = "_blank")),
-          tags$li(a("\"Cumulative Sums, Products, and Extremes\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/cumsum.html",
-                    target = "_blank")),
-          tags$li(a("\"Logarithms and Exponentials\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Log.html",
-                    target = "_blank")),
-          tags$li(a("\"Trigonometric Functions\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Trig.html",
-                    target = "_blank")),
-          tags$li(a("\"Special Functions of Mathematics\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Special.html",
-                    target = "_blank"),
-                  "(", code("gamma()", .noWS = "before"), "etc.)"),
-          tags$li(a("\"Maxima and Minima\"",
-                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html",
-                    target = "_blank"))
-        ),
-        "Further possibly helpful pages:",
-        tags$ul(
-          tags$li(a("Section \"Operators\" in the \"R Language Definition\"",
-                    href = "https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Operators",
-                    target = "_blank")),
-          tags$li(a("\"The R Reference Index\"",
-                    href = "",
-                    target = "_blank"))
-        )
-      )),
-      title = "Help pages for R functions",
-      footer = modalButton("Close"),
-      # size = "m",
-      easyClose = TRUE
-    ))
-  })
-  
   #-------------------------------------------------
   # Data
   
@@ -2443,6 +2364,85 @@ server <- function(input, output, session){
   
   #------------------------
   # Custom summary
+  
+  observeEvent(input$cust_allow_link, {
+    showModal(modalDialog(
+      HTML(paste(
+        "These are the characters and character groups which are allowed in the custom expression on",
+        "tab \"Custom summary\":",
+        tags$ul(
+          lapply(cust_allow_all, function(char_i){
+            if(identical(char_i, " ")){
+              return(tags$li(HTML(paste(code(char_i), "&nbsp;(blank space)"))))
+            }
+            return(tags$li(code(char_i)))
+          })
+        )
+      )),
+      title = "Allowed characters and character groups",
+      footer = modalButton("Close"),
+      # size = "m",
+      easyClose = TRUE
+    ))
+  })
+  
+  observeEvent(input$cust_help_link, {
+    showModal(modalDialog(
+      HTML(paste(
+        "Help pages for R functions which may be used in the custom expression:",
+        tags$ul(
+          tags$li(a("\"Arithmetic Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html",
+                    target = "_blank")),
+          tags$li(a("\"Relational Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html",
+                    target = "_blank")),
+          tags$li(a("\"Logical Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html",
+                    target = "_blank")),
+          tags$li(a("\"Miscellaneous Mathematical Functions\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html",
+                    target = "_blank"),
+                  "(", code("abs()", .noWS = "before"), "and", code("sqrt()", .noWS = "after"), ")"),
+          tags$li(a("\"Sign Function\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/sign.html",
+                    target = "_blank")),
+          tags$li(a("\"Rounding of Numbers\"",
+                    href = "https://stat.ethz.ch/R-manual/R-patched/library/base/html/Round.html",
+                    target = "_blank")),
+          tags$li(a("\"Cumulative Sums, Products, and Extremes\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/cumsum.html",
+                    target = "_blank")),
+          tags$li(a("\"Logarithms and Exponentials\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Log.html",
+                    target = "_blank")),
+          tags$li(a("\"Trigonometric Functions\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Trig.html",
+                    target = "_blank")),
+          tags$li(a("\"Special Functions of Mathematics\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Special.html",
+                    target = "_blank"),
+                  "(", code("gamma()", .noWS = "before"), "etc.)"),
+          tags$li(a("\"Maxima and Minima\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html",
+                    target = "_blank"))
+        ),
+        "Further possibly helpful pages:",
+        tags$ul(
+          tags$li(a("Section \"Operators\" in the \"R Language Definition\"",
+                    href = "https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Operators",
+                    target = "_blank")),
+          tags$li(a("\"The R Reference Index\"",
+                    href = "",
+                    target = "_blank"))
+        )
+      )),
+      title = "Help pages for R functions",
+      footer = modalButton("Close"),
+      # size = "m",
+      easyClose = TRUE
+    ))
+  })
   
   C_pars <- reactive({
     brms::parnames(C_stanres()$bfit)

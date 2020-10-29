@@ -2486,7 +2486,6 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      C_cust(cust_smmry_empty)
       return()
     }
     # Check for forbidden code:
@@ -2500,7 +2499,6 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      C_cust(cust_smmry_empty)
       return()
     }
     # Check that "C_pars()" contains the correct parameter names:
@@ -2510,10 +2508,9 @@ server <- function(input, output, session){
         duration = NA,
         type = "error"
       )
-      C_cust(cust_smmry_empty)
       return()
     }
-    C_cust(with(as.data.frame(C_draws_mat()), {
+    C_cust(rbind(C_cust(), with(as.data.frame(C_draws_mat()), {
       cust_res <- try(eval(parse(text = input$cust_text)), silent = TRUE)
       if(inherits(cust_res, "try-error")){
         showNotification(
@@ -2533,7 +2530,7 @@ server <- function(input, output, session){
         "SD" = sd(cust_res)
       ))
       return(cust_smmry)
-    }))
+    })))
   })
   
   output$cust_view <- renderTable({

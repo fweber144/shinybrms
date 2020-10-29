@@ -110,10 +110,11 @@ for(char_i in cust_allow_spec){
 }
 
 # Empty "Custom summary" table:
-cust_smmry_empty <- setNames(as.data.frame(matrix(0, nrow = 0, ncol = 8)),
+cust_smmry_empty <- setNames(cbind(data.frame(character()), as.data.frame(matrix(0, nrow = 0, ncol = 8))),
                              sub("^Q50$",
                                  "median",
-                                 c(paste0("Q", sub("\\.0$", "", 100 * c(0.025, 0.25, 0.5, 0.75, 0.975))),
+                                 c("Name",
+                                   paste0("Q", sub("\\.0$", "", 100 * c(0.025, 0.25, 0.5, 0.75, 0.975))),
                                    "MAD", "mean", "SD")))
 
 ####################################################################################################
@@ -941,6 +942,9 @@ ui <- navbarPage(
                     selectize = TRUE),
         actionButton("par_add", "Insert parameter name"),
         br(),
+        br(),
+        textInput("cust_name", "Name for the custom expression (optional):",
+                  placeholder = "Enter name or leave empty"),
         br(),
         actionButton("cust_act", "Calculate posterior summary quantities", class = "btn-primary"),
         br(),
@@ -2523,8 +2527,7 @@ server <- function(input, output, session){
       cust_q <- quantile(cust_res, probs = c(0.025, 0.25, 0.5, 0.75, 0.975))
       names(cust_q) <- paste0("Q", sub("%$", "", names(cust_q)))
       names(cust_q)[names(cust_q) == "Q50"] <- "median"
-      cust_smmry <- as.data.frame(t(cust_q))
-      cust_smmry <- cbind(cust_smmry, data.frame(
+      cust_smmry <- cbind(data.frame("Name" = input$cust_name), as.data.frame(t(cust_q)), data.frame(
         "MAD" = mad(cust_res),
         "mean" = mean(cust_res),
         "SD" = sd(cust_res)

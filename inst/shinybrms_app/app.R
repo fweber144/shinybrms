@@ -97,11 +97,11 @@ prior_brms_fun <- c(
 )
 
 # Allowed symbols for "Custom summary":
-cust_allow_all <- c(as.character(0:9), " ", ".", "(", ")", "!", "pmax", "pmin",
+cust_allow_all <- c(as.character(0:9), " ", ".", "(", ")",
                     getGroupMembers("Arith"),
                     getGroupMembers("Compare"),
-                    getGroupMembers("Logic"),
-                    getGroupMembers("Math"))
+                    getGroupMembers("Logic"), "!",
+                    getGroupMembers("Math"), "pmax", "pmin")
 # Escape special characters:
 cust_allow_spec <- c(".", "|", "(", ")", "^", "*", "+") # , "\\", "[", "{", "$", "?"
 cust_allow_grp <- cust_allow_all
@@ -918,16 +918,18 @@ ui <- navbarPage(
                    "(or logical) expression involving at least one parameter.",
                    "Click", HTML(paste(actionLink("cust_allow_link", "here"))),
                    "for a list of characters and character groups which are allowed in the custom expression.",
+                   "For details on how to use these characters or character groups, see the examples below",
+                   "or", HTML(paste(actionLink("cust_help_link", "these links")), .noWS = "after"), ".",
                    "Parameter names need to be enclosed in backticks (", code("`", .noWS = "outside"), ").",
                    "The drop-down list below may be used for inserting parameter names (directly with",
                    "enclosing backticks) into the custom expression."),
-                 p("Examples for such a custom expression would be:",
-                   code("`b_age` + `b_age:genderM`", .noWS = "after"),
-                   ",",
-                   code("log(`sigma`)", .noWS = "after"),
-                   ", or",
-                   code("`b_treatment` > 0.2", .noWS = "after"),
-                   ". For the latter example, the posterior mean gives the posterior probability for",
+                 p("Examples for a custom expression would be:",
+                   tags$ul(
+                     tags$li(code("`b_age` + `b_age:genderM`")),
+                     tags$li(code("log(`sigma`)")),
+                     tags$li(code("`b_treatment` > 0.2"))
+                   ),
+                   "For the latter example, the posterior mean gives the posterior probability that",
                    code("`b_treatment` > 0.2", .noWS = "after"),
                    ".")),
         br(),
@@ -1240,18 +1242,79 @@ server <- function(input, output, session){
   observeEvent(input$cust_allow_link, {
     showModal(modalDialog(
       HTML(paste(
-        "These are the characters and character groups which are allowed in the custom expression on",
+        "These are the characters and character groups which are allowed in the custom expression on", # "These are the characters, operators, and functions which are allowed in the custom expression on",
         "tab \"Custom summary\":",
         tags$ul(
           lapply(cust_allow_all, function(char_i){
             if(identical(char_i, " ")){
-              return(tags$li(code(char_i), "(blank space)"))
+              return(tags$li(HTML(paste(code(char_i), "&nbsp;(blank space)")))) # return(tags$li(code(char_i), "(blank space)"))
             }
+            # if(grepl("[[:alpha:]]", char_i)){
+            #   char_i <- paste0(char_i, "()")
+            # }
             return(tags$li(code(char_i)))
           })
         )
       )),
-      title = "Allowed characters and character groups",
+      title = "Allowed characters and character groups", # "Allowed characters, operators, and functions",
+      footer = modalButton("Close"),
+      # size = "m",
+      easyClose = TRUE
+    ))
+  })
+  
+  observeEvent(input$cust_help_link, {
+    showModal(modalDialog(
+      HTML(paste(
+        "Help pages for R functions which may be used in the custom expression:",
+        tags$ul(
+          tags$li(a("\"Arithmetic Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Arithmetic.html",
+                    target = "_blank")),
+          tags$li(a("\"Relational Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Comparison.html",
+                    target = "_blank")),
+          tags$li(a("\"Logical Operators\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Logic.html",
+                    target = "_blank")),
+          tags$li(a("\"Miscellaneous Mathematical Functions\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/MathFun.html",
+                    target = "_blank"),
+                  "(", code("abs()", .noWS = "before"), "and", code("sqrt()", .noWS = "after"), ")"),
+          tags$li(a("\"Sign Function\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/sign.html",
+                    target = "_blank")),
+          tags$li(a("\"Rounding of Numbers\"",
+                    href = "https://stat.ethz.ch/R-manual/R-patched/library/base/html/Round.html",
+                    target = "_blank")),
+          tags$li(a("\"Cumulative Sums, Products, and Extremes\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/cumsum.html",
+                    target = "_blank")),
+          tags$li(a("\"Logarithms and Exponentials\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Log.html",
+                    target = "_blank")),
+          tags$li(a("\"Trigonometric Functions\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Trig.html",
+                    target = "_blank")),
+          tags$li(a("\"Special Functions of Mathematics\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Special.html",
+                    target = "_blank"),
+                  "(", code("gamma()", .noWS = "before"), "etc.)"),
+          tags$li(a("\"Maxima and Minima\"",
+                    href = "https://stat.ethz.ch/R-manual/R-devel/library/base/html/Extremes.html",
+                    target = "_blank"))
+        ),
+        "Further possibly helpful pages:",
+        tags$ul(
+          tags$li(a("Section \"Operators\" in the \"R Language Definition\"",
+                    href = "https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Operators",
+                    target = "_blank")),
+          tags$li(a("\"The R Reference Index\"", # "The full R reference manual (\"The R Reference Index\")",
+                    href = "",
+                    target = "_blank"))
+        )
+      )),
+      title = "Help pages for R functions",
       footer = modalButton("Close"),
       # size = "m",
       easyClose = TRUE

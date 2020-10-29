@@ -964,7 +964,10 @@ ui <- navbarPage(
         br(),
         helpText(
           "The \"conditional effects\" plot shows how the outcome behaves as a function of",
-          "a predictor variable or as a function of an interaction."
+          "a predictor variable or as a function of an interaction.",
+          # "For interactions, only interaction effects involving at most 2 predictor variables may be plotted."
+          "Note that interaction effects of order higher than 2 cannot be plotted here, so only main effects",
+          "as well as interaction effects involving at most 2 predictor variables may be plotted."
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",
@@ -2579,7 +2582,7 @@ server <- function(input, output, session){
                         choices = c("Choose predictor term ..." = ""))
       return()
     }
-    C_termsNP <- grep("\\|", C_terms(), value = TRUE, invert = TRUE)
+    C_termsNP <- grep("\\||:.*:|\\*.*\\*", C_terms(), value = TRUE, invert = TRUE)
     updateSelectInput(session, "term_sel",
                       choices = c("Choose predictor term ..." = "",
                                   C_termsNP))

@@ -2585,8 +2585,9 @@ server <- function(input, output, session){
   })
   
   output$ceff_plot <- renderPlot({
+    req(input$term_sel)
     C_ceff <- brms::conditional_effects(
-      C_fit,
+      C_stanres()$bfit,
       effects = input$term_sel
     )
     C_ceff_plot_list <- plot(C_ceff)

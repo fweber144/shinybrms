@@ -949,7 +949,10 @@ ui <- navbarPage(
         tableOutput("cust_view"),
         helpText("Note: All columns contain", em("posterior"), "summary quantities.",
                  "In particular, the columns starting with \"Q\" contain the corresponding",
-                 "posterior percentiles and column \"MAD\" contains the posterior median absolute deviation.")
+                 "posterior percentiles and column \"MAD\" contains the posterior median absolute deviation."),
+        downloadButton("cust_smmry_download", "Download custom summary"),
+        br(),
+        br()
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
@@ -2540,6 +2543,15 @@ server <- function(input, output, session){
       return(C_cust())
     }
   })
+  
+  output$cust_smmry_download <- downloadHandler(
+    filename = "custom_summary.csv",
+    content = function(file){
+      write.csv(C_cust(),
+                file = file,
+                row.names = FALSE)
+    }
+  )
   
   #------------------------
   # Download

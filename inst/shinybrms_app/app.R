@@ -2537,11 +2537,8 @@ server <- function(input, output, session){
   })
   
   output$cust_view <- renderTable({
-    if(inherits(try(C_stanres(), silent = TRUE), "try-error")){
-      return(cust_smmry_empty)
-    } else{
-      return(C_cust())
-    }
+    invisible(try(C_stanres(), silent = TRUE))
+    C_cust()
   })
   
   output$cust_smmry_download <- downloadHandler(

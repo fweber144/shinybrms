@@ -959,6 +959,21 @@ ui <- navbarPage(
         br()
       ),
       tabPanel(
+        "Conditional effects",
+        titlePanel("Conditional effects"),
+        br(),
+        helpText(
+          "The \"conditional effects\" plot shows how the outcome behaves as a function of",
+          "a predictor variable or as a function of an interaction."
+        ),
+        br(),
+        selectInput("term_sel", "Predictor term to plot:",
+                    choices = c("Choose predictor term ..." = ""),
+                    selectize = TRUE),
+        br(),
+        plotOutput("ceff_plot")
+      ),
+      tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
         titlePanel(HTML(paste("Launch", strong("shinystan")))),
         br(),
@@ -2549,6 +2564,42 @@ server <- function(input, output, session){
                 row.names = FALSE)
     }
   )
+  
+  #------------------------
+  # Conditional effects
+  
+  C_terms <- reactive({
+    attr(terms(C_stanres()$bfit$formula$formula), "term.labels")
+  })
+  
+  observe({
+    if(inherits(try(C_terms(), silent = TRUE), "try-error")){
+      updateSelectInput(session, "term_sel",
+                        choices = c("Choose predictor term ..." = ""))
+      return()
+    }
+    C_termsNP <- grep("\\|", C_terms(), value = TRUE, invert = TRUE)
+    updateSelectInput(session, "term_sel",
+                      choices = c("Choose predictor term ..." = "",
+                                  C_termsNP))
+  })
+  
+  output$ceff_plot <- renderPlot({
+    C_ceff <- brms::conditional_effects(
+      C_fit,
+      effects = input$term_sel
+    )
+    C_ceff_plot_list <- plot(C_ceff)
+    if(length(C_ceff_plot_list) > 1L){
+      showNotification(
+        paste("Function brms:::plot.brms_conditional_effects() returned multiple plot objects.",
+              "Only plotting the first one. Please report this."),
+        duration = NA,
+        type = "warning"
+      )
+    }
+    return(C_ceff_plot_list[[1]])
+  })
   
   #------------------------
   # Download

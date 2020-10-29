@@ -42,4 +42,5 @@ Suggests:
     MASS,
     lme4,
     testthat,
-    shinytest
+    shinytest,
+    ggplot2

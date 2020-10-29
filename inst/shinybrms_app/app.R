@@ -2537,7 +2537,7 @@ server <- function(input, output, session){
   })
   
   output$cust_view <- renderTable({
-    invisible(try(C_stanres(), silent = TRUE))
+    invisible(try(C_stanres(), silent = TRUE)) # Only used for making output$cust_view reactive on C_stanres() (so that output$cust_view grays out while recalculating C_stanres()).
     C_cust()
   })
   

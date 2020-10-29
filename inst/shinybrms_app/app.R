@@ -965,7 +965,6 @@ ui <- navbarPage(
         helpText(
           "The \"conditional effects\" plot shows how the outcome behaves as a function of",
           "a predictor variable or as a function of an interaction.",
-          # "For interactions, only interaction effects involving at most 2 predictor variables may be plotted."
           "Note that interaction effects of order higher than 2 cannot be plotted here, so only main effects",
           "as well as interaction effects involving at most 2 predictor variables may be plotted."
         ),

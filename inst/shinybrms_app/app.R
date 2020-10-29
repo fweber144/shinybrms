@@ -963,8 +963,8 @@ ui <- navbarPage(
         titlePanel("Conditional effects"),
         br(),
         helpText(
-          "The \"conditional effects\" plot shows how the outcome behaves as a function of",
-          "a predictor variable or as a function of an interaction.",
+          "The \"conditional effects\" plot shows the estimated effect of a predictor variable or the",
+          "estimated effect of an interaction on the outcome.",
           "To do so, this plot conditions on specific values of the predictor variables not included in",
           "the effect under investigation: It conditions on the mean of continuous predictor variables",
           "and on the reference category of categorical predictor variables.",

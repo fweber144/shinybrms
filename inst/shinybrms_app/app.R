@@ -966,12 +966,13 @@ ui <- navbarPage(
           "The \"conditional effects\" plot shows how the outcome behaves as a function of",
           "a predictor variable or as a function of an interaction."
         ),
-        br(),
+        # br(),
         selectInput("term_sel", "Predictor term to plot:",
                     choices = c("Choose predictor term ..." = ""),
                     selectize = TRUE),
-        br(),
-        plotOutput("ceff_plot")
+        # br(),
+        plotOutput("ceff_plot", width = "1000px", height = "618px"),
+        br()
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),

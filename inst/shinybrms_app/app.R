@@ -1242,21 +1242,18 @@ server <- function(input, output, session){
   observeEvent(input$cust_allow_link, {
     showModal(modalDialog(
       HTML(paste(
-        "These are the characters and character groups which are allowed in the custom expression on", # "These are the characters, operators, and functions which are allowed in the custom expression on",
+        "These are the characters and character groups which are allowed in the custom expression on",
         "tab \"Custom summary\":",
         tags$ul(
           lapply(cust_allow_all, function(char_i){
             if(identical(char_i, " ")){
-              return(tags$li(HTML(paste(code(char_i), "&nbsp;(blank space)")))) # return(tags$li(code(char_i), "(blank space)"))
+              return(tags$li(HTML(paste(code(char_i), "&nbsp;(blank space)"))))
             }
-            # if(grepl("[[:alpha:]]", char_i)){
-            #   char_i <- paste0(char_i, "()")
-            # }
             return(tags$li(code(char_i)))
           })
         )
       )),
-      title = "Allowed characters and character groups", # "Allowed characters, operators, and functions",
+      title = "Allowed characters and character groups",
       footer = modalButton("Close"),
       # size = "m",
       easyClose = TRUE
@@ -1309,7 +1306,7 @@ server <- function(input, output, session){
           tags$li(a("Section \"Operators\" in the \"R Language Definition\"",
                     href = "https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Operators",
                     target = "_blank")),
-          tags$li(a("\"The R Reference Index\"", # "The full R reference manual (\"The R Reference Index\")",
+          tags$li(a("\"The R Reference Index\"",
                     href = "",
                     target = "_blank"))
         )

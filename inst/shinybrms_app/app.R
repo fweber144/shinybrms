@@ -22,7 +22,7 @@ library(shiny)
 
 # Needed to prevent occasional RStudio crashes when starting the Stan run with
 # "rstan" version >= 2.21.1:
-if(identical(.Platform$OS.type, "windows") && packageVersion("rstan") >= "2.21.1"){
+if(packageVersion("rstan") >= "2.21.1"){
   rstan::rstan_options("javascript" = FALSE)
 }
 

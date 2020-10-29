@@ -963,15 +963,17 @@ ui <- navbarPage(
         titlePanel("Conditional effects"),
         br(),
         helpText(
-          "The \"conditional effects\" plot shows the estimated effect of a predictor variable or the",
-          "estimated effect of an interaction on the outcome.",
-          "To do so, this plot conditions on specific values of the predictor variables not included in",
-          "the effect under investigation: It conditions on the mean of continuous predictor variables",
-          "and on the reference category of categorical predictor variables.",
-          "Likewise, the variability arising from partially pooled effects is not taken into account.",
-          "Note that interaction effects of order higher than 2 cannot be plotted here, so only main effects",
-          "as well as interaction effects involving at most 2 predictor variables may be plotted.",
-          "Furthermore, partially pooled effects are not supported yet."
+          p("The \"conditional effects\" plot shows the estimated effect of a predictor variable",
+            "on the outcome.",
+            "To do so, this plot conditions on specific values of the predictor variables not included in",
+            "the effect under investigation: It conditions on the mean of continuous predictor variables",
+            "and on the reference category of categorical predictor variables.",
+            "Likewise, the variability arising from partially pooled effects is not taken into account."),
+          p("An interaction effect involving at most two predictor variables may also be visualized.",
+            "In this case, the \"conditional effects\" plot as described above is created for the",
+            "first predictor variable involved in this interaction, separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
+            "of the second predictor variable involved in this interaction."),
+          p("Partially pooled effects are not supported yet.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",

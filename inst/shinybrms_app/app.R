@@ -2600,16 +2600,7 @@ server <- function(input, output, session){
         type = "warning"
       )
     }
-    if(!requireNamespace("ggplot2", quietly = TRUE)){
-      showNotification(
-        "Please install package \"ggplot2\" for full plotting functionality.",
-        duration = NA,
-        type = "warning"
-      )
-      return(C_ceff_plot_list[[1]])
-    }
-    return(C_ceff_plot_list[[1]] +
-             ggplot2::theme_gray(base_size = 12))
+    return(C_ceff_plot_list[[1]])
   })
   
   #------------------------

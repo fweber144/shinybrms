@@ -982,7 +982,16 @@ ui <- navbarPage(
                     selectize = TRUE),
         # br(),
         plotOutput("ceff_plot", width = "1000px", height = "618px"),
-        br()
+        br(),
+        selectInput("ceff_download_sel", "Choose file format for download:",
+                    choices = c("PDF" = "pdf",
+                                "JPEG" = "jpeg",
+                                "PNG" = "png",
+                                "BMP" = "bmp",
+                                "TIFF" = "tiff",
+                                "SVG" = "svg"),
+                    selectize = TRUE),
+        downloadButton("ceff_download", "Download plot")
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
@@ -2625,6 +2634,21 @@ server <- function(input, output, session){
   output$ceff_plot <- renderPlot({
     gg_ceff()
   })
+  
+  output$ceff_download <- downloadHandler(
+    filename = "shinybrms_cond_eff",
+    content = function(file){
+      if(!requireNamespace("ggplot2", quietly = TRUE)){
+        showNotification(
+          "Please install package \"ggplot2\" to download the plot.",
+          duration = NA,
+          type = "error"
+        )
+        return()
+      }
+      ggplot2::ggsave(paste0(file, ".", input$ceff_download_sel), plot = gg_ceff(), width = 7, height = 7 * 0.618)
+    }
+  )
   
   #------------------------
   # Download

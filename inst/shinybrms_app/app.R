@@ -777,7 +777,7 @@ ui <- navbarPage(
                  actionLink("mcmc_link1", "MCMC diagnostics"),
                  "for details):"),
           verbatimTextOutput("diagn_all_out", placeholder = TRUE),
-          selectInput("stanout_download_sel", "Choose output file to download (optional, but recommended):",
+          selectInput("stanout_download_sel", "Choose output file to download:",
                       choices = c("\"brmsfit\" object (RDS file)" = "brmsfit_obj",
                                   "List of MCMC diagnostics (RDS file)" = "diagn_obj",
                                   "Matrix of posterior draws (CSV file)" = "draws_mat_csv",

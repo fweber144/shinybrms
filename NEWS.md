@@ -2,6 +2,7 @@
 
 ## Major changes
 
+  - Added conditional-effects plot (see [`brms::conditional_effects()`](https://paul-buerkner.github.io/brms/reference/conditional_effects.brmsfit.html)).
   - Added the possibility to perform custom posterior summary analyses, e.g. for a transformation of
     parameters or for a sum of parameters.
 

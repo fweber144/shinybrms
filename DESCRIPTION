@@ -36,11 +36,11 @@ Imports:
     brms (>= 2.14.0),
     rstan (>= 2.19.3)
 Suggests: 
+    ggplot2,
     shinystan (>= 2.4.0),
     callr (>= 3.4.0),
     rstanarm,
     MASS,
     lme4,
     testthat,
-    shinytest,
-    ggplot2
+    shinytest

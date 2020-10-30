@@ -2595,7 +2595,7 @@ server <- function(input, output, session){
                                   C_termsNP))
   })
   
-  output$ceff_plot <- renderPlot({
+  gg_ceff <- reactive({
     req(input$term_sel)
     C_ceff <- brms::conditional_effects(
       C_stanres()$bfit,
@@ -2620,6 +2620,10 @@ server <- function(input, output, session){
       )
     }
     return(C_ceff_plot_list[[1]])
+  })
+  
+  output$ceff_plot <- renderPlot({
+    gg_ceff()
   })
   
   #------------------------

@@ -991,7 +991,8 @@ ui <- navbarPage(
                                 "TIFF" = "tiff",
                                 "SVG" = "svg"),
                     selectize = TRUE),
-        downloadButton("ceff_download", "Download plot")
+        downloadButton("ceff_download", "Download plot"),
+        br()
       ),
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),

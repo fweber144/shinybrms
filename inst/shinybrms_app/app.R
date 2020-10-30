@@ -968,7 +968,9 @@ ui <- navbarPage(
             "To do so, this plot conditions on specific values of the predictor variables not included in",
             "the effect under investigation: It conditions on the mean of continuous predictor variables",
             "and on the reference category of categorical predictor variables.",
-            "Likewise, the variability arising from partially pooled effects is not taken into account."),
+            "Likewise, partially pooled effects are set to zero so that the variability as well as the",
+            "posterior uncertainty arising from partially pooled effects and their estimation is not",
+            "taken into account."),
           p("An interaction effect involving at most two predictor variables may also be visualized.",
             "In this case, the \"conditional effects\" plot as described above is created for the",
             "first predictor variable involved in this interaction, separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.

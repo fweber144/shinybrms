@@ -1449,19 +1449,38 @@ server <- function(input, output, session){
       return(ToothGrowth)
     } else{
       req(input$file_upload)
-      try(return(read.csv(input$file_upload$datapath,
-                          header = input$header,
-                          sep = input$sep,
-                          quote = input$quote,
-                          dec = input$dec,
-                          na.strings = c("NA", "."))),
-          silent = TRUE)
-      showNotification(
-        "File upload was not successful.",
-        duration = NA,
-        type = "error"
-      )
-      req(FALSE)
+      da_tmp <- try(read.csv(input$file_upload$datapath,
+                             header = input$header,
+                             sep = input$sep,
+                             quote = input$quote,
+                             dec = input$dec,
+                             na.strings = c("NA", ".")),
+                    silent = TRUE)
+      if(inherits(da_tmp, "try-error")){
+        showNotification(
+          "File upload was not successful.",
+          duration = NA,
+          type = "error"
+        )
+        req(FALSE)
+      }
+      if("." %in% names(da_tmp)){
+        if(!"X." %in% names(da_tmp)){
+          names(da_tmp)[names(da_tmp) == "."] <- "X."
+        } else{
+          showNotification(
+            HTML(paste(
+              "The column name", code("."), "(dot) is not allowed. Automatically renaming this",
+              "column to", code("X."), "failed since there already exists a column",
+              code("X.", .noWS = "after"), "."
+            )),
+            duration = NA,
+            type = "error"
+          )
+          req(FALSE)
+        }
+      }
+      return(da_tmp)
     }
   })
   

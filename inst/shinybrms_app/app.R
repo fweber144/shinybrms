@@ -2633,7 +2633,7 @@ server <- function(input, output, session){
   # Conditional effects
   
   C_terms <- reactive({
-    return(attr(terms(C_stanres()$bfit$formula$formula), "term.labels"))
+    return(attr(terms(formula(C_stanres()$bfit)$formula), "term.labels"))
   })
   
   observe({

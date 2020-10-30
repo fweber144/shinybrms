@@ -965,8 +965,8 @@ ui <- navbarPage(
         helpText(
           p("The \"conditional effects\" plot shows the estimated effect of a predictor variable",
             "on the outcome.",
-            "To do so, this plot conditions on specific values of the predictor variables not included in",
-            "the effect under investigation: It conditions on the mean of continuous predictor variables",
+            "To do so, this plot conditions on specific values of the other predictor variables:",
+            "It conditions on the mean of continuous predictor variables",
             "and on the reference category of categorical predictor variables.",
             "Likewise, partially pooled effects are set to zero."),
           p("An interaction effect involving at most two predictor variables may also be visualized.",

@@ -2638,7 +2638,9 @@ server <- function(input, output, session){
   })
   
   output$ceff_download <- downloadHandler(
-    filename = paste0("shinybrms_cond_eff.", input$ceff_download_sel),
+    filename = function(){
+      paste0("shinybrms_cond_eff.", input$ceff_download_sel)
+    },
     content = function(file){
       if(!requireNamespace("ggplot2", quietly = TRUE)){
         showNotification(

@@ -2568,7 +2568,7 @@ server <- function(input, output, session){
   })
   
   output$cust_smmry_download <- downloadHandler(
-    filename = "custom_summary.csv",
+    filename = "shinybrms_custom_summary.csv",
     content = function(file){
       write.csv(C_cust(),
                 file = file,

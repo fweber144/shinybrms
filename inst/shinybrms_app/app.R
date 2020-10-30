@@ -2312,7 +2312,7 @@ server <- function(input, output, session){
   # Matrix of posterior draws (for later usage and only run if needed)
   
   C_draws_mat <- reactive({
-    as.matrix(C_stanres()$bfit)
+    return(as.matrix(C_stanres()$bfit))
   })
   
   #------
@@ -2531,7 +2531,7 @@ server <- function(input, output, session){
   })
   
   C_pars <- reactive({
-    brms::parnames(C_stanres()$bfit)
+    return(brms::parnames(C_stanres()$bfit))
   })
   
   observe({
@@ -2633,7 +2633,7 @@ server <- function(input, output, session){
   # Conditional effects
   
   C_terms <- reactive({
-    attr(terms(C_stanres()$bfit$formula$formula), "term.labels")
+    return(attr(terms(C_stanres()$bfit$formula$formula), "term.labels"))
   })
   
   observe({

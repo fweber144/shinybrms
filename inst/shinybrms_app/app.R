@@ -2638,7 +2638,7 @@ server <- function(input, output, session){
   })
   
   output$ceff_download <- downloadHandler(
-    filename = "shinybrms_cond_eff",
+    filename = paste0("shinybrms_cond_eff.", input$ceff_download_sel),
     content = function(file){
       if(!requireNamespace("ggplot2", quietly = TRUE)){
         showNotification(
@@ -2648,7 +2648,7 @@ server <- function(input, output, session){
         )
         return()
       }
-      ggplot2::ggsave(paste0(file, ".", input$ceff_download_sel), plot = gg_ceff(), width = 7, height = 7 * 0.618)
+      ggplot2::ggsave(filename = file, plot = gg_ceff(), width = 7, height = 7 * 0.618)
     }
   )
   

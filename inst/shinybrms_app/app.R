@@ -992,6 +992,7 @@ ui <- navbarPage(
                                 "SVG" = "svg"),
                     selectize = TRUE),
         downloadButton("ceff_download", "Download plot"),
+        br(),
         br()
       ),
       tabPanel(

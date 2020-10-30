@@ -2317,6 +2317,38 @@ server <- function(input, output, session){
     }
   }, sep = "\n")
   
+  #------
+  # Download
+  
+  output$stanout_download <- downloadHandler(
+    filename = function(){
+      if(identical(input$stanout_download_sel, "draws_mat_csv")){
+        return("shinybrms_post_draws_mat.csv")
+      } else{
+        return(paste0(switch(input$stanout_download_sel,
+                             "brmsfit_obj" = "shinybrms_brmsfit",
+                             "diagn_obj" = "shinybrms_MCMC_diagnostics",
+                             "draws_mat_obj" = "shinybrms_post_draws_mat",
+                             "draws_arr_obj" = "shinybrms_post_draws_arr"),
+                      ".rds"))
+      }
+    },
+    content = function(file){
+      if(identical(input$stanout_download_sel, "draws_mat_csv")){
+        write.csv(C_draws_mat(),
+                  file = file,
+                  row.names = FALSE)
+      } else{
+        saveRDS(switch(input$stanout_download_sel,
+                       "brmsfit_obj" = C_stanres()$bfit,
+                       "diagn_obj" = C_stanres()$diagn,
+                       "draws_mat_obj" = C_draws_mat(),
+                       "draws_arr_obj" = C_stanres()$draws_arr),
+                file = file)
+      }
+    }
+  )
+  
   #------------------------
   # MCMC diagnostics
   
@@ -2651,38 +2683,6 @@ server <- function(input, output, session){
         return()
       }
       ggplot2::ggsave(filename = file, plot = gg_ceff(), width = 7, height = 7 * 0.618)
-    }
-  )
-  
-  #------------------------
-  # Download
-  
-  output$stanout_download <- downloadHandler(
-    filename = function(){
-      if(identical(input$stanout_download_sel, "draws_mat_csv")){
-        return("shinybrms_post_draws_mat.csv")
-      } else{
-        return(paste0(switch(input$stanout_download_sel,
-                             "brmsfit_obj" = "shinybrms_brmsfit",
-                             "diagn_obj" = "shinybrms_MCMC_diagnostics",
-                             "draws_mat_obj" = "shinybrms_post_draws_mat",
-                             "draws_arr_obj" = "shinybrms_post_draws_arr"),
-                      ".rds"))
-      }
-    },
-    content = function(file){
-      if(identical(input$stanout_download_sel, "draws_mat_csv")){
-        write.csv(C_draws_mat(),
-                  file = file,
-                  row.names = FALSE)
-      } else{
-        saveRDS(switch(input$stanout_download_sel,
-                       "brmsfit_obj" = C_stanres()$bfit,
-                       "diagn_obj" = C_stanres()$diagn,
-                       "draws_mat_obj" = C_draws_mat(),
-                       "draws_arr_obj" = C_stanres()$draws_arr),
-                file = file)
-      }
     }
   )
   

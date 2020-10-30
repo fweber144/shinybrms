@@ -1712,12 +1712,12 @@ server <- function(input, output, session){
       pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
       pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
         xNP_lst <- lapply(x_lst, intersect, y = input$pred_mainNP_sel)
-        x_isSubNV <- sapply(seq_along(xNP_lst), function(idx){
+        x_isSubNP <- sapply(seq_along(xNP_lst), function(idx){
           any(sapply(xNP_lst[-idx], function(xNP){
             all(xNP_lst[[idx]] %in% xNP)
           }))
         })
-        return(x_lst[!x_isSubNV])
+        return(x_lst[!x_isSubNP])
       }, simplify = FALSE)
       pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
     }

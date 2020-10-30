@@ -1676,7 +1676,7 @@ server <- function(input, output, session){
       #     terms on the population-level side need to be grouped by the term on the group-level side).
       #   - For partially pooled slopes, add the corresponding nonpooled slopes since the partially pooled
       #     slopes are assumed to have mean zero.
-      # The first task is performed by applying combn() to m = 1L, ..., length(x_V) with "x_V"
+      # The first task is performed by applying combn() to m = 1L, ..., length(xPP) with "xPP"
       # containing the group-level terms of a given element of "pred_lst".
       # The second task is performed by additionally applying combn() to m = 0L when performing
       # the first task.
@@ -1686,11 +1686,11 @@ server <- function(input, output, session){
       if(any(pred_needsExpand)){ # This if() condition is not necessary, but included for better readability.
         pred_lst_toExpand <- pred_lst[pred_needsExpand]
         pred_lst_expanded <- do.call("c", lapply(pred_lst_toExpand, function(x){
-          x_V <- intersect(x, input$pred_mainPP_sel)
-          x_V_lst_expanded <- unlist(lapply(c(0L, seq_along(x_V)), combn, x = x_V, simplify = FALSE),
+          xPP <- intersect(x, input$pred_mainPP_sel)
+          xPP_lst_expanded <- unlist(lapply(c(0L, seq_along(xPP)), combn, x = xPP, simplify = FALSE),
                                      recursive = FALSE)
-          x_NV <- intersect(x, input$pred_mainNP_sel)
-          lapply(x_V_lst_expanded, "c", x_NV)
+          xNP <- intersect(x, input$pred_mainNP_sel)
+          lapply(xPP_lst_expanded, "c", xNP)
         }))
         pred_lst <- c(pred_lst[!pred_needsExpand],
                       pred_lst_expanded)
@@ -1702,19 +1702,19 @@ server <- function(input, output, session){
       # By group-level term: Check each population-level term for being a "subterm" (lower-order
       # term) of a high-order term and if yes, remove it:
       pred_vec_chr <- sapply(pred_lst, function(x){
-        x_V <- intersect(x, input$pred_mainPP_sel)
-        if(length(x_V) > 0L){
-          return(paste(x_V, collapse = "<-->"))
+        xPP <- intersect(x, input$pred_mainPP_sel)
+        if(length(xPP) > 0L){
+          return(paste(xPP, collapse = "<-->"))
         } else{
           return(NA_character_)
         }
       })
       pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
       pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst){
-        x_NV_lst <- lapply(x_lst, intersect, y = input$pred_mainNP_sel)
-        x_isSubNV <- sapply(seq_along(x_NV_lst), function(idx){
-          any(sapply(x_NV_lst[-idx], function(x_NV){
-            all(x_NV_lst[[idx]] %in% x_NV)
+        xNP_lst <- lapply(x_lst, intersect, y = input$pred_mainNP_sel)
+        x_isSubNV <- sapply(seq_along(xNP_lst), function(idx){
+          any(sapply(xNP_lst[-idx], function(xNP){
+            all(xNP_lst[[idx]] %in% xNP)
           }))
         })
         return(x_lst[!x_isSubNV])
@@ -1723,20 +1723,20 @@ server <- function(input, output, session){
     }
     
     pred_DF <- do.call("rbind", lapply(pred_lst, function(x){
-      x_NV <- intersect(x, input$pred_mainNP_sel)
-      if(length(x_NV) > 0L){
-        x_NV <- paste(x_NV, collapse = "*")
+      xNP <- intersect(x, input$pred_mainNP_sel)
+      if(length(xNP) > 0L){
+        xNP <- paste(xNP, collapse = "*")
       } else{
-        x_NV <- NA_character_
+        xNP <- NA_character_
       }
-      x_V <- intersect(x, input$pred_mainPP_sel)
-      if(length(x_V) > 0L){
-        x_V <- paste(x_V, collapse = ":")
+      xPP <- intersect(x, input$pred_mainPP_sel)
+      if(length(xPP) > 0L){
+        xPP <- paste(xPP, collapse = ":")
       } else{
-        x_V <- NA_character_
+        xPP <- NA_character_
       }
-      data.frame("from_mainNP" = x_NV,
-                 "from_mainPP" = x_V)
+      data.frame("from_mainNP" = xNP,
+                 "from_mainPP" = xPP)
     }))
     pred_DF$from_mainPP <- factor(pred_DF$from_mainPP, levels = unique(pred_DF$from_mainPP), exclude = NULL)
     pred_DF <- aggregate(from_mainNP ~ from_mainPP, pred_DF, function(x){

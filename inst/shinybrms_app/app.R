@@ -2643,7 +2643,7 @@ server <- function(input, output, session){
   #   return(brms::brmsterms(C_bformula_ff()))
   # })
   
-  # C_formula_fbt <- reactive({
+  # C_formula_ff <- reactive({
   #   # stopifnot(identical(formula(C_bterms_ff()), C_bterms_ff()$formula))
   #   # stopifnot(identical(formula(C_bterms_ff()), formula(C_bformula_ff())))
   #   return(formula(C_bterms_ff()))

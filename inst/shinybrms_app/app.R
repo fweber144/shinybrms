@@ -2669,7 +2669,7 @@ server <- function(input, output, session){
     # bformula_NP <- brms:::update_re_terms(C_bformula_ff(), re_formula = NA)
     # stopifnot(identical(termlabs_NP, labels(terms(formula(bformula_NP)))))
     ### 
-    termlabs_NP_main <- grep(":|\\*", termlabs_NP, value = TRUE, invert = TRUE)
+    termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)
     ### Check:
     # voutc_symb <- formula(C_bformula_ff())[[2]]
     # voutc <- all.names(voutc_symb)
@@ -2677,7 +2677,7 @@ server <- function(input, output, session){
     # stopifnot(identical(termlabs_NP_main, setdiff(brms:::all_vars(formula(bformula_NP)), voutc)))
     ### 
     termlabs_NP_IA <- setdiff(termlabs_NP, termlabs_NP_main)
-    termlabs_NP_IA2 <- grep(":.*:|\\*.*\\*", termlabs_NP_IA, value = TRUE, invert = TRUE)
+    termlabs_NP_IA2 <- grep(":.*:", termlabs_NP_IA, value = TRUE, invert = TRUE)
     termlabs_NP_IA2_rev <- sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i){
       return(paste(rev(termlabs_NP_IA2_i), collapse = ":"))
     })

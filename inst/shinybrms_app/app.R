@@ -2639,16 +2639,6 @@ server <- function(input, output, session){
     return(formula(C_stanres()$bfit))
   })
   
-  # C_bterms_ff <- reactive({
-  #   return(brms::brmsterms(C_bformula_ff()))
-  # })
-  
-  # C_formula_ff <- reactive({
-  #   # stopifnot(identical(formula(C_bterms_ff()), C_bterms_ff()$formula))
-  #   # stopifnot(identical(formula(C_bterms_ff()), formula(C_bformula_ff())))
-  #   return(formula(C_bterms_ff()))
-  # })
-  
   termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
   
   observe({
@@ -2661,24 +2651,13 @@ server <- function(input, output, session){
     #------------
     # Get term labels
     
-    # stopifnot(identical(formula(C_bformula_ff()), C_bformula_ff()$formula))
     termlabs <- labels(terms(formula(C_bformula_ff())))
     
     #------------
     # Nonpooled effects
     
     termlabs_NP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
-    ### Check:
-    # bformula_NP <- brms:::update_re_terms(C_bformula_ff(), re_formula = NA)
-    # stopifnot(identical(termlabs_NP, labels(terms(formula(bformula_NP)))))
-    ### 
     termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)
-    ### Check:
-    # voutc_symb <- formula(C_bformula_ff())[[2]]
-    # voutc <- all.names(voutc_symb)
-    # stopifnot(identical(voutc, deparse(voutc_symb)))
-    # stopifnot(identical(termlabs_NP_main, setdiff(brms:::all_vars(formula(bformula_NP)), voutc)))
-    ### 
     termlabs_NP_IA <- setdiff(termlabs_NP, termlabs_NP_main)
     termlabs_NP_IA2 <- grep(":.*:", termlabs_NP_IA, value = TRUE, invert = TRUE)
     termlabs_NP_IA2_rev <- sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i){
@@ -2690,23 +2669,10 @@ server <- function(input, output, session){
     
     termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
-    stopifnot(all(sapply(termlabs_PP_split, length) == 2L)) # Alternative check: stopifnot(!any(grepl("\\|.*\\|", termlabs_PP)))
-    ### Old code:
-    # termlabs_PP_coef <- sapply(termlabs_PP_split, "[[", 1)
-    # termlabs_PP_grp <- sapply(termlabs_PP_split, "[[", 2)
-    # termlabs_PP_lst <- lapply(setNames(termlabs_PP_coef, termlabs_PP_grp), function(termlabs_PP_i){
-    #   return(labels(terms(as.formula(paste("~", termlabs_PP_i)))))
-    # })
-    ### 
+    stopifnot(all(sapply(termlabs_PP_split, length) == 2L))
     termlabs_PP_grp(sapply(termlabs_PP_split, "[[", 2))
     termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
-      ### May only be used when depending on R >= 4.0.1 (which should probably be avoided since
-      ### R 4.0.0 introduced a lot of big changes):
-      # retermlabs_PP_i <- paste0(":", retermlabs_PP_i,
-      #                           recycle0 = TRUE)
-      # return(paste0(termlabs_PP_i[2], retermlabs_PP_i))
-      ### 
       if(identical(length(retermlabs_PP_i), 0L)){
         return(termlabs_PP_i[2])
       }

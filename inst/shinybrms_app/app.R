@@ -2654,6 +2654,8 @@ server <- function(input, output, session){
   #   return(formula(C_bterms_ff()))
   # })
   
+  termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
+  
   observe({
     if(inherits(try(C_termlabs_ff(), silent = TRUE), "try-error")){
       updateSelectInput(session, "term_sel",
@@ -2685,14 +2687,42 @@ server <- function(input, output, session){
     #------------
     # Partially pooled effects
     
-    ### TODO:
-    # termlabs_PP <- setdiff(C_termlabs_ff(), termlabs_NP)
+    termlabs_PP <- setdiff(C_termlabs_ff(), termlabs_NP)
+    termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
+    stopifnot(all(sapply(termlabs_PP_split, length) == 2L)) # Alternative check: stopifnot(!any(grepl("\\|.*\\|", termlabs_PP)))
+    ### Old code:
+    # termlabs_PP_coef <- sapply(termlabs_PP_split, "[[", 1)
+    # termlabs_PP_grp <- sapply(termlabs_PP_split, "[[", 2)
+    # termlabs_PP_lst <- lapply(setNames(termlabs_PP_coef, termlabs_PP_grp), function(termlabs_PP_i){
+    #   return(labels(terms(as.formula(paste("~", termlabs_PP_i)))))
+    # })
     ### 
+    termlabs_PP_grp(sapply(termlabs_PP_split, "[[", 2))
+    termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
+      retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
+      ### May only be used when depending on R >= 4.0.1 (which should probably be avoided since
+      ### R 4.0.0 introduced a lot of big changes):
+      # retermlabs_PP_i <- paste0(":", retermlabs_PP_i,
+      #                           recycle0 = TRUE)
+      # return(paste0(termlabs_PP_i[2], retermlabs_PP_i))
+      ### 
+      if(identical(length(retermlabs_PP_i), 0L)){
+        return(termlabs_PP_i[2])
+      }
+      return(paste0(termlabs_PP_i[2], ":", retermlabs_PP_i))
+    }))
+    termlabs_PP_main <- grep(":", termlabs_PP_colon, value = TRUE, invert = TRUE)
+    termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_main)
+    termlabs_PP_IA2 <- grep(":.*:", termlabs_PP_IA, value = TRUE, invert = TRUE)
+    termlabs_PP_IA2_rev <- sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){
+      return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
+    })
     
     #------------
     # Update choices for input$term_sel
     
-    term_choices <- c(termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev)
+    term_choices <- c(termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev,
+                      termlabs_PP_main, termlabs_PP_IA2, termlabs_PP_IA2_rev)
     updateSelectInput(session, "term_sel",
                       choices = c("Choose predictor term ..." = "",
                                   term_choices))
@@ -2700,9 +2730,15 @@ server <- function(input, output, session){
   
   gg_ceff <- reactive({
     req(input$term_sel)
+    re_formula_ceff <- if(any(strsplit(input$term_sel, split = ":")[[1]] %in% termlabs_PP_grp())){
+      NULL
+    } else{
+      NA
+    }
     C_ceff <- brms::conditional_effects(
       C_stanres()$bfit,
-      effects = input$term_sel
+      effects = input$term_sel,
+      re_formula = re_formula_ceff
     )
     if(!requireNamespace("ggplot2", quietly = TRUE)){
       showNotification(

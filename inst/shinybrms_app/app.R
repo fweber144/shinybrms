@@ -2639,11 +2639,6 @@ server <- function(input, output, session){
     return(formula(C_stanres()$bfit))
   })
   
-  C_termlabs_ff <- reactive({
-    # stopifnot(identical(formula(C_bformula_ff()), C_bformula_ff()$formula))
-    return(labels(terms(formula(C_bformula_ff()))))
-  })
-  
   # C_bterms_ff <- reactive({
   #   return(brms::brmsterms(C_bformula_ff()))
   # })
@@ -2657,16 +2652,22 @@ server <- function(input, output, session){
   termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
   
   observe({
-    if(inherits(try(C_termlabs_ff(), silent = TRUE), "try-error")){
+    if(inherits(try(C_bformula_ff(), silent = TRUE), "try-error")){
       updateSelectInput(session, "term_sel",
                         choices = c("Choose predictor term ..." = ""))
       return()
     }
     
     #------------
+    # Get term labels
+    
+    # stopifnot(identical(formula(C_bformula_ff()), C_bformula_ff()$formula))
+    termlabs <- labels(terms(formula(C_bformula_ff())))
+    
+    #------------
     # Nonpooled effects
     
-    termlabs_NP <- grep("\\|", C_termlabs_ff(), value = TRUE, invert = TRUE)
+    termlabs_NP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
     ### Check:
     # bformula_NP <- brms:::update_re_terms(C_bformula_ff(), re_formula = NA)
     # stopifnot(identical(termlabs_NP, labels(terms(formula(bformula_NP)))))
@@ -2687,7 +2688,7 @@ server <- function(input, output, session){
     #------------
     # Partially pooled effects
     
-    termlabs_PP <- setdiff(C_termlabs_ff(), termlabs_NP)
+    termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
     stopifnot(all(sapply(termlabs_PP_split, length) == 2L)) # Alternative check: stopifnot(!any(grepl("\\|.*\\|", termlabs_PP)))
     ### Old code:

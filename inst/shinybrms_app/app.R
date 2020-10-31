@@ -2632,20 +2632,70 @@ server <- function(input, output, session){
   #------------------------
   # Conditional effects
   
-  C_terms <- reactive({
-    return(labels(terms(formula(C_stanres()$bfit)$formula)))
+  # NOTE: suffix "ff" stands for "from fit".
+  
+  # The "brmsformula" from the fitted model object:
+  C_bformula_ff <- reactive({
+    return(formula(C_stanres()$bfit))
   })
   
+  C_termlabs_ff <- reactive({
+    # stopifnot(identical(formula(C_bformula_ff()), C_bformula_ff()$formula))
+    return(labels(terms(formula(C_bformula_ff()))))
+  })
+  
+  # C_bterms_ff <- reactive({
+  #   return(brms::brmsterms(C_bformula_ff()))
+  # })
+  
+  # C_formula_fbt <- reactive({
+  #   # stopifnot(identical(formula(C_bterms_ff()), C_bterms_ff()$formula))
+  #   # stopifnot(identical(formula(C_bterms_ff()), formula(C_bformula_ff())))
+  #   return(formula(C_bterms_ff()))
+  # })
+  
   observe({
-    if(inherits(try(C_terms(), silent = TRUE), "try-error")){
+    if(inherits(try(C_termlabs_ff(), silent = TRUE), "try-error")){
       updateSelectInput(session, "term_sel",
                         choices = c("Choose predictor term ..." = ""))
       return()
     }
-    C_termsNP <- grep("\\||:.*:|\\*.*\\*", C_terms(), value = TRUE, invert = TRUE)
+    
+    #------------
+    # Nonpooled effects
+    
+    termlabs_NP <- grep("\\|", C_termlabs_ff(), value = TRUE, invert = TRUE)
+    ### Check:
+    # bformula_NP <- brms:::update_re_terms(C_bformula_ff(), re_formula = NA)
+    # stopifnot(identical(termlabs_NP, labels(terms(formula(bformula_NP)))))
+    ### 
+    termlabs_NP_main <- grep(":|\\*", termlabs_NP, value = TRUE, invert = TRUE)
+    ### Check:
+    # voutc_symb <- formula(C_bformula_ff())[[2]]
+    # voutc <- all.names(voutc_symb)
+    # stopifnot(identical(voutc, deparse(voutc_symb)))
+    # stopifnot(identical(termlabs_NP_main, setdiff(brms:::all_vars(formula(bformula_NP)), voutc)))
+    ### 
+    termlabs_NP_IA <- setdiff(termlabs_NP, termlabs_NP_main)
+    termlabs_NP_IA2 <- grep(":.*:|\\*.*\\*", termlabs_NP_IA, value = TRUE, invert = TRUE)
+    termlabs_NP_IA2_rev <- sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i){
+      return(paste(rev(termlabs_NP_IA2_i), collapse = ":"))
+    })
+    
+    #------------
+    # Partially pooled effects
+    
+    ### TODO:
+    # termlabs_PP <- setdiff(C_termlabs_ff(), termlabs_NP)
+    ### 
+    
+    #------------
+    # Update choices for input$term_sel
+    
+    term_choices <- c(termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev)
     updateSelectInput(session, "term_sel",
                       choices = c("Choose predictor term ..." = "",
-                                  C_termsNP))
+                                  term_choices))
   })
   
   gg_ceff <- reactive({

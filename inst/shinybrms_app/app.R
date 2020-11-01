@@ -2667,7 +2667,7 @@ server <- function(input, output, session){
     
     termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
-    stopifnot(all(sapply(termlabs_PP_split, length) == 2L))
+    stopifnot(all(lengths(termlabs_PP_split) == 2L))
     termlabs_PP_grp(sapply(termlabs_PP_split, "[[", 2))
     termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))

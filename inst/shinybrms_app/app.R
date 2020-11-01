@@ -1370,6 +1370,9 @@ server <- function(input, output, session){
       if(requireNamespace("rstanarm", quietly = TRUE)){
         tmp_env <- new.env()
         data(kidiq, package = "rstanarm", envir = tmp_env)
+        assign("kidiq", within(get("kidiq", envir = tmp_env), {
+          mom_hs <- factor(paste0("hs", mom_hs))
+        }), envir = tmp_env)
         return(get("kidiq", envir = tmp_env))
       } else{
         showNotification(

@@ -10,6 +10,7 @@
 
 ## Minor changes
 
+  - Example dataset `kidiq`: Converted column `mom_hs` to factor.
   - UI: Minor improvements (e.g. in label and notification texts).
   - Minor cosmetic improvement in the CSS theme.
   - Adopted to **brms** v2.14.0.

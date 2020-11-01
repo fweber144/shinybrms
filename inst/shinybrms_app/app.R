@@ -2699,7 +2699,9 @@ server <- function(input, output, session){
     re_formula_ceff <- if(any(c(input$term_sel, # In fact, including input$term_sel here is not necessary as a group-level term which consists of an interaction requires the involved predictor variables to be group-level terms on their own. But if this is changed in the future, then it's necessary to have input$term_sel included here.
                                 strsplit(input$term_sel, split = ":")[[1]]) %in%
                               termlabs_PP_grp())){
-      NULL
+      ### TODO:
+      stop("Needs to be implemented.")
+      ### 
     } else{
       NA
     }

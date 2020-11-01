@@ -2669,7 +2669,6 @@ server <- function(input, output, session){
     termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
     stopifnot(all(lengths(termlabs_PP_split) == 2L))
-    termlabs_PP_grp(sapply(termlabs_PP_split, "[[", 2))
     termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
       if(identical(length(retermlabs_PP_i), 0L)){
@@ -2683,6 +2682,14 @@ server <- function(input, output, session){
     termlabs_PP_IA2_rev <- sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
     })
+    termlabs_PP_grp_tmp <- sapply(termlabs_PP_split, "[[", 2)
+    termlabs_PP_grp_tmp_main <- grep(":", termlabs_PP_grp_tmp, value = TRUE, invert = TRUE)
+    termlabs_PP_grp_tmp_IA <- setdiff(termlabs_PP_grp_tmp, termlabs_PP_grp_tmp_main)
+    termlabs_PP_grp_tmp_IA2 <- grep(":.*:", termlabs_PP_grp_tmp_IA, value = TRUE, invert = TRUE)
+    termlabs_PP_grp_tmp_IA2_rev <- sapply(strsplit(termlabs_PP_grp_tmp_IA2, split = ":"), function(termlabs_PP_grp_tmp_IA2_i){
+      return(paste(rev(termlabs_PP_grp_tmp_IA2_i), collapse = ":"))
+    })
+    termlabs_PP_grp(c(termlabs_PP_grp_tmp_main, termlabs_PP_grp_tmp_IA2, termlabs_PP_grp_tmp_IA2_rev))
     
     #------------
     # Update choices for input$term_sel
@@ -2696,14 +2703,19 @@ server <- function(input, output, session){
   
   gg_ceff <- reactive({
     req(input$term_sel)
-    re_formula_ceff <- if(any(c(input$term_sel, # In fact, including input$term_sel here is not necessary as a group-level term which consists of an interaction requires the involved predictor variables to be group-level terms on their own. But if this is changed in the future, then it's necessary to have input$term_sel included here.
-                                strsplit(input$term_sel, split = ":")[[1]]) %in%
-                              termlabs_PP_grp())){
-      ### TODO:
-      stop("Needs to be implemented.")
-      ### 
-    } else{
-      NA
+    re_formula_ceff <- NA
+    term_sel_PP <- intersect(input$term_sel, termlabs_PP_grp())
+    if(identical(length(term_sel_PP), 1L)){
+      re_formula_ceff <- as.formula(paste("~ (1 |", term_sel_PP, ")"))
+    } else if(identical(length(term_sel_PP), 0L) && grepl(":", input$term_sel)){
+      term_sel_split <- strsplit(input$term_sel, split = ":")[[1]]
+      term_sel_split_PP <- intersect(term_sel_split, termlabs_PP_grp())
+      stopifnot(length(term_sel_split_PP) <= 1L)
+      if(identical(length(term_sel_split_PP), 1L)){
+        term_sel_split_NP <- setdiff(term_sel_split, term_sel_split_PP)
+        stopifnot(identical(length(term_sel_split_NP), 1L))
+        re_formula_ceff <- as.formula(paste("~ (1 +", term_sel_split_NP, "|", term_sel_split_PP, ")"))
+      }
     }
     C_ceff <- brms::conditional_effects(
       C_stanres()$bfit,

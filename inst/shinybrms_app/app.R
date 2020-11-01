@@ -2641,6 +2641,7 @@ server <- function(input, output, session){
   
   observe({
     if(inherits(try(C_bformula_ff(), silent = TRUE), "try-error")){
+      termlabs_PP_grp(NULL)
       updateSelectInput(session, "term_sel",
                         choices = c("Choose predictor term ..." = ""))
       return()

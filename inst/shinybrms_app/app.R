@@ -2640,7 +2640,8 @@ server <- function(input, output, session){
     return(formula(C_stanres()$bfit))
   })
   
-  # A reactive object which will contain the labels of the group terms:
+  # A reactive object which will contain the labels of the group terms (excluding those with at
+  # least two colons):
   termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
   
   observe({
@@ -2673,6 +2674,8 @@ server <- function(input, output, session){
     termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
     stopifnot(all(lengths(termlabs_PP_split) == 2L))
+    termlabs_PP_grp_tmp <- grep(":.*:", sapply(termlabs_PP_split, "[[", 2), value = TRUE, invert = TRUE)
+    termlabs_PP_grp(termlabs_PP_grp_tmp)
     termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
       if(identical(length(retermlabs_PP_i), 0L)){
@@ -2680,20 +2683,17 @@ server <- function(input, output, session){
       }
       return(c(termlabs_PP_i[2], paste0(retermlabs_PP_i, ":", termlabs_PP_i[2])))
     }))
-    termlabs_PP_main <- grep(":", termlabs_PP_colon, value = TRUE, invert = TRUE)
-    termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_main)
+    termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_grp_tmp)
     termlabs_PP_IA2 <- grep(":.*:", termlabs_PP_IA, value = TRUE, invert = TRUE)
     termlabs_PP_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_IA2), 0L)'.
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
     }))
     
-    termlabs_PP_grp(grep(":.*:", sapply(termlabs_PP_split, "[[", 2), value = TRUE, invert = TRUE))
-    
     #------------
     # Update choices for input$term_sel
     
     term_choices <- c(termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev,
-                      termlabs_PP_main, termlabs_PP_IA2, termlabs_PP_IA2_rev)
+                      termlabs_PP_grp_tmp, termlabs_PP_IA2, termlabs_PP_IA2_rev)
     updateSelectInput(session, "term_sel",
                       choices = c("Choose predictor term ..." = "",
                                   term_choices))

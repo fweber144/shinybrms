@@ -39,3 +39,26 @@ app$setInputs(posterior_navlist_ID = "Summary")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))
+app$setInputs(posterior_navlist_ID = "Custom summary",
+              par_sel = "b_week",
+              par_add = "click")
+app$setInputs(cust_text = "`b_week` + ",
+              par_sel = "b_week:trtdrug",
+              par_add = "click")
+app$setInputs(cust_act = "click")
+app$setInputs(cust_text = "`b_week` + ",
+              par_sel = "b_week:trtdrugP",
+              par_add = "click")
+app$setInputs(cust_name = "week for drugP",
+              cust_act = "click")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))
+app$setInputs(posterior_navlist_ID = "Conditional effects")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))
+app$setInputs(term_sel = "week:trt")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))

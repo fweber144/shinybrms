@@ -1,0 +1,141 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.95,
+    "advOpts_chains": 4,
+    "advOpts_cores": 2,
+    "advOpts_init_r": 2,
+    "advOpts_inits": "random",
+    "advOpts_iter": 2000,
+    "advOpts_max_treedepth": 15,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": true,
+    "advOpts_seed": 6789,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 2,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "week for drugP",
+    "cust_text": "`b_week` + `b_week:trtdrugP`",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "dec": ".",
+    "dist_sel": "bernoulli",
+    "ex_da_sel": "bacteria",
+    "file_upload": null,
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_navlist_ID": "Formula preview",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "outc_sel": "y",
+    "outcome_link1": 0,
+    "par_add": 3,
+    "par_sel": "b_week:trtdrugP",
+    "posterior_link1": 0,
+    "posterior_navlist_ID": "Conditional effects",
+    "pred_int_add": 1,
+    "pred_int_build": null,
+    "pred_int_sel": "week<-->trt",
+    "pred_mainNP_sel": [
+      "week",
+      "trt"
+    ],
+    "pred_mainPP_sel": "ID",
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 1,
+    "prior_class_sel": "b",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link2": 0,
+    "prior_reset": 0,
+    "prior_text": "student_t(3, 0, 10)",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 1,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advOpts": true,
+    "show_general_MCMC_tab": true,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": "week:trt"
+  },
+  "output": {
+    "ceff_plot": {
+      "src": "[image data sha1: e23294f967e26707c63bb93288db84836bf0ef5d]",
+      "width": 1000,
+      "height": 618,
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": -0.55,
+              "right": 11.55,
+              "bottom": 0.20606673561683,
+              "top": 1.03068560127448
+            },
+            "mapping": {
+              "ymin": "lower__",
+              "ymax": "upper__",
+              "fill": "effect2__",
+              "colour": "effect2__",
+              "x": "effect1__",
+              "y": "estimate__"
+            },
+            "range": {
+              "left": 39.346201743462,
+              "right": 914.854495641345,
+              "bottom": 581.653798256538,
+              "top": 5.97758405977584
+            }
+          }
+        ],
+        "dims": {
+          "width": 1000,
+          "height": 618
+        }
+      }
+    },
+    "cust_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Name <\/th> <th style='text-align: right;'> Q2.5 <\/th> <th style='text-align: right;'> Q25 <\/th> <th style='text-align: right;'> median <\/th> <th style='text-align: right;'> Q75 <\/th> <th style='text-align: right;'> Q97.5 <\/th> <th style='text-align: right;'> MAD <\/th> <th style='text-align: right;'> mean <\/th> <th style='text-align: right;'> SD <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td>  <\/td> <td align=\"right\"> -0.33 <\/td> <td align=\"right\"> -0.21 <\/td> <td align=\"right\"> -0.15 <\/td> <td align=\"right\"> -0.09 <\/td> <td align=\"right\"> 0.02 <\/td> <td align=\"right\"> 0.09 <\/td> <td align=\"right\"> -0.15 <\/td> <td align=\"right\"> 0.09 <\/td> <\/tr>\n  <tr> <td> week for drugP <\/td> <td align=\"right\"> -0.42 <\/td> <td align=\"right\"> -0.29 <\/td> <td align=\"right\"> -0.22 <\/td> <td align=\"right\"> -0.16 <\/td> <td align=\"right\"> -0.04 <\/td> <td align=\"right\"> 0.10 <\/td> <td align=\"right\"> -0.22 <\/td> <td align=\"right\"> 0.10 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> y <\/th> <th style='text-align: left;'> ap <\/th> <th style='text-align: left;'> hilo <\/th> <th style='text-align: right;'> week <\/th> <th style='text-align: left;'> ID <\/th> <th style='text-align: left;'> trt <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   4 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">  11 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.7464, chain_2: 0.6414, chain_3: 0.6711, chain_4: 0.621) is OK.",
+    "diagn_all_out": "All MCMC diagnostics are OK (see the tab \"MCMC diagnostics\" for details).",
+    "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
+    "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
+    "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "essBulk_out": "All bulk-ESS values are OK.",
+    "essTail_out": "All tail-ESS values are OK.",
+    "formula_view": "y ~ 1 + week*trt + (1 | ID)",
+    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail\nb_Intercept         1.0012076 1717.8342 1784.573\nb_week              1.0008995 2715.5009 2014.695\nb_trtdrug           1.0017894 2064.6192 1821.340\nb_trtdrugP          1.0010274 2095.0418 2523.527\nb_week:trtdrug      1.0010042 3176.3893 2832.497\nb_week:trtdrugP     1.0001141 3011.8164 2934.225\nsd_ID__Intercept    1.0010088 1186.8910 1765.805\nr_ID[X01,Intercept] 1.0004526 5993.6443 2827.528\nr_ID[X02,Intercept] 1.0008766 5858.2198 3269.059\nr_ID[X03,Intercept] 1.0014889 4381.8409 2352.792\nr_ID[X04,Intercept] 1.0000121 5283.0769 2800.475\nr_ID[X05,Intercept] 1.0002197 5169.0758 2560.494\nr_ID[X06,Intercept] 1.0004558 4051.3715 2741.250\nr_ID[X07,Intercept] 1.0007412 2997.6097 2916.283\nr_ID[X08,Intercept] 1.0019229 3595.2525 2843.877\nr_ID[X09,Intercept] 0.9997241 4653.7465 2711.208\nr_ID[X10,Intercept] 0.9997981 5029.1638 2588.461\nr_ID[X11,Intercept] 1.0029998 5085.6183 2923.682\nr_ID[X12,Intercept] 1.0001768 3525.3295 2808.418\nr_ID[X13,Intercept] 1.0011594 6236.0811 2809.105\nr_ID[X14,Intercept] 1.0005622 2983.4786 2795.925\nr_ID[X15,Intercept] 1.0020048 4591.8910 2728.191\nr_ID[X16,Intercept] 1.0018141 5876.7174 3120.648\nr_ID[X17,Intercept] 0.9997681 4256.7927 2845.954\nr_ID[X18,Intercept] 1.0009822 3419.3224 2753.162\nr_ID[X19,Intercept] 1.0009619 2583.0265 2443.105\nr_ID[X20,Intercept] 1.0025381 4230.4292 3042.916\nr_ID[X21,Intercept] 1.0004151 5510.7091 2900.227\nr_ID[Y01,Intercept] 1.0000790 5003.9490 2488.623\nr_ID[Y02,Intercept] 0.9999409 2185.1223 2591.450\nr_ID[Y03,Intercept] 1.0013754 4094.2839 2882.101\nr_ID[Y04,Intercept] 1.0026427 2843.4992 2998.493\nr_ID[Y05,Intercept] 1.0001508 2322.4387 2617.108\nr_ID[Y06,Intercept] 1.0015729 5741.7714 2975.865\nr_ID[Y07,Intercept] 1.0001200 3870.1390 3169.650\nr_ID[Y08,Intercept] 1.0002065 5212.6157 2894.131\nr_ID[Y09,Intercept] 0.9999580 4801.7288 2480.221\nr_ID[Y10,Intercept] 1.0022906 5499.0176 3151.367\nr_ID[Y11,Intercept] 1.0002490 5219.2179 3041.210\nr_ID[Y12,Intercept] 1.0004013 4918.4332 2655.165\nr_ID[Y13,Intercept] 1.0002429 2672.5046 3041.047\nr_ID[Y14,Intercept] 1.0001004 5614.3542 2893.395\nr_ID[Z01,Intercept] 1.0001399 4822.0604 2823.317\nr_ID[Z02,Intercept] 1.0001324 4584.9986 2853.357\nr_ID[Z03,Intercept] 1.0000302 3826.3177 2792.659\nr_ID[Z05,Intercept] 1.0016653 2651.6083 2809.657\nr_ID[Z06,Intercept] 0.9995225 3597.5884 2809.790\nr_ID[Z07,Intercept] 1.0001808 3871.1325 3031.946\nr_ID[Z09,Intercept] 1.0005169 4021.4463 2770.427\nr_ID[Z10,Intercept] 1.0010952 4968.3187 2968.952\nr_ID[Z11,Intercept] 1.0019351 3910.8627 2517.674\nr_ID[Z14,Intercept] 1.0000310 4995.8032 3131.738\nr_ID[Z15,Intercept] 1.0017889 5167.1483 2851.532\nr_ID[Z19,Intercept] 1.0014039 4634.7216 3251.882\nr_ID[Z20,Intercept] 1.0004048 4020.6585 2846.675\nr_ID[Z24,Intercept] 1.0006648 3606.5624 3331.634\nr_ID[Z26,Intercept] 1.0005551 5260.2823 3136.052\nlp__                1.0031830  937.3108 1704.155",
+    "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + week*trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrug <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrugP <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week:trtdrug <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> week:trtdrugP <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 10) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "rhat_out": "All R-hat values are OK.",
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + week * trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \nSamples: 4 chains, each with iter = 2000; warmup = 1000; thin = 1;\n         total post-warmup samples = 4000\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 10)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nsd(Intercept)     1.46      0.45     0.66     2.58 1.00     1187     1766\n\nPopulation-Level Effects: \n              Estimate Est.Error l-95% CI u-95% CI Rhat Bulk_ESS Tail_ESS\nIntercept         3.13      0.75     1.82     4.98 1.00     1718     1785\nweek             -0.11      0.09    -0.29     0.05 1.00     2716     2015\ntrtdrug          -1.20      0.95    -3.34     0.60 1.00     2065     1821\ntrtdrugP         -0.28      1.02    -2.43     1.77 1.00     2095     2524\nweek:trtdrug     -0.04      0.12    -0.28     0.20 1.00     3176     2832\nweek:trtdrugP    -0.11      0.12    -0.36     0.13 1.00     3012     2934\n\nSamples were drawn using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  "export": {
+
+  }
+}

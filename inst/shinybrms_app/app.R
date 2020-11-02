@@ -1590,11 +1590,13 @@ server <- function(input, output, session){
     PP_sel_choices <- setdiff(names(da()),
                               c(input$outc_sel,
                                 input$pred_mainNP_sel))
-    # Only allow factor, character, and logical variables:
-    PP_sel_choices_OK <- sapply(da()[PP_sel_choices], function(x){
-      is.character(x) || is.factor(x) || is.logical(x)
-    })
-    PP_sel_choices <- PP_sel_choices[PP_sel_choices_OK]
+    if(length(PP_sel_choices) > 0L){
+      # Only allow factor, character, and logical variables:
+      PP_sel_choices_OK <- sapply(da()[PP_sel_choices], function(x){
+        is.character(x) || is.factor(x) || is.logical(x)
+      })
+      PP_sel_choices <- PP_sel_choices[PP_sel_choices_OK]
+    }
     updateSelectInput(session, "pred_mainPP_sel",
                       choices = c("Choose variables for partially pooled main effects ..." = "",
                                   PP_sel_choices),

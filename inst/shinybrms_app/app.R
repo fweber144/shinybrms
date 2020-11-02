@@ -2662,9 +2662,9 @@ server <- function(input, output, session){
     termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)
     termlabs_NP_IA <- setdiff(termlabs_NP, termlabs_NP_main)
     termlabs_NP_IA2 <- grep(":.*:", termlabs_NP_IA, value = TRUE, invert = TRUE)
-    termlabs_NP_IA2_rev <- sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i){
+    termlabs_NP_IA2_rev <- unlist(sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_NP_IA2), 0L)'.
       return(paste(rev(termlabs_NP_IA2_i), collapse = ":"))
-    })
+    }))
     
     #------------
     # Partially pooled effects
@@ -2682,16 +2682,16 @@ server <- function(input, output, session){
     termlabs_PP_main <- grep(":", termlabs_PP_colon, value = TRUE, invert = TRUE)
     termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_main)
     termlabs_PP_IA2 <- grep(":.*:", termlabs_PP_IA, value = TRUE, invert = TRUE)
-    termlabs_PP_IA2_rev <- sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){
+    termlabs_PP_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_IA2), 0L)'.
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
-    })
+    }))
     termlabs_PP_grp_tmp <- sapply(termlabs_PP_split, "[[", 2)
     termlabs_PP_grp_tmp_main <- grep(":", termlabs_PP_grp_tmp, value = TRUE, invert = TRUE)
     termlabs_PP_grp_tmp_IA <- setdiff(termlabs_PP_grp_tmp, termlabs_PP_grp_tmp_main)
     termlabs_PP_grp_tmp_IA2 <- grep(":.*:", termlabs_PP_grp_tmp_IA, value = TRUE, invert = TRUE)
-    termlabs_PP_grp_tmp_IA2_rev <- sapply(strsplit(termlabs_PP_grp_tmp_IA2, split = ":"), function(termlabs_PP_grp_tmp_IA2_i){
+    termlabs_PP_grp_tmp_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_grp_tmp_IA2, split = ":"), function(termlabs_PP_grp_tmp_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_grp_tmp_IA2), 0L)'.
       return(paste(rev(termlabs_PP_grp_tmp_IA2_i), collapse = ":"))
-    })
+    }))
     termlabs_PP_grp(c(termlabs_PP_grp_tmp_main, termlabs_PP_grp_tmp_IA2, termlabs_PP_grp_tmp_IA2_rev))
     
     #------------

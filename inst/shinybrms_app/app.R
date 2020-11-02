@@ -2677,14 +2677,13 @@ server <- function(input, output, session){
     termlabs_PP_grp_tmp <- sapply(termlabs_PP_split, "[[", 2)
     termlabs_PP_grp_tmp <- grep(":.*:", termlabs_PP_grp_tmp, value = TRUE, invert = TRUE)
     termlabs_PP_grp(termlabs_PP_grp_tmp)
-    termlabs_PP_colon <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
+    termlabs_PP_IA <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
       if(identical(length(retermlabs_PP_i), 0L)){
-        return(termlabs_PP_i[2])
+        return(character())
       }
-      return(c(termlabs_PP_i[2], paste0(retermlabs_PP_i, ":", termlabs_PP_i[2])))
+      return(paste0(retermlabs_PP_i, ":", termlabs_PP_i[2]))
     }))
-    termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_grp_tmp)
     termlabs_PP_IA2 <- grep(":.*:", termlabs_PP_IA, value = TRUE, invert = TRUE)
     termlabs_PP_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_IA2), 0L)'.
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))

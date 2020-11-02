@@ -963,18 +963,21 @@ ui <- navbarPage(
         titlePanel("Conditional effects"),
         br(),
         helpText(
-          p("The conditional-effects plot shows the estimated effect of a predictor variable",
-            "on the outcome. To do so, this plot conditions on specific values of the other predictor variables:",
-            "It conditions on the mean of continuous predictor variables and",
-            "on the reference category of those categorical predictor variables which have",
-            "nonpooled main effects. Partially pooled effects are set to zero (apart from those",
-            "which are plotted and",
-            HTML("&ndash;"), "if partially pooled slopes are plotted", HTML("&ndash;"),
-            "also apart from the corresponding partially pooled intercepts)."),
-          p("An interaction effect involving at most two predictor variables may also be visualized.",
-            "In this case, the conditional-effects plot as described above is created for the",
-            "first predictor variable involved in this interaction, separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
+          p("The conditional-effects plot shows the estimated effect of a predictor variable on the outcome.",
+            "An interaction effect involving at most two predictor variables may also be visualized",
+            "by showing the estimated effect of the first predictor variable involved in this interaction",
+            "separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
             "of the second predictor variable involved in this interaction."),
+          p("As its name suggests, this plot", em("conditions"), "on specific values of the other",
+            "predictor variables: It conditions on the mean of continuous predictor variables and",
+            "on the reference category of those categorical predictor variables which have",
+            "nonpooled main effects. Partially pooled effects are set to zero, with the following exceptions:",
+            tags$ul(
+              tags$li("Those partially pooled effects which are plotted are not set to zero (otherwise,",
+                      "there would not be anything meaningful to plot)."),
+              tags$li("If partially pooled slopes are plotted, the corresponding partially pooled intercepts",
+                      "are also not set to zero (for consistency with nonpooled interaction effects).") # More precisely: "for consistency with nonpooled interaction effects (and this also avoids problems with dummy-coded partially pooled slopes)"
+            )),
           p("Be cautious with predictor variables having a high number of levels (which is usually",
             "only the case for partially pooled effects): In that case, the computation may",
             "take a long time and the resulting plot is rarely useful.")

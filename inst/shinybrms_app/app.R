@@ -374,15 +374,24 @@ ui <- navbarPage(
                      tags$li("Partially pooled effects are also known as varying, group-level, or random effects."),
                    )),
           h4("Nonpooled main effects"),
-          helpText("Start typing or click into the field below to choose variables for which",
-                   "nonpooled main effects shall be added."),
+          helpText(
+            "Start typing or click into the field below to choose variables for which",
+            "nonpooled main effects shall be added."
+          ),
           selectInput("pred_mainNP_sel", NULL,
                       choices = c("Choose variables for nonpooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           h4("Partially pooled main effects"),
-          helpText("Start typing or click into the field below to choose variables for which",
-                   "partially pooled main effects shall be added."),
+          helpText(
+            "Start typing or click into the field below to choose variables for which",
+            "partially pooled main effects shall be added.",
+            "Note that you may not specify partially pooled main effects for a numeric or integer variable.",
+            "This is not allowed to point out that a variable must be treated as categorical to have",
+            "partially pooled main effects.",
+            "If you really want partially pooled main effects for a numeric or integer variable, you",
+            "have to convert this variable in your dataset to a character variable."
+          ),
           selectInput("pred_mainPP_sel", NULL,
                       choices = c("Choose variables for partially pooled main effects ..." = ""),
                       multiple = TRUE,

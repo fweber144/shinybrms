@@ -2679,10 +2679,16 @@ server <- function(input, output, session){
     termlabs_PP_grp(termlabs_PP_grp_tmp)
     termlabs_PP_IA <- unlist(lapply(termlabs_PP_split, function(termlabs_PP_i){
       retermlabs_PP_i <- labels(terms(as.formula(paste("~", termlabs_PP_i[1]))))
+      ### May only be used when depending on R >= 4.0.1 (which should probably be avoided since
+      ### R 4.0.0 introduced a lot of big changes):
+      # return(paste0(retermlabs_PP_i, ":", termlabs_PP_i[2], recycle0 = TRUE))
+      ### 
+      ### When not depending on R >= 4.0.1:
       if(identical(length(retermlabs_PP_i), 0L)){
         return(character())
       }
       return(paste0(retermlabs_PP_i, ":", termlabs_PP_i[2]))
+      ### 
     }))
     termlabs_PP_IA2 <- grep(":.*:", termlabs_PP_IA, value = TRUE, invert = TRUE)
     termlabs_PP_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_IA2), 0L)'.

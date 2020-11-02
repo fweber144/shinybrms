@@ -2707,6 +2707,7 @@ server <- function(input, output, session){
       re_formula_ceff <- as.formula(paste("~ (1 |", term_sel_PP, ")"))
     } else if(identical(length(term_sel_PP), 0L) && grepl(":", input$term_sel)){
       term_sel_split <- strsplit(input$term_sel, split = ":")[[1]]
+      stopifnot(length(term_sel_split) <= 2L)
       term_sel_split_PP <- intersect(term_sel_split, termlabs_PP_grp())
       stopifnot(length(term_sel_split_PP) <= 1L)
       if(identical(length(term_sel_split_PP), 1L)){

@@ -1309,7 +1309,7 @@ server <- function(input, output, session){
         return(get("Arabidopsis", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"lme4\" needed. Please install it.",
+          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1322,7 +1322,7 @@ server <- function(input, output, session){
         return(get("bacteria", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"MASS\" needed. Please install it.",
+          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1346,7 +1346,7 @@ server <- function(input, output, session){
         return(get("birthwt", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"MASS\" needed. Please install it.",
+          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1359,7 +1359,7 @@ server <- function(input, output, session){
         return(get("epilepsy", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"brms\" needed. Please install it.",
+          HTML(paste("Package", code("brms"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1372,7 +1372,7 @@ server <- function(input, output, session){
         return(get("grouseticks", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"lme4\" needed. Please install it.",
+          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1388,7 +1388,7 @@ server <- function(input, output, session){
         return(get("kidiq", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"rstanarm\" needed. Please install it.",
+          HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1403,7 +1403,7 @@ server <- function(input, output, session){
         return(get("quine", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"MASS\" needed. Please install it.",
+          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1416,7 +1416,7 @@ server <- function(input, output, session){
         return(get("Rabbit", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"MASS\" needed. Please install it.",
+          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1439,7 +1439,7 @@ server <- function(input, output, session){
         return(get("roaches", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"rstanarm\" needed. Please install it.",
+          HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1452,7 +1452,7 @@ server <- function(input, output, session){
         return(get("sleepstudy", envir = tmp_env))
       } else{
         showNotification(
-          "Package \"lme4\" needed. Please install it.",
+          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -2751,7 +2751,7 @@ server <- function(input, output, session){
     )
     if(!requireNamespace("ggplot2", quietly = TRUE)){
       showNotification(
-        "Please install package \"ggplot2\" for full plotting functionality.",
+        HTML(paste("Please install package", code("ggplot2"), "for full plotting functionality.")),
         duration = NA,
         type = "warning"
       )
@@ -2761,8 +2761,10 @@ server <- function(input, output, session){
     }
     if(length(C_ceff_plot_list) > 1L){
       showNotification(
-        paste("Function brms:::plot.brms_conditional_effects() returned multiple plot objects.",
-              "Only plotting the first one. Please report this."),
+        HTML(paste(
+          "Function", code("brms:::plot.brms_conditional_effects()"), "returned multiple plot objects.",
+          "Only plotting the first one. Please report this."
+        )),
         duration = NA,
         type = "warning"
       )
@@ -2781,7 +2783,7 @@ server <- function(input, output, session){
     content = function(file){
       if(!requireNamespace("ggplot2", quietly = TRUE)){
         showNotification(
-          "Please install package \"ggplot2\" to download the plot.",
+          HTML(paste("Package", code("ggplot2"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -2839,14 +2841,14 @@ server <- function(input, output, session){
         )
       } else{
         showNotification(
-          "Package \"callr\" needed. Please install it.",
+          HTML(paste("Package", code("callr"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
       }
     } else{
       showNotification(
-        "Package \"shinystan\" needed. Please install it.",
+        HTML(paste("Package", code("shinystan"), "needed. Please install it.")),
         duration = NA,
         type = "error"
       )

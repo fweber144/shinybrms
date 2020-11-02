@@ -16,6 +16,12 @@
     "advOpts_seed": null,
     "advOpts_thin": 1,
     "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 0,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
     "data_link1": 0,
     "data_link2": 0,
     "data_link3": 0,
@@ -32,6 +38,8 @@
     "navbar_ID": "Likelihood",
     "outc_sel": "",
     "outcome_link1": 0,
+    "par_add": 0,
+    "par_sel": "",
     "posterior_link1": 0,
     "posterior_navlist_ID": "Run Stan",
     "pred_int_add": 1,
@@ -58,7 +66,8 @@
     "show_general_MCMC_tab": false,
     "show_stancode": false,
     "show_standata": false,
-    "stanout_download_sel": "brmsfit_obj"
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": ""
   },
   "output": {
     "da_view": {

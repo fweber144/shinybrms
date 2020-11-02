@@ -2687,7 +2687,7 @@ server <- function(input, output, session){
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
     }))
     
-    termlabs_PP_grp(grep(":.*:", sapply(termlabs_PP_split, "[[", 2), value = TRUE, invert = TRUE))
+    termlabs_PP_grp(sapply(termlabs_PP_split, "[[", 2))
     
     #------------
     # Update choices for input$term_sel

@@ -39,3 +39,30 @@ app$setInputs(posterior_navlist_ID = "Summary")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))
+app$setInputs(posterior_navlist_ID = "Custom summary")
+app$setInputs(par_sel = "b_week")
+app$setInputs(par_add = "click")
+app$setInputs(cust_text = "`b_week` + ")
+app$setInputs(par_sel = "b_week:trtdrug")
+app$setInputs(par_add = "click")
+app$setInputs(cust_act = "click")
+app$setInputs(cust_text = "`b_week` + ")
+app$setInputs(par_sel = "b_week:trtdrugP")
+app$setInputs(par_add = "click")
+app$setInputs(cust_name = "week for drugP")
+app$setInputs(cust_act = "click")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))
+app$setInputs(posterior_navlist_ID = "Conditional effects")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))
+app$setInputs(term_sel = "week:trt")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))
+app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+app$snapshot(items = list(input = TRUE,
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE))

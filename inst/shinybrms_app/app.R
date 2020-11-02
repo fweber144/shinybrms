@@ -2640,6 +2640,7 @@ server <- function(input, output, session){
     return(formula(C_stanres()$bfit))
   })
   
+  # A reactive object which will contain the labels of the group terms:
   termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
   
   observe({
@@ -2685,14 +2686,8 @@ server <- function(input, output, session){
     termlabs_PP_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_IA2, split = ":"), function(termlabs_PP_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_IA2), 0L)'.
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
     }))
-    termlabs_PP_grp_tmp <- sapply(termlabs_PP_split, "[[", 2)
-    termlabs_PP_grp_tmp_main <- grep(":", termlabs_PP_grp_tmp, value = TRUE, invert = TRUE)
-    termlabs_PP_grp_tmp_IA <- setdiff(termlabs_PP_grp_tmp, termlabs_PP_grp_tmp_main)
-    termlabs_PP_grp_tmp_IA2 <- grep(":.*:", termlabs_PP_grp_tmp_IA, value = TRUE, invert = TRUE)
-    termlabs_PP_grp_tmp_IA2_rev <- unlist(sapply(strsplit(termlabs_PP_grp_tmp_IA2, split = ":"), function(termlabs_PP_grp_tmp_IA2_i){ # NOTE: unlist() is only needed for the special case 'identical(length(termlabs_PP_grp_tmp_IA2), 0L)'.
-      return(paste(rev(termlabs_PP_grp_tmp_IA2_i), collapse = ":"))
-    }))
-    termlabs_PP_grp(c(termlabs_PP_grp_tmp_main, termlabs_PP_grp_tmp_IA2, termlabs_PP_grp_tmp_IA2_rev))
+    
+    termlabs_PP_grp(grep(":.*:", sapply(termlabs_PP_split, "[[", 2), value = TRUE, invert = TRUE))
     
     #------------
     # Update choices for input$term_sel

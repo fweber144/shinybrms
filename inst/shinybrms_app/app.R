@@ -968,10 +968,11 @@ ui <- navbarPage(
             "by showing the estimated effect of the first predictor variable involved in this interaction",
             "separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
             "of the second predictor variable involved in this interaction."),
-          p("As its name suggests, this plot", em("conditions"), "on specific values of the other",
-            "predictor variables: It conditions on the mean of continuous predictor variables and",
-            "on the reference category of those categorical predictor variables which have",
-            "nonpooled main effects. Partially pooled effects are set to zero, with the following exceptions:",
+          p("As its name suggests, the conditional-effects plot", em("conditions"), "on specific values of",
+            "those predictor variables which are not involved in the plot:",
+            "It conditions on the mean of continuous predictor variables and",
+            "on the reference category of those categorical predictor variables which have nonpooled main effects.",
+            "Partially pooled effects are set to zero, with the following exceptions:",
             tags$ul(
               tags$li("Those partially pooled effects which are plotted are not set to zero (otherwise,",
                       "there would not be anything meaningful to plot)."),

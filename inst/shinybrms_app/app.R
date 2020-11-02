@@ -2708,7 +2708,6 @@ server <- function(input, output, session){
     req(input$term_sel)
     re_formula_ceff <- NA
     term_sel_PP <- intersect(input$term_sel, termlabs_PP_grp())
-    stopifnot(length(term_sel_PP) <= 1L)
     if(identical(length(term_sel_PP), 1L)){
       re_formula_ceff <- as.formula(paste("~ (1 |", term_sel_PP, ")"))
     } else if(identical(length(term_sel_PP), 0L) && grepl(":", input$term_sel)){

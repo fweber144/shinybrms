@@ -967,12 +967,14 @@ ui <- navbarPage(
             "on the outcome. To do so, this plot conditions on specific values of the other predictor variables:",
             "It conditions on the mean of continuous predictor variables and",
             "on the reference category of those categorical predictor variables which have",
-            "nonpooled main effects. Partially pooled effects are set to zero."),
+            "nonpooled main effects. Partially pooled effects are set to zero (apart from those",
+            "which are plotted and",
+            HTML("&ndash;"), "if partially pooled slopes are plotted", HTML("&ndash;"),
+            "also apart from the corresponding partially pooled intercepts)."),
           p("An interaction effect involving at most two predictor variables may also be visualized.",
             "In this case, the conditional-effects plot as described above is created for the",
             "first predictor variable involved in this interaction, separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
-            "of the second predictor variable involved in this interaction."),
-          p("Partially pooled effects are not supported yet.")
+            "of the second predictor variable involved in this interaction.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",

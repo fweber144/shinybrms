@@ -924,7 +924,7 @@ ui <- navbarPage(
                    "Parameter names need to be enclosed in backticks (", code("`", .noWS = "outside"), ").",
                    "The drop-down list below may be used for inserting parameter names (directly with",
                    "enclosing backticks) into the custom expression."),
-                 p("Examples for a custom expression would be:",
+                 p("Fictitious examples for a custom expression would be:",
                    tags$ul(
                      tags$li(code("`b_age` + `b_age:genderM`")),
                      tags$li(code("log(`sigma`)")),

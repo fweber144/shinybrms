@@ -16,6 +16,12 @@
     "advOpts_seed": null,
     "advOpts_thin": 1,
     "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 0,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
     "data_link1": 0,
     "data_link2": 0,
     "data_link3": 0,
@@ -31,6 +37,8 @@
     "navbar_ID": "Likelihood",
     "outc_sel": "y",
     "outcome_link1": 0,
+    "par_add": 0,
+    "par_sel": "",
     "posterior_link1": 0,
     "posterior_navlist_ID": "Run Stan",
     "pred_int_add": 0,
@@ -57,7 +65,8 @@
     "show_general_MCMC_tab": false,
     "show_stancode": false,
     "show_standata": false,
-    "stanout_download_sel": "brmsfit_obj"
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": ""
   },
   "output": {
     "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: right;'> y <\/th> <th style='text-align: right;'> pred1 <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td align=\"right\">   1 <\/td> <td align=\"right\"> 0.47 <\/td> <\/tr>\n  <tr> <td align=\"right\">   1 <\/td> <td align=\"right\"> 1.02 <\/td> <\/tr>\n  <tr> <td align=\"right\">   1 <\/td> <td align=\"right\"> 0.01 <\/td> <\/tr>\n  <tr> <td align=\"right\">   0 <\/td> <td align=\"right\"> -4.39 <\/td> <\/tr>\n  <tr> <td align=\"right\">   1 <\/td> <td align=\"right\"> -0.25 <\/td> <\/tr>\n  <tr> <td align=\"right\">   1 <\/td> <td align=\"right\"> 0.35 <\/td> <\/tr>\n   <\/tbody> <\/table>",

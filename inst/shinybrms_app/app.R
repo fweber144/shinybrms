@@ -2677,7 +2677,7 @@ server <- function(input, output, session){
       if(identical(length(retermlabs_PP_i), 0L)){
         return(termlabs_PP_i[2])
       }
-      return(paste0(termlabs_PP_i[2], ":", retermlabs_PP_i))
+      return(paste0(retermlabs_PP_i, ":", termlabs_PP_i[2]))
     }))
     termlabs_PP_main <- grep(":", termlabs_PP_colon, value = TRUE, invert = TRUE)
     termlabs_PP_IA <- setdiff(termlabs_PP_colon, termlabs_PP_main)

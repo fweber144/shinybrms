@@ -16,6 +16,12 @@
     "advOpts_seed": null,
     "advOpts_thin": 1,
     "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 0,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
     "data_link1": 0,
     "data_link2": 0,
     "data_link3": 0,
@@ -32,6 +38,8 @@
     "navbar_ID": "Data",
     "outc_sel": "total.fruits",
     "outcome_link1": 0,
+    "par_add": 0,
+    "par_sel": "",
     "posterior_link1": 0,
     "posterior_navlist_ID": "Run Stan",
     "pred_int_add": 0,
@@ -58,7 +66,8 @@
     "show_general_MCMC_tab": false,
     "show_stancode": false,
     "show_standata": false,
-    "stanout_download_sel": "brmsfit_obj"
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": ""
   },
   "output": {
     "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> reg <\/th> <th style='text-align: left;'> popu <\/th> <th style='text-align: left;'> gen <\/th> <th style='text-align: left;'> rack <\/th> <th style='text-align: left;'> nutrient <\/th> <th style='text-align: left;'> amd <\/th> <th style='text-align: left;'> status <\/th> <th style='text-align: right;'> total.fruits <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Transplant <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 1 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Petri.Plate <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 1 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Normal <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> clipped <\/td> <td> Normal <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 8 <\/td> <td> clipped <\/td> <td> Transplant <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n  <tr> <td> NL <\/td> <td> 3.NL <\/td> <td> 4 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td> unclipped <\/td> <td> Petri.Plate <\/td> <td align=\"right\">   0 <\/td> <\/tr>\n   <\/tbody> <\/table>",

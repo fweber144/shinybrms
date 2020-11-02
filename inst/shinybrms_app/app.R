@@ -974,7 +974,10 @@ ui <- navbarPage(
           p("An interaction effect involving at most two predictor variables may also be visualized.",
             "In this case, the conditional-effects plot as described above is created for the",
             "first predictor variable involved in this interaction, separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
-            "of the second predictor variable involved in this interaction.")
+            "of the second predictor variable involved in this interaction."),
+          p("Be cautious with predictor variables having a high number of levels (which is usually",
+            "only the case for partially pooled effects): In that case, the computation may",
+            "take a long time and the resulting plot is rarely useful.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",

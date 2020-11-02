@@ -2722,10 +2722,12 @@ server <- function(input, output, session){
         re_formula_ceff <- as.formula(paste("~ (1 +", term_sel_split_NP, "|", term_sel_split_PP, ")"))
       }
     }
+    # set.seed(<seed>) # Not necessary here since argument 're_formula' of brms::conditional_effects() is set to only those partially pooled effects which are plotted (or also the corresponding partially pooled intercepts, if partially pooled slopes are plotted).
     C_ceff <- brms::conditional_effects(
       C_stanres()$bfit,
       effects = input$term_sel,
       re_formula = re_formula_ceff
+      # sample_new_levels = "gaussian" # Not necessary here since argument 're_formula' of brms::conditional_effects() is set to only those partially pooled effects which are plotted (or also the corresponding partially pooled intercepts, if partially pooled slopes are plotted).
     )
     if(!requireNamespace("ggplot2", quietly = TRUE)){
       showNotification(

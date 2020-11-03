@@ -994,9 +994,8 @@ ui <- navbarPage(
           p("Be cautious with predictor variables having a high number of levels (which is usually",
             "only the case for partially pooled effects): In that case, the computation may",
             "take a long time and the resulting plot is rarely useful."),
-          p("Note that the size of the downloaded plot follows the size of the plot which is shown here",
-            "in the app, so if you want to download the plot in a different size, simply adjust your",
-            "browser window size until the plot in the app has the desired size and then download the plot.")
+          p("If you want to download the plot in a different size, simply adjust your browser window size",
+            "until the plot in the app has the desired size and then download the plot.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",

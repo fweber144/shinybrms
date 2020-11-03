@@ -994,7 +994,8 @@ ui <- navbarPage(
           p("Be cautious with predictor variables having a high number of levels (which is usually",
             "only the case for partially pooled effects): In that case, the computation may",
             "take a long time and the resulting plot is rarely useful."),
-          p("Note that the downloaded plot has the same size as the plot which is shown here in the app,",
+          p("Note that the downloaded plot should have about the same physical size (e.g.",
+            "measured in inches or cm, not pixels) as the plot which is shown here in the app,",
             "so if you want to download the plot in a different size, simply adjust your browser window",
             "until the plot in the app has the desired size and then download the plot.")
         ),
@@ -2811,8 +2812,8 @@ server <- function(input, output, session){
       }
       ggplot2::ggsave(filename = file,
                       plot = gg_ceff(),
-                      width = session$clientData$output_size_aux_width / 72,
-                      height = session$clientData$output_size_aux_width * 0.618 / 72)
+                      width = session$clientData$output_size_aux_width / 100, # In fact, this should be divided by 72 instead of 100, but that gives a plot which doesn't match the original plot size (in inches) in the app.
+                      height = session$clientData$output_size_aux_width * 0.618 / 100) # In fact, this should be divided by 72 instead of 100, but that gives a plot which doesn't match the original plot size (in inches) in the app.
     }
   )
   

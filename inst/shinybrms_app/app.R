@@ -2767,7 +2767,7 @@ server <- function(input, output, session){
       )
       C_ceff_plot_list <- plot(C_ceff)
     } else{
-      C_ceff_plot_list <- plot(C_ceff, theme = ggplot2::theme_gray(base_size = 12))
+      C_ceff_plot_list <- plot(C_ceff, theme = ggplot2::theme_gray(base_size = 16))
     }
     if(length(C_ceff_plot_list) > 1L){
       showNotification(

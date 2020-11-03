@@ -386,10 +386,10 @@ ui <- navbarPage(
           helpText(
             "Start typing or click into the field below to choose variables for which",
             "partially pooled main effects shall be added.",
-            "Note that you may not specify partially pooled main effects for a numeric or integer variable.",
-            "This is not allowed to point out that a variable must be treated as categorical to have",
+            "Note that you may not specify partially pooled main effects for a numeric variable.",
+            "This is not allowed to point out that a variable must be treated as nominal to have",
             "partially pooled main effects.",
-            "If you really want partially pooled main effects for a numeric or integer variable, you",
+            "If you really want partially pooled main effects for a numeric variable, you",
             "have to convert this variable in your dataset to a character variable."
           ),
           selectInput("pred_mainPP_sel", NULL,

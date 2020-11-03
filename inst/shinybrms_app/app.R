@@ -1000,7 +1000,8 @@ ui <- navbarPage(
                     choices = c("Choose predictor term ..." = ""),
                     selectize = TRUE),
         # br(),
-        plotOutput("ceff_plot", width = "1000px", height = "618px"),
+        plotOutput("size_aux", width = "100%", height = "1px"), # Only for getting the width in pixels corresponding to argument 'width = "100%"'.
+        plotOutput("ceff_plot", inline = TRUE),
         br(),
         selectInput("ceff_download_sel", "Choose file format for download:",
                     choices = c("PDF" = "pdf",
@@ -2781,9 +2782,14 @@ server <- function(input, output, session){
     return(C_ceff_plot_list[[1]])
   })
   
+  # Only for getting the width in pixels corresponding to argument 'width = "100%"' of plotOutput():
+  output$size_aux <- renderPlot({
+    req(FALSE)
+  })
+  
   output$ceff_plot <- renderPlot({
     gg_ceff()
-  })
+  }, width = function() session$clientData$output_size_aux_width, height = function() session$clientData$output_size_aux_width * 0.618)
   
   output$ceff_download <- downloadHandler(
     filename = function(){
@@ -2798,7 +2804,7 @@ server <- function(input, output, session){
         )
         return()
       }
-      ggplot2::ggsave(filename = file, plot = gg_ceff(), width = 7, height = 7 * 0.618)
+      ggplot2::ggsave(filename = file, plot = gg_ceff(), width = session$clientData$output_size_aux_width / 72, height = session$clientData$output_size_aux_width * 0.618 / 72)
     }
   )
   

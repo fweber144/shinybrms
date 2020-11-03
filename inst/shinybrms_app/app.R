@@ -993,9 +993,7 @@ ui <- navbarPage(
             )),
           p("Be cautious with predictor variables having a high number of levels (which is usually",
             "only the case for partially pooled effects): In that case, the computation may",
-            "take a long time and the resulting plot is rarely useful."),
-          p("If you want to download the plot in a different size, simply adjust your browser window size",
-            "until the plot in the app has the desired size and then download the plot.")
+            "take a long time and the resulting plot is rarely useful.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",
@@ -1013,6 +1011,10 @@ ui <- navbarPage(
                                 "TIFF" = "tiff",
                                 "SVG" = "svg"),
                     selectize = TRUE),
+        helpText(
+          "If you want to download the plot in a different size, simply adjust your browser window size",
+          "until the plot in the app has the desired size and then download the plot."
+        ),
         downloadButton("ceff_download", "Download plot"),
         br(),
         br()

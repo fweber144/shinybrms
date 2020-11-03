@@ -2792,7 +2792,9 @@ server <- function(input, output, session){
   
   output$ceff_plot <- renderPlot({
     gg_ceff()
-  }, width = function() session$clientData$output_size_aux_width, height = function() session$clientData$output_size_aux_width * 0.618)
+  },
+  width = function() session$clientData$output_size_aux_width,
+  height = function() session$clientData$output_size_aux_width * 0.618)
   
   output$ceff_download <- downloadHandler(
     filename = function(){

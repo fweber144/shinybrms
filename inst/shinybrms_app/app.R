@@ -2807,7 +2807,10 @@ server <- function(input, output, session){
         )
         return()
       }
-      ggplot2::ggsave(filename = file, plot = gg_ceff(), width = session$clientData$output_size_aux_width / 72, height = session$clientData$output_size_aux_width * 0.618 / 72)
+      ggplot2::ggsave(filename = file,
+                      plot = gg_ceff(),
+                      width = session$clientData$output_size_aux_width / 72,
+                      height = session$clientData$output_size_aux_width * 0.618 / 72)
     }
   )
   

@@ -2222,7 +2222,11 @@ server <- function(input, output, session){
       warn_capt <- setdiff(warn_capt, c(
         "Compiling Stan program...",
         "Start sampling",
-        "recompiling to avoid crashing R session"
+        "recompiling to avoid crashing R session",
+        grep("Warning: There were [[:digit:]]+ divergent transitions after warmup\\. See", warn_capt, value = TRUE),
+        "http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup",
+        "to find out why this is a problem and how to eliminate them.",
+        "Warning: Examine the pairs() plot to diagnose sampling problems"
       ))
       for(warn_capt_i in warn_capt){
         showNotification(

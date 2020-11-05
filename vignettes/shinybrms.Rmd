@@ -229,7 +229,7 @@ knitr::include_graphics("screenshots/Posterior_Diagnostics_General_Detailed.png"
 ### Summary
 
 \
-Since all MCMC diagnostics look good, we may start interpreting the posterior. In the tab "Summary", we get a short summary of our Stan run, including the mean (column `Estimate`), the standard deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
+Since all MCMC diagnostics look good, we may start interpreting the posterior. In the tab "Summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
 
 \
 ```{r echo = FALSE, results = "hide"}

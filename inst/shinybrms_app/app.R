@@ -2474,7 +2474,7 @@ server <- function(input, output, session){
   # Summary
   
   output$smmry_view <- renderPrint({
-    print(C_stanres()$bfit, digits = 2, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
+    print(C_stanres()$bfit, digits = 4, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   })
   
   #------------------------

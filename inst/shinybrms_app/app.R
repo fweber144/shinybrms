@@ -1847,11 +1847,13 @@ server <- function(input, output, session){
         paste("Warning: There are missing values in the data. The corresponding rows have been",
               "omitted in the construction of the default priors. They will also be omitted when",
               "running Stan (and also in the Stan data).")
-      showNotification(
-        paste(warn_capt, collapse = " | "),
-        duration = NA,
-        type = "warning"
-      )
+      for(warn_capt_i in warn_capt){
+        showNotification(
+          warn_capt_i,
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
     return(C_prior_default_tmp)
   })
@@ -2043,11 +2045,13 @@ server <- function(input, output, session){
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <-
         paste("Warning: There are missing values in the data. The corresponding rows will be",
               "omitted when running Stan (and also in the Stan data).")
-      showNotification(
-        paste(warn_capt, collapse = " | "),
-        duration = NA,
-        type = "warning"
-      )
+      for(warn_capt_i in warn_capt){
+        showNotification(
+          warn_capt_i,
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
     return(C_stancode_tmp)
   })
@@ -2081,11 +2085,13 @@ server <- function(input, output, session){
       warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <-
         paste("Warning: There are missing values in the data. The corresponding rows have been",
               "omitted in the Stan data. They will also be omitted when running Stan.")
-      showNotification(
-        paste(warn_capt, collapse = " | "),
-        duration = NA,
-        type = "warning"
-      )
+      for(warn_capt_i in warn_capt){
+        showNotification(
+          warn_capt_i,
+          duration = NA,
+          type = "warning"
+        )
+      }
     }
     return(C_standata_tmp)
   })

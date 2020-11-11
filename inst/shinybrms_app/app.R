@@ -368,10 +368,10 @@ ui <- navbarPage(
         ),
         wellPanel(
           h3("Main effects"),
-          helpText("Note:",
+          helpText("Notes:",
                    tags$ul(
-                     tags$li("Nonpooled effects are also known as constant, population-level, or fixed effects."),
-                     tags$li("Partially pooled effects are also known as varying, group-level, or random effects."),
+                     tags$li("Nonpooled effects are also known as population-level, constant, or fixed effects."),
+                     tags$li("Partially pooled effects are also known as group-level, varying, or random effects."),
                    )),
           h4("Nonpooled main effects"),
           helpText(

@@ -853,27 +853,36 @@ ui <- navbarPage(
           p("The general MCMC diagnostics (computed for each parameter",
             "as well as for the accumulated log-posterior density) are:",
             tags$ul(
-              tags$li("the modified",
-                      # "variant of the",
-                      "potential scale reduction factor \\(\\widehat{R}\\)",
-                      # "(",
-                      # a("Gelman and Rubin, 1992",
-                      #   href = "https://doi.org/10.1214/ss/1177011136",
-                      #   target = "_blank",
-                      #   .noWS = "outside"),
-                      # ";",
-                      # a("Brooks and Gelman, 1998",
-                      #   href = "https://doi.org/10.2307/1390675",
-                      #   target = "_blank",
-                      #   .noWS = "after"),
-                      # ")",
-                      "proposed by",
-                      a("Vehtari et al. (2020)",
-                        href = "https://doi.org/10.1214/20-BA1221",
-                        target = "_blank"),
-                      "(here simply called \"the\" \\(\\widehat{R}\\) instead of \"the modified\" \\(\\widehat{R}\\)),"),
-              tags$li("the effective sample size (ESS) in the bulk of the corresponding marginal posterior distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"),
-              tags$li("the ESS in the tails of the corresponding marginal posterior distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)).")
+              tags$li(
+                "the modified",
+                # "variant of the",
+                "potential scale reduction factor \\(\\widehat{R}\\)",
+                # "(",
+                # a("Gelman and Rubin, 1992",
+                #   href = "https://doi.org/10.1214/ss/1177011136",
+                #   target = "_blank",
+                #   .noWS = "outside"),
+                # ";",
+                # a("Brooks and Gelman, 1998",
+                #   href = "https://doi.org/10.2307/1390675",
+                #   target = "_blank",
+                #   .noWS = "after"),
+                # ")",
+                "proposed by",
+                a("Vehtari et al. (2020)",
+                  href = "https://doi.org/10.1214/20-BA1221",
+                  target = "_blank"),
+                "(here simply called", em("the"), "\\(\\widehat{R}\\) instead of",
+                em("the modified"), "\\(\\widehat{R}\\)),"
+              ),
+              tags$li(
+                "the effective sample size (ESS) in the bulk of the corresponding marginal posterior",
+                "distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"
+              ),
+              tags$li(
+                "the ESS in the tails of the corresponding marginal posterior",
+                "distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\))."
+              )
             ),
             "In general, the following values of the general MCMC diagnostics are worrying:",
             tags$ul(

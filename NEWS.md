@@ -14,8 +14,8 @@
   - Tab "Summary": Increased the number of printed decimal digits
     from 2 to 4.
   - Tab "Summary": Replaced posterior mean and posterior standard
-    deviation by posterior median and
-    posterior median absolute deviation, respectively.
+    deviation by posterior median and posterior median absolute
+    deviation, respectively.
   - For partially pooled main effects, numeric (including integer)
     variables are not allowed anymore.
   - Example dataset `kidiq`: Converted column `mom_hs` to factor.

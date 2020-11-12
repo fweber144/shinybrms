@@ -987,7 +987,7 @@ ui <- navbarPage(
           p("A conditional-effects plot shows the estimated effect of a predictor variable on the outcome.",
             "An interaction effect involving at most two predictor variables may also be visualized",
             "by showing the estimated effect of the first predictor variable (involved in this interaction)",
-            "separately for appropriate values", # Here, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
+            "separately for appropriate values", # Thereby, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
             "of the second predictor variable (involved in this interaction)."),
           p("As its name suggests, a conditional-effects plot", em("conditions"), "on specific values of",
             "those predictor variables which are not involved in the plot:",

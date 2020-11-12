@@ -583,7 +583,7 @@ ui <- navbarPage(
                             a("\"Stan Functions Reference\"",
                               href = "https://mc-stan.org/docs/2_21/functions-reference/index.html",
                               target = "_blank"),
-                            "for details)",
+                            "for details),",
                             em("or")
                           ))),
                           tags$li(HTML(paste0("specify a prior distribution using one of the ",
@@ -596,7 +596,7 @@ ui <- navbarPage(
                                               a(HTML(paste(code("lkj"))),
                                                 href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
                                                 target = "_blank"),
-                                              ") ", em("or")))),
+                                              "), ", em("or")))),
                           tags$li("leave this field empty to use a flat prior.")
                         ),
                         "If you specify a prior distribution using a Stan function, you have to ",

@@ -185,7 +185,7 @@ knitr::include_graphics("screenshots/Posterior_Sampling_2.png")
 *Fig. 15: Sampling progress (bottom; after completion of sampling).*
 
 \
-We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail in Tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
+We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on Tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
 
 \
 ```{r echo = FALSE, results = "hide"}

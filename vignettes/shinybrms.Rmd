@@ -67,7 +67,7 @@ knitr::include_graphics("screenshots/Likelihood_Outcome.png")
 ### Predictors
 
 \
-After selecting tab "Predictors", we choose variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
+After selecting tab "Predictors", we choose the variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -165,7 +165,7 @@ knitr::include_graphics("screenshots/Posterior_Run_Run.png")
 *Fig. 13: Page "Posterior", tab "Run Stan", panel "Run Stan".*
 
 \
-Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for Advanced Option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
+Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
 
 \
 ```{r echo = FALSE, results = "hide"}

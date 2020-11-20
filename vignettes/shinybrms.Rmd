@@ -245,9 +245,9 @@ The purpose of tab "Custom summary" is explained in the help text of that tab:
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/Posterior_CustSummary_1.png")
+knitr::include_graphics("screenshots/Posterior_CustSummary.png")
 ```
-[![](screenshots/Posterior_CustSummary_1.png)](screenshots/Posterior_CustSummary_1.png)
+[![](screenshots/Posterior_CustSummary.png)](screenshots/Posterior_CustSummary.png)
 *Fig. 21: Page "Posterior", tab "Custom summary" (top).*
 
 \
@@ -255,9 +255,9 @@ Here, it makes sense to calculate posterior summary quantities for the `trt`-spe
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/Posterior_CustSummary_2.png")
+knitr::include_graphics("screenshots/Posterior_CustSummary_done.png")
 ```
-[![](screenshots/Posterior_CustSummary_2.png)](screenshots/Posterior_CustSummary_2.png)
+[![](screenshots/Posterior_CustSummary_done.png)](screenshots/Posterior_CustSummary_done.png)
 *Fig. 22: Page "Posterior", tab "Custom summary" (bottom; showing a custom summary for the `week:trt` effects).*
 
 ### Conditional effects
@@ -267,9 +267,9 @@ The purpose of tab "Conditional effects" is explained in the help text of that t
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/Posterior_CondEff_1.png")
+knitr::include_graphics("screenshots/Posterior_CondEff.png")
 ```
-[![](screenshots/Posterior_CondEff_1.png)](screenshots/Posterior_CondEff_1.png)
+[![](screenshots/Posterior_CondEff.png)](screenshots/Posterior_CondEff.png)
 *Fig. 23: Page "Posterior", tab "Conditional effects" (top).*
 
 \
@@ -277,9 +277,9 @@ Here, it makes sense to plot the conditional effects for the `week:trt` interact
 
 \
 ```{r echo = FALSE, results = "hide"}
-knitr::include_graphics("screenshots/Posterior_CondEff_2.png")
+knitr::include_graphics("screenshots/Posterior_CondEff_done.png")
 ```
-[![](screenshots/Posterior_CondEff_2.png)](screenshots/Posterior_CondEff_2.png)
+[![](screenshots/Posterior_CondEff_done.png)](screenshots/Posterior_CondEff_done.png)
 *Fig. 24: Page "Posterior", tab "Conditional effects" (bottom; showing the plot for `week:trt`).*
 
 ### Launch **shinystan**

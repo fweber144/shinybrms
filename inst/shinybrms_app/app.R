@@ -587,15 +587,17 @@ ui <- navbarPage(
                               target = "_blank"),
                             "for details),", em("or")
                           ))),
-                          tags$li(HTML(paste0("specify a prior distribution using one of the ",
-                                              "special (pseudo-)functions defined by ", strong("brms"),
-                                              " for this purpose (see ",
-                                              a(HTML(paste(code("brms::set_prior()"))),
-                                                href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
-                                                target = "_blank"),
-                                              "for details; an important example is",
-                                              code("lkj"),
-                                              "for parameters of class", code("cor"), "), ", em("or")))),
+                          tags$li(HTML(paste(
+                            "specify a prior distribution using one of the",
+                            "special (pseudo-)functions defined by", strong("brms"),
+                            "for this purpose (see",
+                            a(HTML(paste(code("brms::set_prior()"))),
+                              href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
+                              target = "_blank"),
+                            "for details; an important example is",
+                            code("lkj"),
+                            "for parameters of class", code("cor", .noWS = "after"), "),", em("or")
+                          ))),
                           tags$li("leave this field empty to use a flat prior.")
                         ),
                         "If you specify a prior distribution using a Stan function, you have to ",

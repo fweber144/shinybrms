@@ -594,8 +594,7 @@ ui <- navbarPage(
                             a(HTML(paste(code("brms::set_prior()"))),
                               href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
                               target = "_blank"),
-                            "for details; an important example is",
-                            code("lkj"),
+                            "for details; an important example is", code("lkj"),
                             "for parameters of class", code("cor", .noWS = "after"), "),", em("or")
                           ))),
                           tags$li("leave this field empty to use a flat prior.")

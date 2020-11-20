@@ -574,11 +574,11 @@ ui <- navbarPage(
                     choices = c("Choose group or leave empty" = ""),
                     selectize = TRUE),
         textInput("prior_text",
-                  HTML(paste0(
+                  HTML(paste(
                     "Prior distribution:",
                     helpText(
-                      HTML(paste0(
-                        "Note: You may ", em("either"),
+                      HTML(paste(
+                        "Note: You may", em("either"),
                         tags$ul(
                           tags$li(HTML(paste(
                             "specify a prior distribution using a Stan function (see the",
@@ -599,10 +599,10 @@ ui <- navbarPage(
                           ))),
                           tags$li("leave this field empty to use a flat prior.")
                         ),
-                        "If you specify a prior distribution using a Stan function, you have to ",
-                        "use the Stan function which would be used in a Stan sampling statement ",
-                        "and specify values for all arguments of this Stan function (e.g. ",
-                        code("normal(0, 2.5)"), "). "
+                        "If you specify a prior distribution using a Stan function, you have to",
+                        "use the Stan function which would be used in a Stan sampling statement",
+                        "and specify values for all arguments of this Stan function (e.g.",
+                        code("normal(0, 2.5)", .noWS = "after"), ")."
                       )),
                       style = "font-weight:normal"
                     )

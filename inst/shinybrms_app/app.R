@@ -87,12 +87,14 @@ prior_brms_fun <- c(
   ### Requiring a simplex constraint:
   "dirichlet",
   ### 
+  ### For parameters of class "cor" (only used by brms; has no Stan function equivalent):
+  "lkj",
+  ### 
   ### Requiring a Cholesky-factor-of-correlation-matrix constraint:
-  "lkj", # Internally replaced by "lkj_corr_cholesky".
   "lkj_corr_cholesky",
   ### 
   ### Requiring a correlation-matrix constraint:
-  "lkj_corr" # Internally replaced by "lkj_corr_cholesky".
+  "lkj_corr"
   ### 
 )
 

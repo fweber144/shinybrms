@@ -110,6 +110,8 @@ knitr::include_graphics("screenshots/Prior_Default.png")
 [![](screenshots/Prior_Default.png)](screenshots/Prior_Default.png)
 *Fig. 8: Page "Prior" (top).*
 
+### Custom priors
+
 \
 At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
 

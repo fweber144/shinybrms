@@ -238,6 +238,50 @@ knitr::include_graphics("screenshots/Posterior_Summary.png")
 [![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)
 *Fig. 20: Page "Posterior", tab "Summary".*
 
+### Custom summary
+
+\
+The purpose of tab "Custom summary" is explained in the help text of that tab:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_CustSummary_1.png")
+```
+[![](screenshots/Posterior_CustSummary_1.png)](screenshots/Posterior_CustSummary_1.png)
+*Fig. 21: Page "Posterior", tab "Custom summary" (top).*
+
+\
+Here, it makes sense to calculate posterior summary quantities for the `trt`-specific `week` effects which are given by the sum of the main effect of `week` and the interaction effect for the corresponding `trt` value (except for the reference `trt` level where this interaction effect does not exist):
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_CustSummary_2.png")
+```
+[![](screenshots/Posterior_CustSummary_2.png)](screenshots/Posterior_CustSummary_2.png)
+*Fig. 22: Page "Posterior", tab "Custom summary" (bottom; showing a custom summary for the `week:trt` effects).*
+
+### Conditional effects
+
+\
+The purpose of tab "Conditional effects" is explained in the help text of that tab:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_CondEff_1.png")
+```
+[![](screenshots/Posterior_CondEff_1.png)](screenshots/Posterior_CondEff_1.png)
+*Fig. 23: Page "Posterior", tab "Conditional effects" (top).*
+
+\
+Here, it makes sense to plot the conditional effects for the `week:trt` interaction:
+
+\
+```{r echo = FALSE, results = "hide"}
+knitr::include_graphics("screenshots/Posterior_CondEff_2.png")
+```
+[![](screenshots/Posterior_CondEff_2.png)](screenshots/Posterior_CondEff_2.png)
+*Fig. 24: Page "Posterior", tab "Conditional effects" (bottom; showing the plot for `week:trt`).*
+
 ### Launch **shinystan**
 
 \

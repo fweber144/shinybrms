@@ -253,7 +253,7 @@ knitr::include_graphics("screenshots/Posterior_CustSummary.png")
 *Fig. 21: Page "Posterior", tab "Custom summary" (top).*
 
 \
-Here, it makes sense to calculate posterior summary quantities for the `trt`-specific `week` effects which are given by the sum of the main effect of `week` and the interaction effect for the corresponding `trt` value (except for the reference `trt` level where this interaction effect does not exist):
+Here, it makes sense to calculate posterior summary quantities for the `trt`-specific `week` effects which are given by the sum of the main effect of `week` and the interaction effect with the corresponding `trt` value (except for the reference level of `trt` where this interaction effect does not exist):
 
 \
 ```{r echo = FALSE, results = "hide"}

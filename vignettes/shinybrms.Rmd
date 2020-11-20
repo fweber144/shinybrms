@@ -31,7 +31,7 @@ knitr::include_graphics("screenshots/Home.png")
 ## Data
 
 \
-We then switch to Page "Data". Usually, you will want to upload a custom dataset, but for the purpose of demonstration, we will choose the example dataset `MASS::bacteria` here:
+We then switch to page "Data". Usually, you will want to upload a custom dataset, but for the purpose of demonstration, we will choose the example dataset `MASS::bacteria` here:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -41,7 +41,7 @@ knitr::include_graphics("screenshots/Data.png")
 *Fig. 2: Page "Data" (top).*
 
 \
-Further down on Page "Data", we may choose e.g. to show all rows of the dataset:
+Further down on page "Data", we may choose e.g. to show all rows of the dataset:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -55,26 +55,26 @@ knitr::include_graphics("screenshots/Data_AllRows.png")
 ### Outcome
 
 \
-On Page "Likelihood", the first tab is called "Outcome". Here, we define variable `y` (from our dataset `MASS::bacteria`) to be the outcome and since this is a binary outcome, we choose the distributional family "Bernoulli with logit link":
+On page "Likelihood", the first tab is called "Outcome". Here, we define variable `y` (from our dataset `MASS::bacteria`) to be the outcome and since this is a binary outcome, we choose the distributional family "Bernoulli with logit link":
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Likelihood_Outcome.png")
 ```
 [![](screenshots/Likelihood_Outcome.png)](screenshots/Likelihood_Outcome.png)
-*Fig. 4: Page "Likelihood", Tab "Outcome".*
+*Fig. 4: Page "Likelihood", tab "Outcome".*
 
 ### Predictors
 
 \
-After selecting Tab "Predictors", we choose variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
+After selecting tab "Predictors", we choose variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Likelihood_Predictors.png")
 ```
 [![](screenshots/Likelihood_Predictors.png)](screenshots/Likelihood_Predictors.png)
-*Fig. 5: Page "Likelihood", Tab "Predictors" (top).*
+*Fig. 5: Page "Likelihood", tab "Predictors" (top).*
 
 \
 After scrolling down, we set up a (nonpooled) interaction term for `week` and `trt`:
@@ -84,7 +84,7 @@ After scrolling down, we set up a (nonpooled) interaction term for `week` and `t
 knitr::include_graphics("screenshots/Likelihood_Predictors_Int.png")
 ```
 [![](screenshots/Likelihood_Predictors_Int.png)](screenshots/Likelihood_Predictors_Int.png)
-*Fig. 6: Page "Likelihood", Tab "Predictors" (bottom; setting up the interaction effect).*
+*Fig. 6: Page "Likelihood", tab "Predictors" (bottom; setting up the interaction effect).*
 
 \
 After clicking on "Add interaction term", we get:
@@ -94,14 +94,14 @@ After clicking on "Add interaction term", we get:
 knitr::include_graphics("screenshots/Likelihood_Predictors_done.png")
 ```
 [![](screenshots/Likelihood_Predictors_done.png)](screenshots/Likelihood_Predictors_done.png)
-*Fig. 7: Page "Likelihood", Tab "Predictors" (bottom; after adding the interaction effect).*
+*Fig. 7: Page "Likelihood", tab "Predictors" (bottom; after adding the interaction effect).*
 
 ## Prior
 
 ### Default priors
 
 \
-At the top of Page "Prior", we obtain a table with the default priors for the model we have specified so far:
+At the top of page "Prior", we obtain a table with the default priors for the model we have specified so far:
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -111,7 +111,7 @@ knitr::include_graphics("screenshots/Prior_Default.png")
 *Fig. 8: Page "Prior" (top).*
 
 \
-At the bottom of Page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
+At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
 
 \
 ```{r echo = FALSE, results = "hide"}
@@ -135,34 +135,34 @@ knitr::include_graphics("screenshots/Prior_Custom_done.png")
 ### Run Stan
 
 \
-On Page "Posterior", the first tab is called "Run Stan". At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):
+On page "Posterior", the first tab is called "Run Stan". At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_Run.png")
 ```
 [![](screenshots/Posterior_Run.png)](screenshots/Posterior_Run.png)
-*Fig. 11: Page "Posterior", Tab "Run Stan" (top).*
+*Fig. 11: Page "Posterior", tab "Run Stan" (top).*
 
 \
-Here, we focus on Panel "Advanced options" where we may set a seed for reproducibility:
+Here, we focus on panel "Advanced options" where we may set a seed for reproducibility:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_Run_AdvOpts.png")
 ```
 [![](screenshots/Posterior_Run_AdvOpts.png)](screenshots/Posterior_Run_AdvOpts.png)
-*Fig. 12: Page "Posterior", Tab "Run Stan", Panel "Advanced options".*
+*Fig. 12: Page "Posterior", tab "Run Stan", panel "Advanced options".*
 
 \
-Now we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below Panel "Advanced options", we find Panel "Run Stan" where we simply click the button for running Stan:
+Now we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel "Advanced options", we find panel "Run Stan" where we simply click the button for running Stan:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_Run_Run.png")
 ```
 [![](screenshots/Posterior_Run_Run.png)](screenshots/Posterior_Run_Run.png)
-*Fig. 13: Page "Posterior", Tab "Run Stan", Panel "Run Stan".*
+*Fig. 13: Page "Posterior", tab "Run Stan", panel "Run Stan".*
 
 \
 Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for Advanced Option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
@@ -185,14 +185,14 @@ knitr::include_graphics("screenshots/Posterior_Sampling_2.png")
 *Fig. 15: Sampling progress (bottom; after completion of sampling).*
 
 \
-We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on Tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
+We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_Run_Run_done.png")
 ```
 [![](screenshots/Posterior_Run_Run_done.png)](screenshots/Posterior_Run_Run_done.png)
-*Fig. 16: Page "Posterior", Tab "Run Stan", Panel "Run Stan" (after completion of the Stan run).*
+*Fig. 16: Page "Posterior", tab "Run Stan", panel "Run Stan" (after completion of the Stan run).*
 
 ### MCMC diagnostics (details)
 
@@ -204,7 +204,7 @@ Tab "MCMC diagnostics" first shows a description which MCMC diagnostics are chec
 knitr::include_graphics("screenshots/Posterior_Diagnostics.png")
 ```
 [![](screenshots/Posterior_Diagnostics.png)](screenshots/Posterior_Diagnostics.png)
-*Fig. 17: Page "Posterior", Tab "MCMC diagnostics" (top).*
+*Fig. 17: Page "Posterior", tab "MCMC diagnostics" (top).*
 
 \
 Underneath this description, the diagnostic results for the given Stan run are shown; first the diagnostics specific to Hamiltonian Monte Carlo (HMC) and then the general MCMC diagnostics:
@@ -214,7 +214,7 @@ Underneath this description, the diagnostic results for the given Stan run are s
 knitr::include_graphics("screenshots/Posterior_Diagnostics_General.png")
 ```
 [![](screenshots/Posterior_Diagnostics_General.png)](screenshots/Posterior_Diagnostics_General.png)
-*Fig. 18: Page "Posterior", Tab "MCMC diagnostics" (bottom).*
+*Fig. 18: Page "Posterior", tab "MCMC diagnostics" (bottom).*
 
 \
 For the general MCMC diagnostics (which are computed for each parameter as well as for the accumulated log-posterior density), it is also possible to show a detailed table:
@@ -224,31 +224,31 @@ For the general MCMC diagnostics (which are computed for each parameter as well 
 knitr::include_graphics("screenshots/Posterior_Diagnostics_General_Detailed.png")
 ```
 [![](screenshots/Posterior_Diagnostics_General_Detailed.png)](screenshots/Posterior_Diagnostics_General_Detailed.png)
-*Fig. 19: Page "Posterior", Tab "MCMC diagnostics", top of the detailed table of the general MCMC diagnostics.*
+*Fig. 19: Page "Posterior", tab "MCMC diagnostics", top of the detailed table of the general MCMC diagnostics.*
 
 ### Summary
 
 \
-Since all MCMC diagnostics look good, we may start interpreting the posterior. On Tab "Summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
+Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab "Summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_Summary.png")
 ```
 [![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)
-*Fig. 20: Page "Posterior", Tab "Summary".*
+*Fig. 20: Page "Posterior", tab "Summary".*
 
 ### Launch **shinystan**
 
 \
-Note that the output shown on Tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on Tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+Note that the output shown on tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 ```{r echo = FALSE, results = "hide"}
 knitr::include_graphics("screenshots/Posterior_shinystan.png")
 ```
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)
-*Fig. 21: Page "Posterior", Tab "Launch **shinystan**".*
+*Fig. 21: Page "Posterior", tab "Launch **shinystan**".*
 
 \
 At this point, the **shinybrms** workflow ends and passes over to **shinystan**.

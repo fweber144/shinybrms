@@ -11,9 +11,10 @@ language: r
 cache: packages
 #r_binary_packages:
 #  - rstan
-#r_packages:
+r_packages:
 #  - httpuv
 #  - rstanarm
+  - pillar
 os:
   - linux
   - osx

@@ -13,7 +13,6 @@
 * R-hub:
   - R-devel (2020-11-17 r79439) on Windows Server 2008 R2 SP1 system (platform: x86_64-w64-mingw32 (64-bit))
   - R 3.6.1 on Ubuntu 16.04.11 LTS system (platform: x86_64-pc-linux-gnu (64-bit)) with GCC
-  - R-devel (2020-09-27 r79265) on Fedora Linux system (platform: x86_64-pc-linux-gnu (64-bit)) with clang and gfortran
 
 ## R CMD check results
 

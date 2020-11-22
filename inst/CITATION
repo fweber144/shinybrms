@@ -8,5 +8,5 @@ bibentry(
   url = "https://fweber144.github.io/shinybrms/",
   textVersion = paste("Frank Weber (2020).",
                       "shinybrms: Graphical User Interface ('shiny' App) for 'brms'.",
-                      "R package, version 1.5.0.9000. URL: <https://fweber144.github.io/shinybrms/>.")
+                      "R package, version 1.5.0.9000. URL: https://fweber144.github.io/shinybrms/.")
 )

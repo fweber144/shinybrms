@@ -919,8 +919,8 @@ ui <- navbarPage(
         )
       ),
       tabPanel(
-        "Default summary",
-        titlePanel("Default summary"),
+        "Summary",
+        titlePanel("Summary"),
         br(),
         helpText("Notes:",
                  tags$ul(
@@ -2485,7 +2485,7 @@ server <- function(input, output, session){
   })
   
   #------------------------
-  # Default summary
+  # Summary
   
   output$smmry_view <- renderPrint({
     print(C_stanres()$bfit, digits = 4, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)

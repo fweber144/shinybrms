@@ -1306,7 +1306,7 @@ server <- function(input, output, session){
   }, {
     updateNavbarPage(session, "navbar_ID", "Likelihood")
     updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$formula_link1, {
     updateNavbarPage(session, "navbar_ID", "Likelihood")

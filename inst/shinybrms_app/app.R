@@ -335,18 +335,23 @@ ui <- navbarPage(
         strong("Parameters (with corresponding link functions) specific to this distributional family:"),
         tableOutput("dist_link"),
         helpText(
-          "For details concerning the link functions, see the help for the R function",
-          a(HTML(paste(code("brms::brmsfamily()"))),
-            href = "https://paul-buerkner.github.io/brms/reference/brmsfamily.html",
-            target = "_blank"),
-          "and the", strong("brms"), "vignette",
-          a("\"Parameterization of Response Distributions in brms\"",
-            href = "https://CRAN.R-project.org/web/packages/brms/vignettes/brms_families.html",
-            target = "_blank",
-            .noWS = "after"),
-          ". Note that for each parameter, the link function only applies if this parameter is",
-          "actually modeled by (nonconstant) predictors. Currently, this is only supported",
-          "for the location parameter (e.g.", code("mu"), "for a Gaussian distribution)."
+          p("For details concerning the link functions, see the help for the R function",
+            a(HTML(paste(code("brms::brmsfamily()"))),
+              href = "https://paul-buerkner.github.io/brms/reference/brmsfamily.html",
+              target = "_blank"),
+            "and the", strong("brms"), "vignette",
+            a("\"Parameterization of Response Distributions in brms\"",
+              href = "https://CRAN.R-project.org/web/packages/brms/vignettes/brms_families.html",
+              target = "_blank",
+              .noWS = "after"),
+            ". Note that for each parameter, the link function only applies if this parameter is",
+            "actually modeled by (nonconstant) predictors. Currently, this is only supported",
+            "for the location parameter (e.g.", code("mu"), "for a Gaussian distribution)."),
+          p("For details concerning the remaining (family-specific) parameters, see the help for the R function ",
+            a(HTML(paste(code("brms::set_prior()"))),
+              href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
+              target = "_blank"),
+            ".")
         )
       ),
       tabPanel(
@@ -506,9 +511,20 @@ ui <- navbarPage(
         tags$li("When specifying a custom prior, you may only choose a combination of",
                 "\"Class\", \"Coefficient\", and \"Group\" which is also present in the",
                 "table of the default priors."),
-        tags$li("The parameter named", code("Intercept"), "is the intercept when centering the predictors.",
-                "This is only the internally used intercept; in the output, the intercept with",
-                "respect to the noncentered predictors is given (named", code("b_Intercept", .noWS = "after"), ")."),
+        tags$li("The names of the parameter classes are taken from", strong("brms"),
+                "and may be translated as follows:",
+                tags$ul(
+                  tags$li(code("Intercept"), ": the intercept when centering the predictors.",
+                          "This is only the internally used intercept; in the output, the intercept with",
+                          "respect to the noncentered predictors is given (named", code("b_Intercept", .noWS = "after"), ")."),
+                  tags$li(code("b"), ": nonpooled effects (or nonpooled regression coefficients)."),
+                  tags$li(code("sd"), ": standard deviations of partially pooled effects."),
+                  tags$li(code("cor"), ": correlations between partially pooled effects of the same group."),
+                  tags$li("All other parameter classes are specific to the chosen",
+                          "distributional family for the outcome (see page",
+                          HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
+                          ").")
+                )),
         tags$li("As soon as you choose a new dataset on page", actionLink("data_link3", "Data"), "(even if you upload",
                 "the same dataset again), the custom priors are automatically reset."),
         tags$li("As soon as you change the likelihood, the custom priors are automatically reset.")
@@ -1040,7 +1056,9 @@ ui <- navbarPage(
             tags$ul(
               tags$li(
                 "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
-                "are used. These are as follows:",
+                "are used. These are closely related to the parameter classes listed on page",
+                HTML(paste(actionLink("prior_link3", "Prior")), .noWS = "after"), "and may be",
+                "summarized as follows:",
                 tags$ul(
                   tags$li(code("b_Intercept"), "is the intercept (with respect to the noncentered predictors)."),
                   tags$li("The parameters starting with", code("b_"), "are the nonpooled effects."),
@@ -1055,7 +1073,7 @@ ui <- navbarPage(
                   tags$li(code("log-posterior"), "is the accumulated log-posterior density (up to an additive constant)."),
                   tags$li("All other parameters are parameters specific to the chosen",
                           "distributional family for the outcome (see page",
-                          HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
+                          HTML(paste(actionLink("outcome_link2", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
                           ").")
                 )
               ),
@@ -1282,7 +1300,10 @@ server <- function(input, output, session){
     updateNavbarPage(session, "navbar_ID", "Likelihood")
   })
   
-  observeEvent(input$outcome_link1, {
+  observeEvent({
+    input$outcome_link1
+    input$outcome_link2
+  }, {
     updateNavbarPage(session, "navbar_ID", "Likelihood")
     updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
   })
@@ -1295,6 +1316,7 @@ server <- function(input, output, session){
   observeEvent({
     input$prior_link1
     input$prior_link2
+    input$prior_link3
   }, {
     updateNavbarPage(session, "navbar_ID", "Prior")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)

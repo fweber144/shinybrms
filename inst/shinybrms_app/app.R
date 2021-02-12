@@ -681,7 +681,7 @@ ui <- navbarPage(
           checkboxInput("show_stancode", "Show Stan code", value = FALSE),
           conditionalPanel(
             condition = "input.show_stancode",
-            verbatimTextOutput("stancode_view", placeholder = TRUE),
+            verbatimTextOutput("stancode_view", placeholder = TRUE)
           ),
           downloadButton("stancode_download", "Download Stan code")
         ),

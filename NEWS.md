@@ -1,5 +1,13 @@
 # **shinybrms** 1.5.0.9000
 
+## Minor changes
+
+  - Now using `parallel::detectCores(logical = FALSE)` instead of
+    `parallel::detectCores()` when determining the default number of cores for
+    the Stan run.
+  - Improved help texts in the UI.
+  - Renamed tab "Summary" (page "Posterior") to "Default summary".
+
 # **shinybrms** 1.5.0
 
 ## Major changes

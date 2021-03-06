@@ -2,6 +2,7 @@
 
 ## Minor changes
 
+  - Updated some references.
   - Now using `parallel::detectCores(logical = FALSE)` instead of
     `parallel::detectCores()` when determining the default number of cores for
     the Stan run.

@@ -885,10 +885,7 @@ ui <- navbarPage(
                 #   target = "_blank",
                 #   .noWS = "after"),
                 # ")",
-                "proposed by",
-                a("Vehtari et al. (2021)",
-                  href = "https://doi.org/10.1214/20-BA1221",
-                  target = "_blank"),
+                "proposed by Vehtari et al. (2021)",
                 "(here simply called", em("the"), "\\(\\widehat{R}\\) instead of",
                 em("the modified"), "\\(\\widehat{R}\\)),"
               ),

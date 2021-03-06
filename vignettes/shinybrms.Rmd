@@ -174,11 +174,11 @@ For the general MCMC diagnostics (which are computed for each parameter as well 
 ### Summary
 
 \
-Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab "Summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
+Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab "Default summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
 
 \
 [![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)
-*Fig. 20: Page "Posterior", tab "Summary".*
+*Fig. 20: Page "Posterior", tab "Default summary".*
 
 ### Custom summary
 
@@ -215,7 +215,7 @@ Here, it makes sense to plot the conditional effects for the `week:trt` interact
 ### Launch **shinystan**
 
 \
-Note that the output shown on tab "Summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+Note that the output shown on tab "Default summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)

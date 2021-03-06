@@ -35,7 +35,7 @@ app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))
-app$setInputs(posterior_navlist_ID = "Summary")
+app$setInputs(posterior_navlist_ID = "Default summary")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))

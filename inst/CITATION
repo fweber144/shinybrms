@@ -3,10 +3,10 @@ bibentry(
   header = "To cite package 'shinybrms' in publications, use:",
   title = "{shinybrms}: Graphical User Interface ('{shiny}' App) for '{brms}'",
   author = "Frank Weber",
-  year = "2020",
-  note = "R package, version 1.5.0.9000",
+  year = "2021",
+  note = "R package, version 1.5.1",
   url = "https://fweber144.github.io/shinybrms/",
-  textVersion = paste("Frank Weber (2020).",
+  textVersion = paste("Frank Weber (2021).",
                       "shinybrms: Graphical User Interface ('shiny' App) for 'brms'.",
-                      "R package, version 1.5.0.9000. URL: https://fweber144.github.io/shinybrms/.")
+                      "R package, version 1.5.1. URL: https://fweber144.github.io/shinybrms/.")
 )

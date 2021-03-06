@@ -4,9 +4,9 @@ bibentry(
   title = "{shinybrms}: Graphical User Interface ('{shiny}' App) for '{brms}'",
   author = "Frank Weber",
   year = "2021",
-  note = "R package, version 1.5.1",
+  note = "R package, version 1.5.1.9000",
   url = "https://fweber144.github.io/shinybrms/",
   textVersion = paste("Frank Weber (2021).",
                       "shinybrms: Graphical User Interface ('shiny' App) for 'brms'.",
-                      "R package, version 1.5.1. URL: https://fweber144.github.io/shinybrms/.")
+                      "R package, version 1.5.1.9000. URL: https://fweber144.github.io/shinybrms/.")
 )

@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -87,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -104,7 +104,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://github.com/fweber144/shinybrms/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -125,6 +125,20 @@
       <small>Source: <a href='https://github.com/fweber144/shinybrms/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="shinybrms-151" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.1">
+<a href="#shinybrms-151" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.5.1</h1>
+<div id="minor-changes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li>Updated some references.</li>
+<li>Now using <code><a href="https://rdrr.io/r/parallel/detectCores.html">parallel::detectCores(logical = FALSE)</a></code> instead of <code><a href="https://rdrr.io/r/parallel/detectCores.html">parallel::detectCores()</a></code> when determining the default number of cores for the Stan run.</li>
+<li>Improved help texts in the UI.</li>
+<li>Renamed tab “Summary” (page “Posterior”) to “Default summary”.</li>
+</ul>
+</div>
+</div>
     <div id="shinybrms-150" class="section level1">
 <h1 class="page-header" data-toc-text="1.5.0">
 <a href="#shinybrms-150" class="anchor"></a><small> 2020-11-21 </small><strong>shinybrms</strong> 1.5.0</h1>
@@ -137,9 +151,9 @@
 <li>Added the possibility to perform custom posterior summary analyses, e.g. for a transformation of parameters or for a sum of parameters.</li>
 </ul>
 </div>
-<div id="minor-changes" class="section level2">
+<div id="minor-changes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Tab “Summary”: Increased the number of printed decimal digits from 2 to 4.</li>
 <li>Tab “Summary”: Replaced posterior mean and posterior standard deviation by posterior median and posterior median absolute deviation, respectively.</li>
@@ -182,9 +196,9 @@
 <li>A new theme is used for the <strong>shinybrms</strong> app. This theme is basically the “United” theme from <a href="https://github.com/thomaspark/bootswatch">Bootswatch</a> v3.3.7 with just a few minor modifications. For the font, the “Open Sans” font from <a href="https://fonts.google.com/">Google Fonts</a> is used. See the new file “LICENSE” for details concerning the licenses of these new components.</li>
 </ul>
 </div>
-<div id="minor-changes-1" class="section level2">
+<div id="minor-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>When deselecting a variable from the list for the nonpooled main effects or deselecting a variable from the list for the partially pooled main effects, the interactions involving this variable are now reduced to the corresponding lower-order interactions (instead of being simply removed).</li>
 <li>When updating the selections for the class or the coefficient of a custom prior, the former value is now selected if it exists among the new choices.</li>
@@ -218,9 +232,9 @@
 <li>Added a description how to include an offset. For this, the required version of <strong>brms</strong> had to be increased to 2.13.3.</li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level2">
+<div id="minor-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI (e.g. improved and added help texts and notifications, but also added hyperlinks to the online documentation of R functions).</li>
 <li>Added the possibility to download the MCMC diagnostics (including the newly added general MCMC diagnostics).</li>
@@ -240,9 +254,9 @@
     <div id="shinybrms-122-only-github" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.2">
 <a href="#shinybrms-122-only-github" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.2.2 (only GitHub)</h1>
-<div id="minor-changes-3" class="section level2">
+<div id="minor-changes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-4" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI.</li>
 <li>Show more warnings from the Stan run. Some of these additional warnings overlap with the HMC diagnostics added in v1.2.0, but rather show too many warnings (even if they are partly duplicated) than too few.</li>
@@ -259,9 +273,9 @@
     <div id="shinybrms-121" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.1">
 <a href="#shinybrms-121" class="anchor"></a><small> 2020-06-25 </small><strong>shinybrms</strong> 1.2.1</h1>
-<div id="minor-changes-4" class="section level2">
+<div id="minor-changes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-4" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-5" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI.</li>
 <li>Updated information about the <strong>shinybrms</strong> package and app (e.g. added the URL of the <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong> website</a>).</li>
@@ -285,9 +299,9 @@
 <li>Show Hamiltonian Monte Carlo (HMC) diagnostics in the “Output” panel on page “Posterior”.</li>
 </ul>
 </div>
-<div id="minor-changes-5" class="section level2">
+<div id="minor-changes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-5" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-6" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Added a package website built with <code>pkgdown</code>.</li>
 <li>Added a package logo created with <code>hexSticker</code>.</li>
@@ -312,9 +326,9 @@
 <li>Added the possibility to include varying effects.</li>
 </ul>
 </div>
-<div id="minor-changes-6" class="section level2">
+<div id="minor-changes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-6" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-7" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>All predictor terms (main effects as well as interactions) are now shown in a preview table.</li>
 <li>It is now possible to remove interaction terms one by one.</li>
@@ -324,7 +338,7 @@
 <li>Added the possibility to download the matrix of posterior draws as a CSV file.</li>
 <li>For the “Advanced options” (for <strong>brms</strong> and Stan): Use explicit default values and show them to the user. Set <code>adapt_delta</code> per default to 0.95 as done in package <strong>rstanarm</strong>. Set <code>max_treedepth</code> per default to 15 as done for most models in <strong>rstanarm</strong>.</li>
 <li>User interface (UI): Numerous minor improvements, especially concerning button labels, input fields, help texts, and notifications.</li>
-<li>Removed argument <code>launch.browser</code> from <code><a href="../reference/launch_shinybrms.html">shinybrms::launch_shinybrms()</a></code> so that the default from <code><a href="https://shiny.rstudio.com/reference/shiny/latest/runApp.html">shiny::runApp()</a></code> is used.</li>
+<li>Removed argument <code>launch.browser</code> from <code><a href="../reference/launch_shinybrms.html">shinybrms::launch_shinybrms()</a></code> so that the default from <code><a href="https://rdrr.io/pkg/shiny/man/runApp.html">shiny::runApp()</a></code> is used.</li>
 <li>Changed the way how RStudio’s default setting for the global option <code>browser</code> is avoided. Most importantly, option <code>shinybrms.RStudio_browser</code> was removed and replaced by the two new options <code>shinybrms.prog_browser</code> and <code>shinybrms.shinystan_browser</code>.</li>
 <li>Allowed *.dat files in the file upload.</li>
 </ul>

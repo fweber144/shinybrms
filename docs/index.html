@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
       </span>
     </div>
 
@@ -49,7 +49,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
+    <span class="fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -66,7 +66,7 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://github.com/fweber144/shinybrms/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -103,7 +103,7 @@
 <p>The following two sections describe two options for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The first option is recommended as it offers all advantages that R packages have (e.g. offline usage). For both options, you need to perform the following steps first:</p>
 <ol>
 <li>Install R (see the <a href="https://www.R-project.org/">R homepage</a>).</li>
-<li>Install the R package <a href="https://mc-stan.org/rstan/"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
+<li>Install the R package <a href="https://mc-stan.org/rstan/"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...],     dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
 </ol>
 <div id="with-installation-of-shinybrms" class="section level3">
 <h3 class="hasAnchor">
@@ -179,11 +179,11 @@
 <li>
 <p>Launch the <strong>shinybrms</strong> app directly <a href="https://github.com/fweber144/shinybrms/tree/master/inst/shinybrms_app">from GitHub</a> by either running the following R code:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
+<code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
                  subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span><span class="op">)</span></code></pre></div>
 <p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://shiny.rstudio.com/reference/shiny/latest/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
+<code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
                  subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span>,
                  launch.browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </li>

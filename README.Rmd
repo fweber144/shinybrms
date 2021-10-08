@@ -25,18 +25,18 @@ knitr::opts_chunk$set(
 
 The [R](https://www.R-project.org/) package [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package [**brms**](https://paul-buerkner.github.io/brms/) which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a [**shiny**](https://shiny.rstudio.com/) app.
 
-To get an impression of the **shinybrms** app, have a look at [this page](https://fweber144.github.io/shinybrms/articles/shinybrms.html). The following text explains how to launch the **shinybrms** app.
+To get an impression of the **shinybrms** app, have a look at [this page](https://fweber144.github.io/shinybrms/articles/shinybrms.html). The following text explains how to launch the **shinybrms** app (and also how to install it, if necessary).
 
 ## Launching the **shinybrms** app
 
-The following two sections describe two options for launching the **shinybrms** app, either *with* or *without* the installation of **shinybrms**. The first option is recommended as it offers all advantages that R packages have (e.g. offline usage). For both options, you need to perform the following steps first:
+The following two sections describe two options for launching the **shinybrms** app, either *with* or *without* the installation of **shinybrms**. The first option is recommended as it offers all advantages that R packages have (e.g., offline usage). For both options, you need to perform the following steps first:
 
 1. Install R (see the [R homepage](https://www.R-project.org/)).
 2. Install the R package [**rstan**](https://mc-stan.org/rstan/) (see the ["RStan Getting Started" GitHub page](https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started) for instructions; make sure to use `install.packages("rstan", [...], dependencies = TRUE)` with `[...]` as advised on the "RStan Getting Started" GitHub page).
 
 ### *With* installation of **shinybrms**
 
-1. In this first step, you will install the R package **shinybrms** either [from CRAN](https://CRAN.R-project.org/package=shinybrms) or [from GitHub](https://github.com/fweber144/shinybrms). The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages [**lme4**](https://CRAN.R-project.org/package=lme4), [**MASS**](https://CRAN.R-project.org/package=MASS), and [**rstanarm**](https://mc-stan.org/rstanarm/) or not.
+1. Use one of the following approaches to install the R package **shinybrms** either from [CRAN](https://CRAN.R-project.org/package=shinybrms) or from [GitHub](https://github.com/fweber144/shinybrms). The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages [**lme4**](https://CRAN.R-project.org/package=lme4), [**MASS**](https://CRAN.R-project.org/package=MASS), and [**rstanarm**](https://mc-stan.org/rstanarm/) or not.
     + If you want to use the example datasets from the R packages **lme4**, **MASS**, and **rstanarm**, then the R code for installing **shinybrms** from CRAN and GitHub (respectively) is as follows:
       * To install **shinybrms** from CRAN:
         ```{r, eval = FALSE}
@@ -66,7 +66,7 @@ The following two sections describe two options for launching the **shinybrms** 
    library(shinybrms)
    launch_shinybrms()
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using [RStudio](https://rstudio.com/)):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://rstudio.com/)):
    ```{r, eval = FALSE}
    library(shinybrms)
    launch_shinybrms(launch.browser = TRUE)
@@ -87,7 +87,7 @@ The following two sections describe two options for launching the **shinybrms** 
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app")
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using [RStudio](https://rstudio.com/)):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://rstudio.com/)):
    ```{r, eval = FALSE}
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app",

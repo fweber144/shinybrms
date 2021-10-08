@@ -166,7 +166,7 @@ ui <- navbarPage(
         "the parameters.)",
         "Thus, after having specified the likelihood and the prior (distribution), the aim of a",
         "Bayesian data analysis is to infer the posterior (distribution) and then perform",
-        "analyses based on the posterior, e.g. plotting marginal posterior distributions and",
+        "analyses based on the posterior, e.g., plotting marginal posterior distributions and",
         "calculating their 2.5%, 50%, and 97.5% quantiles."),
       p("For a more thorough introduction to Bayesian statistics in general as well as",
         "Bayesian regression models in particular, the following textbooks might",
@@ -202,7 +202,7 @@ ui <- navbarPage(
         HTML(paste(actionLink("references_link1", "References")), .noWS = "after"), "."),
       p("Furthermore, the following conventions are used throughout this app:",
         tags$ul(
-          tags$li("Names of R packages are written in bold (e.g.", strong("brms", .noWS = "after"), ")."),
+          tags$li("Names of R packages are written in bold (e.g.,", strong("brms", .noWS = "after"), ")."),
           tags$li("Names of R functions are given according to the scheme",
                   code("<package>::<function>()"), "with", code("<package>"), "denoting the R package which",
                   "contains the", code("<function>", .noWS = "after"), ". Where possible, this scheme is hyperlinked.")
@@ -346,7 +346,7 @@ ui <- navbarPage(
               .noWS = "after"),
             ". Note that for each parameter, the link function only applies if this parameter is",
             "actually modeled by (nonconstant) predictors. Currently, this is only supported",
-            "for the location parameter (e.g.", code("mu"), "for a Gaussian distribution)."),
+            "for the location parameter (e.g.,", code("mu"), "for a Gaussian distribution)."),
           p("For details concerning the remaining (family-specific) parameters, see the help for the R function ",
             a(HTML(paste(code("brms::set_prior()"))),
               href = "https://paul-buerkner.github.io/brms/reference/set_prior.html",
@@ -367,7 +367,7 @@ ui <- navbarPage(
             "The type of a variable may be seen on page", actionLink("data_link2", "Data"),
             "when choosing the \"Structure\" preview type. If you want a numeric variable to be",
             "treated as a nominal predictor variable, you have to convert this variable in your",
-            "dataset to a character variable, e.g. by changing the value", code("1"), "to",
+            "dataset to a character variable, e.g., by changing the value", code("1"), "to",
             code("level1", .noWS = "after"), ", the value", code("2"), "to",
             code("level2", .noWS = "after"), ", and so on.",
             "For nominal predictor variables, the first level (after sorting alphabetically) will be the",
@@ -617,7 +617,7 @@ ui <- navbarPage(
                         ),
                         "If you specify a prior distribution using a Stan function, you have to",
                         "use the Stan function which would be used in a Stan sampling statement",
-                        "and specify values for all arguments of this Stan function (e.g.",
+                        "and specify values for all arguments of this Stan function (e.g.,",
                         code("normal(0, 2.5)", .noWS = "after"), ")."
                       )),
                       style = "font-weight:normal"

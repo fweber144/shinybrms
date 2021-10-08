@@ -35,7 +35,7 @@ We then switch to page "Data". Usually, you will want to upload a custom dataset
 *Fig. 2: Page "Data" (top).*
 
 \
-Further down on page "Data", we may choose e.g. to show all rows of the dataset:
+Further down on page "Data", we may choose, for example, to show all rows of the dataset:
 
 \
 [![](screenshots/Data_AllRows.png)](screenshots/Data_AllRows.png)

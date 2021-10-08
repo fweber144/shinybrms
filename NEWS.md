@@ -6,8 +6,8 @@
 
   - Updated some references.
   - Now using `parallel::detectCores(logical = FALSE)` instead of
-    `parallel::detectCores()` when determining the default number of cores for
-    the Stan run.
+    `parallel::detectCores()` when determining the default number of
+    cores for the Stan run.
   - Improved help texts in the UI.
   - Renamed tab "Summary" (page "Posterior") to "Default summary".
 
@@ -21,7 +21,7 @@
   - Added support for conditional-effects plots (see
     [`brms::conditional_effects()`](https://paul-buerkner.github.io/brms/reference/conditional_effects.brmsfit.html)).
   - Added the possibility to perform custom posterior summary analyses,
-    e.g. for a transformation of parameters or for a sum of parameters.
+    e.g., for a transformation of parameters or for a sum of parameters.
 
 ## Minor changes
 
@@ -33,7 +33,7 @@
   - For partially pooled main effects, numeric (including integer)
     variables are not allowed anymore.
   - Example dataset `kidiq`: Converted column `mom_hs` to factor.
-  - UI: Minor improvements (e.g. in label and notification texts).
+  - UI: Minor improvements (e.g., in label and notification texts).
   - Minor cosmetic improvement in the CSS theme.
   - Included some changes necessary for **brms** version 2.14.0 (and
     above).
@@ -82,7 +82,8 @@
     of class or coefficient (provided that the clearing was allowed,
     meaning that such a combination was present in the table of the
     default priors).
-  - UI: Minor improvements (e.g. improved button labels and help texts).
+  - UI: Minor improvements (e.g., improved button labels and help
+    texts).
   - On Windows with **rstan** version \>= 2.21.1: Automatically run
     `rstan::rstan_options("javascript" = FALSE)` at the launch of the
     **shinybrms** app to prevent occasional crashes of the R session
@@ -122,9 +123,9 @@
 
 ## Minor changes
 
-  - Minor improvements in the UI (e.g. improved and added help texts and
-    notifications, but also added hyperlinks to the online documentation
-    of R functions).
+  - Minor improvements in the UI (e.g., improved and added help texts
+    and notifications, but also added hyperlinks to the online
+    documentation of R functions).
   - Added the possibility to download the MCMC diagnostics (including
     the newly added general MCMC diagnostics).
   - Minor improvements in the README file.
@@ -156,7 +157,7 @@
 
   - Minor improvements in the UI.
   - Updated information about the **shinybrms** package and app
-    (e.g. added the URL of the 
+    (e.g., added the URL of the 
     [**shinybrms** website](https://fweber144.github.io/shinybrms/)).
 
 ## Bug fixes
@@ -193,7 +194,7 @@
     shown in a preview table.
   - It is now possible to remove interaction terms one by one.
   - Restricted the choices for the outcome and the predictor selections
-    (e.g. the outcome variable is now automatically removed from the
+    (e.g., the outcome variable is now automatically removed from the
     list of possible predictor variables).
   - Removed some example datasets and added new ones.
   - Automatically create the R objects needed for the posterior

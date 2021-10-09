@@ -32,12 +32,9 @@
 #'
 #' @export
 #'
-#' @examples
-#' \donttest{
-#' if(interactive()){
-#'   launch_shinybrms(launch.browser = TRUE)
-#' }
-#' }
+#' @examplesIf interactive()
+#' launch_shinybrms(launch.browser = TRUE)
+#' 
 
 launch_shinybrms <- function(...){
   app_path <- system.file("shinybrms_app", package = "shinybrms")

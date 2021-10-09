@@ -30,12 +30,11 @@
 #'
 #' @return `TRUE` (invisible).
 #'
-#' @export
-#'
 #' @examplesIf interactive()
 #' launch_shinybrms(launch.browser = TRUE)
 #' 
-
+#' @export
+#' 
 launch_shinybrms <- function(...){
   app_path <- system.file("shinybrms_app", package = "shinybrms")
   if(identical(app_path, "")){

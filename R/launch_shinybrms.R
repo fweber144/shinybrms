@@ -30,8 +30,10 @@
 #'
 #' @return `TRUE` (invisible).
 #'
-#' @examplesIf interactive()
-#' launch_shinybrms(launch.browser = TRUE)
+#' @examples
+#' if (interactive()) {
+#'   launch_shinybrms(launch.browser = TRUE)
+#' }
 #' 
 #' @export
 #' 

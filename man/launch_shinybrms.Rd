@@ -42,7 +42,8 @@ Note that \bold{shinystan}'s global option \code{shinystan.rstudio} (see
 external \R process where RStudio's browsers are not available.
 }
 \examples{
-\dontshow{if (interactive()) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-launch_shinybrms(launch.browser = TRUE)
-\dontshow{\}) # examplesIf}
+if (interactive()) {
+  launch_shinybrms(launch.browser = TRUE)
+}
+
 }

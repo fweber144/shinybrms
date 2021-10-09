@@ -2,7 +2,7 @@ library(shinytest)
 
 test_that(
   paste("the app does not crash when switching the dataset after having selected",
-        "outcome and distributional family (but no predictors) for the former dataset."),
+        "outcome and distributional family (but no predictors) for the initial dataset."),
   {
     skip_on_cran()
     skip_if_not_installed("lme4")
@@ -16,7 +16,7 @@ test_that(
 
 test_that(
   paste("the app does not crash when switching to a dataset which differs from",
-        "the former dataset only in the name of a predictor variable."),
+        "the initial dataset only in the name of a predictor variable."),
   {
     skip_on_cran()
     
@@ -35,7 +35,7 @@ test_that("uploading another dataset (here: the same dataset again) resets the c
 })
 
 test_that(
-  paste("switching to a dataset which differs from the former dataset only in some values of the variables",
+  paste("switching to a dataset which differs from the initial dataset only in some values of the variables",
         "causes the default priors to be recomputed correctly and the custom priors to be reset."),
   {
     skip_on_cran()

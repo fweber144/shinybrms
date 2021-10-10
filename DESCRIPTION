@@ -38,9 +38,11 @@ Suggests:
     rstanarm,
     MASS,
     lme4,
+    knitr,
     rmarkdown,
     testthat,
     shinytest
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr, rmarkdown

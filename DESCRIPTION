@@ -41,5 +41,6 @@ Suggests:
     rstanarm,
     MASS,
     lme4,
+    rmarkdown,
     testthat,
     shinytest

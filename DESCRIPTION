@@ -1,4 +1,3 @@
-Roxygen: list(markdown = TRUE)
 Package: shinybrms
 Title: Graphical User Interface ('shiny' App) for 'brms'
 Version: 1.5.1.9000
@@ -27,8 +26,6 @@ License: GPL-3 | file LICENSE
 URL: https://fweber144.github.io/shinybrms/,
     https://github.com/fweber144/shinybrms
 BugReports: https://github.com/fweber144/shinybrms/issues
-Encoding: UTF-8
-RoxygenNote: 7.1.2
 Depends: R (>= 3.6.0)
 Imports: 
     shiny (>= 1.4.0),
@@ -44,3 +41,6 @@ Suggests:
     rmarkdown,
     testthat,
     shinytest
+Encoding: UTF-8
+RoxygenNote: 7.1.2
+Roxygen: list(markdown = TRUE)

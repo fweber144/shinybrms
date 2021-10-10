@@ -38,7 +38,6 @@ Suggests:
     rstanarm,
     MASS,
     lme4,
-    rmarkdown,
     testthat,
     shinytest
 Encoding: UTF-8

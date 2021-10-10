@@ -1,12 +1,17 @@
+meta_year <- sub("-.*$", "", meta$Date)
+
 bibentry(
   bibtype = "Manual",
   header = "To cite package 'shinybrms' in publications, use:",
   title = "{shinybrms}: Graphical User Interface ('{shiny}' App) for '{brms}'",
   author = "Frank Weber",
-  year = "2021",
-  note = "R package, version 1.5.1.9000",
+  year = meta_year,
+  note = paste("R package, version", meta$Version),
   url = "https://fweber144.github.io/shinybrms/",
-  textVersion = paste("Frank Weber (2021).",
-                      "shinybrms: Graphical User Interface ('shiny' App) for 'brms'.",
-                      "R package, version 1.5.1.9000. URL: https://fweber144.github.io/shinybrms/.")
+  textVersion = paste0(
+    "Frank Weber (", meta_year, "). ",
+    "shinybrms: Graphical User Interface ('shiny' App) for 'brms'. ",
+    "R package, version ", meta$Version,
+    ". URL: https://fweber144.github.io/shinybrms/."
+  )
 )

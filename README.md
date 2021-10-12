@@ -1,12 +1,4 @@
 
-<br>
-
-<!-- badges: start -->
-
-[![Travis build
-status](https://travis-ci.com/fweber144/shinybrms.svg?branch=master)](https://travis-ci.com/fweber144/shinybrms)
-<!-- badges: end -->
-
 # **shinybrms** <img src='man/figures/logo.svg' align="right" height="139" />
 
 <br>

@@ -1,11 +1,4 @@
 
-<br>
-
-<!-- badges: start -->
-
-[![R-CMD-check](https://github.com/fweber144/shinybrms/workflows/R-CMD-check/badge.svg)](https://github.com/fweber144/shinybrms/actions)
-<!-- badges: end -->
-
 # **shinybrms** <img src='man/figures/logo.svg' align="right" height="139" />
 
 <br>

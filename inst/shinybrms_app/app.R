@@ -871,20 +871,7 @@ ui <- navbarPage(
             "as well as for the accumulated log-posterior density) are:",
             tags$ul(
               tags$li(
-                "the modified",
-                # "variant of the",
-                "potential scale reduction factor \\(\\widehat{R}\\)",
-                # "(",
-                # a("Gelman and Rubin, 1992",
-                #   href = "https://doi.org/10.1214/ss/1177011136",
-                #   target = "_blank",
-                #   .noWS = "outside"),
-                # ";",
-                # a("Brooks and Gelman, 1998",
-                #   href = "https://doi.org/10.2307/1390675",
-                #   target = "_blank",
-                #   .noWS = "after"),
-                # ")",
+                "the modified \\(\\widehat{R}\\)",
                 "proposed by Vehtari et al. (2021)",
                 "(here simply called", em("the"), "\\(\\widehat{R}\\) instead of",
                 em("the modified"), "\\(\\widehat{R}\\)),"

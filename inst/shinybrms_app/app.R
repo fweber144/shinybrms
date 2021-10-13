@@ -2582,7 +2582,7 @@ server <- function(input, output, session){
   })
   
   C_pars <- reactive({
-    return(brms::parnames(C_stanres()$bfit))
+    return(brms::variables(C_stanres()$bfit))
   })
   
   observe({

@@ -14,9 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-####################################################################################################
-# Preparations and global definitions
-####################################################################################################
+# Preparations and global definitions -------------------------------------
 
 library(shiny)
 
@@ -112,19 +110,22 @@ for (char_i in cust_allow_spec) {
 }
 
 # Empty "Custom summary" table:
-cust_smmry_empty <- setNames(cbind(data.frame(character()), as.data.frame(matrix(0, nrow = 0, ncol = 8))),
-                             sub("^Q50$",
-                                 "median",
-                                 c("Name",
-                                   paste0("Q", sub("\\.0$", "", 100 * c(0.025, 0.25, 0.5, 0.75, 0.975))),
-                                   "MAD", "mean", "SD")))
+cust_smmry_empty <- setNames(
+  cbind(data.frame(character()), as.data.frame(matrix(0, nrow = 0, ncol = 8))),
+  sub("^Q50$",
+      "median",
+      c("Name",
+        paste0("Q", sub("\\.0$", "", 100 * c(0.025, 0.25, 0.5, 0.75, 0.975))),
+        "MAD", "mean", "SD"))
+)
 
-####################################################################################################
-# UI
-####################################################################################################
+# UI ----------------------------------------------------------------------
 
 ui <- navbarPage(
   "shinybrms", id = "navbar_ID",
+  
+  ## Home -------------------------------------------------------------------
+  
   tabPanel(
     "Home",
     titlePanel("Home"),
@@ -211,6 +212,9 @@ ui <- navbarPage(
     # hr(),
     icon = icon("home")
   ),
+  
+  ## Data -------------------------------------------------------------------
+  
   tabPanel(
     "Data",
     titlePanel("Data"),
@@ -246,19 +250,21 @@ ui <- navbarPage(
                    .noWS = "after"),
                  ")."),
         selectInput("ex_da_sel", NULL,
-                    choices = c("Choose example dataset ..." = "",
-                                "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
-                                "bacteria (from package \"MASS\")" = "bacteria",
-                                "birthwt (from package \"MASS\")" = "birthwt",
-                                "epilepsy (from package \"brms\")" = "epilepsy",
-                                "grouseticks (from package \"lme4\")" = "grouseticks",
-                                "kidiq (from package \"rstanarm\")" = "kidiq",
-                                "Puromycin" = "Puromycin",
-                                "quine (from package \"MASS\")" = "quine",
-                                "Rabbit (from package \"MASS\")" = "Rabbit",
-                                "roaches (from package \"rstanarm\")" = "roaches",
-                                "sleepstudy (from package \"lme4\")" = "sleepstudy",
-                                "ToothGrowth" = "ToothGrowth"),
+                    choices = c(
+                      "Choose example dataset ..." = "",
+                      "Arabidopsis (from package \"lme4\")" = "Arabidopsis",
+                      "bacteria (from package \"MASS\")" = "bacteria",
+                      "birthwt (from package \"MASS\")" = "birthwt",
+                      "epilepsy (from package \"brms\")" = "epilepsy",
+                      "grouseticks (from package \"lme4\")" = "grouseticks",
+                      "kidiq (from package \"rstanarm\")" = "kidiq",
+                      "Puromycin" = "Puromycin",
+                      "quine (from package \"MASS\")" = "quine",
+                      "Rabbit (from package \"MASS\")" = "Rabbit",
+                      "roaches (from package \"rstanarm\")" = "roaches",
+                      "sleepstudy (from package \"lme4\")" = "sleepstudy",
+                      "ToothGrowth" = "ToothGrowth"
+                    ),
                     selectize = TRUE),
         hr(),
         h4("Upload a dataset"),
@@ -308,11 +314,15 @@ ui <- navbarPage(
       )
     )
   ),
+  
+  ## Likelihood -------------------------------------------------------------
+  
   tabPanel(
     "Likelihood",
     titlePanel("Likelihood"),
     br(),
     navlistPanel(
+      ### Outcome ---------------------------------------------------------------
       tabPanel(
         "Outcome",
         titlePanel("Outcome"),
@@ -354,6 +364,7 @@ ui <- navbarPage(
             ".")
         )
       ),
+      ### Predictors ------------------------------------------------------------
       tabPanel(
         "Predictors",
         titlePanel("Predictors"),
@@ -488,6 +499,7 @@ ui <- navbarPage(
           tableOutput("pred_view")
         )
       ),
+      ### Formula preview -------------------------------------------------------
       tabPanel(
         "Formula preview",
         titlePanel("Formula preview"),
@@ -498,6 +510,9 @@ ui <- navbarPage(
       id = "likelihood_navlist_ID"
     )
   ),
+  
+  ## Prior ------------------------------------------------------------------
+  
   tabPanel(
     "Prior",
     titlePanel("Prior"),
@@ -640,6 +655,9 @@ ui <- navbarPage(
       )
     )
   ),
+  
+  ## Posterior --------------------------------------------------------------
+  
   tabPanel(
     "Posterior",
     titlePanel("Posterior"),
@@ -663,6 +681,7 @@ ui <- navbarPage(
       "."
     ),
     navlistPanel(
+      ### Run Stan --------------------------------------------------------------
       tabPanel(
         "Run Stan",
         titlePanel("Run Stan"),
@@ -823,6 +842,7 @@ ui <- navbarPage(
           downloadButton("stanout_download", "Download output file")
         )
       ),
+      ### MCMC diagnostics ------------------------------------------------------
       tabPanel(
         "MCMC diagnostics",
         titlePanel("MCMC diagnostics"),
@@ -919,6 +939,7 @@ ui <- navbarPage(
           )
         )
       ),
+      ### Default summary -------------------------------------------------------
       tabPanel(
         "Default summary",
         titlePanel("Default summary"),
@@ -933,6 +954,7 @@ ui <- navbarPage(
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE)
       ),
+      ### Custom summary --------------------------------------------------------
       tabPanel(
         "Custom summary",
         titlePanel("Custom summary"),
@@ -980,6 +1002,7 @@ ui <- navbarPage(
         br(),
         br()
       ),
+      ### Conditional effects ---------------------------------------------------
       tabPanel(
         "Conditional effects",
         titlePanel("Conditional effects"),
@@ -1029,6 +1052,7 @@ ui <- navbarPage(
         br(),
         br()
       ),
+      ### Launch **shinystan** --------------------------------------------------
       tabPanel(
         HTML(paste("Launch", strong("shinystan"))),
         titlePanel(HTML(paste("Launch", strong("shinystan")))),
@@ -1086,8 +1110,12 @@ ui <- navbarPage(
       id = "posterior_navlist_ID"
     )
   ),
+  
+  ## More -------------------------------------------------------------------
+  
   navbarMenu(
     "More",
+    ### About -----------------------------------------------------------------
     tabPanel(
       "About",
       titlePanel(HTML(paste("About", strong("shinybrms")))),
@@ -1172,6 +1200,7 @@ ui <- navbarPage(
         )
       )
     ),
+    ### Links -----------------------------------------------------------------
     tabPanel(
       "Links",
       titlePanel("Links"),
@@ -1234,6 +1263,7 @@ ui <- navbarPage(
         )
       )
     ),
+    ### References ------------------------------------------------------------
     tabPanel(
       "References",
       titlePanel("References"),
@@ -1261,13 +1291,14 @@ ui <- navbarPage(
         "."))
     )
   ),
+  
+  ## Quit -------------------------------------------------------------------
+  
   tabPanel(title = "Quit", value = "quit_app", icon = icon("power-off")),
   theme = "united_mod.min.css"
 )
 
-####################################################################################################
-# Server
-####################################################################################################
+# Server ------------------------------------------------------------------
 
 server <- function(input, output, session) {
   

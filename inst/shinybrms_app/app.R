@@ -136,7 +136,7 @@ ui <- navbarPage(
       # br(),
       h4("Description"),
       p("This",
-        a(strong("shiny"), href = "https://shiny.rstudio.com/", target = "_blank"),
+        a(HTML(paste(strong("shiny"))), href = "https://shiny.rstudio.com/", target = "_blank"),
         "app is part of the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
         "package",

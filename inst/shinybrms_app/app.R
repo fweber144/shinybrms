@@ -1262,7 +1262,16 @@ ui <- navbarPage(
     )
   ),
   tabPanel(title = "Quit", value = "quit_app", icon = icon("power-off")),
-  theme = "united_mod.min.css"
+  theme = bslib::bs_theme(
+    bootswatch = "united",
+    # fg = "#FDF7F7", # TODO
+    # bg = "#101010", # TODO
+    primary = "#a50034",
+    secondary = "#858182",
+    base_font = if(pingr::is_online()) bslib::font_google("Open Sans") else NULL,
+    heading_font = if(pingr::is_online()) bslib::font_google("Open Sans") else NULL
+    # , code_font = if(pingr::is_online()) bslib::font_google("JetBrains Mono") else NULL # TODO
+  )
 )
 
 ####################################################################################################

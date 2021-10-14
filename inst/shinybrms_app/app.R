@@ -1864,10 +1864,11 @@ server <- function(input, output, session){
     }
     if(length(warn_capt) > 0L){
       warn_capt <- unique(warn_capt)
-      warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <-
-        paste("Warning: There are missing values in the data. The corresponding rows have been",
-              "omitted in the construction of the default priors. They will also be omitted when",
-              "running Stan (and also in the Stan data).")
+      warn_capt[warn_capt == "Warning: Rows containing NAs were excluded from the model."] <- paste(
+        "Warning: There are missing values in the data. The corresponding rows have been",
+        "omitted in the construction of the default priors. They will also be omitted when",
+        "running Stan (and also in the Stan data)."
+      )
       for(warn_capt_i in warn_capt){
         showNotification(
           warn_capt_i,

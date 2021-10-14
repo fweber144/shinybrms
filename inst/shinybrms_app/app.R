@@ -2444,7 +2444,8 @@ server <- function(input, output, session){
     EBFMI_text <- paste0("The E-BFMI (",
                          paste(paste0(names(C_stanres()$diagn$EBFMI),
                                       ": ",
-                                      round(C_stanres()$diagn$EBFMI, 4)),
+                                      format(round(C_stanres()$diagn$EBFMI, 4),
+                                             nsmall = 4)),
                                collapse = ", "),
                          ")")
     if(C_stanres()$diagn$EBFMI_OK){

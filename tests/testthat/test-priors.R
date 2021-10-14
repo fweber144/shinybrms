@@ -6,7 +6,7 @@ test_that("Specification of custom priors", {
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "priors.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "priors.R"))
 })
 
 test_that("the group for the prior is not automatically set to be empty when not necessary.", {
@@ -15,7 +15,7 @@ test_that("the group for the prior is not automatically set to be empty when not
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "priors_autoSetEmpty.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "priors_autoSetEmpty.R"))
 })
 
 test_that("if necessary, the group for the prior is automatically reset when switching the class for the prior.", {
@@ -24,5 +24,5 @@ test_that("if necessary, the group for the prior is automatically reset when swi
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "priors_switchClass.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "priors_switchClass.R"))
 })

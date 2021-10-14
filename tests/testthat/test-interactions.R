@@ -6,5 +6,5 @@ test_that("Specification of interaction terms", {
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "interactions.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "interactions.R"))
 })

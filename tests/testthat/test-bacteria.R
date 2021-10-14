@@ -9,7 +9,7 @@ test_that("Results of the Stan run for the \"bacteria\" example from the \"shiny
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "bacteria_run_linux.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "bacteria_run_linux.R"))
 })
 
 test_that("Results of the Stan run for the \"bacteria\" example from the \"shinybrms\" vignette on Windows", {
@@ -21,5 +21,5 @@ test_that("Results of the Stan run for the \"bacteria\" example from the \"shiny
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "bacteria_run_windows.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "bacteria_run_windows.R"))
 })

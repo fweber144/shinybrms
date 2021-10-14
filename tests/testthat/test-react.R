@@ -10,7 +10,7 @@ test_that(paste(
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "switchData_outcome.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_outcome.R"))
 })
 
 test_that(paste(
@@ -21,7 +21,7 @@ test_that(paste(
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "switchData_pred.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_pred.R"))
 })
 
 test_that("uploading another dataset (here: the same dataset again) resets the custom priors.", {
@@ -29,7 +29,7 @@ test_that("uploading another dataset (here: the same dataset again) resets the c
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "switchData_same.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_same.R"))
 })
 
 test_that(paste(
@@ -40,7 +40,7 @@ test_that(paste(
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "switchData_value.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_value.R"))
 })
 
 test_that("clearing the outcome resets the priors.", {
@@ -49,7 +49,7 @@ test_that("clearing the outcome resets the priors.", {
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "clearOutcome.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "clearOutcome.R"))
 })
 
 test_that("clearing the distributional family resets the priors.", {
@@ -58,7 +58,7 @@ test_that("clearing the distributional family resets the priors.", {
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "clearFamily.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "clearFamily.R"))
 })
 
 test_that("clearing the example dataset resets the priors, the selected outcome, and the selected predictors.", {
@@ -67,5 +67,5 @@ test_that("clearing the example dataset resets the priors, the selected outcome,
   
   shinytest::installDependencies()
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  expect_pass(testApp(app_path, testnames = "clearData.R"))
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "clearData.R"))
 })

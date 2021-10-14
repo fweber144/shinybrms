@@ -1262,7 +1262,14 @@ ui <- navbarPage(
     )
   ),
   tabPanel(title = "Quit", value = "quit_app", icon = icon("power-off")),
-  theme = bslib::bs_theme(version = 4, primary = "#a50034")
+  theme = bslib::bs_theme(
+    version = 4,
+    bootswatch = "united",
+    primary = "#a50034",
+    secondary = "#858182",
+    base_font = "Verdana",
+    font_scale = 0.9
+  )
 )
 
 ####################################################################################################

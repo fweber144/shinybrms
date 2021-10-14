@@ -1042,7 +1042,7 @@ ui <- navbarPage(
               tags$li(
                 "In the", strong("shinystan"), "app, the parameter names given by", strong("brms"),
                 "are used. These are closely related to the parameter classes listed on page",
-                HTML(paste(actionLink("prior_link3", "Prior")), .noWS = "after"), "and may be",
+                HTML(paste(actionLink("prior_link3", "Prior"))), "and may be",
                 "summarized as follows:",
                 tags$ul(
                   tags$li(code("b_Intercept"), "is the intercept (with respect to the noncentered predictors)."),

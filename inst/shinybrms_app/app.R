@@ -1265,13 +1265,10 @@ ui <- navbarPage(
   theme = bslib::bs_theme(
     version = 5,
     bootswatch = "united",
-    # fg = "#FDF7F7", # TODO
-    # bg = "#101010", # TODO
     primary = "#a50034",
     secondary = "#858182",
-    base_font = if(pingr::is_online()) bslib::font_google("Open Sans") else NULL,
-    heading_font = if(pingr::is_online()) bslib::font_google("Open Sans") else NULL
-    # , code_font = if(pingr::is_online()) bslib::font_google("JetBrains Mono") else NULL # TODO
+    base_font = "Verdana"
+    #, font_scale = NULL
   )
 )
 
@@ -1280,6 +1277,8 @@ ui <- navbarPage(
 ####################################################################################################
 
 server <- function(input, output, session){
+  
+  bslib::bs_themer()
   
   #-------------------------------------------------
   # Links

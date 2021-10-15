@@ -23,8 +23,7 @@ Description: A graphical user interface (GUI) for fitting Bayesian
     'Stan' (<https://mc-stan.org/>). The 'shinybrms' GUI is a 'shiny'
     app.
 License: GPL-3 | file LICENSE
-URL: https://fweber144.github.io/shinybrms/,
-    https://github.com/fweber144/shinybrms
+URL: https://fweber144.github.io/shinybrms/
 BugReports: https://github.com/fweber144/shinybrms/issues
 Depends: R (>= 3.6.0)
 Imports: 

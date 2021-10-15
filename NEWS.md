@@ -1,5 +1,16 @@
 # **shinybrms** 1.5.1.9000
 
+## Minor changes
+
+  - UI: Minor wording improvements.
+  - Set a minimum width for the output on tab "Default summary".
+  - Append trailing zeros in the rounding of the E-BFMI values.
+
+## Bug fixes
+
+  - UI: Fixed some typos and incorrect spacing in the text.
+  - Avoid the deprecation warning for `brms::parnames()`.
+
 # **shinybrms** 1.5.1
 
 ## Minor changes

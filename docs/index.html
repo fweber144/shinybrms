@@ -41,7 +41,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
       </span>
     </div>
 
@@ -82,10 +82,6 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-
-<p><br></p>
-<!-- badges: start -->
-<p><a href="https://travis-ci.org/fweber144/shinybrms"><img src="https://travis-ci.org/fweber144/shinybrms.svg?branch=master" alt="Travis build status"></a> <!-- badges: end --></p>
 <div id="shinybrms-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
 <a href="#shinybrms-" class="anchor"></a><strong>shinybrms</strong> <img src="reference/figures/logo.svg" align="right" height="139">
@@ -95,15 +91,15 @@
 <h2 class="hasAnchor">
 <a href="#description" class="anchor"></a>Description</h2>
 <p>The <a href="https://www.R-project.org/">R</a> package <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong></a> provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package <a href="https://paul-buerkner.github.io/brms/"><strong>brms</strong></a> which in turn relies on <a href="https://mc-stan.org/">Stan</a>. The <strong>shinybrms</strong> GUI is a <a href="https://shiny.rstudio.com/"><strong>shiny</strong></a> app.</p>
-<p>To get an impression of the <strong>shinybrms</strong> app, have a look at <a href="https://fweber144.github.io/shinybrms/articles/shinybrms.html">this page</a>. The following text explains how to launch the <strong>shinybrms</strong> app.</p>
+<p>To get an impression of the <strong>shinybrms</strong> app, have a look at <a href="https://fweber144.github.io/shinybrms/articles/shinybrms.html">this page</a>. The following text explains how to launch the <strong>shinybrms</strong> app (and also how to install it, if necessary).</p>
 </div>
 <div id="launching-the-shinybrms-app" class="section level2">
 <h2 class="hasAnchor">
 <a href="#launching-the-shinybrms-app" class="anchor"></a>Launching the <strong>shinybrms</strong> app</h2>
-<p>The following two sections describe two options for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The first option is recommended as it offers all advantages that R packages have (e.g. offline usage). For both options, you need to perform the following steps first:</p>
+<p>The following two sections describe two options for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The first option is recommended as it offers all advantages that R packages have (e.g., offline usage). For both options, you need to perform the following steps first:</p>
 <ol>
 <li>Install R (see the <a href="https://www.R-project.org/">R homepage</a>).</li>
-<li>Install the R package <a href="https://mc-stan.org/rstan/"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...],     dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
+<li>Install the R package <a href="https://mc-stan.org/rstan/"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
 </ol>
 <div id="with-installation-of-shinybrms" class="section level3">
 <h3 class="hasAnchor">
@@ -111,7 +107,7 @@
 </h3>
 <ol>
 <li>
-<p>In this first step, you will install the R package <strong>shinybrms</strong> either <a href="https://CRAN.R-project.org/package=shinybrms">from CRAN</a> or <a href="https://github.com/fweber144/shinybrms">from GitHub</a>. The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/"><strong>rstanarm</strong></a> or not.</p>
+<p>Use one of the following approaches to install the R package <strong>shinybrms</strong> either from <a href="https://CRAN.R-project.org/package=shinybrms">CRAN</a> or from <a href="https://github.com/fweber144/shinybrms">GitHub</a>. The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/"><strong>rstanarm</strong></a> or not.</p>
 <ul>
 <li>If you want to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
 <ul>
@@ -154,7 +150,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
+<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using <a href="https://www.rstudio.com/">RStudio</a>):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span>
 <span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span>launch.browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
@@ -181,7 +177,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
                  subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span><span class="op">)</span></code></pre></div>
-<p>or this R code which ensures that the app opens up in the default web browser (helpful e.g. if you are using <a href="https://rstudio.com/">RStudio</a>):</p>
+<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using <a href="https://www.rstudio.com/">RStudio</a>):</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,
                  subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span>,
@@ -191,7 +187,6 @@
 </div>
 </div>
 </div>
-
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

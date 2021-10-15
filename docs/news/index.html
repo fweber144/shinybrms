@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
       </span>
     </div>
 
@@ -125,12 +125,34 @@
       <small>Source: <a href='https://github.com/fweber144/shinybrms/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="shinybrms-151" class="section level1">
-<h1 class="page-header" data-toc-text="1.5.1">
-<a href="#shinybrms-151" class="anchor"></a><small> 2021-03-06 </small><strong>shinybrms</strong> 1.5.1</h1>
+    <div id="shinybrms-152" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.2">
+<a href="#shinybrms-152" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.5.2</h1>
 <div id="minor-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minor-changes" class="anchor"></a>Minor changes</h2>
+<ul>
+<li>UI: Minor wording improvements.</li>
+<li>Set a minimum width for the output on tab “Default summary”.</li>
+<li>Append trailing zeros in the rounding of the E-BFMI values.</li>
+</ul>
+</div>
+<div id="bug-fixes" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<ul>
+<li>UI: Fixed some typos and incorrect spacing in the text.</li>
+<li>Avoid the deprecation warning for <code><a href="https://rdrr.io/pkg/brms/man/parnames.html">brms::parnames()</a></code>.</li>
+<li>Fixed a NOTE occurring in some CRAN checks.</li>
+</ul>
+</div>
+</div>
+    <div id="shinybrms-151" class="section level1">
+<h1 class="page-header" data-toc-text="1.5.1">
+<a href="#shinybrms-151" class="anchor"></a><small> 2021-03-06 </small><strong>shinybrms</strong> 1.5.1</h1>
+<div id="minor-changes-1" class="section level2">
+<h2 class="hasAnchor">
+<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Updated some references.</li>
 <li>Now using <code><a href="https://rdrr.io/r/parallel/detectCores.html">parallel::detectCores(logical = FALSE)</a></code> instead of <code><a href="https://rdrr.io/r/parallel/detectCores.html">parallel::detectCores()</a></code> when determining the default number of cores for the Stan run.</li>
@@ -148,18 +170,18 @@
 <ul>
 <li>Use the automatic <code><a href="https://mc-stan.org/rstan/reference/rstan_options.html">rstan::rstan_options("javascript" = FALSE)</a></code> fix on <em>all</em> platforms (not only Windows) if <strong>rstan</strong> version 2.21.1 or above is used.</li>
 <li>Added support for conditional-effects plots (see <a href="https://paul-buerkner.github.io/brms/reference/conditional_effects.brmsfit.html"><code>brms::conditional_effects()</code></a>).</li>
-<li>Added the possibility to perform custom posterior summary analyses, e.g. for a transformation of parameters or for a sum of parameters.</li>
+<li>Added the possibility to perform custom posterior summary analyses, e.g., for a transformation of parameters or for a sum of parameters.</li>
 </ul>
 </div>
-<div id="minor-changes-1" class="section level2">
+<div id="minor-changes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-1" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Tab “Summary”: Increased the number of printed decimal digits from 2 to 4.</li>
 <li>Tab “Summary”: Replaced posterior mean and posterior standard deviation by posterior median and posterior median absolute deviation, respectively.</li>
 <li>For partially pooled main effects, numeric (including integer) variables are not allowed anymore.</li>
 <li>Example dataset <code>kidiq</code>: Converted column <code>mom_hs</code> to factor.</li>
-<li>UI: Minor improvements (e.g. in label and notification texts).</li>
+<li>UI: Minor improvements (e.g., in label and notification texts).</li>
 <li>Minor cosmetic improvement in the CSS theme.</li>
 <li>Included some changes necessary for <strong>brms</strong> version 2.14.0 (and above).</li>
 <li>Changed package description.</li>
@@ -167,9 +189,9 @@
 <li>Minor improvements in the documentation for <code><a href="../reference/launch_shinybrms.html">launch_shinybrms()</a></code>.</li>
 </ul>
 </div>
-<div id="bug-fixes" class="section level2">
+<div id="bug-fixes-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a possible security issue for the text input field “Prior distribution”.</li>
 </ul>
@@ -178,9 +200,9 @@
     <div id="shinybrms-141" class="section level1">
 <h1 class="page-header" data-toc-text="1.4.1">
 <a href="#shinybrms-141" class="anchor"></a><small> 2020-09-29 </small><strong>shinybrms</strong> 1.4.1</h1>
-<div id="bug-fixes-1" class="section level2">
+<div id="bug-fixes-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-1" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Corrected a mistake in the DESCRIPTION file: The contributors and copyright holders for external components have to be listed among the authors.</li>
 </ul>
@@ -196,21 +218,21 @@
 <li>A new theme is used for the <strong>shinybrms</strong> app. This theme is basically the “United” theme from <a href="https://github.com/thomaspark/bootswatch">Bootswatch</a> v3.3.7 with just a few minor modifications. For the font, the “Open Sans” font from <a href="https://fonts.google.com/">Google Fonts</a> is used. See the new file “LICENSE” for details concerning the licenses of these new components.</li>
 </ul>
 </div>
-<div id="minor-changes-2" class="section level2">
+<div id="minor-changes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-2" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-3" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>When deselecting a variable from the list for the nonpooled main effects or deselecting a variable from the list for the partially pooled main effects, the interactions involving this variable are now reduced to the corresponding lower-order interactions (instead of being simply removed).</li>
 <li>When updating the selections for the class or the coefficient of a custom prior, the former value is now selected if it exists among the new choices.</li>
 <li>When specifying a custom prior and switching the class or the coefficient, the input field for the group is now only cleared (automatically) if necessary. Before, it was cleared at every change of class or coefficient (provided that the clearing was allowed, meaning that such a combination was present in the table of the default priors).</li>
-<li>UI: Minor improvements (e.g. improved button labels and help texts).</li>
+<li>UI: Minor improvements (e.g., improved button labels and help texts).</li>
 <li>On Windows with <strong>rstan</strong> version &gt;= 2.21.1: Automatically run <code><a href="https://mc-stan.org/rstan/reference/rstan_options.html">rstan::rstan_options("javascript" = FALSE)</a></code> at the launch of the <strong>shinybrms</strong> app to prevent occasional crashes of the R session when starting the Stan run.</li>
 <li>UI: Added internal links.</li>
 </ul>
 </div>
-<div id="bug-fixes-2" class="section level2">
+<div id="bug-fixes-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-2" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed the bug that when setting the input field “Group” (of a custom prior) to a nonempty value and later switching back to an empty value, the “Group” was empty in the UI, but internally, the former value was kept. This bug was solved by initializing the input field “Group” <em>with</em> a choose prompt (which made it necessary to catch impossible combinations of “Class”, “Coefficient”, and “Group” with a user notification).</li>
 </ul>
@@ -232,20 +254,20 @@
 <li>Added a description how to include an offset. For this, the required version of <strong>brms</strong> had to be increased to 2.13.3.</li>
 </ul>
 </div>
-<div id="minor-changes-3" class="section level2">
+<div id="minor-changes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-3" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-4" class="anchor"></a>Minor changes</h2>
 <ul>
-<li>Minor improvements in the UI (e.g. improved and added help texts and notifications, but also added hyperlinks to the online documentation of R functions).</li>
+<li>Minor improvements in the UI (e.g., improved and added help texts and notifications, but also added hyperlinks to the online documentation of R functions).</li>
 <li>Added the possibility to download the MCMC diagnostics (including the newly added general MCMC diagnostics).</li>
 <li>Minor improvements in the README file.</li>
 <li>Minor improvements on pages “About” and “Links” (both listed under “More”).</li>
 <li>Added example dataset <code>roaches</code> from package <strong>rstanarm</strong>.</li>
 </ul>
 </div>
-<div id="bug-fixes-3" class="section level2">
+<div id="bug-fixes-4" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-3" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug when switching the dataset.</li>
 </ul>
@@ -254,17 +276,17 @@
     <div id="shinybrms-122-only-github" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.2">
 <a href="#shinybrms-122-only-github" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.2.2 (only GitHub)</h1>
-<div id="minor-changes-4" class="section level2">
+<div id="minor-changes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-4" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-5" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI.</li>
 <li>Show more warnings from the Stan run. Some of these additional warnings overlap with the HMC diagnostics added in v1.2.0, but rather show too many warnings (even if they are partly duplicated) than too few.</li>
 </ul>
 </div>
-<div id="bug-fixes-4" class="section level2">
+<div id="bug-fixes-5" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-4" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a NOTE occurring in some CRAN checks.</li>
 </ul>
@@ -273,17 +295,17 @@
     <div id="shinybrms-121" class="section level1">
 <h1 class="page-header" data-toc-text="1.2.1">
 <a href="#shinybrms-121" class="anchor"></a><small> 2020-06-25 </small><strong>shinybrms</strong> 1.2.1</h1>
-<div id="minor-changes-5" class="section level2">
+<div id="minor-changes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-5" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-6" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Minor improvements in the UI.</li>
-<li>Updated information about the <strong>shinybrms</strong> package and app (e.g. added the URL of the <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong> website</a>).</li>
+<li>Updated information about the <strong>shinybrms</strong> package and app (e.g., added the URL of the <strong>shinybrms</strong> <a href="https://fweber144.github.io/shinybrms/">website</a>).</li>
 </ul>
 </div>
-<div id="bug-fixes-5" class="section level2">
+<div id="bug-fixes-6" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-5" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a bug causing the sampling progress file not to open up if RStudio’s internal <code>rs_shinyviewer</code> was used for option <code>"browser"</code>.</li>
 </ul>
@@ -299,18 +321,18 @@
 <li>Show Hamiltonian Monte Carlo (HMC) diagnostics in the “Output” panel on page “Posterior”.</li>
 </ul>
 </div>
-<div id="minor-changes-6" class="section level2">
+<div id="minor-changes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-6" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-7" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>Added a package website built with <code>pkgdown</code>.</li>
 <li>Added a package logo created with <code>hexSticker</code>.</li>
 <li>Require R &gt;= 3.6.0.</li>
 </ul>
 </div>
-<div id="bug-fixes-6" class="section level2">
+<div id="bug-fixes-7" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-6" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Fixed a NOTE occurring in some CRAN checks.</li>
 </ul>
@@ -326,13 +348,13 @@
 <li>Added the possibility to include varying effects.</li>
 </ul>
 </div>
-<div id="minor-changes-7" class="section level2">
+<div id="minor-changes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minor-changes-7" class="anchor"></a>Minor changes</h2>
+<a href="#minor-changes-8" class="anchor"></a>Minor changes</h2>
 <ul>
 <li>All predictor terms (main effects as well as interactions) are now shown in a preview table.</li>
 <li>It is now possible to remove interaction terms one by one.</li>
-<li>Restricted the choices for the outcome and the predictor selections (e.g. the outcome variable is now automatically removed from the list of possible predictor variables).</li>
+<li>Restricted the choices for the outcome and the predictor selections (e.g., the outcome variable is now automatically removed from the list of possible predictor variables).</li>
 <li>Removed some example datasets and added new ones.</li>
 <li>Automatically create the R objects needed for the posterior predictive checks in <strong>shinystan</strong>.</li>
 <li>Added the possibility to download the matrix of posterior draws as a CSV file.</li>
@@ -343,10 +365,10 @@
 <li>Allowed *.dat files in the file upload.</li>
 </ul>
 </div>
-<div id="bug-fixes-7" class="section level2">
+<div id="bug-fixes-8" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-7" class="anchor"></a>Bug fixes</h2>
-<p>“Under the hood”, there have been many changes which should make the <strong>shinybrms</strong> app more robust. In particular, the following bugs have been fixed:</p>
+<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
+<p>“Under the hood”, there have been many changes which should make the <strong>shinybrms</strong> app more stable. In particular, the following bugs have been fixed:</p>
 <ul>
 <li>Fixed a bug causing the app to crash if the dataset was changed under certain circumstances.</li>
 <li>Fixed a bug making it possible to keep the outcome and the predictor variables selected when clearing the selection of an example dataset.</li>
@@ -361,9 +383,9 @@
     <div id="shinybrms-101" class="section level1">
 <h1 class="page-header" data-toc-text="1.0.1">
 <a href="#shinybrms-101" class="anchor"></a><small> 2020-03-26 </small><strong>shinybrms</strong> 1.0.1</h1>
-<div id="bug-fixes-8" class="section level2">
+<div id="bug-fixes-9" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fixes-8" class="anchor"></a>Bug fixes</h2>
+<a href="#bug-fixes-9" class="anchor"></a>Bug fixes</h2>
 <ul>
 <li>Example datasets:
 <ul>

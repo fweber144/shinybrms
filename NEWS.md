@@ -151,7 +151,7 @@ warnings (even if they are partly duplicated) than too few.
 
 * Minor improvements in the UI.
 * Updated information about the **shinybrms** package and app (e.g., added the
-URL of the [**shinybrms** website](https://fweber144.github.io/shinybrms/)).
+URL of the **shinybrms** [website](https://fweber144.github.io/shinybrms/)).
 
 ## Bug fixes
 
@@ -210,7 +210,7 @@ replaced by the two new options `shinybrms.prog_browser` and
 ## Bug fixes
 
 "Under the hood", there have been many changes which should make the
-**shinybrms** app more robust. In particular, the following bugs have been
+**shinybrms** app more stable. In particular, the following bugs have been
 fixed:
 
 * Fixed a bug causing the app to crash if the dataset was changed under certain

@@ -10,6 +10,7 @@
 
 * UI: Fixed some typos and incorrect spacing in the text.
 * Avoid the deprecation warning for `brms::parnames()`.
+* Fixed a NOTE occurring in some CRAN checks.
 
 # **shinybrms** 1.5.1
 

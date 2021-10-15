@@ -92,7 +92,7 @@ you need to perform the following steps first:
 
     or this R code which ensures that the app opens up in the default
     web browser (helpful, e.g., if you are using
-    [RStudio](https://rstudio.com/)):
+    [RStudio](https://www.rstudio.com/)):
 
     ``` r
     library(shinybrms)
@@ -129,7 +129,7 @@ you need to perform the following steps first:
 
     or this R code which ensures that the app opens up in the default
     web browser (helpful, e.g., if you are using
-    [RStudio](https://rstudio.com/)):
+    [RStudio](https://www.rstudio.com/)):
 
     ``` r
     shiny::runGitHub("fweber144/shinybrms",

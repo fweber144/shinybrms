@@ -60,7 +60,7 @@ The following two sections describe two options for launching the **shinybrms** 
    library(shinybrms)
    launch_shinybrms()
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://rstudio.com/)):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://www.rstudio.com/)):
    ```{r, eval = FALSE}
    library(shinybrms)
    launch_shinybrms(launch.browser = TRUE)
@@ -81,7 +81,7 @@ The following two sections describe two options for launching the **shinybrms** 
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app")
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://rstudio.com/)):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using [RStudio](https://www.rstudio.com/)):
    ```{r, eval = FALSE}
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app",

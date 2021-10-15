@@ -1302,8 +1302,7 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
   
-  #-------------------------------------------------
-  # Links
+  ## Links ------------------------------------------------------------------
   
   observeEvent({
     input$data_link1
@@ -1359,8 +1358,7 @@ server <- function(input, output, session) {
     updateNavbarPage(session, "navbar_ID", "References")
   })
   
-  #-------------------------------------------------
-  # Data
+  ## Data -------------------------------------------------------------------
   
   da <- reactive({
     if (identical(input$ex_da_sel, "Arabidopsis")) {
@@ -1563,8 +1561,7 @@ server <- function(input, output, session) {
     }
   })
   
-  #------------------------
-  # Data preview
+  ### Data preview ----------------------------------------------------------
   
   output$da_view <- renderTable({
     if (identical(input$preview_rows_radio, "head")) {
@@ -1578,11 +1575,9 @@ server <- function(input, output, session) {
     str(da())
   })
   
-  #-------------------------------------------------
-  # Likelihood
+  ## Likelihood -------------------------------------------------------------
   
-  #------------------------
-  # Outcome
+  ### Outcome ---------------------------------------------------------------
   
   observe({
     if (inherits(try(da(), silent = TRUE), "try-error")) {
@@ -1598,8 +1593,7 @@ server <- function(input, output, session) {
                       selected = isolate(input$outc_sel))
   })
   
-  #------------
-  # Distributional family
+  #### Distributional family ------------------------------------------------
   
   C_family <- reactive({
     req(input$dist_sel)
@@ -1630,11 +1624,9 @@ server <- function(input, output, session) {
     }
   })
   
-  #------------------------
-  # Predictors
+  ### Predictors ------------------------------------------------------------
   
-  #------------
-  # Main effects
+  #### Main effects ---------------------------------------------------------
   
   observe({
     if (inherits(try(da(), silent = TRUE), "try-error")) {
@@ -1672,8 +1664,7 @@ server <- function(input, output, session) {
                       selected = isolate(input$pred_mainPP_sel))
   })
   
-  #------------
-  # Interactions
+  #### Interactions ---------------------------------------------------------
   
   observe({
     if (inherits(try(da(), silent = TRUE), "try-error")) {
@@ -1741,8 +1732,7 @@ server <- function(input, output, session) {
     }
   }, ignoreNULL = FALSE)
   
-  #------------
-  # Combination of all predictor terms
+  #### Combination of all chosen predictor terms ----------------------------
   
   C_pred <- reactive({
     if (is.null(input$pred_mainNP_sel) && is.null(input$pred_mainPP_sel)) {
@@ -1832,8 +1822,7 @@ server <- function(input, output, session) {
     return(pred_DF)
   })
   
-  #------------
-  # Predictor terms preview
+  #### Predictor terms preview ----------------------------------------------
   
   output$pred_view <- renderTable({
     C_pred()
@@ -1843,8 +1832,7 @@ server <- function(input, output, session) {
     return(x)
   })
   
-  #------------------------
-  # Formula
+  ### Formula ---------------------------------------------------------------
   
   C_formula_char <- reactive({
     req(input$outc_sel)
@@ -1872,11 +1860,9 @@ server <- function(input, output, session) {
     C_formula_char()
   })
   
-  #-------------------------------------------------
-  # Prior
+  ## Prior ------------------------------------------------------------------
   
-  #------------------------
-  # Prior construction
+  ### Prior construction ----------------------------------------------------
   
   C_prior_rv <- reactiveValues(prior_set_obj = brms::empty_prior())
   
@@ -2053,8 +2039,7 @@ server <- function(input, output, session) {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
   
-  #------------------------
-  # Prior preview
+  ### Prior preview ---------------------------------------------------------
   
   prior_colsToHide <- reactive({
     return(
@@ -2074,14 +2059,11 @@ server <- function(input, output, session) {
     C_prior_rv$prior_set_obj[, !prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
-  #-------------------------------------------------
-  # Posterior
+  ## Posterior --------------------------------------------------------------
   
-  #------------------------
-  # Run Stan
+  ### Run Stan --------------------------------------------------------------
   
-  #------------
-  # Stan code
+  #### Stan code ------------------------------------------------------------
   
   C_stancode <- reactive({
     req(C_formula(), C_family())
@@ -2120,8 +2102,7 @@ server <- function(input, output, session) {
     }
   )
   
-  #------------
-  # Stan data
+  #### Stan data ------------------------------------------------------------
   
   C_standata <- reactive({
     req(C_formula(), C_family())
@@ -2160,8 +2141,7 @@ server <- function(input, output, session) {
     }
   )
   
-  #------------
-  # Run Stan
+  #### Run Stan -------------------------------------------------------------
   
   C_stanres <- eventReactive(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2297,11 +2277,9 @@ server <- function(input, output, session) {
     # test gradient mode (1L) nor error mode (2L):
     stopifnot(identical(C_bfit$fit@mode, 0L))
     
-    #------
-    # Computation of MCMC diagnostics
+    ##### Computation of MCMC diagnostics -------------------------------------
     
-    #---
-    # HMC-specific diagnostics
+    ###### HMC-specific diagnostics -------------------------------------------
     
     C_div <- rstan::get_num_divergent(C_bfit$fit)
     C_div_OK <- identical(C_div, 0L)
@@ -2313,8 +2291,7 @@ server <- function(input, output, session) {
                         paste0("chain_", sapply(C_bfit$fit@stan_args, "[[", "chain_id")))
     C_EBFMI_OK <- all(C_EBFMI >= 0.2)
     
-    #---
-    # General MCMC diagnostics
+    ###### General MCMC diagnostics -------------------------------------------
     
     C_essBulk <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_bulk)
     if (any(is.na(C_essBulk))) {
@@ -2337,14 +2314,12 @@ server <- function(input, output, session) {
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
-    #---
-    # Overall check for all MCMC diagnostics
+    ###### Overall check for all MCMC diagnostics -----------------------------
     
     C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK,
                       C_essBulk_OK, C_rhat_OK, C_essTail_OK))
     
-    #---
-    # Notifications for the MCMC diagnostics
+    ###### Notifications for the MCMC diagnostics -----------------------------
     
     # First: Check for failed chains:
     if (n_chains_out < n_chains_spec) {
@@ -2391,22 +2366,19 @@ server <- function(input, output, session) {
                 draws_arr = C_draws_arr))
   })
   
-  #------
-  # Matrix of posterior draws (for later usage and only run if needed)
+  ##### Matrix of posterior draws (for later usage and only run if needed) ----
   
   C_draws_mat <- reactive({
     return(as.matrix(C_stanres()$bfit))
   })
   
-  #------
-  # Date and time when the Stan run was finished
+  ##### Date and time when the Stan run was finished ------------------------
   
   output$fit_date <- renderText({
     C_stanres()$bfit$fit@date
   })
   
-  #------
-  # Overall check for all MCMC diagnostics
+  ##### Overall check for all MCMC diagnostics ------------------------------
   
   output$diagn_all_out <- renderText({
     if (C_stanres()$diagn$all_OK) {
@@ -2419,8 +2391,7 @@ server <- function(input, output, session) {
     }
   }, sep = "\n")
   
-  #------
-  # Download
+  ##### Download ------------------------------------------------------------
   
   output$stanout_download <- downloadHandler(
     filename = function() {
@@ -2442,11 +2413,9 @@ server <- function(input, output, session) {
     }
   )
   
-  #------------------------
-  # MCMC diagnostics
+  ### MCMC diagnostics ------------------------------------------------------
   
-  #------------
-  # HMC-specific diagnostics
+  #### HMC-specific diagnostics ---------------------------------------------
   
   output$diagn_div_out <- renderText({
     div_text <- paste0("The number of iterations ending with a divergence (",
@@ -2488,8 +2457,7 @@ server <- function(input, output, session) {
     }
   }, sep = "\n")
   
-  #------------
-  # General MCMC diagnostics
+  #### General MCMC diagnostics ---------------------------------------------
   
   output$rhat_out <- renderText({
     if (C_stanres()$diagn$Rhat_OK) {
@@ -2525,15 +2493,13 @@ server <- function(input, output, session) {
                check.names = FALSE)
   })
   
-  #------------------------
-  # Default summary
+  ### Default summary -------------------------------------------------------
   
   output$smmry_view <- renderPrint({
     print(C_stanres()$bfit, digits = 4, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   }, width = max(getOption("width"), 100))
   
-  #------------------------
-  # Custom summary
+  ### Custom summary --------------------------------------------------------
   
   observeEvent(input$cust_allow_link, {
     showModal(modalDialog(
@@ -2713,8 +2679,7 @@ server <- function(input, output, session) {
     }
   )
   
-  #------------------------
-  # Conditional effects
+  ### Conditional effects ---------------------------------------------------
   
   # NOTE: suffix "ff" stands for "from fit".
   
@@ -2735,13 +2700,11 @@ server <- function(input, output, session) {
       return()
     }
     
-    #------------
-    # Get term labels
+    #### Get term labels ------------------------------------------------------
     
     termlabs <- labels(terms(formula(C_bformula_ff())))
     
-    #------------
-    # Nonpooled effects
+    #### Nonpooled effects ----------------------------------------------------
     
     termlabs_NP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
     termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)
@@ -2751,8 +2714,7 @@ server <- function(input, output, session) {
       return(paste(rev(termlabs_NP_IA2_i), collapse = ":"))
     }))
     
-    #------------
-    # Partially pooled effects
+    #### Partially pooled effects ---------------------------------------------
     
     termlabs_PP <- setdiff(termlabs, termlabs_NP)
     termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
@@ -2778,8 +2740,7 @@ server <- function(input, output, session) {
       return(paste(rev(termlabs_PP_IA2_i), collapse = ":"))
     }))
     
-    #------------
-    # Update choices for input$term_sel
+    #### Update choices for input$term_sel ------------------------------------
     
     term_choices <- c(termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev,
                       termlabs_PP_grp_tmp, termlabs_PP_IA2, termlabs_PP_IA2_rev)
@@ -2866,8 +2827,7 @@ server <- function(input, output, session) {
     }
   )
   
-  #------------------------
-  # shinystan
+  ### shinystan -------------------------------------------------------------
   
   observeEvent(input$act_launch_shinystan, {
     invisible(req(C_stanres()))
@@ -2928,8 +2888,7 @@ server <- function(input, output, session) {
     }
   })
   
-  #-------------------------------------------------
-  # Quit app
+  ## Quit app ---------------------------------------------------------------
   
   observe({
     if (identical(input$navbar_ID, "quit_app")) {
@@ -2963,8 +2922,6 @@ server <- function(input, output, session) {
   
 }
 
-####################################################################################################
-# Call to shinyApp()
-####################################################################################################
+# Call to shinyApp() ------------------------------------------------------
 
 shinyApp(ui = ui, server = server)

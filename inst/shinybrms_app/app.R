@@ -460,7 +460,7 @@ ui <- navbarPage(
                 target = "_blank"),
               "for an example)."),
             p("If you want to specify an offset, please follow these steps which ensure that",
-              "the default prior for the intercept (at centered predictors) is adopted accordingly:",
+              "the default prior for the intercept (at centered predictors) is adapted accordingly:",
               tags$ol(
                 tags$li("Add the offset variable in the input field of section \"Nonpooled main effects\" above."),
                 tags$li("In the \"Specification of custom priors\" on page",

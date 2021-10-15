@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 The following screenshots show how to fit an example model in the **shinybrms** app. For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
 
+**NOTE:** The screenshots below were created using **shinybrms** version 1.5.1. However, version 1.5.2 has only introduced very few UI changes (see the [changelog](../news/index.html) for details).
+
 ## Home
 
 \

@@ -1645,25 +1645,26 @@ server <- function(input, output, session) {
   })
   
   observe({
-    if (inherits(try(da(), silent = TRUE), "try-error")) {
-      updateSelectInput(session, "pred_mainPP_sel",
-                        choices = c("Choose variables for partially pooled main effects ..." = ""))
-      return()
-    }
-    PP_sel_choices <- setdiff(names(da()),
-                              c(input$outc_sel,
-                                input$pred_mainNP_sel))
-    if (length(PP_sel_choices) > 0L) {
-      # Only allow factor, character, and logical variables:
-      PP_sel_choices_OK <- sapply(da()[PP_sel_choices], function(x) {
-        is.character(x) || is.factor(x) || is.logical(x)
-      })
-      PP_sel_choices <- PP_sel_choices[PP_sel_choices_OK]
+    pred_mainPP_choices <- c("Choose variables for partially pooled main effects ..." = "")
+    if (!inherits(try(da(), silent = TRUE), "try-error")) {
+      PP_sel_choices <- setdiff(names(da()),
+                                c(input$outc_sel,
+                                  input$pred_mainNP_sel))
+      if (length(PP_sel_choices) > 0L) {
+        # Only allow factor, character, and logical variables:
+        PP_sel_choices_OK <- sapply(da()[PP_sel_choices], function(x) {
+          is.character(x) || is.factor(x) || is.logical(x)
+        })
+        PP_sel_choices <- PP_sel_choices[PP_sel_choices_OK]
+      }
+      pred_mainPP_choices <- c(pred_mainPP_choices, PP_sel_choices)
+      pred_mainPP_slctd <- isolate(input$pred_mainPP_sel)
+    } else {
+      pred_mainPP_slctd <- NULL
     }
     updateSelectInput(session, "pred_mainPP_sel",
-                      choices = c("Choose variables for partially pooled main effects ..." = "",
-                                  PP_sel_choices),
-                      selected = isolate(input$pred_mainPP_sel))
+                      choices = pred_mainPP_choices,
+                      selected = pred_mainPP_slctd)
   })
   
   #### Interactions ---------------------------------------------------------

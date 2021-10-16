@@ -43,6 +43,19 @@ test_that(paste(
   shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_value.R"))
 })
 
+test_that(paste(
+  "the app does not crash and the default priors are reset when switching the dataset after",
+  "having built a working model for the initial dataset."
+), {
+  skip_on_cran()
+  skip_if_not_installed("lme4")
+  skip_if_not_installed("MASS")
+  
+  shinytest::installDependencies()
+  app_path <- system.file("shinybrms_app", package = "shinybrms")
+  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "switchData_prior.R"))
+})
+
 test_that("clearing the outcome resets the priors.", {
   skip_on_cran()
   skip_if_not_installed("MASS")

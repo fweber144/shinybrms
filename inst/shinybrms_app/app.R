@@ -1584,13 +1584,13 @@ server <- function(input, output, session) {
                         setdiff(names(da()),
                                 c(input$pred_mainNP_sel,
                                   input$pred_mainPP_sel)))
-      outc_seld <- isolate(input$outc_sel)
+      outc_slctd <- isolate(input$outc_sel)
     } else {
-      outc_seld <- NULL
+      outc_slctd <- NULL
     }
     updateSelectInput(session, "outc_sel",
                       choices = outc_choices,
-                      selected = outc_seld)
+                      selected = outc_slctd)
   })
   
   #### Distributional family ------------------------------------------------
@@ -1635,13 +1635,13 @@ server <- function(input, output, session) {
                                setdiff(names(da()),
                                        c(input$outc_sel,
                                          input$pred_mainPP_sel)))
-      pred_mainNP_seld <- isolate(input$pred_mainNP_sel)
+      pred_mainNP_slctd <- isolate(input$pred_mainNP_sel)
     } else {
-      pred_mainNP_seld <- NULL
+      pred_mainNP_slctd <- NULL
     }
     updateSelectInput(session, "pred_mainNP_sel",
                       choices = pred_mainNP_choices,
-                      selected = pred_mainNP_seld)
+                      selected = pred_mainNP_slctd)
   })
   
   observe({
@@ -1905,17 +1905,17 @@ server <- function(input, output, session) {
     prior_class_choices <- setNames(prior_class_choices, prior_class_choices)
     names(prior_class_choices)[prior_class_choices == ""] <- "Choose class ..."
     
-    prior_class_seld <- intersect(prior_class_choices,
-                                  isolate(input$prior_class_sel))
-    prior_class_seld <- setNames(prior_class_seld, prior_class_seld)
-    names(prior_class_seld)[prior_class_seld == ""] <- "Choose class ..."
-    if (identical(length(prior_class_seld), 0L)) {
-      prior_class_seld <- NULL
+    prior_class_slctd <- intersect(prior_class_choices,
+                                   isolate(input$prior_class_sel))
+    prior_class_slctd <- setNames(prior_class_slctd, prior_class_slctd)
+    names(prior_class_slctd)[prior_class_slctd == ""] <- "Choose class ..."
+    if (identical(length(prior_class_slctd), 0L)) {
+      prior_class_slctd <- NULL
     }
     
     updateSelectInput(session, "prior_class_sel",
                       choices = prior_class_choices,
-                      selected = prior_class_seld)
+                      selected = prior_class_slctd)
   })
   
   # Update the choices for "coefficient" (if necessary):
@@ -1929,17 +1929,17 @@ server <- function(input, output, session) {
     prior_coef_choices <- setNames(prior_coef_choices, prior_coef_choices)
     names(prior_coef_choices)[prior_coef_choices == ""] <- "Choose coefficient or leave empty"
     
-    prior_coef_seld <- intersect(prior_coef_choices,
-                                 isolate(input$prior_coef_sel))
-    prior_coef_seld <- setNames(prior_coef_seld, prior_coef_seld)
-    names(prior_coef_seld)[prior_coef_seld == ""] <- "Choose coefficient or leave empty"
-    if (identical(length(prior_coef_seld), 0L)) {
-      prior_coef_seld <- NULL
+    prior_coef_slctd <- intersect(prior_coef_choices,
+                                  isolate(input$prior_coef_sel))
+    prior_coef_slctd <- setNames(prior_coef_slctd, prior_coef_slctd)
+    names(prior_coef_slctd)[prior_coef_slctd == ""] <- "Choose coefficient or leave empty"
+    if (identical(length(prior_coef_slctd), 0L)) {
+      prior_coef_slctd <- NULL
     }
     
     updateSelectInput(session, "prior_coef_sel",
                       choices = prior_coef_choices,
-                      selected = prior_coef_seld)
+                      selected = prior_coef_slctd)
   })
   
   # Update the choices for "group" (if necessary):
@@ -1954,17 +1954,17 @@ server <- function(input, output, session) {
     prior_group_choices <- setNames(prior_group_choices, prior_group_choices)
     names(prior_group_choices)[prior_group_choices == ""] <- "Choose group or leave empty"
     
-    prior_group_seld <- intersect(prior_group_choices,
-                                  isolate(input$prior_group_sel))
-    prior_group_seld <- setNames(prior_group_seld, prior_group_seld)
-    names(prior_group_seld)[prior_group_seld == ""] <- "Choose group or leave empty"
-    if (identical(length(prior_group_seld), 0L)) {
-      prior_group_seld <- NULL
+    prior_group_slctd <- intersect(prior_group_choices,
+                                   isolate(input$prior_group_sel))
+    prior_group_slctd <- setNames(prior_group_slctd, prior_group_slctd)
+    names(prior_group_slctd)[prior_group_slctd == ""] <- "Choose group or leave empty"
+    if (identical(length(prior_group_slctd), 0L)) {
+      prior_group_slctd <- NULL
     }
     
     updateSelectInput(session, "prior_group_sel",
                       choices = prior_group_choices,
-                      selected = prior_group_seld)
+                      selected = prior_group_slctd)
   })
   
   # Reset the custom priors if the default prior changes:

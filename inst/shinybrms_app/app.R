@@ -1629,17 +1629,19 @@ server <- function(input, output, session) {
   #### Main effects ---------------------------------------------------------
   
   observe({
-    if (inherits(try(da(), silent = TRUE), "try-error")) {
-      updateSelectInput(session, "pred_mainNP_sel",
-                        choices = c("Choose variables for nonpooled main effects ..." = ""))
-      return()
+    pred_mainNP_choices <- c("Choose variables for nonpooled main effects ..." = "")
+    if (!inherits(try(da(), silent = TRUE), "try-error")) {
+      pred_mainNP_choices <- c(pred_mainNP_choices,
+                               setdiff(names(da()),
+                                       c(input$outc_sel,
+                                         input$pred_mainPP_sel)))
+      pred_mainNP_seld <- isolate(input$pred_mainNP_sel)
+    } else {
+      pred_mainNP_seld <- NULL
     }
     updateSelectInput(session, "pred_mainNP_sel",
-                      choices = c("Choose variables for nonpooled main effects ..." = "",
-                                  setdiff(names(da()),
-                                          c(input$outc_sel,
-                                            input$pred_mainPP_sel))),
-                      selected = isolate(input$pred_mainNP_sel))
+                      choices = pred_mainNP_choices,
+                      selected = pred_mainNP_seld)
   })
   
   observe({

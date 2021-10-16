@@ -1578,17 +1578,19 @@ server <- function(input, output, session) {
   ### Outcome ---------------------------------------------------------------
   
   observe({
-    if (inherits(try(da(), silent = TRUE), "try-error")) {
-      updateSelectInput(session, "outc_sel",
-                        choices = c("Choose outcome ..." = ""))
-      return()
+    outc_choices <- c("Choose outcome ..." = "")
+    if (!inherits(try(da(), silent = TRUE), "try-error")) {
+      outc_choices <- c(outc_choices,
+                        setdiff(names(da()),
+                                c(input$pred_mainNP_sel,
+                                  input$pred_mainPP_sel)))
+      outc_seld <- isolate(input$outc_sel)
+    } else {
+      outc_seld <- NULL
     }
     updateSelectInput(session, "outc_sel",
-                      choices = c("Choose outcome ..." = "",
-                                  setdiff(names(da()),
-                                          c(input$pred_mainNP_sel,
-                                            input$pred_mainPP_sel))),
-                      selected = isolate(input$outc_sel))
+                      choices = outc_choices,
+                      selected = outc_seld)
   })
   
   #### Distributional family ------------------------------------------------

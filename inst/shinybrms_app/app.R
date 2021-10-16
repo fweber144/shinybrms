@@ -1714,19 +1714,19 @@ server <- function(input, output, session) {
                      input$pred_mainPP_sel))
     })
     pred_int_rv$choices <- pred_int_rv$choices[sapply(pred_int_rv$choices, length) > 1L]
-    pred_intSel_slctd <- lapply(pred_intSel_slctd, function(x) {
-      intersect(x, c(input$pred_mainNP_sel,
-                     input$pred_mainPP_sel))
-    })
-    pred_intSel_slctd <- pred_intSel_slctd[sapply(pred_intSel_slctd, length) > 1L]
     if (length(pred_int_rv$choices) > 0L) {
       pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
+      pred_intSel_choices <- pred_int_rv$choices_chr
+      pred_intSel_slctd <- lapply(pred_intSel_slctd, function(x) {
+        intersect(x, c(input$pred_mainNP_sel,
+                       input$pred_mainPP_sel))
+      })
+      pred_intSel_slctd <- pred_intSel_slctd[sapply(pred_intSel_slctd, length) > 1L]
       if (length(pred_intSel_slctd) > 0L) {
         pred_intSel_slctd <- sapply(pred_intSel_slctd, paste, collapse = "<-->")
       } else{
         pred_intSel_slctd <- NULL
       }
-      pred_intSel_choices <- pred_int_rv$choices_chr
     } else{
       pred_int_rv$choices <- NULL
       pred_int_rv$choices_chr <- NULL

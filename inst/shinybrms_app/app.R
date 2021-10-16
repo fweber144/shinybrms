@@ -1491,11 +1491,9 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(roaches, package = "rstanarm", envir = tmp_env)
         assign("roaches", within(get("roaches", envir = tmp_env), {
-          # Code from
-          # https://avehtari.github.io/modelselection/roaches.html
-          # and
-          # https://mc-stan.org/rstanarm/articles/count.html
-          # but slightly modified:
+          # Code from <https://avehtari.github.io/modelselection/roaches.html>
+          # and <https://mc-stan.org/rstanarm/articles/count.html>, but slightly
+          # modified:
           exposure2_log <- log(exposure2)
           roach1_scaledBy0.01 <- 0.01 * roach1
           roach1_sqrt <- sqrt(roach1)

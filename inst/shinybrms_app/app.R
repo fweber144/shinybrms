@@ -1371,7 +1371,7 @@ server <- function(input, output, session) {
           nutrient <- as.factor(nutrient)
         }), envir = tmp_env)
         return(get("Arabidopsis", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
@@ -1384,7 +1384,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(bacteria, package = "MASS", envir = tmp_env)
         return(get("bacteria", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
@@ -1408,7 +1408,7 @@ server <- function(input, output, session) {
           levels(ftv_3cat)[-(1:2)] <- "2+"
         }), envir = tmp_env)
         return(get("birthwt", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
@@ -1421,7 +1421,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(epilepsy, package = "brms", envir = tmp_env)
         return(get("epilepsy", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("brms"), "needed. Please install it.")),
           duration = NA,
@@ -1434,7 +1434,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(grouseticks, package = "lme4", envir = tmp_env)
         return(get("grouseticks", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
@@ -1450,7 +1450,7 @@ server <- function(input, output, session) {
           mom_hs <- factor(paste0("hs", mom_hs))
         }), envir = tmp_env)
         return(get("kidiq", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
           duration = NA,
@@ -1465,7 +1465,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(quine, package = "MASS", envir = tmp_env)
         return(get("quine", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
@@ -1478,7 +1478,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(Rabbit, package = "MASS", envir = tmp_env)
         return(get("Rabbit", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
           duration = NA,
@@ -1499,7 +1499,7 @@ server <- function(input, output, session) {
           roach1_sqrt <- sqrt(roach1)
         }), envir = tmp_env)
         return(get("roaches", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
           duration = NA,
@@ -1512,7 +1512,7 @@ server <- function(input, output, session) {
         tmp_env <- new.env()
         data(sleepstudy, package = "lme4", envir = tmp_env)
         return(get("sleepstudy", envir = tmp_env))
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
           duration = NA,
@@ -1522,7 +1522,7 @@ server <- function(input, output, session) {
       }
     } else if (identical(input$ex_da_sel, "ToothGrowth")) {
       return(ToothGrowth)
-    } else{
+    } else {
       req(input$file_upload)
       da_tmp <- try(read.csv(input$file_upload$datapath,
                              header = input$header,
@@ -1542,7 +1542,7 @@ server <- function(input, output, session) {
       if ("." %in% names(da_tmp)) {
         if (!"X." %in% names(da_tmp)) {
           names(da_tmp)[names(da_tmp) == "."] <- "X."
-        } else{
+        } else {
           showNotification(
             HTML(paste(
               "The column name", code("."), "(dot) is not allowed. Automatically renaming this",
@@ -1564,7 +1564,7 @@ server <- function(input, output, session) {
   output$da_view <- renderTable({
     if (identical(input$preview_rows_radio, "head")) {
       return(head(da()))
-    } else{
+    } else {
       return(da())
     }
   })
@@ -1607,7 +1607,7 @@ server <- function(input, output, session) {
                    "Link function" = character(),
                    check.names = FALSE)
       )
-    } else{
+    } else {
       C_family_list <- C_family()
       dist_link_tmp <- data.frame("Parameter" = C_family_list$dpars,
                                   "Link function" = NA,
@@ -1615,7 +1615,7 @@ server <- function(input, output, session) {
       dist_link_tmp$"Link function" <- sapply(dist_link_tmp$"Parameter", function(par_i) {
         if (paste0("link_", par_i) %in% names(C_family_list)) {
           return(C_family_list[[paste0("link_", par_i)]])
-        } else{
+        } else {
           return(NA)
         }
       })
@@ -1724,10 +1724,10 @@ server <- function(input, output, session) {
       pred_intSel_slctd <- pred_intSel_slctd[sapply(pred_intSel_slctd, length) > 1L]
       if (length(pred_intSel_slctd) > 0L) {
         pred_intSel_slctd <- sapply(pred_intSel_slctd, paste, collapse = "<-->")
-      } else{
+      } else {
         pred_intSel_slctd <- NULL
       }
-    } else{
+    } else {
       pred_int_rv$choices <- NULL
       pred_int_rv$choices_chr <- NULL
       pred_intSel_choices <- character()
@@ -1788,7 +1788,7 @@ server <- function(input, output, session) {
         xPP <- intersect(x, input$pred_mainPP_sel)
         if (length(xPP) > 0L) {
           return(paste(xPP, collapse = "<-->"))
-        } else{
+        } else {
           return(NA_character_)
         }
       })
@@ -1809,13 +1809,13 @@ server <- function(input, output, session) {
       xNP <- intersect(x, input$pred_mainNP_sel)
       if (length(xNP) > 0L) {
         xNP <- paste(xNP, collapse = "*")
-      } else{
+      } else {
         xNP <- NA_character_
       }
       xPP <- intersect(x, input$pred_mainPP_sel)
       if (length(xPP) > 0L) {
         xPP <- paste(xPP, collapse = ":")
-      } else{
+      } else {
         xPP <- NA_character_
       }
       data.frame("from_mainNP" = xNP,
@@ -1846,7 +1846,7 @@ server <- function(input, output, session) {
     formula_splitted <- apply(C_pred(), 1, function(x) {
       if (is.na(x["from_mainPP"])) {
         return(x["from_mainNP"])
-      } else{
+      } else {
         return(paste0("(", x["from_mainNP"], " | ", x["from_mainPP"], ")"))
       }
     })
@@ -2302,21 +2302,21 @@ server <- function(input, output, session) {
     C_essBulk <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_bulk)
     if (any(is.na(C_essBulk))) {
       C_essBulk_OK <- FALSE
-    } else{
+    } else {
       C_essBulk_OK <- all(C_essBulk > 100 * n_chains_out)
     }
     
     C_rhat <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::Rhat)
     if (any(is.na(C_rhat))) {
       C_rhat_OK <- FALSE
-    } else{
+    } else {
       C_rhat_OK <- all(C_rhat < 1.01)
     }
     
     C_essTail <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_tail)
     if (any(is.na(C_essTail))) {
       C_essTail_OK <- FALSE
-    } else{
+    } else {
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
@@ -2335,7 +2335,7 @@ server <- function(input, output, session) {
         duration = NA,
         type = "warning"
       )
-    } else{
+    } else {
       # Secondly: Overall check for all MCMC diagnostics:
       if (C_all_OK) {
         showNotification(
@@ -2344,7 +2344,7 @@ server <- function(input, output, session) {
           duration = NA,
           type = "message"
         )
-      } else{
+      } else {
         showNotification(
           paste("Warning: Finished running Stan, but at least one MCMC diagnostic is worrying (see",
                 "the tab \"MCMC diagnostics\" for details). In general,",
@@ -2390,7 +2390,7 @@ server <- function(input, output, session) {
     if (C_stanres()$diagn$all_OK) {
       return(paste("All MCMC diagnostics are OK (see",
                    "the tab \"MCMC diagnostics\" for details)."))
-    } else{
+    } else {
       return(paste("Warning: At least one MCMC diagnostic is worrying (see",
                    "the tab \"MCMC diagnostics\" for details). In general,",
                    "this indicates that the Stan results should not be used."))
@@ -2408,7 +2408,7 @@ server <- function(input, output, session) {
         write.csv(C_draws_mat(),
                   file = file,
                   row.names = FALSE)
-      } else{
+      } else {
         saveRDS(switch(input$stanout_download_sel,
                        "shinybrms_brmsfit.rds" = C_stanres()$bfit,
                        "shinybrms_MCMC_diagnostics.rds" = C_stanres()$diagn,
@@ -2429,7 +2429,7 @@ server <- function(input, output, session) {
                        ")")
     if (C_stanres()$diagn$divergences_OK) {
       return(paste(div_text, "is OK."))
-    } else{
+    } else {
       return(paste("Warning:", div_text, "is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2441,7 +2441,7 @@ server <- function(input, output, session) {
                         ")")
     if (C_stanres()$diagn$hits_max_tree_depth_OK) {
       return(paste(tree_text, "is OK."))
-    } else{
+    } else {
       return(paste("Warning:", tree_text, "is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2457,7 +2457,7 @@ server <- function(input, output, session) {
                          ")")
     if (C_stanres()$diagn$EBFMI_OK) {
       return(paste(EBFMI_text, "is OK."))
-    } else{
+    } else {
       return(paste("Warning:", EBFMI_text, "is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2468,7 +2468,7 @@ server <- function(input, output, session) {
   output$rhat_out <- renderText({
     if (C_stanres()$diagn$Rhat_OK) {
       return("All R-hat values are OK.")
-    } else{
+    } else {
       return(paste("Warning: At least one R-hat value is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2477,7 +2477,7 @@ server <- function(input, output, session) {
   output$essBulk_out <- renderText({
     if (C_stanres()$diagn$ESS_bulk_OK) {
       return("All bulk-ESS values are OK.")
-    } else{
+    } else {
       return(paste("Warning: At least one bulk-ESS value is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2486,7 +2486,7 @@ server <- function(input, output, session) {
   output$essTail_out <- renderText({
     if (C_stanres()$diagn$ESS_tail_OK) {
       return("All tail-ESS values are OK.")
-    } else{
+    } else {
       return(paste("Warning: At least one tail-ESS value is worrying. In general,",
                    "this indicates that the Stan results should not be used."))
     }
@@ -2782,7 +2782,7 @@ server <- function(input, output, session) {
         type = "warning"
       )
       C_ceff_plot_list <- plot(C_ceff)
-    } else{
+    } else {
       C_ceff_plot_list <- plot(C_ceff, theme = ggplot2::theme_gray(base_size = 16))
     }
     if (length(C_ceff_plot_list) > 1L) {
@@ -2874,14 +2874,14 @@ server <- function(input, output, session) {
                       browser_callr = shinystan_browser,
                       seed_callr = seed_PPD_tmp)
         )
-      } else{
+      } else {
         showNotification(
           HTML(paste("Package", code("callr"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
       }
-    } else{
+    } else {
       showNotification(
         HTML(paste("Package", code("shinystan"), "needed. Please install it.")),
         duration = NA,
@@ -2899,7 +2899,7 @@ server <- function(input, output, session) {
             is.character(lc_collate_orig) &&
             is.vector(lc_collate_orig)) {
           Sys.setlocale("LC_COLLATE", lc_collate_orig)
-        } else{
+        } else {
           Sys.setlocale("LC_COLLATE", "")
         }
       }
@@ -2914,7 +2914,7 @@ server <- function(input, output, session) {
             is.character(lc_collate_orig) &&
             is.vector(lc_collate_orig)) {
           Sys.setlocale("LC_COLLATE", lc_collate_orig)
-        } else{
+        } else {
           Sys.setlocale("LC_COLLATE", "")
         }
       }

@@ -1670,16 +1670,18 @@ server <- function(input, output, session) {
   #### Interactions ---------------------------------------------------------
   
   observe({
-    if (inherits(try(da(), silent = TRUE), "try-error")) {
-      updateSelectInput(session, "pred_int_build",
-                        choices = c("Choose variables for an interaction term ..." = ""))
-      return()
+    pred_intBuild_choices <- c("Choose variables for an interaction term ..." = "")
+    if (!inherits(try(da(), silent = TRUE), "try-error")) {
+      pred_intBuild_choices <- c(pred_intBuild_choices,
+                                 input$pred_mainNP_sel,
+                                 input$pred_mainPP_sel)
+      pred_int_slctd <- isolate(input$pred_int_build)
+    } else {
+      pred_int_slctd <- NULL
     }
     updateSelectInput(session, "pred_int_build",
-                      choices = c("Choose variables for an interaction term ..." = "",
-                                  input$pred_mainNP_sel,
-                                  input$pred_mainPP_sel),
-                      selected = isolate(input$pred_int_build))
+                      choices = pred_intBuild_choices,
+                      selected = pred_int_slctd)
   })
   
   pred_int_rv <- reactiveValues()

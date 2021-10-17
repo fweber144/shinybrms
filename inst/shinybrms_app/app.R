@@ -222,10 +222,12 @@ ui <- navbarPage(
     sidebarLayout(
       sidebarPanel(
         helpText(
-          p("Either choose an example dataset or upload a file (preferably *.csv, *.txt, or *.dat) containing",
-            "your own dataset. In either case, a preview of the dataset will be shown in the main",
-            "panel on the right. If you want to upload a dataset after having chosen an example",
-            "dataset, you have to clear the input field \"Choose example dataset ...\" first."),
+          p("Either choose an example dataset or upload a file (preferably",
+            "*.csv, *.txt, or *.dat) containing your own dataset. In either",
+            "case, a preview of the dataset will be shown in the main panel on",
+            "the right. If you want to upload a dataset after having chosen an",
+            "example dataset, you have to clear the input field \"Choose",
+            "example dataset ...\" first."),
           p("The following data entries are recognized as missing values: empty ",
             "(i.e. nothing, not even a whitespace), whitespace, ", code("NA"),
             ", ", code("."), " (dot).")

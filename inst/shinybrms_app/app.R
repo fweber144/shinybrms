@@ -1588,10 +1588,11 @@ server <- function(input, output, session) {
     } else {
       outc_slctd <- NULL
     }
+    freezeReactiveValue(input, "outc_sel")
     updateSelectInput(inputId = "outc_sel",
                       choices = outc_choices,
                       selected = outc_slctd)
-  })
+  }, priority = 1)
   
   #### Distributional family ------------------------------------------------
   
@@ -1639,10 +1640,11 @@ server <- function(input, output, session) {
     } else {
       pred_mainNP_slctd <- NULL
     }
+    freezeReactiveValue(input, "pred_mainNP_sel")
     updateSelectInput(inputId = "pred_mainNP_sel",
                       choices = pred_mainNP_choices,
                       selected = pred_mainNP_slctd)
-  })
+  }, priority = 1)
   
   observe({
     pred_mainPP_choices <- c("Choose variables for partially pooled main effects ..." = "")
@@ -1662,10 +1664,11 @@ server <- function(input, output, session) {
     } else {
       pred_mainPP_slctd <- NULL
     }
+    freezeReactiveValue(input, "pred_mainPP_sel")
     updateSelectInput(inputId = "pred_mainPP_sel",
                       choices = pred_mainPP_choices,
                       selected = pred_mainPP_slctd)
-  })
+  }, priority = 1)
   
   #### Interactions ---------------------------------------------------------
   
@@ -1679,10 +1682,11 @@ server <- function(input, output, session) {
     } else {
       pred_int_slctd <- NULL
     }
+    freezeReactiveValue(input, "pred_int_build")
     updateSelectInput(inputId = "pred_int_build",
                       choices = pred_intBuild_choices,
                       selected = pred_int_slctd)
-  })
+  }, priority = 1)
   
   pred_int_rv <- reactiveValues()
   observeEvent(input$pred_int_add, {
@@ -1691,16 +1695,18 @@ server <- function(input, output, session) {
                                list(input$pred_int_build))
       pred_int_rv$choices <- pred_int_rv$choices[!duplicated(lapply(pred_int_rv$choices, sort))]
       pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
+      freezeReactiveValue(input, "pred_int_sel")
       updateSelectInput(inputId = "pred_int_sel",
                         choices = pred_int_rv$choices_chr,
                         selected = c(input$pred_int_sel,
                                      paste(input$pred_int_build, collapse = "<-->")))
+      freezeReactiveValue(input, "pred_int_build")
       updateSelectInput(inputId = "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNP_sel,
                                     input$pred_mainPP_sel))
     }
-  })
+  }, priority = 1)
   
   # Ensure that all variables involved in the interaction terms have a main effect (either
   # nonpooled or partially pooled):
@@ -1733,10 +1739,11 @@ server <- function(input, output, session) {
       pred_intSel_choices <- character()
       pred_intSel_slctd <- NULL
     }
+    freezeReactiveValue(input, "pred_int_sel")
     updateSelectInput(inputId = "pred_int_sel",
                       choices = pred_intSel_choices,
                       selected = pred_intSel_slctd)
-  }, ignoreNULL = FALSE)
+  }, ignoreNULL = FALSE, priority = 1)
   
   #### Combination of all chosen predictor terms ----------------------------
   
@@ -1930,10 +1937,11 @@ server <- function(input, output, session) {
       prior_class_slctd <- NULL
     }
     
+    freezeReactiveValue(input, "prior_class_sel")
     updateSelectInput(inputId = "prior_class_sel",
                       choices = prior_class_choices,
                       selected = prior_class_slctd)
-  })
+  }, priority = 1)
   
   # Update the choices for "coefficient" (if necessary):
   observe({
@@ -1954,10 +1962,11 @@ server <- function(input, output, session) {
       prior_coef_slctd <- NULL
     }
     
+    freezeReactiveValue(input, "prior_coef_sel")
     updateSelectInput(inputId = "prior_coef_sel",
                       choices = prior_coef_choices,
                       selected = prior_coef_slctd)
-  })
+  }, priority = 1)
   
   # Update the choices for "group" (if necessary):
   observe({
@@ -1979,10 +1988,11 @@ server <- function(input, output, session) {
       prior_group_slctd <- NULL
     }
     
+    freezeReactiveValue(input, "prior_group_sel")
     updateSelectInput(inputId = "prior_group_sel",
                       choices = prior_group_choices,
                       selected = prior_group_slctd)
-  })
+  }, priority = 1)
   
   # Reset the custom priors if the default prior changes:
   observeEvent(C_prior_default(), {
@@ -2608,24 +2618,27 @@ server <- function(input, output, session) {
     if (!inherits(try(C_pars(), silent = TRUE), "try-error")) {
       par_choices <- c(par_choices, C_pars())
     }
+    freezeReactiveValue(input, "par_sel")
     updateSelectInput(inputId = "par_sel",
                       choices = par_choices)
-  })
+  }, priority = 1)
   
   observeEvent(input$par_add, {
     req(input$par_sel)
+    freezeReactiveValue(input, "cust_text")
     updateTextInput(inputId = "cust_text",
                     value = paste0(input$cust_text, "`", input$par_sel, "`"))
-  })
+  }, priority = 1)
   
   C_cust <- reactiveVal(cust_smmry_empty)
   
   # Reset C_cust() when C_stanres() has changed (and also reset input$cust_text):
   observeEvent(try(C_stanres(), silent = TRUE), {
     C_cust(cust_smmry_empty)
+    freezeReactiveValue(input, "cust_text")
     updateTextInput(inputId = "cust_text",
                     value = "")
-  })
+  }, priority = 1)
   
   observeEvent(input$cust_act, {
     # Check that there is at least one parameter name in 'input$cust_text':
@@ -2760,9 +2773,10 @@ server <- function(input, output, session) {
     } else {
       termlabs_PP_grp(NULL)
     }
+    freezeReactiveValue(input, "term_sel")
     updateSelectInput(inputId = "term_sel",
                       choices = term_choices)
-  })
+  }, priority = 1)
   
   gg_ceff <- reactive({
     req(input$term_sel)

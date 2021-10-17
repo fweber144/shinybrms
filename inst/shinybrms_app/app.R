@@ -1309,24 +1309,24 @@ server <- function(input, output, session) {
     input$data_link2
     input$data_link3
   }, {
-    updateNavbarPage(session, "navbar_ID", "Data")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Data")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$likelihood_link1, {
-    updateNavbarPage(session, "navbar_ID", "Likelihood")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Likelihood")
   })
   
   observeEvent({
     input$outcome_link1
     input$outcome_link2
   }, {
-    updateNavbarPage(session, "navbar_ID", "Likelihood")
-    updateNavlistPanel(session, "likelihood_navlist_ID", "Outcome")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Likelihood")
+    updateNavlistPanel(inputId = "likelihood_navlist_ID", selected = "Outcome")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$formula_link1, {
-    updateNavbarPage(session, "navbar_ID", "Likelihood")
-    updateNavlistPanel(session, "likelihood_navlist_ID", "Formula preview")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Likelihood")
+    updateNavlistPanel(inputId = "likelihood_navlist_ID", selected = "Formula preview")
   })
   
   observeEvent({
@@ -1334,28 +1334,28 @@ server <- function(input, output, session) {
     input$prior_link2
     input$prior_link3
   }, {
-    updateNavbarPage(session, "navbar_ID", "Prior")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Prior")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$posterior_link1, {
-    updateNavbarPage(session, "navbar_ID", "Posterior")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Posterior")
   })
   
   observeEvent(input$mcmc_link1, {
-    updateNavbarPage(session, "navbar_ID", "Posterior")
-    updateNavlistPanel(session, "posterior_navlist_ID", "MCMC diagnostics")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Posterior")
+    updateNavlistPanel(inputId = "posterior_navlist_ID", selected = "MCMC diagnostics")
   })
   
   observeEvent(input$about_link1, {
-    updateNavbarPage(session, "navbar_ID", "About")
+    updateNavbarPage(inputId = "navbar_ID", selected = "About")
   })
   
   observeEvent(input$links_link1, {
-    updateNavbarPage(session, "navbar_ID", "Links")
+    updateNavbarPage(inputId = "navbar_ID", selected = "Links")
   })
   
   observeEvent(input$references_link1, {
-    updateNavbarPage(session, "navbar_ID", "References")
+    updateNavbarPage(inputId = "navbar_ID", selected = "References")
   })
   
   ## Data -------------------------------------------------------------------
@@ -1588,7 +1588,7 @@ server <- function(input, output, session) {
     } else {
       outc_slctd <- NULL
     }
-    updateSelectInput(session, "outc_sel",
+    updateSelectInput(inputId = "outc_sel",
                       choices = outc_choices,
                       selected = outc_slctd)
   })
@@ -1639,7 +1639,7 @@ server <- function(input, output, session) {
     } else {
       pred_mainNP_slctd <- NULL
     }
-    updateSelectInput(session, "pred_mainNP_sel",
+    updateSelectInput(inputId = "pred_mainNP_sel",
                       choices = pred_mainNP_choices,
                       selected = pred_mainNP_slctd)
   })
@@ -1662,7 +1662,7 @@ server <- function(input, output, session) {
     } else {
       pred_mainPP_slctd <- NULL
     }
-    updateSelectInput(session, "pred_mainPP_sel",
+    updateSelectInput(inputId = "pred_mainPP_sel",
                       choices = pred_mainPP_choices,
                       selected = pred_mainPP_slctd)
   })
@@ -1679,7 +1679,7 @@ server <- function(input, output, session) {
     } else {
       pred_int_slctd <- NULL
     }
-    updateSelectInput(session, "pred_int_build",
+    updateSelectInput(inputId = "pred_int_build",
                       choices = pred_intBuild_choices,
                       selected = pred_int_slctd)
   })
@@ -1691,11 +1691,11 @@ server <- function(input, output, session) {
                                list(input$pred_int_build))
       pred_int_rv$choices <- pred_int_rv$choices[!duplicated(lapply(pred_int_rv$choices, sort))]
       pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
-      updateSelectInput(session, "pred_int_sel",
+      updateSelectInput(inputId = "pred_int_sel",
                         choices = pred_int_rv$choices_chr,
                         selected = c(input$pred_int_sel,
                                      paste(input$pred_int_build, collapse = "<-->")))
-      updateSelectInput(session, "pred_int_build",
+      updateSelectInput(inputId = "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
                                     input$pred_mainNP_sel,
                                     input$pred_mainPP_sel))
@@ -1733,7 +1733,7 @@ server <- function(input, output, session) {
       pred_intSel_choices <- character()
       pred_intSel_slctd <- NULL
     }
-    updateSelectInput(session, "pred_int_sel",
+    updateSelectInput(inputId = "pred_int_sel",
                       choices = pred_intSel_choices,
                       selected = pred_intSel_slctd)
   }, ignoreNULL = FALSE)
@@ -1930,7 +1930,7 @@ server <- function(input, output, session) {
       prior_class_slctd <- NULL
     }
     
-    updateSelectInput(session, "prior_class_sel",
+    updateSelectInput(inputId = "prior_class_sel",
                       choices = prior_class_choices,
                       selected = prior_class_slctd)
   })
@@ -1954,7 +1954,7 @@ server <- function(input, output, session) {
       prior_coef_slctd <- NULL
     }
     
-    updateSelectInput(session, "prior_coef_sel",
+    updateSelectInput(inputId = "prior_coef_sel",
                       choices = prior_coef_choices,
                       selected = prior_coef_slctd)
   })
@@ -1979,7 +1979,7 @@ server <- function(input, output, session) {
       prior_group_slctd <- NULL
     }
     
-    updateSelectInput(session, "prior_group_sel",
+    updateSelectInput(inputId = "prior_group_sel",
                       choices = prior_group_choices,
                       selected = prior_group_slctd)
   })
@@ -2608,13 +2608,13 @@ server <- function(input, output, session) {
     if (!inherits(try(C_pars(), silent = TRUE), "try-error")) {
       par_choices <- c(par_choices, C_pars())
     }
-    updateSelectInput(session, "par_sel",
+    updateSelectInput(inputId = "par_sel",
                       choices = par_choices)
   })
   
   observeEvent(input$par_add, {
     req(input$par_sel)
-    updateTextInput(session, "cust_text",
+    updateTextInput(inputId = "cust_text",
                     value = paste0(input$cust_text, "`", input$par_sel, "`"))
   })
   
@@ -2623,7 +2623,7 @@ server <- function(input, output, session) {
   # Reset C_cust() when C_stanres() has changed (and also reset input$cust_text):
   observeEvent(try(C_stanres(), silent = TRUE), {
     C_cust(cust_smmry_empty)
-    updateTextInput(session, "cust_text",
+    updateTextInput(inputId = "cust_text",
                     value = "")
   })
   
@@ -2760,7 +2760,7 @@ server <- function(input, output, session) {
     } else {
       termlabs_PP_grp(NULL)
     }
-    updateSelectInput(session, "term_sel",
+    updateSelectInput(inputId = "term_sel",
                       choices = term_choices)
   })
   

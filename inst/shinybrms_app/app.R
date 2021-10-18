@@ -450,9 +450,9 @@ ui <- navbarPage(
                       selectize = TRUE)
         ),
         wellPanel(
-          h3("Offset"),
-          helpText(withMathJax(
-            p("An offset is a predictor with a coefficient fixed to 1.",
+          h3("Offsets"),
+          helpText(
+            p("An offset variable is a predictor variable with a coefficient fixed to 1.",
               "In most regression analyses, an offset is not needed.",
               "In the context of this app, the typical use case would be a count data outcome",
               "where the observation time differs from individual to individual (see the",
@@ -461,30 +461,13 @@ ui <- navbarPage(
                 href = "https://mc-stan.org/rstanarm/articles/count.html",
                 target = "_blank"),
               "for an example)."),
-            p("If you want to specify an offset, please follow these steps which ensure that",
-              "the default prior for the intercept (at centered predictors) is adapted accordingly:",
-              tags$ol(
-                tags$li("Add the offset variable in the input field of section \"Nonpooled main effects\" above."),
-                tags$li("In the \"Specification of custom priors\" on page",
-                        HTML(paste(actionLink("prior_link2", "Prior")), .noWS = "after"), ":",
-                        tags$ol(
-                          tags$li("Choose class", code("b", .noWS = "after"), "."),
-                          tags$li("Choose the coefficient of the offset variable."),
-                          tags$li("Type", code("constant(1)"), "in the input field for the prior distribution."),
-                          tags$li("Click on \"Add prior\".")
-                        ))
-              )),
-            p(strong("Important:"),
-              "If you followed these steps, then after the Stan run, you will be warned that",
-              "at least one MCMC diagnostic is worrying. The problem is that the steps above",
-              "create a constant parameter with a missing value (", code("NA", .noWS = "outside"),
-              ") for the corresponding \\(\\widehat{R}\\), bulk-ESS, and tail-ESS. Thus,",
-              "for the \\(\\widehat{R}\\), bulk-ESS, and tail-ESS",
-              em("of this constant parameter", .noWS = "after"), ", you may ignore the warning.",
-              "However, the MCMC diagnostics might be worrying for other reasons as well. Thus, you",
-              "need to check the MCMC diagnostics very carefully. In particular, you need to check",
-              "the HMC-specific diagnostics as well as the detailed table of the general MCMC diagnostics.")
-          ))
+            p("Start typing or click into the field below to choose variables for which",
+              "offsets shall be added.")
+          ),
+          selectInput("offs_sel", NULL,
+                      choices = c("Choose variables for offsets ..." = ""),
+                      multiple = TRUE,
+                      selectize = TRUE)
         ),
         wellPanel(
           h3("Preview of chosen predictor terms"),
@@ -876,7 +859,7 @@ ui <- navbarPage(
               target = "_blank",
               .noWS = "after"),
             ". The \"Brief Guide to Stan’s Warnings\" covers all MCMC diagnostics used here and",
-            "gives some advice on what to do when they indicate problems.",
+            "gives some advice on what to do if they indicate problems.",
             "Betancourt (2018) focuses on the HMC-specific diagnostics,",
             "whereas Vehtari et al. (2021) focus on the general MCMC diagnostics."),
           p("The HMC-specific diagnostics are:",
@@ -912,7 +895,18 @@ ui <- navbarPage(
               tags$li("\\(\\widehat{R} \\geq 1.01\\),"),
               tags$li("\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\) with \\(n_{\\text{chains}}\\) denoting the number of chains,"),
               tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
-            ))
+            )),
+          p(em("Note:"), "If you used a", code("constant()"), "prior (which should rarely be the case),",
+            "then after the Stan run, you will be warned that at least one MCMC diagnostic is worrying.",
+            "The reason is that",
+            "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",
+            "cannot be calculated for a constant parameter. Thus, with respect to",
+            "the \\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",
+            em("of a constant parameter", .noWS = "after"), ", you may ignore the warning.",
+            "However, the MCMC diagnostics may be worrying for other reasons or other parameters as well.",
+            "Thus, in this case, you need to check the MCMC diagnostics very carefully.",
+            "In particular, you need to check the HMC-specific diagnostics as well as",
+            "the detailed table of the general MCMC diagnostics.") # (where a constant parameter has only missing values, i.e., only", code("NA", .noWS = "after"), "s)
         )),
         br(),
         wellPanel(
@@ -1073,8 +1067,8 @@ ui <- navbarPage(
                 tags$ul(
                   tags$li(code("b_Intercept"), "is the intercept (with respect to the noncentered predictors)."),
                   tags$li("The parameters starting with", code("b_"), "are the nonpooled effects."),
-                  tags$li("If you used the", code("constant(1)"), "approach for including an offset, then",
-                          "the parameters starting with", code("par_b_"), "are internal parameters which you don't",
+                  tags$li("If you used a", code("constant()"), "prior (which should rarely be the case), then",
+                          "the parameters starting with", code("par_"), "are internal parameters which you don't",
                           "need to take into account."),
                   tags$li("The parameters starting with", code("r_"), "are the partially pooled effects."),
                   tags$li("The parameters starting with", code("sd_"), "are the standard deviations of the",
@@ -1585,7 +1579,8 @@ server <- function(input, output, session) {
       outc_choices <- c(outc_choices,
                         setdiff(names(da()),
                                 c(input$pred_mainNP_sel,
-                                  input$pred_mainPP_sel)))
+                                  input$pred_mainPP_sel,
+                                  input$offs_sel)))
       outc_slctd <- isolate(input$outc_sel)
     } else {
       outc_slctd <- NULL
@@ -1636,7 +1631,8 @@ server <- function(input, output, session) {
       pred_mainNP_choices <- c(pred_mainNP_choices,
                                setdiff(names(da()),
                                        c(input$outc_sel,
-                                         input$pred_mainPP_sel)))
+                                         input$pred_mainPP_sel,
+                                         input$offs_sel)))
       pred_mainNP_slctd <- isolate(input$pred_mainNP_sel)
     } else {
       pred_mainNP_slctd <- NULL
@@ -1651,7 +1647,8 @@ server <- function(input, output, session) {
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       PP_sel_choices <- setdiff(names(da()),
                                 c(input$outc_sel,
-                                  input$pred_mainNP_sel))
+                                  input$pred_mainNP_sel,
+                                  input$offs_sel))
       if (length(PP_sel_choices) > 0L) {
         # Only allow factor, character, and logical variables:
         PP_sel_choices_OK <- sapply(da()[PP_sel_choices], function(x) {
@@ -1740,12 +1737,35 @@ server <- function(input, output, session) {
                       selected = pred_intSel_slctd)
   }, ignoreNULL = FALSE)
   
+  #### Offsets --------------------------------------------------------------
+  
+  observe({
+    offs_choices <- c("Choose variables for offsets ..." = "")
+    if (!inherits(try(da(), silent = TRUE), "try-error")) {
+      offs_choices <- c(offs_choices,
+                        setdiff(names(da()),
+                                c(input$outc_sel,
+                                  input$pred_mainNP_sel,
+                                  input$pred_mainPP_sel)))
+      offs_slctd <- isolate(input$offs_sel)
+    } else {
+      offs_slctd <- NULL
+    }
+    updateSelectInput(session, "offs_sel",
+                      choices = offs_choices,
+                      selected = offs_slctd)
+  })
+  
   #### Combination of all chosen predictor terms ----------------------------
   
   C_pred <- reactive({
     if (is.null(input$pred_mainNP_sel) && is.null(input$pred_mainPP_sel)) {
+      mainNP_tmp <- "1"
+      if (length(input$offs_sel) > 0L) {
+        mainNP_tmp <- c(mainNP_tmp, paste0("offset(", input$offs_sel, ")"))
+      }
       return(data.frame("from_mainPP" = factor(NA_character_, levels = NA_character_, exclude = NULL),
-                        "from_mainNP" = "1"))
+                        "from_mainNP" = paste(mainNP_tmp, collapse = " + ")))
     }
     
     pred_lst <- c(
@@ -1806,6 +1826,7 @@ server <- function(input, output, session) {
       }, simplify = FALSE)
       pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
     }
+    pred_lst <- c(pred_lst, as.list(input$offs_sel))
     
     pred_DF <- do.call("rbind", lapply(pred_lst, function(x) {
       xNP <- intersect(x, input$pred_mainNP_sel)
@@ -1819,6 +1840,15 @@ server <- function(input, output, session) {
         xPP <- paste(xPP, collapse = ":")
       } else {
         xPP <- NA_character_
+      }
+      xOffs <- intersect(x, input$offs_sel)
+      if (identical(length(xOffs), 1L)) {
+        if (!isTRUE(is.na(xNP))) {
+          stop("Unexpected value of `xNP`. Please notify the package maintainer.")
+        }
+        xNP <- paste0("offset(", xOffs, ")")
+      } else if (!identical(length(xOffs), 0L)) {
+        stop("Unexpected length of `xOffs`. Please notify the package maintainer.")
       }
       data.frame("from_mainNP" = xNP,
                  "from_mainPP" = xPP)

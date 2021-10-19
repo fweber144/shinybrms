@@ -739,7 +739,7 @@ ui <- navbarPage(
             condition = "input.show_advOpts",
             helpText(
               "Notes:",
-              tags$ol(
+              tags$ul(
                 tags$li(paste("To obtain reproducible results, you need to specify a value for",
                               "option \"Seed\" and enter this value each time you want to",
                               "obtain the same results. Leave option \"Seed\" empty to use a",
@@ -801,13 +801,36 @@ ui <- navbarPage(
         ),
         wellPanel(
           h3("Run Stan"),
-          helpText("Note: If the advanced option \"Open progress\" is selected (as per default),",
-                   "Windows users having Firefox set as their default web browser may need to manually",
-                   "copy the link to the Stan HTML progress file which is automatically opening up and",
-                   "paste this link into a different web browser for viewing the progress file there."),
+          helpText(
+            p("Start the Stan run for inferring the posterior here (or upload",
+              "the results from a previous Stan run instead)."),
+            p("Notes:",
+              tags$ul(
+                tags$li(
+                  "If the advanced option \"Open progress\" is selected (as",
+                  "per default), Windows users having Firefox set as their default",
+                  "web browser may need to manually copy the link to the Stan HTML",
+                  "progress file which is automatically opening up and paste this",
+                  "link into a different web browser for viewing the progress file",
+                  "there."
+                ),
+                tags$li(
+                  "If uploaded Stan results are used, then", strong("shinybrms"),
+                  "currently cannot check whether the number of chains in the",
+                  "Stan results differs from the desired number of chains",
+                  "(i.e., from the number of chains specified for the original",
+                  "Stan run)."
+                )
+              ))
+          ),
           actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary"),
           br(),
           br(),
+          fileInput("brmsfit_upload", "Upload \"brmsfit\" object (RDS file):",
+                    multiple = FALSE,
+                    accept = c(".rds"),
+                    buttonLabel = "Browse ..."),
+          hr(),
           strong("Date and time when the Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
           strong("Check if all MCMC diagnostics are OK (see the tab",
@@ -821,13 +844,17 @@ ui <- navbarPage(
                                   "Matrix of posterior draws (RDS file)" = "shinybrms_post_draws_mat.rds",
                                   "Array of posterior draws (RDS file)" = "shinybrms_post_draws_arr.rds"),
                       selectize = TRUE),
-          helpText(HTML(paste0("The most comprehensive output object is the", code("brmsfit"), "object which ",
-                               "is the output from the R function ",
-                               a(HTML(paste(code("brms::brm()"))),
-                                 href = "https://paul-buerkner.github.io/brms/reference/brm.html",
-                                 target = "_blank"),
-                               ", the central function ",
-                               "for inferring the posterior."))),
+          helpText(
+            "The most comprehensive output object is the", code("brmsfit"),
+            "object which is the output from the R function",
+            a(HTML(paste(code("brms::brm()"))),
+              href = "https://paul-buerkner.github.io/brms/reference/brm.html",
+              target = "_blank", .noWS = "after"),
+            ", the central function for inferring the posterior. Such a",
+            code("brmsfit"), "object may be uploaded later above to avoid",
+            "running Stan (for", em("that"), "model and", em("that"), "data)",
+            "again."
+          ),
           downloadButton("stanout_download", "Download output file")
         )
       ),
@@ -2197,7 +2224,8 @@ server <- function(input, output, session) {
   
   #### Run Stan -------------------------------------------------------------
   
-  C_stanres <- reactiveVal()
+  n_chains_spec <- reactiveVal(-Inf)
+  C_bfit <- reactiveVal()
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2209,7 +2237,7 @@ server <- function(input, output, session) {
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     
-    n_chains_spec <- input$advOpts_chains
+    n_chains_spec(input$advOpts_chains)
     
     args_brm <- list(
       formula = C_formula(),
@@ -2293,7 +2321,7 @@ server <- function(input, output, session) {
     
     # Run Stan (more precisely: brms::brm()):
     warn_capt <- capture.output({
-      C_bfit <- do.call(brms::brm, args = args_brm)
+      bfit_tmp <- do.call(brms::brm, args = args_brm)
     }, type = "message")
     
     # Reset all modified options and environment variables:
@@ -2327,24 +2355,49 @@ server <- function(input, output, session) {
       }
     }
     
-    C_draws_arr <- as.array(C_bfit)
+    C_bfit(bfit_tmp)
+  })
+  
+  observeEvent(input$brmsfit_upload, {
+    req(input$brmsfit_upload)
+    bfit_tmp <- try(readRDS(input$brmsfit_upload$datapath),
+                    silent = TRUE)
+    if (inherits(bfit_tmp, "try-error")) {
+      showModal(modalDialog(
+        "The file upload failed.",
+        title = "File upload failed",
+        footer = modalButton("Close"),
+        size = "s",
+        easyClose = TRUE
+      ))
+      req(FALSE)
+    }
+    n_chains_spec(-Inf)
+    C_bfit(bfit_tmp)
+  })
+  
+  C_stanres <- reactiveVal()
+  
+  observeEvent(C_bfit(), {
+    req(n_chains_spec(), C_bfit())
+    C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
     # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither
     # test gradient mode (1L) nor error mode (2L):
-    stopifnot(identical(C_bfit$fit@mode, 0L))
+    stopifnot(identical(C_bfit()$fit@mode, 0L))
     
     ##### Computation of MCMC diagnostics -------------------------------------
     
     ###### HMC-specific diagnostics -------------------------------------------
     
-    C_div <- rstan::get_num_divergent(C_bfit$fit)
+    C_div <- rstan::get_num_divergent(C_bfit()$fit)
     C_div_OK <- identical(C_div, 0L)
     
-    C_tree <- rstan::get_num_max_treedepth(C_bfit$fit)
+    C_tree <- rstan::get_num_max_treedepth(C_bfit()$fit)
     C_tree_OK <- identical(C_tree, 0L)
     
-    C_EBFMI <- setNames(rstan::get_bfmi(C_bfit$fit),
-                        paste0("chain_", sapply(C_bfit$fit@stan_args, "[[", "chain_id")))
+    C_EBFMI <- setNames(rstan::get_bfmi(C_bfit()$fit),
+                        paste0("chain_", sapply(C_bfit()$fit@stan_args, "[[", "chain_id")))
     C_EBFMI_OK <- all(C_EBFMI >= 0.2)
     
     ###### General MCMC diagnostics -------------------------------------------
@@ -2378,7 +2431,7 @@ server <- function(input, output, session) {
     ###### Notifications for the MCMC diagnostics -----------------------------
     
     # First: Check for failed chains:
-    if (n_chains_out < n_chains_spec) {
+    if (n_chains_out < n_chains_spec()) {
       showNotification(
         paste("Warning: Finished running Stan, but at least one chain exited with an error.",
               "The Stan results should not be used."),
@@ -2405,7 +2458,7 @@ server <- function(input, output, session) {
       }
     }
     
-    C_stanres(list(bfit = C_bfit,
+    C_stanres(list(bfit = C_bfit(),
                    diagn = list(all_OK = C_all_OK,
                                 divergences_OK = C_div_OK,
                                 divergences = C_div,

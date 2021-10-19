@@ -1531,11 +1531,13 @@ server <- function(input, output, session) {
                              na.strings = c("NA", ".")),
                     silent = TRUE)
       if (inherits(da_tmp, "try-error")) {
-        showNotification(
-          "File upload was not successful.",
-          duration = NA,
-          type = "error"
-        )
+        showModal(modalDialog(
+          "The file upload failed.",
+          title = "File upload failed",
+          footer = modalButton("Close"),
+          size = "s",
+          easyClose = TRUE
+        ))
         req(FALSE)
       }
       if ("." %in% names(da_tmp)) {
@@ -2584,7 +2586,6 @@ server <- function(input, output, session) {
       )),
       title = "Allowed characters and character groups",
       footer = modalButton("Close"),
-      # size = "m",
       easyClose = TRUE
     ))
   })
@@ -2642,7 +2643,6 @@ server <- function(input, output, session) {
       )),
       title = "Help pages for R functions",
       footer = modalButton("Close"),
-      # size = "m",
       easyClose = TRUE
     ))
   })

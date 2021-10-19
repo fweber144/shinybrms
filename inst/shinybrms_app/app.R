@@ -1915,19 +1915,17 @@ server <- function(input, output, session) {
     }, type = "message")
     options(warn = warn_orig$warn)
     if (inherits(C_prior_default_tmp, "try-error")) {
-      ### Only for testing purposes:
-      # ### Option 1:
-      # # err_capt <- attr(C_prior_default_tmp, "condition")$message
-      # ### 
-      # ### Option 2:
-      # err_capt <- conditionMessage(attr(C_prior_default_tmp, "condition"))
-      # ### 
-      # for (err_capt_i in err_capt) {
-      #   if (!identical(err_capt_i, "")) {
-      #     showNotification(err_capt_i, duration = NA, type = "error")
-      #   }
-      # }
+      ### Option 1:
+      # err_capt <- attr(C_prior_default_tmp, "condition")$message
       ###
+      ### Option 2:
+      err_capt <- conditionMessage(attr(C_prior_default_tmp, "condition"))
+      ###
+      for (err_capt_i in err_capt) {
+        if (!identical(err_capt_i, "")) {
+          showNotification(err_capt_i, duration = NA, type = "error")
+        }
+      }
       return(brms::empty_prior())
     }
     if (length(warn_capt) > 0L) {

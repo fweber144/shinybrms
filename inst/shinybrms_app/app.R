@@ -2195,7 +2195,9 @@ server <- function(input, output, session) {
   
   #### Run Stan -------------------------------------------------------------
   
-  C_stanres <- eventReactive(input$run_stan, {
+  C_stanres <- reactiveVal()
+  
+  observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,
         input$advOpts_chains,
@@ -2401,38 +2403,41 @@ server <- function(input, output, session) {
       }
     }
     
-    return(list(bfit = C_bfit,
-                diagn = list(all_OK = C_all_OK,
-                             divergences_OK = C_div_OK,
-                             divergences = C_div,
-                             hits_max_tree_depth_OK = C_tree_OK,
-                             hits_max_tree_depth = C_tree,
-                             EBFMI_OK = C_EBFMI_OK,
-                             EBFMI = C_EBFMI,
-                             Rhat_OK = C_rhat_OK,
-                             Rhat = C_rhat,
-                             ESS_bulk_OK = C_essBulk_OK,
-                             ESS_bulk = C_essBulk,
-                             ESS_tail_OK = C_essTail_OK,
-                             ESS_tail = C_essTail),
-                draws_arr = C_draws_arr))
+    C_stanres(list(bfit = C_bfit,
+                   diagn = list(all_OK = C_all_OK,
+                                divergences_OK = C_div_OK,
+                                divergences = C_div,
+                                hits_max_tree_depth_OK = C_tree_OK,
+                                hits_max_tree_depth = C_tree,
+                                EBFMI_OK = C_EBFMI_OK,
+                                EBFMI = C_EBFMI,
+                                Rhat_OK = C_rhat_OK,
+                                Rhat = C_rhat,
+                                ESS_bulk_OK = C_essBulk_OK,
+                                ESS_bulk = C_essBulk,
+                                ESS_tail_OK = C_essTail_OK,
+                                ESS_tail = C_essTail),
+                   draws_arr = C_draws_arr))
   })
   
   ##### Matrix of posterior draws (for later usage and only run if needed) ----
   
   C_draws_mat <- reactive({
+    invisible(req(C_stanres()))
     return(as.matrix(C_stanres()$bfit))
   })
   
   ##### Date and time when the Stan run was finished ------------------------
   
   output$fit_date <- renderText({
+    invisible(req(C_stanres()))
     C_stanres()$bfit$fit@date
   })
   
   ##### Overall check for all MCMC diagnostics ------------------------------
   
   output$diagn_all_out <- renderText({
+    invisible(req(C_stanres()))
     if (C_stanres()$diagn$all_OK) {
       return(paste("All MCMC diagnostics are OK (see",
                    "the tab \"MCMC diagnostics\" for details)."))
@@ -2455,6 +2460,7 @@ server <- function(input, output, session) {
                   file = file,
                   row.names = FALSE)
       } else {
+        invisible(req(C_stanres()))
         saveRDS(switch(input$stanout_download_sel,
                        "shinybrms_brmsfit.rds" = C_stanres()$bfit,
                        "shinybrms_MCMC_diagnostics.rds" = C_stanres()$diagn,
@@ -2470,6 +2476,7 @@ server <- function(input, output, session) {
   #### HMC-specific diagnostics ---------------------------------------------
   
   output$diagn_div_out <- renderText({
+    invisible(req(C_stanres()))
     div_text <- paste0("The number of iterations ending with a divergence (",
                        C_stanres()$diagn$divergences,
                        ")")
@@ -2482,6 +2489,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$diagn_tree_out <- renderText({
+    invisible(req(C_stanres()))
     tree_text <- paste0("The number of iterations hitting the maximum tree depth (",
                         C_stanres()$diagn$hits_max_tree_depth,
                         ")")
@@ -2494,6 +2502,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$diagn_EBFMI_out <- renderText({
+    invisible(req(C_stanres()))
     EBFMI_text <- paste0("The E-BFMI (",
                          paste(paste0(names(C_stanres()$diagn$EBFMI),
                                       ": ",
@@ -2512,6 +2521,7 @@ server <- function(input, output, session) {
   #### General MCMC diagnostics ---------------------------------------------
   
   output$rhat_out <- renderText({
+    invisible(req(C_stanres()))
     if (C_stanres()$diagn$Rhat_OK) {
       return("All R-hat values are OK.")
     } else {
@@ -2521,6 +2531,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$essBulk_out <- renderText({
+    invisible(req(C_stanres()))
     if (C_stanres()$diagn$ESS_bulk_OK) {
       return("All bulk-ESS values are OK.")
     } else {
@@ -2530,6 +2541,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$essTail_out <- renderText({
+    invisible(req(C_stanres()))
     if (C_stanres()$diagn$ESS_tail_OK) {
       return("All tail-ESS values are OK.")
     } else {
@@ -2539,6 +2551,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$general_MCMC_out <- renderPrint({
+    invisible(req(C_stanres()))
     data.frame("R-hat" = C_stanres()$diagn$Rhat,
                "ESS_bulk" = C_stanres()$diagn$ESS_bulk,
                "ESS_tail" = C_stanres()$diagn$ESS_tail,
@@ -2548,6 +2561,7 @@ server <- function(input, output, session) {
   ### Default summary -------------------------------------------------------
   
   output$smmry_view <- renderPrint({
+    invisible(req(C_stanres()))
     print(C_stanres()$bfit, digits = 4, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   }, width = max(getOption("width"), 100))
   
@@ -2633,6 +2647,7 @@ server <- function(input, output, session) {
   })
   
   C_pars <- reactive({
+    invisible(req(C_stanres()))
     return(brms::variables(C_stanres()$bfit))
   })
   
@@ -2735,6 +2750,7 @@ server <- function(input, output, session) {
   
   # The "brmsformula" from the fitted model object:
   C_bformula_ff <- reactive({
+    invisible(req(C_stanres()))
     return(formula(C_stanres()$bfit))
   })
   
@@ -2798,7 +2814,7 @@ server <- function(input, output, session) {
   })
   
   gg_ceff <- reactive({
-    req(input$term_sel)
+    req(input$term_sel, C_stanres())
     re_formula_ceff <- NA
     term_sel_PP <- intersect(input$term_sel, termlabs_PP_grp())
     if (identical(length(term_sel_PP), 1L)) {

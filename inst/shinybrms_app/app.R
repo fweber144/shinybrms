@@ -900,7 +900,7 @@ ui <- navbarPage(
               tags$li("\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\) with \\(n_{\\text{chains}}\\) denoting the number of chains,"),
               tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
             )),
-          p(em("Note:"), "If you used a", code("constant()"), "prior (which should rarely be the case),",
+          p("Note: If you used a", code("constant()"), "prior (which should rarely be the case),",
             "then after the Stan run, you will be warned that at least one MCMC diagnostic is worrying.",
             "The reason is that",
             "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",

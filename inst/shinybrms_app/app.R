@@ -274,7 +274,7 @@ ui <- navbarPage(
                     selectize = TRUE),
         hr(),
         h4("Upload a dataset"),
-        fileInput("file_upload", "Choose file:",
+        fileInput("data_upload", "Choose file:",
                   multiple = FALSE,
                   accept = c("text/csv",
                              "text/comma-separated-values",
@@ -1522,8 +1522,8 @@ server <- function(input, output, session) {
     } else if (identical(input$ex_da_sel, "ToothGrowth")) {
       return(ToothGrowth)
     } else {
-      req(input$file_upload)
-      da_tmp <- try(read.csv(input$file_upload$datapath,
+      req(input$data_upload)
+      da_tmp <- try(read.csv(input$data_upload$datapath,
                              header = input$header,
                              sep = input$sep,
                              quote = input$quote,

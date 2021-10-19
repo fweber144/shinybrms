@@ -1331,7 +1331,6 @@ server <- function(input, output, session) {
   
   observeEvent({
     input$prior_link1
-    input$prior_link2
     input$prior_link3
   }, {
     updateNavbarPage(session, "navbar_ID", "Prior")

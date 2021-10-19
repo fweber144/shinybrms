@@ -2562,7 +2562,8 @@ server <- function(input, output, session) {
   
   output$smmry_view <- renderPrint({
     invisible(req(C_stanres()))
-    print(C_stanres()$bfit, digits = 4, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
+    print(C_stanres()$bfit, digits = 4,
+          robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
   }, width = max(getOption("width"), 100))
   
   ### Custom summary --------------------------------------------------------
@@ -2570,8 +2571,8 @@ server <- function(input, output, session) {
   observeEvent(input$cust_allow_link, {
     showModal(modalDialog(
       HTML(paste(
-        "These are the characters and character groups which are allowed in the custom expression on",
-        "tab \"Custom summary\":",
+        "These are the characters and character groups which are allowed in",
+        "the custom expression on tab \"Custom summary\":",
         tags$ul(
           lapply(cust_allow_all, function(char_i) {
             if (identical(char_i, " ")) {

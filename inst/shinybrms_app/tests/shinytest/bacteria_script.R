@@ -21,7 +21,12 @@ app$setInputs(navbar_ID = "Prior",
 app$setInputs(navbar_ID = "Posterior",
               show_advOpts = TRUE,
               advOpts_seed = 6789,
-              advOpts_cores = 2)
+              advOpts_cores = 2,
+              advOpts_chains = 2,
+              advOpts_iter = 500,
+              advOpts_adapt_delta = 0.8,
+              advOpts_max_treedepth = 10,
+              advOpts_save_warmup = FALSE)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",

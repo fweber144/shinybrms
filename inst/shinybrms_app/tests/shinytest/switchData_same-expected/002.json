@@ -4,7 +4,7 @@
     "act_launch_shinystan": 0,
     "advOpts_adapt_delta": 0.95,
     "advOpts_chains": 4,
-    "advOpts_cores": 4,
+    "advOpts_cores": 2,
     "advOpts_init_r": 2,
     "advOpts_inits": "random",
     "advOpts_iter": 2000,

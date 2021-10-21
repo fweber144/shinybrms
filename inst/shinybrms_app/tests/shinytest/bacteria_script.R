@@ -46,6 +46,7 @@ app$setInputs(cust_name = "week for drugP",
               cust_act = "click")
 app$setInputs(posterior_navlist_ID = "Conditional effects",
               term_sel = "week:trt")
+app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE))

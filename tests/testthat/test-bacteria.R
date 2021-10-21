@@ -1,8 +1,8 @@
 library(shinytest)
 
 # Note: In fact, it would be more desirable to specify argument `suffix` in the
-# shinytest::testApp() calls below (and to have a single file "bacteria_run.R"),
-# but this has the downside that the shinytests then cannot be run directly via
+# shinytest::testApp() calls below (and to have a single file "bacteria.R"), but
+# this has the downside that the shinytests then cannot be run directly via
 # RStudio's "Run Tests" button (in an opened shinytest file).
 
 test_that("Stan run for the \"bacteria\" example on Linux", {

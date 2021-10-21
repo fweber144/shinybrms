@@ -24,18 +24,9 @@ app$setInputs(navbar_ID = "Posterior",
               advOpts_cores = 2)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshot(items = list(input = TRUE,
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
-app$snapshot(items = list(input = TRUE,
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
 app$setInputs(posterior_navlist_ID = "Default summary")
-app$snapshot(items = list(input = TRUE,
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
 app$setInputs(posterior_navlist_ID = "Custom summary",
               par_sel = "b_week",
               par_add = "click")
@@ -48,13 +39,7 @@ app$setInputs(cust_text = "`b_week` + ",
               par_add = "click")
 app$setInputs(cust_name = "week for drugP",
               cust_act = "click")
-app$snapshot(items = list(input = TRUE,
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
 app$setInputs(posterior_navlist_ID = "Conditional effects")
-app$snapshot(items = list(input = TRUE,
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
 app$setInputs(term_sel = "week:trt")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),

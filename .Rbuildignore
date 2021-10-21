@@ -8,3 +8,4 @@
 ^docs$
 ^pkgdown$
 ^vignettes$
+inst/shinybrms_app/tests/shinytest/bacteria_full\.rds

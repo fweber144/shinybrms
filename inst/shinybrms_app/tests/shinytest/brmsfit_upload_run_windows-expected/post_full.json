@@ -16,20 +16,6 @@
     "advOpts_seed": null,
     "advOpts_thin": 1,
     "advOpts_warmup": null,
-    "brmsfit_upload": {
-      "name": [
-        "bacteria_full.rds"
-      ],
-      "size": [
-        4676302
-      ],
-      "type": [
-        ""
-      ],
-      "datapath": [
-        "0.rds"
-      ]
-    },
     "ceff_download_sel": "pdf",
     "cust_act": 2,
     "cust_allow_link": 0,

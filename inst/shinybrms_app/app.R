@@ -818,8 +818,7 @@ ui <- navbarPage(
                   "If uploaded Stan results are used, then", strong("shinybrms"),
                   "currently cannot check whether the number of chains in the",
                   "Stan results differs from the desired number of chains",
-                  "(i.e., from the number of chains specified for the original",
-                  "Stan run)."
+                  "(i.e., from the number of chains specified originally)."
                 )
               ))
           ),

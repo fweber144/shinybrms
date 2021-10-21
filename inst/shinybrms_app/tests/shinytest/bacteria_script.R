@@ -49,4 +49,5 @@ app$setInputs(posterior_navlist_ID = "Conditional effects",
 app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
 app$snapshot(items = list(input = TRUE,
                           output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE))
+                          export = TRUE),
+             filename = "post_full.json")

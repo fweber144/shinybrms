@@ -29,6 +29,7 @@ app$setInputs(navbar_ID = "Posterior",
               advOpts_save_warmup = FALSE)
 app$snapshot()
 app$setInputs(run_stan = "click", timeout_ = 1800000)
+app$snapshotDownload("stanout_download", filename = "bacteria_full.rds")
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$setInputs(posterior_navlist_ID = "Default summary")

@@ -396,11 +396,15 @@ ui <- navbarPage(
         ),
         wellPanel(
           h3("Main effects"),
-          helpText("Notes:",
-                   tags$ul(
-                     tags$li("Nonpooled effects are also known as", em("population-level"), "or", em("fixed"), "effects."),
-                     tags$li("Partially pooled effects are also known as", em("group-level"), "or", em("random"), "effects."),
-                   )),
+          helpText(
+            "Notes:",
+            tags$ul(
+              tags$li("Nonpooled effects are also known as",
+                      em("population-level"), "or", em("fixed"), "effects."),
+              tags$li("Partially pooled effects are also known as",
+                      em("group-level"), "or", em("random"), "effects."),
+            )
+          ),
           h4("Nonpooled main effects"),
           helpText(
             "Start typing or click into the field below to choose variables for which",

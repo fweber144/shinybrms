@@ -2381,6 +2381,11 @@ server <- function(input, output, session) {
     reset_brmsfit_upload("dummy_value")
   })
   
+  dummy_react <- reactive({
+    input$run_stan
+    return("dummy_value_reactive")
+  })
+  
   output$brmsfit_upload_UI <- renderUI({
     reset_brmsfit_upload()
     fileInput("brmsfit_upload", "Upload \"brmsfit\" object (RDS file):",
@@ -2516,6 +2521,7 @@ server <- function(input, output, session) {
   ##### Date and time when the Stan run was finished ------------------------
   
   output$fit_date <- renderText({
+    dummy_react()
     invisible(req(C_stanres()))
     C_stanres()$bfit$fit@date
   })

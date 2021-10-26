@@ -2964,7 +2964,9 @@ server <- function(input, output, session) {
       if (identical(length(term_sel_split_PP), 1L)) {
         term_sel_split_NP <- setdiff(term_sel_split, term_sel_split_PP)
         stopifnot(identical(length(term_sel_split_NP), 1L))
-        re_formula_ceff <- as.formula(paste("~ (1 +", term_sel_split_NP, "|", term_sel_split_PP, ")"))
+        re_formula_ceff <- as.formula(paste(
+          "~ (1 +", term_sel_split_NP, "|", term_sel_split_PP, ")"
+        ))
       }
     }
     ### Not necessary here since there is no sampling taking place (since

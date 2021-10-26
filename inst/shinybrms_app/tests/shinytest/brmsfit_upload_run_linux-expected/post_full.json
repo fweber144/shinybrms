@@ -32,6 +32,7 @@
     "formula_link1": 0,
     "header": true,
     "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
     "likelihood_navlist_ID": "Outcome",
     "links_link1": 0,
     "mcmc_link1": 0,
@@ -43,6 +44,7 @@
     "par_add": 3,
     "par_sel": "b_week:trtdrugP",
     "posterior_link1": 0,
+    "posterior_link_upld": 0,
     "posterior_navlist_ID": "Launch <strong>shinystan<\/strong>",
     "pred_int_add": 0,
     "pred_int_build": null,
@@ -57,6 +59,7 @@
     "prior_group_sel": "",
     "prior_link1": 0,
     "prior_link3": 0,
+    "prior_link_upld": 0,
     "prior_reset": 0,
     "prior_text": "",
     "quote": "\"",
@@ -72,10 +75,16 @@
     "term_sel": "week:trt"
   },
   "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
     "ceff_plot": {
       "src": "[image data sha1: c75b36ca0c2cd859d27c8b3e3975776224a9c308]",
       "width": 631,
-      "height": 389.958,
+      "height": 389.979446901184,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -114,7 +123,7 @@
         ],
         "dims": {
           "width": 631,
-          "height": 389.958
+          "height": 389.979446901184
         }
       }
     },

@@ -1,12 +1,3 @@
-# Abbreviation (character) for the OS (one could simply use shinytest::osName()
-# instead, but that gives "win" instead of "windows", so would require changing
-# the names of the folders for the expected test results):
-if (identical(Sys.info()["sysname"], setNames("Linux", "sysname"))) {
-  os_chr <- "linux"
-} else {
-  os_chr <- .Platform$OS.type
-}
-
 app$setInputs(advOpts_cores = 2, wait_ = FALSE, values_ = FALSE)
 
 app$setInputs(navbar_ID = "Posterior")

@@ -1,6 +1,9 @@
 app$setInputs(advOpts_cores = 2, wait_ = FALSE, values_ = FALSE)
 
 app$setInputs(navbar_ID = "Posterior")
+
+# Upload full model -------------------------------------------------------
+
 app$uploadFile(brmsfit_upload = file.path("bacteria_full.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
@@ -34,3 +37,56 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
                           output = setdiff(app$listWidgets()$output, "fit_date"),
                           export = TRUE),
              filename = "post_full.json")
+
+# Upload no-interaction model ---------------------------------------------
+
+app$setInputs(posterior_navlist_ID = "Run Stan")
+app$uploadFile(brmsfit_upload = file.path("bacteria_noInt.rds"))
+app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
+app$setInputs(posterior_navlist_ID = "Default summary")
+app$setInputs(posterior_navlist_ID = "Custom summary",
+              par_sel = "b_week",
+              par_add = "click")
+app$setInputs(cust_text = "abs(`b_week`)",
+              cust_name = "absolute week effect",
+              cust_act = "click")
+app$setInputs(posterior_navlist_ID = "Conditional effects",
+              term_sel = "week")
+app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+bfit_upld <- app$getAllValues(input = "brmsfit_upload",
+                              output = FALSE,
+                              export = FALSE)$input$brmsfit_upload
+bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
+stopifnot(identical(
+  bfit_upld, data.frame(name = "bacteria_noInt.rds", type = "", datapath = "0.rds")
+))
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE),
+             filename = "post_noInt.json")
+
+# Click "Run Stan" button -------------------------------------------------
+
+app$setInputs(posterior_navlist_ID = "Run Stan", wait_ = FALSE, values_ = FALSE)
+app$setInputs(run_stan = "click")
+
+# Upload no-week model ----------------------------------------------------
+
+app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
+app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
+app$setInputs(posterior_navlist_ID = "Default summary")
+app$setInputs(posterior_navlist_ID = "Custom summary")
+app$setInputs(posterior_navlist_ID = "Conditional effects",
+              term_sel = "trt")
+app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+bfit_upld <- app$getAllValues(input = "brmsfit_upload",
+                              output = FALSE,
+                              export = FALSE)$input$brmsfit_upload
+bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
+stopifnot(identical(
+  bfit_upld, data.frame(name = "bacteria_noWeek.rds", type = "", datapath = "0.rds")
+))
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE),
+             filename = "post_noWeek.json")

@@ -1,0 +1,143 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.95,
+    "advOpts_chains": 4,
+    "advOpts_cores": 2,
+    "advOpts_init_r": 2,
+    "advOpts_inits": "random",
+    "advOpts_iter": 2000,
+    "advOpts_max_treedepth": 15,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": true,
+    "advOpts_seed": null,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 3,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "absolute week effect",
+    "cust_text": "abs(`b_week`)",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "",
+    "ex_da_sel": "",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_navlist_ID": "Outcome",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": null,
+    "outc_sel": "",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 4,
+    "par_sel": "b_week",
+    "posterior_link1": 0,
+    "posterior_navlist_ID": "Launch <strong>shinystan<\/strong>",
+    "pred_int_add": 0,
+    "pred_int_build": null,
+    "pred_int_sel": null,
+    "pred_mainNP_sel": null,
+    "pred_mainPP_sel": null,
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 0,
+    "prior_class_sel": "",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_reset": 0,
+    "prior_text": "",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 0,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advOpts": false,
+    "show_general_MCMC_tab": true,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": "week"
+  },
+  "output": {
+    "ceff_plot": {
+      "src": "[image data sha1: 11cf12343c0fe6efcf17df648533609419f85a9a]",
+      "width": 631,
+      "height": 389.958,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": -0.55,
+              "right": 11.55,
+              "bottom": 0.613656941415986,
+              "top": 1.0093359746302
+            },
+            "mapping": {
+              "ymin": "lower__",
+              "ymax": "upper__",
+              "fill": "NULL",
+              "colour": "NULL",
+              "x": "effect1__",
+              "y": "estimate__"
+            },
+            "range": {
+              "left": 53.1282605715887,
+              "right": 623.029789183391,
+              "bottom": 339.871643638092,
+              "top": 7.97011003082912
+            }
+          }
+        ],
+        "dims": {
+          "width": 631,
+          "height": 389.958
+        }
+      }
+    },
+    "cust_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Name <\/th> <th style='text-align: right;'> Q2.5 <\/th> <th style='text-align: right;'> Q25 <\/th> <th style='text-align: right;'> median <\/th> <th style='text-align: right;'> Q75 <\/th> <th style='text-align: right;'> Q97.5 <\/th> <th style='text-align: right;'> MAD <\/th> <th style='text-align: right;'> mean <\/th> <th style='text-align: right;'> SD <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> absolute week effect <\/td> <td align=\"right\"> 0.05 <\/td> <td align=\"right\"> 0.12 <\/td> <td align=\"right\"> 0.15 <\/td> <td align=\"right\"> 0.19 <\/td> <td align=\"right\"> 0.25 <\/td> <td align=\"right\"> 0.06 <\/td> <td align=\"right\"> 0.15 <\/td> <td align=\"right\"> 0.05 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.6402, chain_2: 0.7922) is OK.",
+    "diagn_all_out": "Warning: At least one MCMC diagnostic is worrying (see the tab \"MCMC diagnostics\" for details). In general, this indicates that the Stan results should not be used.",
+    "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
+    "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
+    "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "essTail_out": "All tail-ESS values are OK.",
+    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail\nb_Intercept         1.0056098  311.3129 274.3110\nb_week              1.0042355  795.9915 426.2543\nb_trtdrug           1.0061596  286.6261 238.9248\nb_trtdrugP          1.0033048  428.0181 372.6105\nsd_ID__Intercept    1.0129955  158.0667 278.9813\nr_ID[X01,Intercept] 0.9998581  767.3877 439.9893\nr_ID[X02,Intercept] 1.0075143  545.0429 406.3374\nr_ID[X03,Intercept] 1.0029889  591.2870 406.5099\nr_ID[X04,Intercept] 1.0213071  706.9497 258.4155\nr_ID[X05,Intercept] 1.0033629  694.5652 337.7071\nr_ID[X06,Intercept] 1.0042025  512.3296 346.8119\nr_ID[X07,Intercept] 1.0102126  455.1382 471.7609\nr_ID[X08,Intercept] 0.9985178  516.1836 466.9032\nr_ID[X09,Intercept] 1.0010437  775.3400 338.8117\nr_ID[X10,Intercept] 1.0104046  801.6560 503.0387\nr_ID[X11,Intercept] 1.0015054 1114.3223 476.6167\nr_ID[X12,Intercept] 1.0093635  723.0628 398.2807\nr_ID[X13,Intercept] 0.9990236  651.6497 432.2266\nr_ID[X14,Intercept] 1.0060564  415.9803 450.6829\nr_ID[X15,Intercept] 1.0107652  597.3387 376.2828\nr_ID[X16,Intercept] 1.0077310  851.2538 466.5057\nr_ID[X17,Intercept] 1.0033665  474.9194 377.8545\nr_ID[X18,Intercept] 1.0101172  446.8275 461.6639\nr_ID[X19,Intercept] 1.0024230  441.9428 391.5854\nr_ID[X20,Intercept] 0.9999053  650.6579 333.1468\nr_ID[X21,Intercept] 1.0006549 1034.1986 319.7021\nr_ID[Y01,Intercept] 1.0012974  874.7366 401.7846\nr_ID[Y02,Intercept] 1.0116349  311.4213 219.2476\nr_ID[Y03,Intercept] 1.0009600  645.0580 402.7950\nr_ID[Y04,Intercept] 1.0023929  366.0014 372.2167\nr_ID[Y05,Intercept] 1.0044900  403.6471 335.2550\nr_ID[Y06,Intercept] 1.0013064  877.4881 327.7327\nr_ID[Y07,Intercept] 1.0050692  610.2723 435.2970\nr_ID[Y08,Intercept] 1.0287081  944.6878 342.6029\nr_ID[Y09,Intercept] 1.0060134  778.0661 390.8508\nr_ID[Y10,Intercept] 0.9983841  603.3775 354.6311\nr_ID[Y11,Intercept] 1.0024861  999.7585 467.8263\nr_ID[Y12,Intercept] 0.9996219  964.4139 400.5700\nr_ID[Y13,Intercept] 0.9988684  475.6074 477.6507\nr_ID[Y14,Intercept] 0.9975036  732.5898 370.7501\nr_ID[Z01,Intercept] 1.0088669  799.7889 359.2274\nr_ID[Z02,Intercept] 1.0014497  769.3056 377.2666\nr_ID[Z03,Intercept] 1.0060719  891.9868 221.1259\nr_ID[Z05,Intercept] 1.0121671  333.0011 349.9349\nr_ID[Z06,Intercept] 1.0105074  402.4064 347.0806\nr_ID[Z07,Intercept] 1.0029925  480.6702 409.5835\nr_ID[Z09,Intercept] 1.0059836  982.8459 275.9799\nr_ID[Z10,Intercept] 1.0041711 1032.2824 393.2806\nr_ID[Z11,Intercept] 1.0063730  548.4912 345.3239\nr_ID[Z14,Intercept] 0.9997495  642.0651 331.2139\nr_ID[Z15,Intercept] 1.0057294  725.0360 376.5629\nr_ID[Z19,Intercept] 0.9982288  594.0209 432.2550\nr_ID[Z20,Intercept] 1.0081014  645.5009 350.7275\nr_ID[Z24,Intercept] 1.0043409  769.5072 440.0359\nr_ID[Z26,Intercept] 0.9993197  608.5047 396.7935\nlp__                1.0086839  117.4652 306.9103",
+    "rhat_out": "Warning: At least one R-hat value is worrying. In general, this indicates that the Stan results should not be used.",
+    "size_aux": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + week + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.4150    0.4055   0.6348   2.3659 1.0130      158      279\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   3.2815    0.7206   2.1773   4.7426 1.0057      312      274\nweek       -0.1535    0.0557  -0.2471  -0.0532 1.0043      796      426\ntrtdrug    -1.3349    0.7518  -3.0125   0.1448 1.0062      287      239\ntrtdrugP   -0.8059    0.6405  -2.3320   0.3929 1.0033      428      373\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  "export": {
+
+  }
+}

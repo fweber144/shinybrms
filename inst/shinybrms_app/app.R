@@ -823,6 +823,16 @@ ui <- navbarPage(
                   "there."
                 ),
                 tags$li(
+                  "In general, uploading the results from a previous Stan run",
+                  "will cause a mismatch between the content shown on page",
+                  HTML(paste(actionLink("posterior_link_upld", "Posterior"))),
+                  "versus the content shown on pages",
+                  HTML(paste(actionLink("likelihood_link_upld", "Likelihood"))),
+                  "and",
+                  HTML(paste(actionLink("prior_link_upld", "Prior")), .noWS = "after"),
+                  "."
+                ),
+                tags$li(
                   "If uploaded Stan results are used, then", strong("shinybrms"),
                   "currently cannot check whether the number of chains in the",
                   "Stan results differs from the desired number of chains",
@@ -1346,9 +1356,12 @@ server <- function(input, output, session) {
     updateNavbarPage(session, "navbar_ID", "Data")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
-  observeEvent(input$likelihood_link1, {
+  observeEvent({
+    input$likelihood_link1
+    input$likelihood_link_upld
+  }, {
     updateNavbarPage(session, "navbar_ID", "Likelihood")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent({
     input$outcome_link1
@@ -1366,13 +1379,17 @@ server <- function(input, output, session) {
   observeEvent({
     input$prior_link1
     input$prior_link3
+    input$prior_link_upld
   }, {
     updateNavbarPage(session, "navbar_ID", "Prior")
   }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
-  observeEvent(input$posterior_link1, {
+  observeEvent({
+    input$posterior_link1
+    input$posterior_link_upld
+  }, {
     updateNavbarPage(session, "navbar_ID", "Posterior")
-  })
+  }, ignoreNULL = FALSE, ignoreInit = TRUE)
   
   observeEvent(input$mcmc_link1, {
     updateNavbarPage(session, "navbar_ID", "Posterior")

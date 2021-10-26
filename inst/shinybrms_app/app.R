@@ -2885,9 +2885,9 @@ server <- function(input, output, session) {
     return(formula(C_stanres()$bfit))
   })
   
-  # A reactive object which will contain the labels of the group terms (excluding those with at
-  # least two colons):
-  termlabs_PP_grp <- reactiveVal() # NOTE: reactiveVal() is equivalent to reactiveVal(NULL).
+  # A reactive object which will contain the labels of the group terms
+  # (excluding those with at least two colons):
+  termlabs_PP_grp <- reactiveVal()
   
   observe({
     term_choices <- c("Choose predictor term ..." = "")

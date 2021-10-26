@@ -2753,15 +2753,18 @@ server <- function(input, output, session) {
   
   C_cust <- reactiveVal(cust_smmry_empty)
   
-  # Reset C_cust() when C_stanres() has changed (and also reset input$cust_text):
+  # Reset C_cust() when C_stanres() has changed (and also reset
+  # `input$cust_text` as well as `input$cust_name`):
   observeEvent(try(C_stanres(), silent = TRUE), {
     C_cust(cust_smmry_empty)
     updateTextInput(session, "cust_text",
                     value = "")
+    updateTextInput(session, "cust_name",
+                    value = "")
   })
   
   observeEvent(input$cust_act, {
-    # Check that there is at least one parameter name in 'input$cust_text':
+    # Check that there is at least one parameter name in `input$cust_text`:
     if (!grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text)) {
       showNotification(
         paste("Your custom summary has not been calculated since your custom expression did not contain",

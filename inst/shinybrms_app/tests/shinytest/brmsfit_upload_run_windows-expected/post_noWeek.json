@@ -84,7 +84,7 @@
     "ceff_plot": {
       "src": "[image data sha1: 97a3b931eab1e11b184f26740eb725b097b3026d]",
       "width": 631,
-      "height": 389.958,
+      "height": 389.979446901184,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -130,7 +130,7 @@
         ],
         "dims": {
           "width": 631,
-          "height": 389.958
+          "height": 389.979446901184
         }
       }
     },

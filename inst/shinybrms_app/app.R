@@ -2977,7 +2977,7 @@ server <- function(input, output, session) {
     gg_ceff()
   },
   width = function() session$clientData$output_size_aux_width,
-  height = function() session$clientData$output_size_aux_width * 0.618)
+  height = function() session$clientData$output_size_aux_width * (sqrt(5) - 1) / 2)
   
   output$ceff_download <- downloadHandler(
     filename = function() {
@@ -2999,7 +2999,7 @@ server <- function(input, output, session) {
         ### a plot which doesn't match the original plot size (in inches) in the
         ### app:
         width = session$clientData$output_size_aux_width / 100,
-        height = session$clientData$output_size_aux_width * 0.618 / 100
+        height = session$clientData$output_size_aux_width * ((sqrt(5) - 1) / 2) / 100
         ### 
       )
     }

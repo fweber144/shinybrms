@@ -760,10 +760,13 @@ ui <- navbarPage(
                   "use this default value. These defaults are:",
                   tags$ul(
                     tags$li(
-                      "For option \"Warmup iterations per chain\": half of \"Total iterations per chain\" (rounded down if this fraction is not an integer)."
+                      "For option \"Warmup iterations per chain\": half of",
+                      "\"Total iterations per chain\" (rounded down if this",
+                      "fraction is not an integer)."
                     ),
                     tags$li(
-                      "For option \"Progress-refreshing step size\": tenth of \"Total iterations per chain\", but at least 1."
+                      "For option \"Progress-refreshing step size\": tenth of",
+                      "\"Total iterations per chain\", but at least 1."
                     )
                   )
                 ),

@@ -27,7 +27,7 @@ app$setInputs(navbar_ID = "Posterior",
               advOpts_adapt_delta = 0.8,
               advOpts_max_treedepth = 10,
               advOpts_save_warmup = FALSE)
-app$snapshot()
+app$snapshot(filename = "prep_full.json")
 app$setInputs(run_stan = "click", timeout_ = 1800000)
 app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_full.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",

@@ -1052,7 +1052,11 @@ ui <- navbarPage(
           p("A conditional-effects plot shows the estimated effect of a predictor variable on the outcome.",
             "An interaction effect involving at most two predictor variables may also be visualized",
             "by showing the estimated effect of the first predictor variable (involved in this interaction)",
-            "separately for appropriate values", # Thereby, "appropriate" means: "at the mean" as well as at "mean plus/minus one standard deviation" for continuous predictor variables and at all categories for categorical predictor variables.
+            "separately for appropriate values",
+            # Thereby, "appropriate" means: "at the mean" as well as at "mean
+            # plus/minus one standard deviation" for continuous predictor
+            # variables and at all categories for categorical predictor
+            # variables.
             "of the second predictor variable (involved in this interaction)."),
           p("As its name suggests, a conditional-effects plot", em("conditions"), "on specific values of",
             "those predictor variables which are not involved in the plot:",
@@ -1060,10 +1064,17 @@ ui <- navbarPage(
             "on the reference category of those categorical predictor variables which have nonpooled main effects.",
             "Partially pooled effects are set to zero, with the following exceptions:",
             tags$ul(
-              tags$li("Those partially pooled effects which are plotted are not set to zero (otherwise,",
-                      "there would not be anything meaningful to plot)."),
-              tags$li("If partially pooled slopes are plotted, the corresponding partially pooled intercepts",
-                      "are also not set to zero (for consistency with nonpooled interaction effects).") # More precisely: "for consistency with nonpooled interaction effects (and this also avoids problems with dummy-coded partially pooled slopes)"
+              tags$li(
+                "Those partially pooled effects which are plotted are not set to zero (otherwise,",
+                "there would not be anything meaningful to plot)."
+              ),
+              tags$li(
+                "If partially pooled slopes are plotted, the corresponding partially pooled intercepts",
+                "are also not set to zero (for consistency with nonpooled interaction effects)."
+                # More precisely: "for consistency with nonpooled interaction
+                # effects (and this also avoids problems with dummy-coded
+                # partially pooled slopes)"
+              ) 
             )),
           p("Be cautious with predictor variables having a high number of levels (which is usually",
             "only the case for partially pooled effects): In that case, the computation may",

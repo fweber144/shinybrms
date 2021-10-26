@@ -951,7 +951,9 @@ ui <- navbarPage(
             "However, the MCMC diagnostics may be worrying for other reasons or other parameters as well.",
             "Thus, in this case, you need to check the MCMC diagnostics very carefully.",
             "In particular, you need to check the HMC-specific diagnostics as well as",
-            "the detailed table of the general MCMC diagnostics.") # (where a constant parameter has only missing values, i.e., only", code("NA", .noWS = "after"), "s)
+            "the detailed table of the general MCMC diagnostics.")
+          # (where a constant parameter has only missing values, i.e., only",
+          # code("NA", .noWS = "after"), "s)
         )),
         br(),
         wellPanel(

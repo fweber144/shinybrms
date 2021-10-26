@@ -1935,11 +1935,11 @@ server <- function(input, output, session) {
       xOffs <- intersect(x, input$offs_sel)
       if (identical(length(xOffs), 1L)) {
         if (!isTRUE(is.na(xNP))) {
-          stop("Unexpected value of `xNP`. Please notify the package maintainer.")
+          stop("Unexpected value of `xNP`. Please report this.")
         }
         xNP <- paste0("offset(", xOffs, ")")
       } else if (!identical(length(xOffs), 0L)) {
-        stop("Unexpected length of `xOffs`. Please notify the package maintainer.")
+        stop("Unexpected length of `xOffs`. Please report this.")
       }
       data.frame("from_mainNP" = xNP,
                  "from_mainPP" = xPP)

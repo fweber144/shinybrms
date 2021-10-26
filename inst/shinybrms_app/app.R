@@ -843,10 +843,7 @@ ui <- navbarPage(
           actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary"),
           br(),
           br(),
-          fileInput("brmsfit_upload", "Upload \"brmsfit\" object (RDS file):",
-                    multiple = FALSE,
-                    accept = c(".rds"),
-                    buttonLabel = "Browse ..."),
+          uiOutput("brmsfit_upload_UI"),
           hr(),
           strong("Date and time when the Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
@@ -2249,6 +2246,7 @@ server <- function(input, output, session) {
   #### Run Stan -------------------------------------------------------------
   
   n_chains_spec <- reactiveVal(-Inf)
+  reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
   
   observeEvent(input$run_stan, {
@@ -2380,6 +2378,15 @@ server <- function(input, output, session) {
     }
     
     C_bfit(bfit_tmp)
+    reset_brmsfit_upload("dummy_value")
+  })
+  
+  output$brmsfit_upload_UI <- renderUI({
+    reset_brmsfit_upload()
+    fileInput("brmsfit_upload", "Upload \"brmsfit\" object (RDS file):",
+              multiple = FALSE,
+              accept = c(".rds"),
+              buttonLabel = "Browse ...")
   })
   
   observeEvent(input$brmsfit_upload, {

@@ -69,6 +69,13 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 
 app$setInputs(posterior_navlist_ID = "Run Stan", wait_ = FALSE, values_ = FALSE)
 app$setInputs(run_stan = "click")
+bfit_upld <- app$getAllValues(input = "brmsfit_upload",
+                              output = FALSE,
+                              export = FALSE)$input$brmsfit_upload
+bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
+stopifnot(identical(
+  bfit_upld, data.frame(name = "bacteria_noInt.rds", type = "", datapath = "0.rds")
+))
 
 # Upload no-week model ----------------------------------------------------
 

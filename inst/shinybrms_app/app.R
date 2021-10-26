@@ -952,9 +952,16 @@ ui <- navbarPage(
             ),
             "In general, the following values of the general MCMC diagnostics are worrying:",
             tags$ul(
-              tags$li("\\(\\widehat{R} \\geq 1.01\\),"),
-              tags$li("\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\) with \\(n_{\\text{chains}}\\) denoting the number of chains,"),
-              tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
+              tags$li(
+                "\\(\\widehat{R} \\geq 1.01\\),"
+              ),
+              tags$li(
+                "\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\)",
+                "with \\(n_{\\text{chains}}\\) denoting the number of chains,"
+              ),
+              tags$li(
+                "\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\)."
+              )
             )),
           p("Note: If you used a", code("constant()"), "prior (which should rarely be the case),",
             "then after obtaining the Stan results, you will be warned that at least one MCMC diagnostic is worrying.",
@@ -1102,7 +1109,10 @@ ui <- navbarPage(
                     choices = c("Choose predictor term ..." = ""),
                     selectize = TRUE),
         # br(),
-        plotOutput("size_aux", width = "100%", height = "1px"), # Only for getting the width in pixels corresponding to argument 'width = "100%"'.
+        ### Only for getting the width in pixels corresponding to argument
+        ### 'width = "100%"'.
+        plotOutput("size_aux", width = "100%", height = "1px"),
+        ### 
         plotOutput("ceff_plot", inline = TRUE),
         br(),
         selectInput("ceff_download_sel", "Choose file format for download:",

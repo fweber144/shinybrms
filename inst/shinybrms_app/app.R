@@ -2249,12 +2249,6 @@ server <- function(input, output, session) {
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
   
-  # Just to gray out all output depending on `C_bfit()` and `C_stanres()`:
-  observeEvent(input$run_stan, {
-    freezeReactiveVal(C_bfit)
-    freezeReactiveVal(C_stanres)
-  }, priority = 1)
-  
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
         input$advOpts_cores,

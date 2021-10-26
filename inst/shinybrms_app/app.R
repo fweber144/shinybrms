@@ -3002,8 +3002,9 @@ server <- function(input, output, session) {
     if (length(C_ceff_plot_list) > 1L) {
       showNotification(
         HTML(paste(
-          "Function", code("brms:::plot.brms_conditional_effects()"), "returned multiple plot objects.",
-          "Only plotting the first one. Please report this."
+          "Function", code("brms:::plot.brms_conditional_effects()"),
+          "returned multiple plot objects. Only plotting the first one.",
+          "Please report this."
         )),
         duration = NA,
         type = "warning"

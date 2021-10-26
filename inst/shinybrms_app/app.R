@@ -2977,20 +2977,36 @@ server <- function(input, output, session) {
     ### partially pooled intercepts, if partially pooled slopes are plotted))):
     # set.seed(<seed>)
     ### 
-    C_ceff <- brms::conditional_effects(
-      C_stanres()$bfit,
-      effects = input$term_sel,
-      re_formula = re_formula_ceff
-      ### Not necessary here since there is no sampling taking place (since
-      ### argument 're_formula' of brms::conditional_effects() here only
-      ### contains the group term which is involved in argument 'effects' (since
-      ### argument 're_formula' of brms::conditional_effects() is set to only
-      ### those partially pooled effects which are plotted (or also the
-      ### corresponding partially pooled intercepts, if partially pooled slopes
-      ### are plotted))):
-      # sample_new_levels = "gaussian"
-      ### 
-    )
+    warn_orig <- options(warn = 1)
+    warn_capt <- capture.output({
+      C_ceff <- try(brms::conditional_effects(
+        C_stanres()$bfit,
+        effects = input$term_sel,
+        re_formula = re_formula_ceff
+        ### Not necessary here since there is no sampling taking place (since
+        ### argument 're_formula' of brms::conditional_effects() here only
+        ### contains the group term which is involved in argument 'effects' (since
+        ### argument 're_formula' of brms::conditional_effects() is set to only
+        ### those partially pooled effects which are plotted (or also the
+        ### corresponding partially pooled intercepts, if partially pooled slopes
+        ### are plotted))):
+        # sample_new_levels = "gaussian"
+        ### 
+      ), silent = TRUE)
+    }, type = "message")
+    options(warn = warn_orig$warn)
+    if (inherits(C_ceff, "try-error")) {
+      err_capt <- conditionMessage(attr(C_ceff, "condition"))
+      for (err_capt_i in err_capt) {
+        if (!identical(err_capt_i, "")) {
+          showNotification(err_capt_i, duration = NA, type = "error")
+        }
+      }
+      req(FALSE)
+    }
+    for (warn_capt_i in warn_capt) {
+      showNotification(warn_capt_i, duration = NA, type = "warning")
+    }
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
       showNotification(
         HTML(paste(

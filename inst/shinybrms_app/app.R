@@ -2768,7 +2768,7 @@ server <- function(input, output, session) {
                     value = "")
     updateTextInput(session, "cust_name",
                     value = "")
-  })
+  }, ignoreNULL = FALSE)
   
   observeEvent(input$cust_act, {
     # Check that there is at least one parameter name in `input$cust_text`:

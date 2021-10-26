@@ -945,7 +945,7 @@ ui <- navbarPage(
               tags$li("\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\).")
             )),
           p("Note: If you used a", code("constant()"), "prior (which should rarely be the case),",
-            "then after the Stan run, you will be warned that at least one MCMC diagnostic is worrying.",
+            "then after obtaining the Stan results, you will be warned that at least one MCMC diagnostic is worrying.",
             "The reason is that",
             "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",
             "cannot be calculated for a constant parameter. Thus, with respect to",
@@ -2457,7 +2457,7 @@ server <- function(input, output, session) {
     # First: Check for failed chains:
     if (n_chains_out < n_chains_spec()) {
       showNotification(
-        paste("Warning: Finished running Stan, but at least one chain exited with an error.",
+        paste("Warning: Stan results obtained, but at least one chain exited with an error.",
               "The Stan results should not be used."),
         duration = NA,
         type = "warning"
@@ -2466,14 +2466,14 @@ server <- function(input, output, session) {
       # Secondly: Overall check for all MCMC diagnostics:
       if (C_all_OK) {
         showNotification(
-          paste("Finished running Stan. All MCMC diagnostics are OK (see",
+          paste("Stan results obtained. All MCMC diagnostics are OK (see",
                 "the tab \"MCMC diagnostics\" for details)."),
           duration = NA,
           type = "message"
         )
       } else {
         showNotification(
-          paste("Warning: Finished running Stan, but at least one MCMC diagnostic is worrying (see",
+          paste("Warning: Stan results obtained, but at least one MCMC diagnostic is worrying (see",
                 "the tab \"MCMC diagnostics\" for details). In general,",
                 "this indicates that the Stan results should not be used."),
           duration = NA,

@@ -2992,10 +2992,16 @@ server <- function(input, output, session) {
         )
         return()
       }
-      ggplot2::ggsave(filename = file,
-                      plot = gg_ceff(),
-                      width = session$clientData$output_size_aux_width / 100, # In fact, this should be divided by 72 instead of 100, but that gives a plot which doesn't match the original plot size (in inches) in the app.
-                      height = session$clientData$output_size_aux_width * 0.618 / 100) # In fact, this should be divided by 72 instead of 100, but that gives a plot which doesn't match the original plot size (in inches) in the app.
+      ggplot2::ggsave(
+        filename = file,
+        plot = gg_ceff(),
+        ### In fact, this should be divided by 72 instead of 100, but that gives
+        ### a plot which doesn't match the original plot size (in inches) in the
+        ### app:
+        width = session$clientData$output_size_aux_width / 100,
+        height = session$clientData$output_size_aux_width * 0.618 / 100
+        ### 
+      )
     }
   )
   

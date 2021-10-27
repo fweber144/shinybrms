@@ -1462,7 +1462,7 @@ server <- function(input, output, session) {
           rack <- as.factor(rack)
           nutrient <- as.factor(nutrient)
         }), envir = tmp_env)
-        return(get("Arabidopsis", envir = tmp_env))
+        da_tmp <- get("Arabidopsis", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
@@ -1475,7 +1475,7 @@ server <- function(input, output, session) {
       if (requireNamespace("MASS", quietly = TRUE)) {
         tmp_env <- new.env()
         data(bacteria, package = "MASS", envir = tmp_env)
-        return(get("bacteria", envir = tmp_env))
+        da_tmp <- get("bacteria", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
@@ -1499,7 +1499,7 @@ server <- function(input, output, session) {
           ftv_3cat <- as.factor(ftv)
           levels(ftv_3cat)[-(1:2)] <- "2+"
         }), envir = tmp_env)
-        return(get("birthwt", envir = tmp_env))
+        da_tmp <- get("birthwt", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
@@ -1512,7 +1512,7 @@ server <- function(input, output, session) {
       if (requireNamespace("brms", quietly = TRUE)) {
         tmp_env <- new.env()
         data(epilepsy, package = "brms", envir = tmp_env)
-        return(get("epilepsy", envir = tmp_env))
+        da_tmp <- get("epilepsy", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("brms"), "needed. Please install it.")),
@@ -1525,7 +1525,7 @@ server <- function(input, output, session) {
       if (requireNamespace("lme4", quietly = TRUE)) {
         tmp_env <- new.env()
         data(grouseticks, package = "lme4", envir = tmp_env)
-        return(get("grouseticks", envir = tmp_env))
+        da_tmp <- get("grouseticks", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
@@ -1541,7 +1541,7 @@ server <- function(input, output, session) {
         assign("kidiq", within(get("kidiq", envir = tmp_env), {
           mom_hs <- factor(paste0("hs", mom_hs))
         }), envir = tmp_env)
-        return(get("kidiq", envir = tmp_env))
+        da_tmp <- get("kidiq", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
@@ -1551,12 +1551,12 @@ server <- function(input, output, session) {
         req(FALSE)
       }
     } else if (identical(input$ex_da_sel, "Puromycin")) {
-      return(Puromycin)
+      da_tmp <- Puromycin
     } else if (identical(input$ex_da_sel, "quine")) {
       if (requireNamespace("MASS", quietly = TRUE)) {
         tmp_env <- new.env()
         data(quine, package = "MASS", envir = tmp_env)
-        return(get("quine", envir = tmp_env))
+        da_tmp <- get("quine", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
@@ -1569,7 +1569,7 @@ server <- function(input, output, session) {
       if (requireNamespace("MASS", quietly = TRUE)) {
         tmp_env <- new.env()
         data(Rabbit, package = "MASS", envir = tmp_env)
-        return(get("Rabbit", envir = tmp_env))
+        da_tmp <- get("Rabbit", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("MASS"), "needed. Please install it.")),
@@ -1590,7 +1590,7 @@ server <- function(input, output, session) {
           roach1_scaledBy0.01 <- 0.01 * roach1
           roach1_sqrt <- sqrt(roach1)
         }), envir = tmp_env)
-        return(get("roaches", envir = tmp_env))
+        da_tmp <- get("roaches", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
@@ -1603,7 +1603,7 @@ server <- function(input, output, session) {
       if (requireNamespace("lme4", quietly = TRUE)) {
         tmp_env <- new.env()
         data(sleepstudy, package = "lme4", envir = tmp_env)
-        return(get("sleepstudy", envir = tmp_env))
+        da_tmp <- get("sleepstudy", envir = tmp_env)
       } else {
         showNotification(
           HTML(paste("Package", code("lme4"), "needed. Please install it.")),
@@ -1613,7 +1613,7 @@ server <- function(input, output, session) {
         req(FALSE)
       }
     } else if (identical(input$ex_da_sel, "ToothGrowth")) {
-      return(ToothGrowth)
+      da_tmp <- ToothGrowth
     } else {
       req(input$data_upload)
       da_tmp <- try(read.csv(input$data_upload$datapath,
@@ -1649,8 +1649,8 @@ server <- function(input, output, session) {
           req(FALSE)
         }
       }
-      return(da_tmp)
     }
+    return(da_tmp)
   })
   
   ### Data preview ----------------------------------------------------------

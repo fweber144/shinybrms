@@ -2334,12 +2334,23 @@ server <- function(input, output, session) {
                     list(refresh = input$advOpts_refresh))
     }
     
-    showNotification(
-      paste("Stan will now compile the C++ code for your model (which may take a while) and",
-            "will then start sampling."),
-      duration = 60,
-      type = "message"
-    )
+    # Only use brms:::update.brmsfit() if the dataset has not changed (because
+    # brms:::update.brmsfit() does not recompute the default priors if the
+    # dataset has changed):
+    use_upd <- identical(rlang::hash(da()), da_hash())
+    
+    if (use_upd) {
+      run_mssg <- paste(
+        "Stan will now compile the C++ code for your model (if necessary; this",
+        "may take a while) and will then start sampling."
+      )
+    } else {
+      run_mssg <- paste(
+        "Stan will now compile the C++ code for your model (which may take a",
+        "while) and will then start sampling."
+      )
+    }
+    showNotification(run_mssg, duration = 60, type = "message")
     
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
     if (args_brm$open_progress) {
@@ -2387,11 +2398,8 @@ server <- function(input, output, session) {
     # Get warnings directly when they occur:
     warn_orig <- options(warn = 1)
     
-    # Run Stan (more precisely: brms::brm()):
-    # Only use brms:::update.brmsfit() if the dataset has not changed (because
-    # brms:::update.brmsfit() does not recompute the default priors if the
-    # dataset has changed):
-    if (identical(rlang::hash(da()), da_hash())) {
+    # Run Stan (more precisely: brms::brm() (or brms:::update.brmsfit(), if possible)):
+    if (use_upd) {
       warn_capt <- capture.output({
         bfit_tmp <- do.call(update, args = c(
           list(object = C_bfit(),

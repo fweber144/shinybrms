@@ -2445,9 +2445,7 @@ server <- function(input, output, session) {
     C_bfit(bfit_tmp)
   })
   
-  C_stanres_rv <- reactiveVal()
-  
-  observeEvent(C_bfit(), {
+  C_stanres_rv <- eventReactive(C_bfit(), {
     req(n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
@@ -2527,21 +2525,21 @@ server <- function(input, output, session) {
       }
     }
     
-    C_stanres_rv(list(bfit = C_bfit(),
-                      diagn = list(all_OK = C_all_OK,
-                                   divergences_OK = C_div_OK,
-                                   divergences = C_div,
-                                   hits_max_tree_depth_OK = C_tree_OK,
-                                   hits_max_tree_depth = C_tree,
-                                   EBFMI_OK = C_EBFMI_OK,
-                                   EBFMI = C_EBFMI,
-                                   Rhat_OK = C_rhat_OK,
-                                   Rhat = C_rhat,
-                                   ESS_bulk_OK = C_essBulk_OK,
-                                   ESS_bulk = C_essBulk,
-                                   ESS_tail_OK = C_essTail_OK,
-                                   ESS_tail = C_essTail),
-                      draws_arr = C_draws_arr))
+    return(list(bfit = C_bfit(),
+                diagn = list(all_OK = C_all_OK,
+                             divergences_OK = C_div_OK,
+                             divergences = C_div,
+                             hits_max_tree_depth_OK = C_tree_OK,
+                             hits_max_tree_depth = C_tree,
+                             EBFMI_OK = C_EBFMI_OK,
+                             EBFMI = C_EBFMI,
+                             Rhat_OK = C_rhat_OK,
+                             Rhat = C_rhat,
+                             ESS_bulk_OK = C_essBulk_OK,
+                             ESS_bulk = C_essBulk,
+                             ESS_tail_OK = C_essTail_OK,
+                             ESS_tail = C_essTail),
+                draws_arr = C_draws_arr))
   })
   
   # Use an otherwise redundant `reactive` object just to gray out all UI

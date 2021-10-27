@@ -2286,6 +2286,7 @@ server <- function(input, output, session) {
   n_chains_spec <- reactiveVal(-Inf)
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
+  C_stanres_state <- NULL
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2416,6 +2417,7 @@ server <- function(input, output, session) {
     }
     
     C_bfit(bfit_tmp)
+    C_stanres_state <<- NULL
     reset_brmsfit_upload("dummy_value")
   })
   
@@ -2443,10 +2445,18 @@ server <- function(input, output, session) {
     }
     n_chains_spec(-Inf)
     C_bfit(bfit_tmp)
+    C_stanres_state <<- NULL
   })
   
-  C_stanres_rv <- eventReactive(C_bfit(), {
+  C_stanres <- reactive({
     req(n_chains_spec(), C_bfit())
+    ### Just to gray out all UI elements depending on `C_stanres()` as soon as
+    ### the `input$run_stan` actionButton() is clicked:
+    input$run_stan
+    if (!is.null(C_stanres_state)) {
+      return(C_stanres_state)
+    }
+    ###
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
     # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither
@@ -2525,28 +2535,22 @@ server <- function(input, output, session) {
       }
     }
     
-    return(list(bfit = C_bfit(),
-                diagn = list(all_OK = C_all_OK,
-                             divergences_OK = C_div_OK,
-                             divergences = C_div,
-                             hits_max_tree_depth_OK = C_tree_OK,
-                             hits_max_tree_depth = C_tree,
-                             EBFMI_OK = C_EBFMI_OK,
-                             EBFMI = C_EBFMI,
-                             Rhat_OK = C_rhat_OK,
-                             Rhat = C_rhat,
-                             ESS_bulk_OK = C_essBulk_OK,
-                             ESS_bulk = C_essBulk,
-                             ESS_tail_OK = C_essTail_OK,
-                             ESS_tail = C_essTail),
-                draws_arr = C_draws_arr))
-  })
-  
-  # Use an otherwise redundant `reactive` object just to gray out all UI
-  # elements depending on `C_stanres()`:
-  C_stanres <- reactive({
-    input$run_stan
-    return(C_stanres_rv())
+    C_stanres_state <<- list(bfit = C_bfit(),
+                             diagn = list(all_OK = C_all_OK,
+                                          divergences_OK = C_div_OK,
+                                          divergences = C_div,
+                                          hits_max_tree_depth_OK = C_tree_OK,
+                                          hits_max_tree_depth = C_tree,
+                                          EBFMI_OK = C_EBFMI_OK,
+                                          EBFMI = C_EBFMI,
+                                          Rhat_OK = C_rhat_OK,
+                                          Rhat = C_rhat,
+                                          ESS_bulk_OK = C_essBulk_OK,
+                                          ESS_bulk = C_essBulk,
+                                          ESS_tail_OK = C_essTail_OK,
+                                          ESS_tail = C_essTail),
+                             draws_arr = C_draws_arr)
+    return(C_stanres_state)
   })
   
   ##### Matrix of posterior draws (for later usage and only run if needed) ----

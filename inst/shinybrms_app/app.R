@@ -2286,6 +2286,7 @@ server <- function(input, output, session) {
   n_chains_spec <- reactiveVal(-Inf)
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
+  needs_recalc <- FALSE
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2416,6 +2417,7 @@ server <- function(input, output, session) {
     }
     
     C_bfit(bfit_tmp)
+    needs_recalc <<- TRUE
     reset_brmsfit_upload("dummy_value")
   })
   
@@ -2443,6 +2445,7 @@ server <- function(input, output, session) {
     }
     n_chains_spec(-Inf)
     C_bfit(bfit_tmp)
+    needs_recalc <<- TRUE
   })
   
   C_stanres <- reactive({
@@ -2450,7 +2453,7 @@ server <- function(input, output, session) {
     ### the `input$run_stan` actionButton() is clicked:
     input$run_stan
     ###
-    req(n_chains_spec(), C_bfit())
+    req(needs_recalc, n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
     # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither
@@ -2529,6 +2532,7 @@ server <- function(input, output, session) {
       }
     }
     
+    needs_recalc <<- FALSE
     return(list(bfit = C_bfit(),
                 diagn = list(all_OK = C_all_OK,
                              divergences_OK = C_div_OK,

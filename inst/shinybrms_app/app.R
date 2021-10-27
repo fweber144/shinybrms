@@ -100,6 +100,13 @@ prior_brms_fun <- c(
   ### 
 )
 
+# Dummy hash for the case of no data:
+da_hash_no_data <- c(
+  paste("This is not a hash, but just a dummy string which is not identical to",
+        "any hash (and safer than the default `NULL` in reactiveVal())."),
+  "And this is just a dummy string to get length > 1L."
+)
+
 # Allowed symbols for "Custom summary":
 cust_allow_all <- c(as.character(0:9), " ", ".", "(", ")",
                     getGroupMembers("Arith"),
@@ -2286,6 +2293,7 @@ server <- function(input, output, session) {
   n_chains_spec <- reactiveVal(-Inf)
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
+  da_hash <- reactiveVal(da_hash_no_data)
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2380,9 +2388,23 @@ server <- function(input, output, session) {
     warn_orig <- options(warn = 1)
     
     # Run Stan (more precisely: brms::brm()):
-    warn_capt <- capture.output({
-      bfit_tmp <- do.call(brms::brm, args = args_brm)
-    }, type = "message")
+    if (isTRUE(getOption("shinybrms.allow_upd", TRUE)) &&
+        # Only use brms:::update.brmsfit() if the dataset has not changed
+        # (because brms:::update.brmsfit() does not recompute the default priors
+        # if the dataset has changed):
+        identical(rlang::hash(da()), da_hash())) {
+      warn_capt <- capture.output({
+        bfit_tmp <- do.call(update, args = c(
+          list(object = C_bfit(),
+               formula. = C_formula()),
+          args_brm[setdiff(names(args_brm), c("formula", "data"))]
+        ))
+      }, type = "message")
+    } else {
+      warn_capt <- capture.output({
+        bfit_tmp <- do.call(brms::brm, args = args_brm)
+      }, type = "message")
+    }
     
     # Reset all modified options and environment variables:
     options(warn = warn_orig$warn)
@@ -2416,6 +2438,7 @@ server <- function(input, output, session) {
     }
     
     C_bfit(bfit_tmp)
+    da_hash(rlang::hash(da()))
     reset_brmsfit_upload("dummy_value")
   })
   
@@ -2443,6 +2466,7 @@ server <- function(input, output, session) {
     }
     n_chains_spec(-Inf)
     C_bfit(bfit_tmp)
+    da_hash(da_hash_no_data)
   })
   
   C_stanres <- reactive({

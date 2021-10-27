@@ -2445,7 +2445,7 @@ server <- function(input, output, session) {
     C_bfit(bfit_tmp)
   })
   
-  C_stanres_rv <- reactive({
+  C_stanres <- reactive({
     req(n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
@@ -2540,13 +2540,6 @@ server <- function(input, output, session) {
                              ESS_tail_OK = C_essTail_OK,
                              ESS_tail = C_essTail),
                 draws_arr = C_draws_arr))
-  })
-  
-  # Use an otherwise redundant `reactive` object just to gray out all UI
-  # elements depending on `C_stanres()`:
-  C_stanres <- reactive({
-    input$run_stan
-    return(C_stanres_rv())
   })
   
   ##### Matrix of posterior draws (for later usage and only run if needed) ----

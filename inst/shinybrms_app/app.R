@@ -2445,7 +2445,7 @@ server <- function(input, output, session) {
     C_bfit(bfit_tmp)
   })
   
-  C_stanres <- reactive({
+  C_stanres_rv <- reactive({
     req(n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
@@ -2542,10 +2542,11 @@ server <- function(input, output, session) {
                 draws_arr = C_draws_arr))
   })
   
-  # Just to gray out all UI elements depending on `C_stanres()`:
-  grayout <- reactive({
+  # Use an otherwise redundant `reactive` object just to gray out all UI
+  # elements depending on `C_stanres()`:
+  C_stanres <- reactive({
     input$run_stan
-    return("dummy_value_grayout")
+    return(C_stanres_rv())
   })
   
   ##### Matrix of posterior draws (for later usage and only run if needed) ----
@@ -2689,7 +2690,6 @@ server <- function(input, output, session) {
   ### Default summary -------------------------------------------------------
   
   output$smmry_view <- renderPrint({
-    try(grayout(), silent = TRUE)
     invisible(req(C_stanres()))
     print(C_stanres()$bfit, digits = 4,
           robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)

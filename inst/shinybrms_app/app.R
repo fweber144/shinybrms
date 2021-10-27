@@ -2445,7 +2445,7 @@ server <- function(input, output, session) {
     C_bfit(bfit_tmp)
   })
   
-  C_stanres_rv <- eventReactive(C_bfit(), {
+  C_stanres_rv <- reactive({
     req(n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]

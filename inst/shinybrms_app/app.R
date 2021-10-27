@@ -2286,7 +2286,7 @@ server <- function(input, output, session) {
   n_chains_spec <- reactiveVal(-Inf)
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
-  needs_recalc <- reactiveVal(FALSE)
+  C_stanres_state <- NULL
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(),
@@ -2417,7 +2417,7 @@ server <- function(input, output, session) {
     }
     
     C_bfit(bfit_tmp)
-    needs_recalc(TRUE)
+    C_stanres_state <<- NULL
     reset_brmsfit_upload("dummy_value")
   })
   
@@ -2445,7 +2445,7 @@ server <- function(input, output, session) {
     }
     n_chains_spec(-Inf)
     C_bfit(bfit_tmp)
-    needs_recalc(TRUE)
+    C_stanres_state <<- NULL
   })
   
   C_stanres <- reactive({
@@ -2453,8 +2453,8 @@ server <- function(input, output, session) {
     ### Just to gray out all UI elements depending on `C_stanres()` as soon as
     ### the `input$run_stan` actionButton() is clicked:
     input$run_stan
-    if (!isolate(needs_recalc())) {
-      return(isolate(C_stanres()))
+    if (!is.null(C_stanres_state)) {
+      return(C_stanres_state)
     }
     ###
     C_draws_arr <- as.array(C_bfit())
@@ -2535,22 +2535,22 @@ server <- function(input, output, session) {
       }
     }
     
-    needs_recalc(FALSE)
-    return(list(bfit = C_bfit(),
-                diagn = list(all_OK = C_all_OK,
-                             divergences_OK = C_div_OK,
-                             divergences = C_div,
-                             hits_max_tree_depth_OK = C_tree_OK,
-                             hits_max_tree_depth = C_tree,
-                             EBFMI_OK = C_EBFMI_OK,
-                             EBFMI = C_EBFMI,
-                             Rhat_OK = C_rhat_OK,
-                             Rhat = C_rhat,
-                             ESS_bulk_OK = C_essBulk_OK,
-                             ESS_bulk = C_essBulk,
-                             ESS_tail_OK = C_essTail_OK,
-                             ESS_tail = C_essTail),
-                draws_arr = C_draws_arr))
+    C_stanres_state <<- list(bfit = C_bfit(),
+                             diagn = list(all_OK = C_all_OK,
+                                          divergences_OK = C_div_OK,
+                                          divergences = C_div,
+                                          hits_max_tree_depth_OK = C_tree_OK,
+                                          hits_max_tree_depth = C_tree,
+                                          EBFMI_OK = C_EBFMI_OK,
+                                          EBFMI = C_EBFMI,
+                                          Rhat_OK = C_rhat_OK,
+                                          Rhat = C_rhat,
+                                          ESS_bulk_OK = C_essBulk_OK,
+                                          ESS_bulk = C_essBulk,
+                                          ESS_tail_OK = C_essTail_OK,
+                                          ESS_tail = C_essTail),
+                             draws_arr = C_draws_arr)
+    return(C_stanres_state)
   })
   
   ##### Matrix of posterior draws (for later usage and only run if needed) ----

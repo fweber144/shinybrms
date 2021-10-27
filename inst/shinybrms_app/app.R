@@ -2388,11 +2388,10 @@ server <- function(input, output, session) {
     warn_orig <- options(warn = 1)
     
     # Run Stan (more precisely: brms::brm()):
-    if (isTRUE(getOption("shinybrms.allow_upd", TRUE)) &&
-        # Only use brms:::update.brmsfit() if the dataset has not changed
-        # (because brms:::update.brmsfit() does not recompute the default priors
-        # if the dataset has changed):
-        identical(rlang::hash(da()), da_hash())) {
+    # Only use brms:::update.brmsfit() if the dataset has not changed (because
+    # brms:::update.brmsfit() does not recompute the default priors if the
+    # dataset has changed):
+    if (identical(rlang::hash(da()), da_hash())) {
       warn_capt <- capture.output({
         bfit_tmp <- do.call(update, args = c(
           list(object = C_bfit(),

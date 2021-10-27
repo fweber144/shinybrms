@@ -2449,11 +2449,14 @@ server <- function(input, output, session) {
   })
   
   C_stanres <- reactive({
+    req(n_chains_spec(), C_bfit())
     ### Just to gray out all UI elements depending on `C_stanres()` as soon as
     ### the `input$run_stan` actionButton() is clicked:
     input$run_stan
+    if (!isolate(needs_recalc())) {
+      return(isolate(C_stanres()))
+    }
     ###
-    req(needs_recalc(), n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
     # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither

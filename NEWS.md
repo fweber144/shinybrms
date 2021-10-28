@@ -30,7 +30,7 @@ notification in the lower right corner).
 ## Bug fixes
 
 * Fix a typo in the "Get started" vignette shown on the **pkgdown** website.
-(The scale parameter for the Student-$t$ prior used to be 10 in the past, but
+(The scale parameter for the Student-*t* prior used to be 10 in the past, but
 now it should be 4.)
 * Clear the input field for the name of a custom summary expression as soon as
 new Stan results are obtained.

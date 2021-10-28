@@ -18,9 +18,9 @@
 
 library(shiny)
 
-# Increase size limit for file uploads to 50 MB (necessary especially for
-# `brmsfit` objects stored in RDS files):
-options(shiny.maxRequestSize = 50 * 1024^2)
+# Increase size limit for file uploads (necessary especially for `brmsfit`
+# objects stored in RDS files); default is 50 MB if unset:
+options(shiny.maxRequestSize = getOption("shiny.maxRequestSize", 50 * 1024^2))
 
 # Needed to prevent occasional RStudio crashes when starting the Stan run with
 # "rstan" version >= 2.21.1:

@@ -239,10 +239,7 @@ ui <- navbarPage(
             "the right."),
           p("If you want to upload a dataset after having chosen an",
             "example dataset, you have to clear the input field \"Choose",
-            "example dataset ...\" first. Clearing this input field is also",
-            "recommended before choosing a new example dataset (otherwise, an",
-            "error message might be shown, listing variables which cannot be",
-            "found in the newly selected dataset)."),
+            "example dataset ...\" first."),
           p("The following data entries are recognized as missing values: empty ",
             "(i.e. nothing, not even a whitespace), whitespace, ", code("NA"),
             ", ", code("."), " (dot).")

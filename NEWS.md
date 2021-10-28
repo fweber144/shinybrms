@@ -1,6 +1,39 @@
 # **shinybrms** 1.5.2.9000
 
+## Major changes
 
+* If a previous `brmsfit` exists (i.e., it is currently presented on page
+"Posterior"), then a click on the "Run Stan" button causes this previous
+`brmsfit` to get updated using `brms:::update.brmsfit()` (if possible), saving
+the compilation time. The fact that `brms:::update.brmsfit()` currently does not
+recompute the default priors if the dataset has changed, combined with the
+flexibility that *any* `brmsfit` may be uploaded in **shinybrms** (even ones
+which were not fitted through **shinybrms**), an uploaded `brmsfit` may not be
+updated. This updating of a previous `brmsfit` may be turned off using the
+global option `shinybrms.allow_upd` (see `?launch_shinybrms` for details).
+* Allow the upload of a previously created `brmsfit` object (page "Posterior",
+tab "Run Stan", panel "Run Stan"). This required increasing the size limit for
+file uploads to 50 MB.
+* Allow for `offset()` terms without the need to resort to the previous
+workaround based on a `constant()` prior (see **brms**'s GitHub issue #923
+solved in **brms** v2.16.0). This increases the required **brms** version to at
+least 2.16.0.
+
+## Minor changes
+
+* Theme: Some colors have been slightly changed to match the overall theme
+better.
+* UI: In case of a failed file upload, a modal dialog is now shown (instead of a
+notification in the lower right corner).
+* UI: Minor formatting and wording improvements in help texts.
+
+## Bug fixes
+
+* Fix a typo in the "Get started" vignette shown on the **pkgdown** website.
+(The scale parameter for the Student-$t$ prior used to be 10 in the past, but
+now it should be 4.)
+* Clear the input field for the name of a custom summary expression as soon as
+new Stan results are obtained.
 
 # **shinybrms** 1.5.2
 

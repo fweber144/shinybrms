@@ -35,10 +35,18 @@ the \bold{shinystan} app from within \bold{shinybrms}. Therefore, \bold{shinybrm
 redefines RStudio's default for option \code{browser} to fix this issue.
 }
 
-The only other global option used by \bold{shinybrms} is \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If
-option \code{mc.cores} is set, then the advanced option "Cores" (in the \bold{shinybrms} app) defaults
-to the value of this option. If option \code{mc.cores} is not set, then the advanced option "Cores"
-defaults to the value returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
+The only other global options used by \bold{shinybrms} are:
+\itemize{
+\item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the advanced option
+"Cores" (in the \bold{shinybrms} app) defaults to the value of this option. If option \code{mc.cores}
+is not set, then the advanced option "Cores" defaults to the value returned by
+\code{\link[parallel:detectCores]{parallel::detectCores()}}.
+\item \code{shiny.maxRequestSize} (see \code{\link[shiny:shinyOptions]{shiny::shinyOptions()}}): If not specified by the user, then a
+default value of \code{50 * 1024^2} (corresponding to 50 MB) is used.
+\item \code{warn} (see \code{\link[base:options]{base::options()}}): Set and reset internally (necessary for catching some warning
+messages).
+\item \code{browser} (see \code{\link[base:options]{base::options()}}): Set and reset internally (see above).
+}
 
 Note that \bold{shinystan}'s global option \code{shinystan.rstudio} (see
 \code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \bold{shinystan} is called from an

@@ -22,10 +22,16 @@
 #' the \bold{shinystan} app from within \bold{shinybrms}. Therefore, \bold{shinybrms} automatically
 #' redefines RStudio's default for option `browser` to fix this issue.
 #'
-#' The only other global option used by \bold{shinybrms} is `mc.cores` (see [base::options()]): If
-#' option `mc.cores` is set, then the advanced option "Cores" (in the \bold{shinybrms} app) defaults
-#' to the value of this option. If option `mc.cores` is not set, then the advanced option "Cores"
-#' defaults to the value returned by [parallel::detectCores()].
+#' The only other global options used by \bold{shinybrms} are:
+#' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the advanced option
+#' "Cores" (in the \bold{shinybrms} app) defaults to the value of this option. If option `mc.cores`
+#' is not set, then the advanced option "Cores" defaults to the value returned by
+#' [parallel::detectCores()].
+#' * `shiny.maxRequestSize` (see [shiny::shinyOptions()]): If not specified by the user, then a
+#' default value of `50 * 1024^2` (corresponding to 50 MB) is used.
+#' * `warn` (see [base::options()]): Set and reset internally (necessary for catching some warning
+#' messages).
+#' * `browser` (see [base::options()]): Set and reset internally (see above).
 #'
 #' Note that \bold{shinystan}'s global option `shinystan.rstudio` (see
 #' [shinystan::launch_shinystan()]) may not be used here as \bold{shinystan} is called from an

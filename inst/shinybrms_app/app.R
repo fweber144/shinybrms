@@ -2198,6 +2198,14 @@ server <- function(input, output, session) {
     C_prior_rv$prior_set_obj <- brms::empty_prior()
   })
   
+  # A `reactive()` object containing the custom prior (only necessary to be able
+  # to raise a silent error similar to `req(FALSE)` which is not possible for
+  # `reactiveValues`):
+  C_prior <- reactive({
+    req(C_prior_default())
+    return(C_prior_rv$prior_set_obj)
+  })
+  
   ### Prior preview ---------------------------------------------------------
   
   prior_colsToHide <- reactive({
@@ -2215,7 +2223,7 @@ server <- function(input, output, session) {
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({
-    C_prior_rv$prior_set_obj[, !prior_colsToHide()]
+    C_prior()[, !prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   ## Posterior --------------------------------------------------------------
@@ -2225,13 +2233,13 @@ server <- function(input, output, session) {
   #### Stan code ------------------------------------------------------------
   
   C_stancode <- reactive({
-    req(C_formula(), C_family())
+    req(C_formula(), C_family(), C_prior())
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_stancode_tmp <- brms::make_stancode(formula = C_formula(),
                                             data = da(),
                                             family = C_family(),
-                                            prior = C_prior_rv$prior_set_obj)
+                                            prior = C_prior())
     }, type = "message")
     options(warn = warn_orig$warn)
     if (length(warn_capt) > 0L) {
@@ -2264,13 +2272,13 @@ server <- function(input, output, session) {
   #### Stan data ------------------------------------------------------------
   
   C_standata <- reactive({
-    req(C_formula(), C_family())
+    req(C_formula(), C_family(), C_prior())
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_standata_tmp <- brms::make_standata(formula = C_formula(),
                                             data = da(),
                                             family = C_family(),
-                                            prior = C_prior_rv$prior_set_obj)
+                                            prior = C_prior())
     }, type = "message")
     options(warn = warn_orig$warn)
     if (length(warn_capt) > 0L) {
@@ -2308,7 +2316,7 @@ server <- function(input, output, session) {
   da_hash <- reactiveVal(da_hash_no_data)
   
   observeEvent(input$run_stan, {
-    req(C_formula(), C_family(),
+    req(C_formula(), C_family(), C_prior(),
         input$advOpts_cores,
         input$advOpts_chains,
         input$advOpts_iter,
@@ -2323,7 +2331,7 @@ server <- function(input, output, session) {
       formula = C_formula(),
       data = da(),
       family = C_family(),
-      prior = C_prior_rv$prior_set_obj,
+      prior = C_prior(),
       cores = min(input$advOpts_cores, input$advOpts_chains),
       chains = input$advOpts_chains,
       seed = input$advOpts_seed,

@@ -1,0 +1,124 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.8,
+    "advOpts_chains": 2,
+    "advOpts_cores": 2,
+    "advOpts_init_r": 2,
+    "advOpts_inits": "random",
+    "advOpts_iter": 500,
+    "advOpts_max_treedepth": 10,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": false,
+    "advOpts_seed": 5493,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "brmsfit_upload": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 0,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "negbinomial",
+    "ex_da_sel": "epilepsy",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
+    "likelihood_navlist_ID": "Predictors",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": "Trt",
+    "outc_sel": "count",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 0,
+    "par_sel": "",
+    "posterior_link1": 0,
+    "posterior_link_upld": 0,
+    "posterior_navlist_ID": "Run Stan",
+    "pred_int_add": 0,
+    "pred_int_build": null,
+    "pred_int_sel": null,
+    "pred_mainNP_sel": null,
+    "pred_mainPP_sel": null,
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 0,
+    "prior_class_sel": "",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_link_upld": 0,
+    "prior_reset": 0,
+    "prior_text": "",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 0,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advOpts": true,
+    "show_general_MCMC_tab": false,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": ""
+  },
+  "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: right;'> Age <\/th> <th style='text-align: right;'> Base <\/th> <th style='text-align: left;'> Trt <\/th> <th style='text-align: left;'> patient <\/th> <th style='text-align: left;'> visit <\/th> <th style='text-align: right;'> count <\/th> <th style='text-align: left;'> obs <\/th> <th style='text-align: right;'> zAge <\/th> <th style='text-align: right;'> zBase <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td align=\"right\"> 31.00 <\/td> <td align=\"right\"> 11.00 <\/td> <td> 0 <\/td> <td> 1 <\/td> <td> 1 <\/td> <td align=\"right\"> 5.00 <\/td> <td> 1 <\/td> <td align=\"right\"> 0.42 <\/td> <td align=\"right\"> -0.76 <\/td> <\/tr>\n  <tr> <td align=\"right\"> 30.00 <\/td> <td align=\"right\"> 11.00 <\/td> <td> 0 <\/td> <td> 2 <\/td> <td> 1 <\/td> <td align=\"right\"> 3.00 <\/td> <td> 2 <\/td> <td align=\"right\"> 0.27 <\/td> <td align=\"right\"> -0.76 <\/td> <\/tr>\n  <tr> <td align=\"right\"> 25.00 <\/td> <td align=\"right\"> 6.00 <\/td> <td> 0 <\/td> <td> 3 <\/td> <td> 1 <\/td> <td align=\"right\"> 2.00 <\/td> <td> 3 <\/td> <td align=\"right\"> -0.53 <\/td> <td align=\"right\"> -0.94 <\/td> <\/tr>\n  <tr> <td align=\"right\"> 36.00 <\/td> <td align=\"right\"> 8.00 <\/td> <td> 0 <\/td> <td> 4 <\/td> <td> 1 <\/td> <td align=\"right\"> 4.00 <\/td> <td> 4 <\/td> <td align=\"right\"> 1.22 <\/td> <td align=\"right\"> -0.87 <\/td> <\/tr>\n  <tr> <td align=\"right\"> 22.00 <\/td> <td align=\"right\"> 66.00 <\/td> <td> 0 <\/td> <td> 5 <\/td> <td> 1 <\/td> <td align=\"right\"> 7.00 <\/td> <td> 5 <\/td> <td align=\"right\"> -1.01 <\/td> <td align=\"right\"> 1.30 <\/td> <\/tr>\n  <tr> <td align=\"right\"> 29.00 <\/td> <td align=\"right\"> 27.00 <\/td> <td> 0 <\/td> <td> 6 <\/td> <td> 1 <\/td> <td align=\"right\"> 5.00 <\/td> <td> 6 <\/td> <td align=\"right\"> 0.11 <\/td> <td align=\"right\"> -0.16 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_all_out": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> log <\/td> <\/tr>\n  <tr> <td> shape <\/td> <td> log <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "fit_date": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + offset(Trt) <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_default_view": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "prior_set_view": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    }
+  },
+  "export": {
+
+  }
+}

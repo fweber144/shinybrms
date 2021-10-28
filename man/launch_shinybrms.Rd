@@ -7,9 +7,9 @@
 launch_shinybrms(...)
 }
 \arguments{
-\item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to force the
-\bold{shinybrms} app to launch in the system's default web browser (even if using RStudio),
-set argument \code{launch.browser} to \code{TRUE}.}
+\item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to
+force the \bold{shinybrms} app to launch in the system's default web
+browser (even if using RStudio), set argument \code{launch.browser} to \code{TRUE}.}
 }
 \value{
 \code{TRUE} (invisible).
@@ -20,37 +20,41 @@ This function launches the \bold{shinybrms} app.
 \note{
 The following global options are introduced by \bold{shinybrms}:
 \itemize{
-\item \code{shinybrms.allow_upd}: Mainly for internal testing purposes. A single logical value indicating
-whether updating a previous model fit using \code{brms:::update.brmsfit()} is allowed. Defaults to
-\code{TRUE}.
-\item \code{shinybrms.prog_browser}: The value for the global option \code{browser} to be used for opening the
-\href{https://mc-stan.org/}{Stan} progress file (an HTML file). Defaults to option \code{browser} (see
-\code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser} cannot be used for the Stan
-progress file. Therefore, \bold{shinybrms} automatically redefines RStudio's default for option
-\code{browser} to fix this issue.
-\item \code{shinybrms.shinystan_browser}: The value for the global option
-\code{browser} to be used for opening the \bold{shinystan} app. Defaults to option \code{browser} (see
-\code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser} cannot be used for opening
-the \bold{shinystan} app from within \bold{shinybrms}. Therefore, \bold{shinybrms} automatically
-redefines RStudio's default for option \code{browser} to fix this issue.
+\item \code{shinybrms.allow_upd}: Mainly for internal testing purposes. A single
+logical value indicating whether updating a previous model fit using
+\code{brms:::update.brmsfit()} is allowed. Defaults to \code{TRUE}.
+\item \code{shinybrms.prog_browser}: The value for the global option \code{browser} to be
+used for opening the \href{https://mc-stan.org/}{Stan} progress file (an HTML
+file). Defaults to option \code{browser} (see \code{\link[base:options]{base::options()}}). Note that
+RStudio's default for option \code{browser} cannot be used for the Stan progress
+file. Therefore, \bold{shinybrms} automatically redefines RStudio's default
+for option \code{browser} to fix this issue.
+\item \code{shinybrms.shinystan_browser}: The value for the global option \code{browser} to
+be used for opening the \bold{shinystan} app. Defaults to option \code{browser}
+(see \code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser}
+cannot be used for opening the \bold{shinystan} app from within
+\bold{shinybrms}. Therefore, \bold{shinybrms} automatically redefines
+RStudio's default for option \code{browser} to fix this issue.
 }
 
 The only other global options used by \bold{shinybrms} are:
 \itemize{
-\item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the advanced option
-"Cores" (in the \bold{shinybrms} app) defaults to the value of this option. If option \code{mc.cores}
-is not set, then the advanced option "Cores" defaults to the value returned by
-\code{\link[parallel:detectCores]{parallel::detectCores()}}.
-\item \code{shiny.maxRequestSize} (see \code{\link[shiny:shinyOptions]{shiny::shinyOptions()}}): If not specified by the user, then a
-default value of \code{50 * 1024^2} (corresponding to 50 MB) is used.
-\item \code{warn} (see \code{\link[base:options]{base::options()}}): Set and reset internally (necessary for catching some warning
-messages).
+\item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the
+advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
+of this option. If option \code{mc.cores} is not set, then the advanced option
+"Cores" defaults to the value returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
+\item \code{shiny.maxRequestSize} (see \code{\link[shiny:shinyOptions]{shiny::shinyOptions()}}): If not specified by
+the user, then a default value of \code{50 * 1024^2} (corresponding to 50 MB) is
+used.
+\item \code{warn} (see \code{\link[base:options]{base::options()}}): Set and reset internally (necessary for
+catching some warning messages).
 \item \code{browser} (see \code{\link[base:options]{base::options()}}): Set and reset internally (see above).
 }
 
 Note that \bold{shinystan}'s global option \code{shinystan.rstudio} (see
-\code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \bold{shinystan} is called from an
-external \R process where RStudio's browsers are not available.
+\code{\link[shinystan:launch_shinystan]{shinystan::launch_shinystan()}}) may not be used here as \bold{shinystan} is
+called from an external \R process where RStudio's browsers are not
+available.
 }
 \examples{
 if (interactive()) {

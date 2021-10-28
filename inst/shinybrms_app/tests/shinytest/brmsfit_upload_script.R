@@ -70,7 +70,7 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 # Click "Run Stan" button -------------------------------------------------
 
 app$setInputs(posterior_navlist_ID = "Run Stan", wait_ = FALSE, values_ = FALSE)
-app$setInputs(run_stan = "click")
+app$setInputs(run_stan = "click", timeout_ = 10000)
 bfit_upld <- app$getAllValues(input = "brmsfit_upload",
                               output = FALSE,
                               export = FALSE)$input$brmsfit_upload

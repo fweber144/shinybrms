@@ -8,6 +8,9 @@
 #'
 #' @note The following global options are introduced by \bold{shinybrms}:
 #'
+#' * `shinybrms.allow_upd`: Mainly for internal testing purposes. A single logical value indicating
+#' whether updating a previous model fit using `brms:::update.brmsfit()` is allowed. Defaults to
+#' `TRUE`.
 #' * `shinybrms.prog_browser`: The value for the global option `browser` to be used for opening the
 #' [Stan](https://mc-stan.org/) progress file (an HTML file). Defaults to option `browser` (see
 #' [base::options()]). Note that RStudio's default for option `browser` cannot be used for the Stan

@@ -20,6 +20,9 @@ This function launches the \bold{shinybrms} app.
 \note{
 The following global options are introduced by \bold{shinybrms}:
 \itemize{
+\item \code{shinybrms.allow_upd}: Mainly for internal testing purposes. A single logical value indicating
+whether updating a previous model fit using \code{brms:::update.brmsfit()} is allowed. Defaults to
+\code{TRUE}.
 \item \code{shinybrms.prog_browser}: The value for the global option \code{browser} to be used for opening the
 \href{https://mc-stan.org/}{Stan} progress file (an HTML file). Defaults to option \code{browser} (see
 \code{\link[base:options]{base::options()}}). Note that RStudio's default for option \code{browser} cannot be used for the Stan

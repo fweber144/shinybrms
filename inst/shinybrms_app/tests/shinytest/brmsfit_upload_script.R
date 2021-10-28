@@ -1,3 +1,5 @@
+run_all_models <- getOption("sbtst.run_all_models", TRUE)
+
 app$setInputs(advOpts_cores = 2, wait_ = FALSE, values_ = FALSE)
 
 app$setInputs(navbar_ID = "Posterior")
@@ -79,21 +81,23 @@ stopifnot(identical(
 
 # Upload no-week model ----------------------------------------------------
 
-app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
-app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
-app$setInputs(posterior_navlist_ID = "Default summary")
-app$setInputs(posterior_navlist_ID = "Custom summary")
-app$setInputs(posterior_navlist_ID = "Conditional effects",
-              term_sel = "trt")
-app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
-bfit_upld <- app$getAllValues(input = "brmsfit_upload",
-                              output = FALSE,
-                              export = FALSE)$input$brmsfit_upload
-bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
-stopifnot(identical(
-  bfit_upld, data.frame(name = "bacteria_noWeek.rds", type = "", datapath = "0.rds")
-))
-app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE),
-             filename = "post_noWeek.json")
+if (run_all_models) {
+  app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
+  app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
+  app$setInputs(posterior_navlist_ID = "Default summary")
+  app$setInputs(posterior_navlist_ID = "Custom summary")
+  app$setInputs(posterior_navlist_ID = "Conditional effects",
+                term_sel = "trt")
+  app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+  bfit_upld <- app$getAllValues(input = "brmsfit_upload",
+                                output = FALSE,
+                                export = FALSE)$input$brmsfit_upload
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
+  stopifnot(identical(
+    bfit_upld, data.frame(name = "bacteria_noWeek.rds", type = "", datapath = "0.rds")
+  ))
+  app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                            output = setdiff(app$listWidgets()$output, "fit_date"),
+                            export = TRUE),
+               filename = "post_noWeek.json")
+}

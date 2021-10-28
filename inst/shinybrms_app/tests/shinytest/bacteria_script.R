@@ -1,3 +1,5 @@
+run_all_models <- getOption("sbtst.run_all_models", TRUE)
+
 # Full model --------------------------------------------------------------
 
 ## Preparation ------------------------------------------------------------
@@ -136,32 +138,34 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 
 # No-week model -----------------------------------------------------------
 
-## Preparation ------------------------------------------------------------
-
-app$setInputs(navbar_ID = "Likelihood")
-app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainNP_sel = "trt")
-app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$setInputs(navbar_ID = "Prior",
-              prior_add = "click")
-app$setInputs(navbar_ID = "Posterior", wait_ = FALSE, values_ = FALSE)
-app$setInputs(posterior_navlist_ID = "Run Stan")
-app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE),
-             filename = "prep_noWeek.json")
-
-## Posterior --------------------------------------------------------------
-
-app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_noWeek.rds"))
-app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
-app$setInputs(posterior_navlist_ID = "Default summary")
-app$setInputs(posterior_navlist_ID = "Custom summary")
-app$setInputs(posterior_navlist_ID = "Conditional effects",
-              term_sel = "trt")
-app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
-app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
-                          output = setdiff(app$listWidgets()$output, "fit_date"),
-                          export = TRUE),
-             filename = "post_noWeek.json")
+if (run_all_models) {
+  ## Preparation ------------------------------------------------------------
+  
+  app$setInputs(navbar_ID = "Likelihood")
+  app$setInputs(likelihood_navlist_ID = "Predictors",
+                pred_mainNP_sel = "trt")
+  app$setInputs(likelihood_navlist_ID = "Formula preview")
+  app$setInputs(navbar_ID = "Prior",
+                prior_add = "click")
+  app$setInputs(navbar_ID = "Posterior", wait_ = FALSE, values_ = FALSE)
+  app$setInputs(posterior_navlist_ID = "Run Stan")
+  app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                            output = setdiff(app$listWidgets()$output, "fit_date"),
+                            export = TRUE),
+               filename = "prep_noWeek.json")
+  
+  ## Posterior --------------------------------------------------------------
+  
+  app$setInputs(run_stan = "click", timeout_ = 1800000)
+  app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_noWeek.rds"))
+  app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
+  app$setInputs(posterior_navlist_ID = "Default summary")
+  app$setInputs(posterior_navlist_ID = "Custom summary")
+  app$setInputs(posterior_navlist_ID = "Conditional effects",
+                term_sel = "trt")
+  app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+  app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                            output = setdiff(app$listWidgets()$output, "fit_date"),
+                            export = TRUE),
+               filename = "post_noWeek.json")
+}

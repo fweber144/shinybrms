@@ -2334,10 +2334,12 @@ server <- function(input, output, session) {
                     list(refresh = input$advOpts_refresh))
     }
     
-    # Only use brms:::update.brmsfit() if the dataset has not changed (because
-    # brms:::update.brmsfit() does not recompute the default priors if the
-    # dataset has changed):
-    use_upd <- identical(rlang::hash(da()), da_hash())
+    # Logical (single value) indicating whether to use brms:::update.brmsfit():
+    use_upd <- isTRUE(getOption("shinybrms.allow_upd", TRUE)) &&
+      # Only use brms:::update.brmsfit() if the dataset has not changed (because
+      # brms:::update.brmsfit() does not recompute the default priors if the
+      # dataset has changed):
+      identical(rlang::hash(da()), da_hash())
     
     if (use_upd) {
       run_mssg <- paste(

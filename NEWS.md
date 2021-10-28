@@ -12,8 +12,9 @@ which were not fitted through **shinybrms**), an uploaded `brmsfit` may not be
 updated. This updating of a previous `brmsfit` may be turned off using the
 global option `shinybrms.allow_upd` (see `?launch_shinybrms` for details).
 * Allow the upload of a previously created `brmsfit` object (page "Posterior",
-tab "Run Stan", panel "Run Stan"). This required increasing the size limit for
-file uploads to 50 MB.
+tab "Run Stan", panel "Run Stan"). This required increasing the default size
+limit for file uploads (global option `shiny.maxRequestSize`; now at 50 MB if
+not set by the user).
 * Allow for `offset()` terms without the need to resort to the previous
 workaround based on a `constant()` prior (see **brms**'s GitHub issue #923
 solved in **brms** v2.16.0). This increases the required **brms** version to at
@@ -21,6 +22,7 @@ least 2.16.0.
 
 ## Minor changes
 
+* Improved documentation of global options used by **shinybrms**.
 * Theme: Some colors have been slightly changed to match the overall theme
 better.
 * UI: In case of a failed file upload, a modal dialog is now shown (instead of a

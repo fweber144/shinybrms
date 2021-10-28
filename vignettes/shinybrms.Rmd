@@ -91,7 +91,7 @@ At the top of page "Prior", we obtain a table with the default priors for the mo
 ### Custom priors
 
 \
-At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class `b`):
+At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 4 for all regression coefficients (parameter class `b`):
 
 \
 [![](screenshots/Prior_Custom.png)](screenshots/Prior_Custom.png)

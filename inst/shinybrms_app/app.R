@@ -2004,6 +2004,16 @@ server <- function(input, output, session) {
   
   # Get default priors:
   C_prior_default <- reactive({
+    if(inherits(try(C_formula(), silent = TRUE), "try-error") ||
+       inherits(try(C_family(), silent = TRUE), "try-error") ||
+       inherits(try(req(all(c(
+         setdiff(input$outc_sel, ""),
+         input$pred_mainNP_sel,
+         input$pred_mainPP_sel,
+         input$offs_sel
+       ) %in% names(da()))), silent = TRUE), "try-error")){
+      return(brms::empty_prior())
+    }
     warn_orig <- options(warn = 1)
     warn_capt <- capture.output({
       C_prior_default_tmp <- try(brms::get_prior(formula = C_formula(),

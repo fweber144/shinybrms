@@ -50,17 +50,14 @@
 #' 
 #' @export
 #' 
-launch_shinybrms <- function(...){
+launch_shinybrms <- function(...) {
   app_path <- system.file("shinybrms_app", package = "shinybrms")
-  if(identical(app_path, "")){
+  if (identical(app_path, "")) {
     stop("Path to package \"shinybrms\" could not be found. Try re-installing ",
          "package \"shinybrms\".")
   }
-  shiny::runApp(
-    appDir = app_path,
-    ...
-  )
-  if(FALSE){
+  shiny::runApp(appDir = app_path, ...)
+  if (FALSE) {
     # Just a dummy call of a "brms" function to avoid a NOTE in CRAN checks on
     # some platforms:
     brms::expp1(0)

@@ -2128,11 +2128,10 @@ server <- function(input, output, session) {
   observeEvent(C_prior_default(), {
     if (inherits(try(C_prior_default(), silent = TRUE), "try-error")) {
       C_prior_rv$prior_set_obj <- quote(req(FALSE)) # expression(req(FALSE))
-      freezeReactiveValue(C_prior_rv, "prior_set_obj")
       return()
     }
     C_prior_rv$prior_set_obj <- brms::empty_prior()
-  }, priority = 1e6)
+  })
   
   # Add a custom prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {

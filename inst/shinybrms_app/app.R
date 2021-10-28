@@ -2034,7 +2034,9 @@ server <- function(input, output, session) {
           showNotification(err_capt_i, duration = NA, type = "error")
         }
       }
-      return(brms::empty_prior())
+      # To avoid running Stan in this case, throw a silent error instead of having
+      # `return(brms::empty_prior())`:
+      req(FALSE)
     }
     if (length(warn_capt) > 0L) {
       warn_capt <- unique(warn_capt)

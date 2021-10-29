@@ -1,5 +1,3 @@
-run_all_models <- getOption("sbtst.run_all_models", TRUE)
-
 # Full model --------------------------------------------------------------
 
 ## Preparation ------------------------------------------------------------
@@ -137,7 +135,7 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 
 # No-week model -----------------------------------------------------------
 
-if (run_all_models) {
+if (getOption("sbtst.run_all_models", TRUE)) {
   ## Preparation ------------------------------------------------------------
   
   app$setInputs(navbar_ID = "Likelihood")

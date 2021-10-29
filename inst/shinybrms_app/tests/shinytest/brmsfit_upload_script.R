@@ -1,5 +1,3 @@
-run_all_models <- getOption("sbtst.run_all_models", TRUE)
-
 app$setInputs(advOpts_cores = 2, wait_ = FALSE, values_ = FALSE)
 
 app$setInputs(navbar_ID = "Posterior")
@@ -81,7 +79,7 @@ stopifnot(identical(
 
 # Upload no-week model ----------------------------------------------------
 
-if (run_all_models) {
+if (getOption("sbtst.run_all_models", TRUE)) {
   app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
   app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
   app$setInputs(posterior_navlist_ID = "Default summary")

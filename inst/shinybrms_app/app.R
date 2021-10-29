@@ -2448,7 +2448,7 @@ server <- function(input, output, session) {
     showNotification(run_mssg, duration = 60, type = "message")
     
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
-    if (input$advOpts_open_progress) { # TODO: Should this be `isTRUE(args_brm$open_progress)`?
+    if (input$advOpts_open_progress) {
       # For RStudio:
       RSTUDIO_orig <- Sys.getenv("RSTUDIO")
       if (identical(RSTUDIO_orig, "1")) {
@@ -2471,22 +2471,31 @@ server <- function(input, output, session) {
       }
       browser_orig <- options(browser = prog_browser)
       
-      # Even show the progress if parallel::mclapply() (with forking) is intended to be used:
-      if (identical(.Platform$OS.type, "unix")) { # TODO: Add `|| identical(input$advOpts_backend, "cmdstanr")` here?
-        if (!interactive()) {
-          tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
-          sink(tmp_stdout_txt)
-          sink_active <- TRUE
-          cat("Refresh this page to see the sampling progress.",
-              "Note that the C++ code needs to be compiled first, which may take",
-              "a while.\n")
-          tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
-          rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
-          browseURL(paste0("file://", tmp_stdout_html))
-        } else if (isatty(stdout())) {
-          sink(tempfile(pattern = "shinybrms_dummy_stdout_", fileext = ".txt"))
-          sink_active <- TRUE
-        }
+      # Even show the progress if parallel::mclapply() with forking is intended
+      # to be used or actually used (see the source code from `library(rstan); getMethod("sampling",
+      # signature = "stanmodel")` for the condition when parallel::mclapply()
+      # with forking is used) or if using the **cmdstanr** backend:
+      if (identical(.Platform$OS.type, "unix") &&
+          interactive() &&
+          isatty(stdout())) {
+        # In this case, the simplest solution to make the progress file open up
+        # is to avoid forking:
+        sink(tempfile(pattern = "shinybrms_dummy_stdout_", fileext = ".txt"))
+        sink_active <- TRUE
+      } else if ((identical(.Platform$OS.type, "unix") &&
+                  !interactive()) ||
+                 identical(input$advOpts_backend, "cmdstanr")) {
+        # In this case, create an own progress file to be opened up (and don't
+        # avoid forking):
+        tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
+        sink(tmp_stdout_txt)
+        sink_active <- TRUE
+        cat("Refresh this page to see the sampling progress.",
+            "Note that the C++ code needs to be compiled first, which may take",
+            "a while.\n")
+        tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
+        rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
+        browseURL(paste0("file://", tmp_stdout_html))
       }
     }
     

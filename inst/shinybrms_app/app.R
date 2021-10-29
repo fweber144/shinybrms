@@ -805,6 +805,7 @@ ui <- navbarPage(
                      radioButtons("advOpts_backend", "Backend:",
                                   choiceNames = list(strong("rstan"), strong("cmdstanr")),
                                   choiceValues = list("rstan", "cmdstanr"),
+                                  selected = getOption("brms.backend", "rstan"),
                                   inline = TRUE),
                      numericInput("advOpts_seed", "Seed:",
                                   value = NA, step = 1L),

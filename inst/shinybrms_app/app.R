@@ -2354,6 +2354,7 @@ server <- function(input, output, session) {
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
     
+    save_warmup_tmp <- input$advOpts_save_warmup
     if (identical(input$advOpts_backend, "cmdstanr")) {
       if (!requireNamespace("cmdstanr", quietly = TRUE)) {
         showNotification(
@@ -2362,6 +2363,19 @@ server <- function(input, output, session) {
           type = "error"
         )
         req(FALSE)
+      }
+      if (save_warmup_tmp) {
+        showNotification(
+          HTML(paste(
+            "Saving the warmup draws is currently not possible when the",
+            strong("cmdstanr"), "backend is used. The reason is that otherwise,",
+            "the app would crash when launching the", strong("shinystan"), "app.",
+            "Now deselecting this option internally."
+          )),
+          duration = NA,
+          type = "warning"
+        )
+        save_warmup_tmp <- FALSE
       }
     }
     
@@ -2380,7 +2394,7 @@ server <- function(input, output, session) {
       thin = input$advOpts_thin,
       inits = input$advOpts_inits,
       save_pars = brms::save_pars(all = input$advOpts_save_all_pars),
-      save_warmup = input$advOpts_save_warmup
+      save_warmup = save_warmup_tmp
     )
     if (!is.na(input$advOpts_warmup)) {
       args_brm <- c(args_brm,

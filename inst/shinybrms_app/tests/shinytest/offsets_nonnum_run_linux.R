@@ -1,4 +1,3 @@
 app <- ShinyDriver$new("../../")
-app$snapshotInit("offsets_nonnum_run_linux", screenshot = FALSE)
-
-source("offsets_nonnum_script.R", local = TRUE, echo = FALSE)
+tst_prefix <- "offsets_nonnum"
+source("init_os_dep.R", local = TRUE, echo = FALSE)

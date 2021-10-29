@@ -1,12 +1,14 @@
 run_all_models <- getOption("sbtst.run_all_models", TRUE)
 
+dwn_folder <- file.path("..", paste0("bacteria_run_", os_chr, "-current"))
+
 app$setInputs(advOpts_cores = 2, wait_ = FALSE, values_ = FALSE)
 
 app$setInputs(navbar_ID = "Posterior")
 
 # Upload full model -------------------------------------------------------
 
-app$uploadFile(brmsfit_upload = file.path("bacteria_full.rds"))
+app$uploadFile(brmsfit_upload = file.path(dwn_folder, "bacteria_full.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$setInputs(posterior_navlist_ID = "Default summary")
@@ -43,7 +45,7 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 # Upload no-interaction model ---------------------------------------------
 
 app$setInputs(posterior_navlist_ID = "Run Stan")
-app$uploadFile(brmsfit_upload = file.path("bacteria_noInt.rds"))
+app$uploadFile(brmsfit_upload = file.path(dwn_folder, "bacteria_noInt.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
 app$setInputs(posterior_navlist_ID = "Default summary")
 app$setInputs(posterior_navlist_ID = "Custom summary",
@@ -82,7 +84,7 @@ stopifnot(identical(
 # Upload no-week model ----------------------------------------------------
 
 if (run_all_models) {
-  app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
+  app$uploadFile(brmsfit_upload = file.path(dwn_folder, "bacteria_noWeek.rds"))
   app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
   app$setInputs(posterior_navlist_ID = "Default summary")
   app$setInputs(posterior_navlist_ID = "Custom summary")

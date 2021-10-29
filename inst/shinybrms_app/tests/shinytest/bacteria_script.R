@@ -1,5 +1,7 @@
 run_all_models <- getOption("sbtst.run_all_models", TRUE)
 
+dwn_folder <- paste0(tst_folder, "-current")
+
 # Full model --------------------------------------------------------------
 
 ## Preparation ------------------------------------------------------------
@@ -38,7 +40,7 @@ app$snapshot(filename = "prep_full.json")
 ## Posterior --------------------------------------------------------------
 
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_full.rds"))
+app$snapshotDownload("stanout_download", filename = "bacteria_full.rds")
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$setInputs(posterior_navlist_ID = "Default summary")
@@ -82,7 +84,7 @@ app$snapshot(items = list(input = TRUE,
 ## Posterior --------------------------------------------------------------
 
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_noInt.rds"))
+app$snapshotDownload("stanout_download", filename = "bacteria_noInt.rds")
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
 app$setInputs(posterior_navlist_ID = "Default summary")
 app$setInputs(posterior_navlist_ID = "Custom summary",
@@ -102,7 +104,7 @@ app$snapshot(items = list(input = TRUE,
 # Upload full model -------------------------------------------------------
 
 app$setInputs(posterior_navlist_ID = "Run Stan") # , wait_ = FALSE, values_ = FALSE
-app$uploadFile(brmsfit_upload = file.path("bacteria_full.rds"))
+app$uploadFile(brmsfit_upload = file.path(dwn_folder, "bacteria_full.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
 app$setInputs(posterior_navlist_ID = "Default summary")
 app$setInputs(posterior_navlist_ID = "Custom summary",
@@ -156,7 +158,7 @@ if (run_all_models) {
   ## Posterior --------------------------------------------------------------
   
   app$setInputs(run_stan = "click", timeout_ = 1800000)
-  app$snapshotDownload("stanout_download", filename = file.path("..", "bacteria_noWeek.rds"))
+  app$snapshotDownload("stanout_download", filename = "bacteria_noWeek.rds")
   app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
   app$setInputs(posterior_navlist_ID = "Default summary")
   app$setInputs(posterior_navlist_ID = "Custom summary")

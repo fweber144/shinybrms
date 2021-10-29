@@ -1,4 +1,3 @@
 app <- ShinyDriver$new("../../")
-app$snapshotInit("bacteria_run_windows", screenshot = FALSE)
-
-source("bacteria_script.R", local = TRUE, echo = FALSE)
+tst_prefix <- "bacteria"
+source("init_os_dep.R", local = TRUE, echo = FALSE)

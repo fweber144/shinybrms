@@ -101,7 +101,6 @@ app$snapshot(items = list(input = TRUE,
 
 # Upload full model -------------------------------------------------------
 
-app$setInputs(navbar_ID = "Posterior", wait_ = FALSE, values_ = FALSE)
 app$setInputs(posterior_navlist_ID = "Run Stan") # , wait_ = FALSE, values_ = FALSE
 app$uploadFile(brmsfit_upload = file.path("bacteria_full.rds"))
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")

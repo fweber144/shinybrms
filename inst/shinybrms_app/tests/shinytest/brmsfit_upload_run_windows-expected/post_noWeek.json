@@ -1,0 +1,159 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.95,
+    "advOpts_chains": 4,
+    "advOpts_cores": 2,
+    "advOpts_init_r": 2,
+    "advOpts_inits": "random",
+    "advOpts_iter": 2000,
+    "advOpts_max_treedepth": 15,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": true,
+    "advOpts_seed": null,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 3,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "",
+    "ex_da_sel": "",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
+    "likelihood_navlist_ID": "Outcome",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": null,
+    "outc_sel": "",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 4,
+    "par_sel": "",
+    "posterior_link1": 0,
+    "posterior_link_upld": 0,
+    "posterior_navlist_ID": "Launch <strong>shinystan<\/strong>",
+    "pred_int_add": 0,
+    "pred_int_build": null,
+    "pred_int_sel": null,
+    "pred_mainNP_sel": null,
+    "pred_mainPP_sel": null,
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 0,
+    "prior_class_sel": "",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_link_upld": 0,
+    "prior_reset": 0,
+    "prior_text": "",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 1,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advOpts": false,
+    "show_general_MCMC_tab": true,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": "trt"
+  },
+  "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "ceff_plot": {
+      "src": "[image data sha1: 97a3b931eab1e11b184f26740eb725b097b3026d]",
+      "width": 631,
+      "height": 389.979446901184,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": 0.4,
+              "right": 3.6,
+              "bottom": 0.56285307992378,
+              "top": 0.994033311775512,
+              "discrete_limits": {
+                "x": [
+                  "placebo",
+                  "drug",
+                  "drug+"
+                ]
+              }
+            },
+            "mapping": {
+              "ymin": "lower__",
+              "ymax": "upper__",
+              "fill": "NULL",
+              "colour": "NULL",
+              "x": "effect1__",
+              "y": "estimate__"
+            },
+            "range": {
+              "left": 53.1282605715887,
+              "right": 623.029789183391,
+              "bottom": 339.871643638092,
+              "top": 7.97011003082912
+            }
+          }
+        ],
+        "dims": {
+          "width": 631,
+          "height": 389.979446901184
+        }
+      }
+    },
+    "cust_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Name <\/th> <th style='text-align: right;'> Q2.5 <\/th> <th style='text-align: right;'> Q25 <\/th> <th style='text-align: right;'> median <\/th> <th style='text-align: right;'> Q75 <\/th> <th style='text-align: right;'> Q97.5 <\/th> <th style='text-align: right;'> MAD <\/th> <th style='text-align: right;'> mean <\/th> <th style='text-align: right;'> SD <\/th>  <\/tr> <\/thead> <tbody>\n  <\/tbody> <\/table>",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.5947, chain_2: 0.4398) is OK.",
+    "diagn_all_out": "Warning: At least one MCMC diagnostic is worrying (see the tab \"MCMC diagnostics\" for details). In general, this indicates that the Stan results should not be used.",
+    "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
+    "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
+    "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "essTail_out": "Warning: At least one tail-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "general_MCMC_out": "                        R-hat   ESS_bulk  ESS_tail\nb_Intercept         1.0193488  359.00351 247.54001\nb_trtdrug           0.9963957  464.05107 328.86722\nb_trtdrugP          1.0019424  511.31093 341.02252\nsd_ID__Intercept    1.0018788  101.93668 157.83486\nr_ID[X01,Intercept] 1.0140984  690.75521 461.78734\nr_ID[X02,Intercept] 0.9988506  873.43928 294.57362\nr_ID[X03,Intercept] 1.0020219  450.88049 459.21687\nr_ID[X04,Intercept] 1.0090977  684.13801 460.24557\nr_ID[X05,Intercept] 0.9991277  568.83236 373.82470\nr_ID[X06,Intercept] 1.0116990  630.22786 325.17094\nr_ID[X07,Intercept] 1.0057331  240.88124 411.92471\nr_ID[X08,Intercept] 0.9993960  694.80683 325.71286\nr_ID[X09,Intercept] 1.0062141  994.65159 385.31143\nr_ID[X10,Intercept] 1.0036017  573.48530 350.40387\nr_ID[X11,Intercept] 1.0056569  719.70866 476.45464\nr_ID[X12,Intercept] 1.0005945  482.95914 432.98447\nr_ID[X13,Intercept] 0.9985739  701.16244 271.96176\nr_ID[X14,Intercept] 1.0154908  632.89644 297.88540\nr_ID[X15,Intercept] 1.0017211  534.86364 354.93703\nr_ID[X16,Intercept] 1.0100521  675.07682 198.69588\nr_ID[X17,Intercept] 0.9986044  592.40782 315.39323\nr_ID[X18,Intercept] 0.9981405  381.23934 430.51602\nr_ID[X19,Intercept] 0.9973702  285.94767 388.84232\nr_ID[X20,Intercept] 1.0019653 1076.95792 315.29326\nr_ID[X21,Intercept] 0.9979615  982.67186 269.83625\nr_ID[Y01,Intercept] 1.0050027  720.42455 282.02930\nr_ID[Y02,Intercept] 0.9990238  156.12609 272.25407\nr_ID[Y03,Intercept] 0.9995072  703.32291 309.34714\nr_ID[Y04,Intercept] 0.9976551  213.72143 446.77086\nr_ID[Y05,Intercept] 1.0080670  251.77234 407.62558\nr_ID[Y06,Intercept] 0.9984769  742.95617 346.98014\nr_ID[Y07,Intercept] 0.9978772  427.28012 298.70642\nr_ID[Y08,Intercept] 1.0028521  890.13369 399.21823\nr_ID[Y09,Intercept] 1.0046396  815.25247 412.24713\nr_ID[Y10,Intercept] 0.9976938  905.28727 516.89215\nr_ID[Y11,Intercept] 1.0056260 1112.49647 406.76014\nr_ID[Y12,Intercept] 1.0034079  775.75812 323.56335\nr_ID[Y13,Intercept] 1.0022975  279.87089 258.61292\nr_ID[Y14,Intercept] 1.0122613 1086.67973 357.92138\nr_ID[Z01,Intercept] 1.0030688  674.78933 292.44028\nr_ID[Z02,Intercept] 1.0134247 1011.00678 252.44619\nr_ID[Z03,Intercept] 1.0006450  563.11762 300.29165\nr_ID[Z05,Intercept] 0.9980264  320.41985 485.30799\nr_ID[Z06,Intercept] 0.9998878  533.91868 324.03021\nr_ID[Z07,Intercept] 1.0000263  495.84363 376.42440\nr_ID[Z09,Intercept] 0.9998025  567.02361 273.76447\nr_ID[Z10,Intercept] 0.9983382  877.20808 439.83858\nr_ID[Z11,Intercept] 0.9970011  420.76035 306.93897\nr_ID[Z14,Intercept] 1.0023693  653.70029 423.43608\nr_ID[Z15,Intercept] 1.0086486  591.87098 335.79598\nr_ID[Z19,Intercept] 1.0038411  607.69676 255.13496\nr_ID[Z20,Intercept] 1.0050852  428.74689 340.18428\nr_ID[Z24,Intercept] 1.0022834  482.02499 475.66235\nr_ID[Z26,Intercept] 1.0030303  924.64032 375.46142\nlp__                1.0197018   87.05528  86.28806",
+    "rhat_out": "Warning: At least one R-hat value is worrying. In general, this indicates that the Stan results should not be used.",
+    "size_aux": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.2990    0.4458   0.3145   2.2441 1.0019      102      158\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   2.4190    0.5384   1.5221   3.6414 1.0194      359      248\ntrtdrug    -1.2232    0.6424  -2.5200  -0.1743 0.9964      464      329\ntrtdrugP   -0.7550    0.6839  -2.1636   0.5311 1.0020      511      341\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  "export": {
+
+  }
+}

@@ -25,20 +25,20 @@
 #' RStudio's default for option `browser` to fix this issue.
 #'
 #' External global options used by \bold{shinybrms} are:
+#' * `shiny.maxRequestSize` (see [shiny::shinyOptions()]): If not specified by
+#' the user, then \bold{shinybrms} uses a value of `50 * 1024^2` (corresponding
+#' to 50 MB).
+#' * `warn` (see [base::options()]): Set and reset internally (necessary for
+#' catching some warning messages).
+#' * `browser` (see [base::options()]): Set and reset internally (see above).
 #' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the
 #' advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
 #' of this option. If option `mc.cores` is not set, then the advanced option
 #' "Cores" defaults to the value returned by [parallel::detectCores()].
-#' * `shiny.maxRequestSize` (see [shiny::shinyOptions()]): If not specified by
-#' the user, then \bold{shinybrms} uses a value of `50 * 1024^2` (corresponding
-#' to 50 MB).
 #' * `brms.backend` (see [brms::brm()]): If option `brms.backend` is set, then
 #' the advanced option "Backend" (in the \bold{shinybrms} app) defaults to the
 #' value of this option. If option `brms.backend` is not set, then the advanced
 #' option "Backend" defaults to `"rstan"`.
-#' * `warn` (see [base::options()]): Set and reset internally (necessary for
-#' catching some warning messages).
-#' * `browser` (see [base::options()]): Set and reset internally (see above).
 #'
 #' Note that \bold{shinystan}'s global option `shinystan.rstudio` (see
 #' [shinystan::launch_shinystan()]) may not be used here as \bold{shinystan} is

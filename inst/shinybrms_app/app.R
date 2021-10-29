@@ -148,19 +148,30 @@ ui <- navbarPage(
       # br(),
       h4("Description"),
       p("This",
-        a(HTML(paste(strong("shiny"))), href = "https://shiny.rstudio.com/", target = "_blank"),
+        a(HTML(paste(strong("shiny"))),
+          href = "https://shiny.rstudio.com/",
+          target = "_blank"),
         "app is part of the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
         "package",
-        a(HTML(paste(strong("shinybrms"))), href = "https://fweber144.github.io/shinybrms/", target = "_blank"),
+        a(HTML(paste(strong("shinybrms"))),
+          href = "https://fweber144.github.io/shinybrms/",
+          target = "_blank"),
         "and allows to fit Bayesian regression models using the R package",
-        a(HTML(paste(strong("brms"))), href = "https://paul-buerkner.github.io/brms/", target = "_blank"),
+        a(HTML(paste(strong("brms"))),
+          href = "https://paul-buerkner.github.io/brms/",
+          target = "_blank"),
         "which in turn relies on",
         a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
-        ". More specifically, the only", strong("brms") ,"backend currently supported by",
-        strong("shinybrms"), "is the R package",
-        a(HTML(paste(strong("rstan"))), href = "https://mc-stan.org/rstan/", target = "_blank", .noWS = "after"),
-        "."),
+        ". More specifically,", strong("brms"), "has two possible backends:",
+        a(HTML(paste(strong("rstan"))),
+          href = "https://mc-stan.org/rstan/",
+          target = "_blank"),
+        "and",
+        a(HTML(paste(strong("cmdstanr"))),
+          href = "https://mc-stan.org/cmdstanr/",
+          target = "_blank", .noWS = "after"),
+        ". Both backends are supported by", strong("shinybrms", .noWS = "after"), "."),
       h4("Bayesian regression models"),
       p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
         ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
@@ -561,9 +572,10 @@ ui <- navbarPage(
       a("\"Stan Functions Reference\"",
         href = "https://mc-stan.org/docs/2_21/functions-reference/index.html",
         target = "_blank"),
-      ", here for Stan version 2.21.0 since this is the Stan version used by the most recent version of ",
-      strong("rstan"),
-      ")."
+      ", here for Stan version 2.21.0 since this is the Stan version used by ",
+      "the most recent version of ", strong("rstan"), "; for ",
+      strong("cmdstanr"), ", the appropriate version depends on the installed ",
+      "CmdStan version)."
     ))),
     hr(),
     h3("Default priors"),
@@ -740,11 +752,16 @@ ui <- navbarPage(
             a(HTML(paste(code("rstan::sampling()"))),
               href = "https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html",
               target = "_blank", .noWS = "after"),
-            ", and",
+            ",",
             a(HTML(paste(code("rstan::stan()"))),
               href = "https://mc-stan.org/rstan/reference/stan.html",
               target = "_blank", .noWS = "after"),
-            "."
+            ", and the",
+            a(HTML(paste(code("$sample()"))),
+              href = "https://mc-stan.org/cmdstanr/reference/model-method-sample.html",
+              target = "_blank"),
+            "method from", strong("cmdstanr"), "(depending on the backend",
+            "chosen below)."
           ),
           checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
           conditionalPanel(
@@ -785,12 +802,16 @@ ui <- navbarPage(
             ),
             fluidRow(
               column(5,
+                     radioButtons("advOpts_backend", "Backend:",
+                                  choiceNames = list(strong("rstan"), strong("cmdstanr")),
+                                  choiceValues = list("rstan", "cmdstanr"),
+                                  inline = TRUE),
                      numericInput("advOpts_seed", "Seed:",
                                   value = NA, step = 1L),
                      numericInput("advOpts_cores", "Cores:",
                                   value = getOption("mc.cores", parallel::detectCores(logical = FALSE)),
                                   step = 1L, min = 1L),
-                     numericInput("advOpts_chains", "Chains:",
+                     numericInput("advOpts_chains", "Chains (MCMC chains):",
                                   value = 4L, step = 1L, min = 1L),
                      numericInput("advOpts_iter", "Total iterations per chain:",
                                   value = 2000L, step = 1L, min = 1L),
@@ -803,10 +824,15 @@ ui <- navbarPage(
                                   choices = list("Random" = "random", "Zero" = "0"),
                                   inline = TRUE),
                      numericInput("advOpts_init_r",
-                                  HTML(paste0("Range of random initial values in the unconstrained parameter space (",
-                                              code("init_r"),
-                                              "; only relevant if random initial values are chosen):")),
-                                  value = 2, step = 0.1, min = 0),
+                                  HTML(paste0(
+                                    "Range of random initial values in the ",
+                                    "unconstrained parameter space (",
+                                    code("init_r"), " in ", strong("rstan"), ", ",
+                                    code("init"), " in ", strong("cmdstanr"),
+                                    "; only relevant if random initial values ",
+                                    "are chosen):"
+                                  )),
+                                  value = NA, step = 0.1, min = 0),
                      numericInput("advOpts_adapt_delta",
                                   HTML(paste0("Target Metropolis acceptance rate (", code("adapt_delta"), "):")),
                                   value = 0.95, step = 0.01, min = 0, max = 1),
@@ -1315,6 +1341,12 @@ ui <- navbarPage(
             a("website", href = "https://mc-stan.org/rstan/", target = "_blank"), ", ",
             a("CRAN", href = "https://CRAN.R-project.org/package=rstan", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/stan-dev/rstan/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
+            strong("cmdstanr"), ": ",
+            a("website", href = "https://mc-stan.org/cmdstanr/", target = "_blank"), ", ",
+            # a("CRAN", href = "https://CRAN.R-project.org/package=cmdstanr", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/stan-dev/cmdstanr/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
             strong("shinystan"), ": ",
@@ -2318,9 +2350,19 @@ server <- function(input, output, session) {
         input$advOpts_chains,
         input$advOpts_iter,
         input$advOpts_thin,
-        input$advOpts_init_r,
         input$advOpts_adapt_delta,
         input$advOpts_max_treedepth)
+    
+    if (identical(input$advOpts_backend, "cmdstanr")) {
+      if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+        showNotification(
+          HTML(paste("Package", code("cmdstanr"), "needed. Please install it.")),
+          duration = NA,
+          type = "error"
+        )
+        req(FALSE)
+      }
+    }
     
     n_chains_spec(input$advOpts_chains)
     
@@ -2329,18 +2371,15 @@ server <- function(input, output, session) {
       data = da(),
       family = C_family(),
       prior = C_prior(),
+      backend = input$advOpts_backend,
       cores = min(input$advOpts_cores, input$advOpts_chains),
       chains = input$advOpts_chains,
       seed = input$advOpts_seed,
       iter = input$advOpts_iter,
       thin = input$advOpts_thin,
       inits = input$advOpts_inits,
-      init_r = input$advOpts_init_r,
-      open_progress = input$advOpts_open_progress,
       save_pars = brms::save_pars(all = input$advOpts_save_all_pars),
-      save_warmup = input$advOpts_save_warmup,
-      control = list(adapt_delta = input$advOpts_adapt_delta,
-                     max_treedepth = input$advOpts_max_treedepth)
+      save_warmup = input$advOpts_save_warmup
     )
     if (!is.na(input$advOpts_warmup)) {
       args_brm <- c(args_brm,
@@ -2349,6 +2388,28 @@ server <- function(input, output, session) {
     if (!is.na(input$advOpts_refresh)) {
       args_brm <- c(args_brm,
                     list(refresh = input$advOpts_refresh))
+    }
+    if (identical(input$advOpts_backend, "cmdstanr")) {
+      args_brm <- c(
+        args_brm,
+        list(adapt_delta = input$advOpts_adapt_delta,
+             max_treedepth = input$advOpts_max_treedepth)
+      )
+      if (!is.na(input$advOpts_init_r)) {
+        args_brm <- c(args_brm,
+                      list(init = input$advOpts_init_r))
+      }
+    } else {
+      args_brm <- c(
+        args_brm,
+        list(open_progress = input$advOpts_open_progress,
+             control = list(adapt_delta = input$advOpts_adapt_delta,
+                            max_treedepth = input$advOpts_max_treedepth))
+      )
+      if (!is.na(input$advOpts_init_r)) {
+        args_brm <- c(args_brm,
+                      list(init_r = input$advOpts_init_r))
+      }
     }
     
     # Logical (single value) indicating whether to use brms:::update.brmsfit():
@@ -2372,7 +2433,7 @@ server <- function(input, output, session) {
     showNotification(run_mssg, duration = 60, type = "message")
     
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
-    if (args_brm$open_progress) {
+    if (input$advOpts_open_progress) { # TODO: Should this be `isTRUE(args_brm$open_progress)`?
       # For RStudio:
       RSTUDIO_orig <- Sys.getenv("RSTUDIO")
       if (identical(RSTUDIO_orig, "1")) {
@@ -2396,7 +2457,7 @@ server <- function(input, output, session) {
       browser_orig <- options(browser = prog_browser)
       
       # Even show the progress if parallel::mclapply() (with forking) is intended to be used:
-      if (identical(.Platform$OS.type, "unix")) {
+      if (identical(.Platform$OS.type, "unix")) { # TODO: Add `|| identical(input$advOpts_backend, "cmdstanr")` here?
         if (!interactive()) {
           tmp_stdout_txt <- tempfile(pattern = "shinybrms_stdout_", fileext = ".txt")
           sink(tmp_stdout_txt)
@@ -2499,22 +2560,25 @@ server <- function(input, output, session) {
     req(n_chains_spec(), C_bfit())
     C_draws_arr <- as.array(C_bfit())
     n_chains_out <- dim(C_draws_arr)[2]
-    # Check that the mode of the resulting "stanfit" object is the "normal" mode (0L), i.e. neither
-    # test gradient mode (1L) nor error mode (2L):
-    stopifnot(identical(C_bfit()$fit@mode, 0L))
+    C_sfit <- C_bfit()$fit
+    stopifnot(rstan:::is.stanfit(C_sfit))
+    
+    # Check that the mode of the resulting "stanfit" object is the "normal" mode
+    # (0L), i.e. neither test gradient mode (1L) nor error mode (2L):
+    stopifnot(identical(C_sfit@mode, 0L))
     
     ##### Computation of MCMC diagnostics -------------------------------------
     
     ###### HMC-specific diagnostics -------------------------------------------
     
-    C_div <- rstan::get_num_divergent(C_bfit()$fit)
+    C_div <- rstan::get_num_divergent(C_sfit)
     C_div_OK <- identical(C_div, 0L)
     
-    C_tree <- rstan::get_num_max_treedepth(C_bfit()$fit)
+    C_tree <- rstan::get_num_max_treedepth(C_sfit)
     C_tree_OK <- identical(C_tree, 0L)
     
-    C_EBFMI <- setNames(rstan::get_bfmi(C_bfit()$fit),
-                        paste0("chain_", sapply(C_bfit()$fit@stan_args, "[[", "chain_id")))
+    C_EBFMI <- setNames(rstan::get_bfmi(C_sfit),
+                        paste0("chain_", sapply(C_sfit@stan_args, "[[", "chain_id")))
     C_EBFMI_OK <- all(C_EBFMI >= 0.2)
     
     ###### General MCMC diagnostics -------------------------------------------
@@ -3131,18 +3195,18 @@ server <- function(input, output, session) {
         # Call "shinystan" from an external R process (needed to allow opening another "shiny" app
         # (here "shinystan") from within the current "shiny" app (here "shinybrms")):
         callr::r(
-          function(brmsfit_obj, browser_callr, seed_callr) {
+          function(bfit_obj, browser_callr, seed_callr) {
             browser_callr_orig <- options(browser = browser_callr)
-            assign("y", brms::get_y(brmsfit_obj), envir = .GlobalEnv)
+            assign("y", brms::get_y(bfit_obj), envir = .GlobalEnv)
             if (!is.vector(y)) assign("y", as.vector(y), envir = .GlobalEnv)
             set.seed(seed_callr)
-            assign("y_rep", brms::posterior_predict(brmsfit_obj), envir = .GlobalEnv)
-            shinystan::launch_shinystan(brmsfit_obj,
+            assign("y_rep", brms::posterior_predict(bfit_obj), envir = .GlobalEnv)
+            shinystan::launch_shinystan(bfit_obj,
                                         rstudio = FALSE)
             options(browser = browser_callr_orig$browser)
             return(invisible(TRUE))
           },
-          args = list(brmsfit_obj = C_stanres()$bfit,
+          args = list(bfit_obj = C_stanres()$bfit,
                       browser_callr = shinystan_browser,
                       seed_callr = seed_PPD_tmp)
         )

@@ -1,0 +1,165 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.8,
+    "advOpts_chains": 2,
+    "advOpts_cores": 2,
+    "advOpts_init_r": 2,
+    "advOpts_inits": "random",
+    "advOpts_iter": 500,
+    "advOpts_max_treedepth": 10,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": false,
+    "advOpts_seed": 6789,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 5,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "bernoulli",
+    "ex_da_sel": "bacteria",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
+    "likelihood_navlist_ID": "Formula preview",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": null,
+    "outc_sel": "y",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 7,
+    "par_sel": "",
+    "posterior_link1": 0,
+    "posterior_link_upld": 0,
+    "posterior_navlist_ID": "Launch <strong>shinystan<\/strong>",
+    "pred_int_add": 1,
+    "pred_int_build": null,
+    "pred_int_sel": null,
+    "pred_mainNP_sel": "trt",
+    "pred_mainPP_sel": "ID",
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 3,
+    "prior_class_sel": "b",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_link_upld": 0,
+    "prior_reset": 0,
+    "prior_text": "student_t(3, 0, 4)",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 3,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advOpts": true,
+    "show_general_MCMC_tab": true,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": "trt"
+  },
+  "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "ceff_plot": {
+      "src": "[image data sha1: 46741ece84dca1f401d09ecc8ca4ea386759d90f]",
+      "width": 631,
+      "height": 389.979446901184,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": 0.4,
+              "right": 3.6,
+              "bottom": 0.535842727427688,
+              "top": 0.990635984498132,
+              "discrete_limits": {
+                "x": [
+                  "placebo",
+                  "drug",
+                  "drug+"
+                ]
+              }
+            },
+            "mapping": {
+              "ymin": "lower__",
+              "ymax": "upper__",
+              "fill": "NULL",
+              "colour": "NULL",
+              "x": "effect1__",
+              "y": "estimate__"
+            },
+            "range": {
+              "left": 53.1282689912827,
+              "right": 623.029887920299,
+              "bottom": 340.871731008717,
+              "top": 7.97011207970112
+            }
+          }
+        ],
+        "dims": {
+          "width": 631,
+          "height": 389.979446901184
+        }
+      }
+    },
+    "cust_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Name <\/th> <th style='text-align: right;'> Q2.5 <\/th> <th style='text-align: right;'> Q25 <\/th> <th style='text-align: right;'> median <\/th> <th style='text-align: right;'> Q75 <\/th> <th style='text-align: right;'> Q97.5 <\/th> <th style='text-align: right;'> MAD <\/th> <th style='text-align: right;'> mean <\/th> <th style='text-align: right;'> SD <\/th>  <\/tr> <\/thead> <tbody>\n  <\/tbody> <\/table>",
+    "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> y <\/th> <th style='text-align: left;'> ap <\/th> <th style='text-align: left;'> hilo <\/th> <th style='text-align: right;'> week <\/th> <th style='text-align: left;'> ID <\/th> <th style='text-align: left;'> trt <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   4 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">  11 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.6137, chain_2: 0.7713) is OK.",
+    "diagn_all_out": "Warning: At least one MCMC diagnostic is worrying (see the tab \"MCMC diagnostics\" for details). In general, this indicates that the Stan results should not be used.",
+    "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
+    "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
+    "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "essTail_out": "Warning: At least one tail-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "formula_view": "y ~ 1 + trt + (1 | ID)",
+    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail\nb_Intercept         1.0059927  259.9405 180.7589\nb_trtdrug           1.0005354  314.0370 318.7970\nb_trtdrugP          1.0098519  316.3221 309.0444\nsd_ID__Intercept    1.0123877  115.6939 213.9707\nr_ID[X01,Intercept] 1.0126336  698.9581 282.7041\nr_ID[X02,Intercept] 0.9993895  744.0916 466.6310\nr_ID[X03,Intercept] 1.0039327  426.5019 217.4992\nr_ID[X04,Intercept] 0.9976379  802.8100 376.6453\nr_ID[X05,Intercept] 0.9967283  798.3744 311.3253\nr_ID[X06,Intercept] 0.9994662  764.7295 431.8529\nr_ID[X07,Intercept] 1.0074563  409.4859 434.8864\nr_ID[X08,Intercept] 1.0030343  664.6261 306.2009\nr_ID[X09,Intercept] 1.0069957 1142.4718 471.0662\nr_ID[X10,Intercept] 1.0052587  638.3183 349.1448\nr_ID[X11,Intercept] 1.0011107  652.2675 363.6607\nr_ID[X12,Intercept] 0.9973467  867.7176 382.4341\nr_ID[X13,Intercept] 1.0117976  714.5268 343.8039\nr_ID[X14,Intercept] 1.0138700  543.3224 400.5084\nr_ID[X15,Intercept] 0.9986051  537.8458 289.3462\nr_ID[X16,Intercept] 1.0015638 1123.7991 342.1976\nr_ID[X17,Intercept] 1.0026221  846.0837 454.8199\nr_ID[X18,Intercept] 1.0042972  389.3955 383.6154\nr_ID[X19,Intercept] 0.9983192  452.2692 286.0188\nr_ID[X20,Intercept] 1.0014225  683.3727 324.3589\nr_ID[X21,Intercept] 1.0235156  811.8115 269.7462\nr_ID[Y01,Intercept] 1.0009961  705.2018 343.6229\nr_ID[Y02,Intercept] 1.0024630  251.9131 393.4312\nr_ID[Y03,Intercept] 0.9972962  726.0336 468.0793\nr_ID[Y04,Intercept] 1.0128635  397.2596 422.1131\nr_ID[Y05,Intercept] 1.0002264  384.0099 366.2709\nr_ID[Y06,Intercept] 1.0086431  832.7258 331.3880\nr_ID[Y07,Intercept] 1.0023970  663.8557 477.9661\nr_ID[Y08,Intercept] 1.0154440 1035.6761 408.3255\nr_ID[Y09,Intercept] 0.9995638  734.4721 329.5553\nr_ID[Y10,Intercept] 1.0047726  813.7680 372.9993\nr_ID[Y11,Intercept] 1.0015042  827.1388 326.8573\nr_ID[Y12,Intercept] 1.0034791  777.8056 325.8484\nr_ID[Y13,Intercept] 1.0041713  452.8300 441.7689\nr_ID[Y14,Intercept] 1.0048681  814.6166 248.5459\nr_ID[Z01,Intercept] 0.9992425  672.4255 465.9576\nr_ID[Z02,Intercept] 1.0065927  793.1859 310.3306\nr_ID[Z03,Intercept] 0.9991803  758.9065 351.1390\nr_ID[Z05,Intercept] 1.0072727  385.6516 370.7431\nr_ID[Z06,Intercept] 1.0085467  682.3066 295.8945\nr_ID[Z07,Intercept] 1.0000039  568.6263 440.3038\nr_ID[Z09,Intercept] 1.0012472  603.3393 467.4007\nr_ID[Z10,Intercept] 1.0012299  783.8168 155.2245\nr_ID[Z11,Intercept] 1.0033948  629.7617 350.4434\nr_ID[Z14,Intercept] 0.9998747  898.7223 465.5676\nr_ID[Z15,Intercept] 1.0118375  939.0361 438.5241\nr_ID[Z19,Intercept] 1.0107056  818.2404 376.7122\nr_ID[Z20,Intercept] 0.9986055  441.9254 281.7174\nr_ID[Z24,Intercept] 1.0038795  553.8389 354.7638\nr_ID[Z26,Intercept] 1.0039528  874.1552 496.0561\nlp__                1.0298991   78.1900 172.2574",
+    "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrug <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> trtdrugP <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 4) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "rhat_out": "Warning: At least one R-hat value is worrying. In general, this indicates that the Stan results should not be used.",
+    "size_aux": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.1690    0.4488   0.4319   1.9724 1.0124      116      214\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   2.3469    0.4693   1.5674   3.4752 1.0060      260      181\ntrtdrug    -1.2095    0.6105  -2.6722   0.0957 1.0006      314      319\ntrtdrugP   -0.6695    0.6207  -2.0327   0.6523 1.0098      317      309\n\nDraws were sampled using sampling(NUTS). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  "export": {
+
+  }
+}

@@ -163,15 +163,16 @@ ui <- navbarPage(
           target = "_blank"),
         "which in turn relies on",
         a("Stan", href = "https://mc-stan.org/", target = "_blank", .noWS = "after"),
-        ". More specifically,", strong("brms"), "has two possible backends:",
+        ". More specifically,", strong("brms"), "offers two backends: The",
         a(HTML(paste(strong("rstan"))),
           href = "https://mc-stan.org/rstan/",
           target = "_blank"),
-        "and",
+        "or the",
         a(HTML(paste(strong("cmdstanr"))),
           href = "https://mc-stan.org/cmdstanr/",
-          target = "_blank", .noWS = "after"),
-        ". Both backends are supported by", strong("shinybrms", .noWS = "after"), "."),
+          target = "_blank"),
+        "R package. Both backends are supported by",
+        strong("shinybrms", .noWS = "after"), "."),
       h4("Bayesian regression models"),
       p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
         ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
@@ -742,63 +743,85 @@ ui <- navbarPage(
             a(HTML(paste(code("brms::brm()"))),
               href = "https://paul-buerkner.github.io/brms/reference/brm.html",
               target = "_blank"),
-            "which is the central function for inferring the posterior.",
-            "These advanced options have sensible defaults, but sometimes they need to be changed.",
-            "For details on these advanced options, see the help for the functions",
-            a(HTML(paste(code("brms::brm()"))),
-              href = "https://paul-buerkner.github.io/brms/reference/brm.html",
-              target = "_blank", .noWS = "after"),
-            ",",
-            a(HTML(paste(code("rstan::sampling()"))),
-              href = "https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html",
-              target = "_blank", .noWS = "after"),
-            ",",
-            a(HTML(paste(code("rstan::stan()"))),
-              href = "https://mc-stan.org/rstan/reference/stan.html",
-              target = "_blank", .noWS = "after"),
-            ", and the",
-            a(HTML(paste(code("$sample()"))),
-              href = "https://mc-stan.org/cmdstanr/reference/model-method-sample.html",
-              target = "_blank"),
-            "method from", strong("cmdstanr"), "(depending on the backend",
-            "chosen below)."
+            "which is the central function for inferring the posterior. These",
+            "advanced options have sensible defaults, but sometimes, they need",
+            "to be changed."
           ),
           checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
           conditionalPanel(
             condition = "input.show_advOpts",
             helpText(
-              "Notes:",
-              tags$ul(
-                tags$li(
-                  "To obtain reproducible results, you need to specify a value for",
-                  "option \"Seed\" and enter this value each time you want to",
-                  "obtain the same results. Leave option \"Seed\" empty to use a",
-                  "random seed (giving nonreproducible results)."
-                ),
-                tags$li(
-                  "Numeric options with an empty field (apart from option \"Seed\") have",
-                  "a default value which depends on other options. Leave them empty to",
-                  "use this default value. These defaults are:",
-                  tags$ul(
-                    tags$li(
-                      "For option \"Warmup iterations per chain\": half of",
-                      "\"Total iterations per chain\" (rounded down if this",
-                      "fraction is not an integer)."
-                    ),
-                    tags$li(
-                      "For option \"Progress-refreshing step size\": tenth of",
-                      "\"Total iterations per chain\", but at least 1."
-                    )
+              p("For most of the following advanced options, details may be",
+                "found on the",
+                a(HTML(paste(code("brms::brm()"))),
+                  href = "https://paul-buerkner.github.io/brms/reference/brm.html",
+                  target = "_blank"),
+                "help page. However, there are also some backend-specific",
+                "advanced options for which the following help pages need to",
+                "be consulted:",
+                tags$ul(
+                  tags$li(
+                    "For the",
+                    a(HTML(paste(strong("rstan"))),
+                      href = "https://mc-stan.org/rstan/",
+                      target = "_blank"),
+                    "backend:",
+                    a(HTML(paste(code("rstan::sampling()"))),
+                      href = "https://mc-stan.org/rstan/reference/stanmodel-method-sampling.html",
+                      target = "_blank", .noWS = "after"),
+                    ", together with",
+                    a(HTML(paste(code("rstan::stan()"))),
+                      href = "https://mc-stan.org/rstan/reference/stan.html",
+                      target = "_blank", .noWS = "after"),
+                    "."
+                  ),
+                  tags$li(
+                    "For the",
+                    a(HTML(paste(strong("cmdstanr"))),
+                      href = "https://mc-stan.org/cmdstanr/",
+                      target = "_blank"),
+                    "backend:",
+                    a(HTML(paste(code("$sample()"))),
+                      href = "https://mc-stan.org/cmdstanr/reference/model-method-sample.html",
+                      target = "_blank", .noWS = "after"),
+                    ", together with the",
+                    a("\"CmdStan User's Guide\"",
+                      href = "https://mc-stan.org/docs/2_28/cmdstan-guide/index.html",
+                      target = "_blank", .noWS = "after"),
+                    "."
                   )
-                ),
-                tags$li(
-                  "Numeric options with a preset value may not be left empty."
-                ),
-                tags$li(
-                  "Internally, the number of cores is set automatically to the",
-                  "minimum value of options \"Cores\" and \"Chains\"."
-                )
-              )
+                )),
+              p("Notes:",
+                tags$ul(
+                  tags$li(
+                    "Numeric options with a preset value may not be left empty."
+                  ),
+                  tags$li(
+                    "If unset, option \"Seed\" internally defaults to a random",
+                    "seed, giving nonreproducible results. To obtain reproducible",
+                    "results, you need to specify a value for option \"Seed\"",
+                    "and enter this value each time you want to obtain the same",
+                    "results again."
+                  ),
+                  tags$li(
+                    "Internally, the value supplied to option \"Cores\" is cut",
+                    "off at the value supplied to option \"Chains\"."
+                  ),
+                  tags$li(
+                    "If unset, option \"Warmup iterations per chain\" internally",
+                    "defaults to half of option \"Total iterations per chain\"",
+                    "(rounded down if this fraction is not an integer)."
+                  ),
+                  tags$li(
+                    "If unset, option \"Progress-refreshing step size\" internally",
+                    "defaults to a tenth of option \"Total iterations per chain\",",
+                    "but at least 1."
+                  ),
+                  tags$li(
+                    "If unset, option \"Range of random initial values in the",
+                    "unconstrained parameter space\" internally defaults to 2."
+                  )
+                ))
             ),
             fluidRow(
               column(5,
@@ -2895,7 +2918,7 @@ server <- function(input, output, session) {
                     href = "https://cran.r-project.org/doc/manuals/r-release/R-lang.html#Operators",
                     target = "_blank")),
           tags$li(a("\"The R Reference Index\"",
-                    href = "",
+                    href = "https://cran.r-project.org/doc/manuals/r-release/fullrefman.pdf",
                     target = "_blank"))
         )
       )),

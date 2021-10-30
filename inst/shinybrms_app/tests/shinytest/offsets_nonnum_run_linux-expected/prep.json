@@ -3,7 +3,7 @@
     "about_link1": 0,
     "act_launch_shinystan": 0,
     "advOpts_adapt_delta": 0.8,
-    "advOpts_backend": "rstan",
+    "advOpts_backend": "cmdstanr",
     "advOpts_chains": 2,
     "advOpts_cores": 2,
     "advOpts_init_r": null,

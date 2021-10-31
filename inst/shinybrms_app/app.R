@@ -1519,7 +1519,7 @@ server <- function(input, output, session) {
         da_tmp <- get("Arabidopsis", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
+          HTML(paste("Package", strong("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1532,7 +1532,7 @@ server <- function(input, output, session) {
         da_tmp <- get("bacteria", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
+          HTML(paste("Package", strong("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1556,7 +1556,7 @@ server <- function(input, output, session) {
         da_tmp <- get("birthwt", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
+          HTML(paste("Package", strong("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1569,7 +1569,7 @@ server <- function(input, output, session) {
         da_tmp <- get("epilepsy", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("brms"), "needed. Please install it.")),
+          HTML(paste("Package", strong("brms"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1582,7 +1582,7 @@ server <- function(input, output, session) {
         da_tmp <- get("grouseticks", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
+          HTML(paste("Package", strong("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1598,7 +1598,7 @@ server <- function(input, output, session) {
         da_tmp <- get("kidiq", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
+          HTML(paste("Package", strong("rstanarm"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1613,7 +1613,7 @@ server <- function(input, output, session) {
         da_tmp <- get("quine", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
+          HTML(paste("Package", strong("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1626,7 +1626,7 @@ server <- function(input, output, session) {
         da_tmp <- get("Rabbit", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("MASS"), "needed. Please install it.")),
+          HTML(paste("Package", strong("MASS"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1647,7 +1647,7 @@ server <- function(input, output, session) {
         da_tmp <- get("roaches", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("rstanarm"), "needed. Please install it.")),
+          HTML(paste("Package", strong("rstanarm"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -1660,7 +1660,7 @@ server <- function(input, output, session) {
         da_tmp <- get("sleepstudy", envir = tmp_env)
       } else {
         showNotification(
-          HTML(paste("Package", code("lme4"), "needed. Please install it.")),
+          HTML(paste("Package", strong("lme4"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -2382,7 +2382,7 @@ server <- function(input, output, session) {
     if (identical(input$advOpts_backend, "cmdstanr")) {
       if (!requireNamespace("cmdstanr", quietly = TRUE)) {
         showNotification(
-          HTML(paste("Package", code("cmdstanr"), "needed. Please install it.")),
+          HTML(paste("Package", strong("cmdstanr"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -3194,7 +3194,7 @@ server <- function(input, output, session) {
     content = function(file) {
       if (!requireNamespace("ggplot2", quietly = TRUE)) {
         showNotification(
-          HTML(paste("Package", code("ggplot2"), "needed. Please install it.")),
+          HTML(paste("Package", strong("ggplot2"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
@@ -3260,14 +3260,14 @@ server <- function(input, output, session) {
         )
       } else {
         showNotification(
-          HTML(paste("Package", code("callr"), "needed. Please install it.")),
+          HTML(paste("Package", strong("callr"), "needed. Please install it.")),
           duration = NA,
           type = "error"
         )
       }
     } else {
       showNotification(
-        HTML(paste("Package", code("shinystan"), "needed. Please install it.")),
+        HTML(paste("Package", strong("shinystan"), "needed. Please install it.")),
         duration = NA,
         type = "error"
       )

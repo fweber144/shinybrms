@@ -58,6 +58,7 @@ prior_stan_fun <- c(
   "double_exponential",
   "logistic",
   "gumbel",
+  "skew_double_exponential",
   ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
   "lognormal",
   "chi_square",
@@ -69,9 +70,9 @@ prior_stan_fun <- c(
   "weibull",
   "frechet",
   "rayleigh",
-  "wiener",
   "pareto",
   "pareto_type_2",
+  "wiener",
   ### 
   ### Requiring a lower bound and an upper bound (which is checked by brms:::check_prior_content()):
   "beta",

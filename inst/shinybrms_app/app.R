@@ -2389,6 +2389,7 @@ server <- function(input, output, session) {
         req(FALSE)
       }
       if (save_warmup_tmp) {
+        # Because of **brms** issue #1257:
         showNotification(
           HTML(paste(
             "Saving the warmup draws is currently not possible when the",
@@ -2457,6 +2458,12 @@ server <- function(input, output, session) {
       # brms:::update.brmsfit() does not recompute the default priors if the
       # dataset has changed):
       identical(rlang::hash(da()), da_hash())
+    if (use_upd &&
+        identical(C_bfit()$backend, "rstan") &&
+        identical(args_brm$backend, "cmdstanr")) {
+      # Because of **brms** issue #1259:
+      use_upd <- FALSE
+    }
     
     if (use_upd) {
       run_mssg <- paste(

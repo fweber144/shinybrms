@@ -2529,13 +2529,19 @@ server <- function(input, output, session) {
     # Run Stan (more precisely: brms::brm() (or brms:::update.brmsfit(), if possible)):
     if (use_upd) {
       warn_capt <- capture.output({
-        bfit_tmp <- do.call(update, args = c(
+        bfit_tmp <- try(do.call(update, args = c(
           list(object = C_bfit(),
                formula. = C_formula()),
           args_brm[setdiff(names(args_brm), c("formula", "data"))]
-        ))
+        )), silent = TRUE)
       }, type = "message")
-    } else {
+    }
+    if (!use_upd ||
+        ### Should in fact be redundant, given the `!use_upd` condition (but
+        ### shouldn't harm either):
+        !exists("bfit_tmp") ||
+        ### 
+        (exists("bfit_tmp") && inherits(bfit_tmp, "try-error"))) {
       warn_capt <- capture.output({
         bfit_tmp <- do.call(brms::brm, args = args_brm)
       }, type = "message")

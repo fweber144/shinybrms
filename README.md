@@ -19,11 +19,11 @@ also how to install it, if necessary).
 
 ## Launching the **shinybrms** app
 
-The following two sections describe two options for launching the
+The following two sections describe two ways for launching the
 **shinybrms** app, either *with* or *without* the installation of
-**shinybrms**. The first option is recommended as it offers all
-advantages that R packages have (e.g., offline usage). For both options,
-you need to perform the following steps first:
+**shinybrms**. The former is recommended as it offers all advantages
+that R packages have (e.g., offline usage). For both ways, you need to
+perform the following steps first:
 
 1.  Install R (see the [R homepage](https://www.R-project.org/)).
 2.  Install the R package [**rstan**](https://mc-stan.org/rstan/) (see
@@ -32,6 +32,15 @@ you need to perform the following steps first:
     for instructions; make sure to use
     `install.packages("rstan", [...], dependencies = TRUE)` with `[...]`
     as advised on the “RStan Getting Started” GitHub page).
+3.  If you want to be able to use the
+    [**cmdstanr**](https://mc-stan.org/cmdstanr/) backend (or if you
+    need it because the **rstan** backend doesn’t work as expected),
+    then you need to install **cmdstanr** as well as CmdStan by
+    following the instructions on the [**cmdstanr**
+    homepage](https://mc-stan.org/cmdstanr/). In general, the **rstan**
+    backend should be sufficient, though. In the context of
+    **shinybrms**, the major advantage of the **cmdstanr** backend is a
+    (generally) faster Stan run.
 
 ### *With* installation of **shinybrms**
 
@@ -59,7 +68,7 @@ you need to perform the following steps first:
         -   To install **shinybrms** from GitHub:
 
             ``` r
-            if(!requireNamespace("devtools", quietly = TRUE)){
+            if (!requireNamespace("devtools", quietly = TRUE)) {
               install.packages("devtools")
             }
             devtools::install_github("fweber144/shinybrms", dependencies = TRUE)
@@ -77,7 +86,7 @@ you need to perform the following steps first:
         -   To install **shinybrms** from GitHub:
 
             ``` r
-            if(!requireNamespace("devtools", quietly = TRUE)){
+            if (!requireNamespace("devtools", quietly = TRUE)) {
               install.packages("devtools")
             }
             devtools::install_github("fweber144/shinybrms")

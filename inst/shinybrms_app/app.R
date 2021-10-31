@@ -3152,7 +3152,7 @@ server <- function(input, output, session) {
     if (!requireNamespace("ggplot2", quietly = TRUE)) {
       showNotification(
         HTML(paste(
-          "Please install package", code("ggplot2"), "for full plotting",
+          "Please install package", strong("ggplot2"), "for full plotting",
           "functionality."
         )),
         duration = NA,

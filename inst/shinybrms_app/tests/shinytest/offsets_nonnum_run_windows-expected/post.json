@@ -101,6 +101,14 @@
         "validation"
       ]
     },
+    "fit_version": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + offset(Trt) <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "prior_default_view": {
       "message": "",

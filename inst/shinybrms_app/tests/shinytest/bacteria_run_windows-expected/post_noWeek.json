@@ -17,8 +17,9 @@
     "advOpts_seed": 6789,
     "advOpts_thin": 1,
     "advOpts_warmup": null,
+    "brmsfit_upload": null,
     "ceff_download_sel": "pdf",
-    "cust_act": 5,
+    "cust_act": 2,
     "cust_allow_link": 0,
     "cust_help_link": 0,
     "cust_name": "",
@@ -42,7 +43,7 @@
     "outc_sel": "y",
     "outcome_link1": 0,
     "outcome_link2": 0,
-    "par_add": 7,
+    "par_add": 3,
     "par_sel": "",
     "posterior_link1": 0,
     "posterior_link_upld": 0,
@@ -54,7 +55,7 @@
     "pred_mainPP_sel": "ID",
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",
-    "prior_add": 3,
+    "prior_add": 2,
     "prior_class_sel": "b",
     "prior_coef_sel": "",
     "prior_group_sel": "",
@@ -65,7 +66,7 @@
     "prior_text": "student_t(3, 0, 4)",
     "quote": "\"",
     "references_link1": 0,
-    "run_stan": 3,
+    "run_stan": 2,
     "seed_PPD": null,
     "sep": ",",
     "show_advOpts": true,
@@ -158,7 +159,7 @@
         "validation"
       ]
     },
-    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.2990    0.4458   0.3145   2.2441 1.0019      102      158\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   2.4190    0.5384   1.5221   3.6414 1.0194      359      248\ntrtdrug    -1.2232    0.6424  -2.5200  -0.1743 0.9964      464      329\ntrtdrugP   -0.7550    0.6839  -2.1636   0.5311 1.0019      511      341\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.2990    0.4458   0.3145   2.2441 1.0019      102      158\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   2.4190    0.5384   1.5221   3.6414 1.0194      359      248\ntrtdrug    -1.2232    0.6424  -2.5200  -0.1743 0.9964      464      329\ntrtdrugP   -0.7550    0.6839  -2.1636   0.5311 1.0019      511      341\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
   },
   "export": {
 

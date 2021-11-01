@@ -79,7 +79,7 @@ stopifnot(identical(
 
 # Upload no-week model ----------------------------------------------------
 
-if (getOption("sbtst.run_all_models", TRUE)) {
+if (getOption("sbtst.run_upd_extend", TRUE)) {
   app$uploadFile(brmsfit_upload = file.path("bacteria_noWeek.rds"))
   app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
   app$setInputs(posterior_navlist_ID = "Default summary")
@@ -99,3 +99,28 @@ if (getOption("sbtst.run_all_models", TRUE)) {
                             export = TRUE),
                filename = "post_noWeek.json")
 }
+
+# Upload empty model ------------------------------------------------------
+
+app$uploadFile(brmsfit_upload = file.path("bacteria_empty.rds"))
+app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
+app$setInputs(posterior_navlist_ID = "Default summary")
+app$setInputs(posterior_navlist_ID = "Custom summary",
+              par_sel = "b_Intercept",
+              par_add = "click")
+app$setInputs(cust_text = "`b_Intercept`^2",
+              cust_name = "square intercept",
+              cust_act = "click")
+app$setInputs(posterior_navlist_ID = "Conditional effects")
+app$setInputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
+bfit_upld <- app$getAllValues(input = "brmsfit_upload",
+                              output = FALSE,
+                              export = FALSE)$input$brmsfit_upload
+bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
+stopifnot(identical(
+  bfit_upld, data.frame(name = "bacteria_empty.rds", type = "", datapath = "0.rds")
+))
+app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),
+                          output = setdiff(app$listWidgets()$output, "fit_date"),
+                          export = TRUE),
+             filename = "post_empty.json")

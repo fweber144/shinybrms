@@ -58,7 +58,7 @@
     "pred_mainPP_sel": "ID",
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",
-    "prior_add": 2,
+    "prior_add": 3,
     "prior_class_sel": "b",
     "prior_coef_sel": "",
     "prior_group_sel": "",
@@ -69,7 +69,7 @@
     "prior_text": "student_t(3, 0, 4)",
     "quote": "\"",
     "references_link1": 0,
-    "run_stan": 2,
+    "run_stan": 3,
     "seed_PPD": null,
     "sep": ",",
     "show_advOpts": true,
@@ -155,7 +155,7 @@
         "validation"
       ]
     },
-    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ week + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.4150    0.4055   0.6348   2.3659 1.0130      158      279\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   3.2815    0.7206   2.1773   4.7426 1.0057      312      274\nweek       -0.1535    0.0557  -0.2471  -0.0532 1.0044      796      426\ntrtdrug    -1.3349    0.7518  -3.0125   0.1448 1.0062      287      239\ntrtdrugP   -0.8059    0.6405  -2.3320   0.3929 1.0033      428      373\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ 1 + week + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 250; warmup = 0; thin = 1;\n         total post-warmup draws = 500\n\nPriors: \nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\nsd ~ student_t(3, 0, 2.5)\n\nGroup-Level Effects: \n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.4150    0.4055   0.6348   2.3659 1.0130      158      279\n\nPopulation-Level Effects: \n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   3.2815    0.7206   2.1773   4.7426 1.0057      312      274\nweek       -0.1535    0.0557  -0.2471  -0.0532 1.0044      796      426\ntrtdrug    -1.3349    0.7518  -3.0125   0.1448 1.0062      287      239\ntrtdrugP   -0.8059    0.6405  -2.3320   0.3929 1.0033      428      373\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
   },
   "export": {
 

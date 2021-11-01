@@ -39,7 +39,10 @@ app$snapshot(filename = "prep_full.json")
 ## Posterior --------------------------------------------------------------
 
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", paste0(tst_prefix, "_full.rds")))
+app$snapshotDownload(
+  "stanout_download",
+  filename = file.path("..", paste0(tst_prefix, "_full.rds"))
+)
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics",
               show_general_MCMC_tab = TRUE)
 app$setInputs(posterior_navlist_ID = "Default summary")
@@ -84,7 +87,10 @@ if (getOption("sbtst.run_upd_extend", TRUE)) {
   ## Posterior --------------------------------------------------------------
   
   app$setInputs(run_stan = "click", timeout_ = 1800000)
-  app$snapshotDownload("stanout_download", filename = file.path("..", paste0(tst_prefix, "_noWeek.rds")))
+  app$snapshotDownload(
+    "stanout_download",
+    filename = file.path("..", paste0(tst_prefix, "_noWeek.rds"))
+  )
   app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
   app$setInputs(posterior_navlist_ID = "Default summary")
   app$setInputs(posterior_navlist_ID = "Custom summary")
@@ -131,7 +137,10 @@ app$snapshot(items = list(input = TRUE,
 ## Posterior --------------------------------------------------------------
 
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", paste0(tst_prefix, "_noInt.rds")))
+app$snapshotDownload(
+  "stanout_download",
+  filename = file.path("..", paste0(tst_prefix, "_noInt.rds"))
+)
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
 app$setInputs(posterior_navlist_ID = "Default summary")
 app$setInputs(posterior_navlist_ID = "Custom summary",
@@ -204,7 +213,10 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 ## Posterior --------------------------------------------------------------
 
 app$setInputs(run_stan = "click", timeout_ = 1800000)
-app$snapshotDownload("stanout_download", filename = file.path("..", paste0(tst_prefix, "_empty.rds")))
+app$snapshotDownload(
+  "stanout_download",
+  filename = file.path("..", paste0(tst_prefix, "_empty.rds"))
+)
 app$setInputs(posterior_navlist_ID = "MCMC diagnostics")
 app$setInputs(posterior_navlist_ID = "Default summary")
 app$setInputs(posterior_navlist_ID = "Custom summary",

@@ -2522,8 +2522,8 @@ server <- function(input, output, session) {
         sink(tmp_stdout_txt)
         sink_active <- TRUE
         cat("Refresh this page to see the sampling progress.",
-            "Note that the C++ code needs to be compiled first, which may take",
-            "a while.\n")
+            "Note that the C++ code for your model might need to be compiled",
+            "first, which may take a while.\n")
         tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
         rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
         browseURL(paste0("file://", tmp_stdout_html))

@@ -2393,13 +2393,12 @@ server <- function(input, output, session) {
         req(FALSE)
       }
       if (save_warmup_tmp) {
-        # Because of **brms** issue #1257:
         showNotification(
-          HTML(paste(
-            "Saving the warmup draws is currently not possible when the",
-            strong("cmdstanr"), "backend is used. The reason is that otherwise,",
-            "the app would crash when launching the", strong("shinystan"), "app.",
-            "Now deselecting this option internally."
+          HTML(paste0(
+            "Because of ", strong("brms", .noWS = "outside"), "'s issue #1257 ",
+            "(see GitHub), saving the warmup draws is currently not possible ",
+            "if the ", strong("cmdstanr", .noWS = "outside"), " backend is ",
+            "used. Now deselecting this option internally."
           )),
           duration = NA,
           type = "warning"

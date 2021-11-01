@@ -1076,7 +1076,10 @@ ui <- navbarPage(
                    tags$li("Column", code("u-95% CI"), "contains the upper boundary of the 95% central posterior interval.")
                  )),
         br(),
-        verbatimTextOutput("smmry_view", placeholder = TRUE)
+        verbatimTextOutput("smmry_view", placeholder = TRUE),
+        downloadButton("smmry_download", "Download default summary"),
+        br(),
+        br()
       ),
       ### Custom summary --------------------------------------------------------
       tabPanel(
@@ -2867,9 +2870,7 @@ server <- function(input, output, session) {
   #### Download -------------------------------------------------------------
   
   output$diagn_download <- downloadHandler(
-    filename = function() {
-      return("shinybrms_MCMC_diagnostics.rds")
-    },
+    filename = "shinybrms_MCMC_diagnostics.rds",
     content = function(file) {
       invisible(req(C_stanres()))
       saveRDS(C_stanres()$diagn, file = file)
@@ -2878,11 +2879,26 @@ server <- function(input, output, session) {
   
   ### Default summary -------------------------------------------------------
   
-  output$smmry_view <- renderPrint({
+  C_smmry <- reactive({
     invisible(req(C_stanres()))
-    print(C_stanres()$bfit, digits = 4,
-          robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
+    summary(C_stanres()$bfit, robust = TRUE, priors = TRUE, prob = 0.95, mc_se = FALSE)
+  })
+  
+  output$smmry_view <- renderPrint({
+    print(C_smmry(), digits = 4)
   }, width = max(getOption("width"), 100))
+  
+  #### Download -------------------------------------------------------------
+  
+  output$smmry_download <- downloadHandler(
+    filename = "shinybrms_default_summary.txt",
+    content = function(file) {
+      invisible(req(C_smmry()))
+      sink(file = file)
+      print(C_smmry(), digits = 4)
+      sink()
+    }
+  )
   
   ### Custom summary --------------------------------------------------------
   

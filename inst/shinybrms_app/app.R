@@ -925,7 +925,6 @@ ui <- navbarPage(
           verbatimTextOutput("diagn_all_out", placeholder = TRUE),
           selectInput("stanout_download_sel", "Choose output file to download:",
                       choices = c("\"brmsfit\" object (RDS file)" = "shinybrms_brmsfit.rds",
-                                  "List of MCMC diagnostics (RDS file)" = "shinybrms_MCMC_diagnostics.rds",
                                   "Matrix of posterior draws (CSV file)" = "shinybrms_post_draws_mat.csv",
                                   "Matrix of posterior draws (RDS file)" = "shinybrms_post_draws_mat.rds",
                                   "Array of posterior draws (RDS file)" = "shinybrms_post_draws_arr.rds"),
@@ -1059,7 +1058,10 @@ ui <- navbarPage(
             condition = "input.show_general_MCMC_tab",
             verbatimTextOutput("general_MCMC_out", placeholder = TRUE)
           )
-        )
+        ),
+        downloadButton("diagn_download", "Download list of MCMC diagnostics (RDS file)"),
+        br(),
+        br()
       ),
       ### Default summary -------------------------------------------------------
       tabPanel(
@@ -2769,7 +2771,6 @@ server <- function(input, output, session) {
         invisible(req(C_stanres()))
         saveRDS(switch(input$stanout_download_sel,
                        "shinybrms_brmsfit.rds" = C_stanres()$bfit,
-                       "shinybrms_MCMC_diagnostics.rds" = C_stanres()$diagn,
                        "shinybrms_post_draws_mat.rds" = C_draws_mat(),
                        "shinybrms_post_draws_arr.rds" = C_stanres()$draws_arr),
                 file = file)
@@ -2863,6 +2864,18 @@ server <- function(input, output, session) {
                "ESS_tail" = C_stanres()$diagn$ESS_tail,
                check.names = FALSE)
   })
+  
+  #### Download -------------------------------------------------------------
+  
+  output$diagn_download <- downloadHandler(
+    filename = function() {
+      return("shinybrms_MCMC_diagnostics.rds")
+    },
+    content = function(file) {
+      invisible(req(C_stanres()))
+      saveRDS(C_stanres()$diagn, file = file)
+    }
+  )
   
   ### Default summary -------------------------------------------------------
   

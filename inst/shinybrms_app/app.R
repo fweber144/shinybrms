@@ -918,7 +918,7 @@ ui <- navbarPage(
           strong("Date and time when the Stan run was finished:"),
           verbatimTextOutput("fit_date", placeholder = TRUE),
           strong("Important software versions used for this Stan run:"),
-          verbatimTextOutput("fit_version", placeholder = TRUE),
+          tableOutput("fit_version"),
           strong("Check if all MCMC diagnostics are OK (see the tab",
                  actionLink("mcmc_link1", "MCMC diagnostics"),
                  "for details):"),
@@ -2735,9 +2735,9 @@ server <- function(input, output, session) {
   
   ##### Versions used for this Stan run -------------------------------------
   
-  output$fit_version <- renderPrint({
+  output$fit_version <- renderTable({
     invisible(req(C_stanres()))
-    C_stanres()$bfit$version
+    as.data.frame(lapply(C_stanres()$bfit$version, as.character))
   })
   
   ##### Overall check for all MCMC diagnostics ------------------------------

@@ -928,6 +928,7 @@ ui <- navbarPage(
                                   "Matrix of posterior draws (CSV file)" = "shinybrms_post_draws_mat.csv",
                                   "Matrix of posterior draws (RDS file)" = "shinybrms_post_draws_mat.rds",
                                   "Array of posterior draws (RDS file)" = "shinybrms_post_draws_arr.rds"),
+                      width = "25%",
                       selectize = TRUE),
           helpText(
             "The most comprehensive output object is the", code("brmsfit"),
@@ -2601,6 +2602,7 @@ server <- function(input, output, session) {
     fileInput("brmsfit_upload", "Upload \"brmsfit\" object (RDS file):",
               multiple = FALSE,
               accept = c(".rds"),
+              width = "25%",
               buttonLabel = "Browse ...")
   })
   

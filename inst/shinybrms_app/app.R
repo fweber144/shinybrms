@@ -2468,7 +2468,7 @@ server <- function(input, output, session) {
     if (use_upd &&
         identical(C_bfit()$backend, "rstan") &&
         identical(args_brm$backend, "cmdstanr")) {
-      # Because of **brms** issue #1259:
+      # Handle **brms** issue #1259 explicitly:
       use_upd <- FALSE
     }
     
@@ -2542,6 +2542,9 @@ server <- function(input, output, session) {
     
     # Run Stan (more precisely: brms::brm() (or brms:::update.brmsfit(), if possible)):
     if (use_upd) {
+      # Note: The try() call was added for the case where a `brmsfit` is updated
+      # by *extending* the predictors. However, it also handles **brms** issue #1259
+      # implicitly.
       warn_capt <- capture.output({
         bfit_tmp <- try(do.call(update, args = c(
           list(object = C_bfit(),

@@ -422,7 +422,7 @@ ui <- navbarPage(
                       em("group-level"), "or", em("random"), "effects."),
             )
           ),
-          h4("Pooled main effects"),
+          h4("Pooled main effects"), # Abbreviated in the code by "CP" (for "completely pooled").
           helpText(
             "Start typing or click into the field below to choose variables for which",
             "pooled main effects shall be added."

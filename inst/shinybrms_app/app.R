@@ -427,7 +427,7 @@ ui <- navbarPage(
             "Start typing or click into the field below to choose variables for which",
             "pooled main effects shall be added."
           ),
-          selectInput("pred_mainNP_sel", NULL,
+          selectInput("pred_mainCP_sel", NULL,
                       choices = c("Choose variables for pooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
@@ -1738,7 +1738,7 @@ server <- function(input, output, session) {
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       outc_choices <- c(outc_choices,
                         setdiff(names(da()),
-                                c(input$pred_mainNP_sel,
+                                c(input$pred_mainCP_sel,
                                   input$pred_mainPP_sel,
                                   input$offs_sel)))
       outc_slctd <- isolate(input$outc_sel)
@@ -1786,20 +1786,20 @@ server <- function(input, output, session) {
   #### Main effects ---------------------------------------------------------
   
   observe({
-    pred_mainNP_choices <- c("Choose variables for pooled main effects ..." = "")
+    pred_mainCP_choices <- c("Choose variables for pooled main effects ..." = "")
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
-      pred_mainNP_choices <- c(pred_mainNP_choices,
+      pred_mainCP_choices <- c(pred_mainCP_choices,
                                setdiff(names(da()),
                                        c(input$outc_sel,
                                          input$pred_mainPP_sel,
                                          input$offs_sel)))
-      pred_mainNP_slctd <- isolate(input$pred_mainNP_sel)
+      pred_mainCP_slctd <- isolate(input$pred_mainCP_sel)
     } else {
-      pred_mainNP_slctd <- NULL
+      pred_mainCP_slctd <- NULL
     }
-    updateSelectInput(session, "pred_mainNP_sel",
-                      choices = pred_mainNP_choices,
-                      selected = pred_mainNP_slctd)
+    updateSelectInput(session, "pred_mainCP_sel",
+                      choices = pred_mainCP_choices,
+                      selected = pred_mainCP_slctd)
   })
   
   observe({
@@ -1807,7 +1807,7 @@ server <- function(input, output, session) {
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       PP_sel_choices <- setdiff(names(da()),
                                 c(input$outc_sel,
-                                  input$pred_mainNP_sel,
+                                  input$pred_mainCP_sel,
                                   input$offs_sel))
       if (length(PP_sel_choices) > 0L) {
         # Only allow factor, character, and logical variables:
@@ -1832,7 +1832,7 @@ server <- function(input, output, session) {
     pred_intBuild_choices <- c("Choose variables for an interaction term ..." = "")
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       pred_intBuild_choices <- c(pred_intBuild_choices,
-                                 input$pred_mainNP_sel,
+                                 input$pred_mainCP_sel,
                                  input$pred_mainPP_sel)
       pred_int_slctd <- isolate(input$pred_int_build)
     } else {
@@ -1856,7 +1856,7 @@ server <- function(input, output, session) {
                                      paste(input$pred_int_build, collapse = "<-->")))
       updateSelectInput(session, "pred_int_build",
                         choices = c("Choose variables for an interaction term ..." = "",
-                                    input$pred_mainNP_sel,
+                                    input$pred_mainCP_sel,
                                     input$pred_mainPP_sel))
     }
   })
@@ -1864,12 +1864,12 @@ server <- function(input, output, session) {
   # Ensure that all variables involved in the interaction terms have a main effect (either
   # pooled or partially pooled):
   observeEvent({
-    input$pred_mainNP_sel
+    input$pred_mainCP_sel
     input$pred_mainPP_sel
   }, {
     pred_intSel_slctd <- pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
     pred_int_rv$choices <- lapply(pred_int_rv$choices, function(x) {
-      intersect(x, c(input$pred_mainNP_sel,
+      intersect(x, c(input$pred_mainCP_sel,
                      input$pred_mainPP_sel))
     })
     pred_int_rv$choices <- pred_int_rv$choices[sapply(pred_int_rv$choices, length) > 1L]
@@ -1877,7 +1877,7 @@ server <- function(input, output, session) {
       pred_int_rv$choices_chr <- sapply(pred_int_rv$choices, paste, collapse = "<-->")
       pred_intSel_choices <- pred_int_rv$choices_chr
       pred_intSel_slctd <- lapply(pred_intSel_slctd, function(x) {
-        intersect(x, c(input$pred_mainNP_sel,
+        intersect(x, c(input$pred_mainCP_sel,
                        input$pred_mainPP_sel))
       })
       pred_intSel_slctd <- pred_intSel_slctd[sapply(pred_intSel_slctd, length) > 1L]
@@ -1905,7 +1905,7 @@ server <- function(input, output, session) {
       offs_choices <- c(offs_choices,
                         setdiff(names(da()),
                                 c(input$outc_sel,
-                                  input$pred_mainNP_sel,
+                                  input$pred_mainCP_sel,
                                   input$pred_mainPP_sel)))
       offs_slctd <- isolate(input$offs_sel)
     } else {
@@ -1919,17 +1919,17 @@ server <- function(input, output, session) {
   #### Combination of all chosen predictor terms ----------------------------
   
   C_pred <- reactive({
-    if (is.null(input$pred_mainNP_sel) && is.null(input$pred_mainPP_sel)) {
-      mainNP_tmp <- "1"
+    if (is.null(input$pred_mainCP_sel) && is.null(input$pred_mainPP_sel)) {
+      mainCP_tmp <- "1"
       if (length(input$offs_sel) > 0L) {
-        mainNP_tmp <- c(mainNP_tmp, paste0("offset(", input$offs_sel, ")"))
+        mainCP_tmp <- c(mainCP_tmp, paste0("offset(", input$offs_sel, ")"))
       }
       return(data.frame("from_mainPP" = factor(NA_character_, levels = NA_character_, exclude = NULL),
-                        "from_mainNP" = paste(mainNP_tmp, collapse = " + ")))
+                        "from_mainCP" = paste(mainCP_tmp, collapse = " + ")))
     }
     
     pred_lst <- c(
-      as.list(input$pred_mainNP_sel),
+      as.list(input$pred_mainCP_sel),
       as.list(input$pred_mainPP_sel),
       pred_int_rv$choices[pred_int_rv$choices_chr %in% input$pred_int_sel]
     )
@@ -1954,8 +1954,8 @@ server <- function(input, output, session) {
           xPP <- intersect(x, input$pred_mainPP_sel)
           xPP_lst_expanded <- unlist(lapply(c(0L, seq_along(xPP)), combn, x = xPP, simplify = FALSE),
                                      recursive = FALSE)
-          xNP <- intersect(x, input$pred_mainNP_sel)
-          lapply(xPP_lst_expanded, "c", xNP)
+          xCP <- intersect(x, input$pred_mainCP_sel)
+          lapply(xPP_lst_expanded, "c", xCP)
         }))
         pred_lst <- c(pred_lst[!pred_needsExpand],
                       pred_lst_expanded)
@@ -1976,24 +1976,24 @@ server <- function(input, output, session) {
       })
       pred_vec_chr <- factor(pred_vec_chr, levels = unique(pred_vec_chr), exclude = NULL)
       pred_lst <- tapply(pred_lst, pred_vec_chr, function(x_lst) {
-        xNP_lst <- lapply(x_lst, intersect, y = input$pred_mainNP_sel)
-        x_isSubNP <- sapply(seq_along(xNP_lst), function(idx) {
-          any(sapply(xNP_lst[-idx], function(xNP) {
-            all(xNP_lst[[idx]] %in% xNP)
+        xCP_lst <- lapply(x_lst, intersect, y = input$pred_mainCP_sel)
+        x_isSubCP <- sapply(seq_along(xCP_lst), function(idx) {
+          any(sapply(xCP_lst[-idx], function(xCP) {
+            all(xCP_lst[[idx]] %in% xCP)
           }))
         })
-        return(x_lst[!x_isSubNP])
+        return(x_lst[!x_isSubCP])
       }, simplify = FALSE)
       pred_lst <- unlist(pred_lst, recursive = FALSE, use.names = FALSE)
     }
     pred_lst <- c(pred_lst, as.list(input$offs_sel))
     
     pred_DF <- do.call("rbind", lapply(pred_lst, function(x) {
-      xNP <- intersect(x, input$pred_mainNP_sel)
-      if (length(xNP) > 0L) {
-        xNP <- paste(xNP, collapse = "*")
+      xCP <- intersect(x, input$pred_mainCP_sel)
+      if (length(xCP) > 0L) {
+        xCP <- paste(xCP, collapse = "*")
       } else {
-        xNP <- NA_character_
+        xCP <- NA_character_
       }
       xPP <- intersect(x, input$pred_mainPP_sel)
       if (length(xPP) > 0L) {
@@ -2003,18 +2003,18 @@ server <- function(input, output, session) {
       }
       xOffs <- intersect(x, input$offs_sel)
       if (identical(length(xOffs), 1L)) {
-        if (!isTRUE(is.na(xNP))) {
-          stop("Unexpected value of `xNP`. Please report this.")
+        if (!isTRUE(is.na(xCP))) {
+          stop("Unexpected value of `xCP`. Please report this.")
         }
-        xNP <- paste0("offset(", xOffs, ")")
+        xCP <- paste0("offset(", xOffs, ")")
       } else if (!identical(length(xOffs), 0L)) {
         stop("Unexpected length of `xOffs`. Please report this.")
       }
-      data.frame("from_mainNP" = xNP,
+      data.frame("from_mainCP" = xCP,
                  "from_mainPP" = xPP)
     }))
     pred_DF$from_mainPP <- factor(pred_DF$from_mainPP, levels = unique(pred_DF$from_mainPP), exclude = NULL)
-    pred_DF <- aggregate(from_mainNP ~ from_mainPP, pred_DF, function(x) {
+    pred_DF <- aggregate(from_mainCP ~ from_mainPP, pred_DF, function(x) {
       paste(c("1", x[!is.na(x)]), collapse = " + ")
     }, na.action = na.pass)
     return(pred_DF)
@@ -2025,7 +2025,7 @@ server <- function(input, output, session) {
   output$pred_view <- renderTable({
     C_pred()
   }, sanitize.colnames.function = function(x) {
-    x <- sub("^from_mainNP$", "Effect(s)", x)
+    x <- sub("^from_mainCP$", "Effect(s)", x)
     x <- sub("^from_mainPP$", "Group", x)
     return(x)
   })
@@ -2037,9 +2037,9 @@ server <- function(input, output, session) {
     
     formula_splitted <- apply(C_pred(), 1, function(x) {
       if (is.na(x["from_mainPP"])) {
-        return(x["from_mainNP"])
+        return(x["from_mainCP"])
       } else {
-        return(paste0("(", x["from_mainNP"], " | ", x["from_mainPP"], ")"))
+        return(paste0("(", x["from_mainCP"], " | ", x["from_mainPP"], ")"))
       }
     })
     return(paste(
@@ -2070,7 +2070,7 @@ server <- function(input, output, session) {
        inherits(try(C_family(), silent = TRUE), "try-error") ||
        inherits(try(req(all(c(
          setdiff(input$outc_sel, ""),
-         input$pred_mainNP_sel,
+         input$pred_mainCP_sel,
          input$pred_mainPP_sel,
          input$offs_sel
        ) %in% names(da()))), silent = TRUE), "try-error")){
@@ -3136,20 +3136,20 @@ server <- function(input, output, session) {
       
       #### Pooled effects -------------------------------------------------------
       
-      termlabs_NP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
-      termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)
-      termlabs_NP_IA <- setdiff(termlabs_NP, termlabs_NP_main)
-      termlabs_NP_IA2 <- grep(":.*:", termlabs_NP_IA, value = TRUE, invert = TRUE)
+      termlabs_CP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
+      termlabs_CP_main <- grep(":", termlabs_CP, value = TRUE, invert = TRUE)
+      termlabs_CP_IA <- setdiff(termlabs_CP, termlabs_CP_main)
+      termlabs_CP_IA2 <- grep(":.*:", termlabs_CP_IA, value = TRUE, invert = TRUE)
       ### NOTE: unlist() is only needed for the special case
-      ### `identical(length(termlabs_NP_IA2), 0L)`:
-      termlabs_NP_IA2_rev <- unlist(sapply(strsplit(termlabs_NP_IA2, split = ":"), function(termlabs_NP_IA2_i) {
-        return(paste(rev(termlabs_NP_IA2_i), collapse = ":"))
+      ### `identical(length(termlabs_CP_IA2), 0L)`:
+      termlabs_CP_IA2_rev <- unlist(sapply(strsplit(termlabs_CP_IA2, split = ":"), function(termlabs_CP_IA2_i) {
+        return(paste(rev(termlabs_CP_IA2_i), collapse = ":"))
       }))
       ### 
       
       #### Partially pooled effects ---------------------------------------------
       
-      termlabs_PP <- setdiff(termlabs, termlabs_NP)
+      termlabs_PP <- setdiff(termlabs, termlabs_CP)
       termlabs_PP_split <- strsplit(termlabs_PP, "[[:blank:]]*\\|[[:blank:]]*")
       stopifnot(all(lengths(termlabs_PP_split) == 2L))
       termlabs_PP_grp_tmp <- sapply(termlabs_PP_split, "[[", 2)
@@ -3179,7 +3179,7 @@ server <- function(input, output, session) {
       #### Update choices for input$term_sel ------------------------------------
       
       term_choices <- c(term_choices,
-                        termlabs_NP_main, termlabs_NP_IA2, termlabs_NP_IA2_rev,
+                        termlabs_CP_main, termlabs_CP_IA2, termlabs_CP_IA2_rev,
                         termlabs_PP_grp_tmp, termlabs_PP_IA2, termlabs_PP_IA2_rev)
     } else {
       termlabs_PP_grp(NULL)
@@ -3200,10 +3200,10 @@ server <- function(input, output, session) {
       term_sel_split_PP <- intersect(term_sel_split, termlabs_PP_grp())
       stopifnot(length(term_sel_split_PP) <= 1L)
       if (identical(length(term_sel_split_PP), 1L)) {
-        term_sel_split_NP <- setdiff(term_sel_split, term_sel_split_PP)
-        stopifnot(identical(length(term_sel_split_NP), 1L))
+        term_sel_split_CP <- setdiff(term_sel_split, term_sel_split_PP)
+        stopifnot(identical(length(term_sel_split_CP), 1L))
         re_formula_ceff <- as.formula(paste(
-          "~ (1 +", term_sel_split_NP, "|", term_sel_split_PP, ")"
+          "~ (1 +", term_sel_split_CP, "|", term_sel_split_PP, ")"
         ))
       }
     }

@@ -114,7 +114,7 @@ On page "Posterior", the first tab is called "Run Stan". At the top of this tab,
 *Fig. 11: Page "Posterior", tab "Run Stan" (top).*
 
 \
-Here, we focus on panel "Advanced options" where we may set a seed for reproducibility:
+Here, we focus on panel "Advanced options" where we set a seed for reproducibility:
 
 \
 [![](screenshots/Posterior_Run_AdvOpts.png)](screenshots/Posterior_Run_AdvOpts.png)
@@ -128,7 +128,7 @@ Next, we head over to the fundamental part of our analysis, the inference of the
 *Fig. 13: Page "Posterior", tab "Run Stan", panel "Run Stan".*
 
 \
-Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
+Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for advanced option "Open progress", a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:
 
 \
 [![](screenshots/Posterior_Sampling_1.png)](screenshots/Posterior_Sampling_1.png)

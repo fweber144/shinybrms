@@ -55,14 +55,14 @@ On page "Likelihood", the first tab is called "Outcome". Here, we define variabl
 ### Predictors
 
 \
-After selecting tab "Predictors", we choose the variables `week` and `trt` to have nonpooled main effects and variable `ID` to have partially pooled main effects:
+After selecting tab "Predictors", we set up (pooled) main effects for variables `week` and `trt` and partially pooled main effects (i.e., partially pooled intercepts) for variable `ID`:
 
 \
 [![](screenshots/Likelihood_Predictors.png)](screenshots/Likelihood_Predictors.png)
 *Fig. 5: Page "Likelihood", tab "Predictors" (top).*
 
 \
-After scrolling down, we set up a (nonpooled) interaction term for `week` and `trt`:
+After scrolling down, we set up a (pooled) interaction term for `week` and `trt`:
 
 \
 [![](screenshots/Likelihood_Predictors_Int.png)](screenshots/Likelihood_Predictors_Int.png)

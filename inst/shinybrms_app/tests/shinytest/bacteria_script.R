@@ -201,8 +201,7 @@ app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(likelihood_navlist_ID = "Predictors",
               pred_mainNP_sel = character(0))
 app$setInputs(likelihood_navlist_ID = "Formula preview")
-app$setInputs(navbar_ID = "Prior",
-              prior_add = "click")
+app$setInputs(navbar_ID = "Prior")
 app$setInputs(navbar_ID = "Posterior", wait_ = FALSE, values_ = FALSE)
 app$setInputs(posterior_navlist_ID = "Run Stan") # , wait_ = FALSE, values_ = FALSE
 app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_upload"),

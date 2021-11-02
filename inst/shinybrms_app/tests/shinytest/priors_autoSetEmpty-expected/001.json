@@ -50,7 +50,7 @@
     "pred_int_add": 1,
     "pred_int_build": null,
     "pred_int_sel": "week<-->ID",
-    "pred_mainNP_sel": "week",
+    "pred_mainCP_sel": "week",
     "pred_mainPP_sel": "ID",
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",

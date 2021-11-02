@@ -56,7 +56,7 @@
       "reg<-->nutrient",
       "nutrient<-->amd"
     ],
-    "pred_mainNP_sel": [
+    "pred_mainCP_sel": [
       "reg",
       "rack",
       "nutrient",

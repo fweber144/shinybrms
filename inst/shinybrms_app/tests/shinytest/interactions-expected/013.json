@@ -57,7 +57,7 @@
       "rack<-->popu<-->gen",
       "status<-->popu"
     ],
-    "pred_mainNP_sel": [
+    "pred_mainCP_sel": [
       "rack",
       "nutrient",
       "amd",

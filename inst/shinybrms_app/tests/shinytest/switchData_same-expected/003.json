@@ -49,7 +49,7 @@
     "pred_int_add": 0,
     "pred_int_build": null,
     "pred_int_sel": null,
-    "pred_mainNP_sel": "x1",
+    "pred_mainCP_sel": "x1",
     "pred_mainPP_sel": null,
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",

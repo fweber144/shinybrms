@@ -56,7 +56,7 @@
       "Trt<-->zAge",
       "Trt<-->visit"
     ],
-    "pred_mainNP_sel": [
+    "pred_mainCP_sel": [
       "Trt",
       "zAge"
     ],

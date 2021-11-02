@@ -50,7 +50,7 @@
     "pred_int_add": 4,
     "pred_int_build": null,
     "pred_int_sel": "reg<-->nutrient",
-    "pred_mainNP_sel": [
+    "pred_mainCP_sel": [
       "reg",
       "rack",
       "nutrient",

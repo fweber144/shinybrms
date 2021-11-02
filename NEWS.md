@@ -2,10 +2,13 @@
 
 ## Major changes
 
+* Allow the **cmdstanr** backend for **brms**. The global option `brms.backend`
+can be used to control the default backend selected in the "Advanced options" in
+the **shinybrms** app (see `?launch_shinybrms` for details).
 * If a previous `brmsfit` exists (i.e., it is currently presented on page
-"Posterior"), then a click on the "Run Stan" button causes this previous
-`brmsfit` to get updated using `brms:::update.brmsfit()` (if possible), saving
-the compilation time. The fact that `brms:::update.brmsfit()` currently does not
+"Posterior"), then---if possible---a click on the "Run Stan" button causes this
+previous `brmsfit` to get updated using `brms:::update.brmsfit()`, saving the
+compilation time. The fact that `brms:::update.brmsfit()` currently does not
 recompute the default priors if the dataset has changed, combined with the
 flexibility that *any* `brmsfit` may be uploaded in **shinybrms** (even ones
 which were not fitted through **shinybrms**), an uploaded `brmsfit` may not be
@@ -22,15 +25,25 @@ least 2.16.0.
 
 ## Minor changes
 
+* UI: The width of some UI elements in panel "Run Stan" has been adjusted.
+* The "Default summary" from page "Posterior" may now be downloaded (as a text
+file).
+* The download of the MCMC diagnostics was moved from tab "Run Stan" to tab
+"MCMC diagnostics" (both on page "Posterior").
+* Page "Posterior" (tab "Run Stan", panel "Run Stan") now also shows important
+software versions used for the Stan run.
 * Improved documentation of global options used by **shinybrms**.
 * Theme: Some colors have been slightly changed to match the overall theme
 better.
 * UI: In case of a failed file upload, a modal dialog is now shown (instead of a
 notification in the lower right corner).
-* UI: Minor formatting and wording improvements in help texts.
+* UI: Minor formatting and wording improvements in help texts and other UI
+elements.
 
 ## Bug fixes
 
+* Fix an error for Stan runs with advanced option "Open progress" set to
+`FALSE`.
 * Fix a typo in the "Get started" vignette shown on the **pkgdown** website.
 (The scale parameter for the Student-*t* prior is 4.)
 * Clear the input field for the name of a custom summary expression as soon as
@@ -239,7 +252,7 @@ models in **rstanarm**.
 labels, input fields, help texts, and notifications.
 * Removed argument `launch.browser` from `shinybrms::launch_shinybrms()` so that
 the default from `shiny::runApp()` is used.
-* Changed the way how RStudio’s default setting for the global option `browser`
+* Changed the way how RStudio's default setting for the global option `browser`
 is avoided. Most importantly, option `shinybrms.RStudio_browser` was removed and
 replaced by the two new options `shinybrms.prog_browser` and
 `shinybrms.shinystan_browser`.
@@ -287,7 +300,7 @@ Bernoulli, or negative binomial distribution for the (univariate) outcome. For
 the predictors, only nonvarying (a.k.a. population-level or "fixed") effects are
 supported. Varying (a.k.a. group-level or "random") effects are not supported
 yet. Neither supported are most of
-[**brms**](https://CRAN.R-project.org/package=brms)’s other features, like
+[**brms**](https://CRAN.R-project.org/package=brms)'s other features, like
 monotonic effects for ordinal predictors or non-linear effects. Interactions are
 supported, though. For the inspection of the output, only a short summary (from
 `brms::summary.brmsfit()`) and the possibility to launch

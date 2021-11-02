@@ -2372,7 +2372,7 @@ server <- function(input, output, session) {
   
   #### Run Stan -------------------------------------------------------------
   
-  n_chains_spec <- reactiveVal(-Inf)
+  n_chains_spec <- reactiveVal()
   reset_brmsfit_upload <- reactiveVal()
   C_bfit <- reactiveVal()
   da_hash <- reactiveVal(da_hash_no_data)

@@ -2460,6 +2460,10 @@ server <- function(input, output, session) {
       # In fact, rlang::hash() should never return `NULL`, so the following line
       # is not strictly necessary, but it doesn't harm either:
       !is.null(C_bfit_raw()) &&
+      # In fact, rlang::hash() should never return the value of
+      # `da_hash_no_data`, so the following line is not strictly necessary, but
+      # it doesn't harm either:
+      !C_bfit_raw()$is_upload &&
       # Only use brms:::update.brmsfit() if the dataset has not changed (because
       # brms:::update.brmsfit() does not recompute the default priors if the
       # dataset has changed):
@@ -2595,6 +2599,7 @@ server <- function(input, output, session) {
     }
     
     C_bfit_raw(list(bfit = bfit_tmp,
+                    is_upload = FALSE,
                     n_chains_spec = input$advOpts_chains,
                     da_hash = rlang::hash(da())))
     reset_brmsfit_upload("dummy_value")
@@ -2624,6 +2629,7 @@ server <- function(input, output, session) {
       req(FALSE)
     }
     C_bfit_raw(list(bfit = bfit_tmp,
+                    is_upload = TRUE,
                     n_chains_spec = -Inf,
                     da_hash = da_hash_no_data))
   })
@@ -2684,7 +2690,10 @@ server <- function(input, output, session) {
     ###### Notifications for the MCMC diagnostics -----------------------------
     
     # First: Check for failed chains:
-    if (n_chains_out < C_bfit_raw()$n_chains_spec) {
+    # Note: `n_chains_out < -Inf` is always `FALSE`, so the
+    # `!C_bfit_raw()$is_upload` part is not strictly necessary, but it doesn't
+    # harm either:
+    if (!C_bfit_raw()$is_upload && n_chains_out < C_bfit_raw()$n_chains_spec) {
       showNotification(
         paste("Warning: Stan results obtained, but at least one chain exited with an error.",
               "The Stan results should not be used."),

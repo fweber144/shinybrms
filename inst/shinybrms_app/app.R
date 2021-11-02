@@ -2571,7 +2571,7 @@ server <- function(input, output, session) {
     options(warn = warn_orig$warn)
     if (exists("sink_active")) sink()
     if (exists("browser_orig")) options(browser = browser_orig$browser)
-    if (!identical(Sys.getenv("RSTUDIO"), RSTUDIO_orig)) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
+    if (exists("RSTUDIO_orig")) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     
     # Notifications for the warnings thrown by the call to brms::brm():
     if (length(warn_capt) > 0L) {

@@ -416,19 +416,19 @@ ui <- navbarPage(
           helpText(
             "Notes:",
             tags$ul(
-              tags$li("Nonpooled effects are also known as",
+              tags$li("Pooled effects are also known as",
                       em("population-level"), "or", em("fixed"), "effects."),
               tags$li("Partially pooled effects are also known as",
                       em("group-level"), "or", em("random"), "effects."),
             )
           ),
-          h4("Nonpooled main effects"),
+          h4("Pooled main effects"),
           helpText(
             "Start typing or click into the field below to choose variables for which",
-            "nonpooled main effects shall be added."
+            "pooled main effects shall be added."
           ),
           selectInput("pred_mainNP_sel", NULL,
-                      choices = c("Choose variables for nonpooled main effects ..." = ""),
+                      choices = c("Choose variables for pooled main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
           h4("Partially pooled main effects"),
@@ -450,7 +450,7 @@ ui <- navbarPage(
           h3("Interaction effects"),
           helpText(
             p("Here, the term \"interaction\" not only denotes interactions involving only",
-              "predictor variables with nonpooled effects (yielding an interaction with nonpooled effects),",
+              "predictor variables with pooled effects (yielding an interaction with pooled effects),",
               "but also interactions involving predictor variables with partially pooled effects (yielding",
               "an interaction with partially pooled effects).",
               "This broad definition of \"interaction\" is indicated here by the symbol \"<-->\"."),
@@ -546,7 +546,7 @@ ui <- navbarPage(
                   tags$li(code("Intercept"), ": the intercept when centering the predictors.",
                           "This is only the internally used intercept; in the output, the intercept with",
                           "respect to the noncentered predictors is given (named", code("b_Intercept", .noWS = "after"), ")."),
-                  tags$li(code("b"), ": nonpooled effects (or nonpooled regression coefficients)."),
+                  tags$li(code("b"), ": pooled effects (or pooled regression coefficients)."),
                   tags$li(code("sd"), ": standard deviations of partially pooled effects."),
                   tags$li(code("cor"), ": correlations between partially pooled effects of the same group."),
                   tags$li("All other parameter classes are specific to the chosen",
@@ -1148,7 +1148,7 @@ ui <- navbarPage(
           p("As its name suggests, a conditional-effects plot", em("conditions"), "on specific values of",
             "those predictor variables which are not involved in the plot:",
             "It conditions on the mean of continuous predictor variables and",
-            "on the reference category of those categorical predictor variables which have nonpooled main effects.",
+            "on the reference category of those categorical predictor variables which have pooled main effects.",
             "Partially pooled effects are set to zero, with the following exceptions:",
             tags$ul(
               tags$li(
@@ -1157,8 +1157,8 @@ ui <- navbarPage(
               ),
               tags$li(
                 "If partially pooled slopes are plotted, the corresponding partially pooled intercepts",
-                "are also not set to zero (for consistency with nonpooled interaction effects)."
-                # More precisely: "for consistency with nonpooled interaction
+                "are also not set to zero (for consistency with pooled interaction effects)."
+                # More precisely: "for consistency with pooled interaction
                 # effects (and this also avoids problems with dummy-coded
                 # partially pooled slopes)"
               ) 
@@ -1212,7 +1212,7 @@ ui <- navbarPage(
                 "summarized as follows:",
                 tags$ul(
                   tags$li(code("b_Intercept"), "is the intercept (with respect to the noncentered predictors)."),
-                  tags$li("The parameters starting with", code("b_"), "are the nonpooled effects."),
+                  tags$li("The parameters starting with", code("b_"), "are the pooled effects."),
                   tags$li("If you used a", code("constant()"), "prior (which should rarely be the case), then",
                           "the parameters starting with", code("par_"), "are internal parameters which you don't",
                           "need to take into account."),
@@ -1786,7 +1786,7 @@ server <- function(input, output, session) {
   #### Main effects ---------------------------------------------------------
   
   observe({
-    pred_mainNP_choices <- c("Choose variables for nonpooled main effects ..." = "")
+    pred_mainNP_choices <- c("Choose variables for pooled main effects ..." = "")
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       pred_mainNP_choices <- c(pred_mainNP_choices,
                                setdiff(names(da()),
@@ -1862,7 +1862,7 @@ server <- function(input, output, session) {
   })
   
   # Ensure that all variables involved in the interaction terms have a main effect (either
-  # nonpooled or partially pooled):
+  # pooled or partially pooled):
   observeEvent({
     input$pred_mainNP_sel
     input$pred_mainPP_sel
@@ -1939,7 +1939,7 @@ server <- function(input, output, session) {
       #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
       #     including correlations between the partially pooled effects of a specific group-level term, the
       #     terms on the population-level side need to be grouped by the term on the group-level side).
-      #   - For partially pooled slopes, add the corresponding nonpooled slopes since the partially pooled
+      #   - For partially pooled slopes, add the corresponding pooled slopes since the partially pooled
       #     slopes are assumed to have mean zero.
       # The first task is performed by applying combn() to m = 1L, ..., length(xPP) with "xPP"
       # containing the group-level terms of a given element of "pred_lst".
@@ -3134,7 +3134,7 @@ server <- function(input, output, session) {
       
       termlabs <- labels(terms(formula(C_bformula_ff())))
       
-      #### Nonpooled effects ----------------------------------------------------
+      #### Pooled effects -------------------------------------------------------
       
       termlabs_NP <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
       termlabs_NP_main <- grep(":", termlabs_NP, value = TRUE, invert = TRUE)

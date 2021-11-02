@@ -2747,6 +2747,7 @@ server <- function(input, output, session) {
   ##### Date and time when the Stan run was finished ------------------------
   
   output$fit_date <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     C_stanres()$bfit$fit@date
   })
@@ -2754,6 +2755,7 @@ server <- function(input, output, session) {
   ##### Versions used for this Stan run -------------------------------------
   
   output$fit_version <- renderPrint({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     unlist(lapply(C_stanres()$bfit$version, as.character))
   })
@@ -2761,6 +2763,7 @@ server <- function(input, output, session) {
   ##### Overall check for all MCMC diagnostics ------------------------------
   
   output$diagn_all_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     if (C_stanres()$diagn$all_OK) {
       return(paste("All MCMC diagnostics are OK (see",
@@ -2779,6 +2782,7 @@ server <- function(input, output, session) {
       return(input$stanout_download_sel)
     },
     content = function(file) {
+      input$run_stan # Just for graying out.
       if (identical(input$stanout_download_sel, "shinybrms_post_draws_mat.csv")) {
         write.csv(C_draws_mat(),
                   file = file,
@@ -2799,6 +2803,7 @@ server <- function(input, output, session) {
   #### HMC-specific diagnostics ---------------------------------------------
   
   output$diagn_div_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     div_text <- paste0("The number of iterations ending with a divergence (",
                        C_stanres()$diagn$divergences,
@@ -2812,6 +2817,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$diagn_tree_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     tree_text <- paste0("The number of iterations hitting the maximum tree depth (",
                         C_stanres()$diagn$hits_max_tree_depth,
@@ -2825,6 +2831,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$diagn_EBFMI_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     EBFMI_text <- paste0("The E-BFMI (",
                          paste(paste0(names(C_stanres()$diagn$EBFMI),
@@ -2844,6 +2851,7 @@ server <- function(input, output, session) {
   #### General MCMC diagnostics ---------------------------------------------
   
   output$rhat_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     if (C_stanres()$diagn$Rhat_OK) {
       return("All R-hat values are OK.")
@@ -2854,6 +2862,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$essBulk_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     if (C_stanres()$diagn$ESS_bulk_OK) {
       return("All bulk-ESS values are OK.")
@@ -2864,6 +2873,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$essTail_out <- renderText({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     if (C_stanres()$diagn$ESS_tail_OK) {
       return("All tail-ESS values are OK.")
@@ -2874,6 +2884,7 @@ server <- function(input, output, session) {
   }, sep = "\n")
   
   output$general_MCMC_out <- renderPrint({
+    input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     data.frame("R-hat" = C_stanres()$diagn$Rhat,
                "ESS_bulk" = C_stanres()$diagn$ESS_bulk,
@@ -2886,6 +2897,7 @@ server <- function(input, output, session) {
   output$diagn_download <- downloadHandler(
     filename = "shinybrms_MCMC_diagnostics.rds",
     content = function(file) {
+      input$run_stan # Just for graying out.
       invisible(req(C_stanres()))
       saveRDS(C_stanres()$diagn, file = file)
     }
@@ -2899,6 +2911,7 @@ server <- function(input, output, session) {
   })
   
   output$smmry_view <- renderPrint({
+    input$run_stan # Just for graying out.
     print(C_smmry(), digits = 4)
   }, width = max(getOption("width"), 100))
   
@@ -2907,6 +2920,7 @@ server <- function(input, output, session) {
   output$smmry_download <- downloadHandler(
     filename = "shinybrms_default_summary.txt",
     content = function(file) {
+      input$run_stan # Just for graying out.
       invisible(req(C_smmry()))
       sink(file = file)
       print(C_smmry(), digits = 4)
@@ -3081,6 +3095,7 @@ server <- function(input, output, session) {
   })
   
   output$cust_view <- renderTable({
+    input$run_stan # Just for graying out.
     ### Only used for making output$cust_view reactive on C_stanres() (so that
     ### output$cust_view grays out while recalculating C_stanres()).
     invisible(try(C_stanres(), silent = TRUE))
@@ -3091,6 +3106,7 @@ server <- function(input, output, session) {
   output$cust_smmry_download <- downloadHandler(
     filename = "shinybrms_custom_summary.csv",
     content = function(file) {
+      input$run_stan # Just for graying out.
       write.csv(C_cust(),
                 file = file,
                 row.names = FALSE)
@@ -3246,6 +3262,7 @@ server <- function(input, output, session) {
   })
   
   output$ceff_plot <- renderPlot({
+    input$run_stan # Just for graying out.
     gg_ceff()
   },
   width = function() session$clientData$output_size_aux_width,
@@ -3256,6 +3273,7 @@ server <- function(input, output, session) {
       paste0("shinybrms_cond_eff.", input$ceff_download_sel)
     },
     content = function(file) {
+      input$run_stan # Just for graying out.
       if (!requireNamespace("ggplot2", quietly = TRUE)) {
         showNotification(
           HTML(paste("Package", strong("ggplot2"), "needed. Please install it.")),

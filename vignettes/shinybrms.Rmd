@@ -123,7 +123,7 @@ Here, we focus on panel "Advanced options" where we may set a seed for reproduci
 *Fig. 12: Page "Posterior", tab "Run Stan", panel "Advanced options".*
 
 \
-Now we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel "Advanced options", we find panel "Run Stan" where we simply click the button for running Stan:
+Next, we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel "Advanced options", we find panel "Run Stan" where we simply click the button for running Stan:
 
 \
 [![](screenshots/Posterior_Run_Run.png)](screenshots/Posterior_Run_Run.png)

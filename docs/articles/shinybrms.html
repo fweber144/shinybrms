@@ -19,7 +19,7 @@
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="Get started">
 <meta property="og:description" content="shinybrms">
-<meta property="og:image" content="/logo.svg">
+<meta property="og:image" content="https://fweber144.github.io/shinybrms/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -91,7 +91,6 @@
     
     
 <p>The following screenshots show how to fit an example model in the <strong>shinybrms</strong> app. For instructions on how to launch the <strong>shinybrms</strong> app, see the <a href="../index.html">starting page</a>.</p>
-<p><strong>NOTE:</strong> The screenshots below were created using <strong>shinybrms</strong> version 1.5.1. However, version 1.5.2 has only introduced very few UI changes (see the <a href="../news/index.html">changelog</a> for details).</p>
 <div id="home" class="section level2">
 <h2 class="hasAnchor">
 <a href="#home" class="anchor"></a>Home</h2>
@@ -123,10 +122,10 @@ On page “Likelihood”, the first tab is called “Outcome”. Here, we define
 <h3 class="hasAnchor">
 <a href="#predictors" class="anchor"></a>Predictors</h3>
 <p><br>
-After selecting tab “Predictors”, we choose the variables <code>week</code> and <code>trt</code> to have nonpooled main effects and variable <code>ID</code> to have partially pooled main effects:</p>
+After selecting tab “Predictors”, we set up (pooled) main effects for variables <code>week</code> and <code>trt</code> and partially pooled main effects (i.e., partially pooled intercepts) for variable <code>ID</code>:</p>
 <p><br><a href="screenshots/Likelihood_Predictors.png"><img src="screenshots/Likelihood_Predictors.png"></a> <em>Fig. 5: Page “Likelihood”, tab “Predictors” (top).</em></p>
 <p><br>
-After scrolling down, we set up a (nonpooled) interaction term for <code>week</code> and <code>trt</code>:</p>
+After scrolling down, we set up a (pooled) interaction term for <code>week</code> and <code>trt</code>:</p>
 <p><br><a href="screenshots/Likelihood_Predictors_Int.png"><img src="screenshots/Likelihood_Predictors_Int.png"></a> <em>Fig. 6: Page “Likelihood”, tab “Predictors” (bottom; setting up the interaction effect).</em></p>
 <p><br>
 After clicking on “Add interaction term”, we get:</p>
@@ -147,10 +146,10 @@ At the top of page “Prior”, we obtain a table with the default priors for th
 <h3 class="hasAnchor">
 <a href="#custom-priors" class="anchor"></a>Custom priors</h3>
 <p><br>
-At the bottom of page “Prior”, we can specify custom priors. Here, we will use a Student-<span class="math inline">\(t\)</span> prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 10 for all regression coefficients (parameter class <code>b</code>):</p>
+At the bottom of page “Prior”, we can specify custom priors. Here, we will use a Student-<em>t</em> prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 4 for all regression coefficients (parameter class <code>b</code>):</p>
 <p><br><a href="screenshots/Prior_Custom.png"><img src="screenshots/Prior_Custom.png"></a> <em>Fig. 9: Page “Prior” (bottom; setting up a custom prior).</em></p>
 <p><br>
-After clicking on “Add prior”, we see that our Student-<span class="math inline">\(t\)</span> prior was added to the preview table on the right:</p>
+After clicking on “Add prior”, we see that our Student-<em>t</em> prior was added to the preview table on the right:</p>
 <p><br><a href="screenshots/Prior_Custom_done.png"><img src="screenshots/Prior_Custom_done.png"></a> <em>Fig. 10: Page “Prior” (bottom; after adding a custom prior).</em></p>
 </div>
 </div>
@@ -164,13 +163,13 @@ After clicking on “Add prior”, we see that our Student-<span class="math inl
 On page “Posterior”, the first tab is called “Run Stan”. At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):</p>
 <p><br><a href="screenshots/Posterior_Run.png"><img src="screenshots/Posterior_Run.png"></a> <em>Fig. 11: Page “Posterior”, tab “Run Stan” (top).</em></p>
 <p><br>
-Here, we focus on panel “Advanced options” where we may set a seed for reproducibility:</p>
+Here, we focus on panel “Advanced options” where we set a seed for reproducibility:</p>
 <p><br><a href="screenshots/Posterior_Run_AdvOpts.png"><img src="screenshots/Posterior_Run_AdvOpts.png"></a> <em>Fig. 12: Page “Posterior”, tab “Run Stan”, panel “Advanced options”.</em></p>
 <p><br>
-Now we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel “Advanced options”, we find panel “Run Stan” where we simply click the button for running Stan:</p>
+Next, we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel “Advanced options”, we find panel “Run Stan” where we simply click the button for running Stan:</p>
 <p><br><a href="screenshots/Posterior_Run_Run.png"><img src="screenshots/Posterior_Run_Run.png"></a> <em>Fig. 13: Page “Posterior”, tab “Run Stan”, panel “Run Stan”.</em></p>
 <p><br>
-Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for the advanced option “Open progress”, a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:</p>
+Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for advanced option “Open progress”, a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:</p>
 <p><br><a href="screenshots/Posterior_Sampling_1.png"><img src="screenshots/Posterior_Sampling_1.png"></a> <em>Fig. 14: Sampling progress (top).</em></p>
 <p><br>
 Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks something like this:</p>

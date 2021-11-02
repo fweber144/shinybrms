@@ -48,7 +48,7 @@
 
 <meta property="og:title" content="Launch the shinybrms app — launch_shinybrms" />
 <meta property="og:description" content="This function launches the shinybrms app." />
-<meta property="og:image" content="/logo.svg" />
+<meta property="og:image" content="https://fweber144.github.io/shinybrms/logo.svg" />
 
 
 
@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.5.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
       </span>
     </div>
 
@@ -138,9 +138,9 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Arguments passed to <code><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>shiny::runApp()</a></code>. For example, in order to force the
-<b>shinybrms</b> app to launch in the system's default web browser (even if using RStudio),
-set argument <code>launch.browser</code> to <code>TRUE</code>.</p></td>
+      <td><p>Arguments passed to <code><a href='https://rdrr.io/pkg/shiny/man/runApp.html'>shiny::runApp()</a></code>. For example, in order to
+force the <b>shinybrms</b> app to launch in the system's default web
+browser (even if using RStudio), set argument <code>launch.browser</code> to <code>TRUE</code>.</p></td>
     </tr>
     </table>
 
@@ -150,32 +150,51 @@ set argument <code>launch.browser</code> to <code>TRUE</code>.</p></td>
     <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
 
     <p>The following global options are introduced by <b>shinybrms</b>:</p><ul>
-<li><p><code>shinybrms.prog_browser</code>: The value for the global option <code>browser</code> to be used for opening the
-<a href='https://mc-stan.org/'>Stan</a> progress file (an HTML file). Defaults to option <code>browser</code> (see
-<code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that RStudio's default for option <code>browser</code> cannot be used for the Stan
-progress file. Therefore, <b>shinybrms</b> automatically redefines RStudio's default for option
-<code>browser</code> to fix this issue.</p></li>
-<li><p><code>shinybrms.shinystan_browser</code>: The value for the global option
-<code>browser</code> to be used for opening the <b>shinystan</b> app. Defaults to option <code>browser</code> (see
-<code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that RStudio's default for option <code>browser</code> cannot be used for opening
-the <b>shinystan</b> app from within <b>shinybrms</b>. Therefore, <b>shinybrms</b> automatically
-redefines RStudio's default for option <code>browser</code> to fix this issue.</p></li>
+<li><p><code>shinybrms.allow_upd</code>: Mainly for internal testing purposes. A single
+logical value indicating whether updating a previous model fit using
+<code>brms:::update.brmsfit()</code> is allowed. Defaults to <code>TRUE</code>.</p></li>
+<li><p><code>shinybrms.prog_browser</code>: The value for the global option <code>browser</code> to be
+used for opening the <a href='https://mc-stan.org/'>Stan</a> progress file (an HTML
+file). Defaults to option <code>browser</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that
+RStudio's default for option <code>browser</code> cannot be used for the Stan progress
+file. Therefore, <b>shinybrms</b> automatically redefines RStudio's default
+for option <code>browser</code> to fix this issue.</p></li>
+<li><p><code>shinybrms.shinystan_browser</code>: The value for the global option <code>browser</code> to
+be used for opening the <b>shinystan</b> app. Defaults to option <code>browser</code>
+(see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>). Note that RStudio's default for option <code>browser</code>
+cannot be used for opening the <b>shinystan</b> app from within
+<b>shinybrms</b>. Therefore, <b>shinybrms</b> automatically redefines
+RStudio's default for option <code>browser</code> to fix this issue.</p></li>
 </ul>
 
-<p>The only other global option used by <b>shinybrms</b> is <code>mc.cores</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): If
-option <code>mc.cores</code> is set, then the advanced option "Cores" (in the <b>shinybrms</b> app) defaults
-to the value of this option. If option <code>mc.cores</code> is not set, then the advanced option "Cores"
-defaults to the value returned by <code><a href='https://rdrr.io/r/parallel/detectCores.html'>parallel::detectCores()</a></code>.</p>
+<p>External global options used by <b>shinybrms</b> are:</p><ul>
+<li><p><code>shiny.maxRequestSize</code> (see <code><a href='https://rdrr.io/pkg/shiny/man/shinyOptions.html'>shiny::shinyOptions()</a></code>): If not specified by
+the user, then <b>shinybrms</b> uses a value of <code>50 * 1024^2</code> (corresponding
+to 50 MB).</p></li>
+<li><p><code>warn</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): Set and reset internally (necessary for
+catching some warning messages).</p></li>
+<li><p><code>browser</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): Set and reset internally (see above).</p></li>
+<li><p><code>mc.cores</code> (see <code><a href='https://rdrr.io/r/base/options.html'>base::options()</a></code>): If option <code>mc.cores</code> is set, then the
+advanced option "Cores" (in the <b>shinybrms</b> app) defaults to the value
+of this option. If option <code>mc.cores</code> is not set, then the advanced option
+"Cores" defaults to the value returned by <code><a href='https://rdrr.io/r/parallel/detectCores.html'>parallel::detectCores()</a></code>.</p></li>
+<li><p><code>brms.backend</code> (see <code><a href='https://rdrr.io/pkg/brms/man/brm.html'>brms::brm()</a></code>): If option <code>brms.backend</code> is set, then
+the advanced option "Backend" (in the <b>shinybrms</b> app) defaults to the
+value of this option. If option <code>brms.backend</code> is not set, then the advanced
+option "Backend" defaults to <code>"rstan"</code>.</p></li>
+</ul>
+
 <p>Note that <b>shinystan</b>'s global option <code>shinystan.rstudio</code> (see
-<code><a href='https://rdrr.io/pkg/shinystan/man/launch_shinystan.html'>shinystan::launch_shinystan()</a></code>) may not be used here as <b>shinystan</b> is called from an
-external <span style="R">R</span> process where RStudio's browsers are not available.</p>
+<code><a href='https://rdrr.io/pkg/shinystan/man/launch_shinystan.html'>shinystan::launch_shinystan()</a></code>) may not be used here as <b>shinystan</b> is
+called from an external <span style="R">R</span> process where RStudio's browsers are not
+available.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span>
-  <span class='fu'>launch_shinybrms</span><span class='op'>(</span>launch.browser <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/interactive.html'>interactive</a></span><span class='op'>(</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'>  <span class='fu'>launch_shinybrms</span><span class='op'>(</span>launch.browser <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

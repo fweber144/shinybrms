@@ -2372,10 +2372,8 @@ server <- function(input, output, session) {
   
   #### Run Stan -------------------------------------------------------------
   
-  n_chains_spec <- reactiveVal()
   reset_brmsfit_upload <- reactiveVal()
-  C_bfit <- reactiveVal()
-  da_hash <- reactiveVal(da_hash_no_data)
+  C_bfit_raw <- reactiveVal()
   
   observeEvent(input$run_stan, {
     req(C_formula(), C_family(), C_prior(),
@@ -2410,8 +2408,6 @@ server <- function(input, output, session) {
         save_warmup_tmp <- FALSE
       }
     }
-    
-    n_chains_spec(input$advOpts_chains)
     
     args_brm <- list(
       formula = C_formula(),
@@ -2461,12 +2457,15 @@ server <- function(input, output, session) {
     
     # Logical (single value) indicating whether to use brms:::update.brmsfit():
     use_upd <- isTRUE(getOption("shinybrms.allow_upd", TRUE)) &&
+      # In fact, rlang::hash() should never return `NULL`, so the following line
+      # is not strictly necessary, but it doesn't harm either:
+      !is.null(C_bfit_raw()) &&
       # Only use brms:::update.brmsfit() if the dataset has not changed (because
       # brms:::update.brmsfit() does not recompute the default priors if the
       # dataset has changed):
-      identical(rlang::hash(da()), da_hash())
+      identical(rlang::hash(da()), C_bfit_raw()$da_hash)
     if (use_upd &&
-        identical(C_bfit()$backend, "rstan") &&
+        identical(C_bfit_raw()$bfit$backend, "rstan") &&
         identical(args_brm$backend, "cmdstanr")) {
       # Handle **brms** issue #1259 explicitly:
       use_upd <- FALSE
@@ -2547,7 +2546,7 @@ server <- function(input, output, session) {
       # implicitly.
       warn_capt <- capture.output({
         bfit_tmp <- try(do.call(update, args = c(
-          list(object = C_bfit(),
+          list(object = C_bfit_raw()$bfit,
                formula. = C_formula()),
           args_brm[setdiff(names(args_brm), c("formula", "data"))]
         )), silent = TRUE)
@@ -2595,8 +2594,9 @@ server <- function(input, output, session) {
       }
     }
     
-    C_bfit(bfit_tmp)
-    da_hash(rlang::hash(da()))
+    C_bfit_raw(list(bfit = bfit_tmp,
+                    n_chains_spec = input$advOpts_chains,
+                    da_hash = rlang::hash(da())))
     reset_brmsfit_upload("dummy_value")
   })
   
@@ -2623,16 +2623,16 @@ server <- function(input, output, session) {
       ))
       req(FALSE)
     }
-    n_chains_spec(-Inf)
-    C_bfit(bfit_tmp)
-    da_hash(da_hash_no_data)
+    C_bfit_raw(list(bfit = bfit_tmp,
+                    n_chains_spec = -Inf,
+                    da_hash = da_hash_no_data))
   })
   
   C_stanres <- reactive({
-    req(n_chains_spec(), C_bfit())
-    C_draws_arr <- as.array(C_bfit())
+    invisible(req(C_bfit_raw()))
+    C_draws_arr <- as.array(C_bfit_raw()$bfit)
     n_chains_out <- dim(C_draws_arr)[2]
-    C_sfit <- C_bfit()$fit
+    C_sfit <- C_bfit_raw()$bfit$fit
     stopifnot(rstan:::is.stanfit(C_sfit))
     
     # Check that the mode of the resulting "stanfit" object is the "normal" mode
@@ -2684,7 +2684,7 @@ server <- function(input, output, session) {
     ###### Notifications for the MCMC diagnostics -----------------------------
     
     # First: Check for failed chains:
-    if (n_chains_out < n_chains_spec()) {
+    if (n_chains_out < C_bfit_raw()$n_chains_spec) {
       showNotification(
         paste("Warning: Stan results obtained, but at least one chain exited with an error.",
               "The Stan results should not be used."),
@@ -2711,7 +2711,7 @@ server <- function(input, output, session) {
       }
     }
     
-    return(list(bfit = C_bfit(),
+    return(list(bfit = C_bfit_raw()$bfit,
                 diagn = list(all_OK = C_all_OK,
                              divergences_OK = C_div_OK,
                              divergences = C_div,

@@ -2,7 +2,10 @@
 
 ## Major changes
 
-* Replace the term "nonpooled" (effects) by "pooled" (effects).
+* Replace the term "nonpooled" (effects) by "pooled" (effects). This confounding
+was introduced by the replacement of "nonvarying" (effects) by "nonpooled"
+(effects) in v1.3.0 (which was obviously incorrect since "pooled" is the
+opposite of "varying").
 * Allow the **cmdstanr** backend for **brms**. The global option `brms.backend`
 can be used to control the default backend selected in the "Advanced options" in
 the **shinybrms** app (see `?launch_shinybrms` for details).

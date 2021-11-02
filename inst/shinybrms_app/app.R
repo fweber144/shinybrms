@@ -2490,11 +2490,11 @@ server <- function(input, output, session) {
     
     # Some modifications needed to show the progress (see the source code of rstan::sampling()):
     if (input$advOpts_open_progress) {
-      # For RStudio:
+      # In RStudio, we have `identical(Sys.getenv("RSTUDIO"), "1")`, but we need
+      # `!identical(Sys.getenv("RSTUDIO"), "1")`, so use `""` which should be
+      # used outside of RStudio:
       RSTUDIO_orig <- Sys.getenv("RSTUDIO")
-      if (identical(RSTUDIO_orig, "1")) {
-        Sys.setenv("RSTUDIO" = "")
-      }
+      Sys.setenv("RSTUDIO" = "")
       
       # The progress browser:
       prog_browser <- getOption("shinybrms.prog_browser",

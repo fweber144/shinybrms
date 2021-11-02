@@ -40,7 +40,6 @@ Suggests:
     lme4,
     testthat,
     shinytest
-Remotes: github::stan-dev/cmdstanr
 Encoding: UTF-8
 RoxygenNote: 7.1.2
 Roxygen: list(markdown = TRUE)

@@ -1,4 +1,4 @@
-# **shinybrms** 1.5.2.9000
+# **shinybrms** 1.6.0
 
 ## Major changes
 

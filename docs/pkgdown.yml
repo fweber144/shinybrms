@@ -3,7 +3,7 @@ pkgdown: 1.6.1
 pkgdown_sha: ~
 articles:
   shinybrms: shinybrms.html
-last_built: 2021-11-02T20:26Z
+last_built: 2021-11-03T07:35Z
 urls:
   reference: https://fweber144.github.io/shinybrms/reference
   article: https://fweber144.github.io/shinybrms/articles

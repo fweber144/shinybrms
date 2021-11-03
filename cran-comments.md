@@ -6,13 +6,29 @@
     + R 4.1.2 on Windows 10 x64 (build 19043) system (platform:
       x86_64-w64-mingw32/x64 (64-bit))
 * win-builder:
-    + R-devel (2021-10-14 r81057)
+    + R-devel (2021-11-02 r81131)
     + R-release (R 4.1.1)
     + R-oldrelease (R 4.0.5)
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs or NOTEs.
+There were no ERRORs or WARNINGs. The local checks also gave no NOTEs. However,
+the 'win-builder' checks gave 2 NOTEs:
+
+*   checking CRAN incoming feasibility ... NOTE
+    Maintainer: 'Frank Weber <fweber144@protonmail.com>'
+    
+    Suggests or Enhances not in mainstream repositories:
+      cmdstanr
+
+*   checking package dependencies ... NOTE
+    Package suggested but not available for checking: 'cmdstanr'
+
+Currently, the 'cmdstanr' package (<https://mc-stan.org/cmdstanr/>) is not
+available on CRAN yet. It provides an optional backend for the 'brms' package.
+The default backend in 'brms' is the 'rstan' package which is available on CRAN.
+The 'cmdstanr' backend is used in local unit tests, but it is not necessary for
+'shinybrms' to work.
 
 ## Downstream dependencies
 

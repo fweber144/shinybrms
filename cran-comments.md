@@ -1,3 +1,8 @@
+## Resubmission
+
+This is a resubmission for which I have added the repository URL for the
+'cmdstanr' package to the 'DESCRIPTION' file (field 'Additional_repositories').
+
 ## Test environments
 
 * Local:

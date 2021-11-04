@@ -1283,7 +1283,7 @@ ui <- navbarPage(
           tags$li(strong("Version:"),
                   "1.6.0"),
           tags$li(strong("Date:"),
-                  "November 02, 2021"),
+                  "November 04, 2021"),
           tags$li(strong("Citation:"),
                   "Frank Weber (2021).",
                   em("shinybrms: Graphical User Interface ('shiny' App)",

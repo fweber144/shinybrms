@@ -25,6 +25,8 @@ the 'win-builder' checks gave 2 NOTEs:
     
     Suggests or Enhances not in mainstream repositories:
       cmdstanr
+    Availability using Additional_repositories specification:
+      cmdstanr   yes   https://mc-stan.org/r-packages/
 
 *   checking package dependencies ... NOTE
     Package suggested but not available for checking: 'cmdstanr'
@@ -33,7 +35,9 @@ Currently, the 'cmdstanr' package (<https://mc-stan.org/cmdstanr/>) is not
 available on CRAN yet. It provides an optional backend for the 'brms' package.
 The default backend in 'brms' is the 'rstan' package which is available on CRAN.
 The 'cmdstanr' backend is used in local unit tests, but it is not necessary for
-'shinybrms' to work.
+'shinybrms' to work. As the first NOTE says, I have added the repository URL for
+the 'cmdstanr' package to the 'DESCRIPTION' file (field
+'Additional_repositories').
 
 ## Downstream dependencies
 

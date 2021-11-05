@@ -127,14 +127,14 @@
 
     <div id="shinybrms-160" class="section level1">
 <h1 class="page-header" data-toc-text="1.6.0">
-<a href="#shinybrms-160" class="anchor"></a><small> Unreleased </small><strong>shinybrms</strong> 1.6.0</h1>
+<a href="#shinybrms-160" class="anchor"></a><small> 2021-11-04 </small><strong>shinybrms</strong> 1.6.0</h1>
 <div id="major-changes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#major-changes" class="anchor"></a>Major changes</h2>
 <ul>
 <li>Replace the term “nonpooled” (effects) by “pooled” (effects). This confounding was introduced by the replacement of “nonvarying” (effects) by “nonpooled” (effects) in v1.3.0 (which was obviously incorrect since “pooled” is the opposite of “varying”).</li>
 <li>Allow the <strong>cmdstanr</strong> backend for <strong>brms</strong>. The global option <code>brms.backend</code> can be used to control the default backend selected in the “Advanced options” in the <strong>shinybrms</strong> app (see <code><a href="../reference/launch_shinybrms.html">?launch_shinybrms</a></code> for details).</li>
-<li>If a previous <code>brmsfit</code> exists (i.e., it is currently presented on page “Posterior”), then—if possible—a click on the “Run Stan” button causes this previous <code>brmsfit</code> to get updated using <code>brms:::update.brmsfit()</code>, saving the compilation time. The fact that <code>brms:::update.brmsfit()</code> currently does not recompute the default priors if the dataset has changed, combined with the flexibility that <em>any</em> <code>brmsfit</code> may be uploaded in <strong>shinybrms</strong> (even ones which were not fitted through <strong>shinybrms</strong>), an uploaded <code>brmsfit</code> may not be updated. This updating of a previous <code>brmsfit</code> may be turned off using the global option <code>shinybrms.allow_upd</code> (see <code><a href="../reference/launch_shinybrms.html">?launch_shinybrms</a></code> for details).</li>
+<li>If a previous <code>brmsfit</code> exists (i.e., it is currently presented on page “Posterior”), then—if possible—a click on the “Run Stan” button causes this previous <code>brmsfit</code> to get updated using <code>brms:::update.brmsfit()</code>, saving the compilation time. The fact that <code>brms:::update.brmsfit()</code> currently does not recompute the default priors if the dataset has changed, combined with the flexibility that <em>any</em> <code>brmsfit</code> may be uploaded (see below) in <strong>shinybrms</strong> (even ones which were not fitted through <strong>shinybrms</strong>), an uploaded <code>brmsfit</code> may not be updated. The updating of a previous <code>brmsfit</code> may be turned off using the global option <code>shinybrms.allow_upd</code> (see <code><a href="../reference/launch_shinybrms.html">?launch_shinybrms</a></code> for details).</li>
 <li>Allow the upload of a previously created <code>brmsfit</code> object (page “Posterior”, tab “Run Stan”, panel “Run Stan”). This required increasing the default size limit for file uploads (global option <code>shiny.maxRequestSize</code>; now at 50 MB if not set by the user).</li>
 <li>Allow for <code><a href="https://rdrr.io/r/stats/offset.html">offset()</a></code> terms without the need to resort to the previous workaround based on a <code>constant()</code> prior (see <strong>brms</strong>’s GitHub issue <a href='https://github.com/fweber144/shinybrms/issues/923'>#923</a> solved in <strong>brms</strong> v2.16.0). This increases the required <strong>brms</strong> version to at least 2.16.0.</li>
 </ul>
@@ -149,7 +149,7 @@
 <li>Page “Posterior” (tab “Run Stan”, panel “Run Stan”) now also shows important software versions used for the Stan run.</li>
 <li>Improved documentation of global options used by <strong>shinybrms</strong>.</li>
 <li>Theme: Some colors have been slightly changed to match the overall theme better.</li>
-<li>UI: In case of a failed file upload, a modal dialog is now shown (instead of a notification in the lower right corner).</li>
+<li>UI: In case of a failed file upload, a modal dialog is shown now (instead of a notification in the lower right corner).</li>
 <li>UI: Minor formatting and wording improvements in help texts and other UI elements.</li>
 </ul>
 </div>

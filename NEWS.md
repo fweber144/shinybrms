@@ -14,10 +14,10 @@ the **shinybrms** app (see `?launch_shinybrms` for details).
 previous `brmsfit` to get updated using `brms:::update.brmsfit()`, saving the
 compilation time. The fact that `brms:::update.brmsfit()` currently does not
 recompute the default priors if the dataset has changed, combined with the
-flexibility that *any* `brmsfit` may be uploaded in **shinybrms** (even ones
-which were not fitted through **shinybrms**), an uploaded `brmsfit` may not be
-updated. This updating of a previous `brmsfit` may be turned off using the
-global option `shinybrms.allow_upd` (see `?launch_shinybrms` for details).
+flexibility that *any* `brmsfit` may be uploaded (see below) in **shinybrms**
+(even ones which were not fitted through **shinybrms**), an uploaded `brmsfit`
+may not be updated. The updating of a previous `brmsfit` may be turned off using
+the global option `shinybrms.allow_upd` (see `?launch_shinybrms` for details).
 * Allow the upload of a previously created `brmsfit` object (page "Posterior",
 tab "Run Stan", panel "Run Stan"). This required increasing the default size
 limit for file uploads (global option `shiny.maxRequestSize`; now at 50 MB if
@@ -39,7 +39,7 @@ software versions used for the Stan run.
 * Improved documentation of global options used by **shinybrms**.
 * Theme: Some colors have been slightly changed to match the overall theme
 better.
-* UI: In case of a failed file upload, a modal dialog is now shown (instead of a
+* UI: In case of a failed file upload, a modal dialog is shown now (instead of a
 notification in the lower right corner).
 * UI: Minor formatting and wording improvements in help texts and other UI
 elements.

@@ -68,6 +68,9 @@ launch_shinybrms <- function(...) {
     # Just a dummy call of an "rstan" function to avoid a NOTE in CRAN checks on
     # some platforms:
     rstan::set_cppo()
+    # Just a dummy call of an "rlang" function to avoid a NOTE in CRAN checks on
+    # some platforms:
+    rlang::hash(0)
   }
   return(invisible(TRUE))
 }

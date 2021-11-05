@@ -735,7 +735,7 @@ ui <- navbarPage(
             condition = "input.show_standata",
             verbatimTextOutput("standata_view", placeholder = TRUE),
           ),
-          downloadButton("standata_download", "Download Stan data")
+          downloadButton("standata_download", "Download Stan data (RDS file)")
         ),
         wellPanel(
           h3("Advanced options"),
@@ -1078,7 +1078,7 @@ ui <- navbarPage(
                  )),
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE),
-        downloadButton("smmry_download", "Download default summary"),
+        downloadButton("smmry_download", "Download default summary (text file)"),
         br(),
         br()
       ),
@@ -1126,7 +1126,7 @@ ui <- navbarPage(
         helpText("Note: All columns contain", em("posterior"), "summary quantities.",
                  "In particular, the columns starting with \"Q\" contain the corresponding",
                  "posterior percentiles and column \"MAD\" contains the posterior median absolute deviation."),
-        downloadButton("cust_smmry_download", "Download custom summary"),
+        downloadButton("cust_smmry_download", "Download custom summary (CSV file)"),
         br(),
         br()
       ),

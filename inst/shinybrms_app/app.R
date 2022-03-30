@@ -1,5 +1,5 @@
 # shinybrms: Graphical User Interface ('shiny' App) for 'brms'
-# Copyright (C) 2021  Frank Weber
+# Copyright (C) 2022  Frank Weber
 #   
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -1283,9 +1283,9 @@ ui <- navbarPage(
           tags$li(strong("Version:"),
                   "1.6.0.9000"),
           tags$li(strong("Date:"),
-                  "November 05, 2021"),
+                  "March 30, 2022"),
           tags$li(strong("Citation:"),
-                  "Frank Weber (2021).",
+                  "Frank Weber (2022).",
                   em("shinybrms: Graphical User Interface ('shiny' App)",
                      "for 'brms'."),
                   "R package, version 1.6.0.9000. URL:",

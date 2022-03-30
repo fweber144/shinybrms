@@ -1,5 +1,5 @@
 
-# **shinybrms** <img src="man/figures/logo.svg" width="124px" height="144px" align="right" />
+# **shinybrms** <img src="man/figures/logo.svg" width="124.44px" height="144px" align="right" />
 
 <br>
 

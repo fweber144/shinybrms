@@ -1,6 +1,9 @@
 # **shinybrms** 1.6.0.9000
 
+## Minor changes
 
+* Use a darker gray color for help texts (which constitute the majority of the
+in-app text).
 
 # **shinybrms** 1.6.0
 

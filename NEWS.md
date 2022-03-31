@@ -9,7 +9,7 @@ in-app text).
 
 ## Major changes
 
-* Replace the term "nonpooled" (effects) by "pooled" (effects). This confounding
+* Replace the term "nonpooled" (effects) by "pooled" (effects). This confusion
 was introduced by the replacement of "nonvarying" (effects) by "nonpooled"
 (effects) in v1.3.0 (which was obviously incorrect since "pooled" is the
 opposite of "varying").

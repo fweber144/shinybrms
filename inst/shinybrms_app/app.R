@@ -2422,10 +2422,16 @@ server <- function(input, output, session) {
       seed = input$advOpts_seed,
       iter = input$advOpts_iter,
       thin = input$advOpts_thin,
-      inits = input$advOpts_inits,
       save_pars = brms::save_pars(all = input$advOpts_save_all_pars),
       save_warmup = save_warmup_tmp
     )
+    if (packageVersion("brms") > "2.16.3") {
+      args_brm <- c(args_brm,
+                    list(init = input$advOpts_inits))
+    } else {
+      args_brm <- c(args_brm,
+                    list(inits = input$advOpts_inits))
+    }
     if (!is.na(input$advOpts_warmup)) {
       args_brm <- c(args_brm,
                     list(warmup = input$advOpts_warmup))

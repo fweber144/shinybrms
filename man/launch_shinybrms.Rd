@@ -61,7 +61,8 @@ called from an external \R process where RStudio's browsers are not
 available.
 }
 \examples{
-\dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-launch_shinybrms(launch.browser = TRUE)
-\dontshow{\}) # examplesIf}
+if (interactive()) {
+  launch_shinybrms(launch.browser = TRUE)
+}
+
 }

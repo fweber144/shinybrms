@@ -19,13 +19,14 @@ the **shinybrms** app (see `?launch_shinybrms` for details).
 * If a previous `brmsfit` exists (i.e., it is currently presented on page
 "Posterior"), then---if possible---a click on the "Run Stan" button causes this
 previous `brmsfit` to get updated using `brms:::update.brmsfit()`, saving the
-compilation time. The fact that `brms:::update.brmsfit()` currently does not
-recompute the default priors if the dataset has changed, combined with the
-flexibility that *any* `brmsfit` may be uploaded (see below) in **shinybrms**
-(even ones which were not fitted through **shinybrms**), an causes an uploaded
-`brmsfit` not to be updatable. The updating of a previous `brmsfit` may be
-turned off using the global option `shinybrms.allow_upd` (see
-`?launch_shinybrms` for details).
+compilation time. Note that **shinybrms** automatically takes care of the fact
+that `brms:::update.brmsfit()` does not recompute the default priors if the
+dataset has changed. However, for uploaded `brmsfit`s which were not fitted
+through **shinybrms**, this is not possible (and for uploaded `brmsfit`s which
+were fitted through **shinybrms**, this is still complicated), so an uploaded
+`brmsfit` may not be updated. The updating of a previous `brmsfit` may be turned
+off using the global option `shinybrms.allow_upd` (see `?launch_shinybrms` for
+details).
 * Allow the upload of a previously created `brmsfit` object (page "Posterior",
 tab "Run Stan", panel "Run Stan"). This required increasing the default size
 limit for file uploads (global option `shiny.maxRequestSize`; now at 50 MB if

@@ -47,10 +47,8 @@
 #'
 #' @return `TRUE` (invisible).
 #'
-#' @examples
-#' if (interactive()) {
-#'   launch_shinybrms(launch.browser = TRUE)
-#' }
+#' @examplesIf FALSE
+#' launch_shinybrms(launch.browser = TRUE)
 #' 
 #' @export
 #' 

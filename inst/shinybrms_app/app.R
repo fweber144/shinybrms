@@ -43,6 +43,8 @@ san_prior_tab_nms <- function(x) {
   x <- sub("^dpar$", "Distributional parameter", x)
   x <- sub("^nlpar$", "Non-linear parameter", x)
   x <- sub("^bound$", "Bound", x)
+  x <- sub("^lb$", "Lower bound", x)
+  x <- sub("^ub$", "Upper bound", x)
   x <- sub("^source$", "Source", x)
   return(x)
 }

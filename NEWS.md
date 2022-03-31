@@ -31,9 +31,9 @@ tab "Run Stan", panel "Run Stan"). This required increasing the default size
 limit for file uploads (global option `shiny.maxRequestSize`; now at 50 MB if
 not set by the user).
 * Allow for `offset()` terms without the need to resort to the previous
-workaround based on a `constant()` prior (see **brms**'s GitHub issue #923
-solved in **brms** v2.16.0). This increases the required **brms** version to at
-least 2.16.0.
+workaround based on a `constant()` prior (see **brms**'s GitHub issue
+[#923](https://github.com/paul-buerkner/brms/issues/923) solved in **brms**
+v2.16.0). This increases the required **brms** version to at least 2.16.0.
 
 ## Minor changes
 

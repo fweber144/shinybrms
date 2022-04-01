@@ -2448,8 +2448,7 @@ server <- function(input, output, session) {
       )
       if (!identical(input$advOpts_inits, "random") &&
           !is.na(input$advOpts_init_r)) {
-        args_brm <- c(args_brm,
-                      list(init = input$advOpts_init_r))
+        args_brm$init <- input$advOpts_init_r
       }
     } else {
       args_brm <- c(

@@ -2477,6 +2477,7 @@ server <- function(input, output, session) {
       # dataset has changed):
       identical(rlang::hash(da()), C_bfit_raw()$da_hash)
     if (use_upd &&
+        packageVersion("brms") <= "2.16.3" &&
         identical(C_bfit_raw()$bfit$backend, "rstan") &&
         identical(args_brm$backend, "cmdstanr")) {
       # Handle **brms** issue #1259 explicitly:

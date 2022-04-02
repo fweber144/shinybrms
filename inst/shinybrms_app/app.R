@@ -847,7 +847,7 @@ ui <- navbarPage(
                      numericInput("advOpts_thin", "Thinning rate:",
                                   value = 1L, step = 1L, min = 1L)),
               column(5, offset = 1,
-                     radioButtons("advOpts_inits", "Initial values:",
+                     radioButtons("advOpts_init", "Initial values:",
                                   choices = list("Random" = "random", "Zero" = "0"),
                                   inline = TRUE),
                      numericInput("advOpts_init_r",
@@ -2427,10 +2427,10 @@ server <- function(input, output, session) {
     )
     if (packageVersion("brms") > "2.16.3") {
       args_brm <- c(args_brm,
-                    list(init = input$advOpts_inits))
+                    list(init = input$advOpts_init))
     } else {
       args_brm <- c(args_brm,
-                    list(inits = input$advOpts_inits))
+                    list(inits = input$advOpts_init))
     }
     if (!is.na(input$advOpts_warmup)) {
       args_brm <- c(args_brm,
@@ -2446,7 +2446,7 @@ server <- function(input, output, session) {
         list(adapt_delta = input$advOpts_adapt_delta,
              max_treedepth = input$advOpts_max_treedepth)
       )
-      if (!identical(input$advOpts_inits, "random") &&
+      if (!identical(input$advOpts_init, "random") &&
           !is.na(input$advOpts_init_r)) {
         args_brm$init <- input$advOpts_init_r
       }

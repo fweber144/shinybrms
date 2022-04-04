@@ -2446,7 +2446,7 @@ server <- function(input, output, session) {
         list(adapt_delta = input$advOpts_adapt_delta,
              max_treedepth = input$advOpts_max_treedepth)
       )
-      if (!identical(input$advOpts_init, "random") &&
+      if (identical(input$advOpts_init, "random") &&
           !is.na(input$advOpts_init_r)) {
         args_brm$init <- input$advOpts_init_r
       }

@@ -2426,41 +2426,28 @@ server <- function(input, output, session) {
       save_warmup = save_warmup_tmp
     )
     if (packageVersion("brms") > "2.16.3") {
-      args_brm <- c(args_brm,
-                    list(init = input$advOpts_init))
+      args_brm$init <- input$advOpts_init
     } else {
-      args_brm <- c(args_brm,
-                    list(inits = input$advOpts_init))
+      args_brm$inits <- input$advOpts_init
     }
     if (!is.na(input$advOpts_warmup)) {
-      args_brm <- c(args_brm,
-                    list(warmup = input$advOpts_warmup))
+      args_brm$warmup <- input$advOpts_warmup
     }
     if (!is.na(input$advOpts_refresh)) {
-      args_brm <- c(args_brm,
-                    list(refresh = input$advOpts_refresh))
+      args_brm$refresh <- input$advOpts_refresh
     }
     if (identical(input$advOpts_backend, "cmdstanr")) {
-      args_brm <- c(
-        args_brm,
-        list(adapt_delta = input$advOpts_adapt_delta,
-             max_treedepth = input$advOpts_max_treedepth)
-      )
-      if (identical(input$advOpts_init, "random") &&
-          !is.na(input$advOpts_init_r)) {
+      args_brm$adapt_delta <- input$advOpts_adapt_delta
+      args_brm$max_treedepth <- input$advOpts_max_treedepth
+      if (identical(input$advOpts_init, "random") && !is.na(input$advOpts_init_r)) {
         args_brm$init <- input$advOpts_init_r
       }
     } else {
-      args_brm <- c(
-        args_brm,
-        list(open_progress = input$advOpts_open_progress,
-             control = list(adapt_delta = input$advOpts_adapt_delta,
-                            max_treedepth = input$advOpts_max_treedepth))
-      )
-      if (identical(input$advOpts_init, "random") &&
-          !is.na(input$advOpts_init_r)) {
-        args_brm <- c(args_brm,
-                      list(init_r = input$advOpts_init_r))
+      args_brm$open_progress <- input$advOpts_open_progress
+      args_brm$control <- list(adapt_delta = input$advOpts_adapt_delta,
+                               max_treedepth = input$advOpts_max_treedepth)
+      if (identical(input$advOpts_init, "random") && !is.na(input$advOpts_init_r)) {
+        args_brm$init_r <- input$advOpts_init_r
       }
     }
     

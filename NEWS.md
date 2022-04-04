@@ -5,6 +5,15 @@
 * Use a darker gray color for help texts (which constitute the majority of the
 in-app text).
 
+## Bug fixes
+
+* Adapt to changes in **brms** versions > 2.16.3.
+* Previously, advanced option "Range of random initial values [...]" could have
+had an effect even if "Zero" was chosen under "Initial values" (namely, for the
+**cmdstanr** backend in **brms** versions <= 2.16.3). Now, advanced option
+"Range of random initial values [...]" only has an effect if "Random" is chosen
+under "Initial values".
+
 # **shinybrms** 1.6.0
 
 ## Major changes

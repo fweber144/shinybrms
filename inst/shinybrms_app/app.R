@@ -34,6 +34,57 @@ if (isTRUE(getOption("shiny.testmode"))) {
   Sys.setlocale("LC_COLLATE", "C")
 }
 
+# Basic (not advanced) distributional families:
+distFams_basic <- list(
+  "Choose distributional family ..." = "",
+  "Continuous outcome:" = c("Gaussian (normal)" = "gaussian"),
+  "Binary outcome:" = c("Bernoulli with logit link" = "bernoulli"),
+  "Count data outcome:" = c("Negative binomial" = "negbinomial")
+)
+
+# Basic and advanced distributional families:
+distFams_adv <- distFams_basic
+names(distFams_adv)[names(distFams_adv) == "Continuous outcome:"] <- 
+  "Continuous outcome on the real line:"
+distFams_adv$"Continuous outcome on the real line:" <- c(
+  distFams_adv$"Continuous outcome on the real line:",
+  "Student-t" = "student",
+  "Skew normal" = "skew_normal",
+  "Asymmetric Laplace" = "asym_laplace"
+)
+distFams_adv$"Count data outcome:" <- c(
+  distFams_adv$"Count data outcome:",
+  "Negative binomial with hurdle" = "hurdle_negbinomial",
+  "Negative binomial with zero-inflation" = "zero_inflated_negbinomial",
+  "Poisson" = "poisson",
+  "Poisson with hurdle" = "hurdle_poisson",
+  "Poisson with zero-inflation" = "zero_inflated_poisson",
+  "Geometric" = "geometric"
+)
+distFams_adv$"Continuous outcome on the positive real line:" <- c(
+  "Log-normal" = "lognormal",
+  "Log-normal with hurdle" = "hurdle_lognormal",
+  "Gamma" = "Gamma",
+  "Gamma with hurdle" = "hurdle_gamma",
+  "Inverse Gaussian" = "inverse.gaussian",
+  "Weibull" = "weibull",
+  "Exponential" = "exponential",
+  "Frechet" = "frechet",
+  "Generalized extreme value" = "gen_extreme_value"
+)
+distFams_adv$"Proportion as outcome:" <- c(
+  "Beta" = "Beta",
+  "Beta with zero-inflation" = "zero_inflated_beta",
+  "Beta with zero-one-inflation" = "zero_one_inflated_beta"
+)
+distFams_adv$"Circular outcome:" <- c(
+  "von Mises" = "von_mises"
+)
+distFams_adv$"Response time outcome:" <- c(
+  "Shifted log-normal" = "shifted_lognormal",
+  "Exponentially modified Gaussian" = "exgaussian"
+)
+
 san_prior_tab_nms <- function(x) {
   x <- sub("^prior$", "Prior", x)
   x <- sub("^class$", "Class", x)
@@ -361,16 +412,9 @@ ui <- navbarPage(
                     choices = c("Choose outcome ..." = ""),
                     selectize = TRUE),
         selectInput("dist_sel", "Distributional family for the outcome:",
-                    choices = list(
-                      "Choose distributional family ..." = "",
-                      "Continuous outcome:" =
-                        c("Gaussian (normal)" = "gaussian"),
-                      "Binary outcome:" =
-                        c("Bernoulli with logit link" = "bernoulli"),
-                      "Count data outcome:" =
-                        c("Negative binomial" = "negbinomial")
-                    ),
+                    choices = distFams_basic,
                     selectize = TRUE),
+        checkboxInput("show_advFams", label = "Show advanced distributional families"),
         strong("Parameters (with corresponding link functions) specific to this distributional family:"),
         tableOutput("dist_link"),
         helpText(
@@ -1753,6 +1797,18 @@ server <- function(input, output, session) {
   })
   
   #### Distributional family ------------------------------------------------
+  
+  observeEvent(input$show_advFams, {
+    if (input$show_advFams) {
+      dist_choices <- distFams_adv
+    } else {
+      dist_choices <- distFams_basic
+    }
+    dist_slctd <- isolate(input$dist_sel)
+    updateSelectInput(session, "dist_sel",
+                      choices = dist_choices,
+                      selected = dist_slctd)
+  })
   
   C_family <- reactive({
     req(input$dist_sel)

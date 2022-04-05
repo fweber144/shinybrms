@@ -17,6 +17,7 @@ had an effect even if "Zero" was chosen under "Initial values" (namely, for the
 **cmdstanr** backend in **brms** versions <= 2.16.3). Now, advanced option
 "Range of random initial values [...]" only has an effect if "Random" is chosen
 under "Initial values".
+* Show errors thrown by `brms::brm()` to the user.
 
 # **shinybrms** 1.6.0
 

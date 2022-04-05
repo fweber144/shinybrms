@@ -2616,7 +2616,7 @@ server <- function(input, output, session) {
         ### 
         (exists("bfit_tmp") && inherits(bfit_tmp, "try-error"))) {
       warn_capt <- capture.output({
-        bfit_tmp <- do.call(brms::brm, args = args_brm)
+        bfit_tmp <- try(do.call(brms::brm, args = args_brm), silent = TRUE)
       }, type = "message")
     }
     
@@ -2626,6 +2626,15 @@ server <- function(input, output, session) {
     if (exists("browser_orig")) options(browser = browser_orig$browser)
     if (exists("RSTUDIO_orig")) Sys.setenv("RSTUDIO" = RSTUDIO_orig)
     
+    # Notifications for the errors thrown by the call to brms::brm():
+    if (inherits(bfit_tmp, "try-error")) {
+      showNotification(
+        attr(bfit_tmp, "condition")$message,
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
     # Notifications for the warnings thrown by the call to brms::brm():
     if (length(warn_capt) > 0L) {
       warn_capt <- unique(warn_capt)
@@ -2651,11 +2660,13 @@ server <- function(input, output, session) {
       }
     }
     
-    C_bfit_raw(list(bfit = bfit_tmp,
-                    is_upload = FALSE,
-                    n_chains_spec = input$advOpts_chains,
-                    da_hash = rlang::hash(da())))
-    reset_brmsfit_upload("dummy_value")
+    if (!inherits(bfit_tmp, "try-error")) {
+      C_bfit_raw(list(bfit = bfit_tmp,
+                      is_upload = FALSE,
+                      n_chains_spec = input$advOpts_chains,
+                      da_hash = rlang::hash(da())))
+      reset_brmsfit_upload("dummy_value")
+    }
   })
   
   output$brmsfit_upload_UI <- renderUI({

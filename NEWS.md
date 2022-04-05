@@ -1,5 +1,9 @@
 # **shinybrms** 1.6.0.9000
 
+## Major changes
+
+* Support for more distributional families for the outcome.
+
 ## Minor changes
 
 * Use a darker gray color for help texts (which constitute the majority of the

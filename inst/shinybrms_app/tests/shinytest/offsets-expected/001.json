@@ -6,8 +6,8 @@
     "advOpts_backend": "rstan",
     "advOpts_chains": 4,
     "advOpts_cores": 2,
+    "advOpts_init": "random",
     "advOpts_init_r": null,
-    "advOpts_inits": "random",
     "advOpts_iter": 2000,
     "advOpts_max_treedepth": 15,
     "advOpts_open_progress": true,
@@ -80,6 +80,7 @@
     "run_stan": 0,
     "seed_PPD": null,
     "sep": ",",
+    "show_advFams": false,
     "show_advOpts": false,
     "show_general_MCMC_tab": false,
     "show_stancode": false,
@@ -92,8 +93,8 @@
     "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> log <\/td> <\/tr>\n  <tr> <td> shape <\/td> <td> log <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "formula_view": "count ~ 1 + Trt*zAge + offset(zBase) + offset(Base) + (1 | patient) + (1 + Trt | visit)",
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + Trt*zAge + offset(zBase) + offset(Base) <\/td> <\/tr>\n  <tr> <td> patient <\/td> <td> 1 <\/td> <\/tr>\n  <tr> <td> visit <\/td> <td> 1 + Trt <\/td> <\/tr>\n   <\/tbody> <\/table>",
-    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> lb <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, -29.8203389830508, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> Trt1 <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> Trt1:zAge <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> zAge <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> lkj(1) <\/td> <td> cor <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> cor <\/td> <td>  <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> patient <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> patient <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Trt1 <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> gamma(0.01, 0.01) <\/td> <td> shape <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <\/tr>\n   <\/tbody> <\/table>",
-    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> lb <\/th>  <\/tr> <\/thead> <tbody>\n  <\/tbody> <\/table>"
+    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Lower bound <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, -29.8203389830508, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> Trt1 <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> Trt1:zAge <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> b <\/td> <td> zAge <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> lkj(1) <\/td> <td> cor <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> cor <\/td> <td>  <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> patient <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> patient <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td>  <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td>  <\/td> <td> sd <\/td> <td> Trt1 <\/td> <td> visit <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> gamma(0.01, 0.01) <\/td> <td> shape <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Lower bound <\/th>  <\/tr> <\/thead> <tbody>\n  <\/tbody> <\/table>"
   },
   "export": {
 

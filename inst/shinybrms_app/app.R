@@ -2294,9 +2294,11 @@ server <- function(input, output, session) {
                                          class = input$prior_class_sel,
                                          coef = input$prior_coef_sel,
                                          group = input$prior_group_sel)
-    prior_set_obj_add_ch <- merge(prior_set_obj_add[!names(prior_set_obj_add) %in% c("prior", "lb", "ub", "source")],
-                                  C_prior_default()[!names(C_prior_default()) %in% c("prior", "lb", "ub", "source")],
-                                  sort = FALSE)
+    prior_set_obj_add_ch <- merge(
+      prior_set_obj_add[!names(prior_set_obj_add) %in% c("prior", "lb", "ub", "source")],
+      C_prior_default()[!names(C_prior_default()) %in% c("prior", "lb", "ub", "source")],
+      sort = FALSE
+    )
     class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
     if (!identical(prior_set_obj_add_ch,
                    prior_set_obj_add[!names(prior_set_obj_add) %in% c("prior", "lb", "ub", "source")])) {

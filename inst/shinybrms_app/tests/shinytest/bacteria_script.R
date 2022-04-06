@@ -31,9 +31,6 @@ app$setInputs(navbar_ID = "Posterior",
               advOpts_adapt_delta = 0.8,
               advOpts_max_treedepth = 10,
               advOpts_save_warmup = FALSE)
-### For testing the workaround for **brms** issue #1259:
-# app$setInputs(advOpts_backend = "rstan", wait_ = FALSE, values_ = FALSE)
-### 
 app$snapshot(filename = "prep_full.json")
 
 ## Posterior --------------------------------------------------------------
@@ -102,20 +99,6 @@ if (getOption("sbtst.run_upd_extend", TRUE)) {
                             export = TRUE),
                filename = "post_noWeek.json")
 }
-
-### For testing the workaround for **brms** issue #1259:
-# app$setInputs(posterior_navlist_ID = "Run Stan",
-#               advOpts_backend = "cmdstanr")
-# app$setInputs(run_stan = "click", timeout_ = 1800000)
-# app$snapshotDownload(
-#   "stanout_download",
-#   filename = file.path("..", paste0(tst_prefix, "_noWeek_brmsissue1259.rds"))
-# )
-# app$snapshot(items = list(input = TRUE,
-#                           output = setdiff(app$listWidgets()$output, "fit_date"),
-#                           export = TRUE),
-#              filename = "post_noWeek_brmsissue1259.json")
-### 
 
 # No-interaction model ----------------------------------------------------
 

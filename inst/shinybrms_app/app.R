@@ -101,7 +101,8 @@ san_prior_tab_nms <- function(x) {
 }
 
 # Stan function names which may be used for specifying a prior distribution:
-prior_stan_fun <- c(
+# Unbounded distributions:
+prior_stan_fun_unbounded <- c(
   "normal",
   "std_normal",
   "exp_mod_normal",
@@ -111,7 +112,10 @@ prior_stan_fun <- c(
   "double_exponential",
   "logistic",
   "gumbel",
-  "skew_double_exponential",
+  "skew_double_exponential"
+)
+# Bounded distributions:
+prior_stan_fun_bounded <- c(
   ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
   "lognormal",
   "chi_square",
@@ -134,6 +138,8 @@ prior_stan_fun <- c(
   "uniform"
   ### 
 )
+# Combined:
+prior_stan_fun <- c(prior_stan_fun_unbounded, prior_stan_fun_bounded)
 
 # brms function names which may be used for specifying a prior distribution:
 prior_brms_fun <- c(
@@ -2285,6 +2291,19 @@ server <- function(input, output, session) {
       showNotification(
         paste("Your custom prior has not been added since your text in the",
               "\"Prior distribution\" input field could not be recognized."),
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
+    if (identical(input$prior_class_sel, "b") &&
+        any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
+        }))) {
+      # Throw an error for now until arguments `lb` and `ub` of
+      # brms::set_prior() are supported by shinybrms:
+      showNotification(
+        "For class \"b\", only unbounded prior distributions are allowed.",
         duration = NA,
         type = "error"
       )

@@ -2283,8 +2283,8 @@ server <- function(input, output, session) {
       }))
     if (!prior_text_valid) {
       showNotification(
-        paste("Your custom prior has not been added since your text in the \"Prior distribution\"",
-              "input field could not be recognized."),
+        paste("Your custom prior has not been added since your text in the",
+              "\"Prior distribution\" input field could not be recognized."),
         duration = NA,
         type = "error"
       )

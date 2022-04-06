@@ -2294,12 +2294,12 @@ server <- function(input, output, session) {
                                          class = input$prior_class_sel,
                                          coef = input$prior_coef_sel,
                                          group = input$prior_group_sel)
-    prior_set_obj_add_ch <- merge(prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "source")],
-                                  C_prior_default()[, !names(C_prior_default()) %in% c("prior", "source")],
+    prior_set_obj_add_ch <- merge(prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "lb", "ub", "source")],
+                                  C_prior_default()[, !names(C_prior_default()) %in% c("prior", "lb", "ub", "source")],
                                   sort = FALSE)
     class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
     if (!identical(prior_set_obj_add_ch,
-                   prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "source")])) {
+                   prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "lb", "ub", "source")])) {
       showNotification(
         paste("Your custom prior has not been added since the combination of",
               "\"Class\", \"Coefficient\", and \"Group\" you have currently selected",
@@ -2334,7 +2334,7 @@ server <- function(input, output, session) {
         (sapply(C_prior_default(), function(x) {
           is.character(x) && all(x == "")
         }) &
-          !grepl("^prior$|^class$|^coef$|^group$", names(C_prior_default())))
+          !grepl("^prior$|^class$|^coef$|^group$|^lb$|^ub$", names(C_prior_default())))
     )
   })
   

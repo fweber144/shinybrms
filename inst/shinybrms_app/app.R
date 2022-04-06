@@ -2302,8 +2302,8 @@ server <- function(input, output, session) {
                    prior_set_obj_add[, !names(prior_set_obj_add) %in% c("prior", "source")])) {
       showNotification(
         paste("Your custom prior has not been added since the combination of",
-              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected is",
-              "not contained in the table of the default priors."),
+              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected",
+              "could not be found in the table of the default priors."),
         duration = NA,
         type = "error"
       )

@@ -2346,7 +2346,10 @@ server <- function(input, output, session) {
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({
-    C_prior()[!prior_colsToHide()]
+    stopifnot(identical(names(C_prior()), names(C_prior_default())))
+    # Hide columns `lb` and `ub` for now until arguments `lb` and `ub` of
+    # brms::set_prior() are supported by shinybrms:
+    C_prior()[!prior_colsToHide() & !names(C_prior()) %in% c("lb", "ub")]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   ## Posterior --------------------------------------------------------------

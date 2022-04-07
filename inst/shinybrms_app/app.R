@@ -2307,7 +2307,7 @@ server <- function(input, output, session) {
     }
     # Basic sanity checks with respect to bounds (necessary until arguments `lb`
     # and `ub` of brms::set_prior() are supported by shinybrms):
-    if ((identical(input$prior_class_sel, "Intercept") || identical(input$prior_class_sel, "b")) &&
+    if (input$prior_class_sel %in% c("Intercept", "b") &&
         any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
         }))) {
@@ -2319,7 +2319,7 @@ server <- function(input, output, session) {
       )
       return()
     }
-    if (identical(input$prior_class_sel, "sd") &&
+    if (input$prior_class_sel %in% "sd" &&
         any(sapply(c(prior_stan_fun_lbx, prior_stan_fun_lb_ub), function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
         }))) {

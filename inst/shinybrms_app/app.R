@@ -2346,7 +2346,7 @@ server <- function(input, output, session) {
       )
       return()
     }
-    prior_classes_lb0 <- c("sigma", "sd")
+    prior_classes_lb0 <- c("sd", "sigma", "shape")
     if (input$prior_class_sel %in% prior_classes_lb0 &&
         any(sapply(c(prior_stan_fun_lbx, prior_stan_fun_lb_ub), function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)

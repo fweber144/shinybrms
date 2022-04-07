@@ -115,8 +115,7 @@ prior_stan_fun_unbounded <- c(
   "skew_double_exponential"
 )
 # Bounded distributions:
-prior_stan_fun_bounded <- c(
-  ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
+prior_stan_fun_lb0 <- c(
   "lognormal",
   "chi_square",
   "inv_chi_square",
@@ -126,16 +125,26 @@ prior_stan_fun_bounded <- c(
   "inv_gamma",
   "weibull",
   "frechet",
-  "rayleigh",
+  "rayleigh"
+)
+prior_stan_fun_lbx <- c(
   "pareto",
   "pareto_type_2",
-  "wiener",
-  ### 
-  ### Requiring a lower bound and an upper bound (which is checked by brms:::check_prior_content()):
+  "wiener"
+)
+prior_stan_fun_lb_ub <- c(
   "beta",
   "beta_proportion",
   "von_mises",
   "uniform"
+)
+prior_stan_fun_bounded <- c(
+  ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
+  prior_stan_fun_lb0,
+  prior_stan_fun_lbx,
+  ### 
+  ### Requiring a lower bound and an upper bound (which is checked by brms:::check_prior_content()):
+  prior_stan_fun_lb_ub
   ### 
 )
 # Combined:

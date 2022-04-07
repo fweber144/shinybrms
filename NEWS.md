@@ -10,6 +10,14 @@
 in-app text). This should make them easier to read and reduce the contrast with
 regard to the dark red hyperlinks.
 * Adapt to changes in **brms** versions > 2.16.3.
+* Perform some basic sanity checks with respect to bounds of custom priors. This
+is necessary because arguments `lb` and `ub` of `brms::set_prior()` are
+currently not supported by **shinybrms** (since they are rarely needed in the
+context of **shinybrms**). In **brms** versions <= 2.16.3, these arguments could
+only be used for parameter class `"b"` (so a sanity check would have already
+been necessary there), but **brms** version 2.16.12 introduced support for `lb`
+and `ub` in many more parameter classes, so sanity checks are even more
+necessary now.
 
 ## Bug fixes
 
@@ -19,11 +27,6 @@ had an effect even if "Zero" was chosen under "Initial values" (namely, for the
 "Range of random initial values [...]" only has an effect if "Random" is chosen
 under "Initial values".
 * Show errors thrown by `brms::brm()` to the user.
-* Throw an error when trying to use a bounded distribution as prior for class
-`"b"`. The reason is that this would require setting arguments `lb` and `ub` of
-`brms::set_prior()` which is currently not supported by **shinybrms**. Apart
-from this technical reason, a bounded prior for class `"b"` typically doesn't
-make sense in the context of **shinybrms**.
 
 # **shinybrms** 1.6.0
 

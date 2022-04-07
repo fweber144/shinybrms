@@ -2267,6 +2267,8 @@ server <- function(input, output, session) {
   # Add a custom prior if the user clicks the corresponding button:
   observeEvent(input$prior_add, {
     req(input$prior_class_sel)
+    # For security reasons, perform a first check of the text entered in the
+    # "Prior distribution" input field:
     prior_text_valid <- identical(input$prior_text, "") ||
       any(sapply(prior_stan_fun, function(prior_stan_fun_i) {
         grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
@@ -2300,6 +2302,30 @@ server <- function(input, output, session) {
       showNotification(
         paste("Your custom prior has not been added since your text in the",
               "\"Prior distribution\" input field could not be recognized."),
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
+    # Define the custom prior:
+    prior_set_obj_add <- brms::set_prior(prior = input$prior_text,
+                                         class = input$prior_class_sel,
+                                         coef = input$prior_coef_sel,
+                                         group = input$prior_group_sel)
+    # Check for existence in the table of default priors:
+    cols_not2compare <- c("prior", "lb", "ub", "source")
+    prior_set_obj_add_ch <- merge(
+      prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare],
+      C_prior_default()[!names(C_prior_default()) %in% cols_not2compare],
+      sort = FALSE
+    )
+    class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
+    if (!identical(prior_set_obj_add_ch,
+                   prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare])) {
+      showNotification(
+        paste("Your custom prior has not been added since the combination of",
+              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected",
+              "could not be found in the table of the default priors."),
         duration = NA,
         type = "error"
       )
@@ -2344,30 +2370,6 @@ server <- function(input, output, session) {
         )),
         duration = NA,
         type = "message"
-      )
-      return()
-    }
-    # Define the custom prior:
-    prior_set_obj_add <- brms::set_prior(prior = input$prior_text,
-                                         class = input$prior_class_sel,
-                                         coef = input$prior_coef_sel,
-                                         group = input$prior_group_sel)
-    # Check for existence in the table of default priors:
-    cols_not2compare <- c("prior", "lb", "ub", "source")
-    prior_set_obj_add_ch <- merge(
-      prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare],
-      C_prior_default()[!names(C_prior_default()) %in% cols_not2compare],
-      sort = FALSE
-    )
-    class(prior_set_obj_add_ch) <- c("brmsprior", "data.frame")
-    if (!identical(prior_set_obj_add_ch,
-                   prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare])) {
-      showNotification(
-        paste("Your custom prior has not been added since the combination of",
-              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected",
-              "could not be found in the table of the default priors."),
-        duration = NA,
-        type = "error"
       )
       return()
     }

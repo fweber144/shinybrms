@@ -10,14 +10,7 @@
 in-app text). This should make them easier to read and reduce the contrast with
 regard to the dark red hyperlinks.
 * Adapt to changes in **brms** versions > 2.16.3.
-* Perform some basic sanity checks with respect to bounds of custom priors. This
-is necessary because arguments `lb` and `ub` of `brms::set_prior()` are
-currently not supported by **shinybrms** (since they are rarely needed in the
-context of **shinybrms**). In **brms** versions <= 2.16.3, these arguments could
-only be used for parameter class `"b"` (so a sanity check would have already
-been necessary there), but **brms** version 2.16.12 introduced support for `lb`
-and `ub` in many more parameter classes, so sanity checks are even more
-necessary now.
+* Perform some basic sanity checks with respect to bounds of custom priors.
 
 ## Bug fixes
 

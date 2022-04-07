@@ -2305,23 +2305,54 @@ server <- function(input, output, session) {
       )
       return()
     }
-    if (identical(input$prior_class_sel, "b") &&
+    # Basic sanity checks with respect to bounds (necessary until arguments `lb`
+    # and `ub` of brms::set_prior() are supported by shinybrms):
+    if ((identical(input$prior_class_sel, "Intercept") || identical(input$prior_class_sel, "b")) &&
         any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
         }))) {
-      # Throw an error for now until arguments `lb` and `ub` of
-      # brms::set_prior() are supported by shinybrms:
       showNotification(
-        "For class \"b\", only unbounded prior distributions are allowed.",
+        paste("For parameter classes \"Intercept\" and \"b\", only unbounded",
+              "prior distributions are allowed."),
         duration = NA,
         type = "error"
       )
       return()
     }
+    if (identical(input$prior_class_sel, "sd") &&
+        any(sapply(c(prior_stan_fun_lbx, prior_stan_fun_lb_ub), function(prior_stan_fun_i) {
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
+        }))) {
+      showNotification(
+        paste("For parameter class \"sd\", only unbounded prior distributions and",
+              "prior distributions having a lower bound of zero are allowed."),
+        duration = NA,
+        type = "error"
+      )
+      return()
+    }
+    if (!input$prior_class_sel %in% c("Intercept", "b", "sd") &&
+        any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
+        }))) {
+      showNotification(
+        HTML(paste(
+          "You have entered a bounded prior distribution for a parameter class for",
+          "which", strong("shinybrms"), "currently does not have automated boundary",
+          "checks. Please verify yourself that the bound(s) set in the \"Prior distribution\"",
+          "input text field match the bounds in the table of the default priors."
+        )),
+        duration = NA,
+        type = "message"
+      )
+      return()
+    }
+    # Define the custom prior:
     prior_set_obj_add <- brms::set_prior(prior = input$prior_text,
                                          class = input$prior_class_sel,
                                          coef = input$prior_coef_sel,
                                          group = input$prior_group_sel)
+    # Check for existence in the table of default priors:
     cols_not2compare <- c("prior", "lb", "ub", "source")
     prior_set_obj_add_ch <- merge(
       prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare],
@@ -2340,6 +2371,7 @@ server <- function(input, output, session) {
       )
       return()
     }
+    # Append the custom prior:
     C_prior_rv$prior_set_obj <- prior_set_obj_add + C_prior_rv$prior_set_obj
     C_prior_rv$prior_set_obj <- unique(C_prior_rv$prior_set_obj)
   })

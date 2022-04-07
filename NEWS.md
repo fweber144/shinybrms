@@ -7,7 +7,8 @@
 ## Minor changes
 
 * Use a darker gray color for help texts (which constitute the majority of the
-in-app text).
+in-app text). This should make them easier to read and reduce the contrast with
+regard to the dark red hyperlinks.
 
 ## Bug fixes
 

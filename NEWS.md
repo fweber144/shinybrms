@@ -11,6 +11,7 @@ in-app text). This should make them easier to read and reduce the contrast with
 regard to the dark red hyperlinks.
 * Adapt to changes in **brms** versions > 2.16.3.
 * Perform some basic sanity checks with respect to bounds of custom priors.
+* Enhance and generalize the help text for the link functions.
 
 ## Bug fixes
 

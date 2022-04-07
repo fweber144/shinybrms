@@ -2522,7 +2522,7 @@ server <- function(input, output, session) {
         )
         req(FALSE)
       }
-      if (save_warmup_tmp) {
+      if (save_warmup_tmp && packageVersion("brms") <= "2.16.13") {
         showNotification(
           HTML(paste0(
             "Because of ", strong("brms", .noWS = "outside"), "'s issue #1257 ",

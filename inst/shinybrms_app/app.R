@@ -38,7 +38,7 @@ if (isTRUE(getOption("shiny.testmode"))) {
 distFams_basic <- list(
   "Choose distributional family ..." = "",
   "Continuous outcome:" = c("Gaussian (normal)" = "gaussian"),
-  "Binary outcome:" = c("Bernoulli with logit link" = "bernoulli"),
+  "Binary outcome:" = c("Bernoulli" = "bernoulli"),
   "Count data outcome:" = c("Negative binomial" = "negbinomial")
 )
 
@@ -430,7 +430,7 @@ ui <- navbarPage(
                     choices = distFams_basic,
                     selectize = TRUE),
         checkboxInput("show_advFams", label = "Show advanced distributional families"),
-        strong("Parameters (with corresponding link functions) specific to this distributional family:"),
+        strong("Parameters specific to this distributional family, with their link function as used in shinybrms:"),
         tableOutput("dist_link"),
         helpText(
           p("For details concerning the link functions, see the help for the R function",

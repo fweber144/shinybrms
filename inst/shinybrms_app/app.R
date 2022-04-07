@@ -2345,19 +2345,20 @@ server <- function(input, output, session) {
       )
       return()
     }
-    if (input$prior_class_sel %in% "sd" &&
+    if (input$prior_class_sel %in% c("sigma", "sd") &&
         any(sapply(c(prior_stan_fun_lbx, prior_stan_fun_lb_ub), function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
         }))) {
       showNotification(
-        paste("For parameter class \"sd\", only unbounded prior distributions and",
-              "prior distributions having a lower bound of zero are allowed."),
+        paste("For parameter classes \"sigma\" and \"sd\", only unbounded",
+              "prior distributions and prior distributions having a",
+              "lower bound of zero are allowed."),
         duration = NA,
         type = "error"
       )
       return()
     }
-    if (!input$prior_class_sel %in% c("Intercept", "b", "sd") &&
+    if (!input$prior_class_sel %in% c("Intercept", "b", "sigma", "sd") &&
         any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
           grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"), input$prior_text)
         }))) {

@@ -2371,7 +2371,6 @@ server <- function(input, output, session) {
         duration = NA,
         type = "message"
       )
-      return()
     }
     # Append the custom prior:
     C_prior_rv$prior_set_obj <- prior_set_obj_add + C_prior_rv$prior_set_obj

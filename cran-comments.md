@@ -1,19 +1,14 @@
-## Resubmission
-
-This is a resubmission for which I have added the repository URL for the
-'cmdstanr' package to the 'DESCRIPTION' file (field 'Additional_repositories').
-
 ## Test environments
 
 * Local:
     + R 4.1.2 on Ubuntu 20.04.3 LTS system (platform:
       x86_64-pc-linux-gnu (64-bit))
-    + R 4.1.2 on Windows 10 x64 (build 19043) system (platform:
+    + R 4.1.3 on Windows 10 x64 (build 19044) system (platform:
       x86_64-w64-mingw32/x64 (64-bit))
 * win-builder:
-    + R-devel (2021-11-02 r81131)
-    + R-release (R 4.1.1)
-    + R-oldrelease (R 4.0.5)
+    + R-devel (R Under development (unstable) (2022-04-25 r82253 ucrt))
+    + R-release (R version 4.2.0 (2022-04-22 ucrt))
+    + R-oldrelease (R version 4.1.3 (2022-03-10))
 
 ## R CMD check results
 

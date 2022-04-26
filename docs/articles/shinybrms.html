@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.6.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.7.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="../index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="../articles/shinybrms.html">Get started</a>
 </li>
@@ -62,7 +58,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/fweber144/shinybrms/">
+  <a href="https://github.com/fweber144/shinybrms/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -77,156 +73,251 @@
 
       
 
-      </header><script src="shinybrms_files/header-attrs-2.11/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Get started</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/fweber144/shinybrms/blob/master/vignettes/shinybrms.Rmd"><code>vignettes/shinybrms.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/fweber144/shinybrms/blob/HEAD/vignettes/shinybrms.Rmd" class="external-link"><code>vignettes/shinybrms.Rmd</code></a></small>
       <div class="hidden name"><code>shinybrms.Rmd</code></div>
 
     </div>
 
     
     
-<p>The following screenshots show how to fit an example model in the <strong>shinybrms</strong> app. For instructions on how to launch the <strong>shinybrms</strong> app, see the <a href="../index.html">starting page</a>.</p>
-<div id="home" class="section level2">
-<h2 class="hasAnchor">
-<a href="#home" class="anchor"></a>Home</h2>
+<p>The following screenshots show how to fit an example model in the
+<strong>shinybrms</strong> app. For instructions on how to launch the
+<strong>shinybrms</strong> app, see the <a href="../index.html">starting
+page</a>.</p>
+<div class="section level2">
+<h2 id="home">Home<a class="anchor" aria-label="anchor" href="#home"></a>
+</h2>
 <p><br>
-After launching the <strong>shinybrms</strong> app, the following page is shown:</p>
-<p><br><a href="screenshots/Home.png"><img src="screenshots/Home.png"></a> <em>Fig. 1: Page “Home”.</em></p>
+After launching the <strong>shinybrms</strong> app, the following page
+is shown:</p>
+<p><br><a href="screenshots/Home.png"><img src="screenshots/Home.png"></a>
+<em>Fig. 1: Page “Home”.</em></p>
 </div>
-<div id="data" class="section level2">
-<h2 class="hasAnchor">
-<a href="#data" class="anchor"></a>Data</h2>
+<div class="section level2">
+<h2 id="data">Data<a class="anchor" aria-label="anchor" href="#data"></a>
+</h2>
 <p><br>
-We then switch to page “Data”. Usually, you will want to upload a custom dataset, but for the purpose of demonstration, we will choose the example dataset <code><a href="https://rdrr.io/pkg/MASS/man/bacteria.html">MASS::bacteria</a></code> here:</p>
-<p><br><a href="screenshots/Data.png"><img src="screenshots/Data.png"></a> <em>Fig. 2: Page “Data” (top).</em></p>
+We then switch to page “Data”. Usually, you will want to upload a custom
+dataset, but for the purpose of demonstration, we will choose the
+example dataset <code><a href="https://rdrr.io/pkg/MASS/man/bacteria.html" class="external-link">MASS::bacteria</a></code> here:</p>
+<p><br><a href="screenshots/Data.png"><img src="screenshots/Data.png"></a>
+<em>Fig. 2: Page “Data” (top).</em></p>
 <p><br>
-Further down on page “Data”, we may choose, for example, to show all rows of the dataset:</p>
-<p><br><a href="screenshots/Data_AllRows.png"><img src="screenshots/Data_AllRows.png"></a> <em>Fig. 3: Page “Data” (further down when showing all rows of the dataset).</em></p>
+Further down on page “Data”, we may choose, for example, to show all
+rows of the dataset:</p>
+<p><br><a href="screenshots/Data_AllRows.png"><img src="screenshots/Data_AllRows.png"></a> <em>Fig. 3: Page “Data”
+(further down when showing all rows of the dataset).</em></p>
 </div>
-<div id="likelihood" class="section level2">
-<h2 class="hasAnchor">
-<a href="#likelihood" class="anchor"></a>Likelihood</h2>
-<div id="outcome" class="section level3">
-<h3 class="hasAnchor">
-<a href="#outcome" class="anchor"></a>Outcome</h3>
-<p><br>
-On page “Likelihood”, the first tab is called “Outcome”. Here, we define variable <code>y</code> (from our dataset <code><a href="https://rdrr.io/pkg/MASS/man/bacteria.html">MASS::bacteria</a></code>) to be the outcome and since this is a binary outcome, we choose the distributional family “Bernoulli with logit link”:</p>
-<p><br><a href="screenshots/Likelihood_Outcome.png"><img src="screenshots/Likelihood_Outcome.png"></a> <em>Fig. 4: Page “Likelihood”, tab “Outcome”.</em></p>
-</div>
-<div id="predictors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#predictors" class="anchor"></a>Predictors</h3>
-<p><br>
-After selecting tab “Predictors”, we set up (pooled) main effects for variables <code>week</code> and <code>trt</code> and partially pooled main effects (i.e., partially pooled intercepts) for variable <code>ID</code>:</p>
-<p><br><a href="screenshots/Likelihood_Predictors.png"><img src="screenshots/Likelihood_Predictors.png"></a> <em>Fig. 5: Page “Likelihood”, tab “Predictors” (top).</em></p>
-<p><br>
-After scrolling down, we set up a (pooled) interaction term for <code>week</code> and <code>trt</code>:</p>
-<p><br><a href="screenshots/Likelihood_Predictors_Int.png"><img src="screenshots/Likelihood_Predictors_Int.png"></a> <em>Fig. 6: Page “Likelihood”, tab “Predictors” (bottom; setting up the interaction effect).</em></p>
-<p><br>
-After clicking on “Add interaction term”, we get:</p>
-<p><br><a href="screenshots/Likelihood_Predictors_done.png"><img src="screenshots/Likelihood_Predictors_done.png"></a> <em>Fig. 7: Page “Likelihood”, tab “Predictors” (bottom; after adding the interaction effect).</em></p>
-</div>
-</div>
-<div id="prior" class="section level2">
-<h2 class="hasAnchor">
-<a href="#prior" class="anchor"></a>Prior</h2>
-<div id="default-priors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#default-priors" class="anchor"></a>Default priors</h3>
-<p><br>
-At the top of page “Prior”, we obtain a table with the default priors for the model we have specified so far:</p>
-<p><br><a href="screenshots/Prior_Default.png"><img src="screenshots/Prior_Default.png"></a> <em>Fig. 8: Page “Prior” (top).</em></p>
-</div>
-<div id="custom-priors" class="section level3">
-<h3 class="hasAnchor">
-<a href="#custom-priors" class="anchor"></a>Custom priors</h3>
-<p><br>
-At the bottom of page “Prior”, we can specify custom priors. Here, we will use a Student-<em>t</em> prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 4 for all regression coefficients (parameter class <code>b</code>):</p>
-<p><br><a href="screenshots/Prior_Custom.png"><img src="screenshots/Prior_Custom.png"></a> <em>Fig. 9: Page “Prior” (bottom; setting up a custom prior).</em></p>
-<p><br>
-After clicking on “Add prior”, we see that our Student-<em>t</em> prior was added to the preview table on the right:</p>
-<p><br><a href="screenshots/Prior_Custom_done.png"><img src="screenshots/Prior_Custom_done.png"></a> <em>Fig. 10: Page “Prior” (bottom; after adding a custom prior).</em></p>
-</div>
-</div>
-<div id="posterior" class="section level2">
-<h2 class="hasAnchor">
-<a href="#posterior" class="anchor"></a>Posterior</h2>
-<div id="run-stan" class="section level3">
-<h3 class="hasAnchor">
-<a href="#run-stan" class="anchor"></a>Run Stan</h3>
-<p><br>
-On page “Posterior”, the first tab is called “Run Stan”. At the top of this tab, we could get a preview of the Stan code and the Stan data (and download them):</p>
-<p><br><a href="screenshots/Posterior_Run.png"><img src="screenshots/Posterior_Run.png"></a> <em>Fig. 11: Page “Posterior”, tab “Run Stan” (top).</em></p>
-<p><br>
-Here, we focus on panel “Advanced options” where we set a seed for reproducibility:</p>
-<p><br><a href="screenshots/Posterior_Run_AdvOpts.png"><img src="screenshots/Posterior_Run_AdvOpts.png"></a> <em>Fig. 12: Page “Posterior”, tab “Run Stan”, panel “Advanced options”.</em></p>
-<p><br>
-Next, we head over to the fundamental part of our analysis, the inference of the posterior distribution of all parameters. Since we have everything prepared now, this is accomplished quite easily: Right below panel “Advanced options”, we find panel “Run Stan” where we simply click the button for running Stan:</p>
-<p><br><a href="screenshots/Posterior_Run_Run.png"><img src="screenshots/Posterior_Run_Run.png"></a> <em>Fig. 13: Page “Posterior”, tab “Run Stan”, panel “Run Stan”.</em></p>
-<p><br>
-Now Stan starts compiling the C++ code for our model and after having finished the compilation, Stan automatically starts sampling. As we have not changed the default for advanced option “Open progress”, a file will automatically open up (in a new browser tab) after completion of the compilation. This file shows the sampling progress:</p>
-<p><br><a href="screenshots/Posterior_Sampling_1.png"><img src="screenshots/Posterior_Sampling_1.png"></a> <em>Fig. 14: Sampling progress (top).</em></p>
-<p><br>
-Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks something like this:</p>
-<p><br><a href="screenshots/Posterior_Sampling_2.png"><img src="screenshots/Posterior_Sampling_2.png"></a> <em>Fig. 15: Sampling progress (bottom; after completion of sampling).</em></p>
-<p><br>
-We can now switch back to the browser tab where <strong>shinybrms</strong> is running. Most importantly, we get the result of an “overall check” for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on tab “MCMC diagnostics”. Here, all MCMC diagnostics are OK:</p>
-<p><br><a href="screenshots/Posterior_Run_Run_done.png"><img src="screenshots/Posterior_Run_Run_done.png"></a> <em>Fig. 16: Page “Posterior”, tab “Run Stan”, panel “Run Stan” (after completion of the Stan run).</em></p>
-</div>
-<div id="mcmc-diagnostics-details" class="section level3">
-<h3 class="hasAnchor">
-<a href="#mcmc-diagnostics-details" class="anchor"></a>MCMC diagnostics (details)</h3>
-<p><br>
-Tab “MCMC diagnostics” first shows a description which MCMC diagnostics are checked here:</p>
-<p><br><a href="screenshots/Posterior_Diagnostics.png"><img src="screenshots/Posterior_Diagnostics.png"></a> <em>Fig. 17: Page “Posterior”, tab “MCMC diagnostics” (top).</em></p>
-<p><br>
-Underneath this description, the diagnostic results for the given Stan run are shown; first the diagnostics specific to Hamiltonian Monte Carlo (HMC) and then the general MCMC diagnostics:</p>
-<p><br><a href="screenshots/Posterior_Diagnostics_General.png"><img src="screenshots/Posterior_Diagnostics_General.png"></a> <em>Fig. 18: Page “Posterior”, tab “MCMC diagnostics” (bottom).</em></p>
-<p><br>
-For the general MCMC diagnostics (which are computed for each parameter as well as for the accumulated log-posterior density), it is also possible to show a detailed table:</p>
-<p><br><a href="screenshots/Posterior_Diagnostics_General_Detailed.png"><img src="screenshots/Posterior_Diagnostics_General_Detailed.png"></a> <em>Fig. 19: Page “Posterior”, tab “MCMC diagnostics”, top of the detailed table of the general MCMC diagnostics.</em></p>
-</div>
-<div id="default-summary" class="section level3">
-<h3 class="hasAnchor">
-<a href="#default-summary" class="anchor"></a>Default summary</h3>
-<p><br>
-Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab “Default summary”, we get a short summary of our Stan run, including the median (column <code>Estimate</code>), the median absolute deviation (column <code>Est.Error</code>), and the 2.5% and 97.5% quantiles (columns <code>l-95% CI</code> and <code>u-95% CI</code>, respectively) of the marginal posterior distribution of the most important parameters:</p>
-<p><br><a href="screenshots/Posterior_Summary.png"><img src="screenshots/Posterior_Summary.png"></a> <em>Fig. 20: Page “Posterior”, tab “Default summary”.</em></p>
-</div>
-<div id="custom-summary" class="section level3">
-<h3 class="hasAnchor">
-<a href="#custom-summary" class="anchor"></a>Custom summary</h3>
-<p><br>
-The purpose of tab “Custom summary” is explained in the help text of that tab:</p>
-<p><br><a href="screenshots/Posterior_CustSummary.png"><img src="screenshots/Posterior_CustSummary.png"></a> <em>Fig. 21: Page “Posterior”, tab “Custom summary” (top).</em></p>
-<p><br>
-Here, it makes sense to calculate posterior summary quantities for the <code>trt</code>-specific <code>week</code> effects which are given by the sum of the main effect of <code>week</code> and the interaction effect with the corresponding <code>trt</code> value (except for the reference level of <code>trt</code> where this interaction effect does not exist):</p>
-<p><br><a href="screenshots/Posterior_CustSummary_done.png"><img src="screenshots/Posterior_CustSummary_done.png"></a> <em>Fig. 22: Page “Posterior”, tab “Custom summary” (bottom; showing a custom summary for the <code>week:trt</code> effects).</em></p>
-</div>
-<div id="conditional-effects" class="section level3">
-<h3 class="hasAnchor">
-<a href="#conditional-effects" class="anchor"></a>Conditional effects</h3>
-<p><br>
-The purpose of tab “Conditional effects” is explained in the help text of that tab:</p>
-<p><br><a href="screenshots/Posterior_CondEff.png"><img src="screenshots/Posterior_CondEff.png"></a> <em>Fig. 23: Page “Posterior”, tab “Conditional effects” (top).</em></p>
-<p><br>
-Here, it makes sense to plot the conditional effects for the <code>week:trt</code> interaction:</p>
-<p><br><a href="screenshots/Posterior_CondEff_done.png"><img src="screenshots/Posterior_CondEff_done.png"></a> <em>Fig. 24: Page “Posterior”, tab “Conditional effects” (bottom; showing the plot for <code>week:trt</code>).</em></p>
-</div>
-<div id="launch-shinystan" class="section level3">
-<h3 class="hasAnchor">
-<a href="#launch-shinystan" class="anchor"></a>Launch <strong>shinystan</strong>
+<div class="section level2">
+<h2 id="likelihood">Likelihood<a class="anchor" aria-label="anchor" href="#likelihood"></a>
+</h2>
+<div class="section level3">
+<h3 id="outcome">Outcome<a class="anchor" aria-label="anchor" href="#outcome"></a>
 </h3>
 <p><br>
-Note that the output shown on tab “Default summary” is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the <a href="https://shiny.rstudio.com/"><strong>shiny</strong></a> app from <a href="https://mc-stan.org/shinystan/"><strong>shinystan</strong></a> which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the <strong>shinystan</strong> app by clicking the corresponding button on tab “Launch <strong>shinystan</strong>” (after having entered a seed for the reproducibility of the posterior predictive checks):</p>
-<p><br><a href="screenshots/Posterior_shinystan.png"><img src="screenshots/Posterior_shinystan.png"></a> <em>Fig. 21: Page “Posterior”, tab “Launch <strong>shinystan</strong>”.</em></p>
+On page “Likelihood”, the first tab is called “Outcome”. Here, we define
+variable <code>y</code> (from our dataset <code><a href="https://rdrr.io/pkg/MASS/man/bacteria.html" class="external-link">MASS::bacteria</a></code>)
+to be the outcome and since this is a binary outcome, we choose the
+distributional family “Bernoulli”:</p>
+<p><br><a href="screenshots/Likelihood_Outcome.png"><img src="screenshots/Likelihood_Outcome.png"></a> <em>Fig. 4: Page
+“Likelihood”, tab “Outcome”.</em></p>
+</div>
+<div class="section level3">
+<h3 id="predictors">Predictors<a class="anchor" aria-label="anchor" href="#predictors"></a>
+</h3>
 <p><br>
-At this point, the <strong>shinybrms</strong> workflow ends and passes over to <strong>shinystan</strong>.</p>
+After selecting tab “Predictors”, we set up (pooled) main effects for
+variables <code>week</code> and <code>trt</code> and partially pooled
+main effects (i.e., partially pooled intercepts) for variable
+<code>ID</code>:</p>
+<p><br><a href="screenshots/Likelihood_Predictors.png"><img src="screenshots/Likelihood_Predictors.png"></a> <em>Fig. 5: Page
+“Likelihood”, tab “Predictors” (top).</em></p>
+<p><br>
+After scrolling down, we set up a (pooled) interaction term for
+<code>week</code> and <code>trt</code>:</p>
+<p><br><a href="screenshots/Likelihood_Predictors_Int.png"><img src="screenshots/Likelihood_Predictors_Int.png"></a> <em>Fig. 6: Page
+“Likelihood”, tab “Predictors” (bottom; setting up the interaction
+effect).</em></p>
+<p><br>
+After clicking on “Add interaction term”, we get:</p>
+<p><br><a href="screenshots/Likelihood_Predictors_done.png"><img src="screenshots/Likelihood_Predictors_done.png"></a> <em>Fig. 7: Page
+“Likelihood”, tab “Predictors” (bottom; after adding the interaction
+effect).</em></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="prior">Prior<a class="anchor" aria-label="anchor" href="#prior"></a>
+</h2>
+<div class="section level3">
+<h3 id="default-priors">Default priors<a class="anchor" aria-label="anchor" href="#default-priors"></a>
+</h3>
+<p><br>
+At the top of page “Prior”, we obtain a table with the default priors
+for the model we have specified so far:</p>
+<p><br><a href="screenshots/Prior_Default.png"><img src="screenshots/Prior_Default.png"></a> <em>Fig. 8: Page “Prior”
+(top).</em></p>
+</div>
+<div class="section level3">
+<h3 id="custom-priors">Custom priors<a class="anchor" aria-label="anchor" href="#custom-priors"></a>
+</h3>
+<p><br>
+At the bottom of page “Prior”, we can specify custom priors. Here, we
+will use a Student-<em>t</em> prior distribution with 3 degrees of
+freedom, a location parameter of 0, and a scale parameter of 4 for all
+regression coefficients (parameter class <code>b</code>):</p>
+<p><br><a href="screenshots/Prior_Custom.png"><img src="screenshots/Prior_Custom.png"></a> <em>Fig. 9: Page “Prior”
+(bottom; setting up a custom prior).</em></p>
+<p><br>
+After clicking on “Add prior”, we see that our Student-<em>t</em> prior
+was added to the preview table on the right:</p>
+<p><br><a href="screenshots/Prior_Custom_done.png"><img src="screenshots/Prior_Custom_done.png"></a> <em>Fig. 10: Page “Prior”
+(bottom; after adding a custom prior).</em></p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="posterior">Posterior<a class="anchor" aria-label="anchor" href="#posterior"></a>
+</h2>
+<div class="section level3">
+<h3 id="run-stan">Run Stan<a class="anchor" aria-label="anchor" href="#run-stan"></a>
+</h3>
+<p><br>
+On page “Posterior”, the first tab is called “Run Stan”. At the top of
+this tab, we could get a preview of the Stan code and the Stan data (and
+download them):</p>
+<p><br><a href="screenshots/Posterior_Run.png"><img src="screenshots/Posterior_Run.png"></a> <em>Fig. 11: Page
+“Posterior”, tab “Run Stan” (top).</em></p>
+<p><br>
+Here, we focus on panel “Advanced options” where we set a seed for
+reproducibility:</p>
+<p><br><a href="screenshots/Posterior_Run_AdvOpts.png"><img src="screenshots/Posterior_Run_AdvOpts.png"></a> <em>Fig. 12: Page
+“Posterior”, tab “Run Stan”, panel “Advanced options”.</em></p>
+<p><br>
+Next, we head over to the fundamental part of our analysis, the
+inference of the posterior distribution of all parameters. Since we have
+everything prepared now, this is accomplished quite easily: Right below
+panel “Advanced options”, we find panel “Run Stan” where we simply click
+the button for running Stan:</p>
+<p><br><a href="screenshots/Posterior_Run_Run.png"><img src="screenshots/Posterior_Run_Run.png"></a> <em>Fig. 13: Page
+“Posterior”, tab “Run Stan”, panel “Run Stan”.</em></p>
+<p><br>
+Now Stan starts compiling the C++ code for our model and after having
+finished the compilation, Stan automatically starts sampling. As we have
+not changed the default for advanced option “Open progress”, a file will
+automatically open up (in a new browser tab) after completion of the
+compilation. This file shows the sampling progress:</p>
+<p><br><a href="screenshots/Posterior_Sampling_1.png"><img src="screenshots/Posterior_Sampling_1.png"></a> <em>Fig. 14: Sampling
+progress (top).</em></p>
+<p><br>
+Depending on your model and data, the sampling might take a while. For
+the example here, the sampling proceeds quite fast. Note that the
+progress file needs to be refreshed manually (by refreshing the
+corresponding browser tab). When Stan has finished sampling, the bottom
+of the progress file looks something like this:</p>
+<p><br><a href="screenshots/Posterior_Sampling_2.png"><img src="screenshots/Posterior_Sampling_2.png"></a> <em>Fig. 15: Sampling
+progress (bottom; after completion of sampling).</em></p>
+<p><br>
+We can now switch back to the browser tab where
+<strong>shinybrms</strong> is running. Most importantly, we get the
+result of an “overall check” for the Markov chain Monte Carlo (MCMC)
+diagnostics which are given in detail on tab “MCMC diagnostics”. Here,
+all MCMC diagnostics are OK:</p>
+<p><br><a href="screenshots/Posterior_Run_Run_done.png"><img src="screenshots/Posterior_Run_Run_done.png"></a> <em>Fig. 16: Page
+“Posterior”, tab “Run Stan”, panel “Run Stan” (after completion of the
+Stan run).</em></p>
+</div>
+<div class="section level3">
+<h3 id="mcmc-diagnostics-details">MCMC diagnostics (details)<a class="anchor" aria-label="anchor" href="#mcmc-diagnostics-details"></a>
+</h3>
+<p><br>
+Tab “MCMC diagnostics” first shows a description which MCMC diagnostics
+are checked here:</p>
+<p><br><a href="screenshots/Posterior_Diagnostics.png"><img src="screenshots/Posterior_Diagnostics.png"></a> <em>Fig. 17: Page
+“Posterior”, tab “MCMC diagnostics” (top).</em></p>
+<p><br>
+Underneath this description, the diagnostic results for the given Stan
+run are shown; first the diagnostics specific to Hamiltonian Monte Carlo
+(HMC) and then the general MCMC diagnostics:</p>
+<p><br><a href="screenshots/Posterior_Diagnostics_General.png"><img src="screenshots/Posterior_Diagnostics_General.png"></a> <em>Fig. 18:
+Page “Posterior”, tab “MCMC diagnostics” (bottom).</em></p>
+<p><br>
+For the general MCMC diagnostics (which are computed for each parameter
+as well as for the accumulated log-posterior density), it is also
+possible to show a detailed table:</p>
+<p><br><a href="screenshots/Posterior_Diagnostics_General_Detailed.png"><img src="screenshots/Posterior_Diagnostics_General_Detailed.png"></a>
+<em>Fig. 19: Page “Posterior”, tab “MCMC diagnostics”, top of the
+detailed table of the general MCMC diagnostics.</em></p>
+</div>
+<div class="section level3">
+<h3 id="default-summary">Default summary<a class="anchor" aria-label="anchor" href="#default-summary"></a>
+</h3>
+<p><br>
+Since all MCMC diagnostics look good, we may start interpreting the
+posterior. On tab “Default summary”, we get a short summary of our Stan
+run, including the median (column <code>Estimate</code>), the median
+absolute deviation (column <code>Est.Error</code>), and the 2.5% and
+97.5% quantiles (columns <code>l-95% CI</code> and
+<code>u-95% CI</code>, respectively) of the marginal posterior
+distribution of the most important parameters:</p>
+<p><br><a href="screenshots/Posterior_Summary.png"><img src="screenshots/Posterior_Summary.png"></a> <em>Fig. 20: Page
+“Posterior”, tab “Default summary”.</em></p>
+</div>
+<div class="section level3">
+<h3 id="custom-summary">Custom summary<a class="anchor" aria-label="anchor" href="#custom-summary"></a>
+</h3>
+<p><br>
+The purpose of tab “Custom summary” is explained in the help text of
+that tab:</p>
+<p><br><a href="screenshots/Posterior_CustSummary.png"><img src="screenshots/Posterior_CustSummary.png"></a> <em>Fig. 21: Page
+“Posterior”, tab “Custom summary” (top).</em></p>
+<p><br>
+Here, it makes sense to calculate posterior summary quantities for the
+<code>trt</code>-specific <code>week</code> effects which are given by
+the sum of the main effect of <code>week</code> and the interaction
+effect with the corresponding <code>trt</code> value (except for the
+reference level of <code>trt</code> where this interaction effect does
+not exist):</p>
+<p><br><a href="screenshots/Posterior_CustSummary_done.png"><img src="screenshots/Posterior_CustSummary_done.png"></a> <em>Fig. 22:
+Page “Posterior”, tab “Custom summary” (bottom; showing a custom summary
+for the <code>week:trt</code> effects).</em></p>
+</div>
+<div class="section level3">
+<h3 id="conditional-effects">Conditional effects<a class="anchor" aria-label="anchor" href="#conditional-effects"></a>
+</h3>
+<p><br>
+The purpose of tab “Conditional effects” is explained in the help text
+of that tab:</p>
+<p><br><a href="screenshots/Posterior_CondEff.png"><img src="screenshots/Posterior_CondEff.png"></a> <em>Fig. 23: Page
+“Posterior”, tab “Conditional effects” (top).</em></p>
+<p><br>
+Here, it makes sense to plot the conditional effects for the
+<code>week:trt</code> interaction:</p>
+<p><br><a href="screenshots/Posterior_CondEff_done.png"><img src="screenshots/Posterior_CondEff_done.png"></a> <em>Fig. 24: Page
+“Posterior”, tab “Conditional effects” (bottom; showing the plot for
+<code>week:trt</code>).</em></p>
+</div>
+<div class="section level3">
+<h3 id="launch-shinystan">Launch <strong>shinystan</strong><a class="anchor" aria-label="anchor" href="#launch-shinystan"></a>
+</h3>
+<p><br>
+Note that the output shown on tab “Default summary” is only intended for
+a quick inspection. A much more comprehensive analysis of the output is
+possible using the <a href="https://shiny.rstudio.com/" class="external-link"><strong>shiny</strong></a> app from <a href="https://mc-stan.org/shinystan/" class="external-link"><strong>shinystan</strong></a>
+which also offers posterior predictive checks as well as more details
+concerning the MCMC diagnostics. We launch the
+<strong>shinystan</strong> app by clicking the corresponding button on
+tab “Launch <strong>shinystan</strong>” (after having entered a seed for
+the reproducibility of the posterior predictive checks):</p>
+<p><br><a href="screenshots/Posterior_shinystan.png"><img src="screenshots/Posterior_shinystan.png"></a> <em>Fig. 21: Page
+“Posterior”, tab “Launch <strong>shinystan</strong>”.</em></p>
+<p><br>
+At this point, the <strong>shinybrms</strong> workflow ends and passes
+over to <strong>shinystan</strong>.</p>
 </div>
 </div>
   </div>
@@ -242,11 +333,13 @@ At this point, the <strong>shinybrms</strong> workflow ends and passes over to <
 
 
       <footer><div class="copyright">
-  <p>Developed by Frank Weber.</p>
+  <p></p>
+<p>Developed by Frank Weber.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer>
@@ -254,6 +347,8 @@ At this point, the <strong>shinybrms</strong> workflow ends and passes over to <
 
   
 
+
+  
 
   </body>
 </html>

@@ -46,7 +46,7 @@ Further down on page "Data", we may choose, for example, to show all rows of the
 ### Outcome
 
 \
-On page "Likelihood", the first tab is called "Outcome". Here, we define variable `y` (from our dataset `MASS::bacteria`) to be the outcome and since this is a binary outcome, we choose the distributional family "Bernoulli with logit link":
+On page "Likelihood", the first tab is called "Outcome". Here, we define variable `y` (from our dataset `MASS::bacteria`) to be the outcome and since this is a binary outcome, we choose the distributional family "Bernoulli":
 
 \
 [![](screenshots/Likelihood_Outcome.png)](screenshots/Likelihood_Outcome.png)

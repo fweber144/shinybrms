@@ -1,5 +1,11 @@
 # **shinybrms** 1.7.0.9000
 
+## Minor changes
+
+* The threshold for worrying E-BFMI values was increased from 0.2 to 0.3 (to
+comply with Betancourt, 2018,
+[arXiv:1701.02434v2](https://arxiv.org/abs/1701.02434v2)).
+
 # **shinybrms** 1.7.0
 
 ## Major changes

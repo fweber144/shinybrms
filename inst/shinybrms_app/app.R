@@ -1050,7 +1050,7 @@ ui <- navbarPage(
             "In general, the first two of these diagnostics are worrying if they are greater than",
             "zero (i.e. at least one iteration ending with a divergence or at least one iteration",
             "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
-            "smaller than 0.2 for at least one chain."),
+            "smaller than 0.3 for at least one chain."),
           p("The general MCMC diagnostics (computed for each parameter",
             "as well as for the accumulated log-posterior density) are:",
             tags$ul(
@@ -2804,7 +2804,7 @@ server <- function(input, output, session) {
     
     C_EBFMI <- setNames(rstan::get_bfmi(C_sfit),
                         paste0("chain_", sapply(C_sfit@stan_args, "[[", "chain_id")))
-    C_EBFMI_OK <- all(C_EBFMI >= 0.2)
+    C_EBFMI_OK <- all(C_EBFMI >= 0.3)
     
     ###### General MCMC diagnostics -------------------------------------------
     

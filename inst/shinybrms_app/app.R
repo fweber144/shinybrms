@@ -2419,7 +2419,7 @@ server <- function(input, output, session) {
   })
   
   output$prior_default_view <- renderTable({
-    C_prior_default()[!prior_colsToHide()]
+    brms:::prepare_print_prior(C_prior_default())[!prior_colsToHide()]
   }, sanitize.colnames.function = san_prior_tab_nms)
   
   output$prior_set_view <- renderTable({

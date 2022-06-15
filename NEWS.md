@@ -10,8 +10,7 @@ empty fields anymore. The reason for this change is that empty fields arising
 from a flat prior could have been confounded too easily with empty fields
 arising from the vectorization ("inheritance") of the prior within a given
 parameter class. This was especially problematic because the former help text
-underneath the table was formulated mistakably. Now that empty fields are
-avoided, this help text is not necessary anymore and thus was removed.
+underneath the table was worded mistakably.
 
 # **shinybrms** 1.7.0
 

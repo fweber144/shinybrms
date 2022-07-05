@@ -11,6 +11,11 @@ from a flat prior could have been confounded too easily with empty fields
 arising from the vectorization ("inheritance") of the prior within a given
 parameter class. This was especially problematic because the former help text
 underneath the table was worded mistakably.
+* A recompilation of the C++ code is now avoided more often. More specifically,
+affected cases are those where `brms:::update.brmsfit()` is used with a formula
+that was extended on its right-hand side. In those cases, **shinybrms** now
+avoids a recompilation by specifying argument `newdata` of
+`brms:::update.brmsfit()`.
 
 # **shinybrms** 1.7.0
 

@@ -28,6 +28,11 @@ that was extended on its right-hand side. In those cases, **shinybrms** now
 avoids a recompilation by specifying argument `newdata` of
 `brms:::update.brmsfit()`.
 
+## Bug fixes
+
+* Avoid a warning about a deprecated icon called `"home"` when launching the
+app. This required increasing the required **shiny** version to 1.7.0.
+
 # **shinybrms** 1.7.0
 
 ## Major changes

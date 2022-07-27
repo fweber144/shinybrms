@@ -1,13 +1,13 @@
 ## Test environments
 
 * Local:
-    + R 4.1.3 on Ubuntu 20.04.4 LTS system (platform:
+    + R 4.2.1 on Ubuntu 22.04 LTS system (platform:
       x86_64-pc-linux-gnu (64-bit))
-    + R 4.2.0 on Windows 10 x64 (build 19044) system (platform:
+    + R 4.2.1 (2022-06-23 ucrt) on Windows 10 x64 (build 19044) system (platform:
       x86_64-w64-mingw32/x64 (64-bit))
 * win-builder:
-    + R-devel (R Under development (unstable) (2022-04-25 r82253 ucrt))
-    + R-release (R version 4.2.0 (2022-04-22 ucrt))
+    + R-devel (R Under development (unstable) (2022-07-26 r82626 ucrt))
+    + R-release (R version 4.2.1 (2022-06-23 ucrt))
     + R-oldrelease (R version 4.1.3 (2022-03-10))
 
 ## R CMD check results

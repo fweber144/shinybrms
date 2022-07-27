@@ -55,14 +55,14 @@
       "reg<-->nutrient<-->amd",
       "popu<-->gen"
     ],
-    "pred_mainCP_sel": [
+    "pred_mainPL_sel": [
       "reg",
       "rack",
       "nutrient",
       "amd",
       "status"
     ],
-    "pred_mainPP_sel": [
+    "pred_mainGL_sel": [
       "popu",
       "gen"
     ],

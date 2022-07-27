@@ -9,7 +9,7 @@ app$setInputs(navbar_ID = "Likelihood",
               outc_sel = "y",
               dist_sel = "bernoulli")
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = "x1")
+              pred_mainPL_sel = "x1")
 app$setInputs(navbar_ID = "Data")
 app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "data_upload"),
                           output = TRUE,

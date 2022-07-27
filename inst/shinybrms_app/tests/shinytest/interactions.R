@@ -16,8 +16,8 @@ app$setInputs(pred_int_add = "click")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot()
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("reg", "rack", "nutrient", "amd", "status"),
-              pred_mainPP_sel = c("popu", "gen"))
+              pred_mainPL_sel = c("reg", "rack", "nutrient", "amd", "status"),
+              pred_mainGL_sel = c("popu", "gen"))
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot()
 # A test for the bug fixed by commit 17ba0f6de57741b1f39157b10f31e28af6c5e52b:
@@ -70,22 +70,22 @@ app$snapshot()
 # A test for removing a variable whose main effect is involved in at least one interaction (fixed by
 # commit b880b306cf6ad8a13cae235590c9a430c6c669c3):
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("rack", "nutrient", "amd", "status"))
+              pred_mainPL_sel = c("rack", "nutrient", "amd", "status"))
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot()
 # A test for re-adding the previously removed variable (requires to re-add all previously added
 # interaction terms involving the previously removed variable, but here only one of those
 # interaction terms is re-added):
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("rack", "nutrient", "amd", "status", "reg"))
+              pred_mainPL_sel = c("rack", "nutrient", "amd", "status", "reg"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot()
 # A test for adding a variable at a specific position (here, "reg" at the beginning):
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("rack", "nutrient", "amd", "status"))
-app$setInputs(pred_mainCP_sel = c("reg", "rack", "nutrient", "amd", "status"))
+              pred_mainPL_sel = c("rack", "nutrient", "amd", "status"))
+app$setInputs(pred_mainPL_sel = c("reg", "rack", "nutrient", "amd", "status"))
 app$setInputs(pred_int_build = c("reg", "nutrient"),
               pred_int_add = "click")
 app$setInputs(likelihood_navlist_ID = "Formula preview")

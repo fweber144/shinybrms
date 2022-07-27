@@ -56,11 +56,11 @@
       "Trt<-->zAge",
       "Trt<-->visit"
     ],
-    "pred_mainCP_sel": [
+    "pred_mainPL_sel": [
       "Trt",
       "zAge"
     ],
-    "pred_mainPP_sel": [
+    "pred_mainGL_sel": [
       "patient",
       "visit"
     ],

@@ -10,8 +10,8 @@ app$setInputs(navbar_ID = "Likelihood",
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot(items = list(output = c("formula_view")))
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("week", "trt"),
-              pred_mainPP_sel = "ID")
+              pred_mainPL_sel = c("week", "trt"),
+              pred_mainGL_sel = "ID")
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$snapshot(items = list(output = c("formula_view")))
 app$setInputs(likelihood_navlist_ID = "Predictors",
@@ -70,7 +70,7 @@ if (getOption("sbtst.run_upd_extend", TRUE)) {
   
   app$setInputs(navbar_ID = "Likelihood")
   app$setInputs(likelihood_navlist_ID = "Predictors",
-                pred_mainCP_sel = "trt")
+                pred_mainPL_sel = "trt")
   app$setInputs(likelihood_navlist_ID = "Formula preview")
   app$setInputs(navbar_ID = "Prior",
                 prior_add = "click")
@@ -106,7 +106,7 @@ if (getOption("sbtst.run_upd_extend", TRUE)) {
 
 app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = c("week", "trt"))
+              pred_mainPL_sel = c("week", "trt"))
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$setInputs(navbar_ID = "Prior",
               prior_add = "click")
@@ -182,7 +182,7 @@ app$snapshot(items = list(input = setdiff(app$listWidgets()$input, "brmsfit_uplo
 
 app$setInputs(navbar_ID = "Likelihood")
 app$setInputs(likelihood_navlist_ID = "Predictors",
-              pred_mainCP_sel = character(0))
+              pred_mainPL_sel = character(0))
 app$setInputs(likelihood_navlist_ID = "Formula preview")
 app$setInputs(navbar_ID = "Prior")
 app$setInputs(navbar_ID = "Posterior", wait_ = FALSE, values_ = FALSE)

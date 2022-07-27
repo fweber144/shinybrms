@@ -50,14 +50,14 @@
     "pred_int_add": 4,
     "pred_int_build": null,
     "pred_int_sel": "reg<-->nutrient",
-    "pred_mainCP_sel": [
+    "pred_mainPL_sel": [
       "reg",
       "rack",
       "nutrient",
       "amd",
       "status"
     ],
-    "pred_mainPP_sel": [
+    "pred_mainGL_sel": [
       "popu",
       "gen"
     ],

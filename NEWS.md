@@ -1,10 +1,13 @@
 # **shinybrms** 1.7.0.9000
 
-## Minor changes
+## Major changes
 
 * The threshold for worrying E-BFMI values was increased from 0.2 to 0.3 (to
 comply with Betancourt, 2018,
 [arXiv:1701.02434v2](https://arxiv.org/abs/1701.02434v2)).
+
+## Minor changes
+
 * In the table showing the default priors, column "Prior" should not have any
 empty fields anymore. The reason for this change is that empty fields arising
 from a flat prior could have been confounded too easily with empty fields

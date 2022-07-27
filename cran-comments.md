@@ -1,10 +1,10 @@
 ## Test environments
 
 * Local:
-    + R 4.2.1 on Ubuntu 22.04 LTS system (platform:
+    + R version 4.2.1 (2022-06-23) on Ubuntu 22.04 LTS system (platform:
       x86_64-pc-linux-gnu (64-bit))
-    + R 4.2.1 (2022-06-23 ucrt) on Windows 10 x64 (build 19044) system (platform:
-      x86_64-w64-mingw32/x64 (64-bit))
+    + R version 4.2.1 (2022-06-23 ucrt) on Windows 10 x64 (build 19044) system
+      (platform: x86_64-w64-mingw32/x64 (64-bit))
 * win-builder:
     + R-devel (R Under development (unstable) (2022-07-26 r82626 ucrt))
     + R-release (R version 4.2.1 (2022-06-23 ucrt))

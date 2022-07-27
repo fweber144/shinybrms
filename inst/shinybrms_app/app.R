@@ -477,33 +477,33 @@ ui <- navbarPage(
           helpText(
             "Notes:",
             tags$ul(
-              tags$li("Pooled effects are also known as",
-                      em("population-level"), "or", em("fixed"), "effects."),
-              tags$li("Partially pooled effects are also known as",
-                      em("group-level"), "or", em("random"), "effects."),
+              tags$li("Population-level effects are also known as",
+                      em("fixed"), "effects."),
+              tags$li("Group-level effects are also known as",
+                      em("random"), "or", em("partially pooled"), "effects."),
             )
           ),
-          h4("Pooled main effects"), # Abbreviated in the code by "PL" (for "completely pooled").
+          h4("Population-level main effects"),
           helpText(
             "Start typing or click into the field below to choose variables for which",
-            "pooled main effects shall be added."
+            "population-level main effects shall be added."
           ),
           selectInput("pred_mainPL_sel", NULL,
-                      choices = c("Choose variables for pooled main effects ..." = ""),
+                      choices = c("Choose variables for population-level main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE),
-          h4("Partially pooled main effects"),
+          h4("Group-level main effects"),
           helpText(
             "Start typing or click into the field below to choose variables for which",
-            "partially pooled main effects shall be added.",
-            "Note that you may not specify partially pooled main effects for a numeric variable.",
-            "This is not allowed to point out that a variable must be treated as nominal to have",
-            "partially pooled main effects.",
-            "If you really want partially pooled main effects for a numeric variable, you",
+            "group-level main effects shall be added.",
+            "Note that you may not specify group-level main effects for a numeric variable.",
+            "This is not allowed to point out that a variable must be treated as categorical to have",
+            "group-level main effects.",
+            "If you really want group-level main effects for a numeric variable, you",
             "have to convert this variable in your dataset to a character variable."
           ),
           selectInput("pred_mainGL_sel", NULL,
-                      choices = c("Choose variables for partially pooled main effects ..." = ""),
+                      choices = c("Choose variables for group-level main effects ..." = ""),
                       multiple = TRUE,
                       selectize = TRUE)
         ),
@@ -511,9 +511,9 @@ ui <- navbarPage(
           h3("Interaction effects"),
           helpText(
             p("Here, the term \"interaction\" not only denotes interactions involving only",
-              "predictor variables with pooled effects (yielding an interaction with pooled effects),",
-              "but also interactions involving predictor variables with partially pooled effects (yielding",
-              "an interaction with partially pooled effects).",
+              "predictor variables with population-level effects (yielding an interaction with population-level effects),",
+              "but also interactions involving predictor variables with group-level effects (yielding",
+              "an interaction with group-level effects).",
               "This broad definition of \"interaction\" is indicated here by the symbol \"<-->\"."),
             p("Only variables already having a main effect may be included in an interaction",
               "term. In the rare case that you really need an interaction involving a variable",
@@ -607,9 +607,9 @@ ui <- navbarPage(
                   tags$li(code("Intercept"), ": the intercept when centering the predictors.",
                           "This is only the internally used intercept; in the output, the intercept with",
                           "respect to the noncentered predictors is given (named", code("b_Intercept", .noWS = "after"), ")."),
-                  tags$li(code("b"), ": pooled effects (or pooled regression coefficients)."),
-                  tags$li(code("sd"), ": standard deviations of partially pooled effects."),
-                  tags$li(code("cor"), ": correlations between partially pooled effects of the same group."),
+                  tags$li(code("b"), ": population-level effects (or population-level regression coefficients)."),
+                  tags$li(code("sd"), ": standard deviations of group-level effects."),
+                  tags$li(code("cor"), ": correlations between group-level effects of the same group."),
                   tags$li("All other parameter classes are specific to the chosen",
                           "distributional family for the outcome (see page",
                           HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
@@ -671,7 +671,7 @@ ui <- navbarPage(
                     selectize = TRUE),
         selectInput("prior_group_sel",
                     HTML(paste0(
-                      "Group (for partially pooled effects):",
+                      "Group (for group-level effects):",
                       helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
                                "use all groups belonging to the selected class.",
                                style = "font-weight:normal")
@@ -1208,23 +1208,23 @@ ui <- navbarPage(
           p("As its name suggests, a conditional-effects plot", em("conditions"), "on specific values of",
             "those predictor variables which are not involved in the plot:",
             "It conditions on the mean of continuous predictor variables and",
-            "on the reference category of those categorical predictor variables which have pooled main effects.",
-            "Partially pooled effects are set to zero, with the following exceptions:",
+            "on the reference category of those categorical predictor variables which have population-level main effects.",
+            "Group-level effects are set to zero, with the following exceptions:",
             tags$ul(
               tags$li(
-                "Those partially pooled effects which are plotted are not set to zero (otherwise,",
+                "Those group-level effects which are plotted are not set to zero (otherwise,",
                 "there would not be anything meaningful to plot)."
               ),
               tags$li(
-                "If partially pooled slopes are plotted, the corresponding partially pooled intercepts",
-                "are also not set to zero (for consistency with pooled interaction effects)."
-                # More precisely: "for consistency with pooled interaction
+                "If group-level slopes are plotted, the corresponding group-level intercepts",
+                "are also not set to zero (for consistency with population-level interaction effects)."
+                # More precisely: "for consistency with population-level interaction
                 # effects (and this also avoids problems with dummy-coded
-                # partially pooled slopes)"
+                # group-level slopes)"
               ) 
             )),
           p("Be cautious with predictor variables having a high number of levels (which is usually",
-            "only the case for partially pooled effects): In that case, the computation may",
+            "only the case for group-level effects): In that case, the computation may",
             "take a long time and the resulting plot is rarely useful.")
         ),
         # br(),
@@ -1272,15 +1272,15 @@ ui <- navbarPage(
                 "summarized as follows:",
                 tags$ul(
                   tags$li(code("b_Intercept"), "is the intercept (with respect to the noncentered predictors)."),
-                  tags$li("The parameters starting with", code("b_"), "are the pooled effects."),
+                  tags$li("The parameters starting with", code("b_"), "are the population-level effects."),
                   tags$li("If you used a", code("constant()"), "prior (which should rarely be the case), then",
                           "the parameters starting with", code("par_"), "are internal parameters which you don't",
                           "need to take into account."),
-                  tags$li("The parameters starting with", code("r_"), "are the partially pooled effects."),
+                  tags$li("The parameters starting with", code("r_"), "are the group-level effects."),
                   tags$li("The parameters starting with", code("sd_"), "are the standard deviations of the",
-                          "partially pooled effects."),
+                          "group-level effects."),
                   tags$li("The parameters starting with", code("cor_"), "are the correlations between the",
-                          "partially pooled effects of the same group."),
+                          "group-level effects of the same group."),
                   tags$li(code("log-posterior"), "is the accumulated log-posterior density (up to an additive constant)."),
                   tags$li("All other parameters are parameters specific to the chosen",
                           "distributional family for the outcome (see page",
@@ -1870,7 +1870,7 @@ server <- function(input, output, session) {
   #### Main effects ---------------------------------------------------------
   
   observe({
-    pred_mainPL_choices <- c("Choose variables for pooled main effects ..." = "")
+    pred_mainPL_choices <- c("Choose variables for population-level main effects ..." = "")
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       pred_mainPL_choices <- c(pred_mainPL_choices,
                                setdiff(names(da()),
@@ -1887,7 +1887,7 @@ server <- function(input, output, session) {
   })
   
   observe({
-    pred_mainGL_choices <- c("Choose variables for partially pooled main effects ..." = "")
+    pred_mainGL_choices <- c("Choose variables for group-level main effects ..." = "")
     if (!inherits(try(da(), silent = TRUE), "try-error")) {
       GL_sel_choices <- setdiff(names(da()),
                                 c(input$outc_sel,
@@ -1946,7 +1946,7 @@ server <- function(input, output, session) {
   })
   
   # Ensure that all variables involved in the interaction terms have a main effect (either
-  # pooled or partially pooled):
+  # population-level or group-level):
   observeEvent({
     input$pred_mainPL_sel
     input$pred_mainGL_sel
@@ -2021,9 +2021,9 @@ server <- function(input, output, session) {
       # Perform the following tasks (at the same time):
       #   - Expand interactions on the group-level side (in principle, this is not necessary as the
       #     "*" syntax (<predictor_1>*<predictor_2>) also works on the group-level side; however, for
-      #     including correlations between the partially pooled effects of a specific group-level term, the
+      #     including correlations between the group-level effects of a specific group-level term, the
       #     terms on the population-level side need to be grouped by the term on the group-level side).
-      #   - For partially pooled slopes, add the corresponding pooled slopes since the partially pooled
+      #   - For group-level slopes, add the corresponding population-level slopes since the group-level
       #     slopes are assumed to have mean zero.
       # The first task is performed by applying combn() to m = 1L, ..., length(xGL) with "xGL"
       # containing the group-level terms of a given element of "pred_lst".
@@ -3281,7 +3281,7 @@ server <- function(input, output, session) {
       
       termlabs <- labels(terms(formula(C_bformula_ff())))
       
-      #### Pooled effects -------------------------------------------------------
+      #### Population-level effects ---------------------------------------------
       
       termlabs_PL <- grep("\\|", termlabs, value = TRUE, invert = TRUE)
       termlabs_PL_main <- grep(":", termlabs_PL, value = TRUE, invert = TRUE)
@@ -3294,7 +3294,7 @@ server <- function(input, output, session) {
       }))
       ### 
       
-      #### Partially pooled effects ---------------------------------------------
+      #### Group-level effects --------------------------------------------------
       
       termlabs_GL <- setdiff(termlabs, termlabs_PL)
       termlabs_GL_split <- strsplit(termlabs_GL, "[[:blank:]]*\\|[[:blank:]]*")
@@ -3358,8 +3358,8 @@ server <- function(input, output, session) {
     ### argument 're_formula' of brms::conditional_effects() here only contains
     ### the group term which is involved in argument 'effects' (since argument
     ### 're_formula' of brms::conditional_effects() is set to only those
-    ### partially pooled effects which are plotted (or also the corresponding
-    ### partially pooled intercepts, if partially pooled slopes are plotted))):
+    ### group-level effects which are plotted (or also the corresponding
+    ### group-level intercepts, if group-level slopes are plotted))):
     # set.seed(<seed>)
     ### 
     C_ceff <- brms::conditional_effects(
@@ -3370,8 +3370,8 @@ server <- function(input, output, session) {
       ### argument 're_formula' of brms::conditional_effects() here only
       ### contains the group term which is involved in argument 'effects' (since
       ### argument 're_formula' of brms::conditional_effects() is set to only
-      ### those partially pooled effects which are plotted (or also the
-      ### corresponding partially pooled intercepts, if partially pooled slopes
+      ### those group-level effects which are plotted (or also the
+      ### corresponding group-level intercepts, if group-level slopes
       ### are plotted))):
       # sample_new_levels = "gaussian"
       ### 

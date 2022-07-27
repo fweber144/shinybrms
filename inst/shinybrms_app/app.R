@@ -846,7 +846,7 @@ ui <- navbarPage(
                       target = "_blank", .noWS = "after"),
                     ", together with the",
                     a("\"CmdStan User's Guide\"",
-                      href = "https://mc-stan.org/docs/2_29/cmdstan-guide/index.html",
+                      href = "https://mc-stan.org/docs/cmdstan-guide/index.html",
                       target = "_blank", .noWS = "after"),
                     "."
                   )

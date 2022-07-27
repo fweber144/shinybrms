@@ -51,11 +51,11 @@
     "pred_int_add": 1,
     "pred_int_build": null,
     "pred_int_sel": "week<-->trt",
+    "pred_mainGL_sel": "ID",
     "pred_mainPL_sel": [
       "week",
       "trt"
     ],
-    "pred_mainGL_sel": "ID",
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",
     "prior_add": 1,

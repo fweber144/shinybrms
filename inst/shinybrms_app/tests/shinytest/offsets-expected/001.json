@@ -56,13 +56,13 @@
       "Trt<-->zAge",
       "Trt<-->visit"
     ],
-    "pred_mainPL_sel": [
-      "Trt",
-      "zAge"
-    ],
     "pred_mainGL_sel": [
       "patient",
       "visit"
+    ],
+    "pred_mainPL_sel": [
+      "Trt",
+      "zAge"
     ],
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",

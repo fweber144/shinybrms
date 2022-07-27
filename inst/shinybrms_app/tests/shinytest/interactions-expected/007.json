@@ -53,16 +53,16 @@
       "reg<-->nutrient",
       "reg<-->nutrient<-->popu"
     ],
+    "pred_mainGL_sel": [
+      "popu",
+      "gen"
+    ],
     "pred_mainPL_sel": [
       "reg",
       "rack",
       "nutrient",
       "amd",
       "status"
-    ],
-    "pred_mainGL_sel": [
-      "popu",
-      "gen"
     ],
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",

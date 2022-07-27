@@ -57,15 +57,15 @@
       "rack<-->popu<-->gen",
       "status<-->popu"
     ],
+    "pred_mainGL_sel": [
+      "popu",
+      "gen"
+    ],
     "pred_mainPL_sel": [
       "rack",
       "nutrient",
       "amd",
       "status"
-    ],
-    "pred_mainGL_sel": [
-      "popu",
-      "gen"
     ],
     "preview_rows_radio": "head",
     "preview_type_radio": "datas",

@@ -10,11 +10,9 @@ Correspondingly, the term "partially pooled" (effects) is replaced by
 "group-level" (effects). In v1.6.0, the term "pooled" was introduced as an
 improvement for continuous predictors (which cannot have partially pooled or
 group-level effects), but this now turned out to be incorrect for those
-categorical predictors which do not have partially pooled effects. (In fact, the
-term "nonvarying" which had been used prior to v1.3.0 was misleading in the
-first place.) The "population-level"/"group-level" terminology is used in
-**brms**, so it makes sense already in terms of consistency to use it in
-**shinybrms**, too.
+categorical predictors which do not have partially pooled effects. The
+"population-level"/"group-level" terminology is used in **brms**, so it makes
+sense already in terms of consistency to use it in **shinybrms**, too.
 
 ## Minor changes
 

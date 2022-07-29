@@ -61,7 +61,7 @@ distFams_adv$"Count data outcome:" <- c(
   "Poisson with zero-inflation" = "zero_inflated_poisson",
   "Geometric" = "geometric"
 )
-distFams_adv$"Continuous outcome on the positive real line:" <- c(
+distFams_adv$"Continuous outcome on the positive (or nonnegative) real line:" <- c(
   "Log-normal" = "lognormal",
   "Log-normal with hurdle" = "hurdle_lognormal",
   "Gamma" = "Gamma",

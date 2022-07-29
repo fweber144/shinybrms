@@ -69,8 +69,7 @@ distFams_adv$"Continuous outcome on the positive (or nonnegative) real line:" <-
   "Inverse Gaussian" = "inverse.gaussian",
   "Weibull" = "weibull",
   "Exponential" = "exponential",
-  "Frechet" = "frechet",
-  "Generalized extreme value" = "gen_extreme_value"
+  "Frechet" = "frechet"
 )
 distFams_adv$"Proportion as outcome:" <- c(
   "Beta" = "Beta",

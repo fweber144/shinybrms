@@ -27,12 +27,12 @@ affected cases are those where `brms:::update.brmsfit()` is used with a formula
 that was extended on its right-hand side. In those cases, **shinybrms** now
 avoids a recompilation by specifying argument `newdata` of
 `brms:::update.brmsfit()`.
-* In the drop-down list of advanced distributional families, the
-`brms::gen_extreme_value()` family was misclassified under "Continuous outcome
-on the positive (or nonnegative) real line" (in fact, the support of this family
-depends on its shape parameter), but the `brms::gen_extreme_value()` family was
-now removed from that list anyway, due to **brms**'s issue
+* The `brms::gen_extreme_value()` family has been removed from the drop-down
+list of advanced distributional families, due to **brms**'s issue
 [paul-buerkner/brms#1345](https://github.com/paul-buerkner/brms/issues/1345).
+(Note that before, the `brms::gen_extreme_value()` family was misclassified
+under "Continuous outcome on the positive real line": In fact, the support of
+this family depends on its shape parameter.)
 
 ## Bug fixes
 

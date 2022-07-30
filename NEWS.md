@@ -31,7 +31,7 @@ avoids a recompilation by specifying argument `newdata` of
 `brms::gen_extreme_value()` family was misclassified under "Continuous outcome
 on the positive (or nonnegative) real line" (in fact, the support of this family
 depends on its shape parameter), but the `brms::gen_extreme_value()` family was
-now removed anyway, due to **brms**'s issue
+now removed from that list anyway, due to **brms**'s issue
 [paul-buerkner/brms#1345](https://github.com/paul-buerkner/brms/issues/1345).
 
 ## Bug fixes

@@ -78,15 +78,15 @@
   },
   "output": {
     "brmsfit_upload_UI": {
-      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" class=\"shiny-input-file\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
       "deps": [
 
       ]
     },
     "ceff_plot": {
-      "src": "[image data sha1: 2e0bdbc14f75cabe13c60d43adb8cae68a232428]",
-      "width": 631,
-      "height": 389.979446901184,
+      "src": "[image data sha1: 108c9b303374535b2d60e7741da4314ca548bf0c]",
+      "width": 631.328125,
+      "height": 390.1822393037422,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -104,28 +104,26 @@
             "domain": {
               "left": -0.55,
               "right": 11.55,
-              "bottom": 0.645248711498356,
-              "top": 1.0078817249198
+              "bottom": 0.6452487114983559,
+              "top": 1.007881724919803
             },
             "mapping": {
-              "ymin": "lower__",
-              "ymax": "upper__",
-              "fill": "NULL",
-              "colour": "NULL",
-              "x": "effect1__",
-              "y": "estimate__"
+              "ymin": ".data[[\"lower__\"]]",
+              "ymax": ".data[[\"upper__\"]]",
+              "x": ".data[[\"effect1__\"]]",
+              "y": ".data[[\"estimate__\"]]"
             },
             "range": {
-              "left": 53.1282689912827,
-              "right": 623.029887920299,
-              "bottom": 340.871731008717,
-              "top": 7.97011207970112
+              "left": 53.12826899128269,
+              "right": 623.0298879202988,
+              "bottom": 341.8717310087173,
+              "top": 7.970112079701122
             }
           }
         ],
         "dims": {
-          "width": 631,
-          "height": 389.979446901184
+          "width": 631.328125,
+          "height": 390.1822393037422
         }
       }
     },
@@ -135,9 +133,12 @@
     "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
     "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
     "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "essQ2.5_out": "Warning: At least one Q2.5-ESS value is worrying. In general, this indicates that the central 95% posterior intervals should not be used.",
+    "essQ50_out": "Warning: At least one Q50-ESS value is worrying. In general, this indicates that the posterior medians should not be used.",
+    "essQ97.5_out": "All Q97.5-ESS values are OK.",
     "essTail_out": "Warning: At least one tail-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
-    "fit_version": "       brms       rstan stanHeaders    cmdstanr     cmdstan \n   \"2.17.0\"    \"2.21.5\"  \"2.21.0.7\"     \"0.5.2\"    \"2.30.0\" ",
-    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail\nb_Intercept         1.0111945  266.7297 257.6373\nb_week              0.9991912  732.5387 341.7320\nb_trtdrug           1.0146806  300.8028 315.5452\nb_trtdrugP          1.0060258  423.8320 396.7807\nsd_ID__Intercept    1.0079937  165.4732 357.4946\nIntercept           0.9991298  381.9767 316.9683\nr_ID[X01,Intercept] 1.0003789 1210.7733 399.8333\nr_ID[X02,Intercept] 1.0016506  697.9476 373.0384\nr_ID[X03,Intercept] 1.0002301  605.8627 405.0969\nr_ID[X04,Intercept] 1.0152161  597.9182 407.0658\nr_ID[X05,Intercept] 1.0049523  684.4670 507.7731\nr_ID[X06,Intercept] 1.0009663  665.4313 422.1705\nr_ID[X07,Intercept] 1.0029619  526.6112 465.9430\nr_ID[X08,Intercept] 1.0019083  583.8557 310.9597\nr_ID[X09,Intercept] 1.0001244  654.4930 299.0193\nr_ID[X10,Intercept] 1.0017851  959.3183 402.9014\nr_ID[X11,Intercept] 0.9996046 1043.7948 369.2789\nr_ID[X12,Intercept] 0.9983500  679.5795 402.4859\nr_ID[X13,Intercept] 1.0049330  500.0334 309.3546\nr_ID[X14,Intercept] 1.0089032  414.2803 223.7600\nr_ID[X15,Intercept] 1.0020487  457.6279 319.3630\nr_ID[X16,Intercept] 1.0030245  826.6425 464.0522\nr_ID[X17,Intercept] 1.0100185  469.7512 440.9720\nr_ID[X18,Intercept] 0.9998438  465.7312 441.4420\nr_ID[X19,Intercept] 1.0139115  281.7118 304.3192\nr_ID[X20,Intercept] 1.0027687  867.6591 350.8788\nr_ID[X21,Intercept] 0.9987869 1015.1447 328.8443\nr_ID[Y01,Intercept] 1.0021643 1138.3644 257.7073\nr_ID[Y02,Intercept] 1.0098292  261.1031 326.7447\nr_ID[Y03,Intercept] 1.0041522  769.1023 445.2831\nr_ID[Y04,Intercept] 1.0008355  478.6118 452.4976\nr_ID[Y05,Intercept] 1.0093811  300.9956 247.5891\nr_ID[Y06,Intercept] 1.0203746  386.5548 302.7586\nr_ID[Y07,Intercept] 1.0053095  577.8232 323.0687\nr_ID[Y08,Intercept] 0.9993898  840.3063 377.1892\nr_ID[Y09,Intercept] 0.9989061  619.9855 309.4796\nr_ID[Y10,Intercept] 1.0035829  499.1142 306.3001\nr_ID[Y11,Intercept] 1.0006599  674.2852 350.5405\nr_ID[Y12,Intercept] 1.0015406  971.2671 354.6302\nr_ID[Y13,Intercept] 1.0071351  620.3055 363.5494\nr_ID[Y14,Intercept] 1.0026372  717.8634 423.1878\nr_ID[Z01,Intercept] 0.9996519  870.3081 475.2206\nr_ID[Z02,Intercept] 0.9993899  641.4084 434.8864\nr_ID[Z03,Intercept] 1.0023375  579.8936 320.9154\nr_ID[Z05,Intercept] 1.0037211  307.4931 372.9140\nr_ID[Z06,Intercept] 1.0053773  898.4976 495.7092\nr_ID[Z07,Intercept] 1.0019101  885.7494 500.9014\nr_ID[Z09,Intercept] 1.0062189  511.6604 282.5404\nr_ID[Z10,Intercept] 1.0000885  465.7998 380.0062\nr_ID[Z11,Intercept] 0.9976722  588.2979 297.6770\nr_ID[Z14,Intercept] 0.9996338  767.2462 461.1608\nr_ID[Z15,Intercept] 1.0080800  979.6731 431.1767\nr_ID[Z19,Intercept] 1.0026880  642.8691 377.7858\nr_ID[Z20,Intercept] 1.0071100  730.6437 345.2540\nr_ID[Z24,Intercept] 1.0032152  577.6825 430.7506\nr_ID[Z26,Intercept] 1.0091203  935.1110 398.6503\nlprior              1.0124935  168.2882 283.5745\nlp__                1.0262793  105.7525 171.7751\nz_1[1,1]            1.0074202 1182.7568 345.1443\nz_1[1,2]            1.0007557  750.9523 339.5754\nz_1[1,3]            0.9985720  758.9238 301.3421\nz_1[1,4]            1.0129835  490.7000 423.6392\nz_1[1,5]            1.0029394  863.3776 422.4309\nz_1[1,6]            1.0221353 1041.0235 342.8497\nz_1[1,7]            1.0021304  828.5425 519.2603\nz_1[1,8]            0.9994253  719.3831 282.0231\nz_1[1,9]            1.0035388  738.9225 439.6850\nz_1[1,10]           1.0036716 1102.6009 428.2691\nz_1[1,11]           1.0020701 1200.8034 357.3369\nz_1[1,12]           1.0001479  740.7936 316.6489\nz_1[1,13]           1.0086618  538.1454 292.9076\nz_1[1,14]           1.0026629  601.5842 403.4378\nz_1[1,15]           1.0077709  772.5481 410.6572\nz_1[1,16]           1.0017039  864.9360 376.6752\nz_1[1,17]           1.0097602  687.2571 278.4055\nz_1[1,18]           0.9993064  751.6693 383.7966\nz_1[1,19]           1.0094841  401.0721 318.5918\nz_1[1,20]           1.0063550  995.5884 373.5697\nz_1[1,21]           1.0043681  956.5034 298.9565\nz_1[1,22]           0.9992860 1349.4850 285.4070\nz_1[1,23]           1.0046900  839.3546 294.5397\nz_1[1,24]           1.0150367  612.5655 428.3833\nz_1[1,25]           1.0031575  678.7659 333.0594\nz_1[1,26]           1.0122803  684.3809 346.5797\nz_1[1,27]           1.0129221  459.1066 356.0451\nz_1[1,28]           1.0039982  730.7749 277.6112\nz_1[1,29]           0.9987382  751.9960 336.2359\nz_1[1,30]           0.9973575  769.1782 344.9980\nz_1[1,31]           1.0026139  549.8707 312.8557\nz_1[1,32]           1.0042794  717.5092 471.0662\nz_1[1,33]           1.0057122 1106.0045 346.1898\nz_1[1,34]           1.0105356  872.6100 382.7989\nz_1[1,35]           1.0028963  770.0593 379.6008\nz_1[1,36]           0.9975857 1338.4489 406.4822\nz_1[1,37]           0.9981888  677.1066 396.3683\nz_1[1,38]           1.0014748  623.2743 464.0754\nz_1[1,39]           1.0059356  566.4412 439.4446\nz_1[1,40]           1.0063604 1201.3973 455.1700\nz_1[1,41]           1.0058104  905.6271 465.1816\nz_1[1,42]           1.0156330  595.1602 302.5894\nz_1[1,43]           1.0025422  670.2553 342.7500\nz_1[1,44]           1.0015740  674.7533 300.8862\nz_1[1,45]           1.0024674  766.7556 428.6079\nz_1[1,46]           1.0044597 1349.4850 345.5327\nz_1[1,47]           1.0104895  796.7713 397.9044\nz_1[1,48]           1.0097248  815.4988 429.2121\nz_1[1,49]           1.0084689  510.1126 321.5844\nz_1[1,50]           1.0074818 1109.6137 323.2705",
+    "fit_version": "       brms       rstan stanHeaders    cmdstanr     cmdstan \n   \"2.20.4\"    \"2.32.3\"    \"2.32.2\"     \"0.7.0\"    \"2.33.1\" ",
+    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail   ESS_Q50 ESS_Q2.5 ESS_Q97.5\nb_Intercept         1.0111698  266.3930 257.6373  301.9004 400.2598  388.4744\nb_week              0.9991753  732.9177 341.7320  575.3573 442.0236  519.3905\nb_trtdrug           1.0146101  301.6747 315.5452  411.7087 237.9437  399.7889\nb_trtdrugP          1.0060300  423.8657 396.7807  312.7403 361.6520  533.2492\nsd_ID__Intercept    1.0080154  165.2755 357.4946  199.6679 384.5096  400.7326\nr_ID[X01,Intercept] 1.0003755 1211.4169 399.8333 1117.1221 394.2174  384.9254\nr_ID[X02,Intercept] 1.0016578  697.4736 373.0384  590.9984 523.4347  455.0229\nr_ID[X03,Intercept] 1.0002162  605.7234 405.0969  565.6613 388.4744  520.0239\nr_ID[X04,Intercept] 1.0153180  596.4641 407.0658  612.9734 387.8769  393.4881\nr_ID[X05,Intercept] 1.0049039  684.8312 507.7731  673.5810 535.9087  459.0881\nr_ID[X06,Intercept] 1.0009782  665.6750 422.1705  556.3472 448.2806  456.7332\nr_ID[X07,Intercept] 1.0029577  526.2165 465.9430  441.4381 507.6821  379.4495\nr_ID[X08,Intercept] 1.0019017  584.9147 310.9597  475.6588 339.2204  271.7917\nr_ID[X09,Intercept] 1.0001094  655.5074 299.0193  564.5560 517.9122  457.4021\nr_ID[X10,Intercept] 1.0018198  959.9574 402.9014  922.2736 454.9716  355.2543\nr_ID[X11,Intercept] 0.9996116 1044.2548 369.2789  712.8867 442.0988  500.2125\nr_ID[X12,Intercept] 0.9983596  679.1421 402.4859  611.0779 526.1718  383.2024\nr_ID[X13,Intercept] 1.0049803  500.8313 309.3546  529.0792 443.4914  369.9370\nr_ID[X14,Intercept] 1.0088699  413.4434 223.7600  496.2095 453.4653  449.2534\nr_ID[X15,Intercept] 1.0020648  457.6842 319.3630  487.9102 456.0673  346.5363\nr_ID[X16,Intercept] 1.0030133  828.8069 464.0522  619.1902 459.0881  444.3506\nr_ID[X17,Intercept] 1.0100205  469.1830 440.9720  434.0909 407.1283  416.1822\nr_ID[X18,Intercept] 0.9998248  465.4819 441.4420  509.5241 536.4089  429.3970\nr_ID[X19,Intercept] 1.0139263  281.5347 304.3192  480.5529 348.8559  391.1575\nr_ID[X20,Intercept] 1.0027930  866.3545 350.8788  830.3136 533.9216  442.5482\nr_ID[X21,Intercept] 0.9987892 1012.8023 328.8443  779.9931 435.1675  479.5704\nr_ID[Y01,Intercept] 1.0021870 1141.4465 257.7073  965.9512 359.6541  440.0592\nr_ID[Y02,Intercept] 1.0098617  260.8974 326.7447  224.8904 533.9216  385.8891\nr_ID[Y03,Intercept] 1.0041690  767.0523 445.2831  622.5342 456.0673  536.9104\nr_ID[Y04,Intercept] 1.0008189  477.4844 452.4976  575.1367 435.7548  502.7532\nr_ID[Y05,Intercept] 1.0094278  300.5824 247.5891  336.9418 494.8103  443.4021\nr_ID[Y06,Intercept] 1.0203726  387.7835 302.7586  419.5821 458.0742  299.9549\nr_ID[Y07,Intercept] 1.0052883  578.4274 323.0687  604.7964 459.0881  326.3403\nr_ID[Y08,Intercept] 0.9994010  842.2797 377.1892  706.4571 452.2021  351.7272\nr_ID[Y09,Intercept] 0.9989000  619.2609 309.4796  693.4864 425.4016  434.7549\nr_ID[Y10,Intercept] 1.0036299  498.9255 306.3001  552.9977 531.4675  313.0467\nr_ID[Y11,Intercept] 1.0006851  675.2998 350.5405  537.4418 389.6599  444.3885\nr_ID[Y12,Intercept] 1.0015893  972.8289 354.6302  654.3900 426.0957  351.1619\nr_ID[Y13,Intercept] 1.0071350  619.9111 363.5494  447.0345 345.1440  451.2141\nr_ID[Y14,Intercept] 1.0026226  716.6337 423.1878  598.0524 456.0673  415.6787\nr_ID[Z01,Intercept] 0.9996414  869.1199 475.2206  599.5054 535.4099  446.0855\nr_ID[Z02,Intercept] 0.9993969  640.2067 434.8864  716.6061 349.3030  387.5527\nr_ID[Z03,Intercept] 1.0023168  580.3526 320.9154  604.1545 526.1718  416.6257\nr_ID[Z05,Intercept] 1.0036909  308.4959 372.9140  368.5241 278.7139  521.3453\nr_ID[Z06,Intercept] 1.0053424  896.1429 495.7092  767.2767 458.0742  496.9441\nr_ID[Z07,Intercept] 1.0018641  885.1183 500.9014  687.8360 503.4175  516.6601\nr_ID[Z09,Intercept] 1.0061877  511.5235 282.5404  471.5235 231.7381  350.0383\nr_ID[Z10,Intercept] 1.0000821  467.1447 380.0062  805.7120 400.9697  394.9500\nr_ID[Z11,Intercept] 0.9976769  587.8919 297.6770  721.6181 498.8452  308.8494\nr_ID[Z14,Intercept] 0.9996412  767.3430 461.1608  739.1847 386.3733  445.2003\nr_ID[Z15,Intercept] 1.0080937  978.8160 431.1767  796.5603 445.1265  447.2252\nr_ID[Z19,Intercept] 1.0027202  641.9337 377.7858  631.3668 342.4411  458.0742\nr_ID[Z20,Intercept] 1.0070790  731.8509 345.2540  684.1759 457.0672  451.2141\nr_ID[Z24,Intercept] 1.0032603  578.3265 430.7506  437.7966 388.4829  457.7377\nr_ID[Z26,Intercept] 1.0091114  937.8542 398.6503  895.9817 534.4163  398.0539\nlprior              1.0125044  168.0603 283.5745  220.2873 277.5987  373.2325\nlp__                1.0262651  105.7242 171.7751  153.6861 185.0154  217.8647",
     "rhat_out": "Warning: At least one R-hat value is worrying. In general, this indicates that the Stan results should not be used.",
     "size_aux": {
       "message": "",

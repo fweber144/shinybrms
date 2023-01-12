@@ -4,6 +4,12 @@
 
 * Default to sequential instead of parallel computation.
 
+## Minor changes
+
+* Add Weber, Ickstadt, and Glass (2022, DOI:
+[10.32614/RJ-2022-027](https://doi.org/10.32614/RJ-2022-027)) to documentation
+and vignette.
+
 # **shinybrms** 1.8.0
 
 ## Major changes

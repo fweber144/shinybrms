@@ -1,6 +1,8 @@
 ---
 title: "Get started"
 output: rmarkdown::html_vignette
+bibliography: references.bib
+link-citations: true
 vignette: >
   %\VignetteIndexEntry{Get started}
   %\VignetteEngine{knitr::rmarkdown}
@@ -14,7 +16,10 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following screenshots show how to fit an example model in the **shinybrms** app. For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
+The following screenshots show how to fit an example model in the **shinybrms** app.
+For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
+
+Another example may be found in @weber_shinybrms_2022.
 
 ## Home
 
@@ -223,3 +228,5 @@ Note that the output shown on tab "Default summary" is only intended for a quick
 
 \
 At this point, the **shinybrms** workflow ends and passes over to **shinystan**.
+
+## References

@@ -1,5 +1,9 @@
 # **shinybrms** 1.8.0.9000
 
+## Major changes
+
+* Default to sequential instead of parallel computation.
+
 # **shinybrms** 1.8.0
 
 ## Major changes

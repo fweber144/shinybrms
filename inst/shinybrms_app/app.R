@@ -1280,6 +1280,7 @@ ui <- navbarPage(
                           "group-level effects."),
                   tags$li("The parameters starting with", code("cor_"), "are the correlations between the",
                           "group-level effects of the same group."),
+                  tags$li(code("lprior"), "is the accumulated log prior density."),
                   tags$li(code("log-posterior"), "is the accumulated log posterior density (up to an additive constant)."),
                   tags$li("All other parameters are parameters specific to the chosen",
                           "distributional family for the outcome (see page",

@@ -66,3 +66,8 @@ if (interactive()) {
 }
 
 }
+\references{
+Weber, Frank, Katja Ickstadt, and Änne Glass. 2022. “shinybrms: Fitting
+Bayesian Regression Models Using a Graphical User Interface for the R Package
+brms.” The R Journal 14 (2): 96–120. \doi{10.32614/RJ-2022-027}.
+}

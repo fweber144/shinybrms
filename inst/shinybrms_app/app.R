@@ -1049,7 +1049,7 @@ ui <- navbarPage(
             "hitting the maximum tree depth) and the third diagnostic (E-BFMI) is worrying if it is",
             "smaller than 0.3 for at least one chain."),
           p("The general MCMC diagnostics (computed for each parameter",
-            "as well as for the accumulated log-posterior density) are:",
+            "as well as for the accumulated log posterior density) are:",
             tags$ul(
               tags$li(
                 "the modified \\(\\widehat{R}\\)",
@@ -1280,7 +1280,7 @@ ui <- navbarPage(
                           "group-level effects."),
                   tags$li("The parameters starting with", code("cor_"), "are the correlations between the",
                           "group-level effects of the same group."),
-                  tags$li(code("log-posterior"), "is the accumulated log-posterior density (up to an additive constant)."),
+                  tags$li(code("log-posterior"), "is the accumulated log posterior density (up to an additive constant)."),
                   tags$li("All other parameters are parameters specific to the chosen",
                           "distributional family for the outcome (see page",
                           HTML(paste(actionLink("outcome_link2", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),

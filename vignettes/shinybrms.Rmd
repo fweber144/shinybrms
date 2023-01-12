@@ -170,7 +170,7 @@ Underneath this description, the diagnostic results for the given Stan run are s
 *Fig. 18: Page "Posterior", tab "MCMC diagnostics" (bottom).*
 
 \
-For the general MCMC diagnostics (which are computed for each parameter as well as for the accumulated log-posterior density), it is also possible to show a detailed table:
+For the general MCMC diagnostics (which are computed for each parameter as well as for the accumulated log posterior density), it is also possible to show a detailed table:
 
 \
 [![](screenshots/Posterior_Diagnostics_General_Detailed.png)](screenshots/Posterior_Diagnostics_General_Detailed.png)

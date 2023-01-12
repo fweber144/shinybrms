@@ -892,7 +892,7 @@ ui <- navbarPage(
                      numericInput("advOpts_seed", "Seed:",
                                   value = NA, step = 1L),
                      numericInput("advOpts_cores", "Cores:",
-                                  value = getOption("mc.cores", parallel::detectCores(logical = FALSE)),
+                                  value = getOption("mc.cores", 1L),
                                   step = 1L, min = 1L),
                      numericInput("advOpts_chains", "Chains (MCMC chains):",
                                   value = 4L, step = 1L, min = 1L),

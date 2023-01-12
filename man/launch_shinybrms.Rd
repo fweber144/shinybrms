@@ -47,8 +47,8 @@ catching some warning messages).
 \item \code{browser} (see \code{\link[base:options]{base::options()}}): Set and reset internally (see above).
 \item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the
 advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
-of this option. If option \code{mc.cores} is not set, then the advanced option
-"Cores" defaults to the value returned by \code{\link[parallel:detectCores]{parallel::detectCores()}}.
+of this option. If option \code{mc.cores} is not set, then "Cores" defaults to \code{1}
+(i.e., sequential, not parallel computation).
 \item \code{brms.backend} (see \code{\link[brms:brm]{brms::brm()}}): If option \code{brms.backend} is set, then
 the advanced option "Backend" (in the \bold{shinybrms} app) defaults to the
 value of this option. If option \code{brms.backend} is not set, then the advanced

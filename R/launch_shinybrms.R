@@ -33,8 +33,8 @@
 #' * `browser` (see [base::options()]): Set and reset internally (see above).
 #' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the
 #' advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
-#' of this option. If option `mc.cores` is not set, then the advanced option
-#' "Cores" defaults to the value returned by [parallel::detectCores()].
+#' of this option. If option `mc.cores` is not set, then "Cores" defaults to `1`
+#' (i.e., sequential, not parallel computation).
 #' * `brms.backend` (see [brms::brm()]): If option `brms.backend` is set, then
 #' the advanced option "Backend" (in the \bold{shinybrms} app) defaults to the
 #' value of this option. If option `brms.backend` is not set, then the advanced

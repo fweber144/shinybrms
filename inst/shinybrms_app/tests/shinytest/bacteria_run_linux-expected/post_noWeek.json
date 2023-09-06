@@ -79,7 +79,7 @@
   },
   "output": {
     "brmsfit_upload_UI": {
-      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" class=\"shiny-input-file\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
       "deps": [
 
       ]
@@ -87,7 +87,7 @@
     "ceff_plot": {
       "src": "[image data sha1: c39363482a4f35695538c129a055fbe02a75a5d0]",
       "width": 631.328125,
-      "height": 390.182239303742,
+      "height": 390.1822393037422,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -105,8 +105,8 @@
             "domain": {
               "left": 0.4,
               "right": 3.6,
-              "bottom": 0.538108456245956,
-              "top": 0.989062756632696,
+              "bottom": 0.5381084562459559,
+              "top": 0.9890627566326964,
               "discrete_limits": {
                 "x": [
                   "placebo",
@@ -116,24 +116,22 @@
               }
             },
             "mapping": {
-              "ymin": "lower__",
-              "ymax": "upper__",
-              "fill": "NULL",
-              "colour": "NULL",
-              "x": "effect1__",
-              "y": "estimate__"
+              "ymin": ".data[[\"lower__\"]]",
+              "ymax": ".data[[\"upper__\"]]",
+              "x": ".data[[\"effect1__\"]]",
+              "y": ".data[[\"estimate__\"]]"
             },
             "range": {
-              "left": 53.1282689912827,
-              "right": 623.029887920299,
-              "bottom": 341.871731008717,
-              "top": 7.97011207970112
+              "left": 53.12826899128269,
+              "right": 623.0298879202988,
+              "bottom": 341.8717310087173,
+              "top": 7.970112079701122
             }
           }
         ],
         "dims": {
           "width": 631.328125,
-          "height": 390.182239303742
+          "height": 390.1822393037422
         }
       }
     },
@@ -146,7 +144,7 @@
     "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
     "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
     "essTail_out": "Warning: At least one tail-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
-    "fit_version": "       brms       rstan stanHeaders    cmdstanr     cmdstan \n   \"2.18.0\"    \"2.21.7\"  \"2.21.0.7\"     \"0.5.3\"    \"2.31.0\" ",
+    "fit_version": "       brms       rstan stanHeaders    cmdstanr     cmdstan \n   \"2.20.1\"    \"2.21.8\"  \"2.21.0.7\"     \"0.5.3\"    \"2.32.2\" ",
     "formula_view": "y ~ 1 + trt + (1 | ID)",
     "general_MCMC_out": "                        R-hat   ESS_bulk  ESS_tail\nb_Intercept         1.0176831  209.92351 333.11320\nb_trtdrug           1.0144001  300.36262 380.67927\nb_trtdrugP          1.0204883  182.58338 304.38394\nsd_ID__Intercept    1.0265923  104.93188 232.00030\nr_ID[X01,Intercept] 1.0029246  742.41684 439.94113\nr_ID[X02,Intercept] 1.0012548  469.07577 345.21174\nr_ID[X03,Intercept] 1.0032935  475.09356 441.60535\nr_ID[X04,Intercept] 1.0382820 1027.42289 331.09337\nr_ID[X05,Intercept] 1.0056507  543.41097 269.05659\nr_ID[X06,Intercept] 1.0061226  501.00486 400.01602\nr_ID[X07,Intercept] 1.0011447  193.24505 231.12839\nr_ID[X08,Intercept] 1.0260147  623.43889 389.90689\nr_ID[X09,Intercept] 1.0002002  667.58376 410.72873\nr_ID[X10,Intercept] 1.0009841  703.61839 297.50330\nr_ID[X11,Intercept] 1.0044172  543.84090 310.42048\nr_ID[X12,Intercept] 1.0057634  298.88440 455.95902\nr_ID[X13,Intercept] 1.0038942  537.90310 368.96920\nr_ID[X14,Intercept] 1.0037014  517.95435 431.85286\nr_ID[X15,Intercept] 1.0054687  414.28167 362.26874\nr_ID[X16,Intercept] 1.0029520  397.92200 233.11631\nr_ID[X17,Intercept] 1.0127976  310.98258 327.90555\nr_ID[X18,Intercept] 1.0068552  489.70268 308.70536\nr_ID[X19,Intercept] 1.0052143  320.96732 394.72844\nr_ID[X20,Intercept] 1.0122642  759.93816 435.19135\nr_ID[X21,Intercept] 0.9978441  458.51154 334.44771\nr_ID[Y01,Intercept] 0.9979748  800.25197 422.09821\nr_ID[Y02,Intercept] 1.0138576  208.00346 376.97413\nr_ID[Y03,Intercept] 1.0073823  268.72313 187.75238\nr_ID[Y04,Intercept] 1.0102870  257.28783 378.12277\nr_ID[Y05,Intercept] 1.0111329  242.42778 308.71249\nr_ID[Y06,Intercept] 0.9993250 1061.07543 351.55531\nr_ID[Y07,Intercept] 1.0042722  550.17920 279.08203\nr_ID[Y08,Intercept] 1.0066149  412.03100 185.27641\nr_ID[Y09,Intercept] 1.0024137  721.44267 394.40617\nr_ID[Y10,Intercept] 1.0148581  687.91824 272.79843\nr_ID[Y11,Intercept] 1.0056715  764.00854 332.10225\nr_ID[Y12,Intercept] 1.0055456  598.51544 345.51011\nr_ID[Y13,Intercept] 1.0114555  232.69239 284.87171\nr_ID[Y14,Intercept] 1.0055283  586.54386 390.71833\nr_ID[Z01,Intercept] 1.0030934  658.42073 376.36163\nr_ID[Z02,Intercept] 1.0110676  711.40878 467.19664\nr_ID[Z03,Intercept] 1.0085744  515.33293 315.64711\nr_ID[Z05,Intercept] 1.0124672  216.66411 283.12866\nr_ID[Z06,Intercept] 1.0305862  406.56770 283.43947\nr_ID[Z07,Intercept] 1.0061283  430.39430 434.93606\nr_ID[Z09,Intercept] 0.9994049  561.39043 421.09389\nr_ID[Z10,Intercept] 1.0058537  594.56356 352.07439\nr_ID[Z11,Intercept] 1.0036028  446.10123 248.51827\nr_ID[Z14,Intercept] 1.0116978  370.01826 241.60171\nr_ID[Z15,Intercept] 1.0058847  500.53219 302.48683\nr_ID[Z19,Intercept] 1.0092577  524.30994 460.16439\nr_ID[Z20,Intercept] 1.0032376  629.40892 323.15557\nr_ID[Z24,Intercept] 1.0016927  407.48150 268.78245\nr_ID[Z26,Intercept] 1.0014719  510.71854 284.92151\nlprior              1.0216688  122.00226 202.60379\nlp__                1.0614721   70.03086  94.37157",
     "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",

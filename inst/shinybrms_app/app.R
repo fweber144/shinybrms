@@ -2809,21 +2809,40 @@ server <- function(input, output, session) {
     
     ###### General MCMC diagnostics -------------------------------------------
     
-    C_essBulk <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_bulk)
+    C_essBulk <- apply(
+      C_draws_arr, MARGIN = 3,
+      FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+        posterior::ess_bulk
+      } else {
+        rstan::ess_bulk
+      }
+    )
     if (any(is.na(C_essBulk))) {
       C_essBulk_OK <- FALSE
     } else {
       C_essBulk_OK <- all(C_essBulk > 100 * n_chains_out)
     }
     
-    C_rhat <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::Rhat)
+    C_rhat <- apply(C_draws_arr, MARGIN = 3,
+                    FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+                      posterior::rhat
+                    } else {
+                      rstan::Rhat
+                    })
     if (any(is.na(C_rhat))) {
       C_rhat_OK <- FALSE
     } else {
       C_rhat_OK <- all(C_rhat < 1.01)
     }
     
-    C_essTail <- apply(C_draws_arr, MARGIN = 3, FUN = rstan::ess_tail)
+    C_essTail <- apply(
+      C_draws_arr, MARGIN = 3,
+      FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+        posterior::ess_tail
+      } else {
+        rstan::ess_tail
+      }
+    )
     if (any(is.na(C_essTail))) {
       C_essTail_OK <- FALSE
     } else {

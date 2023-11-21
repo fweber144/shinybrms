@@ -258,7 +258,7 @@ ui <- navbarPage(
         "at the observed outcome values), conditional on the",
         "parameters and the predictors (and taken as a function of the parameters).",
         "Thus, after having specified the likelihood and the prior (distribution), the aim of a",
-        "Bayesian data analysis is to infer the posterior (distribution) and then perform",
+        "Bayesian data analysis is to infer the posterior (distribution) and then to perform",
         "analyses based on the posterior, e.g., plotting marginal posterior distributions and",
         "calculating their 2.5%, 50%, and 97.5% quantiles."),
       p("For a more thorough introduction to Bayesian statistics in general as well as",

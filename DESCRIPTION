@@ -40,6 +40,7 @@ Imports:
     rlang
 Suggests: 
     cmdstanr,
+    posterior,
     ggplot2,
     shinystan (>= 2.4.0),
     callr (>= 3.4.0),

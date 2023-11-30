@@ -6,9 +6,11 @@
 
 ## Minor changes
 
-* Add Weber, Ickstadt, and Glass (2022, DOI:
+* Added Weber, Ickstadt, and Glass (2022, DOI:
 [10.32614/RJ-2022-027](https://doi.org/10.32614/RJ-2022-027)) to documentation
 and vignette.
+* If installed, the **posterior** package is now used for computing MCMC
+diagnostics, not **rstan**.
 
 # **shinybrms** 1.8.0
 

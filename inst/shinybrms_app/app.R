@@ -1064,7 +1064,19 @@ ui <- navbarPage(
               ),
               tags$li(
                 "the ESS in the tails of the corresponding marginal posterior",
-                "distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\))."
+                "distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)),"
+              ),
+              tags$li(
+                "the ESS for the 2.5% quantile of the corresponding marginal posterior",
+                "distribution (short: Q2.5-ESS or \\(\\text{ESS}_{\\text{Q}2.5}\\); reported",
+                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
+                "typically interested in the 2.5% quantile of marginal posteriors),"
+              ),
+              tags$li(
+                "the ESS for the 97.5% quantile of the corresponding marginal posterior",
+                "distribution (short: Q97.5-ESS or \\(\\text{ESS}_{\\text{Q}97.5}\\); reported",
+                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
+                "typically interested in the 97.5% quantile of marginal posteriors)."
               )
             ),
             "In general, the following values of the general MCMC diagnostics are worrying:",
@@ -1077,15 +1089,23 @@ ui <- navbarPage(
                 "with \\(n_{\\text{chains}}\\) denoting the number of chains,"
               ),
               tags$li(
-                "\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\)."
+                "\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\),"
+              ),
+              tags$li(
+                "\\(\\text{ESS}_{\\text{Q}2.5} \\leq 100 \\cdot n_{\\text{chains}}\\),"
+              ),
+              tags$li(
+                "\\(\\text{ESS}_{\\text{Q}97.5} \\leq 100 \\cdot n_{\\text{chains}}\\)."
               )
             )),
           p("Note: If you used a", code("constant()"), "prior (which should rarely be the case),",
             "then after obtaining the Stan results, you will be warned that at least one MCMC diagnostic is worrying.",
             "The reason is that",
-            "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",
+            "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), \\(\\text{ESS}_{\\text{tail}}\\),",
+            "\\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
             "cannot be calculated for a constant parameter. Thus, with respect to",
-            "the \\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), and \\(\\text{ESS}_{\\text{tail}}\\)",
+            "the \\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), \\(\\text{ESS}_{\\text{tail}}\\),",
+            "\\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
             em("of a constant parameter", .noWS = "after"), ", you may ignore the warning.",
             "However, the MCMC diagnostics may be worrying for other reasons or other parameters as well.",
             "Thus, in this case, you need to check the MCMC diagnostics very carefully.",
@@ -1112,6 +1132,10 @@ ui <- navbarPage(
           verbatimTextOutput("essBulk_out", placeholder = TRUE),
           strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
           verbatimTextOutput("essTail_out", placeholder = TRUE),
+          strong("Q2.5-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{Q}2.5}\\):")),
+          verbatimTextOutput("essQ2.5_out", placeholder = TRUE),
+          strong("Q97.5-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{Q}97.5}\\):")),
+          verbatimTextOutput("essQ97.5_out", placeholder = TRUE),
           checkboxInput("show_general_MCMC_tab",
                         "Show detailed table of the general MCMC diagnostics",
                         value = FALSE),
@@ -2849,10 +2873,39 @@ server <- function(input, output, session) {
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
+    C_essQ2.5 <- apply(
+      C_draws_arr, MARGIN = 3,
+      FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+        function(x_sims) posterior::ess_quantile(x_sims, probs = c(0.025))
+      } else {
+        function(x_sims) rstan:::ess_quantile(x_sims, prob = 0.025)
+      }
+    )
+    if (any(is.na(C_essQ2.5))) {
+      C_essQ2.5_OK <- FALSE
+    } else {
+      C_essQ2.5_OK <- all(C_essQ2.5 > 100 * n_chains_out)
+    }
+    
+    C_essQ97.5 <- apply(
+      C_draws_arr, MARGIN = 3,
+      FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+        function(x_sims) posterior::ess_quantile(x_sims, probs = c(0.975))
+      } else {
+        function(x_sims) rstan:::ess_quantile(x_sims, prob = 0.975)
+      }
+    )
+    if (any(is.na(C_essQ97.5))) {
+      C_essQ97.5_OK <- FALSE
+    } else {
+      C_essQ97.5_OK <- all(C_essQ97.5 > 100 * n_chains_out)
+    }
+    
     ###### Overall check for all MCMC diagnostics -----------------------------
     
     C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK,
-                      C_essBulk_OK, C_rhat_OK, C_essTail_OK))
+                      C_essBulk_OK, C_rhat_OK, C_essTail_OK,
+                      C_essQ2.5_OK, C_essQ97.5_OK))
     
     ###### Notifications for the MCMC diagnostics -----------------------------
     
@@ -2900,7 +2953,11 @@ server <- function(input, output, session) {
                              ESS_bulk_OK = C_essBulk_OK,
                              ESS_bulk = C_essBulk,
                              ESS_tail_OK = C_essTail_OK,
-                             ESS_tail = C_essTail),
+                             ESS_tail = C_essTail,
+                             ESS_Q2.5_OK = C_essQ2.5_OK,
+                             ESS_Q2.5 = C_essQ2.5,
+                             ESS_Q97.5_OK = C_essQ97.5_OK,
+                             ESS_Q97.5 = C_essQ97.5),
                 draws_arr = C_draws_arr))
   })
   
@@ -3050,12 +3107,36 @@ server <- function(input, output, session) {
     }
   }, sep = "\n")
   
+  output$essQ2.5_out <- renderText({
+    input$run_stan # Just for graying out.
+    invisible(req(C_stanres()))
+    if (C_stanres()$diagn$ESS_Q2.5_OK) {
+      return("All Q2.5-ESS values are OK.")
+    } else {
+      return(paste("Warning: At least one Q2.5-ESS value is worrying. In general,",
+                   "this indicates that the central 95% posterior intervals should not be used."))
+    }
+  }, sep = "\n")
+  
+  output$essQ97.5_out <- renderText({
+    input$run_stan # Just for graying out.
+    invisible(req(C_stanres()))
+    if (C_stanres()$diagn$ESS_Q97.5_OK) {
+      return("All Q97.5-ESS values are OK.")
+    } else {
+      return(paste("Warning: At least one Q97.5-ESS value is worrying. In general,",
+                   "this indicates that the central 95% posterior intervals should not be used."))
+    }
+  }, sep = "\n")
+  
   output$general_MCMC_out <- renderPrint({
     input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
     data.frame("R-hat" = C_stanres()$diagn$Rhat,
                "ESS_bulk" = C_stanres()$diagn$ESS_bulk,
                "ESS_tail" = C_stanres()$diagn$ESS_tail,
+               "ESS_Q2.5" = C_stanres()$diagn$ESS_Q2.5,
+               "ESS_Q97.5" = C_stanres()$diagn$ESS_Q97.5,
                check.names = FALSE)
   })
   

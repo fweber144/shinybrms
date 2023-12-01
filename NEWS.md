@@ -11,7 +11,8 @@
 and vignette.
 * If installed, the **posterior** package is now used for computing MCMC
 diagnostics, not **rstan**.
-* The ESSs for 2.5% and 97.5% quantiles are now checked automatically as well.
+* The ESSs for 50%, 2.5%, and 97.5% posterior quantiles are now checked
+automatically as well.
 
 # **shinybrms** 1.8.0
 

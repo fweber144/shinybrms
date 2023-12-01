@@ -1067,6 +1067,12 @@ ui <- navbarPage(
                 "distribution (short: tail-ESS or \\(\\text{ESS}_{\\text{tail}}\\)),"
               ),
               tags$li(
+                "the ESS for the median of the corresponding marginal posterior",
+                "distribution (short: Q50-ESS or \\(\\text{ESS}_{\\text{Q}50}\\); reported",
+                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
+                "typically interested in the median of marginal posteriors)."
+              ),
+              tags$li(
                 "the ESS for the 2.5% quantile of the corresponding marginal posterior",
                 "distribution (short: Q2.5-ESS or \\(\\text{ESS}_{\\text{Q}2.5}\\); reported",
                 "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
@@ -1092,6 +1098,9 @@ ui <- navbarPage(
                 "\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\),"
               ),
               tags$li(
+                "\\(\\text{ESS}_{\\text{Q}50} \\leq 100 \\cdot n_{\\text{chains}}\\)."
+              ),
+              tags$li(
                 "\\(\\text{ESS}_{\\text{Q}2.5} \\leq 100 \\cdot n_{\\text{chains}}\\),"
               ),
               tags$li(
@@ -1102,10 +1111,10 @@ ui <- navbarPage(
             "then after obtaining the Stan results, you will be warned that at least one MCMC diagnostic is worrying.",
             "The reason is that",
             "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), \\(\\text{ESS}_{\\text{tail}}\\),",
-            "\\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
+            "\\(\\text{ESS}_{\\text{Q}50}\\), \\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
             "cannot be calculated for a constant parameter. Thus, with respect to",
             "the \\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\), \\(\\text{ESS}_{\\text{tail}}\\),",
-            "\\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
+            "\\(\\text{ESS}_{\\text{Q}50}\\), \\(\\text{ESS}_{\\text{Q}2.5}\\), and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
             em("of a constant parameter", .noWS = "after"), ", you may ignore the warning.",
             "However, the MCMC diagnostics may be worrying for other reasons or other parameters as well.",
             "Thus, in this case, you need to check the MCMC diagnostics very carefully.",
@@ -1132,6 +1141,8 @@ ui <- navbarPage(
           verbatimTextOutput("essBulk_out", placeholder = TRUE),
           strong("Tail-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{tail}}\\):")),
           verbatimTextOutput("essTail_out", placeholder = TRUE),
+          strong("Q50-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{Q}50}\\):")),
+          verbatimTextOutput("essQ50_out", placeholder = TRUE),
           strong("Q2.5-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{Q}2.5}\\):")),
           verbatimTextOutput("essQ2.5_out", placeholder = TRUE),
           strong("Q97.5-ESS:"), # strong(withMathJax("\\(\\text{ESS}_{\\text{Q}97.5}\\):")),
@@ -2873,6 +2884,21 @@ server <- function(input, output, session) {
       C_essTail_OK <- all(C_essTail > 100 * n_chains_out)
     }
     
+    C_essQ50 <- apply(
+      C_draws_arr, MARGIN = 3,
+      FUN = if (requireNamespace("posterior", quietly = TRUE)) {
+        # A shortcut would be posterior::ess_median():
+        function(x_sims) posterior::ess_quantile(x_sims, probs = c(0.5))
+      } else {
+        function(x_sims) rstan:::ess_quantile(x_sims, prob = 0.5)
+      }
+    )
+    if (any(is.na(C_essQ50))) {
+      C_essQ50_OK <- FALSE
+    } else {
+      C_essQ50_OK <- all(C_essQ50 > 100 * n_chains_out)
+    }
+    
     C_essQ2.5 <- apply(
       C_draws_arr, MARGIN = 3,
       FUN = if (requireNamespace("posterior", quietly = TRUE)) {
@@ -2905,7 +2931,7 @@ server <- function(input, output, session) {
     
     C_all_OK <- all(c(C_div_OK, C_tree_OK, C_EBFMI_OK,
                       C_essBulk_OK, C_rhat_OK, C_essTail_OK,
-                      C_essQ2.5_OK, C_essQ97.5_OK))
+                      C_essQ50_OK, C_essQ2.5_OK, C_essQ97.5_OK))
     
     ###### Notifications for the MCMC diagnostics -----------------------------
     
@@ -2954,6 +2980,8 @@ server <- function(input, output, session) {
                              ESS_bulk = C_essBulk,
                              ESS_tail_OK = C_essTail_OK,
                              ESS_tail = C_essTail,
+                             ESS_Q50_OK = C_essQ50_OK,
+                             ESS_Q50 = C_essQ50,
                              ESS_Q2.5_OK = C_essQ2.5_OK,
                              ESS_Q2.5 = C_essQ2.5,
                              ESS_Q97.5_OK = C_essQ97.5_OK,
@@ -3107,6 +3135,17 @@ server <- function(input, output, session) {
     }
   }, sep = "\n")
   
+  output$essQ50_out <- renderText({
+    input$run_stan # Just for graying out.
+    invisible(req(C_stanres()))
+    if (C_stanres()$diagn$ESS_Q50_OK) {
+      return("All Q50-ESS values are OK.")
+    } else {
+      return(paste("Warning: At least one Q50-ESS value is worrying. In general,",
+                   "this indicates that the posterior medians should not be used."))
+    }
+  }, sep = "\n")
+  
   output$essQ2.5_out <- renderText({
     input$run_stan # Just for graying out.
     invisible(req(C_stanres()))
@@ -3135,6 +3174,7 @@ server <- function(input, output, session) {
     data.frame("R-hat" = C_stanres()$diagn$Rhat,
                "ESS_bulk" = C_stanres()$diagn$ESS_bulk,
                "ESS_tail" = C_stanres()$diagn$ESS_tail,
+               "ESS_Q50" = C_stanres()$diagn$ESS_Q50,
                "ESS_Q2.5" = C_stanres()$diagn$ESS_Q2.5,
                "ESS_Q97.5" = C_stanres()$diagn$ESS_Q97.5,
                check.names = FALSE)

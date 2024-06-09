@@ -30,7 +30,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   ### app$getValue() does not work here:
   bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                               export = FALSE)$input$brmsfit_upload
-  
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
   stopifnot(identical(
     bfit_upld, data.frame(name = "bacteria_full.rds", type = "", datapath = "0.rds")
   ))
@@ -53,7 +53,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                               export = FALSE)$input$brmsfit_upload
-  
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
   stopifnot(identical(
     bfit_upld, data.frame(name = "bacteria_noInt.rds", type = "", datapath = "0.rds")
   ))
@@ -67,7 +67,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   app$set_inputs(run_stan = "click", timeout_ = 10000)
   bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                               export = FALSE)$input$brmsfit_upload
-  
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
   stopifnot(identical(
     bfit_upld, data.frame(name = "bacteria_noInt.rds", type = "", datapath = "0.rds")
   ))
@@ -83,6 +83,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
     app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
     bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                                 export = FALSE)$input$brmsfit_upload
+    bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
     stopifnot(identical(bfit_upld, data.frame(name = "bacteria_noWeek.rds",
                                               type = "", datapath = "0.rds")))
     app$expect_values(input = setdiff(lapply(app$get_values(),
@@ -103,7 +104,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                               export = FALSE)$input$brmsfit_upload
-  
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
   stopifnot(identical(
     bfit_upld, data.frame(name = "bacteria_empty.rds", type = "", datapath = "0.rds")
   ))

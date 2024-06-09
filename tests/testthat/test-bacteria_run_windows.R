@@ -126,6 +126,7 @@ test_that("Migrated shinytest test: bacteria_run_windows.R", {
   ### app$getValue() does not work here:
   bfit_upld <- app$get_values(input = "brmsfit_upload", output = FALSE,
                               export = FALSE)$input$brmsfit_upload
+  bfit_upld <- bfit_upld[, setdiff(names(bfit_upld), "size"), drop = FALSE]
   stopifnot(identical(
     bfit_upld, data.frame(name = paste0("bacteria", "_full.rds"), type = "", datapath = "0.rds")
   ))

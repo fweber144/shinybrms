@@ -2,9 +2,9 @@ library(shinytest2)
 
 test_that("Migrated shinytest test: priors.R", {
   app <- AppDriver$new()
-
+  
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
-
+  
   app$set_inputs(navbar_ID = "Data", ex_da_sel = "bacteria")
   app$set_inputs(navbar_ID = "Likelihood", outc_sel = "y", dist_sel = "bernoulli")
   app$set_inputs(likelihood_navlist_ID = "Predictors")

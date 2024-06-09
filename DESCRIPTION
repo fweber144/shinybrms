@@ -47,10 +47,11 @@ Suggests:
     rstanarm,
     MASS,
     lme4,
-    testthat,
-    shinytest
+    testthat (>= 3.0.0),
+    shinytest2
 Additional_repositories:
     https://mc-stan.org/r-packages/
 Encoding: UTF-8
 RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
+Config/testthat/edition: 3

@@ -1,0 +1,124 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.8,
+    "advOpts_backend": "cmdstanr",
+    "advOpts_chains": 2,
+    "advOpts_cores": 2,
+    "advOpts_init": "random",
+    "advOpts_init_r": null,
+    "advOpts_iter": 500,
+    "advOpts_max_treedepth": 10,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": false,
+    "advOpts_seed": 6789,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "brmsfit_upload": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 0,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "",
+    "cust_text": "",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "bernoulli",
+    "ex_da_sel": "bacteria",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
+    "likelihood_navlist_ID": "Formula preview",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": null,
+    "outc_sel": "y",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 0,
+    "par_sel": "",
+    "posterior_link1": 0,
+    "posterior_link_upld": 0,
+    "posterior_navlist_ID": "Run Stan",
+    "pred_int_add": 1,
+    "pred_int_build": null,
+    "pred_int_sel": "week<-->trt",
+    "pred_mainGL_sel": "ID",
+    "pred_mainPL_sel": [
+      "week",
+      "trt"
+    ],
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 1,
+    "prior_class_sel": "b",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_link_upld": 0,
+    "prior_reset": 0,
+    "prior_text": "student_t(3, 0, 4)",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 0,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advFams": false,
+    "show_advOpts": true,
+    "show_general_MCMC_tab": false,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": ""
+  },
+  "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" class=\"shiny-input-file\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> y <\/th> <th style='text-align: left;'> ap <\/th> <th style='text-align: left;'> hilo <\/th> <th style='text-align: right;'> week <\/th> <th style='text-align: left;'> ID <\/th> <th style='text-align: left;'> trt <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   4 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">  11 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_all_out": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "fit_date": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "fit_version": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "formula_view": "y ~ 1 + week*trt + (1 | ID)",
+    "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + week*trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Lower bound <\/th> <th style='text-align: left;'> Upper bound <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> trtdrug <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> trtdrugP <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> week <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> week:trtdrug <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> week:trtdrugP <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 4) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>"
+  },
+  "export": {
+
+  }
+}

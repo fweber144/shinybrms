@@ -1,0 +1,166 @@
+{
+  "input": {
+    "about_link1": 0,
+    "act_launch_shinystan": 0,
+    "advOpts_adapt_delta": 0.8,
+    "advOpts_backend": "cmdstanr",
+    "advOpts_chains": 2,
+    "advOpts_cores": 2,
+    "advOpts_init": "random",
+    "advOpts_init_r": null,
+    "advOpts_iter": 500,
+    "advOpts_max_treedepth": 10,
+    "advOpts_open_progress": true,
+    "advOpts_refresh": null,
+    "advOpts_save_all_pars": false,
+    "advOpts_save_warmup": false,
+    "advOpts_seed": 6789,
+    "advOpts_thin": 1,
+    "advOpts_warmup": null,
+    "brmsfit_upload": null,
+    "ceff_download_sel": "pdf",
+    "cust_act": 3,
+    "cust_allow_link": 0,
+    "cust_help_link": 0,
+    "cust_name": "absolute week effect",
+    "cust_text": "abs(`b_week`)",
+    "data_link1": 0,
+    "data_link2": 0,
+    "data_link3": 0,
+    "data_upload": null,
+    "dec": ".",
+    "dist_sel": "bernoulli",
+    "ex_da_sel": "bacteria",
+    "formula_link1": 0,
+    "header": true,
+    "likelihood_link1": 0,
+    "likelihood_link_upld": 0,
+    "likelihood_navlist_ID": "Formula preview",
+    "links_link1": 0,
+    "mcmc_link1": 0,
+    "navbar_ID": "Posterior",
+    "offs_sel": null,
+    "outc_sel": "y",
+    "outcome_link1": 0,
+    "outcome_link2": 0,
+    "par_add": 4,
+    "par_sel": "b_week",
+    "posterior_link1": 0,
+    "posterior_link_upld": 0,
+    "posterior_navlist_ID": "Launch <strong>shinystan<\/strong>",
+    "pred_int_add": 1,
+    "pred_int_build": null,
+    "pred_int_sel": null,
+    "pred_mainGL_sel": "ID",
+    "pred_mainPL_sel": [
+      "week",
+      "trt"
+    ],
+    "preview_rows_radio": "head",
+    "preview_type_radio": "datas",
+    "prior_add": 3,
+    "prior_class_sel": "b",
+    "prior_coef_sel": "",
+    "prior_group_sel": "",
+    "prior_link1": 0,
+    "prior_link3": 0,
+    "prior_link_upld": 0,
+    "prior_reset": 0,
+    "prior_text": "student_t(3, 0, 4)",
+    "quote": "\"",
+    "references_link1": 0,
+    "run_stan": 3,
+    "seed_PPD": null,
+    "sep": ",",
+    "show_advFams": false,
+    "show_advOpts": true,
+    "show_general_MCMC_tab": true,
+    "show_stancode": false,
+    "show_standata": false,
+    "stanout_download_sel": "shinybrms_brmsfit.rds",
+    "term_sel": "week"
+  },
+  "output": {
+    "brmsfit_upload_UI": {
+      "html": "<div class=\"form-group shiny-input-container\" style=\"width:320px;\">\n  <label class=\"control-label\" id=\"brmsfit_upload-label\" for=\"brmsfit_upload\">Upload \"brmsfit\" object (RDS file):<\/label>\n  <div class=\"input-group\">\n    <label class=\"input-group-btn input-group-prepend\">\n      <span class=\"btn btn-default btn-file\">\n        Browse ...\n        <input id=\"brmsfit_upload\" class=\"shiny-input-file\" name=\"brmsfit_upload\" type=\"file\" style=\"position: absolute !important; top: -99999px !important; left: -99999px !important;\" accept=\".rds\"/>\n      <\/span>\n    <\/label>\n    <input type=\"text\" class=\"form-control\" placeholder=\"No file selected\" readonly=\"readonly\"/>\n  <\/div>\n  <div id=\"brmsfit_upload_progress\" class=\"progress active shiny-file-input-progress\">\n    <div class=\"progress-bar\"><\/div>\n  <\/div>\n<\/div>",
+      "deps": [
+
+      ]
+    },
+    "ceff_plot": {
+      "src": "[image data hash: 24f8caab3efd25dcb549118877667677]",
+      "width": 472,
+      "height": 291.7120426899504,
+      "alt": "Plot object",
+      "coordmap": {
+        "panels": [
+          {
+            "panel": 1,
+            "row": 1,
+            "col": 1,
+            "panel_vars": {
+
+            },
+            "log": {
+              "x": null,
+              "y": null
+            },
+            "domain": {
+              "left": -0.55,
+              "right": 11.55,
+              "bottom": 0.6452487114983559,
+              "top": 1.007881724919803
+            },
+            "mapping": {
+              "ymin": ".data[[\"lower__\"]]",
+              "ymax": ".data[[\"upper__\"]]",
+              "x": ".data[[\"effect1__\"]]",
+              "y": ".data[[\"estimate__\"]]"
+            },
+            "range": {
+              "left": 53.1282689912827,
+              "right": 464.0298879202989,
+              "bottom": 242.8717310087173,
+              "top": 7.970112079701122
+            }
+          }
+        ],
+        "dims": {
+          "width": 472,
+          "height": 291.7120426899504
+        }
+      }
+    },
+    "cust_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Name <\/th> <th style='text-align: right;'> Q2.5 <\/th> <th style='text-align: right;'> Q25 <\/th> <th style='text-align: right;'> median <\/th> <th style='text-align: right;'> Q75 <\/th> <th style='text-align: right;'> Q97.5 <\/th> <th style='text-align: right;'> MAD <\/th> <th style='text-align: right;'> mean <\/th> <th style='text-align: right;'> SD <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> absolute week effect <\/td> <td align=\"right\"> 0.06 <\/td> <td align=\"right\"> 0.12 <\/td> <td align=\"right\"> 0.16 <\/td> <td align=\"right\"> 0.19 <\/td> <td align=\"right\"> 0.27 <\/td> <td align=\"right\"> 0.05 <\/td> <td align=\"right\"> 0.16 <\/td> <td align=\"right\"> 0.05 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "da_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> y <\/th> <th style='text-align: left;'> ap <\/th> <th style='text-align: left;'> hilo <\/th> <th style='text-align: right;'> week <\/th> <th style='text-align: left;'> ID <\/th> <th style='text-align: left;'> trt <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">   4 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> p <\/td> <td> hi <\/td> <td align=\"right\">  11 <\/td> <td> X01 <\/td> <td> placebo <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   0 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n  <tr> <td> y <\/td> <td> a <\/td> <td> hi <\/td> <td align=\"right\">   2 <\/td> <td> X02 <\/td> <td> drug+ <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "diagn_EBFMI_out": "The E-BFMI (chain_1: 0.6863, chain_2: 0.7391) is OK.",
+    "diagn_all_out": "Warning: At least one MCMC diagnostic is worrying (see the tab \"MCMC diagnostics\" for details). In general, this indicates that the Stan results should not be used.",
+    "diagn_div_out": "The number of iterations ending with a divergence (0) is OK.",
+    "diagn_tree_out": "The number of iterations hitting the maximum tree depth (0) is OK.",
+    "dist_link": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Parameter <\/th> <th style='text-align: left;'> Link function <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> mu <\/td> <td> logit <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "essBulk_out": "Warning: At least one bulk-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "essQ2.5_out": "Warning: At least one Q2.5-ESS value is worrying. In general, this indicates that the central 95% posterior intervals should not be used.",
+    "essQ50_out": "Warning: At least one Q50-ESS value is worrying. In general, this indicates that the posterior medians should not be used.",
+    "essQ97.5_out": "All Q97.5-ESS values are OK.",
+    "essTail_out": "Warning: At least one tail-ESS value is worrying. In general, this indicates that the Stan results should not be used.",
+    "fit_version": "       brms       rstan stanHeaders    cmdstanr     cmdstan \n   \"2.21.0\"    \"2.32.6\"    \"2.32.9\"     \"0.8.0\"    \"2.34.1\" ",
+    "formula_view": "y ~ 1 + week + trt + (1 | ID)",
+    "general_MCMC_out": "                        R-hat  ESS_bulk ESS_tail   ESS_Q50 ESS_Q2.5 ESS_Q97.5\nb_Intercept         1.0111698  266.3930 257.6373  301.9004 400.2598  388.4744\nb_week              0.9991753  732.9177 341.7320  575.3573 442.0236  519.3905\nb_trtdrug           1.0146101  301.6747 315.5452  411.7087 237.9437  399.7889\nb_trtdrugP          1.0060300  423.8657 396.7807  312.7403 361.6520  533.2492\nsd_ID__Intercept    1.0080154  165.2755 357.4946  199.6679 384.5096  400.7326\nIntercept           0.9991091  381.7970 316.9683  370.2772 400.2598  442.5482\nr_ID[X01,Intercept] 1.0003755 1211.4169 399.8333 1117.1221 394.2174  384.9254\nr_ID[X02,Intercept] 1.0016578  697.4736 373.0384  590.9984 523.4347  455.0229\nr_ID[X03,Intercept] 1.0002162  605.7234 405.0969  565.6613 388.4744  520.0239\nr_ID[X04,Intercept] 1.0153180  596.4641 407.0658  612.9734 387.8769  393.4881\nr_ID[X05,Intercept] 1.0049039  684.8312 507.7731  673.5810 535.9087  459.0881\nr_ID[X06,Intercept] 1.0009782  665.6750 422.1705  556.3472 448.2806  456.7332\nr_ID[X07,Intercept] 1.0029577  526.2165 465.9430  441.4381 507.6821  379.4495\nr_ID[X08,Intercept] 1.0019017  584.9147 310.9597  475.6588 339.2204  271.7917\nr_ID[X09,Intercept] 1.0001094  655.5074 299.0193  564.5560 517.9122  457.4021\nr_ID[X10,Intercept] 1.0018198  959.9574 402.9014  922.2736 454.9716  355.2543\nr_ID[X11,Intercept] 0.9996116 1044.2548 369.2789  712.8867 442.0988  500.2125\nr_ID[X12,Intercept] 0.9983596  679.1421 402.4859  611.0779 526.1718  383.2024\nr_ID[X13,Intercept] 1.0049803  500.8313 309.3546  529.0792 443.4914  369.9370\nr_ID[X14,Intercept] 1.0088699  413.4434 223.7600  496.2095 453.4653  449.2534\nr_ID[X15,Intercept] 1.0020648  457.6842 319.3630  487.9102 456.0673  346.5363\nr_ID[X16,Intercept] 1.0030133  828.8069 464.0522  619.1902 459.0881  444.3506\nr_ID[X17,Intercept] 1.0100205  469.1830 440.9720  434.0909 407.1283  416.1822\nr_ID[X18,Intercept] 0.9998248  465.4819 441.4420  509.5241 536.4089  429.3970\nr_ID[X19,Intercept] 1.0139263  281.5347 304.3192  480.5529 348.8559  391.1575\nr_ID[X20,Intercept] 1.0027930  866.3545 350.8788  830.3136 533.9216  442.5482\nr_ID[X21,Intercept] 0.9987892 1012.8023 328.8443  779.9931 435.1675  479.5704\nr_ID[Y01,Intercept] 1.0021870 1141.4465 257.7073  965.9512 359.6541  440.0592\nr_ID[Y02,Intercept] 1.0098617  260.8974 326.7447  224.8904 533.9216  385.8891\nr_ID[Y03,Intercept] 1.0041690  767.0523 445.2831  622.5342 456.0673  536.9104\nr_ID[Y04,Intercept] 1.0008189  477.4844 452.4976  575.1367 435.7548  502.7532\nr_ID[Y05,Intercept] 1.0094278  300.5824 247.5891  336.9418 494.8103  443.4021\nr_ID[Y06,Intercept] 1.0203726  387.7835 302.7586  419.5821 458.0742  299.9549\nr_ID[Y07,Intercept] 1.0052883  578.4274 323.0687  604.7964 459.0881  326.3403\nr_ID[Y08,Intercept] 0.9994010  842.2797 377.1892  706.4571 452.2021  351.7272\nr_ID[Y09,Intercept] 0.9989000  619.2609 309.4796  693.4864 425.4016  434.7549\nr_ID[Y10,Intercept] 1.0036299  498.9255 306.3001  552.9977 531.4675  313.0467\nr_ID[Y11,Intercept] 1.0006851  675.2998 350.5405  537.4418 389.6599  444.3885\nr_ID[Y12,Intercept] 1.0015893  972.8289 354.6302  654.3900 426.0957  351.1619\nr_ID[Y13,Intercept] 1.0071350  619.9111 363.5494  447.0345 345.1440  451.2141\nr_ID[Y14,Intercept] 1.0026226  716.6337 423.1878  598.0524 456.0673  415.6787\nr_ID[Z01,Intercept] 0.9996414  869.1199 475.2206  599.5054 535.4099  446.0855\nr_ID[Z02,Intercept] 0.9993969  640.2067 434.8864  716.6061 349.3030  387.5527\nr_ID[Z03,Intercept] 1.0023168  580.3526 320.9154  604.1545 526.1718  416.6257\nr_ID[Z05,Intercept] 1.0036909  308.4959 372.9140  368.5241 278.7139  521.3453\nr_ID[Z06,Intercept] 1.0053424  896.1429 495.7092  767.2767 458.0742  496.9441\nr_ID[Z07,Intercept] 1.0018641  885.1183 500.9014  687.8360 503.4175  516.6601\nr_ID[Z09,Intercept] 1.0061877  511.5235 282.5404  471.5235 231.7381  350.0383\nr_ID[Z10,Intercept] 1.0000821  467.1447 380.0062  805.7120 400.9697  394.9500\nr_ID[Z11,Intercept] 0.9976769  587.8919 297.6770  721.6181 498.8452  308.8494\nr_ID[Z14,Intercept] 0.9996412  767.3430 461.1608  739.1847 386.3733  445.2003\nr_ID[Z15,Intercept] 1.0080937  978.8160 431.1767  796.5603 445.1265  447.2252\nr_ID[Z19,Intercept] 1.0027202  641.9337 377.7858  631.3668 342.4411  458.0742\nr_ID[Z20,Intercept] 1.0070790  731.8509 345.2540  684.1759 457.0672  451.2141\nr_ID[Z24,Intercept] 1.0032603  578.3265 430.7506  437.7966 388.4829  457.7377\nr_ID[Z26,Intercept] 1.0091114  937.8542 398.6503  895.9817 534.4163  398.0539\nlprior              1.0125044  168.0603 283.5745  220.2873 277.5987  373.2325\nlp__                1.0262651  105.7242 171.7751  153.6861 185.0154  217.8647",
+    "pred_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Effect(s) <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td class='NA'> NA <\/td> <td> 1 + week + trt <\/td> <\/tr>\n  <tr> <td> ID <\/td> <td> 1 <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_default_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th> <th style='text-align: left;'> Lower bound <\/th> <th style='text-align: left;'> Upper bound <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> Intercept <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> trtdrug <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> trtdrugP <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> (flat) <\/td> <td> b <\/td> <td> week <\/td> <td>  <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td>  <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td>  <\/td> <td> ID <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n  <tr> <td> student_t(3, 0, 2.5) <\/td> <td> sd <\/td> <td> Intercept <\/td> <td> ID <\/td> <td> 0 <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "prior_set_view": "<table  class = 'table shiny-table table- spacing-s' style = 'width:auto;'>\n<thead> <tr> <th style='text-align: left;'> Prior <\/th> <th style='text-align: left;'> Class <\/th> <th style='text-align: left;'> Coefficient <\/th> <th style='text-align: left;'> Group <\/th>  <\/tr> <\/thead> <tbody>\n  <tr> <td> student_t(3, 0, 4) <\/td> <td> b <\/td> <td>  <\/td> <td>  <\/td> <\/tr>\n   <\/tbody> <\/table>",
+    "rhat_out": "Warning: At least one R-hat value is worrying. In general, this indicates that the Stan results should not be used.",
+    "size_aux": {
+      "message": "",
+      "call": "NULL",
+      "type": [
+        "shiny.silent.error",
+        "validation"
+      ]
+    },
+    "smmry_view": " Family: bernoulli \n  Links: mu = logit \nFormula: y ~ week + trt + (1 | ID) \n   Data: structure(list(y = structure(c(2L, 2L, 2L, 2L, 2L, (Number of observations: 220) \n  Draws: 2 chains, each with iter = 500; warmup = 250; thin = 1;\n         total post-warmup draws = 500\n\nPriors:\nIntercept ~ student_t(3, 0, 2.5)\nb ~ student_t(3, 0, 4)\n<lower=0> sd ~ student_t(3, 0, 2.5)\n\nMultilevel Hyperparameters:\n~ID (Number of levels: 50) \n              Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nsd(Intercept)   1.4734    0.4212   0.7633   2.7010 1.0080      165      357\n\nRegression Coefficients:\n          Estimate Est.Error l-95% CI u-95% CI   Rhat Bulk_ESS Tail_ESS\nIntercept   3.3459    0.6635   2.2280   4.7472 1.0112      266      258\nweek       -0.1564    0.0472  -0.2694  -0.0614 0.9992      733      342\ntrtdrug    -1.3816    0.7001  -2.9266  -0.0828 1.0146      302      316\ntrtdrugP   -0.8479    0.7263  -2.5053   0.5779 1.0060      424      397\n\nDraws were sampled using sample(hmc). For each parameter, Bulk_ESS\nand Tail_ESS are effective sample size measures, and Rhat is the potential\nscale reduction factor on split chains (at convergence, Rhat = 1)."
+  },
+  "export": {
+
+  }
+}

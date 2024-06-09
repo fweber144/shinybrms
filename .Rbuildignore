@@ -10,3 +10,4 @@
 ^vignettes$
 .*\.rds$
 ^CRAN-SUBMISSION$
+_\.new\.png$

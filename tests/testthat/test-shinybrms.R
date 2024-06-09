@@ -1,6 +1,6 @@
 library(shinytest2)
 
-test_that("shinybrms_app works", {
+test_that("shinybrms passes all shinytest2 tests", {
   skip_on_cran()
-  test_app(system.file(package = "shinybrms", "shinybrms_app"))
+  shinytest2::test_app(system.file("shinybrms_app", package = "shinybrms"))
 })

@@ -6,7 +6,7 @@ test_that("Migrated shinytest test: switchData_same.R", {
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   
   app$set_inputs(navbar_ID = "Data")
-  # app$upload_file(data_upload = "switchData-data.csv")
+  app$upload_file(data_upload = "switchData-data.csv")
   app$set_inputs(navbar_ID = "Likelihood", outc_sel = "y", dist_sel = "bernoulli")
   app$set_inputs(likelihood_navlist_ID = "Predictors", pred_mainPL_sel = "x1")
   app$set_inputs(navbar_ID = "Prior", prior_class_sel = "b")
@@ -15,7 +15,7 @@ test_that("Migrated shinytest test: switchData_same.R", {
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input,
                                     "data_upload"), output = TRUE, export = TRUE)
   app$set_inputs(navbar_ID = "Data")
-  # app$upload_file(data_upload = "switchData-data.csv")
+  app$upload_file(data_upload = "switchData-data.csv")
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input,
                                     "data_upload"), output = TRUE, export = TRUE)
   app$set_inputs(navbar_ID = "Prior")

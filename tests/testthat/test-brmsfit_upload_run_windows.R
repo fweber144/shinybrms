@@ -11,7 +11,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   
   # Upload full model -------------------------------------------------------
   
-  # app$upload_file(brmsfit_upload = file.path("bacteria_full.rds"))
+  app$upload_file(brmsfit_upload = file.path("bacteria_full.rds"))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics", show_general_MCMC_tab = TRUE)
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary", par_sel = "b_week",
@@ -41,7 +41,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   # Upload no-interaction model ---------------------------------------------
   
   app$set_inputs(posterior_navlist_ID = "Run Stan")
-  # app$upload_file(brmsfit_upload = file.path("bacteria_noInt.rds"))
+  app$upload_file(brmsfit_upload = file.path("bacteria_noInt.rds"))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary", par_sel = "b_week",
@@ -93,7 +93,7 @@ test_that("Migrated shinytest test: brmsfit_upload_run_windows.R", {
   
   # Upload empty model ------------------------------------------------------
   
-  # app$upload_file(brmsfit_upload = file.path("bacteria_empty.rds"))
+  app$upload_file(brmsfit_upload = file.path("bacteria_empty.rds"))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary", par_sel = "b_Intercept",

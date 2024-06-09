@@ -107,7 +107,7 @@ test_that("Migrated shinytest test: bacteria_run_windows.R", {
   # Upload full model -------------------------------------------------------
   
   app$set_inputs(posterior_navlist_ID = "Run Stan")
-  # app$upload_file(brmsfit_upload = file.path(paste0("bacteria", "_full.rds")))
+  app$upload_file(brmsfit_upload = file.path(paste0("bacteria", "_full.rds")))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary", par_sel = "b_week",

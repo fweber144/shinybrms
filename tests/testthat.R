@@ -1,4 +1,1 @@
-library(testthat)
-library(shinybrms)
-
-test_check("shinybrms")
+shinytest2::test_app()

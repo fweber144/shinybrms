@@ -1,10 +1,93 @@
-library(shinytest)
+library(shinytest2)
 
-test_that("Specification of interaction terms", {
-  skip_on_cran()
-  skip_if_not_installed("lme4")
-  
-  shinytest::installDependencies()
-  app_path <- system.file("shinybrms_app", package = "shinybrms")
-  shinytest::expect_pass(shinytest::testApp(app_path, testnames = "interactions.R"))
+test_that("Migrated shinytest test: interactions.R", {
+  app <- AppDriver$new()
+
+  app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
+
+  app$set_inputs(navbar_ID = "Data", ex_da_sel = "Arabidopsis")
+  app$set_inputs(navbar_ID = "Likelihood", outc_sel = "total.fruits",
+    dist_sel = "negbinomial")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$set_inputs(likelihood_navlist_ID = "Predictors")
+  app$expect_values()
+  # A test for the bug fixed by commit 17ba0f6de57741b1f39157b10f31e28af6c5e52b:
+  app$set_inputs(pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_mainPL_sel = c("reg",
+    "rack", "nutrient", "amd", "status"), pred_mainGL_sel = c("popu",
+    "gen"))
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for the bug fixed by commit 17ba0f6de57741b1f39157b10f31e28af6c5e52b:
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("reg",
+    "nutrient"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for adding an already existing interaction term in a different order of the involved
+  # variables (fixed by commit 5f2242f244a5c68e25e1a89dc21e20c58872a1d0):
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("nutrient",
+    "reg"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("reg",
+    "nutrient", "popu"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("reg",
+    "nutrient", "amd"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("popu",
+    "gen"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("rack",
+    "amd", "popu", "gen"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("rack",
+    "popu", "gen"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("status",
+    "popu"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for removing a variable whose main effect is involved in at least one interaction (fixed by
+  # commit b880b306cf6ad8a13cae235590c9a430c6c669c3):
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_mainPL_sel = c("rack",
+    "nutrient", "amd", "status"))
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for re-adding the previously removed variable (requires to re-add all previously added
+  # interaction terms involving the previously removed variable, but here only one of those
+  # interaction terms is re-added):
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_mainPL_sel = c("rack",
+    "nutrient", "amd", "status", "reg"))
+  app$set_inputs(pred_int_build = c("reg", "nutrient"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for adding a variable at a specific position (here, "reg" at the beginning):
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_mainPL_sel = c("rack",
+    "nutrient", "amd", "status"))
+  app$set_inputs(pred_mainPL_sel = c("reg", "rack", "nutrient",
+    "amd", "status"))
+  app$set_inputs(pred_int_build = c("reg", "nutrient"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for removing an interaction term:
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_sel = c("popu<-->gen",
+    "rack<-->popu<-->gen", "status<-->popu", "reg<-->nutrient"))
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
+  # A test for the bug fixed by commit 695e50dde2e31202034c1b17c103d19aecd43b72:
+  app$set_inputs(likelihood_navlist_ID = "Predictors", pred_int_build = c("nutrient",
+    "amd"), pred_int_add = "click")
+  app$set_inputs(likelihood_navlist_ID = "Formula preview")
+  app$expect_values()
 })

@@ -48,7 +48,6 @@ Suggests:
     MASS,
     lme4,
     testthat (>= 3.0.0),
-    shinytest,
     shinytest2
 Additional_repositories:
     https://mc-stan.org/r-packages/

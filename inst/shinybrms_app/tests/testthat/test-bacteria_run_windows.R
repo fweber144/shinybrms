@@ -1,6 +1,11 @@
 library(shinytest2)
 
-test_that("Migrated shinytest test: bacteria_run_windows.R", {
+test_that("Stan run for the \"bacteria\" example on Windows", {
+  skip_on_ci()
+  skip_on_covr()
+  skip_if_not_installed("MASS")
+  skip_if_not(identical(.Platform$OS.type, "windows"))
+  
   app <- AppDriver$new(options = list(
     shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
     brms.backend = getOption("brms.backend", "rstan")

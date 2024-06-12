@@ -169,7 +169,7 @@ test_that("Stan run for the \"bacteria\" example on Linux", {
     bfit_upld,
     data.frame(name = paste0("bacteria", "_full.rds"), type = "", datapath = "0.rds")
   ))
-  app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
+  app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),###
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
                     export = TRUE)
   

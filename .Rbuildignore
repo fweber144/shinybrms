@@ -11,3 +11,4 @@
 .*\.rds$
 ^CRAN-SUBMISSION$
 _\.new\.png$
+^\.github$

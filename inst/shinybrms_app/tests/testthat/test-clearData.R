@@ -1,6 +1,7 @@
 library(shinytest2)
 
 test_that("clearing the example dataset resets the priors, the selected outcome, and the selected predictors.", {
+  skip_on_cran()
   skip_if_not_installed("MASS")
   
   app <- AppDriver$new()

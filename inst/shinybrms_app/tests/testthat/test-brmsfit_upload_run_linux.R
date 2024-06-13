@@ -1,6 +1,7 @@
 library(shinytest2)
 
 test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux", {
+  skip_on_cran()
   skip_on_ci()
   skip_on_covr()
   skip_if_not_installed("MASS")

@@ -1,6 +1,7 @@
 library(shinytest2)
 
 test_that("clearing the distributional family resets the priors.", {
+  skip_on_cran()
   skip_if_not_installed("MASS")
   
   app <- AppDriver$new()

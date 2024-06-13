@@ -4,7 +4,7 @@ test_that("if necessary, the group for the prior is automatically reset when swi
   skip_on_cran()
   skip_if_not_installed("MASS")
   
-  app <- AppDriver$new()
+  app <- AppDriver$new(expect_values_screenshot_args = FALSE)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

@@ -4,7 +4,7 @@ test_that("clearing the example dataset resets the priors, the selected outcome,
   skip_on_cran()
   skip_if_not_installed("MASS")
   
-  app <- AppDriver$new()
+  app <- AppDriver$new(expect_values_screenshot_args = FALSE)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

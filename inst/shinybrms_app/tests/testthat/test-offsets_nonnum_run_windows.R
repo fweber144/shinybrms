@@ -7,10 +7,11 @@ test_that("nonnumeric offsets don't allow to run Stan, but also don't crash the 
   skip_if_not_installed("MASS")
   skip_if_not(identical(.Platform$OS.type, "windows"))
   
-  app <- AppDriver$new(options = list(
-    shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
-    brms.backend = getOption("brms.backend", "rstan")
-  ))
+  app <- AppDriver$new(
+    expect_values_screenshot_args = FALSE,
+    options = list(shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
+                   brms.backend = getOption("brms.backend", "rstan"))
+  )
   
   app$set_inputs(navbar_ID = "Data",
                  ex_da_sel = "epilepsy")

@@ -8,7 +8,7 @@ test_that(paste(
   skip_if_not_installed("lme4")
   skip_if_not_installed("MASS")
   
-  app <- AppDriver$new()
+  app <- AppDriver$new(expect_values_screenshot_args = FALSE)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

@@ -3,7 +3,7 @@ library(shinytest2)
 test_that("Specification of offsets", {
   skip_on_cran()
   
-  app <- AppDriver$new()
+  app <- AppDriver$new(expect_values_screenshot_args = FALSE)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

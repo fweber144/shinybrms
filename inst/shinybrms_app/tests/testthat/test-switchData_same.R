@@ -9,15 +9,15 @@ test_that("uploading another dataset (here: the same dataset again) resets the c
   
   app$set_inputs(navbar_ID = "Data")
   app$upload_file(data_upload = "switchData-data.csv")
-  app$set_inputs(navbar_ID = "Likelihood",
-                 outc_sel = "y",
-                 dist_sel = "bernoulli")
-  app$set_inputs(likelihood_navlist_ID = "Predictors",
-                 pred_mainPL_sel = "x1")
-  app$set_inputs(navbar_ID = "Prior",
-                 prior_class_sel = "b")
-  app$set_inputs(prior_text = "normal(0, 2.5, values_ = FALSE)",
-                 prior_add = "click")
+  app$set_inputs(navbar_ID = "Likelihood")
+  app$set_inputs(outc_sel = "y")
+  app$set_inputs(dist_sel = "bernoulli")
+  app$set_inputs(likelihood_navlist_ID = "Predictors")
+  app$set_inputs(pred_mainPL_sel = "x1")
+  app$set_inputs(navbar_ID = "Prior")
+  app$set_inputs(prior_class_sel = "b")
+  app$set_inputs(prior_text = "normal(0, 2.5, values_ = FALSE)")
+  app$set_inputs(prior_add = "click")
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "data_upload"),
                     output = TRUE,
                     export = TRUE)

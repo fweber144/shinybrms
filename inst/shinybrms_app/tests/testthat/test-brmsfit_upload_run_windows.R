@@ -20,23 +20,23 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Windo
   # Upload full model -------------------------------------------------------
   
   app$upload_file(brmsfit_upload = file.path("bacteria_full.rds"))
-  app$set_inputs(posterior_navlist_ID = "MCMC diagnostics",
-                 show_general_MCMC_tab = TRUE)
+  app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
+  app$set_inputs(show_general_MCMC_tab = TRUE)
   app$set_inputs(posterior_navlist_ID = "Default summary")
-  app$set_inputs(posterior_navlist_ID = "Custom summary",
-                 par_sel = "b_week",
-                 par_add = "click")
-  app$set_inputs(cust_text = "`b_week` + ",
-                 par_sel = "b_week:trtdrug",
-                 par_add = "click")
+  app$set_inputs(posterior_navlist_ID = "Custom summary")
+  app$set_inputs(par_sel = "b_week")
+  app$set_inputs(par_add = "click")
+  app$set_inputs(cust_text = "`b_week` + ")
+  app$set_inputs(par_sel = "b_week:trtdrug")
+  app$set_inputs(par_add = "click")
   app$set_inputs(cust_act = "click")
-  app$set_inputs(cust_text = "`b_week` + ",
-                 par_sel = "b_week:trtdrugP",
-                 par_add = "click")
-  app$set_inputs(cust_name = "week for drugP",
-                 cust_act = "click")
-  app$set_inputs(posterior_navlist_ID = "Conditional effects",
-                 term_sel = "week:trt")
+  app$set_inputs(cust_text = "`b_week` + ")
+  app$set_inputs(par_sel = "b_week:trtdrugP")
+  app$set_inputs(par_add = "click")
+  app$set_inputs(cust_name = "week for drugP")
+  app$set_inputs(cust_act = "click")
+  app$set_inputs(posterior_navlist_ID = "Conditional effects")
+  app$set_inputs(term_sel = "week:trt")
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   ### Needed because `brmsfit_upload`'s element `"size"` is highly sensitive to
   ### even small changes (like the date stored in the `brmsfit`, etc.); note that
@@ -59,14 +59,14 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Windo
   app$upload_file(brmsfit_upload = file.path("bacteria_noInt.rds"))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
-  app$set_inputs(posterior_navlist_ID = "Custom summary",
-                 par_sel = "b_week",
-                 par_add = "click")
-  app$set_inputs(cust_text = "abs(`b_week`, values_ = FALSE)",
-                 cust_name = "absolute week effect",
-                 cust_act = "click")
-  app$set_inputs(posterior_navlist_ID = "Conditional effects",
-                 term_sel = "week")
+  app$set_inputs(posterior_navlist_ID = "Custom summary")
+  app$set_inputs(par_sel = "b_week")
+  app$set_inputs(par_add = "click")
+  app$set_inputs(cust_text = "abs(`b_week`, values_ = FALSE)")
+  app$set_inputs(cust_name = "absolute week effect")
+  app$set_inputs(cust_act = "click")
+  app$set_inputs(posterior_navlist_ID = "Conditional effects")
+  app$set_inputs(term_sel = "week")
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   bfit_upld <- app$get_values(input = "brmsfit_upload",
                               output = FALSE,
@@ -99,8 +99,8 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Windo
     app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
     app$set_inputs(posterior_navlist_ID = "Default summary")
     app$set_inputs(posterior_navlist_ID = "Custom summary")
-    app$set_inputs(posterior_navlist_ID = "Conditional effects",
-                   term_sel = "trt")
+    app$set_inputs(posterior_navlist_ID = "Conditional effects")
+  app$set_inputs(term_sel = "trt")
     app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
     bfit_upld <- app$get_values(input = "brmsfit_upload",
                                 output = FALSE,
@@ -120,12 +120,12 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Windo
   app$upload_file(brmsfit_upload = file.path("bacteria_empty.rds"))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
-  app$set_inputs(posterior_navlist_ID = "Custom summary",
-                 par_sel = "b_Intercept",
-                 par_add = "click")
-  app$set_inputs(cust_text = "`b_Intercept`^2",
-                 cust_name = "square intercept",
-                 cust_act = "click")
+  app$set_inputs(posterior_navlist_ID = "Custom summary")
+  app$set_inputs(par_sel = "b_Intercept")
+  app$set_inputs(par_add = "click")
+  app$set_inputs(cust_text = "`b_Intercept`^2")
+  app$set_inputs(cust_name = "square intercept")
+  app$set_inputs(cust_act = "click")
   app$set_inputs(posterior_navlist_ID = "Conditional effects")
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   bfit_upld <- app$get_values(input = "brmsfit_upload",

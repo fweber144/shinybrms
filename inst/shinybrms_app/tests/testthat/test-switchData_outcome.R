@@ -12,11 +12,11 @@ test_that(paste(
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   
-  app$set_inputs(navbar_ID = "Data",
-                 ex_da_sel = "Arabidopsis")
-  app$set_inputs(navbar_ID = "Likelihood",
-                 outc_sel = "total.fruits",
-                 dist_sel = "negbinomial")
+  app$set_inputs(navbar_ID = "Data")
+  app$set_inputs(ex_da_sel = "Arabidopsis")
+  app$set_inputs(navbar_ID = "Likelihood")
+  app$set_inputs(outc_sel = "total.fruits")
+  app$set_inputs(dist_sel = "negbinomial")
   app$set_inputs(navbar_ID = "Data")
   app$expect_values()
   # A test for the bug fixed by commits cea0f49cc275636d4875c40f4410eb827bab9112 and

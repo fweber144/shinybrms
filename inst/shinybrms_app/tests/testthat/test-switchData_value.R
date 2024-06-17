@@ -19,7 +19,7 @@ test_that(paste(
   app$set_inputs(pred_mainPL_sel = "x1")
   app$set_inputs(navbar_ID = "Prior")
   app$set_inputs(prior_class_sel = "b")
-  app$set_inputs(prior_text = "normal(0, 2.5, values_ = FALSE)")
+  app$set_inputs(prior_text = "normal(0, 2.5)")
   app$set_inputs(prior_add = "click")
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "data_upload"),
                     output = TRUE,

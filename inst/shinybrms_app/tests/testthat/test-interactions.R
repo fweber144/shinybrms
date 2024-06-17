@@ -90,6 +90,7 @@ test_that("Specification of interaction terms", {
   # A test for adding a variable at a specific position (here, "reg" at the beginning):
   app$set_inputs(likelihood_navlist_ID = "Predictors")
   app$set_inputs(pred_mainPL_sel = c("rack", "nutrient", "amd", "status"))
+  app$wait_for_idle()
   app$set_inputs(pred_mainPL_sel = c("reg", "rack", "nutrient", "amd", "status"))
   app$set_inputs(pred_int_build = c("reg", "nutrient"))
   app$set_inputs(pred_int_add = "click")

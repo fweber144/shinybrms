@@ -46,7 +46,7 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(advOpts_adapt_delta = 0.8)
   app$set_inputs(advOpts_max_treedepth = 10)
   app$set_inputs(advOpts_save_warmup = FALSE)
-  app$expect_values()
+  app$expect_values(name = "prep_full.json")
   
   ## Posterior --------------------------------------------------------------
   
@@ -73,11 +73,13 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   app$expect_values(input = TRUE,
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_full.json")
   
   # No-week model -----------------------------------------------------------
   
   if (getOption("sbtst.run_upd_extend", TRUE)) {
+    ## Preparation ------------------------------------------------------------
     app$set_inputs(navbar_ID = "Likelihood")
     app$set_inputs(likelihood_navlist_ID = "Predictors")
     app$set_inputs(pred_mainPL_sel = "trt")
@@ -88,7 +90,11 @@ test_that("Stan run for the \"bacteria\" example", {
     app$set_inputs(posterior_navlist_ID = "Run Stan")
     app$expect_values(input = TRUE,
                       output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                      export = TRUE)
+                      export = TRUE,
+                      name = "prep_noWeek.json")
+    
+    ## Posterior --------------------------------------------------------------
+    
     app$set_inputs(run_stan = "click", timeout_ = 1800000)
     app$expect_download("stanout_download",
                         name = file.path("..", paste0("bacteria", "_noWeek.rds")))
@@ -100,7 +106,8 @@ test_that("Stan run for the \"bacteria\" example", {
     app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
     app$expect_values(input = TRUE,
                       output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                      export = TRUE)
+                      export = TRUE,
+                      name = "post_noWeek.json")
   }
   
   # No-interaction model ----------------------------------------------------
@@ -117,7 +124,8 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Run Stan")
   app$expect_values(input = TRUE,
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "prep_noInt.json")
   
   ## Posterior --------------------------------------------------------------
   
@@ -137,7 +145,8 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   app$expect_values(input = TRUE,
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_noInt.json")
   
   # Upload full model -------------------------------------------------------
   
@@ -173,7 +182,8 @@ test_that("Stan run for the \"bacteria\" example", {
   ))
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),###
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_full_upload.json")
   
   # Empty model -------------------------------------------------------------
   
@@ -188,7 +198,8 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Run Stan")
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "prep_empty.json")
   
   ## Posterior --------------------------------------------------------------
   
@@ -207,5 +218,6 @@ test_that("Stan run for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_empty.json")
 })

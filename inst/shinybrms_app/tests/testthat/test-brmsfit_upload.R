@@ -16,6 +16,7 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example", {
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   
   app$set_inputs(navbar_ID = "Posterior")
+  app$wait_for_idle()
   
   # Upload full model -------------------------------------------------------
   

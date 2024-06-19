@@ -8,6 +8,7 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
   skip_if_not(identical(.Platform$OS.type, "unix"))
   
   app <- AppDriver$new(
+    variant = platform_variant(r_version = FALSE),
     expect_values_screenshot_args = FALSE,
     options = list(shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
                    brms.backend = getOption("brms.backend", "rstan"))

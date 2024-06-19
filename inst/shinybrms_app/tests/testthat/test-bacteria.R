@@ -51,8 +51,8 @@ test_that("Stan run for the \"bacteria\" example", {
   ## Posterior --------------------------------------------------------------
   
   app$set_inputs(run_stan = "click", timeout_ = 1800000)
-  app$expect_download("stanout_download",
-                      name = file.path("..", paste0("bacteria", "_full.rds")))
+  app$get_download("stanout_download",
+                   name = file.path("..", paste0("bacteria", "_full.rds")))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(show_general_MCMC_tab = TRUE)
   app$set_inputs(posterior_navlist_ID = "Default summary")
@@ -96,8 +96,8 @@ test_that("Stan run for the \"bacteria\" example", {
     ## Posterior --------------------------------------------------------------
     
     app$set_inputs(run_stan = "click", timeout_ = 1800000)
-    app$expect_download("stanout_download",
-                        name = file.path("..", paste0("bacteria", "_noWeek.rds")))
+    app$get_download("stanout_download",
+                     name = file.path("..", paste0("bacteria", "_noWeek.rds")))
     app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
     app$set_inputs(posterior_navlist_ID = "Default summary")
     app$set_inputs(posterior_navlist_ID = "Custom summary")
@@ -130,8 +130,8 @@ test_that("Stan run for the \"bacteria\" example", {
   ## Posterior --------------------------------------------------------------
   
   app$set_inputs(run_stan = "click", timeout_ = 1800000)
-  app$expect_download("stanout_download",
-                      name = file.path("..", paste0("bacteria", "_noInt.rds")))
+  app$get_download("stanout_download",
+                   name = file.path("..", paste0("bacteria", "_noInt.rds")))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary")
@@ -204,8 +204,8 @@ test_that("Stan run for the \"bacteria\" example", {
   ## Posterior --------------------------------------------------------------
   
   app$set_inputs(run_stan = "click", timeout_ = 1800000)
-  app$expect_download("stanout_download",
-                      name = file.path("..", paste0("bacteria", "_empty.rds")))
+  app$get_download("stanout_download",
+                   name = file.path("..", paste0("bacteria", "_empty.rds")))
   app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
   app$set_inputs(posterior_navlist_ID = "Default summary")
   app$set_inputs(posterior_navlist_ID = "Custom summary")

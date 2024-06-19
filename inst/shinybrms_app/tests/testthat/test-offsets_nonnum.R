@@ -1,11 +1,10 @@
 library(shinytest2)
 
-test_that("nonnumeric offsets don't allow to run Stan, but also don't crash the app on Linux", {
+test_that("nonnumeric offsets don't allow to run Stan, but also don't crash the app", {
   skip_on_cran()
   skip_on_ci()
   skip_on_covr()
   skip_if_not_installed("MASS")
-  skip_if_not(identical(.Platform$OS.type, "unix"))
   
   app <- AppDriver$new(
     variant = platform_variant(r_version = FALSE),

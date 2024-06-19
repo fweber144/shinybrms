@@ -1,13 +1,13 @@
 library(shinytest2)
 
-test_that("Stan run for the \"bacteria\" example on Linux", {
+test_that("Stan run for the \"bacteria\" example", {
   skip_on_cran()
   skip_on_ci()
   skip_on_covr()
   skip_if_not_installed("MASS")
-  skip_if_not(identical(.Platform$OS.type, "unix"))
   
   app <- AppDriver$new(
+    variant = platform_variant(r_version = FALSE),
     expect_values_screenshot_args = FALSE,
     options = list(shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
                    brms.backend = getOption("brms.backend", "rstan"))

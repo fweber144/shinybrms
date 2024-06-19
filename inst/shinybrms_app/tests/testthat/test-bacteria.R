@@ -80,10 +80,10 @@ test_that("Stan run for the \"bacteria\" example", {
   if (getOption("sbtst.run_upd_extend", TRUE)) {
     app$set_inputs(navbar_ID = "Likelihood")
     app$set_inputs(likelihood_navlist_ID = "Predictors")
-  app$set_inputs(pred_mainPL_sel = "trt")
+    app$set_inputs(pred_mainPL_sel = "trt")
     app$set_inputs(likelihood_navlist_ID = "Formula preview")
     app$set_inputs(navbar_ID = "Prior")
-  app$set_inputs(prior_add = "click")
+    app$set_inputs(prior_add = "click")
     app$set_inputs(navbar_ID = "Posterior", wait_ = FALSE)
     app$set_inputs(posterior_navlist_ID = "Run Stan")
     app$expect_values(input = TRUE,
@@ -96,7 +96,7 @@ test_that("Stan run for the \"bacteria\" example", {
     app$set_inputs(posterior_navlist_ID = "Default summary")
     app$set_inputs(posterior_navlist_ID = "Custom summary")
     app$set_inputs(posterior_navlist_ID = "Conditional effects")
-  app$set_inputs(term_sel = "trt")
+    app$set_inputs(term_sel = "trt")
     app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
     app$expect_values(input = TRUE,
                       output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),

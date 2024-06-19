@@ -64,7 +64,7 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example", {
   app$set_inputs(posterior_navlist_ID = "Custom summary")
   app$set_inputs(par_sel = "b_week")
   app$set_inputs(par_add = "click")
-  app$set_inputs(cust_text = "abs(`b_week`, values_ = FALSE)")
+  app$set_inputs(cust_text = "abs(`b_week`)")
   app$set_inputs(cust_name = "absolute week effect")
   app$set_inputs(cust_act = "click")
   app$set_inputs(posterior_navlist_ID = "Conditional effects")

@@ -99,6 +99,7 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example", {
   # Upload no-week model ----------------------------------------------------
   
   if (getOption("sbtst.run_upd_extend", TRUE)) {
+    app$upload_file(brmsfit_upload = file.path("bacteria_noWeek.rds"))
     app$set_inputs(posterior_navlist_ID = "MCMC diagnostics")
     app$set_inputs(posterior_navlist_ID = "Default summary")
     app$set_inputs(posterior_navlist_ID = "Custom summary")

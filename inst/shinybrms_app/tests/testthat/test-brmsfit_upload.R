@@ -100,7 +100,7 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
     app$set_inputs(posterior_navlist_ID = "Default summary")
     app$set_inputs(posterior_navlist_ID = "Custom summary")
     app$set_inputs(posterior_navlist_ID = "Conditional effects")
-  app$set_inputs(term_sel = "trt")
+    app$set_inputs(term_sel = "trt")
     app$set_inputs(posterior_navlist_ID = "Launch <strong>shinystan</strong>")
     bfit_upld <- app$get_values(input = "brmsfit_upload",
                                 output = FALSE,

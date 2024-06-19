@@ -51,7 +51,8 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
   ))
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),###
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_full.json")
   
   # Upload no-interaction model ---------------------------------------------
   
@@ -78,7 +79,8 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
   ))
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_noInt.json")
   
   # Click "Run Stan" button -------------------------------------------------
   
@@ -112,7 +114,8 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
     ))
     app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
                       output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                      export = TRUE)
+                      export = TRUE,
+                      name = "post_noWeek.json")
   }
   
   # Upload empty model ------------------------------------------------------
@@ -138,5 +141,6 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example on Linux
   ))
   app$expect_values(input = setdiff(lapply(app$get_values(), names)$input, "brmsfit_upload"),
                     output = setdiff(lapply(app$get_values(), names)$output, "fit_date"),
-                    export = TRUE)
+                    export = TRUE,
+                    name = "post_empty.json")
 })

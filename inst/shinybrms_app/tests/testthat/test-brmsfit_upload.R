@@ -7,11 +7,22 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example", {
   skip_if_not_installed("MASS")
   
   app <- AppDriver$new(
-    variant = platform_variant(r_version = FALSE),
+    variant = paste0(
+      platform_variant(r_version = FALSE), "_check",
+      substr(
+        # `!identical(Sys.getenv("_R_CHECK_FORCE_SUGGESTS_"), "")` means we are
+        # (most probably) in an `R CMD check` run:
+        as.character(!identical(Sys.getenv("_R_CHECK_FORCE_SUGGESTS_"), "")),
+        1,
+        1
+      )
+    ),
     expect_values_screenshot_args = FALSE,
     options = list(shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),
                    brms.backend = getOption("brms.backend", "rstan"))
   )
+  
+  app$set_window_size(height = 1024, width = 768)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

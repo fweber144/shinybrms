@@ -84,9 +84,9 @@
       ]
     },
     "ceff_plot": {
-      "src": "[image data hash: 804be414a1e9359b75b06dc50b87b808]",
-      "width": 621.328125,
-      "height": 384.0018994162433,
+      "src": "[image data hash: 24f8caab3efd25dcb549118877667677]",
+      "width": 472,
+      "height": 291.7120426899504,
       "alt": "Plot object",
       "coordmap": {
         "panels": [
@@ -114,16 +114,16 @@
               "y": ".data[[\"estimate__\"]]"
             },
             "range": {
-              "left": 54.47201899128274,
-              "right": 613.029887920299,
-              "bottom": 337.8688006057869,
+              "left": 53.1282689912827,
+              "right": 464.0298879202989,
+              "bottom": 242.8717310087173,
               "top": 7.970112079701122
             }
           }
         ],
         "dims": {
-          "width": 621.328125,
-          "height": 384.0018994162433
+          "width": 472,
+          "height": 291.7120426899504
         }
       }
     },

@@ -1,0 +1,5 @@
+{
+  "output": {
+    "formula_view": "y ~ 1 + week + trt + (1 | ID)"
+  }
+}

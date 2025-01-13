@@ -629,7 +629,7 @@ ui <- navbarPage(
         target = "_blank"),
       " as well as the ",
       a(HTML("Stan documentation"),
-        href = "https://mc-stan.org/users/documentation/",
+        href = "https://mc-stan.org/docs/",
         target = "_blank"),
       " (in particular, the ",
       a("\"Stan Functions Reference\"",
@@ -749,7 +749,7 @@ ui <- navbarPage(
       "sampler which in turn is a special Markov chain Monte Carlo (MCMC) sampler.",
       "Details concerning Stan's sampling algorithm may be found in the",
       a("Stan documentation",
-        href = "https://mc-stan.org/users/documentation/",
+        href = "https://mc-stan.org/docs/",
         target = "_blank",
         .noWS = "after"),
       "."
@@ -1021,7 +1021,7 @@ ui <- navbarPage(
             "in some situations, false alarms are more likely than in others.",
             "For details concerning the MCMC diagnostics used here, see",
             a("\"Runtime warnings and convergence problems\"",
-              href = "https://mc-stan.org/misc/warnings.html",
+              href = "https://mc-stan.org/learn-stan/diagnostics-warnings.html",
               target = "_blank",
               .noWS = "after"),
             ",",
@@ -1440,8 +1440,8 @@ ui <- navbarPage(
         tags$ul(
           tags$li(HTML(paste0(
             "The Stan name is a registered trademark of ",
-            a("NumFOCUS under the direction of the Stan Leadership Body",
-              href = "https://mc-stan.org/about/numfocus/index.html",
+            a("NumFOCUS under the direction of the Stan Governing Body",
+              href = "https://mc-stan.org/about/#copyright-and-trademark",
               target = "_blank"),
             "."
           ))),
@@ -2766,7 +2766,7 @@ server <- function(input, output, session) {
         "recompiling to avoid crashing R session",
         grep("Warning: There were [[:digit:]]+ divergent transitions after warmup\\. See", warn_capt, value = TRUE),
         grep("^[[:space:]]*$", warn_capt, value = TRUE),
-        "http://mc-stan.org/misc/warnings.html#divergent-transitions-after-warmup",
+        "https://mc-stan.org/learn-stan/diagnostics-warnings.html#divergent-transitions-after-warmup",
         "to find out why this is a problem and how to eliminate them.",
         "Warning: Examine the pairs() plot to diagnose sampling problems"
       ))

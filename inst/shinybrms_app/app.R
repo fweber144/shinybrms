@@ -273,7 +273,7 @@ ui <- navbarPage(
                   em("Bayesian Data Analysis", .noWS = "after"),
                   ". 3rd ed. Boca Raton, FL: CRC Press.")
         )),
-      h4("Notes"),
+      h4("Structure of this app"),
       p("The structure of the", strong("shinybrms"), "app follows the principle described above:",
         "The three main pages are",
         HTML(paste(actionLink("likelihood_link1", "Likelihood")), .noWS = "after"), ",",
@@ -284,18 +284,15 @@ ui <- navbarPage(
         "(for testing purposes, page",
         actionLink("data_link1", "Data"),
         "also offers several example datasets)."),
-      p("Each of these pages provides",
-        "help texts where necessary. For further questions, improvements, or bug reports,",
-        "an issue may be opened on",
-        a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
-        ". Some basic information about", strong("shinybrms"), "as well as some legal information",
+      p("Some basic and legal information about", strong("shinybrms"),
         "may be found on page",
         HTML(paste(actionLink("about_link1", "About")), .noWS = "after"), ".",
         "Links to the software relevant for this app are given on page",
         HTML(paste(actionLink("links_link1", "Links")), .noWS = "after"), ".",
         "References for literature cited throughout the app may be found on page",
         HTML(paste(actionLink("references_link1", "References")), .noWS = "after"), "."),
-      p("Furthermore, the following conventions are used throughout this app:",
+      h4("Conventions in this app"),
+      p("The following conventions are used throughout this app:",
         tags$ul(
           tags$li("Names of R packages are written in bold (e.g.,",
                   strong("brms", .noWS = "after"), ")."),
@@ -303,7 +300,8 @@ ui <- navbarPage(
                   code("<package>::<function>()", .noWS = "after"), ", with",
                   code("<package>"), "denoting the R package which",
                   "contains the", code("<function>", .noWS = "after"),
-                  ". Where possible, this scheme is hyperlinked.")
+                  ". Where possible, this scheme is hyperlinked to",
+                  "corresponding documentation.")
         ))
     ),
     # hr(),
@@ -1415,8 +1413,7 @@ ui <- navbarPage(
       ),
       wellPanel(
         h3("Issues"),
-        "If you need help, if you want to suggest improvements, or if you found",
-        "a bug, please open an issue on",
+        "In case of questions, feature requests, or bug reports concerning this app, please open an issue on",
         a("GitHub", href = "https://github.com/fweber144/shinybrms/issues", target = "_blank", .noWS = "after"),
         "."
       ),

@@ -264,14 +264,17 @@ ui <- navbarPage(
         "calculating their 2.5%, 50%, and 97.5% quantiles."),
       p("For a more thorough introduction to Bayesian statistics in general as well as",
         "Bayesian regression models in particular, the following textbooks might",
-        "be helpful:",
+        "be helpful (some of them are freely available online):",
         tags$ul(
           tags$li("McElreath R (2020).",
                   em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
-                  ". 2nd ed. Boca Raton, FL: CRC Press."),
+                  ". 2nd ed. Boca Raton, FL, USA: CRC Press."),
           tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
                   em("Bayesian Data Analysis", .noWS = "after"),
-                  ". 3rd ed. Boca Raton, FL: CRC Press.")
+                  ". 3rd ed. Boca Raton, FL, USA: CRC Press."),
+          tags$li("Albert J and Hu J (2019). Probability and Bayesian Modeling. Boca Raton, FL, USA: CRC Press."),
+          tags$li("Reich BJ and Ghosh SK (2019). Bayesian Statistical Methods. New York, NY, USA: CRC Press."),
+          tags$li("Johnson AA, Ott MQ, and Dogucu M (2022). Bayes Rules!: An Introduction to Applied Bayesian Modeling. New York, NY, USA: CRC Press.")
         )),
       h4("Structure of this app"),
       p("The structure of the", strong("shinybrms"), "app follows the principle described above:",

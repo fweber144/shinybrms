@@ -659,18 +659,44 @@ ui <- navbarPage(
       a(HTML("Stan documentation"),
         href = "https://mc-stan.org/docs/",
         target = "_blank"),
-      " (in particular, the ",
+      "&mdash;in particular, the ",
       a("\"Stan Functions Reference\"",
+        href = "https://mc-stan.org/docs/functions-reference/index.html",
+        target = "_blank"),
+      " (in case of the ", strong("rstan"), " backend which is here based on ",
+      "Stan version ", rstan::stan_version(), ", this would be ",
+      a(paste0("\"Stan Functions Reference ",
+               paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+                      ".",
+                      unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+               "\""),
         href = paste0("https://mc-stan.org/docs/",
                       paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
                              "_",
                              unclass(as.package_version(rstan::stan_version()))[[1]][2]),
                       "/functions-reference/index.html"),
         target = "_blank"),
-      ", here for Stan version ", rstan::stan_version(), " since this is the Stan version used by ",
-      "the installed version of ", strong("rstan"), "; for ",
-      strong("cmdstanr"), ", the appropriate version depends on the installed ",
-      "CmdStan version)."
+      if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+        ""
+      } else {
+        paste0(
+          "; in case of the ",
+          strong("cmdstanr"), " backend which is here based on ",
+          "CmdStan version ", cmdstanr::cmdstan_version(), ", this would be ",
+          a(paste0("\"Stan Functions Reference ",
+                   paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                          ".",
+                          unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+                   "\""),
+            href = paste0("https://mc-stan.org/docs/",
+                          paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                                 "_",
+                                 unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+                          "/functions-reference/index.html"),
+            target = "_blank")
+        )
+      },
+      ")."
     ))),
     hr(),
     h3("Default priors"),
@@ -718,20 +744,44 @@ ui <- navbarPage(
                         "Note: Options are here:",
                         tags$ul(
                           tags$li(HTML(paste0(
-                            "specifying a prior distribution using a Stan function (see the ",
+                            "specifying a prior distribution using a Stan function&mdash;see the ",
                             a("\"Stan Functions Reference\"",
+                              href = "https://mc-stan.org/docs/functions-reference/index.html",
+                              target = "_blank"),
+                            " (in case of the ", strong("rstan"), " backend which is here based on ",
+                            "Stan version ", rstan::stan_version(), ", this would be ",
+                            a(paste0("\"Stan Functions Reference ",
+                                     paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+                                            ".",
+                                            unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+                                     "\""),
                               href = paste0("https://mc-stan.org/docs/",
                                             paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
                                                    "_",
                                                    unclass(as.package_version(rstan::stan_version()))[[1]][2]),
                                             "/functions-reference/index.html"),
                               target = "_blank"),
-                            "&mdash;here for Stan version ", rstan::stan_version(),
-                            " since this is the Stan version used by ",
-                            "the installed version of ", strong("rstan"), "; for ",
-                            strong("cmdstanr"),
-                            ", the appropriate version depends on the installed ",
-                            "CmdStan version&mdash;for details),"
+                            if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+                              ""
+                            } else {
+                              paste0(
+                                "; in case of the ",
+                                strong("cmdstanr"), " backend which is here based on ",
+                                "CmdStan version ", cmdstanr::cmdstan_version(), ", this would be ",
+                                a(paste0("\"Stan Functions Reference ",
+                                         paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                                                ".",
+                                                unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+                                         "\""),
+                                  href = paste0("https://mc-stan.org/docs/",
+                                                paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                                                       "_",
+                                                       unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+                                                "/functions-reference/index.html"),
+                                  target = "_blank")
+                              )
+                            },
+                            ") for details,"
                           ))),
                           tags$li(HTML(paste0(
                             "specifying a prior distribution using one of the ",

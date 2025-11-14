@@ -138,11 +138,13 @@ prior_stan_fun_lb_ub <- c(
   "uniform"
 )
 prior_stan_fun_bounded <- c(
-  ### Requiring a lower bound (which is checked by brms:::check_prior_content()):
+  ### Requiring a lower bound (which is checked by
+  ### brms:::check_prior_content()):
   prior_stan_fun_lb0,
   prior_stan_fun_lbx,
   ### 
-  ### Requiring a lower bound and an upper bound (which is checked by brms:::check_prior_content()):
+  ### Requiring a lower bound and an upper bound (which is checked by
+  ### brms:::check_prior_content()):
   prior_stan_fun_lb_ub
   ### 
 )
@@ -157,7 +159,8 @@ prior_brms_fun <- c(
   ### Requiring a simplex constraint:
   "dirichlet",
   ### 
-  ### For parameters of class "cor" (only used by brms; has no Stan function equivalent):
+  ### For parameters of class "cor" (only used by brms; has no Stan function
+  ### equivalent):
   "lkj",
   ### 
   ### Requiring a Cholesky-factor-of-correlation-matrix constraint:
@@ -185,7 +188,8 @@ cust_allow_all <- c(as.character(0:9), " ", ".", "(", ")",
 cust_allow_spec <- c(".", "|", "(", ")", "^", "*", "+") # , "\\", "[", "{", "$", "?"
 cust_allow_grp <- cust_allow_all
 for (char_i in cust_allow_spec) {
-  cust_allow_grp <- sub(char_i, paste0("\\", char_i), cust_allow_grp, fixed = TRUE)
+  cust_allow_grp <- sub(char_i, paste0("\\", char_i), cust_allow_grp,
+                        fixed = TRUE)
 }
 
 # Empty "Custom summary" table:
@@ -242,35 +246,38 @@ ui <- navbarPage(
         "; both of these are supported by",
         strong("shinybrms", .noWS = "after"), ")."),
       h4("Bayesian regression models"),
-      p("The fundamental principle of Bayesian statistics is", em("Bayes' theorem", .noWS = "after"),
-        ". In the context relevant for this app, Bayes' theorem may be reduced to the statement",
-        "that the joint posterior distribution of all parameters in the regression model is",
-        "proportional to the product of their joint prior distribution and the likelihood.",
-        "(Here and in the following, the term \"distribution\" is used interchangeably for a",
-        "probability distribution and the corresponding probability density function or",
-        "probability mass function.)",
-        "The posterior distribution reflects the knowledge about the parameters", em("after"),
-        "having seen the data, whereas",
-        "the prior distribution reflects the knowledge about the parameters", em("before"),
-        "having seen the data.",
-        "The information provided by the data is incorporated through the likelihood.",
-        "More precisely, the likelihood is taken as a function of the parameters and",
-        "corresponds to the distribution of the outcome (evaluated",
-        "at the observed outcome values), conditional on the",
-        "parameters and the predictors.",
-        "Thus, after having specified the likelihood and the prior (distribution), the aim of a",
-        "Bayesian data analysis is to infer the posterior (distribution) and then to perform",
-        "analyses based on the posterior, e.g., plotting marginal posterior distributions and",
-        "calculating their 2.5%, 50%, and 97.5% quantiles."),
-      p("For a more thorough introduction to Bayesian statistics in general as well as",
-        "Bayesian regression models in particular, the following textbooks might",
-        "be helpful (some of them are freely available online):",
+      p("The fundamental principle of Bayesian statistics is",
+        em("Bayes' theorem", .noWS = "after"), ". In the context relevant for",
+        "this app, Bayes' theorem may be reduced to the statement",
+        "that the joint posterior distribution of all parameters in the",
+        "regression model is proportional to the product of their joint prior",
+        "distribution and the likelihood. (Here and in the following, the term",
+        "\"distribution\" is used interchangeably for a probability",
+        "distribution and the corresponding probability density function or",
+        "probability mass function.) The posterior distribution reflects the",
+        "knowledge about the parameters", em("after"), "having seen the data,",
+        "whereas the prior distribution reflects the knowledge about the",
+        "parameters", em("before"), "having seen the data. The information",
+        "provided by the data is incorporated through the likelihood. More",
+        "precisely, the likelihood is taken as a function of the parameters and",
+        "corresponds to the distribution of the outcome (evaluated at the",
+        "observed outcome values), conditional on the parameters and the",
+        "predictors. Thus, after having specified the likelihood and the prior",
+        "(distribution), the aim of a Bayesian data analysis is to infer the",
+        "posterior (distribution) and then to perform analyses based on the",
+        "posterior, e.g., plotting marginal posterior distributions and",
+        "calculating their 2.5 %, 50 %, and 97.5 % quantiles."),
+      p("For a more thorough introduction to Bayesian statistics in general as",
+        "well as to Bayesian regression models in particular, the following",
+        "textbooks might be helpful (some of them are freely available online):",
         tags$ul(
           tags$li("Johnson AA, Ott MQ, and Dogucu M (2022).",
-                  em("Bayes Rules!: An Introduction to Applied Bayesian Modeling", .noWS = "after"),
+                  em("Bayes Rules!: An Introduction to Applied Bayesian Modeling",
+                     .noWS = "after"),
                   ". New York, NY, USA: CRC Press."),
           tags$li("McElreath R (2020).",
-                  em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
+                  em("Statistical Rethinking: A Bayesian Course with Examples",
+                     "in R and Stan", .noWS = "after"),
                   ". 2nd ed. Boca Raton, FL, USA: CRC Press."),
           tags$li("Albert J and Hu J (2019).",
                   em("Probability and Bayesian Modeling", .noWS = "after"),
@@ -278,18 +285,18 @@ ui <- navbarPage(
           tags$li("Reich BJ and Ghosh SK (2019).",
                   em("Bayesian Statistical Methods", .noWS = "after"),
                   ". New York, NY, USA: CRC Press."),
-          tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
+          tags$li("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and",
+                  "Rubin DB (2014).",
                   em("Bayesian Data Analysis", .noWS = "after"),
                   ". 3rd ed. Boca Raton, FL, USA: CRC Press.")
         )),
       h4("Structure of this app"),
-      p("The structure of the", strong("shinybrms"), "app follows the principle described above:",
-        "The three main pages are",
+      p("The structure of the", strong("shinybrms"), "app follows the",
+        "principle described above: The three main pages are",
         HTML(paste(actionLink("likelihood_link1", "Likelihood")), .noWS = "after"), ",",
         HTML(paste(actionLink("prior_link1", "Prior")), .noWS = "after"), ", and",
         HTML(paste(actionLink("posterior_link1", "Posterior")), .noWS = "after"), "."),
-      p("The dataset needs to be uploaded on page",
-        actionLink("data_link1", "Data"),
+      p("The dataset needs to be uploaded on page", actionLink("data_link1", "Data"),
         "(for testing purposes, that page also offers several example datasets)."),
       p("Some basic and legal information about", strong("shinybrms"),
         "may be found on page",
@@ -382,7 +389,9 @@ ui <- navbarPage(
                              ".dat"),
                   buttonLabel = "Browse ..."),
         strong("Header:"),
-        checkboxInput("header", "The file has a header containing the column names", TRUE),
+        checkboxInput("header",
+                      "The file has a header containing the column names",
+                      TRUE),
         radioButtons("sep", "Separator symbol:",
                      choices = c("Comma" = ",",
                                  "Semicolon" = ";",
@@ -401,7 +410,8 @@ ui <- navbarPage(
         radioButtons("preview_type_radio", "Type of preview:",
                      choices = c("Dataset" = "datas",
                                  "Structure" = "struc")),
-        radioButtons("preview_rows_radio", "Rows to show (only for preview type \"Dataset\"):",
+        radioButtons("preview_rows_radio",
+                     "Rows to show (only for preview type \"Dataset\"):",
                      choices = c("Head (only the first 6 rows)" = "head",
                                  "All rows" = "all"))
         
@@ -444,10 +454,12 @@ ui <- navbarPage(
                                     "(extends the options in the",
                                     "\"Choose distributional family ...\"",
                                     "field above)")),
-        strong("Parameters specific to this distributional family, with their link function as used in shinybrms:"),
+        strong("Parameters specific to this distributional family, with their",
+               "link function as used in shinybrms:"),
         tableOutput("dist_link"),
         helpText(
-          p("For details concerning the link functions, see the help for the R function",
+          p("For details concerning the link functions, see the help for the",
+            "R function",
             a(HTML(paste(code("brms::brmsfamily()"))),
               href = "https://paulbuerkner.com/brms/reference/brmsfamily.html",
               target = "_blank"),
@@ -456,13 +468,16 @@ ui <- navbarPage(
               href = "https://CRAN.R-project.org/web/packages/brms/vignettes/brms_families.html",
               target = "_blank",
               .noWS = "after"),
-            ". Note that for each parameter, the link function only applies if this parameter is",
-            "actually modeled by (nonconstant) predictors. In", strong("shinybrms", .noWS = "after"),
-            ", this is currently only supported for the location parameter", code("mu", .noWS = "after"), "."),
-          p("For details concerning the remaining (family-specific) parameters, see the help for the R function ",
+            ". Note that for each parameter, the link function only applies if",
+            "this parameter is actually modeled by (nonconstant) predictors.",
+            "In", strong("shinybrms", .noWS = "after"), ", this is currently",
+            "only supported for the location parameter",
+            code("mu", .noWS = "after"), "."),
+          p("For details concerning the remaining (family-specific) parameters,",
+            "see the help for the R function ",
             a(HTML(paste(code("brms::set_prior()"))),
               href = "https://paulbuerkner.com/brms/reference/set_prior.html",
-              target = "_blank"),
+              target = "_blank", .noWS = "after"),
             ".")
         )
       ),
@@ -510,10 +525,12 @@ ui <- navbarPage(
             "Start typing or click into the field below to choose variables",
             "for which population-level main effects should be added."
           ),
-          selectInput("pred_mainPL_sel", NULL,
-                      choices = c("Choose variables for population-level main effects ..." = ""),
-                      multiple = TRUE,
-                      selectize = TRUE),
+          selectInput(
+            "pred_mainPL_sel", NULL,
+            choices = c("Choose variables for population-level main effects ..." = ""),
+            multiple = TRUE,
+            selectize = TRUE
+          ),
           h4("Group-level main effects"),
           helpText(
             "Start typing or click into the field below to choose variables",
@@ -525,10 +542,12 @@ ui <- navbarPage(
             "really needed, this variable needs to be converted to a character",
             "variable (in the dataset)."
           ),
-          selectInput("pred_mainGL_sel", NULL,
-                      choices = c("Choose variables for group-level main effects ..." = ""),
-                      multiple = TRUE,
-                      selectize = TRUE)
+          selectInput(
+            "pred_mainGL_sel", NULL,
+            choices = c("Choose variables for group-level main effects ..." = ""),
+            multiple = TRUE,
+            selectize = TRUE
+          )
         ),
         wellPanel(
           h3("Interaction effects"),
@@ -536,8 +555,8 @@ ui <- navbarPage(
             p("Here, the term \"interaction\" not only denotes interactions",
               "involving only predictor variables with population-level",
               "effects (yielding an interaction with population-level effects),",
-              "but also interactions involving predictor variables with",
-              "group-level effects (yielding an interaction with group-level effects).",
+              "but also interactions involving predictor variables with group-level",
+              "effects (yielding an interaction with group-level effects).",
               "This broad definition of \"interaction\" is indicated here by",
               "the symbol \"<-->\"."),
             p("Only variables already being included with a main-effect term",
@@ -554,17 +573,22 @@ ui <- navbarPage(
               "edited to remove individual interaction terms or to re-add",
               "interaction terms which have previously been removed."),
           ),
-          selectInput("pred_int_build", NULL,
-                      choices = c("Choose variables for an interaction term ..." = ""),
-                      multiple = TRUE,
-                      selectize = TRUE),
+          selectInput(
+            "pred_int_build", NULL,
+            choices = c("Choose variables for an interaction term ..." = ""),
+            multiple = TRUE,
+            selectize = TRUE
+          ),
           actionButton("pred_int_add", "Add interaction term", class = "btn-primary"),
           br(),
           br(),
-          selectInput("pred_int_sel", "Added interaction terms (you may edit this list, see above):",
-                      choices = NULL,
-                      multiple = TRUE,
-                      selectize = TRUE)
+          selectInput(
+            "pred_int_sel",
+            "Added interaction terms (you may edit this list, see above):",
+            choices = NULL,
+            multiple = TRUE,
+            selectize = TRUE
+          )
         ),
         wellPanel(
           h3("Offsets"),
@@ -590,14 +614,16 @@ ui <- navbarPage(
         wellPanel(
           h3("Preview of chosen predictor terms"),
           helpText(
-            p("Here, a preview of the currently chosen predictor terms may be obtained.",
-              "This is mainly intended as a check for those familiar with R's and",
-              strong("brms", .noWS = "after"),
-              "'s formula syntax. A preview of the full formula is given in the tab",
-              HTML(paste(actionLink("formula_link1", "Formula preview")), .noWS = "after"), "."),
-            p("A missing value (", code("NA", .noWS = "outside"), ") in column \"Group\" stands",
-              "for the whole sample (i.e. no group). The value", code("1"), "in column \"Effect(s)\"",
-              "stands for the intercept (or intercepts, if \"Group\" exists).")
+            p("Here, a preview of the currently chosen predictor terms may be",
+              "obtained. This is mainly intended as a check for those familiar",
+              "with R's and", strong("brms", .noWS = "after"), "'s formula",
+              "syntax. A preview of the full formula is given in the tab",
+              HTML(paste(actionLink("formula_link1", "Formula preview")),
+                   .noWS = "after"), "."),
+            p("A missing value (", code("NA", .noWS = "outside"), ") in column",
+              "\"Group\" stands for the whole sample (i.e. no group). The value",
+              code("1"), "in column \"Effect(s)\" stands for the intercept (or",
+              "intercepts, if \"Group\" exists).")
           ),
           tableOutput("pred_view")
         )
@@ -624,28 +650,40 @@ ui <- navbarPage(
       "Build the joint prior distribution of all parameters in your model by ",
       "placing independent priors on all parameters separately. Notes:",
       tags$ul(
-        tags$li("The default priors are taken from package", strong("brms", .noWS = "after"), "."),
-        tags$li("For parameters without a custom prior, the corresponding default prior will be used."),
+        tags$li("The default priors are taken from package",
+                strong("brms", .noWS = "after"), "."),
+        tags$li("For parameters without a custom prior, the corresponding",
+                "default prior will be used."),
         tags$li("When specifying a custom prior, only a combination of",
-                "\"Class\", \"Coefficient\", and \"Group\" which is also present in the",
-                "table of default priors may be chosen."),
+                "\"Class\", \"Coefficient\", and \"Group\" which is also",
+                "present in the table of default priors may be chosen."),
         tags$li("The names of the parameter classes are taken from", strong("brms"),
                 "and may be translated as follows:",
                 tags$ul(
-                  tags$li(code("Intercept"), ": the intercept when centering the predictors",
-                          "(this is only the internally used intercept; in the output, the intercept with",
-                          "respect to the noncentered predictors, called", code("b_Intercept", .noWS = "after"), ", is given),"),
-                  tags$li(code("b"), ": population-level effects (or population-level regression coefficients),"),
-                  tags$li(code("sd"), ": standard deviations of group-level effects,"),
-                  tags$li(code("cor"), ": correlations between group-level effects of the same group."),
-                  tags$li("All other parameter classes are specific to the chosen",
-                          "distributional family for the outcome (see page",
-                          HTML(paste(actionLink("outcome_link1", HTML("Likelihood &rarr; Outcome"))), .noWS = "after"),
+                  tags$li(code("Intercept", .noWS = "after"), ": the intercept",
+                          "when centering the predictors (this is only the",
+                          "internally used intercept; in the output, the",
+                          "intercept with respect to the noncentered predictors,",
+                          "called", code("b_Intercept", .noWS = "after"),
+                          ", is given),"),
+                  tags$li(code("b", .noWS = "after"), ": population-level",
+                          "effects (or population-level regression coefficients),"),
+                  tags$li(code("sd", .noWS = "after"), ": standard deviations",
+                          "of group-level effects,"),
+                  tags$li(code("cor", .noWS = "after"), ": correlations",
+                          "between group-level effects of the same group."),
+                  tags$li("All other parameter classes are specific to the",
+                          "chosen distributional family for the outcome (see page",
+                          HTML(paste(actionLink("outcome_link1",
+                                                HTML("Likelihood &rarr; Outcome"))),
+                               .noWS = "after"),
                           ").")
                 )),
-        tags$li("As soon as a new dataset is chosen on page", actionLink("data_link3", "Data"), "(even if",
-                "the same dataset is uploaded again), the custom priors are automatically reset."),
-        tags$li("As soon as the likelihood is changed, the custom priors are automatically reset.")
+        tags$li("As soon as a new dataset is chosen on page",
+                actionLink("data_link3", "Data"), "(even if the same dataset is",
+                "uploaded again), the custom priors are automatically reset."),
+        tags$li("As soon as the likelihood is changed, the custom priors are",
+                "automatically reset.")
       ),
       "For details concerning the default priors, see the help for the R function ",
       a(HTML(paste(code("brms::set_prior()"))),
@@ -665,17 +703,21 @@ ui <- navbarPage(
         target = "_blank"),
       " (in case of the ", strong("rstan"), " backend which is here based on ",
       "Stan version ", rstan::stan_version(), ", this would be ",
-      a(paste0("\"Stan Functions Reference ",
-               paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
-                      ".",
-                      unclass(as.package_version(rstan::stan_version()))[[1]][2]),
-               "\""),
-        href = paste0("https://mc-stan.org/docs/",
-                      paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
-                             "_",
-                             unclass(as.package_version(rstan::stan_version()))[[1]][2]),
-                      "/functions-reference/index.html"),
-        target = "_blank"),
+      a(paste0(
+        "\"Stan Functions Reference ",
+        paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+               ".",
+               unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+        "\""
+      ),
+      href = paste0(
+        "https://mc-stan.org/docs/",
+        paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+               "_",
+               unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+        "/functions-reference/index.html"
+      ),
+      target = "_blank"),
       if (!requireNamespace("cmdstanr", quietly = TRUE)) {
         ""
       } else {
@@ -683,17 +725,21 @@ ui <- navbarPage(
           "; in case of the ",
           strong("cmdstanr"), " backend which is here based on ",
           "CmdStan version ", cmdstanr::cmdstan_version(), ", this would be ",
-          a(paste0("\"Stan Functions Reference ",
-                   paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
-                          ".",
-                          unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
-                   "\""),
-            href = paste0("https://mc-stan.org/docs/",
-                          paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
-                                 "_",
-                                 unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
-                          "/functions-reference/index.html"),
-            target = "_blank")
+          a(paste0(
+            "\"Stan Functions Reference ",
+            paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                   ".",
+                   unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+            "\""
+          ),
+          href = paste0(
+            "https://mc-stan.org/docs/",
+            paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                   "_",
+                   unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
+            "/functions-reference/index.html"
+          ),
+          target = "_blank")
         )
       },
       ")."
@@ -710,101 +756,127 @@ ui <- navbarPage(
       sidebarPanel(
         h4("Specification of a custom prior"),
         br(),
-        selectInput("prior_class_sel",
-                    HTML(paste0(
-                      "Class:",
-                      helpText("Note: This is the parameter class. It may consist of a single parameter.",
-                               style = "font-weight:normal")
-                    )),
-                    choices = c("Choose class ..." = ""),
-                    selectize = TRUE),
-        selectInput("prior_coef_sel",
-                    HTML(paste0(
-                      "Coefficient:",
-                      helpText("Note: Leave empty to use all coefficients belonging to the",
-                               "selected class.",
-                               style = "font-weight:normal")
-                    )),
-                    choices = c("Choose coefficient or leave empty" = ""),
-                    selectize = TRUE),
-        selectInput("prior_group_sel",
-                    HTML(paste0(
-                      "Group (for group-level effects):",
-                      helpText("Note: Leave empty while having an empty \"Coefficient\" field to",
-                               "use all groups belonging to the selected class.",
-                               style = "font-weight:normal")
-                    )),
-                    choices = c("Choose group or leave empty" = ""),
-                    selectize = TRUE),
-        textInput("prior_text",
-                  HTML(paste(
-                    "Prior distribution:",
-                    helpText(
-                      HTML(paste0(
-                        "Note: Options are here:",
-                        tags$ul(
-                          tags$li(HTML(paste0(
-                            "specifying a prior distribution using a Stan function&mdash;see the ",
-                            a("\"Stan Functions Reference\"",
-                              href = "https://mc-stan.org/docs/functions-reference/index.html",
-                              target = "_blank"),
-                            " (in case of the ", strong("rstan"), " backend which is here based on ",
-                            "Stan version ", rstan::stan_version(), ", this would be ",
-                            a(paste0("\"Stan Functions Reference ",
-                                     paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
-                                            ".",
-                                            unclass(as.package_version(rstan::stan_version()))[[1]][2]),
-                                     "\""),
-                              href = paste0("https://mc-stan.org/docs/",
-                                            paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
-                                                   "_",
-                                                   unclass(as.package_version(rstan::stan_version()))[[1]][2]),
-                                            "/functions-reference/index.html"),
-                              target = "_blank"),
-                            if (!requireNamespace("cmdstanr", quietly = TRUE)) {
-                              ""
-                            } else {
-                              paste0(
-                                "; in case of the ",
-                                strong("cmdstanr"), " backend which is here based on ",
-                                "CmdStan version ", cmdstanr::cmdstan_version(), ", this would be ",
-                                a(paste0("\"Stan Functions Reference ",
-                                         paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
-                                                ".",
-                                                unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
-                                         "\""),
-                                  href = paste0("https://mc-stan.org/docs/",
-                                                paste0(unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
-                                                       "_",
-                                                       unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]),
-                                                "/functions-reference/index.html"),
-                                  target = "_blank")
-                              )
-                            },
-                            ") for details,"
-                          ))),
-                          tags$li(HTML(paste0(
-                            "specifying a prior distribution using one of the ",
-                            "special (pseudo-)functions defined by ", strong("brms"),
-                            " for this purpose (see ",
-                            a(HTML(paste(code("brms::set_prior()"))),
-                              href = "https://paulbuerkner.com/brms/reference/set_prior.html",
-                              target = "_blank"),
-                            " for details; an important example is ", code("lkj"),
-                            " for parameters of class ", code("cor"), "),"
-                          ))),
-                          tags$li("leaving this field empty to use a flat prior.")
+        selectInput(
+          "prior_class_sel",
+          HTML(paste0(
+            "Class:",
+            helpText("Note: This is the parameter class. It may consist of a",
+                     "single parameter.",
+                     style = "font-weight:normal")
+          )),
+          choices = c("Choose class ..." = ""),
+          selectize = TRUE
+        ),
+        selectInput(
+          "prior_coef_sel",
+          HTML(paste0(
+            "Coefficient:",
+            helpText("Note: Leave empty to use all coefficients belonging to",
+                     "the selected class.",
+                     style = "font-weight:normal")
+          )),
+          choices = c("Choose coefficient or leave empty" = ""),
+          selectize = TRUE
+        ),
+        selectInput(
+          "prior_group_sel",
+          HTML(paste0(
+            "Group (for group-level effects):",
+            helpText("Note: Leave empty while having an empty \"Coefficient\"",
+                     "field to use all groups belonging to the selected class.",
+                     style = "font-weight:normal")
+          )),
+          choices = c("Choose group or leave empty" = ""),
+          selectize = TRUE
+        ),
+        textInput(
+          "prior_text",
+          HTML(paste(
+            "Prior distribution:",
+            helpText(
+              HTML(paste0(
+                "Note: Options are here:",
+                tags$ul(
+                  tags$li(HTML(paste0(
+                    "specifying a prior distribution using a Stan ",
+                    "function&mdash;see the ",
+                    a("\"Stan Functions Reference\"",
+                      href = "https://mc-stan.org/docs/functions-reference/index.html",
+                      target = "_blank"),
+                    " (in case of the ", strong("rstan"), " backend which is ",
+                    "here based on  Stan version ", rstan::stan_version(),
+                    ", this would be ",
+                    a(paste0(
+                      "\"Stan Functions Reference ",
+                      paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+                             ".",
+                             unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+                      "\""
+                    ),
+                    href = paste0(
+                      "https://mc-stan.org/docs/",
+                      paste0(unclass(as.package_version(rstan::stan_version()))[[1]][1],
+                             "_",
+                             unclass(as.package_version(rstan::stan_version()))[[1]][2]),
+                      "/functions-reference/index.html"
+                    ),
+                    target = "_blank"),
+                    if (!requireNamespace("cmdstanr", quietly = TRUE)) {
+                      ""
+                    } else {
+                      paste0(
+                        "; in case of the ", strong("cmdstanr"), " backend ",
+                        "which is here based on CmdStan version ",
+                        cmdstanr::cmdstan_version(), ", this would be ",
+                        a(paste0(
+                          "\"Stan Functions Reference ",
+                          paste0(
+                            unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                            ".",
+                            unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]
+                          ),
+                          "\""
                         ),
-                        "If a prior distribution is specified using a Stan function, ",
-                        "the Stan function which would be used in a Stan sampling statement ",
-                        "needs to be entered and values for all arguments of this ",
-                        "Stan function need to be set (e.g., ",
-                        code("normal(0, 2.5)"), ")."
-                      )),
-                      style = "font-weight:normal"
-                    )
-                  )),
-                  placeholder = "Enter prior distribution (e.g., using a Stan function) or leave empty to use a flat prior"),
+                        href = paste0(
+                          "https://mc-stan.org/docs/",
+                          paste0(
+                            unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][1],
+                            "_",
+                            unclass(as.package_version(cmdstanr::cmdstan_version()))[[1]][2]
+                          ),
+                          "/functions-reference/index.html"
+                        ),
+                        target = "_blank")
+                      )
+                    },
+                    ") for details,"
+                  ))),
+                  tags$li(HTML(paste0(
+                    "specifying a prior distribution using one of the ",
+                    "special (pseudo-)functions defined by ", strong("brms"),
+                    " for this purpose (see ",
+                    a(HTML(paste(code("brms::set_prior()"))),
+                      href = "https://paulbuerkner.com/brms/reference/set_prior.html",
+                      target = "_blank"),
+                    " for details; an important example is ", code("lkj"),
+                    " for parameters of class ", code("cor"), "),"
+                  ))),
+                  tags$li("leaving this field empty to use a flat prior.")
+                ),
+                "If a prior distribution is specified using a Stan function, ",
+                "the Stan function which would be used in a Stan sampling ",
+                "statement needs to be entered and values for all arguments ",
+                "of this Stan function need to be set (e.g., ",
+                code("normal(0, 2.5)"), ")."
+              )),
+              style = "font-weight:normal"
+            )
+          )),
+          placeholder = paste0(
+            "Enter prior distribution (e.g., using a Stan function) or leave ",
+            "empty to use a flat prior"
+          )
+        ),
         actionButton("prior_add", "Add prior", class = "btn-primary"),
         br(),
         br(),
@@ -816,8 +888,8 @@ ui <- navbarPage(
         br(),
         strong("Custom priors currently set:"),
         tableOutput("prior_set_view"),
-        helpText("An empty field in column \"Prior\" denotes a flat prior over the support of the",
-                 "corresponding parameter.")
+        helpText("An empty field in column \"Prior\" denotes a flat prior over",
+                 "the support of the corresponding parameter.")
       )
     )
   ),

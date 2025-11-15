@@ -181,7 +181,7 @@ For the general MCMC diagnostics (which are computed for each parameter as well 
 ### Default summary
 
 \
-Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab "Default summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5% and 97.5% quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
+Since all MCMC diagnostics look good, we may start interpreting the posterior. On tab "Default summary", we get a short summary of our Stan run, including the median (column `Estimate`), the median absolute deviation (column `Est.Error`), and the 2.5 % and 97.5 % quantiles (columns `l-95% CI` and `u-95% CI`, respectively) of the marginal posterior distribution of the most important parameters:
 
 \
 [![](screenshots/Posterior_Summary.png)](screenshots/Posterior_Summary.png)

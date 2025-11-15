@@ -1234,16 +1234,16 @@ ui <- navbarPage(
                 "typically interested in the median of marginal posteriors)."
               ),
               tags$li(
-                "the ESS for the 2.5% quantile of the corresponding marginal posterior",
+                "the ESS for the 2.5 % quantile of the corresponding marginal posterior",
                 "distribution (short: Q2.5-ESS or \\(\\text{ESS}_{\\text{Q}2.5}\\); reported",
                 "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
-                "typically interested in the 2.5% quantile of marginal posteriors),"
+                "typically interested in the 2.5 % quantile of marginal posteriors),"
               ),
               tags$li(
-                "the ESS for the 97.5% quantile of the corresponding marginal posterior",
+                "the ESS for the 97.5 % quantile of the corresponding marginal posterior",
                 "distribution (short: Q97.5-ESS or \\(\\text{ESS}_{\\text{Q}97.5}\\); reported",
                 "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
-                "typically interested in the 97.5% quantile of marginal posteriors)."
+                "typically interested in the 97.5 % quantile of marginal posteriors)."
               )
             ),
             "In general, the following values of the general MCMC diagnostics are worrying:",
@@ -1329,8 +1329,8 @@ ui <- navbarPage(
                  tags$ul(
                    tags$li("Column", code("Estimate"), "contains the posterior median."),
                    tags$li("Column", code("Est.Error"), "contains the posterior median absolute deviation."),
-                   tags$li("Column", code("l-95% CI"), "contains the lower boundary of the 95% central posterior interval."),
-                   tags$li("Column", code("u-95% CI"), "contains the upper boundary of the 95% central posterior interval.")
+                   tags$li("Column", code("l-95% CI"), "contains the lower boundary of the 95 % central posterior interval."),
+                   tags$li("Column", code("u-95% CI"), "contains the upper boundary of the 95 % central posterior interval.")
                  )),
         br(),
         verbatimTextOutput("smmry_view", placeholder = TRUE),
@@ -3313,7 +3313,7 @@ server <- function(input, output, session) {
       return("All Q2.5-ESS values are OK.")
     } else {
       return(paste("Warning: At least one Q2.5-ESS value is worrying. In general,",
-                   "this indicates that the central 95% posterior intervals should not be used."))
+                   "this indicates that the central 95 % posterior intervals should not be used."))
     }
   }, sep = "\n")
   
@@ -3324,7 +3324,7 @@ server <- function(input, output, session) {
       return("All Q97.5-ESS values are OK.")
     } else {
       return(paste("Warning: At least one Q97.5-ESS value is worrying. In general,",
-                   "this indicates that the central 95% posterior intervals should not be used."))
+                   "this indicates that the central 95 % posterior intervals should not be used."))
     }
   }, sep = "\n")
   

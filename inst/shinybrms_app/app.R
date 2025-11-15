@@ -902,21 +902,14 @@ ui <- navbarPage(
     br(),
     helpText(
       "Use", a("Stan", href = "https://mc-stan.org/", target = "_blank"),
-      "to infer the joint posterior distribution of all parameters in your model",
-      "by sampling. More specifically, Stan uses a modified",
-      # "variant of the",
-      "no-U-turn sampler (NUTS)",
-      # a("(Hoffman and Gelman, 2014)",
-      #   href = "http://jmlr.org/papers/v15/hoffman14a.html",
-      #   target = "_blank"),
-      "which is a special Hamiltonian Monte Carlo (HMC)",
+      "to infer the joint posterior distribution of all parameters in the",
+      "current model by sampling (i.e., by generating pseudo-random draws from",
+      "this joint posterior). More specifically, Stan uses a modified",
+      "no-U-turn sampler (NUTS) which is a special Hamiltonian Monte Carlo (HMC)",
       "sampler which in turn is a special Markov chain Monte Carlo (MCMC) sampler.",
       "Details concerning Stan's sampling algorithm may be found in the",
-      a("Stan documentation",
-        href = "https://mc-stan.org/docs/",
-        target = "_blank",
-        .noWS = "after"),
-      "."
+      a("Stan documentation", href = "https://mc-stan.org/docs/",
+        target = "_blank", .noWS = "after"), "."
     ),
     navlistPanel(
       ### Run Stan --------------------------------------------------------------
@@ -927,13 +920,12 @@ ui <- navbarPage(
         wellPanel(
           h3("Stan code"),
           helpText(
-            "Here, you can get a preview of the Stan code for your model and download it.",
-            
-            "The data used in the", code("data {...}"), "program block of the Stan code is the Stan",
-            "data. Thus, the Stan code goes together with the Stan data.",
-            
-            "Apart from checking purposes,",
-            "this is useful for example if you want to customize the model and then run Stan by yourself."
+            "Here, a preview of the Stan code for the current model may be",
+            "obtained and downloaded. Apart from checking purposes, this is",
+            "useful, e.g., if the Stan code should be modified, which then",
+            "requires to also retrieve the Stan", em("data"), "(see below) and",
+            "then run Stan", em("outside"), "of",
+            strong("shinybrms", .noWS = "after"), "."
           ),
           checkboxInput("show_stancode", "Show Stan code", value = FALSE),
           conditionalPanel(
@@ -945,15 +937,14 @@ ui <- navbarPage(
         wellPanel(
           h3("Stan data"),
           helpText(
-            "Here, you can get a preview of the structure of the Stan data for your model and download it.",
-            
-            "The Stan data is the data used in the", code("data {...}"), "program block in the Stan",
-            "code. Thus, the Stan data goes together with the Stan code.",
-            
-            "Apart from checking purposes,",
-            "this is useful for example if you want to customize the model and then run Stan by yourself."
+            "Here, a preview of the structure of the Stan data for the current",
+            "model may be obtained and downloaded. (The Stan data is the data",
+            "that is used in the", code("data {...}"), "program block of the",
+            "Stan", em("code", .noWS = "after"), ", which can be previewed and",
+            "downloaded above.)"
           ),
-          checkboxInput("show_standata", "Show structure of Stan data", value = FALSE),
+          checkboxInput("show_standata", "Show structure of Stan data",
+                        value = FALSE),
           conditionalPanel(
             condition = "input.show_standata",
             verbatimTextOutput("standata_view", placeholder = TRUE),
@@ -963,13 +954,13 @@ ui <- navbarPage(
         wellPanel(
           h3("Advanced options"),
           helpText(
-            "Here, you can set advanced options for the R function",
+            "Here, advanced options for the R function",
             a(HTML(paste(code("brms::brm()"))),
               href = "https://paulbuerkner.com/brms/reference/brm.html",
               target = "_blank"),
-            "which is the central function for inferring the posterior. These",
-            "advanced options have sensible defaults, but sometimes, they need",
-            "to be changed."
+            "(the key function for inferring the posterior here) may be set.",
+            "These advanced options have sensible defaults, but sometimes,",
+            "they need to be changed."
           ),
           checkboxInput("show_advOpts", "Show advanced options", value = FALSE),
           conditionalPanel(
@@ -1022,10 +1013,10 @@ ui <- navbarPage(
                   ),
                   tags$li(
                     "If unset, option \"Seed\" internally defaults to a random",
-                    "seed, giving nonreproducible results. To obtain reproducible",
-                    "results, you need to specify a value for option \"Seed\"",
-                    "and enter this value each time you want to obtain the same",
-                    "results again."
+                    "seed, giving unreproducible results. To obtain reproducible",
+                    "results, a value for option \"Seed\" needs to be specified",
+                    "and this value needs to be entered each time the same",
+                    "results should be obtained again."
                   ),
                   tags$li(
                     "Internally, the value supplied to option \"Cores\" is cut",
@@ -1122,7 +1113,8 @@ ui <- navbarPage(
                   "versus the content shown on pages",
                   HTML(paste(actionLink("likelihood_link_upld", "Likelihood"))),
                   "and",
-                  HTML(paste(actionLink("prior_link_upld", "Prior")), .noWS = "after"),
+                  HTML(paste(actionLink("prior_link_upld", "Prior")),
+                       .noWS = "after"),
                   "."
                 ),
                 tags$li(
@@ -1133,7 +1125,8 @@ ui <- navbarPage(
                 )
               ))
           ),
-          actionButton("run_stan", "Run Stan (may take a while)", class = "btn-primary"),
+          actionButton("run_stan", "Run Stan (may take a while)",
+                       class = "btn-primary"),
           br(),
           br(),
           uiOutput("brmsfit_upload_UI"),
@@ -1146,21 +1139,25 @@ ui <- navbarPage(
                  actionLink("mcmc_link1", "MCMC diagnostics"),
                  "for details):"),
           verbatimTextOutput("diagn_all_out", placeholder = TRUE),
-          selectInput("stanout_download_sel", "Choose output file to download:",
-                      choices = c("\"brmsfit\" object (RDS file)" = "shinybrms_brmsfit.rds",
-                                  "Matrix of posterior draws (CSV file)" = "shinybrms_post_draws_mat.csv",
-                                  "Matrix of posterior draws (RDS file)" = "shinybrms_post_draws_mat.rds",
-                                  "Array of posterior draws (RDS file)" = "shinybrms_post_draws_arr.rds"),
-                      width = "320px",
-                      selectize = TRUE),
+          selectInput(
+            "stanout_download_sel", "Choose output file to download:",
+            choices = c(
+              "\"brmsfit\" object (RDS file)" = "shinybrms_brmsfit.rds",
+              "Matrix of posterior draws (CSV file)" = "shinybrms_post_draws_mat.csv",
+              "Matrix of posterior draws (RDS file)" = "shinybrms_post_draws_mat.rds",
+              "Array of posterior draws (RDS file)" = "shinybrms_post_draws_arr.rds"
+            ),
+            width = "320px",
+            selectize = TRUE
+          ),
           helpText(
             "The most comprehensive output object is the", code("brmsfit"),
             "object which is the output from the R function",
             a(HTML(paste(code("brms::brm()"))),
               href = "https://paulbuerkner.com/brms/reference/brm.html",
               target = "_blank", .noWS = "after"),
-            ", the central function for inferring the posterior. Such a",
-            code("brmsfit"), "object may be uploaded later above to avoid",
+            ", the key function for inferring the posterior. Such a",
+            code("brmsfit"), "object may be uploaded later (above) to avoid",
             "running Stan (for", em("that"), "model and", em("that"), "data)",
             "again."
           ),

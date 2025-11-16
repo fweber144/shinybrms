@@ -1452,10 +1452,10 @@ ui <- navbarPage(
                 # group-level slopes)"
               ) 
             )),
-          p("Be cautious with predictor variables having a high number of",
-            "levels (which is usually only the case for group-level effects):",
-            "In that case, the computation may take a long time and the",
-            "resulting plot is rarely useful.")
+          p("Caution is advised in case of predictor variables with a high",
+            "number of levels (which is usually only the case for group-level",
+            "effects): In that case, the computation may take a long time and",
+            "the resulting plot is rarely useful.")
         ),
         # br(),
         selectInput("term_sel", "Predictor term to plot:",
@@ -1477,8 +1477,9 @@ ui <- navbarPage(
                                 "SVG" = "svg"),
                     selectize = TRUE),
         helpText(
-          "If you want to download the plot in a different size, simply adjust your browser window size",
-          "until the plot in the app has the desired size and then download the plot."
+          "To download the plot in a different size, adjust the browser window",
+          "size until the plot in the app has the desired size and then",
+          "download the plot."
         ),
         downloadButton("ceff_download", "Download plot"),
         br(),

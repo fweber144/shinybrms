@@ -1235,21 +1235,15 @@ ui <- navbarPage(
               ),
               tags$li(
                 "the ESS for the median of the corresponding marginal posterior",
-                "distribution (short: Q50-ESS or \\(\\text{ESS}_{\\text{Q}50}\\); reported",
-                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
-                "typically interested in the median of marginal posteriors)."
+                "distribution (short: Q50-ESS or \\(\\text{ESS}_{\\text{Q}50}\\))."
               ),
               tags$li(
                 "the ESS for the 2.5 % quantile of the corresponding marginal posterior",
-                "distribution (short: Q2.5-ESS or \\(\\text{ESS}_{\\text{Q}2.5}\\); reported",
-                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
-                "typically interested in the 2.5 % quantile of marginal posteriors),"
+                "distribution (short: Q2.5-ESS or \\(\\text{ESS}_{\\text{Q}2.5}\\)),"
               ),
               tags$li(
                 "the ESS for the 97.5 % quantile of the corresponding marginal posterior",
-                "distribution (short: Q97.5-ESS or \\(\\text{ESS}_{\\text{Q}97.5}\\); reported",
-                "because in the context of", strong("shinybrms", .noWS = "after"), ", users are",
-                "typically interested in the 97.5 % quantile of marginal posteriors)."
+                "distribution (short: Q97.5-ESS or \\(\\text{ESS}_{\\text{Q}97.5}\\))."
               )
             ),
             "In general, the following values of the general MCMC diagnostics",

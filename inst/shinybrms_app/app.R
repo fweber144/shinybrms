@@ -1119,9 +1119,9 @@ ui <- navbarPage(
                 ),
                 tags$li(
                   "If uploaded Stan results are used, then", strong("shinybrms"),
-                  "currently cannot check whether the number of chains in the",
-                  "Stan results differs from the desired number of chains",
-                  "(i.e., from the number of chains specified originally)."
+                  "currently cannot check whether the number of Markov chains",
+                  "in the Stan results differs from the desired number of these",
+                  "chains (i.e., from the number of chains specified originally)."
                 )
               ))
           ),
@@ -1247,14 +1247,14 @@ ui <- navbarPage(
               )
             ),
             "In general, the following values of the general MCMC diagnostics",
-            "are worrying:",
+            "are worrying (\\(n_{\\text{chains}}\\) denotes the number of",
+            "Markov chains):",
             tags$ul(
               tags$li(
                 "\\(\\widehat{R} \\geq 1.01\\),"
               ),
               tags$li(
-                "\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\)",
-                "with \\(n_{\\text{chains}}\\) denoting the number of chains,"
+                "\\(\\text{ESS}_{\\text{bulk}} \\leq 100 \\cdot n_{\\text{chains}}\\),"
               ),
               tags$li(
                 "\\(\\text{ESS}_{\\text{tail}} \\leq 100 \\cdot n_{\\text{chains}}\\),"

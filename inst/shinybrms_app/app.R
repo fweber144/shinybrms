@@ -1226,7 +1226,8 @@ ui <- navbarPage(
                 em("the modified"), "\\(\\widehat{R}\\)),"
               ),
               tags$li(
-                "the effective sample size (ESS) in the bulk of the corresponding marginal posterior",
+                "the effective sample size (ESS) in the bulk of the",
+                "corresponding marginal posterior",
                 "distribution (short: bulk-ESS or \\(\\text{ESS}_{\\text{bulk}}\\)),"
               ),
               tags$li(
@@ -1269,9 +1270,9 @@ ui <- navbarPage(
                 "\\(\\text{ESS}_{\\text{Q}97.5} \\leq 100 \\cdot n_{\\text{chains}}\\)."
               )
             )),
-          p("Note: If you used a", code("constant()"), "prior (which should",
-            "rarely be the case), then after obtaining the Stan results, you",
-            "will be warned that at least one MCMC diagnostic is worrying.",
+          p("Note: If a", code("constant()"), "prior was used (which should",
+            "rarely be the case), then after obtaining the Stan results, a",
+            "warning will be issued that at least one MCMC diagnostic is worrying.",
             "The reason is that",
             "\\(\\widehat{R}\\), \\(\\text{ESS}_{\\text{bulk}}\\),",
             "\\(\\text{ESS}_{\\text{tail}}\\),",
@@ -1283,14 +1284,14 @@ ui <- navbarPage(
             "\\(\\text{ESS}_{\\text{Q}50}\\), \\(\\text{ESS}_{\\text{Q}2.5}\\),",
             "and \\(\\text{ESS}_{\\text{Q}97.5}\\)",
             em("of a constant parameter", .noWS = "after"),
-            ", you may ignore the warning.",
+            ", this warning may be ignored.",
             "However, the MCMC diagnostics may be worrying for other reasons",
             "or other parameters as well.",
-            "Thus, in this case, you need to check the MCMC diagnostics very carefully.",
-            "In particular, you need to check the HMC-specific diagnostics as well as",
-            "the detailed table of the general MCMC diagnostics.")
-          # (where a constant parameter has only missing values, i.e., only",
-          # code("NA", .noWS = "after"), "s)
+            "Thus, in this case, the MCMC diagnostics need to be checked very",
+            "carefully.",
+            "In particular, the HMC-specific diagnostics", em("as well as"),
+            "the detailed table of the general MCMC diagnostics need to be",
+            "checked.")
         )),
         br(),
         wellPanel(

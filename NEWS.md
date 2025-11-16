@@ -6,13 +6,15 @@
 
 ## Minor changes
 
-* Added Weber, Ickstadt, and Glass (2022, DOI:
-[10.32614/RJ-2022-027](https://doi.org/10.32614/RJ-2022-027)) to documentation
-and vignette.
-* If installed, the **posterior** package is now used for computing MCMC
-diagnostics, not **rstan**.
-* The ESSs for 50%, 2.5%, and 97.5% posterior quantiles are now checked
-automatically as well.
+* If installed, the
+[**posterior**](https://doi.org/10.32614/CRAN.package.posterior) package is now
+used for computing MCMC diagnostics, not **rstan**.
+* Apart from the bulk-ESS and the tail-ESS, the ESSs for the 50 %, 2.5 %, and
+97.5 % posterior quantiles are now checked automatically as well.
+* UI: Minor enhancements in text elements; update URLs.
+* Internally: Tests migrated from
+[**shinytest**](https://doi.org/10.32614/CRAN.package.shinytest) to
+[**shinytest2**](https://doi.org/10.32614/CRAN.package.shinytest2).
 
 # **shinybrms** 1.8.0
 
@@ -211,7 +213,8 @@ from [Google Fonts](https://fonts.google.com/) is used. See the new file
 ## Minor changes
 
 * UI: Added internal links.
-* On Windows with **rstan** version \>= 2.21.1: Automatically run
+* On Windows with [**rstan**](https://doi.org/10.32614/CRAN.package.rstan)
+version \>= 2.21.1: Automatically run
 `rstan::rstan_options("javascript" = FALSE)` at the launch of the **shinybrms**
 app to prevent occasional crashes of the R session when starting the Stan run.
 * UI: Minor improvements (e.g., improved button labels and help texts).

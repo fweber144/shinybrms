@@ -663,7 +663,7 @@ ui <- navbarPage(
                   tags$li(code("Intercept", .noWS = "after"), ": the intercept",
                           "when centering the predictors (this is only the",
                           "internally used intercept; in the output, the",
-                          "intercept with respect to the noncentered predictors,",
+                          "intercept with respect to the uncentered predictors,",
                           "called", code("b_Intercept", .noWS = "after"),
                           ", is given),"),
                   tags$li(code("b", .noWS = "after"), ": population-level",

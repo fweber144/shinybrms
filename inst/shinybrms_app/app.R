@@ -584,7 +584,7 @@ ui <- navbarPage(
           br(),
           selectInput(
             "pred_int_sel",
-            "Added interaction terms (you may edit this list, see above):",
+            "Added interaction terms (this list may be edited, see above):",
             choices = NULL,
             multiple = TRUE,
             selectize = TRUE
@@ -647,7 +647,7 @@ ui <- navbarPage(
     titlePanel("Prior"),
     br(),
     helpText(HTML(paste0(
-      "Build the joint prior distribution of all parameters in your model by ",
+      "Build the joint prior distribution of all parameters in the model by ",
       "placing independent priors on all parameters separately. Notes:",
       tags$ul(
         tags$li("The default priors are taken from package",
@@ -2584,7 +2584,7 @@ server <- function(input, output, session) {
       }))
     if (!prior_text_valid) {
       showNotification(
-        paste("Your custom prior has not been added since your text in the",
+        paste("Custom prior has not been added since the text in the",
               "\"Prior distribution\" input field could not be recognized."),
         duration = NA,
         type = "error"
@@ -2607,9 +2607,9 @@ server <- function(input, output, session) {
     if (!identical(prior_set_obj_add_ch,
                    prior_set_obj_add[!names(prior_set_obj_add) %in% cols_not2compare])) {
       showNotification(
-        paste("Your custom prior has not been added since the combination of",
-              "\"Class\", \"Coefficient\", and \"Group\" you have currently selected",
-              "could not be found in the table of the default priors."),
+        paste("Custom prior has not been added since the combination of",
+              "\"Class\", \"Coefficient\", and \"Group\" that is currently selected",
+              "could not be found in the table of default priors."),
         duration = NA,
         type = "error"
       )
@@ -2653,11 +2653,11 @@ server <- function(input, output, session) {
         }))) {
       showNotification(
         HTML(paste(
-          "You have entered a bounded prior distribution for a parameter class",
+          "A bounded prior distribution was entered for a parameter class",
           "for which", strong("shinybrms"), "currently does not have automated",
-          "boundary checks. Please verify yourself that the bound(s) set in",
+          "boundary checks. Please verify that the bound(s) set in",
           "the \"Prior distribution\" input text field match the bounds in the",
-          "table of the default priors."
+          "table of default priors."
         )),
         duration = NA,
         type = "message"
@@ -2895,12 +2895,12 @@ server <- function(input, output, session) {
     
     if (use_upd) {
       run_mssg <- paste(
-        "Stan will now compile the C++ code for your model (if necessary; this",
+        "Stan will now compile the C++ code for the current model (if necessary; this",
         "may take a while) and will then start sampling."
       )
     } else {
       run_mssg <- paste(
-        "Stan will now compile the C++ code for your model (which may take a",
+        "Stan will now compile the C++ code for the current model (which may take a",
         "while) and will then start sampling."
       )
     }
@@ -2954,8 +2954,8 @@ server <- function(input, output, session) {
         sink(tmp_stdout_txt)
         sink_active <- TRUE
         cat("Refresh this page to see the sampling progress.",
-            "Note that the C++ code for your model might need to be compiled",
-            "first, which may take a while.\n")
+            "Note that the C++ code for the current model might need to be",
+            "compiled first, which may take a while.\n")
         tmp_stdout_html <- sub("\\.txt$", ".html", tmp_stdout_txt)
         rstan:::create_progress_html_file(tmp_stdout_html, tmp_stdout_txt)
         browseURL(paste0("file://", tmp_stdout_html))
@@ -3593,7 +3593,7 @@ server <- function(input, output, session) {
     # Check that there is at least one parameter name in `input$cust_text`:
     if (!grepl(paste(paste0("`", C_pars(), "`"), collapse = "|"), input$cust_text)) {
       showNotification(
-        paste("Your custom summary has not been calculated since your custom",
+        paste("Custom summary has not been calculated since the custom",
               "expression did not contain at least one parameter."),
         duration = NA,
         type = "error"
@@ -3607,7 +3607,7 @@ server <- function(input, output, session) {
     )
     if (!cust_text_valid) {
       showNotification(
-        paste("Your custom summary has not been calculated since your custom",
+        paste("Custom summary has not been calculated since the custom",
               "expression was invalid."),
         duration = NA,
         type = "error"
@@ -3627,7 +3627,7 @@ server <- function(input, output, session) {
       cust_res <- try(eval(parse(text = input$cust_text)), silent = TRUE)
       if (inherits(cust_res, "try-error")) {
         showNotification(
-          "The evaluation of your custom expression failed.",
+          "The evaluation of the custom expression failed.",
           duration = NA,
           type = "error"
         )

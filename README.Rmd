@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ## Description
 
-The [R](https://www.R-project.org/) package [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package [**brms**](https://paul-buerkner.github.io/brms/) which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a [**shiny**](https://shiny.rstudio.com/) app.
+The [R](https://www.R-project.org/) package [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package [**brms**](https://paulbuerkner.com/brms/) which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a [**shiny**](https://shiny.rstudio.com/) app.
 
 To get an impression of the **shinybrms** app, have a look at [this page](https://fweber144.github.io/shinybrms/articles/shinybrms.html). The following text explains how to launch the **shinybrms** app (and also how to install it, if necessary).
 

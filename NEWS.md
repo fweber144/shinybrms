@@ -169,7 +169,7 @@ Stan run.
 * Added the possibility to perform custom posterior summary analyses, e.g., for
 a transformation of parameters or for a sum of parameters.
 * Added support for conditional-effects plots (see
-[`brms::conditional_effects()`](https://paul-buerkner.github.io/brms/reference/conditional_effects.brmsfit.html)).
+[`brms::conditional_effects()`](https://paulbuerkner.com/brms/reference/conditional_effects.brmsfit.html)).
 * Use the automatic `rstan::rstan_options("javascript" = FALSE)` fix on *all*
 platforms (not only Windows) if **rstan** version 2.21.1 or above is used.
 

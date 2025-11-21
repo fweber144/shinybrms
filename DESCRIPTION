@@ -50,7 +50,7 @@ Suggests:
     testthat (>= 3.0.0),
     shinytest2
 Additional_repositories:
-    https://mc-stan.org/r-packages/
+    https://stan-dev.r-universe.dev/
 Encoding: UTF-8
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)

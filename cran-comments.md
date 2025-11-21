@@ -21,7 +21,7 @@ the 'win-builder' checks gave 2 NOTEs:
     Suggests or Enhances not in mainstream repositories:
       cmdstanr
     Availability using Additional_repositories specification:
-      cmdstanr   yes   https://mc-stan.org/r-packages/
+      cmdstanr   yes   https://stan-dev.r-universe.dev/
 
 *   checking package dependencies ... NOTE
     Package suggested but not available for checking: 'cmdstanr'

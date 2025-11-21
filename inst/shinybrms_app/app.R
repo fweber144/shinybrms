@@ -1743,11 +1743,13 @@ ui <- navbarPage(
       )
     ),
     ### References ------------------------------------------------------------
-    # TODO: Add new textbook references to page "References".
     tabPanel(
       "References",
       titlePanel("References"),
       br(),
+      p("Albert J and Hu J (2019).",
+        em("Probability and Bayesian Modeling", .noWS = "after"),
+        ". Boca Raton, FL, USA: CRC Press."),
       p("Betancourt M (2018).",
         "A conceptual introduction to Hamiltonian Monte Carlo.",
         em("arXiv:170102434v2 [stat]", .noWS = "after"), ". URL:",
@@ -1755,12 +1757,20 @@ ui <- navbarPage(
           href = "https://arxiv.org/abs/1701.02434v2",
           target = "_blank"),
         "(visited on July 26, 2020)."),
+      p("Johnson AA, Ott MQ, and Dogucu M (2022).",
+        em("Bayes Rules!: An Introduction to Applied Bayesian Modeling",
+           .noWS = "after"),
+        ". New York, NY, USA: CRC Press."),
       p("Gelman A, Carlin JB, Stern HS, Dunson DB, Vehtari A, and Rubin DB (2014).",
         em("Bayesian Data Analysis", .noWS = "after"),
-        ". 3rd ed. Boca Raton, FL: CRC Press."),
+        ". 3rd ed. Boca Raton, FL, USA: CRC Press."),
       p("McElreath R (2020).",
-        em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan", .noWS = "after"),
-        ". 2nd ed. Boca Raton, FL: CRC Press."),
+        em("Statistical Rethinking: A Bayesian Course with Examples in R and Stan",
+           .noWS = "after"),
+        ". 2nd ed. Boca Raton, FL, USA: CRC Press."),
+      p("Reich BJ and Ghosh SK (2019).",
+        em("Bayesian Statistical Methods", .noWS = "after"),
+        ". New York, NY, USA: CRC Press."),
       p(withMathJax(
         "Vehtari A, Gelman A, Simpson D, Carpenter B, and B", HTML("&uuml;", .noWS = "outside"), "rkner P-C (2021).",
         "Rank-normalization, folding, and localization: An improved \\(\\widehat{R}\\) for",

@@ -1713,6 +1713,12 @@ ui <- navbarPage(
             a("GitHub", href = "https://github.com/stan-dev/shinystan/", target = "_blank")
           ))),
           tags$li(HTML(paste0(
+            strong("posterior"), ": ",
+            a("website", href = "https://mc-stan.org/posterior/", target = "_blank"), ", ",
+            a("CRAN", href = "https://CRAN.R-project.org/package=posterior", target = "_blank"), ", ",
+            a("GitHub", href = "https://github.com/stan-dev/posterior/", target = "_blank")
+          ))),
+          tags$li(HTML(paste0(
             strong("lme4"), ": ",
             a("CRAN", href = "https://CRAN.R-project.org/package=lme4", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/lme4/lme4/", target = "_blank")

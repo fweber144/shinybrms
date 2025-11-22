@@ -124,7 +124,8 @@ prior_stan_fun_lb0 <- c(
   "inv_gamma",
   "weibull",
   "frechet",
-  "rayleigh"
+  "rayleigh",
+  "loglogistic"
 )
 prior_stan_fun_lbx <- c(
   "pareto",
@@ -150,6 +151,22 @@ prior_stan_fun_bounded <- c(
 )
 # Combined:
 prior_stan_fun <- c(prior_stan_fun_unbounded, prior_stan_fun_bounded)
+
+# TODO: Include `multi_normal`, `multi_normal_prec`, `multi_normal_cholesky`,
+# `multi_student_t`, `multi_student_t_cholesky`, `dirichlet`; allow for square
+# brackets in Stan function (prior) input field. Also add support for:
+# --> Already supported by brms (and shinybrms): `lkj_corr`, `lkj_corr_cholesky`
+#     (the latter is the one which is actually used under the hood of
+#     brms::lkj()).
+# --> Probably not recommended (lkj() is probably recommended instead; see the
+#     "brms_overview" vignette): `wishart`, `wishart_cholesky`.
+# --> Not recommended (lkj() is recommended instead; see the "brms_overview"
+#     vignette): `inv_wishart`, `inv_wishart_cholesky`.
+# --> Currently probably not really useful: `multi_gp`,
+#     `multi_gp_cholesky`, `gaussian_dlm_obs`, `hmm_marginal` (these would
+#     typically require features that are currently not supported by shinybrms,
+#     e.g., the use of brms::stanvar() to use parameter values from within the
+#     Markov chain iterations).
 
 # brms function names which may be used for specifying a prior distribution:
 prior_brms_fun <- c(

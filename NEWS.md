@@ -10,10 +10,15 @@
 now used for computing MCMC diagnostics, not **rstan**.
 * Apart from the bulk-ESS and the tail-ESS, the ESSs for the 50 %, 2.5 %, and
 97.5 % posterior quantiles are now checked automatically as well.
-* UI: Minor enhancements in text elements; update URLs.
+* UI: Minor enhancements in text elements; updated URLs.
 * Internally: Tests migrated from
 [**shinytest**](https://rstudio.github.io/shinytest/) to
 [**shinytest2**](https://rstudio.github.io/shinytest2/).
+* Updated the list of allowed function names when specifying a prior via a Stan
+function name (for security reasons, it is not possible to enter arbitrary code
+in the prior distribution text field). Now, all distributions implemented in
+Stan v2.37.0 are supported (although not all of them are useful in the context
+of **shinybrms**).
 
 # **shinybrms** 1.8.0
 

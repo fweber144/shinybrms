@@ -102,6 +102,7 @@ san_prior_tab_nms <- function(x) {
 # Stan function names which may be used for specifying a prior distribution:
 # Unbounded distributions:
 prior_stan_fun_unbounded <- c(
+  # Univariate:
   "normal",
   "std_normal",
   "exp_mod_normal",
@@ -111,10 +112,17 @@ prior_stan_fun_unbounded <- c(
   "double_exponential",
   "logistic",
   "gumbel",
-  "skew_double_exponential"
+  "skew_double_exponential",
+  # Multivariate:
+  "multi_normal", "multi_normal_prec", "multi_normal_cholesky",
+  "multi_student_t", "multi_student_t_cholesky",
+  "multi_gp", "multi_gp_cholesky",
+  "gaussian_dlm_obs",
+  "hmm_marginal"
 )
 # Bounded distributions:
 prior_stan_fun_lb0 <- c(
+  # Univariate:
   "lognormal",
   "chi_square",
   "inv_chi_square",
@@ -125,18 +133,26 @@ prior_stan_fun_lb0 <- c(
   "weibull",
   "frechet",
   "rayleigh",
-  "loglogistic"
+  "loglogistic",
+  # Multivariate:
+  "wishart", "wishart_cholesky",
+  "inv_wishart", "inv_wishart_cholesky"
 )
 prior_stan_fun_lbx <- c(
+  # Univariate:
   "pareto",
   "pareto_type_2",
   "wiener"
 )
 prior_stan_fun_lb_ub <- c(
+  # Univariate:
   "beta",
   "beta_proportion",
   "von_mises",
-  "uniform"
+  "uniform",
+  # Multivariate:
+  "dirichlet",
+  "lkj_corr", "lkj_corr_cholesky"
 )
 prior_stan_fun_bounded <- c(
   ### Requiring a lower bound (which is checked by
@@ -152,22 +168,6 @@ prior_stan_fun_bounded <- c(
 # Combined:
 prior_stan_fun <- c(prior_stan_fun_unbounded, prior_stan_fun_bounded)
 
-# TODO: Include `multi_normal`, `multi_normal_prec`, `multi_normal_cholesky`,
-# `multi_student_t`, `multi_student_t_cholesky`, `dirichlet`; allow for square
-# brackets in Stan function (prior) input field. Also add support for:
-# --> Already supported by brms (and shinybrms): `lkj_corr`, `lkj_corr_cholesky`
-#     (the latter is the one which is actually used under the hood of
-#     brms::lkj()).
-# --> Probably not recommended (lkj() is probably recommended instead; see the
-#     "brms_overview" vignette): `wishart`, `wishart_cholesky`.
-# --> Not recommended (lkj() is recommended instead; see the "brms_overview"
-#     vignette): `inv_wishart`, `inv_wishart_cholesky`.
-# --> Currently probably not really useful: `multi_gp`,
-#     `multi_gp_cholesky`, `gaussian_dlm_obs`, `hmm_marginal` (these would
-#     typically require features that are currently not supported by shinybrms,
-#     e.g., the use of brms::stanvar() to use parameter values from within the
-#     Markov chain iterations).
-
 # brms function names which may be used for specifying a prior distribution:
 prior_brms_fun <- c(
   "horseshoe",
@@ -176,8 +176,10 @@ prior_brms_fun <- c(
   ### Requiring a simplex constraint:
   "dirichlet",
   ### 
-  ### For parameters of class "cor" (only used by brms; has no Stan function
-  ### equivalent):
+  ### For parameters of class "cor" (under this name, this distribution only
+  ### exists in brms; related Stan functions are `lkj_corr` and
+  ### `lkj_corr_cholesky`; the latter is the one which is actually used under
+  ### the hood of brms::lkj()):
   "lkj",
   ### 
   ### Requiring a Cholesky-factor-of-correlation-matrix constraint:
@@ -2588,7 +2590,7 @@ server <- function(input, output, session) {
     # "Prior distribution" input field:
     prior_text_valid <- identical(input$prior_text, "") ||
       any(sapply(prior_stan_fun, function(prior_stan_fun_i) {
-        grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"),
+        grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:][:punct:]⁠]*\\)$"),
               input$prior_text)
       })) ||
       grepl(paste0("^horseshoe\\((",
@@ -2656,7 +2658,7 @@ server <- function(input, output, session) {
     prior_classes_unbounded <- c("Intercept", "b")
     if (input$prior_class_sel %in% prior_classes_unbounded &&
         any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
-          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"),
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:][:punct:]⁠]*\\)$"),
                 input$prior_text)
         }))) {
       showNotification(
@@ -2670,7 +2672,7 @@ server <- function(input, output, session) {
     prior_classes_lb0 <- c("sd", "sigma", "shape")
     if (input$prior_class_sel %in% prior_classes_lb0 &&
         any(sapply(c(prior_stan_fun_lbx, prior_stan_fun_lb_ub), function(prior_stan_fun_i) {
-          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"),
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:][:punct:]⁠]*\\)$"),
                 input$prior_text)
         }))) {
       showNotification(
@@ -2684,7 +2686,7 @@ server <- function(input, output, session) {
     }
     if (!input$prior_class_sel %in% c(prior_classes_unbounded, prior_classes_lb0) &&
         any(sapply(prior_stan_fun_bounded, function(prior_stan_fun_i) {
-          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:].,]*\\)$"),
+          grepl(paste0("^", prior_stan_fun_i, "\\([[:digit:][:blank:][:punct:]⁠]*\\)$"),
                 input$prior_text)
         }))) {
       showNotification(

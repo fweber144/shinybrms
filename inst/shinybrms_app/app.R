@@ -2676,8 +2676,8 @@ server <- function(input, output, session) {
                 input$prior_text)
         }))) {
       showNotification(
-        paste("For parameter classes \"sigma\" and \"sd\", only unbounded",
-              "prior distributions and prior distributions having a",
+        paste("For parameter classes \"sd\", \"sigma\", and \"shape\", only",
+              "unbounded prior distributions and prior distributions having a",
               "lower bound of zero are allowed."),
         duration = NA,
         type = "error"

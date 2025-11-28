@@ -3054,15 +3054,20 @@ server <- function(input, output, session) {
               "used for the model. The corresponding rows have been omitted in",
               "the Stan run.")
       warn_capt <- setdiff(warn_capt, c(
-        "Compiling Stan program...",
-        "Start sampling",
-        "recompiling to avoid crashing R session",
+        grep("^.*Compiling Stan program\\.\\.\\.$", warn_capt, value = TRUE),
+        grep("^.*Model executable is up to date!$", warn_capt, value = TRUE),
+        grep("^.*Start sampling$", warn_capt, value = TRUE),
+        grep("^[[:cntrl:]]{1}g$", warn_capt, value = TRUE),
+        grep("^.*recompiling to avoid crashing R session$", warn_capt, value = TRUE),
         grep(paste0("Warning: There were [[:digit:]]+ divergent transitions ",
                     "after warmup\\. See"), warn_capt, value = TRUE),
         grep("^[[:space:]]*$", warn_capt, value = TRUE),
-        "https://mc-stan.org/learn-stan/diagnostics-warnings.html#divergent-transitions-after-warmup",
-        "to find out why this is a problem and how to eliminate them.",
-        "Warning: Examine the pairs() plot to diagnose sampling problems"
+        grep(paste0("^.*https://mc-stan.org/learn-stan/diagnostics-warnings\\.html",
+                    "#divergent-transitions-after-warmup$"), warn_capt, value = TRUE),
+        grep("^.*to find out why this is a problem and how to eliminate them\\.$",
+             warn_capt, value = TRUE),
+        grep("^.*Warning: Examine the pairs\\(\\) plot to diagnose sampling problems$",
+             warn_capt, value = TRUE)
       ))
       for (warn_capt_i in warn_capt) {
         showNotification(

@@ -119,7 +119,7 @@ On page "Posterior", the first tab is called "Run Stan". At the top of this tab,
 *Fig. 11: Page "Posterior", tab "Run Stan" (top).*
 
 \
-Here, we focus on panel "Advanced options" where we set a seed for reproducibility:
+Here, we focus on panel "Advanced options" where we set a seed for reproducibility (and we also choose 4 cores to use parallel computation):
 
 \
 [![](screenshots/Posterior_Run_AdvOpts.png)](screenshots/Posterior_Run_AdvOpts.png)
@@ -224,7 +224,7 @@ Note that the output shown on tab "Default summary" is only intended for a quick
 
 \
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)
-*Fig. 21: Page "Posterior", tab "Launch **shinystan**".*
+*Fig. 25: Page "Posterior", tab "Launch **shinystan**".*
 
 \
 At this point, the **shinybrms** workflow ends and passes over to **shinystan**.

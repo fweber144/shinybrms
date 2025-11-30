@@ -4,7 +4,7 @@
 #'
 #' @param \dots Arguments passed to [shiny::runApp()]. For example, in order to
 #'   force the \bold{shinybrms} app to launch in the system's default web
-#'   browser (even if using RStudio), set argument `launch.browser` to `TRUE`.
+#'   browser (e.g., if using RStudio), set argument `launch.browser` to `TRUE`.
 #'
 #' @note The following global options are introduced by \bold{shinybrms}:
 #'
@@ -29,7 +29,7 @@
 #' the user, then \bold{shinybrms} uses a value of `50 * 1024^2` (corresponding
 #' to 50 MB).
 #' * `warn` (see [base::options()]): Set and reset internally (necessary for
-#' catching some warning messages).
+#' capturing some warning messages).
 #' * `browser` (see [base::options()]): Set and reset internally (see above).
 #' * `mc.cores` (see [base::options()]): If option `mc.cores` is set, then the
 #' advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
@@ -49,9 +49,9 @@
 #'
 #' @references
 #' 
-#' Weber, Frank, Katja Ickstadt, and Änne Glass. 2022. “shinybrms: Fitting
-#' Bayesian Regression Models Using a Graphical User Interface for the R Package
-#' brms.” The R Journal 14 (2): 96–120. \doi{10.32614/RJ-2022-027}.
+#' Weber F, Ickstadt K, and Glass Ä (2022). **shinybrms**: Fitting Bayesian
+#' Regression Models Using a Graphical User Interface for the R Package
+#' **brms**. *The R Journal* 14(2): 96--120. \doi{10.32614/RJ-2022-027}.
 #'
 #' @examples
 #' if (interactive()) {

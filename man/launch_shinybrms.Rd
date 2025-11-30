@@ -9,7 +9,7 @@ launch_shinybrms(...)
 \arguments{
 \item{\dots}{Arguments passed to \code{\link[shiny:runApp]{shiny::runApp()}}. For example, in order to
 force the \bold{shinybrms} app to launch in the system's default web
-browser (even if using RStudio), set argument \code{launch.browser} to \code{TRUE}.}
+browser (e.g., if using RStudio), set argument \code{launch.browser} to \code{TRUE}.}
 }
 \value{
 \code{TRUE} (invisible).
@@ -43,7 +43,7 @@ External global options used by \bold{shinybrms} are:
 the user, then \bold{shinybrms} uses a value of \code{50 * 1024^2} (corresponding
 to 50 MB).
 \item \code{warn} (see \code{\link[base:options]{base::options()}}): Set and reset internally (necessary for
-catching some warning messages).
+capturing some warning messages).
 \item \code{browser} (see \code{\link[base:options]{base::options()}}): Set and reset internally (see above).
 \item \code{mc.cores} (see \code{\link[base:options]{base::options()}}): If option \code{mc.cores} is set, then the
 advanced option "Cores" (in the \bold{shinybrms} app) defaults to the value
@@ -67,7 +67,7 @@ if (interactive()) {
 
 }
 \references{
-Weber, Frank, Katja Ickstadt, and Änne Glass. 2022. “shinybrms: Fitting
-Bayesian Regression Models Using a Graphical User Interface for the R Package
-brms.” The R Journal 14 (2): 96–120. \doi{10.32614/RJ-2022-027}.
+Weber F, Ickstadt K, and Glass Ä (2022). \strong{shinybrms}: Fitting Bayesian
+Regression Models Using a Graphical User Interface for the R Package
+\strong{brms}. \emph{The R Journal} 14(2): 96--120. \doi{10.32614/RJ-2022-027}.
 }

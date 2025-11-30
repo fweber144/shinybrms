@@ -21,8 +21,6 @@ For instructions on how to launch the **shinybrms** app, see the [starting page]
 
 Another example may be found in @weber_shinybrms_2022.
 
-**Note:** The following screenshots were created with **shinybrms** version 1.8.0 and are therefore not completely up-to-date anymore.
-
 ## Home
 
 \

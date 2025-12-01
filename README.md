@@ -10,7 +10,7 @@ The [R](https://www.R-project.org/) package
 graphical user interface (GUI) for fitting Bayesian regression models
 using the R package [**brms**](https://paulbuerkner.com/brms/) which in
 turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a
-[**shiny**](https://shiny.rstudio.com/) app.
+[**shiny**](https://shiny.posit.co/) app.
 
 To get an impression of the **shinybrms** app, see the [Get
 Started](https://fweber144.github.io/shinybrms/articles/shinybrms.html)
@@ -99,8 +99,8 @@ steps need to be performed first:
     ```
 
     or this R code which ensures that the app opens up in the default
-    web browser (helpful, e.g., if [RStudio](https://www.rstudio.com/)
-    is used):
+    web browser (helpful, e.g., if [RStudio](https://posit.co/) is
+    used):
 
     ``` r
     library(shinybrms)
@@ -137,8 +137,8 @@ steps need to be performed first:
     ```
 
     or this R code which ensures that the app opens up in the default
-    web browser (helpful, e.g., if [RStudio](https://www.rstudio.com/)
-    is used):
+    web browser (helpful, e.g., if [RStudio](https://posit.co/) is
+    used):
 
     ``` r
     shiny::runGitHub("fweber144/shinybrms",

@@ -240,7 +240,7 @@ ui <- navbarPage(
       h4("Description"),
       p("This",
         a(HTML(paste(strong("shiny"))),
-          href = "https://shiny.rstudio.com/",
+          href = "https://shiny.posit.co/",
           target = "_blank"),
         "app is part of the",
         a("R", href = "https://www.R-project.org/", target = "_blank"),
@@ -1753,7 +1753,7 @@ ui <- navbarPage(
           ))),
           tags$li(HTML(paste0(
             strong("shiny"), ": ",
-            a("website", href = "https://shiny.rstudio.com/", target = "_blank"), ", ",
+            a("website", href = "https://shiny.posit.co/", target = "_blank"), ", ",
             a("CRAN", href = "https://CRAN.R-project.org/package=shiny", target = "_blank"), ", ",
             a("GitHub", href = "https://github.com/rstudio/shiny", target = "_blank")
           )))

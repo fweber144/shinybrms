@@ -17,7 +17,7 @@ knitr::opts_chunk$set(
 
 ## Description
 
-The [R](https://www.R-project.org/) package [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package [**brms**](https://paulbuerkner.com/brms/) which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a [**shiny**](https://shiny.rstudio.com/) app.
+The [R](https://www.R-project.org/) package [**shinybrms**](https://fweber144.github.io/shinybrms/) provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package [**brms**](https://paulbuerkner.com/brms/) which in turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a [**shiny**](https://shiny.posit.co/) app.
 
 To get an impression of the **shinybrms** app, see the [Get Started](https://fweber144.github.io/shinybrms/articles/shinybrms.html) page.
 
@@ -61,7 +61,7 @@ The following two sections describe two ways for launching the **shinybrms** app
    library(shinybrms)
    launch_shinybrms()
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if [RStudio](https://www.rstudio.com/) is used):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if [RStudio](https://posit.co/) is used):
    ```{r, eval = FALSE}
    library(shinybrms)
    launch_shinybrms(launch.browser = TRUE)
@@ -82,7 +82,7 @@ The following two sections describe two ways for launching the **shinybrms** app
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app")
    ```
-   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if [RStudio](https://www.rstudio.com/) is used):
+   or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if [RStudio](https://posit.co/) is used):
    ```{r, eval = FALSE}
    shiny::runGitHub("fweber144/shinybrms",
                     subdir = "inst/shinybrms_app",

@@ -218,7 +218,7 @@ Here, it makes sense to plot the conditional effects for the `week:trt` interact
 ### Launch **shinystan**
 
 \
-The output shown on tab "Default summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+The output shown on tab "Default summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.posit.co/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)

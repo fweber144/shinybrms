@@ -6,6 +6,13 @@
 * win-builder:
     + R-devel (R Under development (unstable) (2025-11-30 r89082 ucrt))
     + R-release (R version 4.5.2 (2025-10-31 ucrt))
+    + Package could no be submitted to win-builder's 'R-oldrelease' flavor
+      because package 'curl' threw an error:
+      ```
+      Error in curl::curl_fetch_memory(url, handle = h) : 
+        Upload failed (at start/before it took off) [win-builder.r-project.org]:
+      Failed FTP upload: 550
+      ```
 * macOS builder:
     + R version 4.5.1 Patched (2025-07-10 r88405) on macOS Ventura 13.3.1 system
       (platform: aarch64-apple-darwin20 (64-bit))

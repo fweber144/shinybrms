@@ -6,21 +6,18 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Graphical User Interface (shiny App) for brms • shinybrms</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
-<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="apple-touch-icon.png">
-<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="apple-touch-icon-120x120.png">
-<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="apple-touch-icon-76x76.png">
-<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="favicon-48x48.png">
+<link rel="icon" type="”image/svg+xml”" href="favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="icon" sizes="any" href="favicon.ico">
+<link rel="manifest" href="site.webmanifest">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="bootstrap-toc.css">
 <script src="bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="pkgdown.css" rel="stylesheet">
 <script src="pkgdown.js"></script><meta property="og:title" content="Graphical User Interface (shiny App) for brms">
-<meta property="og:description" content="A graphical user interface (GUI) for fitting Bayesian regression
-    models using the package brms which in turn relies on Stan
-    (&lt;https://mc-stan.org/&gt;). The shinybrms GUI is a shiny app.">
+<meta property="og:description" content="A graphical user interface (GUI) for fitting Bayesian regression models using the package brms which in turn relies on Stan (&lt;https://mc-stan.org/&gt;). The shinybrms GUI is a shiny app.">
 <meta property="og:image" content="https://fweber144.github.io/shinybrms/logo.svg">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,7 +25,7 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -42,7 +39,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">shinybrms</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.8.1</span>
       </span>
     </div>
 
@@ -62,7 +59,7 @@
 <li>
   <a href="https://github.com/fweber144/shinybrms/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -73,7 +70,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -85,17 +82,17 @@
 <div class="section level2">
 <h2 id="description">Description<a class="anchor" aria-label="anchor" href="#description"></a>
 </h2>
-<p>The <a href="https://www.R-project.org/" class="external-link">R</a> package <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong></a> provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package <a href="https://paul-buerkner.github.io/brms/" class="external-link"><strong>brms</strong></a> which in turn relies on <a href="https://mc-stan.org/" class="external-link">Stan</a>. The <strong>shinybrms</strong> GUI is a <a href="https://shiny.rstudio.com/" class="external-link"><strong>shiny</strong></a> app.</p>
-<p>To get an impression of the <strong>shinybrms</strong> app, have a look at <a href="https://fweber144.github.io/shinybrms/articles/shinybrms.html">this page</a>. The following text explains how to launch the <strong>shinybrms</strong> app (and also how to install it, if necessary).</p>
+<p>The <a href="https://www.R-project.org/" class="external-link">R</a> package <a href="https://fweber144.github.io/shinybrms/"><strong>shinybrms</strong></a> provides a graphical user interface (GUI) for fitting Bayesian regression models using the R package <a href="https://paulbuerkner.com/brms/" class="external-link"><strong>brms</strong></a> which in turn relies on <a href="https://mc-stan.org/" class="external-link">Stan</a>. The <strong>shinybrms</strong> GUI is a <a href="https://shiny.rstudio.com/" class="external-link"><strong>shiny</strong></a> app.</p>
+<p>To get an impression of the <strong>shinybrms</strong> app, see the <a href="https://fweber144.github.io/shinybrms/articles/shinybrms.html">Get Started</a> page.</p>
 </div>
 <div class="section level2">
 <h2 id="launching-the-shinybrms-app">Launching the <strong>shinybrms</strong> app<a class="anchor" aria-label="anchor" href="#launching-the-shinybrms-app"></a>
 </h2>
-<p>The following two sections describe two ways for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The former is recommended as it offers all advantages that R packages have (e.g., offline usage). For both ways, you need to perform the following steps first:</p>
+<p>The following two sections describe two ways for launching the <strong>shinybrms</strong> app, either <em>with</em> or <em>without</em> the installation of <strong>shinybrms</strong>. The former is recommended as it offers all advantages that R packages have (e.g., offline usage). For both ways, the following steps need to be performed first:</p>
 <ol style="list-style-type: decimal">
 <li>Install R (see the <a href="https://www.R-project.org/" class="external-link">R homepage</a>).</li>
-<li>Install the R package <a href="https://mc-stan.org/rstan/" class="external-link"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started" class="external-link">“RStan Getting Started” GitHub page</a> for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised on the “RStan Getting Started” GitHub page).</li>
-<li>If you want to be able to use the <a href="https://mc-stan.org/cmdstanr/" class="external-link"><strong>cmdstanr</strong></a> backend (or if you need it because the <strong>rstan</strong> backend doesn’t work as expected), then you need to install <strong>cmdstanr</strong> as well as CmdStan by following the instructions on the <a href="https://mc-stan.org/cmdstanr/" class="external-link"><strong>cmdstanr</strong> homepage</a>. In general, the <strong>rstan</strong> backend should be sufficient, though. In the context of <strong>shinybrms</strong>, the major advantage of the <strong>cmdstanr</strong> backend is a (generally) faster Stan run.</li>
+<li>Install the R package <a href="https://mc-stan.org/rstan/" class="external-link"><strong>rstan</strong></a> (see the <a href="https://github.com/stan-dev/rstan/wiki/RStan-Getting-Started" class="external-link">RStan Getting Started</a> GitHub page for instructions; make sure to use <code>install.packages("rstan", [...], dependencies = TRUE)</code> with <code>[...]</code> as advised there).</li>
+<li>If the <a href="https://mc-stan.org/cmdstanr/" class="external-link"><strong>cmdstanr</strong></a> backend should be used (or if it is needed because the <strong>rstan</strong> backend does not work as expected), then <strong>cmdstanr</strong> as well as CmdStan need to be installed by following the instructions on the <strong>cmdstanr</strong> <a href="https://mc-stan.org/cmdstanr/" class="external-link">homepage</a>. In general, however, the <strong>rstan</strong> backend should be sufficient. In the context of <strong>shinybrms</strong>, the major advantage of the <strong>cmdstanr</strong> backend compared to the <strong>rstan</strong> backend is that in general, it provides a speed improvement for the Stan run.</li>
 </ol>
 <div class="section level3">
 <h3 id="with-installation-of-shinybrms">
@@ -104,9 +101,9 @@
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<p>Use one of the following approaches to install the R package <strong>shinybrms</strong> either from <a href="https://CRAN.R-project.org/package=shinybrms" class="external-link">CRAN</a> or from <a href="https://github.com/fweber144/shinybrms" class="external-link">GitHub</a>. The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. You also need to decide whether you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4" class="external-link"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS" class="external-link"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/" class="external-link"><strong>rstanarm</strong></a> or not.</p>
+<p>Use one of the following approaches to install the R package <strong>shinybrms</strong> either from <a href="https://CRAN.R-project.org/package=shinybrms" class="external-link">CRAN</a> or from <a href="https://github.com/fweber144/shinybrms" class="external-link">GitHub</a>. The GitHub version might be more recent than the CRAN version, but the CRAN version might be more stable. Another decision is whether the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4" class="external-link"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS" class="external-link"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/" class="external-link"><strong>rstanarm</strong></a> should be available.</p>
 <ul>
-<li>If you want to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
+<li>If the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong> should be available, then the R code for installing <strong>shinybrms</strong> from CRAN or GitHub (respectively) is as follows:
 <ul>
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
@@ -123,7 +120,7 @@
 </li>
 </ul>
 </li>
-<li>If you <em>don’t</em> want to use the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong>, then the R code for installing <strong>shinybrms</strong> from CRAN and GitHub (respectively) is as follows:
+<li>If the example datasets from the R packages <strong>lme4</strong>, <strong>MASS</strong>, and <strong>rstanarm</strong> should <em>not</em> be available, then the R code for installing <strong>shinybrms</strong> from CRAN or GitHub (respectively) is as follows:
 <ul>
 <li>
 <p>To install <strong>shinybrms</strong> from CRAN:</p>
@@ -147,7 +144,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using <a href="https://www.rstudio.com/" class="external-link">RStudio</a>):</p>
+<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if <a href="https://www.rstudio.com/" class="external-link">RStudio</a> is used):</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://fweber144.github.io/shinybrms/">shinybrms</a></span><span class="op">)</span></span>
 <span><span class="fu"><a href="reference/launch_shinybrms.html">launch_shinybrms</a></span><span class="op">(</span>launch.browser <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -161,12 +158,12 @@
 </h3>
 <ol style="list-style-type: decimal">
 <li>
-<p>Install the R package <strong>brms</strong>. You may use the following R code for this:</p>
+<p>Install the R package <strong>brms</strong>. The following R code may be used for this:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"brms"</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p>If you want to use the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4" class="external-link"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS" class="external-link"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/" class="external-link"><strong>rstanarm</strong></a>, you need to install these packages. You may use the following R code for this:</p>
+<p>If the example datasets from the R packages <a href="https://CRAN.R-project.org/package=lme4" class="external-link"><strong>lme4</strong></a>, <a href="https://CRAN.R-project.org/package=MASS" class="external-link"><strong>MASS</strong></a>, and <a href="https://mc-stan.org/rstanarm/" class="external-link"><strong>rstanarm</strong></a> should be available, these packages need to be installed. The following R code may be used for this:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lme4"</span>, <span class="st">"MASS"</span>, <span class="st">"rstanarm"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </li>
@@ -175,7 +172,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html" class="external-link">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,</span>
 <span>                 subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span><span class="op">)</span></span></code></pre></div>
-<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if you are using <a href="https://www.rstudio.com/" class="external-link">RStudio</a>):</p>
+<p>or this R code which ensures that the app opens up in the default web browser (helpful, e.g., if <a href="https://www.rstudio.com/" class="external-link">RStudio</a> is used):</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">shiny</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/shiny/man/runUrl.html" class="external-link">runGitHub</a></span><span class="op">(</span><span class="st">"fweber144/shinybrms"</span>,</span>
 <span>                 subdir <span class="op">=</span> <span class="st">"inst/shinybrms_app"</span>,</span>
@@ -216,7 +213,7 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Frank Weber <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4842-7922" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Frank Weber <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4842-7922" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -234,16 +231,16 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

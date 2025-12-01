@@ -14,7 +14,7 @@ turn relies on [Stan](https://mc-stan.org/). The **shinybrms** GUI is a
 
 To get an impression of the **shinybrms** app, see the [Get
 Started](https://fweber144.github.io/shinybrms/articles/shinybrms.html)
-vignette.
+page.
 
 ## Launching the **shinybrms** app
 

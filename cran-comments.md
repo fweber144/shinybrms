@@ -1,37 +1,38 @@
 ## Test environments
 
 * Local:
-    + R version 4.2.1 (2022-06-23) on Ubuntu 22.04 LTS system (platform:
+    + R version 4.5.2 (2025-10-31) on Ubuntu 25.10 system (platform:
       x86_64-pc-linux-gnu (64-bit))
-    + R version 4.2.1 (2022-06-23 ucrt) on Windows 10 x64 (build 19044) system
-      (platform: x86_64-w64-mingw32/x64 (64-bit))
 * win-builder:
-    + R-devel (R Under development (unstable) (2022-07-26 r82626 ucrt))
-    + R-release (R version 4.2.1 (2022-06-23 ucrt))
-    + R-oldrelease (R version 4.1.3 (2022-03-10))
+    + R-devel (R Under development (unstable) (2025-11-30 r89082 ucrt))
+    + R-release (R version 4.5.2 (2025-10-31 ucrt))
+* macOS builder:
+    + R version 4.5.1 Patched (2025-07-10 r88405) on macOS Ventura 13.3.1 system
+      (platform: aarch64-apple-darwin20 (64-bit))
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. The local checks also gave no NOTEs. However,
-the 'win-builder' checks gave 2 NOTEs:
+There were no ERRORs or WARNINGs. The local check also gave no NOTEs and no
+INFOs. However, the 'win-builder' and the 'macOS builder' checks gave 1 NOTE and
+1 INFO:
 
-*   checking CRAN incoming feasibility ... NOTE
-    Maintainer: 'Frank Weber <fweber144@protonmail.com>'
+* checking CRAN incoming feasibility ... NOTE
+    Maintainer: 'Frank Weber <fweber144 [at] protonmail.com>'
     
     Suggests or Enhances not in mainstream repositories:
       cmdstanr
     Availability using Additional_repositories specification:
       cmdstanr   yes   https://stan-dev.r-universe.dev/
 
-*   checking package dependencies ... NOTE
+* checking package dependencies ... INFO
     Package suggested but not available for checking: 'cmdstanr'
 
 Currently, the 'cmdstanr' package (<https://mc-stan.org/cmdstanr/>) is not
-available on CRAN yet. It provides an optional backend for the 'brms' package.
-The default backend in 'brms' is the 'rstan' package which is available on CRAN.
-The 'cmdstanr' backend is used in local unit tests, but it is not necessary for
-'shinybrms' to work. As the first NOTE says, I have added the repository URL for
-the 'cmdstanr' package to the 'DESCRIPTION' file (field
+available on CRAN. It provides an optional backend for the 'brms' package. The
+default backend in 'brms' is the 'rstan' package which is available on CRAN. The
+'cmdstanr' backend is used in local unit tests, but it is not necessary for
+'shinybrms' to work. As the first NOTE says, the repository URL for the
+'cmdstanr' package was added to the 'DESCRIPTION' file (field
 'Additional_repositories').
 
 ## Downstream dependencies

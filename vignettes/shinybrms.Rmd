@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The following screenshots show how to fit an example model in the **shinybrms** app.
+The following screenshots illustrate how to fit a model in the **shinybrms** app.
 For instructions on how to launch the **shinybrms** app, see the [starting page](../index.html).
 
 ## Home
@@ -31,7 +31,7 @@ After launching the **shinybrms** app, the following page is shown:
 ## Data
 
 \
-We then switch to page "Data". Usually, you will want to upload a custom dataset, but for the purpose of demonstration, we will choose the example dataset `MASS::bacteria` here:
+We then switch to page "Data". Usually, there is a custom dataset to be uploaded, but for the purpose of demonstration, we will choose the example dataset `MASS::bacteria` here:
 
 \
 [![](screenshots/Data.png)](screenshots/Data.png)
@@ -92,14 +92,14 @@ At the top of page "Prior", we obtain a table with the default priors for the mo
 ### Custom priors
 
 \
-At the bottom of page "Prior", we can specify custom priors. Here, we will use a Student-*t* prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 4 for all regression coefficients (parameter class `b`):
+At the bottom of page "Prior", we can specify custom priors. Here, we use a Student-$t$ prior distribution with 3 degrees of freedom, a location parameter of 0, and a scale parameter of 4 for all regression coefficients (parameter class `b`):
 
 \
 [![](screenshots/Prior_Custom.png)](screenshots/Prior_Custom.png)
 *Fig. 9: Page "Prior" (bottom; setting up a custom prior).*
 
 \
-After clicking on "Add prior", we see that our Student-*t* prior was added to the preview table on the right:
+After clicking on "Add prior", we see that our Student-$t$ prior was added to the preview table on the right:
 
 \
 [![](screenshots/Prior_Custom_done.png)](screenshots/Prior_Custom_done.png)
@@ -117,7 +117,7 @@ On page "Posterior", the first tab is called "Run Stan". At the top of this tab,
 *Fig. 11: Page "Posterior", tab "Run Stan" (top).*
 
 \
-Here, we focus on panel "Advanced options" where we set a seed for reproducibility (and we also choose 4 cores to use parallel computation):
+Here, we focus on panel "Advanced options" where we set a seed for reproducibility (and where we also choose 4 cores to use parallel computation):
 
 \
 [![](screenshots/Posterior_Run_AdvOpts.png)](screenshots/Posterior_Run_AdvOpts.png)
@@ -138,14 +138,14 @@ Now Stan starts compiling the C++ code for our model and after having finished t
 *Fig. 14: Sampling progress (top).*
 
 \
-Depending on your model and data, the sampling might take a while. For the example here, the sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks something like this:
+Depending on the model and the data, sampling might take a while. For the example here, sampling proceeds quite fast. Note that the progress file needs to be refreshed manually (by refreshing the corresponding browser tab). When Stan has finished sampling, the bottom of the progress file looks something like this:
 
 \
 [![](screenshots/Posterior_Sampling_2.png)](screenshots/Posterior_Sampling_2.png)
 *Fig. 15: Sampling progress (bottom; after completion of sampling).*
 
 \
-We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" for the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
+We can now switch back to the browser tab where **shinybrms** is running. Most importantly, we get the result of an "overall check" of the Markov chain Monte Carlo (MCMC) diagnostics which are given in detail on tab "MCMC diagnostics". Here, all MCMC diagnostics are OK:
 
 \
 [![](screenshots/Posterior_Run_Run_done.png)](screenshots/Posterior_Run_Run_done.png)
@@ -218,7 +218,7 @@ Here, it makes sense to plot the conditional effects for the `week:trt` interact
 ### Launch **shinystan**
 
 \
-Note that the output shown on tab "Default summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
+The output shown on tab "Default summary" is only intended for a quick inspection. A much more comprehensive analysis of the output is possible using the [**shiny**](https://shiny.rstudio.com/) app from [**shinystan**](https://mc-stan.org/shinystan/) which also offers posterior predictive checks as well as more details concerning the MCMC diagnostics. We launch the **shinystan** app by clicking the corresponding button on tab "Launch **shinystan**" (after having entered a seed for the reproducibility of the posterior predictive checks):
 
 \
 [![](screenshots/Posterior_shinystan.png)](screenshots/Posterior_shinystan.png)

@@ -12,17 +12,22 @@
 
 ## R CMD check results
 
-There were no ERRORs or WARNINGs. The local check also gave no NOTEs and no
-INFOs. However, the 'win-builder' and the 'macOS builder' checks gave 1 NOTE and
-1 INFO:
+There were no ERRORs, WARNINGs, or NOTEs. The local check also gave no INFOs.
+However, the 'win-builder' gave 2 INFOs and the 'macOS builder' check gave
+1 INFO. For 'win-builder', the INFOs were:
 
-* checking CRAN incoming feasibility ... NOTE
-    Maintainer: 'Frank Weber <fweber144 [at] protonmail.com>'
+* checking CRAN incoming feasibility ... INFO
+    Maintainer: 'Frank Weber <fweber144 [ at ] protonmail.com>'
     
     Suggests or Enhances not in mainstream repositories:
       cmdstanr
     Availability using Additional_repositories specification:
       cmdstanr   yes   https://stan-dev.r-universe.dev/
+
+* checking package dependencies ... INFO
+    Package suggested but not available for checking: 'cmdstanr'
+
+For 'macOS builder', the INFO was:
 
 * checking package dependencies ... INFO
     Package suggested but not available for checking: 'cmdstanr'

@@ -1,7 +1,7 @@
 Package: shinybrms
 Title: Graphical User Interface ('shiny' App) for 'brms'
-Version: 1.8.0.9000
-Date: 2022-08-06
+Version: 1.8.1
+Date: 2025-12-01
 Authors@R: 
     c(person(given = "Frank",
              family = "Weber",

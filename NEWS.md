@@ -1,5 +1,8 @@
 # **shinybrms** 1.8.1.9000 (in development)
 
+## Minor changes
+
+* Unit tests: Updated to **shinytest2** v0.5.0.
 
 # **shinybrms** 1.8.1
 

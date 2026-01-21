@@ -6,7 +6,10 @@ test_that("Upload of an existing `brmsfit` for the \"bacteria\" example", {
   skip_on_covr()
   skip_if_not_installed("MASS")
   
+  appdir <- system.file(package = "shinybrms", "shinybrms_app")
+  local_app_support(appdir)
   app <- AppDriver$new(
+    appdir,
     variant = paste0(
       platform_variant(r_version = FALSE), "_check",
       substr(

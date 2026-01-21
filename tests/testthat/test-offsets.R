@@ -3,7 +3,9 @@ library(shinytest2)
 test_that("Specification of offsets", {
   skip_on_cran()
   
-  app <- AppDriver$new(expect_values_screenshot_args = FALSE)
+  appdir <- system.file(package = "shinybrms", "shinybrms_app")
+  local_app_support(appdir)
+  app <- AppDriver$new(appdir, expect_values_screenshot_args = FALSE)
   
   app$set_inputs(advOpts_cores = 2, wait_ = FALSE)
   

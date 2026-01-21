@@ -6,7 +6,10 @@ test_that("nonnumeric offsets don't allow to run Stan, but also don't crash the 
   skip_on_covr()
   skip_if_not_installed("MASS")
   
+  appdir <- system.file(package = "shinybrms", "shinybrms_app")
+  local_app_support(appdir)
   app <- AppDriver$new(
+    appdir,
     variant = platform_variant(r_version = FALSE),
     expect_values_screenshot_args = FALSE,
     options = list(shinybrms.allow_upd = getOption("shinybrms.allow_upd", TRUE),

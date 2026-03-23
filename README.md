@@ -67,10 +67,10 @@ steps need to be performed first:
       - To install **shinybrms** from GitHub:
 
         ``` r
-        if (!requireNamespace("devtools", quietly = TRUE)) {
-          install.packages("devtools")
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes")
         }
-        devtools::install_github("fweber144/shinybrms", dependencies = TRUE)
+        remotes::install_github("fweber144/shinybrms", dependencies = TRUE)
         ```
     - If the example datasets from the R packages **lme4**, **MASS**,
       and **rstanarm** should *not* be available, then the R code for
@@ -85,10 +85,10 @@ steps need to be performed first:
       - To install **shinybrms** from GitHub:
 
         ``` r
-        if (!requireNamespace("devtools", quietly = TRUE)) {
-          install.packages("devtools")
+        if (!requireNamespace("remotes", quietly = TRUE)) {
+          install.packages("remotes")
         }
-        devtools::install_github("fweber144/shinybrms")
+        remotes::install_github("fweber144/shinybrms")
         ```
 
 2.  Launch the **shinybrms** app by either running the following R code:
